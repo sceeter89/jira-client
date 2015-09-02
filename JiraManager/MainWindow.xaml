@@ -1,0 +1,38 @@
+﻿<telerik:RadWindow xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="JiraManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JiraManager"
+        xmlns:telerikControls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+        mc:Ignorable="d"
+        Height="419.873" Width="913.748"
+        Header="Jira Manager"
+        telerikControls:StyleManager.Theme="Windows8">
+   <telerik:RadDocking telerikControls:StyleManager.Theme="Windows8">
+      <telerik:RadDocking.DocumentHost>
+         <telerik:RadSplitContainer>
+            <telerik:RadPaneGroup>
+               <telerik:RadPane Header="Scrum Cards">
+                  
+               </telerik:RadPane>
+            </telerik:RadPaneGroup>
+         </telerik:RadSplitContainer>
+      </telerik:RadDocking.DocumentHost>
+
+      <telerik:RadSplitContainer InitialPosition="DockedRight">
+         <telerik:RadPaneGroup>
+            <telerik:RadPane Header="Jira connection"/>
+            <telerik:RadPane Header="Search"/>
+         </telerik:RadPaneGroup>
+      </telerik:RadSplitContainer>
+
+      <telerik:RadSplitContainer InitialPosition="DockedBottom">
+         <telerik:RadPaneGroup>
+            <telerik:RadPane Header="Log">
+               
+            </telerik:RadPane>
+         </telerik:RadPaneGroup>
+      </telerik:RadSplitContainer>
+   </telerik:RadDocking>
+</telerik:RadWindow>

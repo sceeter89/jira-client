@@ -1,0 +1,43 @@
+﻿using System;
+using GalaSoft.MvvmLight.Messaging;
+using JiraManager.Messages.Actions.Authentication;
+using System.Windows.Threading;
+using JiraManager.Api;
+
+namespace JiraManager.Service
+{
+   class ConnectionChecker
+   {
+      private readonly IJiraOperations _operations;
+      private readonly IMessenger _messenger;
+      private readonly DispatcherTimer _timer;
+
+      public ConnectionChecker(IMessenger messenger, IJiraOperations operations)
+      {
+         _operations = operations;
+         _messenger = messenger;
+         _messenger.Register<LoggedInMessage>(this, m => StartChecking());
+         _messenger.Register<LoggedOutMessage>(this, m => StopChecking());
+         _timer = new DispatcherTimer();
+         _timer.Tick += CheckTick;
+      }
+
+      private async void CheckTick(object sender, EventArgs e)
+      {
+         var result = await _operations.CheckSession();
+
+         if(result.IsLoggedIn == false)
+            _messenger.Send(new LoggedOutMessage());
+      }
+
+      private void StartChecking()
+      {
+         _timer.Start();
+      }
+
+      private void StopChecking()
+      {
+         _timer.Stop();
+      }
+   }
+}
