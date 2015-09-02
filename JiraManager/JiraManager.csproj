@@ -101,10 +101,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Api\IJiraOperations.cs" />
+    <Compile Include="Api\LogLevel.cs" />
+    <Compile Include="Controls\ConnectionManager.xaml.cs">
+      <DependentUpon>ConnectionManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\LogViewer.xaml.cs">
       <DependentUpon>LogViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Messages\Actions\Authentication\AttemptLoginMessage.cs" />
     <Compile Include="Messages\Actions\Authentication\LoggedInMessage.cs" />
     <Compile Include="Messages\Actions\Authentication\LoggedOutMessage.cs" />
     <Compile Include="Messages\Actions\LogMessage.cs" />
@@ -113,10 +116,15 @@
     <Compile Include="Service\ConnectionChecker.cs" />
     <Compile Include="Service\IssuesRetriever.cs" />
     <Compile Include="Service\JiraOperations.cs" />
+    <Compile Include="Model\LoginAttemptResult.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Controls\ConnectionManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\LogViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

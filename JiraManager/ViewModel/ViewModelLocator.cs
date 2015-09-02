@@ -23,11 +23,13 @@ namespace JiraManager.ViewModel
             SimpleIoc.Default.Register(() => Messenger.Default);
          }
 
+         SimpleIoc.Default.Register<IJiraOperations, JiraOperations>();
+
          SimpleIoc.Default.Register<Configuration>(true);
          SimpleIoc.Default.Register<IssuesRetriever>(true);
          SimpleIoc.Default.Register<ConnectionChecker>(true);
-         SimpleIoc.Default.Register<IJiraOperations, JiraOperations>();
 
+         SimpleIoc.Default.Register<LoginViewModel>();
          SimpleIoc.Default.Register<LogViewModel>();
          SimpleIoc.Default.Register<MainViewModel>();
       }
@@ -45,6 +47,14 @@ namespace JiraManager.ViewModel
          get
          {
             return ServiceLocator.Current.GetInstance<LogViewModel>();
+         }
+      }
+
+      public LoginViewModel Login
+      {
+         get
+         {
+            return ServiceLocator.Current.GetInstance<LoginViewModel>();
          }
       }
 

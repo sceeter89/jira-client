@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Messaging;
 using JiraManager.Messages.Actions;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
+using System;
 
 namespace JiraManager.ViewModel
 {
@@ -18,7 +19,7 @@ namespace JiraManager.ViewModel
       {
          DispatcherHelper.CheckBeginInvokeOnUI(()=>
          {
-            Messages.Insert(0, message.Message);
+            Messages.Insert(0, string.Format("[{0}][{1}] {2}", DateTime.Now, message.Level, message.Message));
          });
       }
 

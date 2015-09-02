@@ -254,7 +254,27 @@ namespace JiraManager.Model
    {
       public string Self { get; set; }
       public string Name { get; set; }
+      public LoginInfo LoginInfo { get; set; }
+   }
+
+   public class LoginInfo
+   {
+      public int FailedLoginCount { get; set; }
+      public int LoginCount { get; set; }
+      public DateTime LastFailedLoginTime { get; set; }
+      public DateTime PreviousLoginTime { get; set; }
+   }
+
+   public class SuccessfulLoginParameters
+   {
+      public Session Session { get; set; }
       public Logininfo LoginInfo { get; set; }
+   }
+
+   public class Session
+   {
+      public string Name { get; set; }
+      public string Value { get; set; }
    }
 
    public class Logininfo
