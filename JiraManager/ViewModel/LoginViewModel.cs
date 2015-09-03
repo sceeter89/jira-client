@@ -2,9 +2,12 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using JiraManager.Api;
+using JiraManager.Messages.Actions;
 using JiraManager.Messages.Actions.Authentication;
 using JiraManager.Service;
 using System;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace JiraManager.ViewModel
@@ -14,8 +17,9 @@ namespace JiraManager.ViewModel
       private readonly Configuration _configuration;
       private readonly IMessenger _messenger;
       private readonly IJiraOperations _operations;
-      private string _password;
       private bool _isBusy = false;
+      private bool _isConnected;
+      private bool _isDisconnected;
 
       public LoginViewModel(IMessenger messenger, Configuration configuration, IJiraOperations operations)
       {
@@ -32,25 +36,94 @@ namespace JiraManager.ViewModel
             {
                _messenger.Send(new LoggedInMessage());
                _configuration.IsLoggedIn = true;
+               IsConnected = true;
             }
             else
             {
                _messenger.Send(new LoggedOutMessage());
                _configuration.IsLoggedIn = false;
+               IsConnected = false;
             }
             checkLoginTimer.IsEnabled = false;
          };
          checkLoginTimer.IsEnabled = true;
-         LoginCommand = new RelayCommand(async () =>
+         _messenger.Register<ConnectionIsBroken>(this, OnConnectionBroken);
+
+         LoginCommand = new RelayCommand<PasswordBox>(async password => await Login(((PasswordBox)password).Password), p => _isBusy == false);
+         LogoutCommand = new RelayCommand(async () => await Logout(), () => _isBusy == false);
+
+         IsConnected = false;
+      }
+
+      private void OnConnectionBroken(ConnectionIsBroken message)
+      {
+         LogMessage("Connection is broken. Security token might have been invalidated.");
+         if (IsConnected)
          {
-            _isBusy = true;
-            LoginCommand.RaiseCanExecuteChanged();
+            _messenger.Send(new LoggedOutMessage());
+         }
+         IsConnected = false;
+      }
 
+      private async Task Login(string password)
+      {
+         _isBusy = true;
+         LoginCommand.RaiseCanExecuteChanged();
 
+         try
+         {
+            LogMessage("Trying to log in JIRA: " + JiraUrl);
+            var result = await _operations.TryToLogin(Username, password);
+            if (result.WasSuccessful)
+            {
+               IsConnected = true;
+               _messenger.Send(new LoggedInMessage());
+               LogMessage("Logged in successfully!", LogLevel.Info);
+            }
+            else
+            {
+               IsConnected = false;
+               _messenger.Send(new LoggedInMessage());
+               LogMessage("Failed to log in! Reason: " + result.ErrorMessage, LogLevel.Warning);
+            }
+         }
+         catch (Exception e)
+         {
+            LogMessage("Stack Trace: " + Environment.NewLine + e.StackTrace, LogLevel.Debug);
+            LogMessage("Unhandled exception occured during logging in: " + e.Message, LogLevel.Critical);
+         }
 
-            _isBusy = false;
-            LoginCommand.RaiseCanExecuteChanged();
-         }, ()=>_isBusy == false);
+         _isBusy = false;
+         LoginCommand.RaiseCanExecuteChanged();
+      }
+
+      private async Task Logout()
+      {
+         _isBusy = true;
+         LogoutCommand.RaiseCanExecuteChanged();
+
+         try
+         {
+            LogMessage("Logging out...");
+            await _operations.Logout();
+            IsConnected = false;
+            _messenger.Send(new LoggedOutMessage());
+            LogMessage("Logged out successfully", LogLevel.Info);
+
+         }
+         catch (Exception e)
+         {
+            LogMessage("Stack Trace: " + Environment.NewLine + e.StackTrace, LogLevel.Debug);
+            LogMessage("Unhandled exception occured during logging out: " + e.Message, LogLevel.Critical);
+         }
+
+         _isBusy = false;
+         LogoutCommand.RaiseCanExecuteChanged();
+      }
+
+      private void LogMessage(string message, LogLevel level = LogLevel.Debug)
+      {
+         _messenger.Send(new LogMessage(message, level));
       }
 
       public string JiraUrl
@@ -73,17 +146,39 @@ namespace JiraManager.ViewModel
          }
       }
 
-      public string Password
+      public bool IsConnected
       {
-         get { return _password; }
+         get
+         {
+            return _isConnected;
+         }
          set
          {
-            _password = value;
+            _isConnected = value;
+            _isDisconnected = !value;
+
             RaisePropertyChanged();
+            RaisePropertyChanged(() => IsDisconnected);
          }
       }
 
-      public RelayCommand LoginCommand {get; private set;}
-      public RelayCommand LogoutCommand {get; private set;}
+      public bool IsDisconnected
+      {
+         get
+         {
+            return _isDisconnected;
+         }
+         set
+         {
+            _isDisconnected = value;
+            _isConnected = !value;
+
+            RaisePropertyChanged();
+            RaisePropertyChanged(() => IsConnected);
+         }
+      }
+
+      public RelayCommand<PasswordBox> LoginCommand { get; private set; }
+      public RelayCommand LogoutCommand { get; private set; }
    }
 }

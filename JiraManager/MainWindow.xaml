@@ -8,35 +8,47 @@
         xmlns:controls="clr-namespace:JiraManager.Controls"
         mc:Ignorable="d"
         Height="419.873" Width="913.748"
-        Title="Jira Manager">
-   <telerik:RadDocking telerikControls:StyleManager.Theme="Windows8">
-      <telerik:RadDocking.DocumentHost>
-         <telerik:RadSplitContainer telerikControls:StyleManager.Theme="Windows8">
-            <telerik:RadPaneGroup telerikControls:StyleManager.Theme="Windows8">
-               <telerik:RadPane Header="Scrum Cards" telerikControls:StyleManager.Theme="Windows8">
+        Title="Jira Manager"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+   <Grid>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      
+      <telerik:RadRibbonView>
+         
+      </telerik:RadRibbonView>
+      
+      <telerik:RadDocking Grid.Row="1">
+         <telerik:RadDocking.DocumentHost>
+            <telerik:RadSplitContainer>
+               <telerik:RadPaneGroup>
+                  <telerik:RadPane Header="Scrum Cards">
+
+                  </telerik:RadPane>
+               </telerik:RadPaneGroup>
+            </telerik:RadSplitContainer>
+         </telerik:RadDocking.DocumentHost>
+
+         <telerik:RadSplitContainer InitialPosition="DockedRight">
+            <telerik:RadPaneGroup>
+               <telerik:RadPane Header="Jira connection">
+                  <controls:ConnectionManager/>
+               </telerik:RadPane>
+               <telerik:RadPane Header="Search">
 
                </telerik:RadPane>
             </telerik:RadPaneGroup>
          </telerik:RadSplitContainer>
-      </telerik:RadDocking.DocumentHost>
 
-      <telerik:RadSplitContainer InitialPosition="DockedRight">
-         <telerik:RadPaneGroup telerikControls:StyleManager.Theme="Windows8">
-            <telerik:RadPane Header="Jira connection" telerikControls:StyleManager.Theme="Windows8">
-               <controls:ConnectionManager/>
-            </telerik:RadPane>
-            <telerik:RadPane Header="Search" telerikControls:StyleManager.Theme="Windows8">
-
-            </telerik:RadPane>
-         </telerik:RadPaneGroup>
-      </telerik:RadSplitContainer>
-
-      <telerik:RadSplitContainer InitialPosition="DockedBottom">
-         <telerik:RadPaneGroup>
-            <telerik:RadPane Header="Log">
-               <controls:LogViewer/>
-            </telerik:RadPane>
-         </telerik:RadPaneGroup>
-      </telerik:RadSplitContainer>
-   </telerik:RadDocking>
+         <telerik:RadSplitContainer InitialPosition="DockedBottom">
+            <telerik:RadPaneGroup>
+               <telerik:RadPane Header="Log">
+                  <controls:LogViewer/>
+               </telerik:RadPane>
+            </telerik:RadPaneGroup>
+         </telerik:RadSplitContainer>
+      </telerik:RadDocking>
+   </Grid>
 </Window>

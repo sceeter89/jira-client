@@ -9,6 +9,14 @@
              DataContext="{Binding Source={StaticResource Locator}, Path=Login}">
    <StackPanel>
       <TextBlock Text="Jira URL" Margin="4"/>
-      <TextBox Text="Jira URL" Margin="4"/>
+      <TextBox Text="{Binding JiraUrl, Mode=TwoWay}" IsEnabled="{Binding IsDisconnected}" Margin="4"/>
+      <TextBlock Text="Username" Margin="4"/>
+      <TextBox Text="{Binding Username, Mode=TwoWay}" IsEnabled="{Binding IsDisconnected}" Margin="4"/>
+      <TextBlock Text="Password" Margin="4"/>
+      <PasswordBox IsEnabled="{Binding IsDisconnected}" x:Name="Password" Margin="4"/>
+      <StackPanel Orientation="Horizontal">
+         <Button Content="Log in" Margin="4" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password}" IsEnabled="{Binding IsDisconnected}"/>
+         <Button Content="Log out" Margin="4" Command="{Binding LogoutCommand}" IsEnabled="{Binding IsConnected}"/>
+      </StackPanel>
    </StackPanel>
 </UserControl>
