@@ -13,9 +13,9 @@ namespace JiraManager.Service
          _configuration = configuration;
       }
 
-      public async Task<IEnumerable<Issue>> RetrieveIssues(string jql)
+      public async Task<IEnumerable<RawIssue>> RetrieveIssues(string jql)
       {
-         var results = new List<Issue>();
+         var results = new List<RawIssue>();
 
          
 

@@ -1,35 +1,37 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace JiraManager.Model
 {
-   public class SearchResults
+   public class RawSearchResults
    {
       public string Expand { get; set; }
       public int StartAt { get; set; }
       public int MaxResults { get; set; }
       public int Total { get; set; }
-      public Issue[] Issues { get; set; }
+      public RawIssue[] Issues { get; set; }
    }
 
-   public class Issue
+   public class RawIssue
    {
       public string Expand { get; set; }
       public string Id { get; set; }
       public string Self { get; set; }
       public string Key { get; set; }
-      public Fields Fields { get; set; }
+      public JToken Fields { get; set; }
    }
 
-   public class Fields
+   public class RawFields
    {
-      public IssueType IssueType { get; set; }
+      public RawIssueType IssueType { get; set; }
       public object TimeSpent { get; set; }
-      public ProjectInfo Project { get; set; }
+      public RawProjectInfo Project { get; set; }
       public string Customfield_11000 { get; set; }
       public object[] FixVersions { get; set; }
       public object Customfield_11200 { get; set; }
       public object AggregateTimeSpent { get; set; }
-      public Resolution Resolution { get; set; }
+      public RawResolution Resolution { get; set; }
       public object[] Customfield_11201 { get; set; }
       public object Customfield_11004 { get; set; }
       public object Customfield_11202 { get; set; }
@@ -42,9 +44,9 @@ namespace JiraManager.Model
       public DateTime? ResolutionDate { get; set; }
       public int Workratio { get; set; }
       public DateTime? LastViewed { get; set; }
-      public Watches Watches { get; set; }
+      public RawWatches Watches { get; set; }
       public DateTime Created { get; set; }
-      public Priority Priority { get; set; }
+      public RawPriority Priority { get; set; }
       public object Customfield_10100 { get; set; }
       public object Customfield_10101 { get; set; }
       public object Customfield_10102 { get; set; }
@@ -53,10 +55,10 @@ namespace JiraManager.Model
       public object TimeEstimate { get; set; }
       public object AggregateTimeOriginalEstimate { get; set; }
       public object[] Versions { get; set; }
-      public Issuelink[] IssueLinks { get; set; }
-      public UserInfo Assignee { get; set; }
+      public RawIssuelink[] IssueLinks { get; set; }
+      public RawUserInfo Assignee { get; set; }
       public DateTime Updated { get; set; }
-      public Status Status { get; set; }
+      public RawStatus Status { get; set; }
       public object[] Components { get; set; }
       public object TimeOriginalEstimate { get; set; }
       public string Description { get; set; }
@@ -68,21 +70,21 @@ namespace JiraManager.Model
       public object Customfield_10800 { get; set; }
       public object AggregateTimeEstimate { get; set; }
       public string Summary { get; set; }
-      public UserInfo Creator { get; set; }
-      public Subtask[] Subtasks { get; set; }
-      public UserInfo Reporter { get; set; }
-      public ProgressInfo AggregateProgress { get; set; }
+      public RawUserInfo Creator { get; set; }
+      public RawSubtask[] Subtasks { get; set; }
+      public RawUserInfo Reporter { get; set; }
+      public RawProgressInfo AggregateProgress { get; set; }
       public object Customfield_10200 { get; set; }
       public object Customfield_10201 { get; set; }
       public string Customfield_10400 { get; set; }
       public object Environment { get; set; }
       public object DueDate { get; set; }
-      public ProgressInfo Progress { get; set; }
-      public VotesInfo Votes { get; set; }
-      public Parent Parent { get; set; }
+      public RawProgressInfo Progress { get; set; }
+      public RawVotesInfo Votes { get; set; }
+      public RawParent Parent { get; set; }
    }
 
-   public class IssueType
+   public class RawIssueType
    {
       public string Self { get; set; }
       public string Id { get; set; }
@@ -92,17 +94,17 @@ namespace JiraManager.Model
       public bool Subtask { get; set; }
    }
 
-   public class ProjectInfo
+   public class RawProjectInfo
    {
       public string Self { get; set; }
       public string Id { get; set; }
       public string Key { get; set; }
       public string Name { get; set; }
-      public AvatarUrls AvatarUrls { get; set; }
-      public Projectcategory ProjectCategory { get; set; }
+      public RawAvatarUrls AvatarUrls { get; set; }
+      public RawProjectCategory ProjectCategory { get; set; }
    }
 
-   public class AvatarUrls
+   public class RawAvatarUrls
    {
       public string _48x48 { get; set; }
       public string _24x24 { get; set; }
@@ -110,7 +112,7 @@ namespace JiraManager.Model
       public string _32x32 { get; set; }
    }
 
-   public class Projectcategory
+   public class RawProjectCategory
    {
       public string Self { get; set; }
       public string Id { get; set; }
@@ -118,7 +120,7 @@ namespace JiraManager.Model
       public string Name { get; set; }
    }
 
-   public class Resolution
+   public class RawResolution
    {
       public string Self { get; set; }
       public string Id { get; set; }
@@ -133,14 +135,14 @@ namespace JiraManager.Model
       public string Id { get; set; }
    }
 
-   public class Watches
+   public class RawWatches
    {
       public string Self { get; set; }
       public int WatchCount { get; set; }
       public bool IsWatching { get; set; }
    }
 
-   public class Priority
+   public class RawPriority
    {
       public string Self { get; set; }
       public string IconUrl { get; set; }
@@ -148,17 +150,17 @@ namespace JiraManager.Model
       public string Id { get; set; }
    }
 
-   public class Status
+   public class RawStatus
    {
       public string Self { get; set; }
       public string Description { get; set; }
       public string IconUrl { get; set; }
       public string Name { get; set; }
       public string Id { get; set; }
-      public StatusCategory StatusCategory { get; set; }
+      public RawStatusCategory StatusCategory { get; set; }
    }
 
-   public class StatusCategory
+   public class RawStatusCategory
    {
       public string Self { get; set; }
       public int Id { get; set; }
@@ -167,57 +169,57 @@ namespace JiraManager.Model
       public string Name { get; set; }
    }
 
-   public class UserInfo
+   public class RawUserInfo
    {
       public string Self { get; set; }
       public string Name { get; set; }
       public string Key { get; set; }
       public string EmailAddress { get; set; }
-      public AvatarUrls AvatarUrls { get; set; }
+      public RawAvatarUrls AvatarUrls { get; set; }
       public string DisplayName { get; set; }
       public bool Active { get; set; }
       public string TimeZone { get; set; }
    }
 
-   public class ProgressInfo
+   public class RawProgressInfo
    {
       public int Progress { get; set; }
       public int Total { get; set; }
    }
 
-   public class VotesInfo
+   public class RawVotesInfo
    {
       public string Self { get; set; }
       public int Votes { get; set; }
       public bool HasVoted { get; set; }
    }
 
-   public class Parent
+   public class RawParent
    {
       public string Id { get; set; }
       public string Key { get; set; }
       public string Self { get; set; }
-      public RelatedIssueFields Fields { get; set; }
+      public RawRelatedIssueFields Fields { get; set; }
    }
 
-   public class RelatedIssueFields
+   public class RawRelatedIssueFields
    {
       public string Summary { get; set; }
-      public Status Status { get; set; }
-      public Priority Priority { get; set; }
-      public IssueType Issuetype { get; set; }
+      public RawStatus Status { get; set; }
+      public RawPriority Priority { get; set; }
+      public RawIssueType Issuetype { get; set; }
    }
 
-   public class Issuelink
+   public class RawIssuelink
    {
       public string Id { get; set; }
       public string Self { get; set; }
-      public Type Type { get; set; }
-      public InwardIssue InwardIssue { get; set; }
-      public OutwardIssue OutwardIssue { get; set; }
+      public RawLinkType Type { get; set; }
+      public RawInwardIssue InwardIssue { get; set; }
+      public RawOutwardIssue OutwardIssue { get; set; }
    }
 
-   public class Type
+   public class RawLinkType
    {
       public string Id { get; set; }
       public string Name { get; set; }
@@ -226,38 +228,38 @@ namespace JiraManager.Model
       public string Self { get; set; }
    }
 
-   public class InwardIssue
+   public class RawInwardIssue
    {
       public string Id { get; set; }
       public string Key { get; set; }
       public string Self { get; set; }
-      public RelatedIssueFields Fields { get; set; }
+      public RawRelatedIssueFields Fields { get; set; }
    }
 
-   public class OutwardIssue
+   public class RawOutwardIssue
    {
       public string Id { get; set; }
       public string Key { get; set; }
       public string Self { get; set; }
-      public RelatedIssueFields Fields { get; set; }
+      public RawRelatedIssueFields Fields { get; set; }
    }
 
-   public class Subtask
+   public class RawSubtask
    {
       public string Id { get; set; }
       public string Key { get; set; }
       public string Self { get; set; }
-      public RelatedIssueFields Fields { get; set; }
+      public RawRelatedIssueFields Fields { get; set; }
    }
 
-   public class SessionInfo
+   public class RawSessionInfo
    {
       public string Self { get; set; }
       public string Name { get; set; }
-      public LoginInfo LoginInfo { get; set; }
+      public RawLoginInfo LoginInfo { get; set; }
    }
 
-   public class LoginInfo
+   public class RawLoginInfo
    {
       public int FailedLoginCount { get; set; }
       public int LoginCount { get; set; }
@@ -265,24 +267,45 @@ namespace JiraManager.Model
       public DateTime PreviousLoginTime { get; set; }
    }
 
-   public class SuccessfulLoginParameters
+   public class RawSuccessfulLoginParameters
    {
-      public Session Session { get; set; }
-      public Logininfo LoginInfo { get; set; }
+      public RawSession Session { get; set; }
+      public RawLogininfo LoginInfo { get; set; }
    }
 
-   public class Session
+   public class RawSession
    {
       public string Name { get; set; }
       public string Value { get; set; }
    }
 
-   public class Logininfo
+   public class RawLogininfo
    {
       public int FailedLoginCount { get; set; }
       public int LoginCount { get; set; }
       public DateTime LastFailedLoginTime { get; set; }
       public DateTime PreviousLoginTime { get; set; }
+   }
+
+   public class RawFieldDefinition
+   {
+      public string Id { get; set; }
+      public string Name { get; set; }
+      public bool Custom { get; set; }
+      public bool Orderable { get; set; }
+      public bool Navigable { get; set; }
+      public bool Searchable { get; set; }
+      public string[] ClauseNames { get; set; }
+      public RawFieldSchema Schema { get; set; }
+   }
+
+   public class RawFieldSchema
+   {
+      public string Type { get; set; }
+      public string System { get; set; }
+      public string Items { get; set; }
+      public string Custom { get; set; }
+      public int CustomId { get; set; }
    }
 
 }

@@ -7,25 +7,25 @@
         xmlns:telerikControls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
         xmlns:controls="clr-namespace:JiraManager.Controls"
         mc:Ignorable="d"
-        Height="419.873" Width="913.748"
+        Height="732.873" Width="725.748"
         Title="Jira Manager"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
    <Grid>
       <Grid.RowDefinitions>
-         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="0"/>
          <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      
+
       <telerik:RadRibbonView>
-         
+
       </telerik:RadRibbonView>
-      
+
       <telerik:RadDocking Grid.Row="1">
          <telerik:RadDocking.DocumentHost>
             <telerik:RadSplitContainer>
                <telerik:RadPaneGroup>
                   <telerik:RadPane Header="Scrum Cards">
-
+                     <controls:CardsPrintingView/>
                   </telerik:RadPane>
                </telerik:RadPaneGroup>
             </telerik:RadSplitContainer>
@@ -37,7 +37,7 @@
                   <controls:ConnectionManager/>
                </telerik:RadPane>
                <telerik:RadPane Header="Search">
-
+                  <controls:SearchIssues/>
                </telerik:RadPane>
             </telerik:RadPaneGroup>
          </telerik:RadSplitContainer>

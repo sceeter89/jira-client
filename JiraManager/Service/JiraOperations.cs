@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using RestSharp;
 using System.Net;
 using System.Collections.Generic;
+using System;
+using Newtonsoft.Json;
 
 namespace JiraManager.Service
 {
@@ -25,7 +27,7 @@ namespace JiraManager.Service
 
          var client = BuildRestClient();
 
-         var response = await client.ExecuteGetTaskAsync<SessionInfo>(_sessionInfoRequest);
+         var response = await client.ExecuteGetTaskAsync<RawSessionInfo>(_sessionInfoRequest);
 
          if (response.StatusCode == HttpStatusCode.Unauthorized)
          {
@@ -54,7 +56,7 @@ namespace JiraManager.Service
             {"username", username },
             {"password", password }
          });
-         var response = await client.ExecutePostTaskAsync<SuccessfulLoginParameters>(sessionInfoRequest);
+         var response = await client.ExecutePostTaskAsync<RawSuccessfulLoginParameters>(sessionInfoRequest);
 
          if (response.StatusCode == HttpStatusCode.Unauthorized)
             return new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Invalid username or password" };
@@ -82,7 +84,7 @@ namespace JiraManager.Service
          var client = new RestClient(_configuration.JiraUrl);
          client.AddDefaultHeader("Content-Type", "Application/json");
          if (string.IsNullOrEmpty(_configuration.JiraSessionId) == false)
-         { 
+         {
             client.CookieContainer = new CookieContainer();
             client.CookieContainer.Add(new Cookie("JSESSIONID", _configuration.JiraSessionId, "/", client.BaseUrl.Host));
          }
@@ -93,6 +95,46 @@ namespace JiraManager.Service
       private bool IsConfigValid()
       {
          return string.IsNullOrWhiteSpace(_configuration.JiraUrl) == false;
+      }
+
+      public async Task<IEnumerable<RawIssue>> GetIssues(string jql)
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/search", Method.POST);
+         var result = new List<RawIssue>();
+         do
+         {
+            request.AddJsonBody(new
+            {
+               jql = jql,
+               startAt = 0,
+               maxResults = 500
+            });
+            var response = await client.ExecuteTaskAsync(request);
+
+            if (response.StatusCode != HttpStatusCode.OK)
+               throw new InvalidOperationException(response.Content);
+            var searchResults = JsonConvert.DeserializeObject<RawSearchResults>(response.Content);
+            foreach (var issue in searchResults.Issues)
+            {
+               result.Add(issue);
+            }
+            if (result.Count >= searchResults.Total)
+               break;
+         } while (true);
+
+         return result;
+      }
+
+      public async Task<IEnumerable<RawFieldDefinition>> GetFieldDefinitions()
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/field", Method.GET);
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<List<RawFieldDefinition>>(response.Content);
+
+         return result;
       }
    }
 }

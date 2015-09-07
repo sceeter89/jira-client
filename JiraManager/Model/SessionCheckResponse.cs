@@ -3,6 +3,6 @@
    public class SessionCheckResponse
    {
       public bool IsLoggedIn { get; set; }
-      public SessionInfo SessionInfo { get; set; }
+      public RawSessionInfo SessionInfo { get; set; }
    }
 }

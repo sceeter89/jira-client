@@ -37,6 +37,7 @@ namespace JiraManager.ViewModel
                _messenger.Send(new LoggedInMessage());
                _configuration.IsLoggedIn = true;
                IsConnected = true;
+               _messenger.LogMessage("Logged in using existing security token.");
             }
             else
             {
@@ -57,7 +58,7 @@ namespace JiraManager.ViewModel
 
       private void OnConnectionBroken(ConnectionIsBroken message)
       {
-         LogMessage("Connection is broken. Security token might have been invalidated.");
+         _messenger.LogMessage("Connection is broken. Security token might have been invalidated.");
          if (IsConnected)
          {
             _messenger.Send(new LoggedOutMessage());
@@ -72,25 +73,25 @@ namespace JiraManager.ViewModel
 
          try
          {
-            LogMessage("Trying to log in JIRA: " + JiraUrl);
+            _messenger.LogMessage("Trying to log in JIRA: " + JiraUrl);
             var result = await _operations.TryToLogin(Username, password);
             if (result.WasSuccessful)
             {
                IsConnected = true;
                _messenger.Send(new LoggedInMessage());
-               LogMessage("Logged in successfully!", LogLevel.Info);
+               _messenger.LogMessage("Logged in successfully!", LogLevel.Info);
             }
             else
             {
                IsConnected = false;
                _messenger.Send(new LoggedInMessage());
-               LogMessage("Failed to log in! Reason: " + result.ErrorMessage, LogLevel.Warning);
+               _messenger.LogMessage("Failed to log in! Reason: " + result.ErrorMessage, LogLevel.Warning);
             }
          }
          catch (Exception e)
          {
-            LogMessage("Stack Trace: " + Environment.NewLine + e.StackTrace, LogLevel.Debug);
-            LogMessage("Unhandled exception occured during logging in: " + e.Message, LogLevel.Critical);
+            _messenger.LogMessage("Stack Trace: " + Environment.NewLine + e.StackTrace, LogLevel.Debug);
+            _messenger.LogMessage("Unhandled exception occured during logging in: " + e.Message, LogLevel.Critical);
          }
 
          _isBusy = false;
@@ -104,28 +105,23 @@ namespace JiraManager.ViewModel
 
          try
          {
-            LogMessage("Logging out...");
+            _messenger.LogMessage("Logging out...");
             await _operations.Logout();
             IsConnected = false;
             _messenger.Send(new LoggedOutMessage());
-            LogMessage("Logged out successfully", LogLevel.Info);
+            _messenger.LogMessage("Logged out successfully", LogLevel.Info);
 
          }
          catch (Exception e)
          {
-            LogMessage("Stack Trace: " + Environment.NewLine + e.StackTrace, LogLevel.Debug);
-            LogMessage("Unhandled exception occured during logging out: " + e.Message, LogLevel.Critical);
+            _messenger.LogMessage("Stack Trace: " + Environment.NewLine + e.StackTrace, LogLevel.Debug);
+            _messenger.LogMessage("Unhandled exception occured during logging out: " + e.Message, LogLevel.Critical);
          }
 
          _isBusy = false;
          LogoutCommand.RaiseCanExecuteChanged();
       }
-
-      private void LogMessage(string message, LogLevel level = LogLevel.Debug)
-      {
-         _messenger.Send(new LogMessage(message, level));
-      }
-
+      
       public string JiraUrl
       {
          get { return _configuration.JiraUrl; }

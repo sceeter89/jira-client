@@ -31,6 +31,8 @@ namespace JiraManager.ViewModel
 
          SimpleIoc.Default.Register<LoginViewModel>();
          SimpleIoc.Default.Register<LogViewModel>();
+         SimpleIoc.Default.Register<SearchIssuesViewModel>();
+         SimpleIoc.Default.Register<CardsPrintingViewModel>();
          SimpleIoc.Default.Register<MainViewModel>();
       }
 
@@ -55,6 +57,22 @@ namespace JiraManager.ViewModel
          get
          {
             return ServiceLocator.Current.GetInstance<LoginViewModel>();
+         }
+      }
+
+      public SearchIssuesViewModel Search
+      {
+         get
+         {
+            return ServiceLocator.Current.GetInstance<SearchIssuesViewModel>();
+         }
+      }
+
+      public CardsPrintingViewModel CardsPrinting
+      {
+         get
+         {
+            return ServiceLocator.Current.GetInstance<CardsPrintingViewModel>();
          }
       }
 
