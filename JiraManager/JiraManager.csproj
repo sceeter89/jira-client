@@ -138,8 +138,8 @@
     <Compile Include="Api\IJiraOperations.cs" />
     <Compile Include="Api\LogLevel.cs" />
     <Compile Include="Api\MessengerExtensions.cs" />
-    <Compile Include="Controls\CardsPrintingView.xaml.cs">
-      <DependentUpon>CardsPrintingView.xaml</DependentUpon>
+    <Compile Include="Controls\IssueListDisplay.xaml.cs">
+      <DependentUpon>IssueListDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CardsPrintPreview.xaml.cs">
       <DependentUpon>CardsPrintPreview.xaml</DependentUpon>
@@ -165,13 +165,13 @@
     <Compile Include="Service\IssuesRetriever.cs" />
     <Compile Include="Service\JiraOperations.cs" />
     <Compile Include="Model\LoginAttemptResult.cs" />
-    <Compile Include="ViewModel\CardsPrintingViewModel.cs" />
+    <Compile Include="ViewModel\IssueListViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="Controls\CardsPrintingView.xaml">
+    <Page Include="Controls\IssueListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +233,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\xpsicon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

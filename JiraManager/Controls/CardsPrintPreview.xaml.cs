@@ -1,7 +1,10 @@
 ﻿using JiraManager.Model;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Markup;
 
 namespace JiraManager.Controls
 {
@@ -16,7 +19,7 @@ namespace JiraManager.Controls
          DataContext = issues;
       }
 
-      public static IEnumerable<CardsPrintPreview> GeneratePages(IEnumerable<JiraIssue> issues)
+      private static IEnumerable<CardsPrintPreview> GeneratePages(IEnumerable<JiraIssue> issues)
       {
          var issuesLeft = issues;
 
@@ -34,6 +37,28 @@ namespace JiraManager.Controls
 
             yield return new CardsPrintPreview(issuesForPage);
          }
+      }
+
+      public static FixedDocument GenerateDocument(IEnumerable<JiraIssue> issues)
+      {
+         var document = new FixedDocument();
+         var pageSize = new Size(8.5 * 96.0, 11.0 * 96.0);
+
+         foreach (var pagePreview in CardsPrintPreview.GeneratePages(issues))
+         {
+            var pageContent = new PageContent();
+            var fixedPage = new FixedPage();
+            pagePreview.Height = pageSize.Height - 10;
+            pagePreview.Width = pageSize.Width - 10;
+            pagePreview.Margin = new Thickness(5);
+            pagePreview.UpdateLayout();
+
+            fixedPage.Children.Add(pagePreview);
+            ((IAddChild)pageContent).AddChild(fixedPage);
+            document.Pages.Add(pageContent);
+         }
+
+         return document;
       }
    }
 }

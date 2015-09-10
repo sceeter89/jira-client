@@ -12,20 +12,26 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
    <Grid>
       <Grid.RowDefinitions>
-         <RowDefinition Height="0"/>
+         <RowDefinition Height="Auto"/>
          <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
 
-      <telerik:RadRibbonView>
+      <telerik:RadRibbonView ApplicationButtonVisibility="Collapsed" TitleBarVisibility="Collapsed">
+         <telerik:RadRibbonTab Header="Issues">
+            <telerik:RadRibbonGroup Header="Export">
+               <telerik:RadRibbonButton Text="XPS" LargeImage="/Assets/Icons/xpsicon.png" Size="Large"
+                                        Command="{Binding SaveXpsCommand}"/>
 
+            </telerik:RadRibbonGroup>
+         </telerik:RadRibbonTab>
       </telerik:RadRibbonView>
 
       <telerik:RadDocking Grid.Row="1">
          <telerik:RadDocking.DocumentHost>
             <telerik:RadSplitContainer>
                <telerik:RadPaneGroup>
-                  <telerik:RadPane Header="Scrum Cards">
-                     <controls:CardsPrintingView/>
+                  <telerik:RadPane Header="Issues">
+                     <controls:IssueListDisplay/>
                   </telerik:RadPane>
                </telerik:RadPaneGroup>
             </telerik:RadSplitContainer>
@@ -33,11 +39,11 @@
 
          <telerik:RadSplitContainer InitialPosition="DockedRight">
             <telerik:RadPaneGroup>
-               <telerik:RadPane Header="Jira connection">
-                  <controls:ConnectionManager/>
-               </telerik:RadPane>
                <telerik:RadPane Header="Search">
                   <controls:SearchIssues/>
+               </telerik:RadPane>
+               <telerik:RadPane Header="Jira connection">
+                  <controls:ConnectionManager/>
                </telerik:RadPane>
             </telerik:RadPaneGroup>
          </telerik:RadSplitContainer>
