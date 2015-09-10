@@ -7,9 +7,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding Source={StaticResource Locator}, Path=CardsPrinting}">
-    <Grid>
+   <Grid>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="*"/>
+         <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
       <telerik:RadGridView ItemsSource="{Binding Issues}">
-         
+
       </telerik:RadGridView>
-    </Grid>
+      
+      <Button Content="Save to XPS"  Grid.Row="1" Command="{Binding SaveXpsCommand}" HorizontalAlignment="Right"/>
+   </Grid>
 </UserControl>

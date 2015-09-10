@@ -1,6 +1,5 @@
 ﻿using JiraManager.Model;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,6 +23,7 @@ namespace JiraManager.Helpers
             Summary = GetFieldByName<string>(issue, "Summary"),
             Priority = GetFieldByName<string>(issue, "Priority", "name"),
             StoryPoints = (int)(GetFieldByName<float?>(issue, "Story Points") ?? 0),
+            Subtasks = issue.Fields["subtasks"].Count()
          };
       }
 
