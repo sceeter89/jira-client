@@ -29,7 +29,7 @@ namespace JiraManager.Service
 
          var response = await client.ExecuteGetTaskAsync<RawSessionInfo>(_sessionInfoRequest);
 
-         if (response.StatusCode == HttpStatusCode.Unauthorized)
+         if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
          {
             _configuration.JiraSessionId = "";
             return new SessionCheckResponse { IsLoggedIn = false };

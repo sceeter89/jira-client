@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="JiraUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">jira.com</Value>
+      <Value Profile="(Default)">http://jira.com</Value>
     </Setting>
     <Setting Name="Username" Type="System.String" Scope="User">
       <Value Profile="(Default)">my.login</Value>

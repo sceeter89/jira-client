@@ -15,8 +15,13 @@ namespace JiraManager.Service
          }
          set
          {
-            Settings.Default.JiraUrl = value;
-            Settings.Default.Save();
+            if (value.StartsWith("http") == false)
+               JiraUrl = "https://" + value;
+            else
+            {
+               Settings.Default.JiraUrl = value;
+               Settings.Default.Save();
+            }
          }
       }
 

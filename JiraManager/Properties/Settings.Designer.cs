@@ -25,7 +25,7 @@ namespace JiraManager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("jira.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://jira.com")]
         public string JiraUrl {
             get {
                 return ((string)(this["JiraUrl"]));

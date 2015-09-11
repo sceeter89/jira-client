@@ -29,17 +29,19 @@ namespace JiraManager.Service
          var result = await _operations.CheckSession();
 
          if(result.IsLoggedIn == false)
-            _messenger.Send(new ConnectionIsBroken());
+         { _messenger.Send(new ConnectionIsBroken());
+            _timer.IsEnabled = false;
+         }
       }
 
       private void StartChecking()
       {
-         _timer.Start();
+         _timer.IsEnabled = true;
       }
 
       private void StopChecking()
       {
-         _timer.Stop();
+         _timer.IsEnabled = false;
       }
    }
 }

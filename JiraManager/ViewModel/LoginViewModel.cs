@@ -31,6 +31,7 @@ namespace JiraManager.ViewModel
          checkLoginTimer.Interval = TimeSpan.FromMilliseconds(100);
          checkLoginTimer.Tick += async (s, a) =>
          {
+            checkLoginTimer.IsEnabled = false;
             var sessionInfo = await _operations.CheckSession();
             if (sessionInfo.IsLoggedIn)
             {
@@ -45,7 +46,6 @@ namespace JiraManager.ViewModel
                _configuration.IsLoggedIn = false;
                IsConnected = false;
             }
-            checkLoginTimer.IsEnabled = false;
          };
          checkLoginTimer.IsEnabled = true;
          _messenger.Register<ConnectionIsBroken>(this, OnConnectionBroken);
