@@ -4,19 +4,51 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JiraManager.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding Source={StaticResource Locator}, Path=Search}">
-   <Grid>
-      <Grid.RowDefinitions>
-         <RowDefinition Height="Auto"/>
-         <RowDefinition Height="180"/>
-         <RowDefinition Height="Auto"/>
-      </Grid.RowDefinitions>
-      <TextBlock Text="Search query:" Margin="5"/>
-      <TextBox Grid.Row="1" Margin="5 15 5 0" AcceptsReturn="True" x:Name="SearchQuery"/>
-      <Button Content="Search" Command="{Binding SearchCommand}"
+             mc:Ignorable="d" d:DesignWidth="300"
+             DataContext="{Binding Source={StaticResource Locator}, Path=Search}" Height="389">
+   <StackPanel>
+      <Grid>
+         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
+         </Grid.RowDefinitions>
+         <TextBlock Text="Search query:" Margin="5"/>
+         <TextBox Grid.Row="1" Margin="5 15 5 0" AcceptsReturn="True" x:Name="SearchQuery"
+               VerticalContentAlignment="Top" Text="{Binding SearchQuery, Mode=TwoWay}"/>
+         <Button Content="Search" Command="{Binding SearchCommand}"
               CommandParameter="{Binding ElementName=SearchQuery, Path=Text}"
               Grid.Row="2" HorizontalAlignment="Right" Margin="5"/>
-   </Grid>
+      </Grid>
+      <Line Stroke="Black" StrokeThickness="2" Height="4"/>
+      <Grid>
+         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+         </Grid.RowDefinitions>
+         <TextBlock Text="Or select JIRA Agile board then sprint:" Margin="5"/>
+         <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="Auto"/>
+               <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Select board:" Margin="5"/>
+            <ComboBox Grid.Column="1" ItemsSource="{Binding BoardsList}" SelectedItem="{Binding SelectedBoard, Mode=TwoWay}"
+                      Margin="5" DisplayMemberPath="Name"/>
+         </Grid>
+         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="Auto"/>
+               <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Select sprint:" Margin="5"/>
+            <ComboBox Grid.Column="1" ItemsSource="{Binding SprintsList}" SelectedItem="{Binding SelectedSprint, Mode=TwoWay}"
+                      Margin="5" DisplayMemberPath="Name"/>
+         </Grid>
+         <Button Content="Search" Command="{Binding SearchBySprintCommand}"
+              Grid.Row="3" HorizontalAlignment="Right" Margin="5"/>
+      </Grid>
+   </StackPanel>
 </UserControl>

@@ -7,7 +7,7 @@
         xmlns:telerikControls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
         xmlns:controls="clr-namespace:JiraManager.Controls"
         mc:Ignorable="d"
-        Height="732.873" Width="725.748"
+        Height="732.873" Width="975.748"
         Title="Jira Manager"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
    <Grid>
@@ -50,7 +50,7 @@
 
          <telerik:RadSplitContainer InitialPosition="DockedBottom">
             <telerik:RadPaneGroup>
-               <telerik:RadPane Header="Log">
+               <telerik:RadPane Header="Log" CanUserClose="false">
                   <controls:LogViewer/>
                </telerik:RadPane>
             </telerik:RadPaneGroup>

@@ -84,7 +84,7 @@ namespace JiraManager.ViewModel
             else
             {
                IsConnected = false;
-               _messenger.Send(new LoggedInMessage());
+               _messenger.Send(new LoggedOutMessage());
                _messenger.LogMessage("Failed to log in! Reason: " + result.ErrorMessage, LogLevel.Warning);
             }
          }

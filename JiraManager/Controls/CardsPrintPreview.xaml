@@ -39,11 +39,6 @@
                   <TextBlock Text="Story Points: "/>
                   <TextBlock Text="{Binding Issue.StoryPoints}"/>
                </StackPanel>
-
-               <StackPanel HorizontalAlignment="Right" Grid.Row="2" Margin="5">
-                  <TextBlock Text="Subtasks: "/>
-                  <TextBlock Text="{Binding Issue.Subtasks}"/>
-               </StackPanel>
             </Grid>
          </Border>
       </DataTemplate>

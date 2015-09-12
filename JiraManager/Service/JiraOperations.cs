@@ -136,5 +136,30 @@ namespace JiraManager.Service
 
          return result;
       }
+
+      public async Task<IEnumerable<RawAgileBoard>> GetAgileBoards()
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/agile/latest/board", Method.GET);
+         request.AddQueryParameter("maxResults", "500");
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<RawAgileBoardsList>(response.Content);
+
+         return result.Values;
+      }
+
+      public async Task<IEnumerable<RawAgileSprint>> GetSprintsForBoard(int boardId)
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/agile/latest/board/{id}/sprint", Method.GET);
+         request.AddQueryParameter("maxResults", "500");
+         request.AddUrlSegment("id", boardId.ToString());
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<RawAgileSprintsList>(response.Content);
+
+         return result.Values;
+      }
    }
 }

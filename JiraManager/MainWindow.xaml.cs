@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Telerik.Windows.Controls;
 
 namespace JiraManager
 {
@@ -9,6 +10,7 @@ namespace JiraManager
    {
       public MainWindow()
       {
+         StyleManager.ApplicationTheme = new Windows8Theme();
          InitializeComponent();
       }
    }

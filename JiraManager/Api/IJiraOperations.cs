@@ -11,5 +11,7 @@ namespace JiraManager.Api
       Task Logout();
       Task<IEnumerable<RawIssue>> GetIssues(string jql);
       Task<IEnumerable<RawFieldDefinition>> GetFieldDefinitions();
+      Task<IEnumerable<RawAgileBoard>> GetAgileBoards();
+      Task<IEnumerable<RawAgileSprint>> GetSprintsForBoard(int boardId);
    }
 }

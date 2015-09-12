@@ -158,6 +158,7 @@
     <Compile Include="Messages\Actions\Authentication\LoggedOutMessage.cs" />
     <Compile Include="Messages\Actions\ConnectionIsBroken.cs" />
     <Compile Include="Messages\Actions\LogMessage.cs" />
+    <Compile Include="Model\JiraAgileModel.cs" />
     <Compile Include="Model\JiraIssue.cs" />
     <Compile Include="Model\SessionCheckResponse.cs" />
     <Compile Include="Service\Configuration.cs" />
