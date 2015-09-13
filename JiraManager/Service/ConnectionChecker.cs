@@ -26,12 +26,17 @@ namespace JiraManager.Service
 
       private async void CheckTick(object sender, EventArgs e)
       {
-         var result = await _operations.CheckSession();
+         try
+         {
+            var result = await _operations.CheckSession();
 
-         if(result.IsLoggedIn == false)
-         { _messenger.Send(new ConnectionIsBroken());
-            _timer.IsEnabled = false;
+            if (result.IsLoggedIn == false)
+            {
+               _messenger.Send(new ConnectionIsBroken());
+               _timer.IsEnabled = false;
+            }
          }
+         catch { }
       }
 
       private void StartChecking()

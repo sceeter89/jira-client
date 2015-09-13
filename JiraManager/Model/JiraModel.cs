@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
@@ -15,11 +16,27 @@ namespace JiraManager.Model
 
    public class RawIssue
    {
+      private JToken _fields;
+
       public string Expand { get; set; }
       public string Id { get; set; }
       public string Self { get; set; }
       public string Key { get; set; }
-      public JToken Fields { get; set; }
+      [JsonProperty("fields")]
+      public JToken RawFields
+      {
+         get
+         {
+            return _fields;
+         }
+         set
+         {
+            _fields = value;
+            BuiltInFields = value.ToObject<RawFields>();
+         }
+      }
+
+      public RawFields BuiltInFields { get; set; }
    }
 
    public class RawFields
@@ -27,31 +44,16 @@ namespace JiraManager.Model
       public RawIssueType IssueType { get; set; }
       public object TimeSpent { get; set; }
       public RawProjectInfo Project { get; set; }
-      public string Customfield_11000 { get; set; }
       public object[] FixVersions { get; set; }
-      public object Customfield_11200 { get; set; }
       public object AggregateTimeSpent { get; set; }
       public RawResolution Resolution { get; set; }
-      public object[] Customfield_11201 { get; set; }
-      public object Customfield_11004 { get; set; }
-      public object Customfield_11202 { get; set; }
-      public string Customfield_10500 { get; set; }
-      public object Customfield_10700 { get; set; }
-      public object Customfield_10701 { get; set; }
-      public object Customfield_10702 { get; set; }
-      public object Customfield_10703 { get; set; }
-      public Customfield_10901 Customfield10901 { get; set; }
       public DateTime? ResolutionDate { get; set; }
       public int Workratio { get; set; }
       public DateTime? LastViewed { get; set; }
       public RawWatches Watches { get; set; }
       public DateTime Created { get; set; }
       public RawPriority Priority { get; set; }
-      public object Customfield_10100 { get; set; }
-      public object Customfield_10101 { get; set; }
-      public object Customfield_10102 { get; set; }
       public object[] Labels { get; set; }
-      public object Customfield_10103 { get; set; }
       public object TimeEstimate { get; set; }
       public object AggregateTimeOriginalEstimate { get; set; }
       public object[] Versions { get; set; }
@@ -62,21 +64,12 @@ namespace JiraManager.Model
       public object[] Components { get; set; }
       public object TimeOriginalEstimate { get; set; }
       public string Description { get; set; }
-      public string Customfield_11100 { get; set; }
-      public object Customfield_10203 { get; set; }
-      public object Customfield_10204 { get; set; }
-      public string[] Customfield_10600 { get; set; }
-      public object Customfield_10205 { get; set; }
-      public object Customfield_10800 { get; set; }
       public object AggregateTimeEstimate { get; set; }
       public string Summary { get; set; }
       public RawUserInfo Creator { get; set; }
       public RawSubtask[] Subtasks { get; set; }
       public RawUserInfo Reporter { get; set; }
       public RawProgressInfo AggregateProgress { get; set; }
-      public object Customfield_10200 { get; set; }
-      public object Customfield_10201 { get; set; }
-      public string Customfield_10400 { get; set; }
       public object Environment { get; set; }
       public object DueDate { get; set; }
       public RawProgressInfo Progress { get; set; }
@@ -126,13 +119,14 @@ namespace JiraManager.Model
       public string Id { get; set; }
       public string Description { get; set; }
       public string Name { get; set; }
-   }
 
-   public class Customfield_10901
-   {
-      public string Self { get; set; }
-      public string Value { get; set; }
-      public string Id { get; set; }
+      public static readonly RawResolution EmptyResolution = new RawResolution
+      {
+         Self = "N/A",
+         Id = "N/A",
+         Description = "N /A",
+         Name = "N/A"
+      };
    }
 
    public class RawWatches
@@ -179,6 +173,16 @@ namespace JiraManager.Model
       public string DisplayName { get; set; }
       public bool Active { get; set; }
       public string TimeZone { get; set; }
+
+      public static readonly RawUserInfo EmptyInfo = new RawUserInfo
+      {
+         Self = "N/A",
+         Key = "N/A",
+         EmailAddress = "N/A",
+         Active = false,
+         TimeZone = "N/A",
+         DisplayName = "N/A"
+      };
    }
 
    public class RawProgressInfo
@@ -307,5 +311,4 @@ namespace JiraManager.Model
       public string Custom { get; set; }
       public int CustomId { get; set; }
    }
-
 }

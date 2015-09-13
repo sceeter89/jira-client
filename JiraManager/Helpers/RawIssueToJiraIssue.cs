@@ -20,17 +20,18 @@ namespace JiraManager.Helpers
          return new JiraIssue
          {
             Key = issue.Key,
-            Project = GetFieldByName<string>(issue, "Project", "name"),
-            Summary = GetFieldByName<string>(issue, "Summary"),
-            Priority = GetFieldByName<string>(issue, "Priority", "name"),
+            Project = issue.BuiltInFields.Project.Name,
+            Summary = issue.BuiltInFields.Summary,
+            Priority = issue.BuiltInFields.Priority.Name,
             StoryPoints = (int)(GetFieldByName<float?>(issue, "Story Points") ?? 0),
-            Subtasks = issue.Fields["subtasks"].Count(),
-            Created = GetFieldByName<DateTime>(issue, "Created"),
-            Resolved = GetFieldByName<DateTime?>(issue, "Resolved"),
-            Status = GetFieldByName<string>(issue, "Status", "name"),
-            Description = GetFieldByName<string>(issue, "Description"),
-            Assignee = GetFieldByName<string>(issue, "Assignee", "displayName"),
-            Reporter = GetFieldByName<string>(issue, "Reporter", "displayName"),
+            Subtasks = issue.BuiltInFields.Subtasks.Count(),
+            Created = issue.BuiltInFields.Created,
+            Resolved = issue.BuiltInFields.ResolutionDate ?? DateTime.MinValue,
+            Status = issue.BuiltInFields.Status.Name,
+            Description = issue.BuiltInFields.Description,
+            Assignee = (issue.BuiltInFields.Assignee ?? RawUserInfo.EmptyInfo).DisplayName,
+            Reporter = (issue.BuiltInFields.Reporter ?? RawUserInfo.EmptyInfo).DisplayName,
+            BuiltInFields = issue.BuiltInFields
          };
       }
 
@@ -42,10 +43,10 @@ namespace JiraManager.Helpers
          var fieldId = _fields[fieldName].Id;
          JToken token;
          if (path == null)
-            return issue.Fields.Value<T>(fieldId);
+            return issue.RawFields.Value<T>(fieldId);
          else
          {
-            token = issue.Fields.SelectToken(fieldId);
+            token = issue.RawFields.SelectToken(fieldId);
             foreach (var part in path.Split('/'))
             {
                token = token.SelectToken(part);

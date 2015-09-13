@@ -100,6 +100,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Telerik.Pivot.Core">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Pivot.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Windows.Controls">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.dll</HintPath>
     </Reference>
@@ -114,6 +117,12 @@
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Navigation">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Pivot">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Pivot.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.PivotFieldList">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.PivotFieldList.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.RibbonView">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.RibbonView.dll</HintPath>
@@ -150,6 +159,12 @@
     <Compile Include="Controls\LogViewer.xaml.cs">
       <DependentUpon>LogViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PivotReportingGrid.xaml.cs">
+      <DependentUpon>PivotReportingGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PivotReportingProperties.xaml.cs">
+      <DependentUpon>PivotReportingProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SearchIssues.xaml.cs">
       <DependentUpon>SearchIssues.xaml</DependentUpon>
     </Compile>
@@ -158,8 +173,10 @@
     <Compile Include="Messages\Actions\Authentication\LoggedOutMessage.cs" />
     <Compile Include="Messages\Actions\ConnectionIsBroken.cs" />
     <Compile Include="Messages\Actions\LogMessage.cs" />
+    <Compile Include="Messages\Actions\NewSearchResultsAvailable.cs" />
     <Compile Include="Model\JiraAgileModel.cs" />
     <Compile Include="Model\JiraIssue.cs" />
+    <Compile Include="Model\PivotJiraIssue.cs" />
     <Compile Include="Model\SessionCheckResponse.cs" />
     <Compile Include="Service\Configuration.cs" />
     <Compile Include="Service\ConnectionChecker.cs" />
@@ -170,6 +187,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PivotGridViewModel.cs" />
     <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\IssueListDisplay.xaml">
@@ -185,6 +203,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LogViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PivotReportingGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PivotReportingProperties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,6 +246,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -4,18 +4,19 @@ namespace JiraManager.Model
 {
    public class JiraIssue
    {
-      public string Assignee { get; internal set; }
-      public DateTime Created { get; internal set; }
-      public string Description { get; internal set; }
-      public string Key { get; internal set; }
-      public string Priority { get; internal set; }
-      public string Project { get; internal set; }
-      public string Reporter { get; internal set; }
-      public DateTime? Resolved { get; internal set; }
-      public string Status { get; internal set; }
-      public int StoryPoints { get; internal set; }
-      public int Subtasks { get; internal set; }
-      public string Summary { get; internal set; }
+      public string Assignee { get; set; }
+      public DateTime Created { get; set; }
+      public string Description { get; set; }
+      public string Key { get; set; }
+      public string Priority { get; set; }
+      public string Project { get; set; }
+      public string Reporter { get; set; }
+      public DateTime? Resolved { get; set; }
+      public string Status { get; set; }
+      public int StoryPoints { get; set; }
+      public int Subtasks { get; set; }
+      public string Summary { get; set; }
+      public RawFields BuiltInFields { get; set; }
    }
 
    public class JiraIssuePrintPreviewModel

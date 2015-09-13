@@ -12,6 +12,7 @@ using JiraManager.Helpers;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Threading;
 using JiraManager.Messages.Actions.Authentication;
+using JiraManager.Messages.Actions;
 
 namespace JiraManager.ViewModel
 {
@@ -51,7 +52,7 @@ namespace JiraManager.ViewModel
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
                BoardsList.Clear();
-               foreach (var board in boards.OrderBy(x => x.Name))
+               foreach (var board in boards.Where(x => x.Type == "scrum").OrderBy(x => x.Name))
                   BoardsList.Add(board);
             });
          });
@@ -92,6 +93,7 @@ namespace JiraManager.ViewModel
             FoundIssues.Add(issue);
          }
          _messenger.LogMessage(string.Format("Search done. Found {0} issues.", FoundIssues.Count));
+         _messenger.Send(new NewSearchResultsAvailable());
          SetIsBusy(false);
       }
 

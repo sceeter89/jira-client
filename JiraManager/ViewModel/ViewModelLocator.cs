@@ -33,6 +33,7 @@ namespace JiraManager.ViewModel
          SimpleIoc.Default.Register<LogViewModel>();
          SimpleIoc.Default.Register<SearchIssuesViewModel>();
          SimpleIoc.Default.Register<IssueListViewModel>();
+         SimpleIoc.Default.Register<PivotGridViewModel>();
          SimpleIoc.Default.Register<MainViewModel>();
       }
 
@@ -73,6 +74,14 @@ namespace JiraManager.ViewModel
          get
          {
             return ServiceLocator.Current.GetInstance<IssueListViewModel>();
+         }
+      }
+
+      public PivotGridViewModel Pivot
+      {
+         get
+         {
+            return ServiceLocator.Current.GetInstance<PivotGridViewModel>();
          }
       }
 
