@@ -9,10 +9,14 @@ Application name is not yet adequate, but eventually this application is thought
 
 Please download latest release from: https://github.com/sceeter89/jira-manager/releases and extract to desired directory. Then run JiraManager.exe file to start. Once you log in to your JIRA your session will be stored, but your password will not be saved anywhere. What it implies - once your session expires (e.g. due to server restart) you will need to log in again.
 
+### Prerequisities
+
+To run JiraManager you will need to install .NET 4.5.2 (https://www.microsoft.com/pl-pl/download/details.aspx?id=42642) or higher.
+
 ## Feedback
 
 Any feedback is greatly welcome. Whether you think of some cool feature to add or you encounter some bug or trouble feel free to raise an issue here: https://github.com/sceeter89/jira-manager/issues
 
 ## Development
 
-JiraManager makes great use of Telerik controls for WPF, so to build it you will need these controls installed (http://www.telerik.com/products/wpf/overview.aspx).
+JiraManager is being developed using Visual Studio 2015 and makes great use of Telerik controls for WPF, so to build it you will need these controls installed (http://www.telerik.com/products/wpf/overview.aspx).
