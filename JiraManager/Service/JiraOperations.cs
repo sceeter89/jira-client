@@ -6,6 +6,8 @@ using System.Net;
 using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace JiraManager.Service
 {
@@ -160,6 +162,49 @@ namespace JiraManager.Service
          var result = JsonConvert.DeserializeObject<RawAgileSprintsList>(response.Content);
 
          return result.Values;
+      }
+
+      public async Task<RawProfileDetails> GetProfileDetails()
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/myself", Method.GET);
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<RawProfileDetails>(response.Content);
+
+         return result;
+      }
+
+      public async Task<BitmapImage> DownloadPicture(string imageUrl)
+      {
+         var request = (HttpWebRequest)WebRequest.Create(imageUrl);
+         if (string.IsNullOrEmpty(_configuration.JiraSessionId) == false)
+         {
+            request.CookieContainer = new CookieContainer();
+            request.CookieContainer.Add(new Cookie("JSESSIONID", _configuration.JiraSessionId, "/", request.RequestUri.Host));
+         }
+
+         var response = (HttpWebResponse)request.GetResponse();
+
+         using (Stream inputStream = response.GetResponseStream())
+         using (Stream outputStream = new MemoryStream())
+         {
+            var buffer = new byte[4096];
+            int bytesRead;
+            do
+            {
+               bytesRead = inputStream.Read(buffer, 0, buffer.Length);
+               outputStream.Write(buffer, 0, bytesRead);
+            } while (bytesRead != 0);
+
+            var bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            bitmapImage.StreamSource = outputStream;
+            bitmapImage.EndInit();
+            bitmapImage.Freeze();
+            return bitmapImage;
+         }
       }
    }
 }

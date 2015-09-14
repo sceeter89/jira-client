@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Threading;
+using JiraManager.Properties;
 using System.Windows;
 
 namespace JiraManager
@@ -11,6 +12,12 @@ namespace JiraManager
       static App()
       {
          DispatcherHelper.Initialize();
+         if (Settings.Default.SettingsUpgradePending)
+         {
+            Settings.Default.Upgrade();
+            Settings.Default.SettingsUpgradePending = false;
+            Settings.Default.Save();
+         }
       }
    }
 }

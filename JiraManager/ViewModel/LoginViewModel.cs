@@ -4,10 +4,12 @@ using GalaSoft.MvvmLight.Messaging;
 using JiraManager.Api;
 using JiraManager.Messages.Actions;
 using JiraManager.Messages.Actions.Authentication;
+using JiraManager.Model;
 using JiraManager.Service;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace JiraManager.ViewModel
@@ -20,6 +22,8 @@ namespace JiraManager.ViewModel
       private bool _isBusy = false;
       private bool _isConnected;
       private bool _isDisconnected;
+      private RawProfileDetails _profile;
+      private BitmapImage _avatarSource;
 
       public LoginViewModel(IMessenger messenger, Configuration configuration, IJiraOperations operations)
       {
@@ -50,10 +54,23 @@ namespace JiraManager.ViewModel
          checkLoginTimer.IsEnabled = true;
          _messenger.Register<ConnectionIsBroken>(this, OnConnectionBroken);
 
-         LoginCommand = new RelayCommand<PasswordBox>(async password => await Login(((PasswordBox)password).Password), p => _isBusy == false);
+         LoginCommand = new RelayCommand<PasswordBox>(async password => await Login(password.Password), p => _isBusy == false);
          LogoutCommand = new RelayCommand(async () => await Logout(), () => _isBusy == false);
 
          IsConnected = false;
+
+         _messenger.Register<LoggedInMessage>(this, async _ =>
+         {
+            var details = await _operations.GetProfileDetails();
+            Profile = details;
+            var avatar = await _operations.DownloadPicture(details.AvatarUrls._48x48);
+            AvatarSource = avatar;
+         });
+         _messenger.Register<LoggedOutMessage>(this, _ =>
+         {
+            Profile = null;
+            AvatarSource = null;
+         });
       }
 
       private void OnConnectionBroken(ConnectionIsBroken message)
@@ -121,7 +138,7 @@ namespace JiraManager.ViewModel
          _isBusy = false;
          LogoutCommand.RaiseCanExecuteChanged();
       }
-      
+
       public string JiraUrl
       {
          get { return _configuration.JiraUrl; }
@@ -176,5 +193,26 @@ namespace JiraManager.ViewModel
 
       public RelayCommand<PasswordBox> LoginCommand { get; private set; }
       public RelayCommand LogoutCommand { get; private set; }
+
+      public RawProfileDetails Profile
+      {
+         get { return _profile; }
+         set
+         {
+            _profile = value;
+            RaisePropertyChanged();
+
+         }
+      }
+
+      public BitmapImage AvatarSource
+      {
+         get { return _avatarSource; }
+         set
+         {
+            _avatarSource = value;
+            RaisePropertyChanged();
+         }
+      }
    }
 }

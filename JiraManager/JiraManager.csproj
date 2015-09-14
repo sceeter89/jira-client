@@ -127,6 +127,7 @@
     <Compile Include="Api\IJiraOperations.cs" />
     <Compile Include="Api\LogLevel.cs" />
     <Compile Include="Api\MessengerExtensions.cs" />
+    <Compile Include="Controls\Converters\NullToCollapsedConverter.cs" />
     <Compile Include="Controls\IssueListDisplay.xaml.cs">
       <DependentUpon>IssueListDisplay.xaml</DependentUpon>
     </Compile>
@@ -240,9 +241,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\Icons\xpsicon.png" />
   </ItemGroup>

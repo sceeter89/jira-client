@@ -49,11 +49,13 @@ namespace JiraManager.ViewModel
          DocumentPanes.Clear();
          DocumentPanes.Add(_issueListDocumentPane);
          DocumentPanes.Add(_pivotDocumentPane);
+         FocusDocumentPane(_issueListDocumentPane);
 
          PropertyPanes.Clear();
          PropertyPanes.Add(_searchPropertyPane);
          PropertyPanes.Add(_pivotPropertyPane);
          PropertyPanes.Add(_connectionPropertyPane);
+         FocusPropertyPane(_searchPropertyPane);
 
          SetIsLoggedIn();
       }
@@ -139,6 +141,11 @@ namespace JiraManager.ViewModel
       private void FocusPropertyPane(RadPane pane)
       {
          SelectedPropertyPaneIndex = PropertyPanes.IndexOf(pane);
+      }
+
+      private void FocusDocumentPane(RadPane pane)
+      {
+         SelectedDocumentPaneIndex = DocumentPanes.IndexOf(pane);
       }
 
       public int SelectedPropertyPaneIndex

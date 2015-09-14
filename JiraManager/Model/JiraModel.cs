@@ -99,9 +99,13 @@ namespace JiraManager.Model
 
    public class RawAvatarUrls
    {
+      [JsonProperty("48x48")]
       public string _48x48 { get; set; }
+      [JsonProperty("24x24")]
       public string _24x24 { get; set; }
+      [JsonProperty("16x16")]
       public string _16x16 { get; set; }
+      [JsonProperty("32x32")]
       public string _32x32 { get; set; }
    }
 
@@ -311,4 +315,31 @@ namespace JiraManager.Model
       public string Custom { get; set; }
       public int CustomId { get; set; }
    }
+
+
+   public class RawProfileDetails
+   {
+      public string Self { get; set; }
+      public string Name { get; set; }
+      public string EmailAddress { get; set; }
+      public RawAvatarUrls AvatarUrls { get; set; }
+      public string DisplayName { get; set; }
+      public bool Active { get; set; }
+      public string TimeZone { get; set; }
+      public RawGroups Groups { get; set; }
+      public string Expand { get; set; }
+   }
+   
+   public class RawGroups
+   {
+      public int Size { get; set; }
+      public RawGroup[] Items { get; set; }
+   }
+
+   public class RawGroup
+   {
+      public string Name { get; set; }
+      public string Self { get; set; }
+   }
+
 }

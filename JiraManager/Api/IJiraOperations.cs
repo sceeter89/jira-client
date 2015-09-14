@@ -1,6 +1,7 @@
 ﻿using JiraManager.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace JiraManager.Api
 {
@@ -13,5 +14,7 @@ namespace JiraManager.Api
       Task<IEnumerable<RawFieldDefinition>> GetFieldDefinitions();
       Task<IEnumerable<RawAgileBoard>> GetAgileBoards();
       Task<IEnumerable<RawAgileSprint>> GetSprintsForBoard(int boardId);
+      Task<RawProfileDetails> GetProfileDetails();
+      Task<BitmapImage> DownloadPicture(string imageUrl);
    }
 }
