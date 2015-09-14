@@ -29,29 +29,12 @@
       <telerik:RadDocking Grid.Row="1">
          <telerik:RadDocking.DocumentHost>
             <telerik:RadSplitContainer>
-               <telerik:RadPaneGroup>
-                  <telerik:RadPane Header="Issues" CanUserClose="false">
-                     <controls:IssueListDisplay/>
-                  </telerik:RadPane>
-                  <telerik:RadPane Header="Pivot reporting" CanUserClose="false">
-                     <controls:PivotReportingGrid/>
-                  </telerik:RadPane>
-               </telerik:RadPaneGroup>
+               <telerik:RadPaneGroup SelectedIndex="{Binding SelectedDocumentPaneIndex, Mode=TwoWay}"  ItemsSource="{Binding DocumentPanes}"/>
             </telerik:RadSplitContainer>
          </telerik:RadDocking.DocumentHost>
 
          <telerik:RadSplitContainer InitialPosition="DockedRight">
-            <telerik:RadPaneGroup>
-               <telerik:RadPane Header="Search" CanUserClose="false">
-                  <controls:SearchIssues/>
-               </telerik:RadPane>
-               <telerik:RadPane Header="Jira connection" CanUserClose="false">
-                  <controls:ConnectionManager/>
-               </telerik:RadPane>
-               <telerik:RadPane Header="Pivot properties" CanUserClose="false">
-                  <controls:PivotReportingProperties/>
-               </telerik:RadPane>
-            </telerik:RadPaneGroup>
+            <telerik:RadPaneGroup SelectedIndex="{Binding SelectedPropertyPaneIndex, Mode=TwoWay}" ItemsSource="{Binding PropertyPanes}"/>
          </telerik:RadSplitContainer>
 
          <telerik:RadSplitContainer InitialPosition="DockedBottom">

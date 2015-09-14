@@ -154,6 +154,7 @@
     <Compile Include="Messages\Actions\ConnectionIsBroken.cs" />
     <Compile Include="Messages\Actions\LogMessage.cs" />
     <Compile Include="Messages\Actions\NewSearchResultsAvailable.cs" />
+    <Compile Include="Messages\Navigation\OpenConnectionTabMessage.cs" />
     <Compile Include="Model\JiraAgileModel.cs" />
     <Compile Include="Model\JiraIssue.cs" />
     <Compile Include="Model\PivotJiraIssue.cs" />
