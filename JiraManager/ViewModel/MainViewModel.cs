@@ -1,4 +1,3 @@
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using JiraManager.Api;
@@ -10,13 +9,13 @@ using System.IO;
 using System.Linq;
 using System.Windows.Xps.Packaging;
 using Telerik.Windows.Controls;
-using System;
 
 namespace JiraManager.ViewModel
 {
    public class MainViewModel : GalaSoft.MvvmLight.ViewModelBase
    {
       private bool _isLoggedIn = false;
+      private bool _userModifiedQuery = false;
 
       private readonly SearchIssuesViewModel _searchIssuesViewModel;
       private readonly IMessenger _messenger;

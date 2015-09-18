@@ -9,10 +9,8 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using JiraManager.Helpers;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight.Threading;
-using JiraManager.Messages.Actions.Authentication;
 using JiraManager.Messages.Actions;
+using JiraManager.Model.SearchableFields;
 
 namespace JiraManager.ViewModel
 {
@@ -23,8 +21,6 @@ namespace JiraManager.ViewModel
       private readonly BackgroundWorker _backgroundWorker = new BackgroundWorker();
       private readonly IJiraOperations _operations;
       private RawIssueToJiraIssue _modelConverter;
-      private RawAgileBoard _selectedBoard;
-      private RawAgileSprint _selectedSprint;
       private string _searchQuery;
 
       public SearchIssuesViewModel(IMessenger messenger, IJiraOperations operations)
@@ -32,30 +28,22 @@ namespace JiraManager.ViewModel
          _operations = operations;
          _messenger = messenger;
          SearchCommand = new RelayCommand(DoSearch, () => _isBusy == false);
-         SearchBySprintCommand = new RelayCommand(() =>
-         {
-            SearchQuery = string.Format("Sprint = {0}", SelectedSprint.Id);
-            SearchCommand.Execute(null);
-         }, () => SelectedSprint != null);
+         CustomSearchCommand = new RelayCommand(DoCustomSearch, () => _isBusy == false);
+
          FoundIssues = new ObservableCollection<JiraIssue>();
          _backgroundWorker.DoWork += DownloadIssues;
          _backgroundWorker.RunWorkerCompleted += DownloadCompleted;
 
-         BoardsList = new ObservableCollection<RawAgileBoard>();
-         SprintsList = new ObservableCollection<RawAgileSprint>();
+         SearchableFields = new[] { new SearchBySprintField(messenger, operations) };
+      }
 
-         _messenger.Register<LoggedInMessage>(this, async m =>
-         {
-            var boards = await _operations.GetAgileBoards();
-            if (boards == null)
-               return;
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-               BoardsList.Clear();
-               foreach (var board in boards.Where(x => x.Type == "scrum").OrderBy(x => x.Name))
-                  BoardsList.Add(board);
-            });
-         });
+      private void DoCustomSearch()
+      {
+         var searchClauses = SearchableFields.Where(f => f.IsFilled).Select(f => f.GetSearchQuery());
+         var searchString = string.Join(" AND ", searchClauses.Select(c => string.Format("( {0} )", c)));
+
+         SearchQuery = searchString;
+         SearchCommand.Execute(null);
       }
 
       private void DownloadCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -116,7 +104,7 @@ namespace JiraManager.ViewModel
          e.Result = results;
       }
 
-      private async void DoSearch()
+      private void DoSearch()
       {
          SetIsBusy(true);
          _messenger.LogMessage(SearchQuery);
@@ -134,48 +122,9 @@ namespace JiraManager.ViewModel
 
       public RelayCommand SearchCommand { get; private set; }
 
-      public RelayCommand SearchBySprintCommand { get; private set; }
+      public RelayCommand CustomSearchCommand { get; private set; }
 
       public ObservableCollection<JiraIssue> FoundIssues { get; private set; }
-
-      public ObservableCollection<RawAgileBoard> BoardsList { get; private set; }
-      public ObservableCollection<RawAgileSprint> SprintsList { get; private set; }
-
-      public RawAgileBoard SelectedBoard
-      {
-         get { return _selectedBoard; }
-         set
-         {
-            SprintsList.Clear();
-            SelectedSprint = null;
-
-            _selectedBoard = value;
-
-            Task.Run(async () =>
-            {
-               var sprints = await _operations.GetSprintsForBoard(value.Id);
-               DispatcherHelper.CheckBeginInvokeOnUI(() =>
-               {
-                  SprintsList.Clear();
-                  foreach (var sprint in sprints.OrderBy(x => x.Name))
-                     SprintsList.Add(sprint);
-               });
-            });
-
-            RaisePropertyChanged();
-         }
-      }
-
-      public RawAgileSprint SelectedSprint
-      {
-         get { return _selectedSprint; }
-         set
-         {
-            _selectedSprint = value;
-            RaisePropertyChanged();
-            SearchBySprintCommand.RaiseCanExecuteChanged();
-         }
-      }
 
       public string SearchQuery
       {
@@ -186,5 +135,7 @@ namespace JiraManager.ViewModel
             RaisePropertyChanged();
          }
       }
+
+      public IEnumerable<ISearchableField> SearchableFields { get; private set; }
    }
 }
