@@ -1,9 +1,6 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Service;
-using Microsoft.Practices.ServiceLocation;
+using Autofac;
+using System.Reflection;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -11,37 +8,14 @@ namespace Yakuza.JiraClient.ViewModel
    {
       public ViewModelLocator()
       {
-         ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-         if (ViewModelBase.IsInDesignModeStatic)
-         {
-            // Create design time view services and models
-         }
-         else
-         {
-            // Create run time view services and models
-            SimpleIoc.Default.Register(() => Messenger.Default);
-         }
-
-         SimpleIoc.Default.Register<IJiraOperations, JiraOperations>();
-
-         SimpleIoc.Default.Register<Configuration>(true);
-         SimpleIoc.Default.Register<IssuesRetriever>(true);
-         SimpleIoc.Default.Register<ConnectionChecker>(true);
-
-         SimpleIoc.Default.Register<LoginViewModel>();
-         SimpleIoc.Default.Register<LogViewModel>();
-         SimpleIoc.Default.Register<SearchIssuesViewModel>();
-         SimpleIoc.Default.Register<IssueListViewModel>();
-         SimpleIoc.Default.Register<PivotGridViewModel>();
-         SimpleIoc.Default.Register<MainViewModel>();
+         BuildIocContainer();
       }
 
       public MainViewModel Main
       {
          get
          {
-            return ServiceLocator.Current.GetInstance<MainViewModel>();
+            return IocContainer.Resolve<MainViewModel>();
          }
       }
 
@@ -49,7 +23,7 @@ namespace Yakuza.JiraClient.ViewModel
       {
          get
          {
-            return ServiceLocator.Current.GetInstance<LogViewModel>();
+            return IocContainer.Resolve<LogViewModel>();
          }
       }
 
@@ -57,7 +31,7 @@ namespace Yakuza.JiraClient.ViewModel
       {
          get
          {
-            return ServiceLocator.Current.GetInstance<LoginViewModel>();
+            return IocContainer.Resolve<LoginViewModel>();
          }
       }
 
@@ -65,7 +39,7 @@ namespace Yakuza.JiraClient.ViewModel
       {
          get
          {
-            return ServiceLocator.Current.GetInstance<SearchIssuesViewModel>();
+            return IocContainer.Resolve<SearchIssuesViewModel>();
          }
       }
 
@@ -73,7 +47,7 @@ namespace Yakuza.JiraClient.ViewModel
       {
          get
          {
-            return ServiceLocator.Current.GetInstance<IssueListViewModel>();
+            return IocContainer.Resolve<IssueListViewModel>();
          }
       }
 
@@ -81,13 +55,42 @@ namespace Yakuza.JiraClient.ViewModel
       {
          get
          {
-            return ServiceLocator.Current.GetInstance<PivotGridViewModel>();
+            return IocContainer.Resolve<PivotGridViewModel>();
          }
       }
 
       public static void Cleanup()
       {
          // TODO Clear the ViewModels
+      }
+
+      internal IContainer IocContainer { get; private set; }
+
+      private void BuildIocContainer()
+      {
+         var builder = new ContainerBuilder();
+
+         var clientAssembly = Assembly.Load("Jira Client");
+
+         builder.RegisterType<Messenger>()
+            .AsImplementedInterfaces()
+            .SingleInstance();
+
+         //Register ViewModels
+         builder.RegisterAssemblyTypes(clientAssembly)
+            .Where(t => t.Name.EndsWith("ViewModel"))
+            .AsSelf()
+            .SingleInstance();
+
+         //Register and run background services
+         builder.RegisterAssemblyTypes(clientAssembly)
+            .InNamespace("Yakuza.JiraClient.Service")
+            .AsImplementedInterfaces()
+            .AsSelf()
+            .SingleInstance()
+            .AutoActivate();
+
+         IocContainer = builder.Build();
       }
    }
 }

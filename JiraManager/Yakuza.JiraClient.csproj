@@ -37,6 +37,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -169,6 +173,7 @@
       <DependentUpon>SearchIssues.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\RawIssueToJiraIssue.cs" />
+    <Compile Include="Messages\Actions\Authentication\IsLoggedInMessage.cs" />
     <Compile Include="Messages\Actions\Authentication\LoggedInMessage.cs" />
     <Compile Include="Messages\Actions\Authentication\LoggedOutMessage.cs" />
     <Compile Include="Messages\Actions\ConnectionIsBroken.cs" />
@@ -187,7 +192,6 @@
     <Compile Include="Model\SessionCheckResponse.cs" />
     <Compile Include="Service\Configuration.cs" />
     <Compile Include="Service\ConnectionChecker.cs" />
-    <Compile Include="Service\IssuesRetriever.cs" />
     <Compile Include="Service\JiraOperations.cs" />
     <Compile Include="Model\LoginAttemptResult.cs" />
     <Compile Include="ViewModel\IssueListViewModel.cs" />

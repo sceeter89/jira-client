@@ -15,19 +15,11 @@ namespace Yakuza.JiraClient.ViewModel
    public class MainViewModel : GalaSoft.MvvmLight.ViewModelBase
    {
       private bool _isLoggedIn = false;
-      private bool _userModifiedQuery = false;
 
       private readonly SearchIssuesViewModel _searchIssuesViewModel;
       private readonly IMessenger _messenger;
       private int _selectedDocumentPaneIndex;
       private int _selectedPropertyPaneIndex;
-
-      private readonly RadPane _connectionPropertyPane = new RadPane { Header = "JIRA", Content = new ConnectionManager(), CanUserClose = false };
-      private readonly RadPane _pivotPropertyPane = new RadPane { Header = "pivot", Content = new PivotReportingProperties() };
-      private readonly RadPane _searchPropertyPane = new RadPane { Header = "search", Content = new SearchIssues() };
-
-      private readonly RadPane _issueListDocumentPane = new RadPane { Header = "issues", Content = new IssueListDisplay() };
-      private readonly RadPane _pivotDocumentPane = new RadPane { Header = "pivot", Content = new PivotReportingGrid() };
 
       public MainViewModel(IMessenger messenger, SearchIssuesViewModel searchIssuesViewModel)
       {
@@ -35,26 +27,28 @@ namespace Yakuza.JiraClient.ViewModel
          _searchIssuesViewModel = searchIssuesViewModel;
          SaveXpsCommand = new RelayCommand(SaveXps, () => _isLoggedIn);
 
-         _messenger.Register<OpenConnectionTabMessage>(this, _ => FocusPropertyPane(_connectionPropertyPane));
          _messenger.Register<LoggedInMessage>(this, LoadUi);
          _messenger.Register<LoggedOutMessage>(this, _ => SetIsLoggedOut());
+         _messenger.Register<OpenConnectionTabMessage>(this, _ => FocusPropertyPane(ConnectionPropertyPane));
 
          DocumentPanes = new ObservableCollection<RadPane>();
-         PropertyPanes = new ObservableCollection<RadPane> { _connectionPropertyPane };
+         PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane };
+
+         _messenger.Send(new IsLoggedInMessage());
       }
 
       private void LoadUi(LoggedInMessage message)
       {
          DocumentPanes.Clear();
-         DocumentPanes.Add(_issueListDocumentPane);
-         DocumentPanes.Add(_pivotDocumentPane);
-         FocusDocumentPane(_issueListDocumentPane);
+         DocumentPanes.Add(IssueListDocumentPane);
+         DocumentPanes.Add(PivotDocumentPane);
+         FocusDocumentPane(IssueListDocumentPane);
 
          PropertyPanes.Clear();
-         PropertyPanes.Add(_searchPropertyPane);
-         PropertyPanes.Add(_pivotPropertyPane);
-         PropertyPanes.Add(_connectionPropertyPane);
-         FocusPropertyPane(_searchPropertyPane);
+         PropertyPanes.Add(SearchPropertyPane);
+         PropertyPanes.Add(PivotPropertyPane);
+         PropertyPanes.Add(ConnectionPropertyPane);
+         FocusPropertyPane(SearchPropertyPane);
 
          SetIsLoggedIn();
       }
@@ -162,5 +156,67 @@ namespace Yakuza.JiraClient.ViewModel
 
       public ObservableCollection<RadPane> DocumentPanes { get; private set; }
       public ObservableCollection<RadPane> PropertyPanes { get; private set; }
+
+      private RadPane _connectionPropertyPane;
+      private RadPane _pivotPropertyPane;
+      private RadPane _searchPropertyPane;
+
+      private RadPane _issueListDocumentPane;
+      private RadPane _pivotDocumentPane;
+
+      private RadPane SearchPropertyPane
+      {
+         get
+         {
+            if (_searchPropertyPane == null)
+               _searchPropertyPane = new RadPane { Header = "search", Content = new SearchIssues() };
+
+            return _searchPropertyPane;
+         }
+      }
+
+      private RadPane PivotPropertyPane
+      {
+         get
+         {
+            if (_pivotPropertyPane == null)
+               _pivotPropertyPane = new RadPane { Header = "pivot", Content = new PivotReportingProperties() };
+
+            return _pivotPropertyPane;
+         }
+      }
+
+      private RadPane ConnectionPropertyPane
+      {
+         get
+         {
+            if (_connectionPropertyPane == null)
+               _connectionPropertyPane = new RadPane { Header = "JIRA", Content = new ConnectionManager(), CanUserClose = false };
+
+            return _connectionPropertyPane;
+         }
+      }
+
+      private RadPane IssueListDocumentPane
+      {
+         get
+         {
+            if (_issueListDocumentPane == null)
+               _issueListDocumentPane = new RadPane { Header = "issues", Content = new IssueListDisplay() };
+
+            return _issueListDocumentPane;
+         }
+      }
+
+      private RadPane PivotDocumentPane
+      {
+         get
+         {
+            if (_pivotDocumentPane == null)
+               _pivotDocumentPane = new RadPane { Header = "pivot", Content = new PivotReportingGrid() };
+
+            return _pivotDocumentPane;
+         }
+      }
    }
 }

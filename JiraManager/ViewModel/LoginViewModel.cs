@@ -51,7 +51,6 @@ namespace Yakuza.JiraClient.ViewModel
                IsConnected = false;
             }
          };
-         checkLoginTimer.IsEnabled = true;
          _messenger.Register<ConnectionIsBroken>(this, OnConnectionBroken);
 
          LoginCommand = new RelayCommand<PasswordBox>(async password => await Login(password.Password), p => _isBusy == false);
@@ -71,6 +70,14 @@ namespace Yakuza.JiraClient.ViewModel
             Profile = null;
             AvatarSource = null;
          });
+         _messenger.Register<IsLoggedInMessage>(this, m =>
+         {
+            if (IsConnected)
+               _messenger.Send(new LoggedInMessage());
+            else
+               _messenger.Send(new LoggedOutMessage());
+         });
+         checkLoginTimer.IsEnabled = true;
       }
 
       private void OnConnectionBroken(ConnectionIsBroken message)
