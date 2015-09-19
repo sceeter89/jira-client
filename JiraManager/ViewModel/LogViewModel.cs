@@ -1,11 +1,11 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using JiraManager.Messages.Actions;
+using Yakuza.JiraClient.Messages.Actions;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
 using System;
 
-namespace JiraManager.ViewModel
+namespace Yakuza.JiraClient.ViewModel
 {
    public class LogViewModel : ViewModelBase
    {

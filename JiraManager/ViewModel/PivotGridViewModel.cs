@@ -1,12 +1,12 @@
 ﻿using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using JiraManager.Messages.Actions;
+using Yakuza.JiraClient.Messages.Actions;
 using Telerik.Pivot.Core;
 using System.Linq;
-using JiraManager.Model;
+using Yakuza.JiraClient.Model;
 
-namespace JiraManager.ViewModel
+namespace Yakuza.JiraClient.ViewModel
 {
    public class PivotGridViewModel : ViewModelBase
    {

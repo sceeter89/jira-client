@@ -1,11 +1,11 @@
 ﻿using System;
 using GalaSoft.MvvmLight.Messaging;
-using JiraManager.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Messages.Actions.Authentication;
 using System.Windows.Threading;
-using JiraManager.Api;
-using JiraManager.Messages.Actions;
+using Yakuza.JiraClient.Api;
+using Yakuza.JiraClient.Messages.Actions;
 
-namespace JiraManager.Service
+namespace Yakuza.JiraClient.Service
 {
    class ConnectionChecker
    {

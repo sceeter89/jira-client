@@ -1,4 +1,4 @@
-﻿namespace JiraManager.Api
+﻿namespace Yakuza.JiraClient.Api
 {
    public enum LogLevel
    {

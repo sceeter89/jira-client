@@ -1,4 +1,4 @@
-﻿namespace JiraManager.Messages.Actions
+﻿namespace Yakuza.JiraClient.Messages.Actions
 {
    public class NewSearchResultsAvailable
    {

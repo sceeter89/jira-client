@@ -1,16 +1,16 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using JiraManager.Api;
-using JiraManager.Controls;
-using JiraManager.Messages.Actions.Authentication;
-using JiraManager.Messages.Navigation;
+using Yakuza.JiraClient.Api;
+using Yakuza.JiraClient.Controls;
+using Yakuza.JiraClient.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Messages.Navigation;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Xps.Packaging;
 using Telerik.Windows.Controls;
 
-namespace JiraManager.ViewModel
+namespace Yakuza.JiraClient.ViewModel
 {
    public class MainViewModel : GalaSoft.MvvmLight.ViewModelBase
    {

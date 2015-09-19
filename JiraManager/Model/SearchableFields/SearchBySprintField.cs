@@ -1,8 +1,8 @@
 ﻿using System;
-using JiraManager.Api;
+using Yakuza.JiraClient.Api;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
-using JiraManager.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Messages.Actions.Authentication;
 using GalaSoft.MvvmLight.Threading;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +10,9 @@ using GalaSoft.MvvmLight;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using JiraManager.Controls.Fields.Search;
+using Yakuza.JiraClient.Controls.Fields.Search;
 
-namespace JiraManager.Model.SearchableFields
+namespace Yakuza.JiraClient.Model.SearchableFields
 {
    public class SearchBySprintField : ViewModelBase, ISearchableField
    {

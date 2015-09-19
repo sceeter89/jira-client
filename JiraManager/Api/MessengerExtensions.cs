@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using JiraManager.Messages.Actions;
+using Yakuza.JiraClient.Messages.Actions;
 
-namespace JiraManager.Api
+namespace Yakuza.JiraClient.Api
 {
    internal static class MessengerExtensions
    {

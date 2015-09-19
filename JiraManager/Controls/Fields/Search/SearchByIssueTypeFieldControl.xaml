@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="JiraManager.Controls.Fields.Search.SearchByIssueTypeFieldControl"
+﻿<UserControl x:Class="Yakuza.JiraClient.Controls.Fields.Search.SearchByIssueTypeFieldControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:JiraManager.Controls.Fields.Search"
+             xmlns:local="clr-namespace:Yakuza.JiraClient.Controls.Fields.Search"
              mc:Ignorable="d" 
              Height="33" d:DesignWidth="300">
    <Grid>

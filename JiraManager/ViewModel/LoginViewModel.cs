@@ -1,18 +1,18 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using JiraManager.Api;
-using JiraManager.Messages.Actions;
-using JiraManager.Messages.Actions.Authentication;
-using JiraManager.Model;
-using JiraManager.Service;
+using Yakuza.JiraClient.Api;
+using Yakuza.JiraClient.Messages.Actions;
+using Yakuza.JiraClient.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Model;
+using Yakuza.JiraClient.Service;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
-namespace JiraManager.ViewModel
+namespace Yakuza.JiraClient.ViewModel
 {
    public class LoginViewModel : ViewModelBase
    {

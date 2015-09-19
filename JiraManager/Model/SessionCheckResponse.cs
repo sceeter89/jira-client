@@ -1,4 +1,4 @@
-﻿namespace JiraManager.Model
+﻿namespace Yakuza.JiraClient.Model
 {
    public class SessionCheckResponse
    {

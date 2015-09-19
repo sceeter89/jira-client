@@ -1,10 +1,10 @@
-﻿using JiraManager.Model;
+﻿using Yakuza.JiraClient.Model;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JiraManager.Helpers
+namespace Yakuza.JiraClient.Helpers
 {
    public class RawIssueToJiraIssue
    {

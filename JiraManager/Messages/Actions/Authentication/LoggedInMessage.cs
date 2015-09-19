@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JiraManager.Messages.Actions.Authentication
+namespace Yakuza.JiraClient.Messages.Actions.Authentication
 {
    class LoggedInMessage
    {

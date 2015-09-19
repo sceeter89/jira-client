@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace JiraManager.Controls
+namespace Yakuza.JiraClient.Controls
 {
    /// <summary>
    /// Interaction logic for SearchIssues.xaml

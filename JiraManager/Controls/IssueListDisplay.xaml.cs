@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace JiraManager.Controls
+namespace Yakuza.JiraClient.Controls
 {
    /// <summary>
    /// Interaction logic for CardsPrintingView.xaml

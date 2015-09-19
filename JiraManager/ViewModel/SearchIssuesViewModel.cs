@@ -2,17 +2,17 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using JiraManager.Api;
+using Yakuza.JiraClient.Api;
 using System.Collections.ObjectModel;
-using JiraManager.Model;
+using Yakuza.JiraClient.Model;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
-using JiraManager.Helpers;
-using JiraManager.Messages.Actions;
-using JiraManager.Model.SearchableFields;
+using Yakuza.JiraClient.Helpers;
+using Yakuza.JiraClient.Messages.Actions;
+using Yakuza.JiraClient.Model.SearchableFields;
 
-namespace JiraManager.ViewModel
+namespace Yakuza.JiraClient.ViewModel
 {
    public class SearchIssuesViewModel : ViewModelBase
    {

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace JiraManager.Api
+namespace Yakuza.JiraClient.Api
 {
    public interface ISearchableField
    {

@@ -1,11 +1,11 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using JiraManager.Api;
-using JiraManager.Service;
+using Yakuza.JiraClient.Api;
+using Yakuza.JiraClient.Service;
 using Microsoft.Practices.ServiceLocation;
 
-namespace JiraManager.ViewModel
+namespace Yakuza.JiraClient.ViewModel
 {
    public class ViewModelLocator
    {

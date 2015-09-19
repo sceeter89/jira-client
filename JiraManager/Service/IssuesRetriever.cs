@@ -1,8 +1,8 @@
-﻿using JiraManager.Model;
+﻿using Yakuza.JiraClient.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace JiraManager.Service
+namespace Yakuza.JiraClient.Service
 {
    public class IssuesRetriever
    {

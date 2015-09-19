@@ -1,4 +1,4 @@
-﻿using JiraManager.Model;
+﻿using Yakuza.JiraClient.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
 
-namespace JiraManager.Controls
+namespace Yakuza.JiraClient.Controls
 {
    public partial class CardsPrintPreview : UserControl
    {

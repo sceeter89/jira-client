@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace JiraManager.Controls.Converters
+namespace Yakuza.JiraClient.Controls.Converters
 {
    public class NullToCollapsedConverter : IValueConverter
    {

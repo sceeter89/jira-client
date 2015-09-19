@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
-using JiraManager.Properties;
+using Yakuza.JiraClient.Properties;
 
-namespace JiraManager.Service
+namespace Yakuza.JiraClient.Service
 {
    public class Configuration : ViewModelBase
    {

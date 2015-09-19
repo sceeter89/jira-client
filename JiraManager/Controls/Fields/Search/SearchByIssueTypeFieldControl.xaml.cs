@@ -1,4 +1,4 @@
-﻿namespace JiraManager.Controls.Fields.Search
+﻿namespace Yakuza.JiraClient.Controls.Fields.Search
 {
    public partial class SearchByIssueTypeFieldControl
    {

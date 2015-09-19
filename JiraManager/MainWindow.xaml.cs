@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using Telerik.Windows.Controls;
 
-namespace JiraManager
+namespace Yakuza.JiraClient
 {
    /// <summary>
    /// Interaction logic for MainWindow.xaml

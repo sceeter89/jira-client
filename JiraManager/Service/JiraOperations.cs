@@ -1,5 +1,5 @@
-﻿using JiraManager.Model;
-using JiraManager.Api;
+﻿using Yakuza.JiraClient.Model;
+using Yakuza.JiraClient.Api;
 using System.Threading.Tasks;
 using RestSharp;
 using System.Net;
@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using System.Windows.Media.Imaging;
 using System.IO;
 
-namespace JiraManager.Service
+namespace Yakuza.JiraClient.Service
 {
    public class JiraOperations : IJiraOperations
    {

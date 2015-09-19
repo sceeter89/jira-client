@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyDescription("Application made to ease external operations on JIRA.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Yakuza")]
-[assembly: AssemblyProduct("JiraManager")]
+[assembly: AssemblyProduct("Yakuza.JiraClient")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

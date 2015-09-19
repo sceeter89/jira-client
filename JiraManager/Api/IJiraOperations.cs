@@ -1,9 +1,9 @@
-﻿using JiraManager.Model;
+﻿using Yakuza.JiraClient.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
-namespace JiraManager.Api
+namespace Yakuza.JiraClient.Api
 {
    public interface IJiraOperations
    {

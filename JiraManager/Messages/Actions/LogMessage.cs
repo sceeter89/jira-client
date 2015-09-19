@@ -1,6 +1,6 @@
-﻿using JiraManager.Api;
+﻿using Yakuza.JiraClient.Api;
 
-namespace JiraManager.Messages.Actions
+namespace Yakuza.JiraClient.Messages.Actions
 {
    public class LogMessage
    {

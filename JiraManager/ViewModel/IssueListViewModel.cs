@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
-using JiraManager.Model;
+using Yakuza.JiraClient.Model;
 using System.Collections.ObjectModel;
 
-namespace JiraManager.ViewModel
+namespace Yakuza.JiraClient.ViewModel
 {
    public class IssueListViewModel : ViewModelBase
    {
