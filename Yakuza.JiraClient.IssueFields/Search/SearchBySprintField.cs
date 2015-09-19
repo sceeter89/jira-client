@@ -74,7 +74,6 @@ namespace Yakuza.JiraClient.IssueFields.Search
                DispatcherHelper.CheckBeginInvokeOnUI(() =>
                {
                   SprintsList.Clear();
-                  SprintsList.Add(null);
                   foreach (var sprint in sprints.OrderBy(x => x.Name))
                      SprintsList.Add(sprint);
                });
