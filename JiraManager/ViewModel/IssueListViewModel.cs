@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
-using Yakuza.JiraClient.Model;
+using Yakuza.JiraClient.Api.Model;
 using System.Collections.ObjectModel;
 
 namespace Yakuza.JiraClient.ViewModel

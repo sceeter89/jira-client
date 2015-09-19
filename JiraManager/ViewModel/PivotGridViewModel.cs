@@ -1,10 +1,9 @@
-﻿using System;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Yakuza.JiraClient.Messages.Actions;
 using Telerik.Pivot.Core;
 using System.Linq;
-using Yakuza.JiraClient.Model;
+using Yakuza.JiraClient.Api.Messages.Actions;
+using Yakuza.JiraClient.Api.Model;
 
 namespace Yakuza.JiraClient.ViewModel
 {

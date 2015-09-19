@@ -4,13 +4,13 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Yakuza.JiraClient.Api;
 using System.Collections.ObjectModel;
-using Yakuza.JiraClient.Model;
 using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using Yakuza.JiraClient.Helpers;
-using Yakuza.JiraClient.Messages.Actions;
-using Yakuza.JiraClient.Model.SearchableFields;
+using Yakuza.JiraClient.Api.Model;
+using Yakuza.JiraClient.IssueFields.Search;
+using Yakuza.JiraClient.Api.Messages.Actions;
 
 namespace Yakuza.JiraClient.ViewModel
 {

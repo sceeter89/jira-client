@@ -2,13 +2,13 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Controls;
-using Yakuza.JiraClient.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Messages.Navigation;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Xps.Packaging;
 using Telerik.Windows.Controls;
+using Yakuza.JiraClient.Api.Messages.Navigation;
+using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 
 namespace Yakuza.JiraClient.ViewModel
 {

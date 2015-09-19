@@ -1,9 +1,9 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Yakuza.JiraClient.Messages.Actions;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
 using System;
+using Yakuza.JiraClient.Api.Messages.Actions;
 
 namespace Yakuza.JiraClient.ViewModel
 {

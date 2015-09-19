@@ -1,9 +1,9 @@
 ﻿using System;
 using GalaSoft.MvvmLight.Messaging;
-using Yakuza.JiraClient.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using System.Windows.Threading;
 using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Messages.Actions;
+using Yakuza.JiraClient.Api.Messages.Actions;
 
 namespace Yakuza.JiraClient.Service
 {

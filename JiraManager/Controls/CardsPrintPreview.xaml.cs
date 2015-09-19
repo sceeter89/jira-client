@@ -1,10 +1,10 @@
-﻿using Yakuza.JiraClient.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
+using Yakuza.JiraClient.Api.Model;
 
 namespace Yakuza.JiraClient.Controls
 {
@@ -44,7 +44,7 @@ namespace Yakuza.JiraClient.Controls
          var document = new FixedDocument();
          var pageSize = new Size(8.5 * 96.0, 11.0 * 96.0);
 
-         foreach (var pagePreview in CardsPrintPreview.GeneratePages(issues))
+         foreach (var pagePreview in GeneratePages(issues))
          {
             var pageContent = new PageContent();
             var fixedPage = new FixedPage();

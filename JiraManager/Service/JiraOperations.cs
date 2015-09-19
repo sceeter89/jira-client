@@ -1,5 +1,4 @@
-﻿using Yakuza.JiraClient.Model;
-using Yakuza.JiraClient.Api;
+﻿using Yakuza.JiraClient.Api;
 using System.Threading.Tasks;
 using RestSharp;
 using System.Net;
@@ -8,6 +7,7 @@ using System;
 using Newtonsoft.Json;
 using System.Windows.Media.Imaging;
 using System.IO;
+using Yakuza.JiraClient.Api.Model;
 
 namespace Yakuza.JiraClient.Service
 {
@@ -175,7 +175,7 @@ namespace Yakuza.JiraClient.Service
          return result;
       }
 
-      public async Task<BitmapImage> DownloadPicture(string imageUrl)
+      public BitmapImage DownloadPicture(string imageUrl)
       {
          var request = (HttpWebRequest)WebRequest.Create(imageUrl);
          if (string.IsNullOrEmpty(_configuration.JiraSessionId) == false)

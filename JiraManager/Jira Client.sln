@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient", "Yakuza.JiraClient.csproj", "{97C43D4E-239B-401E-AC7A-F52F24D4CD64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.IssueFields", "..\Yakuza.JiraClient.IssueFields\Yakuza.JiraClient.IssueFields.csproj", "{19DF2ACB-AAD3-4DD7-9B8A-E75AA193D2CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Api", "Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj", "{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DF2ACB-AAD3-4DD7-9B8A-E75AA193D2CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DF2ACB-AAD3-4DD7-9B8A-E75AA193D2CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DF2ACB-AAD3-4DD7-9B8A-E75AA193D2CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DF2ACB-AAD3-4DD7-9B8A-E75AA193D2CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

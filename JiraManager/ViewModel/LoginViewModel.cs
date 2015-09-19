@@ -2,15 +2,15 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Messages.Actions;
-using Yakuza.JiraClient.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Model;
+using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Service;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Api.Messages.Actions;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -62,7 +62,7 @@ namespace Yakuza.JiraClient.ViewModel
          {
             var details = await _operations.GetProfileDetails();
             Profile = details;
-            var avatar = await _operations.DownloadPicture(details.AvatarUrls._48x48);
+            var avatar = _operations.DownloadPicture(details.AvatarUrls._48x48);
             AvatarSource = avatar;
          });
          _messenger.Register<LoggedOutMessage>(this, _ =>

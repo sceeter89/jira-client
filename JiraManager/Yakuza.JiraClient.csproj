@@ -42,16 +42,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.2.0.37226, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -128,29 +128,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Api\IJiraOperations.cs" />
-    <Compile Include="Api\ISearchableField.cs" />
-    <Compile Include="Api\LogLevel.cs" />
-    <Compile Include="Api\MessengerExtensions.cs" />
     <Compile Include="Controls\Converters\NullToCollapsedConverter.cs" />
-    <Compile Include="Controls\Fields\Search\SearchByPriorityFieldControl.xaml.cs">
-      <DependentUpon>SearchByPriorityFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Fields\Search\SearchByStatusFieldControl.xaml.cs">
-      <DependentUpon>SearchByStatusFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Fields\Search\SearchByResolutionFieldControl.xaml.cs">
-      <DependentUpon>SearchByResolutionFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Fields\Search\SearchByProjectFieldControl.xaml.cs">
-      <DependentUpon>SearchByProjectFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Fields\Search\SearchBySprintFieldControl.xaml.cs">
-      <DependentUpon>SearchBySprintFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Fields\Search\SearchByIssueTypeFieldControl.xaml.cs">
-      <DependentUpon>SearchByIssueTypeFieldControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\IssueListDisplay.xaml.cs">
       <DependentUpon>IssueListDisplay.xaml</DependentUpon>
     </Compile>
@@ -173,27 +151,9 @@
       <DependentUpon>SearchIssues.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\RawIssueToJiraIssue.cs" />
-    <Compile Include="Messages\Actions\Authentication\IsLoggedInMessage.cs" />
-    <Compile Include="Messages\Actions\Authentication\LoggedInMessage.cs" />
-    <Compile Include="Messages\Actions\Authentication\LoggedOutMessage.cs" />
-    <Compile Include="Messages\Actions\ConnectionIsBroken.cs" />
-    <Compile Include="Messages\Actions\LogMessage.cs" />
-    <Compile Include="Messages\Actions\NewSearchResultsAvailable.cs" />
-    <Compile Include="Messages\Navigation\OpenConnectionTabMessage.cs" />
-    <Compile Include="Model\JiraAgileModel.cs" />
-    <Compile Include="Model\JiraIssue.cs" />
-    <Compile Include="Model\PivotJiraIssue.cs" />
-    <Compile Include="Model\SearchableFields\SearchByPriorityField.cs" />
-    <Compile Include="Model\SearchableFields\SearchByStatusField.cs" />
-    <Compile Include="Model\SearchableFields\SearchByResolutionField.cs" />
-    <Compile Include="Model\SearchableFields\SearchByProjectField.cs" />
-    <Compile Include="Model\SearchableFields\SearchByIssueTypeField.cs" />
-    <Compile Include="Model\SearchableFields\SearchBySprintField.cs" />
-    <Compile Include="Model\SessionCheckResponse.cs" />
     <Compile Include="Service\Configuration.cs" />
     <Compile Include="Service\ConnectionChecker.cs" />
     <Compile Include="Service\JiraOperations.cs" />
-    <Compile Include="Model\LoginAttemptResult.cs" />
     <Compile Include="ViewModel\IssueListViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />
@@ -201,30 +161,6 @@
     <Compile Include="ViewModel\PivotGridViewModel.cs" />
     <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="Controls\Fields\Search\SearchByPriorityFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Fields\Search\SearchByStatusFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Fields\Search\SearchByResolutionFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Fields\Search\SearchByProjectFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Fields\Search\SearchBySprintFieldControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Fields\Search\SearchByIssueTypeFieldControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\IssueListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -267,7 +203,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\JiraModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -297,6 +232,16 @@
   <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\Icons\xpsicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yakuza.JiraClient.IssueFields\Yakuza.JiraClient.IssueFields.csproj">
+      <Project>{19df2acb-aad3-4dd7-9b8a-e75aa193d2ce}</Project>
+      <Name>Yakuza.JiraClient.IssueFields</Name>
+    </ProjectReference>
+    <ProjectReference Include="Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
+      <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
+      <Name>Yakuza.JiraClient.Api</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
