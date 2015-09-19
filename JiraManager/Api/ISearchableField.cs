@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace JiraManager.Api
 {
@@ -6,7 +7,7 @@ namespace JiraManager.Api
    {
       bool IsFilled { get; }
       string GetSearchQuery();
-      void Clear();
+      ICommand ClearCommand { get; }
       UserControl EditControl { get; }
    }
 }

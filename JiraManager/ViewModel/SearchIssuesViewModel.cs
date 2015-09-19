@@ -34,7 +34,11 @@ namespace JiraManager.ViewModel
          _backgroundWorker.DoWork += DownloadIssues;
          _backgroundWorker.RunWorkerCompleted += DownloadCompleted;
 
-         SearchableFields = new[] { new SearchBySprintField(messenger, operations) };
+         SearchableFields = new[]
+         {
+            (ISearchableField)new SearchBySprintField(messenger, operations),
+            (ISearchableField)new SearchByIssueTypeField(messenger, operations)
+         };
       }
 
       private void DoCustomSearch()

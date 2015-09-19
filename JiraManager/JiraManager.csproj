@@ -132,6 +132,9 @@
     <Compile Include="Controls\Fields\Search\SearchBySprintFieldControl.xaml.cs">
       <DependentUpon>SearchBySprintFieldControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Fields\Search\SearchByIssueTypeFieldControl.xaml.cs">
+      <DependentUpon>SearchByIssueTypeFieldControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\IssueListDisplay.xaml.cs">
       <DependentUpon>IssueListDisplay.xaml</DependentUpon>
     </Compile>
@@ -163,6 +166,7 @@
     <Compile Include="Model\JiraAgileModel.cs" />
     <Compile Include="Model\JiraIssue.cs" />
     <Compile Include="Model\PivotJiraIssue.cs" />
+    <Compile Include="Model\SearchableFields\SearchByIssueTypeField.cs" />
     <Compile Include="Model\SearchableFields\SearchBySprintField.cs" />
     <Compile Include="Model\SessionCheckResponse.cs" />
     <Compile Include="Service\Configuration.cs" />
@@ -178,6 +182,10 @@
     <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\Fields\Search\SearchBySprintFieldControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Fields\Search\SearchByIssueTypeFieldControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

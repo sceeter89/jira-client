@@ -16,5 +16,6 @@ namespace JiraManager.Api
       Task<IEnumerable<RawAgileSprint>> GetSprintsForBoard(int boardId);
       Task<RawProfileDetails> GetProfileDetails();
       Task<BitmapImage> DownloadPicture(string imageUrl);
+      Task<IEnumerable<RawIssueType>> GetIssueTypes();
    }
 }

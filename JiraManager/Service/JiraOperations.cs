@@ -206,5 +206,17 @@ namespace JiraManager.Service
             return bitmapImage;
          }
       }
+
+      public async Task<IEnumerable<RawIssueType>> GetIssueTypes()
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/2/issuetype", Method.GET);
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<IEnumerable<RawIssueType>>(response.Content);
+
+         return result;
+         
+      }
    }
 }

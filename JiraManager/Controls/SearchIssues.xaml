@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JiraManager.Controls"
              xmlns:fields="clr-namespace:JiraManager.Model.SearchableFields"
+             xmlns:api="clr-namespace:JiraManager.Api"
              mc:Ignorable="d" d:DesignWidth="300"
              DataContext="{Binding Source={StaticResource Locator}, Path=Search}" Height="389">
    <Grid>
@@ -27,20 +28,31 @@
               CommandParameter="{Binding ElementName=SearchQuery, Path=Text}"
               Grid.Row="2" HorizontalAlignment="Right" Margin="5"/>
       </Grid>
-      <Rectangle Stroke="Black" StrokeThickness="1" Height="1" Margin="5 0 5 0"
-                 Grid.Row="1"/>
+      <Rectangle Stroke="Black" StrokeThickness="2" Height="2" Margin="5 0 5 5" Grid.Row="1"/>
 
       <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
          <ScrollViewer.Resources>
-            <DataTemplate DataType="{x:Type fields:SearchBySprintField}">
-               <Search:SearchBySprintFieldControl />
+            <DataTemplate x:Key="SearchFieldTemplate">
+               <Border BorderBrush="Black" BorderThickness="1 0 1 1">
+                  <Grid Margin="3">
+                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                     </Grid.ColumnDefinitions>
+                     <ContentControl Content="{Binding EditControl}"/>
+                     <Button Content="Clear" Command="{Binding ClearCommand}" Grid.Column="1" VerticalAlignment="Top"/>
+                  </Grid>
+               </Border>
             </DataTemplate>
          </ScrollViewer.Resources>
-         <ItemsControl ItemsSource="{Binding SearchableFields}" />
+         <StackPanel>
+            <Rectangle Stroke="Black" StrokeThickness="1" Height="1"/>
+            <ItemsControl ItemsSource="{Binding SearchableFields}" ItemTemplate="{StaticResource SearchFieldTemplate}"/>
+         </StackPanel>
       </ScrollViewer>
-      
-      
-            
+
+
+
       <Button Content="Search" Command="{Binding CustomSearchCommand}"
               Grid.Row="3" HorizontalAlignment="Right" Margin="5"/>
    </Grid>

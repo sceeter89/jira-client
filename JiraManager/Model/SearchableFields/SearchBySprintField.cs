@@ -8,6 +8,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using System.Windows.Controls;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
+using JiraManager.Controls.Fields.Search;
 
 namespace JiraManager.Model.SearchableFields
 {
@@ -72,6 +75,7 @@ namespace JiraManager.Model.SearchableFields
                DispatcherHelper.CheckBeginInvokeOnUI(() =>
                {
                   SprintsList.Clear();
+                  SprintsList.Add(null);
                   foreach (var sprint in sprints.OrderBy(x => x.Name))
                      SprintsList.Add(sprint);
                });
@@ -95,14 +99,20 @@ namespace JiraManager.Model.SearchableFields
       {
          get
          {
-            throw new NotImplementedException();
+            return new SearchBySprintFieldControl();
          }
       }
 
-      public void Clear()
+      public ICommand ClearCommand
       {
-         SelectedSprint = null;
-         SelectedBoard = null;
+         get
+         {
+            return new RelayCommand(() =>
+            {
+               SelectedSprint = null;
+               SelectedBoard = null;
+            });
+         }
       }
 
       public string GetSearchQuery()
