@@ -17,5 +17,9 @@ namespace Yakuza.JiraClient.Api
       Task<RawProfileDetails> GetProfileDetails();
       Task<BitmapImage> DownloadPicture(string imageUrl);
       Task<IEnumerable<RawIssueType>> GetIssueTypes();
+      Task<IEnumerable<RawProjectInfo>> GetProjectsList();
+      Task<IEnumerable<RawPriority>> GetPrioritiesList();
+      Task<IEnumerable<RawResolution>> GetResolutionsList();
+      Task<IEnumerable<RawStatus>> GetStatusesList();
    }
 }

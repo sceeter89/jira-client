@@ -34,10 +34,13 @@ namespace Yakuza.JiraClient.ViewModel
          _backgroundWorker.DoWork += DownloadIssues;
          _backgroundWorker.RunWorkerCompleted += DownloadCompleted;
 
-         SearchableFields = new[]
+         SearchableFields = new ISearchableField[]
          {
-            (ISearchableField)new SearchBySprintField(messenger, operations),
-            (ISearchableField)new SearchByIssueTypeField(messenger, operations)
+            new SearchBySprintField(messenger, operations),
+            new SearchByIssueTypeField(messenger, operations),
+            new SearchByProjectField(messenger, operations),
+            new SearchByPriorityField(messenger, operations),
+            new SearchByResolutionField(messenger, operations),
          };
       }
 

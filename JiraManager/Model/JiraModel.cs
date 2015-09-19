@@ -121,6 +121,7 @@ namespace Yakuza.JiraClient.Model
       public string Self { get; set; }
       public string Id { get; set; }
       public string Description { get; set; }
+      public string IconUrl { get; set; }
       public string Name { get; set; }
 
       public static readonly RawResolution EmptyResolution = new RawResolution
@@ -128,7 +129,8 @@ namespace Yakuza.JiraClient.Model
          Self = "N/A",
          Id = "N/A",
          Description = "N /A",
-         Name = "N/A"
+         Name = "N/A",
+         IconUrl = "N/A"
       };
    }
 
@@ -144,6 +146,8 @@ namespace Yakuza.JiraClient.Model
       public string Self { get; set; }
       public string IconUrl { get; set; }
       public string Name { get; set; }
+      public string Description { get; set; }
+      public string StatusColor { get; set; }
       public string Id { get; set; }
    }
 

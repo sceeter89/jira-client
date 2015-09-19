@@ -129,6 +129,18 @@
     <Compile Include="Api\LogLevel.cs" />
     <Compile Include="Api\MessengerExtensions.cs" />
     <Compile Include="Controls\Converters\NullToCollapsedConverter.cs" />
+    <Compile Include="Controls\Fields\Search\SearchByPriorityFieldControl.xaml.cs">
+      <DependentUpon>SearchByPriorityFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Fields\Search\SearchByStatusFieldControl.xaml.cs">
+      <DependentUpon>SearchByStatusFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Fields\Search\SearchByResolutionFieldControl.xaml.cs">
+      <DependentUpon>SearchByResolutionFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Fields\Search\SearchByProjectFieldControl.xaml.cs">
+      <DependentUpon>SearchByProjectFieldControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Fields\Search\SearchBySprintFieldControl.xaml.cs">
       <DependentUpon>SearchBySprintFieldControl.xaml</DependentUpon>
     </Compile>
@@ -166,6 +178,10 @@
     <Compile Include="Model\JiraAgileModel.cs" />
     <Compile Include="Model\JiraIssue.cs" />
     <Compile Include="Model\PivotJiraIssue.cs" />
+    <Compile Include="Model\SearchableFields\SearchByPriorityField.cs" />
+    <Compile Include="Model\SearchableFields\SearchByStatusField.cs" />
+    <Compile Include="Model\SearchableFields\SearchByResolutionField.cs" />
+    <Compile Include="Model\SearchableFields\SearchByProjectField.cs" />
     <Compile Include="Model\SearchableFields\SearchByIssueTypeField.cs" />
     <Compile Include="Model\SearchableFields\SearchBySprintField.cs" />
     <Compile Include="Model\SessionCheckResponse.cs" />
@@ -181,6 +197,22 @@
     <Compile Include="ViewModel\PivotGridViewModel.cs" />
     <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Controls\Fields\Search\SearchByPriorityFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Fields\Search\SearchByStatusFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Fields\Search\SearchByResolutionFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Fields\Search\SearchByProjectFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Fields\Search\SearchBySprintFieldControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

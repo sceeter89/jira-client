@@ -210,13 +210,60 @@ namespace Yakuza.JiraClient.Service
       public async Task<IEnumerable<RawIssueType>> GetIssueTypes()
       {
          var client = BuildRestClient();
-         var request = new RestRequest("/rest/api/2/issuetype", Method.GET);
+         var request = new RestRequest("/rest/api/latest/issuetype", Method.GET);
 
          var response = await client.ExecuteTaskAsync(request);
          var result = JsonConvert.DeserializeObject<IEnumerable<RawIssueType>>(response.Content);
 
+         return result;         
+      }
+
+      public async Task<IEnumerable<RawProjectInfo>> GetProjectsList()
+      {
+
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/project", Method.GET);
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<IEnumerable<RawProjectInfo>>(response.Content);
+
          return result;
-         
+      }
+
+      public async Task<IEnumerable<RawPriority>> GetPrioritiesList()
+      {
+
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/priority", Method.GET);
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<IEnumerable<RawPriority>>(response.Content);
+
+         return result;
+      }
+
+      public async Task<IEnumerable<RawResolution>> GetResolutionsList()
+      {
+
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/resolution", Method.GET);
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<IEnumerable<RawResolution>>(response.Content);
+
+         return result;
+      }
+
+      public async Task<IEnumerable<RawStatus>> GetStatusesList()
+      {
+
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/status", Method.GET);
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<IEnumerable<RawStatus>>(response.Content);
+
+         return result;
       }
    }
 }

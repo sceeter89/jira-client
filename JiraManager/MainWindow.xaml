@@ -8,7 +8,7 @@
         xmlns:controls="clr-namespace:Yakuza.JiraClient.Controls"
         mc:Ignorable="d"
         Height="732.873" Width="975.748"
-        Title="Jira Manager"
+        Title="Jira Client"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
    <Grid>
       <Grid.RowDefinitions>

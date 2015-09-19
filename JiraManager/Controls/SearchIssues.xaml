@@ -7,7 +7,7 @@
              xmlns:fields="clr-namespace:Yakuza.JiraClient.Model.SearchableFields"
              xmlns:api="clr-namespace:Yakuza.JiraClient.Api"
              mc:Ignorable="d" d:DesignWidth="300"
-             DataContext="{Binding Source={StaticResource Locator}, Path=Search}" Height="389">
+             DataContext="{Binding Source={StaticResource Locator}, Path=Search}">
    <Grid>
       <Grid.RowDefinitions>
          <RowDefinition Height="Auto"/>
