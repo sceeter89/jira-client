@@ -11,6 +11,7 @@ using Yakuza.JiraClient.Helpers;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.IssueFields.Search;
 using Yakuza.JiraClient.Api.Messages.Actions;
+using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -42,6 +43,8 @@ namespace Yakuza.JiraClient.ViewModel
             new SearchByPriorityField(messenger, operations),
             new SearchByResolutionField(messenger, operations),
          };
+
+         _messenger.Send(new IsLoggedInMessage());
       }
 
       private void DoCustomSearch()
@@ -88,7 +91,7 @@ namespace Yakuza.JiraClient.ViewModel
             FoundIssues.Add(issue);
          }
          _messenger.LogMessage(string.Format("Search done. Found {0} issues.", FoundIssues.Count));
-         _messenger.Send(new NewSearchResultsAvailable());
+         _messenger.Send(new NewSearchResultsAvailable(FoundIssues));
          SetIsBusy(false);
       }
 

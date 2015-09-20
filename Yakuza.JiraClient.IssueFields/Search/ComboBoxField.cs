@@ -13,12 +13,12 @@ using Yakuza.JiraClient.Api.Messages.Status;
 
 namespace Yakuza.JiraClient.IssueFields.Search
 {
-   public class SearchByIssueTypeField : ViewModelBase, ISearchableField
+   public class ComboBoxSearchField : ViewModelBase, ISearchableField
    {
       private readonly IJiraOperations _operations;
       private RawIssueType _selectedIssueType;
 
-      public SearchByIssueTypeField(IMessenger messenger, IJiraOperations operations)
+      public ComboBoxSearchField(IMessenger messenger, IJiraOperations operations)
       {
          _operations = operations;
 

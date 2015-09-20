@@ -1,23 +1,27 @@
 ﻿using GalaSoft.MvvmLight;
 using Yakuza.JiraClient.Api.Model;
-using System.Collections.ObjectModel;
+using GalaSoft.MvvmLight.Messaging;
+using System.Collections.Generic;
+using Yakuza.JiraClient.Api.Messages.Actions;
 
 namespace Yakuza.JiraClient.ViewModel
 {
    public class IssueListViewModel : ViewModelBase
    {
-      private readonly SearchIssuesViewModel _searchIssuesViewModel;
+      private IList<JiraIssue> _issues;
 
-      public IssueListViewModel(SearchIssuesViewModel searchIssuesViewModel)
+      public IssueListViewModel(IMessenger messenger)
       {
-         _searchIssuesViewModel = searchIssuesViewModel;
+         messenger.Register<NewSearchResultsAvailable>(this, m => Issues = m.SearchResults);
       }
-      
-      public ObservableCollection<JiraIssue> Issues
+
+      public IList<JiraIssue> Issues
       {
-         get
+         get { return _issues; }
+         set
          {
-            return _searchIssuesViewModel.FoundIssues;
+            _issues = value;
+            RaisePropertyChanged();
          }
       }
    }

@@ -99,13 +99,13 @@ namespace Yakuza.JiraClient.Api.Model
    public class RawAvatarUrls
    {
       [JsonProperty("48x48")]
-      public string _48x48 { get; set; }
+      public string Avatar48x48 { get; set; }
       [JsonProperty("24x24")]
-      public string _24x24 { get; set; }
+      public string Avatar24x24 { get; set; }
       [JsonProperty("16x16")]
-      public string _16x16 { get; set; }
+      public string Avatar16x16 { get; set; }
       [JsonProperty("32x32")]
-      public string _32x32 { get; set; }
+      public string Avatar32x32 { get; set; }
    }
 
    public class RawProjectCategory
@@ -281,21 +281,13 @@ namespace Yakuza.JiraClient.Api.Model
    public class RawSuccessfulLoginParameters
    {
       public RawSession Session { get; set; }
-      public RawLogininfo LoginInfo { get; set; }
+      public RawLoginInfo LoginInfo { get; set; }
    }
 
    public class RawSession
    {
       public string Name { get; set; }
       public string Value { get; set; }
-   }
-
-   public class RawLogininfo
-   {
-      public int FailedLoginCount { get; set; }
-      public int LoginCount { get; set; }
-      public DateTime LastFailedLoginTime { get; set; }
-      public DateTime PreviousLoginTime { get; set; }
    }
 
    public class RawFieldDefinition

@@ -9,6 +9,9 @@ using System.Windows.Xps.Packaging;
 using Telerik.Windows.Controls;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Api.Model;
+using System.Collections.Generic;
+using Yakuza.JiraClient.Api.Messages.Actions;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -16,25 +19,23 @@ namespace Yakuza.JiraClient.ViewModel
    {
       private bool _isLoggedIn = false;
 
-      private readonly SearchIssuesViewModel _searchIssuesViewModel;
+      private IEnumerable<JiraIssue> _foundIssues;
       private readonly IMessenger _messenger;
       private int _selectedDocumentPaneIndex;
       private int _selectedPropertyPaneIndex;
 
-      public MainViewModel(IMessenger messenger, SearchIssuesViewModel searchIssuesViewModel)
+      public MainViewModel(IMessenger messenger)
       {
          _messenger = messenger;
-         _searchIssuesViewModel = searchIssuesViewModel;
          SaveXpsCommand = new RelayCommand(SaveXps, () => _isLoggedIn);
 
          _messenger.Register<LoggedInMessage>(this, LoadUi);
          _messenger.Register<LoggedOutMessage>(this, _ => SetIsLoggedOut());
          _messenger.Register<OpenConnectionTabMessage>(this, _ => FocusPropertyPane(ConnectionPropertyPane));
+         _messenger.Register<NewSearchResultsAvailable>(this, m => _foundIssues = m.SearchResults);
 
          DocumentPanes = new ObservableCollection<RadPane>();
          PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane };
-
-         _messenger.Send(new IsLoggedInMessage());
       }
 
       private void LoadUi(LoggedInMessage message)
@@ -75,13 +76,13 @@ namespace Yakuza.JiraClient.ViewModel
 
       private void SaveXps()
       {
-         if (_searchIssuesViewModel.FoundIssues.Any() == false)
+         if (_foundIssues == null || _foundIssues.Any() == false)
          {
             _messenger.LogMessage("No issues to export.", LogLevel.Warning);
             return;
          }
 
-         var document = CardsPrintPreview.GenerateDocument(_searchIssuesViewModel.FoundIssues);
+         var document = CardsPrintPreview.GenerateDocument(_foundIssues);
          var dlg = new Microsoft.Win32.SaveFileDialog();
          dlg.FileName = "Scrum Cards.xps";
          dlg.DefaultExt = ".xps";

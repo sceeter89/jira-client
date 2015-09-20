@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Messages.Actions;
+using Yakuza.JiraClient.Api.Messages.Status;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -32,23 +33,23 @@ namespace Yakuza.JiraClient.ViewModel
          _operations = operations;
 
          var checkLoginTimer = new DispatcherTimer();
-         checkLoginTimer.Interval = TimeSpan.FromMilliseconds(100);
+         checkLoginTimer.Interval = TimeSpan.FromMilliseconds(50);
          checkLoginTimer.Tick += async (s, a) =>
          {
             checkLoginTimer.IsEnabled = false;
             var sessionInfo = await _operations.CheckSession();
             if (sessionInfo.IsLoggedIn)
             {
-               _messenger.Send(new LoggedInMessage());
                _configuration.IsLoggedIn = true;
                IsConnected = true;
                _messenger.LogMessage("Logged in using existing security token.");
+               _messenger.Send(new LoggedInMessage());
             }
             else
             {
-               _messenger.Send(new LoggedOutMessage());
                _configuration.IsLoggedIn = false;
                IsConnected = false;
+               _messenger.Send(new LoggedOutMessage());
             }
          };
          _messenger.Register<ConnectionIsBroken>(this, OnConnectionBroken);
@@ -62,20 +63,22 @@ namespace Yakuza.JiraClient.ViewModel
          {
             var details = await _operations.GetProfileDetails();
             Profile = details;
-            var avatar = _operations.DownloadPicture(details.AvatarUrls._48x48);
+            var avatar = _operations.DownloadPicture(details.AvatarUrls.Avatar48x48);
             AvatarSource = avatar;
+            IsConnected = true;
          });
          _messenger.Register<LoggedOutMessage>(this, _ =>
          {
             Profile = null;
             AvatarSource = null;
+            IsConnected = false;
          });
          _messenger.Register<IsLoggedInMessage>(this, m =>
          {
             if (IsConnected)
-               _messenger.Send(new LoggedInMessage());
+               _messenger.Send(new ConnectionEstablishedMessage(Profile));
             else
-               _messenger.Send(new LoggedOutMessage());
+               _messenger.Send(new ConnectionDownMessage());
          });
          checkLoginTimer.IsEnabled = true;
       }

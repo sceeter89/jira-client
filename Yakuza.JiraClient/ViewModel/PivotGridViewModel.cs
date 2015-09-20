@@ -10,21 +10,19 @@ namespace Yakuza.JiraClient.ViewModel
    public class PivotGridViewModel : ViewModelBase
    {
       private readonly IMessenger _messenger;
-      private readonly SearchIssuesViewModel _searchIssuesViewModel;
 
-      public PivotGridViewModel(IMessenger messenger, SearchIssuesViewModel searchIssuesViewModel)
+      public PivotGridViewModel(IMessenger messenger)
       {
-         _searchIssuesViewModel = searchIssuesViewModel;
          _messenger = messenger;
          _messenger.Register<NewSearchResultsAvailable>(this, RefreshPivot);
          DataSource = new LocalDataSourceProvider();
       }
 
-      private void RefreshPivot(NewSearchResultsAvailable obj)
+      private void RefreshPivot(NewSearchResultsAvailable message)
       {
          using (DataSource.DeferRefresh())
          {
-            DataSource.ItemsSource = _searchIssuesViewModel.FoundIssues
+            DataSource.ItemsSource = message.SearchResults
                .Select(x => new PivotJiraIssue(x)).ToList();
          }
       }

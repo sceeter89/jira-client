@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Height="732.873" Width="975.748"
         Title="Jira Client"
-        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+        Icon="/Assets/Icons/JiraClient.png">
    <Grid>
       <Grid.RowDefinitions>
          <RowDefinition Height="Auto"/>
