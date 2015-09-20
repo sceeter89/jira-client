@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="12.4.1" version="12.4.1" Modules="simple" RootPath="." Language="pl" Id="{BD1C202E-3B15-431B-A7B9-9E3D37E27323}">
+  <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
+    <ROW Name="HiddenItems" Value="MsiThemeComponent;BackgroundImagesComponent;UpdaterComponent;SerValComponent;DigCertStoreComponent;MsiInstExSeqComponent;DictionaryComponent;MsiAppSearchComponent;MsiAssemblyComponent;MsiClassComponent;MsiOdbcDataSrcComponent;MsiServInstComponent;MsiOrgComponent;MsiExtComponent;CPLAppletComponent;ActSyncAppComponent;PreReqComponent;WebApplicationsComponent;MsiJavaComponent;MsiDriverPackagesComponent;UserAccountsComponent;ScheduledTasksComponent;SqlConnectionComponent;AutorunComponent;FirewallExceptionComponent;GameUxComponent;MsiDirectEditorComponent;SharePointSlnComponent;SilverlightSlnComponent;MultipleInstancesComponent;SccmComponent;ActSyncAppComponent"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
+    <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
+    <ROW Property="ALLUSERS" Value="1"/>
+    <ROW Property="ARPNOMODIFY" MultiBuildValue="x86_Release_1:1"/>
+    <ROW Property="ARPPRODUCTICON" Value="Icon.exe" Type="8"/>
+    <ROW Property="ARPURLINFOABOUT" Value="https://github.com/sceeter89/jira-client"/>
+    <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/sceeter89/jira-client/releases"/>
+    <ROW Property="CTRLS" Value="2"/>
+    <ROW Property="Manufacturer" Value="Yakuza"/>
+    <ROW Property="ProductCode" Value="1045:{982CB1A7-092E-418C-9FAE-222FDC168AFA} " Type="16"/>
+    <ROW Property="ProductLanguage" Value="1045"/>
+    <ROW Property="ProductName" Value="Jira Client"/>
+    <ROW Property="ProductVersion" Value="0.3.0" Type="32"/>
+    <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
+    <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
+    <ROW Property="UpgradeCode" Value="{508356A6-7A4D-4A84-B7F1-5D742431745E}"/>
+    <ROW Property="WindowsType9X" MultiBuildValue="x86_Release_1:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsType9XDisplay" MultiBuildValue="x86_Release_1:Windows 9x/ME" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40" MultiBuildValue="x86_Release_1:Windows NT 4.0" ValueLocId="-"/>
+    <ROW Property="WindowsTypeNT40Display" MultiBuildValue="x86_Release_1:Windows NT 4.0" ValueLocId="-"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiDirsComponent">
+    <ROW Directory="APPDIR" Directory_Parent="TARGETDIR" DefaultDir="APPDIR:." IsPseudoRoot="1"/>
+    <ROW Directory="DesktopFolder" Directory_Parent="TARGETDIR" DefaultDir="DESKTO~1|DesktopFolder" IsPseudoRoot="1"/>
+    <ROW Directory="SHORTCUTDIR" Directory_Parent="TARGETDIR" DefaultDir="SHORTC~1|SHORTCUTDIR" IsPseudoRoot="1"/>
+    <ROW Directory="TARGETDIR" DefaultDir="SourceDir"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
+    <ROW Component="Autofac.dll" ComponentId="{DBB81367-15D1-48BB-9C4B-400E8EE1C03E}" Directory_="APPDIR" Attributes="0" KeyPath="Autofac.dll"/>
+    <ROW Component="GalaSoft.MvvmLight.Extras.dll" ComponentId="{8F569DAA-B87D-42BB-A2F4-55A153C3EC2D}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.Extras.dll"/>
+    <ROW Component="GalaSoft.MvvmLight.Platform.dll" ComponentId="{4E0AF70B-20FC-45C2-8B0A-768F51180F90}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.Platform.dll"/>
+    <ROW Component="GalaSoft.MvvmLight.dll" ComponentId="{8BE11FC1-AA2B-42A2-ACD8-222615F8C88A}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.dll"/>
+    <ROW Component="JiraClient.exe" ComponentId="{869403F9-C52A-4DD8-8F61-D0296A606C25}" Directory_="APPDIR" Attributes="0" KeyPath="JiraClient.exe"/>
+    <ROW Component="JiraClient.exe.config" ComponentId="{F578D18D-F7FB-490F-A220-9A9DB848402E}" Directory_="APPDIR" Attributes="0" KeyPath="JiraClient.exe.config" Type="0"/>
+    <ROW Component="Microsoft.CSharp.dll" ComponentId="{CEC19158-11E0-4707-8CFE-758530C05389}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.CSharp.dll"/>
+    <ROW Component="Microsoft.Practices.ServiceLocation.dll" ComponentId="{94CC1FB9-4C3B-4654-8368-DB7C119E2179}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Practices.ServiceLocation.dll"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{925A7E82-245F-49A9-B93E-90C280C0497F}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
+    <ROW Component="PresentationCore.dll" ComponentId="{E928D918-0B28-4422-8A0F-E66DA875E225}" Directory_="APPDIR" Attributes="0" KeyPath="PresentationCore.dll"/>
+    <ROW Component="PresentationFramework.dll" ComponentId="{35F2A350-C95D-4623-9E4E-6922C594DE86}" Directory_="APPDIR" Attributes="0" KeyPath="PresentationFramework.dll"/>
+    <ROW Component="ProductInformation" ComponentId="{2111C34E-CE4C-45EA-B428-42A82A4E9D0F}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
+    <ROW Component="ReachFramework.dll" ComponentId="{8D5ED8FC-3A28-46B4-AC24-24A34160B0E9}" Directory_="APPDIR" Attributes="0" KeyPath="ReachFramework.dll"/>
+    <ROW Component="RestSharp.dll" ComponentId="{1807245D-97DF-43F1-AE34-08A55B88B36A}" Directory_="APPDIR" Attributes="0" KeyPath="RestSharp.dll"/>
+    <ROW Component="SHORTCUTDIR" ComponentId="{988BC83B-7BC5-4AF4-B91E-6523E1CF18E7}" Directory_="SHORTCUTDIR" Attributes="0"/>
+    <ROW Component="System.ComponentModel.DataAnnotations.dl" ComponentId="{5AE305C3-54C2-4AB6-B8BD-6B6164B17EC0}" Directory_="APPDIR" Attributes="0" KeyPath="System.ComponentModel.DataAnnotations.dll"/>
+    <ROW Component="System.Configuration.dll" ComponentId="{05771B9A-AE8C-47FE-A8C7-4BD003D93AC5}" Directory_="APPDIR" Attributes="0" KeyPath="System.Configuration.dll"/>
+    <ROW Component="System.Core.dll" ComponentId="{13B2830C-12FE-4DE8-B1DF-80415E5F592C}" Directory_="APPDIR" Attributes="0" KeyPath="System.Core.dll"/>
+    <ROW Component="System.Data.DataSetExtensions.dll" ComponentId="{CEE69A87-D9B5-40D6-A760-5FBBB3B96891}" Directory_="APPDIR" Attributes="0" KeyPath="System.Data.DataSetExtensions.dll"/>
+    <ROW Component="System.Data.dll" ComponentId="{91738A6D-3B0F-45D6-95A9-ECCF26A082BF}" Directory_="APPDIR" Attributes="0" KeyPath="System.Data.dll"/>
+    <ROW Component="System.Drawing.dll" ComponentId="{01E47551-B34A-4458-A5A4-F7DC0AA833D8}" Directory_="APPDIR" Attributes="0" KeyPath="System.Drawing.dll"/>
+    <ROW Component="System.Printing.dll" ComponentId="{E096C2AC-9051-4221-BBF3-DE4BB7FA0730}" Directory_="APPDIR" Attributes="0" KeyPath="System.Printing.dll"/>
+    <ROW Component="System.Windows.Interactivity.dll" ComponentId="{8FC93955-EC05-4DA1-981D-59BC4D3359D0}" Directory_="APPDIR" Attributes="0" KeyPath="System.Windows.Interactivity.dll"/>
+    <ROW Component="System.Xaml.dll" ComponentId="{DD094A16-1E27-4B93-A0BD-D4A7EECBCC55}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xaml.dll"/>
+    <ROW Component="System.Xml.Linq.dll" ComponentId="{7384F000-9B9C-4194-B08A-E7A15376613F}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xml.Linq.dll"/>
+    <ROW Component="System.Xml.dll" ComponentId="{A4CD74D9-B42F-4DEB-9438-9DFD13E3DAE5}" Directory_="APPDIR" Attributes="0" KeyPath="System.Xml.dll"/>
+    <ROW Component="System.dll" ComponentId="{4B912F9C-800D-4260-B802-C6AB2C568AC6}" Directory_="APPDIR" Attributes="0" KeyPath="System.dll"/>
+    <ROW Component="Telerik.Pivot.Core.dll" ComponentId="{973F8E6E-8ACC-4D3C-8884-42F2F1ED8067}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Pivot.Core.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Docking.dll" ComponentId="{CDBC311A-7323-4CD0-8326-490119766778}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Docking.dll"/>
+    <ROW Component="Telerik.Windows.Controls.GridView.dll" ComponentId="{1B1552E0-8E71-4608-A9B4-1682373A305F}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.GridView.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Input.dll" ComponentId="{C869C7D8-6216-451D-927B-5FDB210B8BA7}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Input.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Navigation.dll" ComponentId="{7A83BFBC-56AC-49DD-8319-58FF0AEDECDC}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Navigation.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Pivot.dll" ComponentId="{C0DCB2E1-49DC-424B-9924-06A150E5A7CD}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Pivot.dll"/>
+    <ROW Component="Telerik.Windows.Controls.PivotFieldList." ComponentId="{2CA40A3D-D977-4BE4-B56F-49BBBEFE95C9}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.PivotFieldList.dll"/>
+    <ROW Component="Telerik.Windows.Controls.RibbonView.dll" ComponentId="{C02FF915-98B4-424D-8AAC-08754BD90DE8}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.RibbonView.dll"/>
+    <ROW Component="Telerik.Windows.Controls.dll" ComponentId="{302777D8-3D68-469F-89DE-B12767620DB9}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.dll"/>
+    <ROW Component="Telerik.Windows.Data.dll" ComponentId="{DCD7171F-C4F3-4DDC-8D38-F1D85E170A6C}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Data.dll"/>
+    <ROW Component="Telerik.Windows.Themes.Windows8.dll" ComponentId="{C1339B76-BB1E-438B-A666-CC67A7FE6DBC}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Themes.Windows8.dll"/>
+    <ROW Component="UIAutomationProvider.dll" ComponentId="{702D2F68-73D3-45CE-B8D5-7518B79D2359}" Directory_="APPDIR" Attributes="0" KeyPath="UIAutomationProvider.dll"/>
+    <ROW Component="UIAutomationTypes.dll" ComponentId="{C2522603-6EB3-413D-9FED-41AA8566B06A}" Directory_="APPDIR" Attributes="0" KeyPath="UIAutomationTypes.dll"/>
+    <ROW Component="WindowsBase.dll" ComponentId="{ACD99E4C-4F60-4D59-BCAE-CC09FE4225FD}" Directory_="APPDIR" Attributes="0" KeyPath="WindowsBase.dll"/>
+    <ROW Component="Yakuza.JiraClient.Api.dll" ComponentId="{FF66AA50-5037-4E5E-9197-11A46C5440AC}" Directory_="APPDIR" Attributes="0" KeyPath="Yakuza.JiraClient.Api.dll"/>
+    <ROW Component="Yakuza.JiraClient.IssueFields.dll" ComponentId="{B068CC49-592E-42B2-BA1D-32368AC63460}" Directory_="APPDIR" Attributes="0" KeyPath="Yakuza.JiraClient.IssueFields.dll"/>
+    <ROW Component="mscorlib.dll" ComponentId="{B3C1582F-1845-493D-BB22-9BE4CDC4FA19}" Directory_="APPDIR" Attributes="0" KeyPath="mscorlib.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="Autofac.dll GalaSoft.MvvmLight.Extras.dll GalaSoft.MvvmLight.Platform.dll GalaSoft.MvvmLight.dll JiraClient.exe JiraClient.exe.config Microsoft.CSharp.dll Microsoft.Practices.ServiceLocation.dll Newtonsoft.Json.dll PresentationCore.dll PresentationFramework.dll ProductInformation ReachFramework.dll RestSharp.dll SHORTCUTDIR System.ComponentModel.DataAnnotations.dl System.Configuration.dll System.Core.dll System.Data.DataSetExtensions.dll System.Data.dll System.Drawing.dll System.Printing.dll System.Windows.Interactivity.dll System.Xaml.dll System.Xml.Linq.dll System.Xml.dll System.dll Telerik.Pivot.Core.dll Telerik.Windows.Controls.Docking.dll Telerik.Windows.Controls.GridView.dll Telerik.Windows.Controls.Input.dll Telerik.Windows.Controls.Navigation.dll Telerik.Windows.Controls.Pivot.dll Telerik.Windows.Controls.PivotFieldList. Telerik.Windows.Controls.RibbonView.dll Telerik.Windows.Controls.dll Telerik.Windows.Data.dll Telerik.Windows.Themes.Windows8.dll UIAutomationProvider.dll UIAutomationTypes.dll WindowsBase.dll Yakuza.JiraClient.Api.dll Yakuza.JiraClient.IssueFields.dll mscorlib.dll"/>
+    <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="Autofac.dll" Component_="Autofac.dll" FileName="Autofac.dll" Attributes="0" SourcePath="..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll" SelfReg="false" NextFile="ReachFramework.dll"/>
+    <ROW File="GalaSoft.MvvmLight.Extras.dll" Component_="GalaSoft.MvvmLight.Extras.dll" FileName="GALASO~2.DLL|GalaSoft.MvvmLight.Extras.dll" Attributes="0" SourcePath="..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll" SelfReg="false" NextFile="GalaSoft.MvvmLight.dll"/>
+    <ROW File="GalaSoft.MvvmLight.Platform.dll" Component_="GalaSoft.MvvmLight.Platform.dll" FileName="GALASO~1.DLL|GalaSoft.MvvmLight.Platform.dll" Attributes="0" SourcePath="..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll" SelfReg="false" NextFile="PresentationFramework.dll"/>
+    <ROW File="GalaSoft.MvvmLight.dll" Component_="GalaSoft.MvvmLight.dll" FileName="GALASO~3.DLL|GalaSoft.MvvmLight.dll" Attributes="0" SourcePath="..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll" SelfReg="false" NextFile="Newtonsoft.Json.dll"/>
+    <ROW File="JiraClient.exe" Component_="JiraClient.exe" FileName="JIRACL~1.EXE|Jira Client.exe" Attributes="0" SourcePath="..\Yakuza.JiraClient\bin\x86\Release\Jira Client.exe" SelfReg="false" NextFile="GalaSoft.MvvmLight.Platform.dll" DigSign="true"/>
+    <ROW File="JiraClient.exe.config" Component_="JiraClient.exe.config" FileName="JIRACL~1.CON|Jira Client.exe.config" Attributes="0" SourcePath="..\Yakuza.JiraClient\bin\x86\Release\Jira Client.exe.config" SelfReg="false" NextFile="Autofac.dll"/>
+    <ROW File="Microsoft.CSharp.dll" Component_="Microsoft.CSharp.dll" FileName="MICROS~2.DLL|Microsoft.CSharp.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Microsoft.CSharp.dll" SelfReg="false" NextFile="System.Xml.Linq.dll"/>
+    <ROW File="Microsoft.Practices.ServiceLocation.dll" Component_="Microsoft.Practices.ServiceLocation.dll" FileName="MICROS~1.DLL|Microsoft.Practices.ServiceLocation.dll" Attributes="0" SourcePath="..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll" SelfReg="false" NextFile="GalaSoft.MvvmLight.Extras.dll"/>
+    <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll" SelfReg="false" NextFile="RestSharp.dll"/>
+    <ROW File="PresentationCore.dll" Component_="PresentationCore.dll" FileName="PRESEN~2.DLL|PresentationCore.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\PresentationCore.dll" SelfReg="false" NextFile="System.Printing.dll"/>
+    <ROW File="PresentationFramework.dll" Component_="PresentationFramework.dll" FileName="PRESEN~1.DLL|PresentationFramework.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\PresentationFramework.dll" SelfReg="false" NextFile="JiraClient.exe.config"/>
+    <ROW File="ReachFramework.dll" Component_="ReachFramework.dll" FileName="REACHF~1.DLL|ReachFramework.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\ReachFramework.dll" SelfReg="false" NextFile="Microsoft.Practices.ServiceLocation.dll"/>
+    <ROW File="RestSharp.dll" Component_="RestSharp.dll" FileName="RESTSH~1.DLL|RestSharp.dll" Attributes="0" SourcePath="..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll" SelfReg="false" NextFile="System.Xml.dll"/>
+    <ROW File="System.ComponentModel.DataAnnotations.dll" Component_="System.ComponentModel.DataAnnotations.dl" FileName="SYSTEM~3.DLL|System.ComponentModel.DataAnnotations.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.ComponentModel.DataAnnotations.dll" SelfReg="false" NextFile="Telerik.Windows.Themes.Windows8.dll"/>
+    <ROW File="System.Configuration.dll" Component_="System.Configuration.dll" FileName="SYSTEM~4.DLL|System.Configuration.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Configuration.dll" SelfReg="false" NextFile="System.Xaml.dll"/>
+    <ROW File="System.Core.dll" Component_="System.Core.dll" FileName="SYSTEM~6.DLL|System.Core.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Core.dll" SelfReg="false" NextFile="System.Data.dll"/>
+    <ROW File="System.Data.DataSetExtensions.dll" Component_="System.Data.DataSetExtensions.dll" FileName="SYSTE~11.DLL|System.Data.DataSetExtensions.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Data.DataSetExtensions.dll" SelfReg="false" NextFile="Yakuza.JiraClient.IssueFields.dll"/>
+    <ROW File="System.Data.dll" Component_="System.Data.dll" FileName="SYSTEM~7.DLL|System.Data.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Data.dll" SelfReg="false" NextFile="System.Drawing.dll"/>
+    <ROW File="System.Drawing.dll" Component_="System.Drawing.dll" FileName="SYSTEM~8.DLL|System.Drawing.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Drawing.dll" SelfReg="false" NextFile="Yakuza.JiraClient.Api.dll"/>
+    <ROW File="System.Printing.dll" Component_="System.Printing.dll" FileName="SYSTEM~9.DLL|System.Printing.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Printing.dll" SelfReg="false" NextFile="Microsoft.CSharp.dll"/>
+    <ROW File="System.Windows.Interactivity.dll" Component_="System.Windows.Interactivity.dll" FileName="SYSTEM~1.DLL|System.Windows.Interactivity.dll" Attributes="0" SourcePath="..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll" SelfReg="false" NextFile="JiraClient.exe"/>
+    <ROW File="System.Xaml.dll" Component_="System.Xaml.dll" FileName="SYSTEM~5.DLL|System.Xaml.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xaml.dll" SelfReg="false" NextFile="System.Core.dll"/>
+    <ROW File="System.Xml.Linq.dll" Component_="System.Xml.Linq.dll" FileName="SYSTE~10.DLL|System.Xml.Linq.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xml.Linq.dll" SelfReg="false" NextFile="System.Data.DataSetExtensions.dll"/>
+    <ROW File="System.Xml.dll" Component_="System.Xml.dll" FileName="SYSTEM~2.DLL|System.Xml.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Xml.dll" SelfReg="false" NextFile="System.dll"/>
+    <ROW File="System.dll" Component_="System.dll" FileName="System.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.Docking.dll"/>
+    <ROW File="Telerik.Pivot.Core.dll" Component_="Telerik.Pivot.Core.dll" FileName="TELERI~3.DLL|Telerik.Pivot.Core.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Pivot.Core.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.dll"/>
+    <ROW File="Telerik.Windows.Controls.Docking.dll" Component_="Telerik.Windows.Controls.Docking.dll" FileName="TELERI~1.DLL|Telerik.Windows.Controls.Docking.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Docking.dll" SelfReg="false" NextFile="System.ComponentModel.DataAnnotations.dll"/>
+    <ROW File="Telerik.Windows.Controls.GridView.dll" Component_="Telerik.Windows.Controls.GridView.dll" FileName="TELERI~6.DLL|Telerik.Windows.Controls.GridView.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.GridView.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.Input.dll"/>
+    <ROW File="Telerik.Windows.Controls.Input.dll" Component_="Telerik.Windows.Controls.Input.dll" FileName="TELERI~7.DLL|Telerik.Windows.Controls.Input.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Input.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.Navigation.dll"/>
+    <ROW File="Telerik.Windows.Controls.Navigation.dll" Component_="Telerik.Windows.Controls.Navigation.dll" FileName="TELERI~8.DLL|Telerik.Windows.Controls.Navigation.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Navigation.dll" SelfReg="false" NextFile="WindowsBase.dll"/>
+    <ROW File="Telerik.Windows.Controls.Pivot.dll" Component_="Telerik.Windows.Controls.Pivot.dll" FileName="TELERI~9.DLL|Telerik.Windows.Controls.Pivot.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Pivot.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.RibbonView.dll"/>
+    <ROW File="Telerik.Windows.Controls.PivotFieldList.dll" Component_="Telerik.Windows.Controls.PivotFieldList." FileName="TELERI~5.DLL|Telerik.Windows.Controls.PivotFieldList.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.PivotFieldList.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.GridView.dll"/>
+    <ROW File="Telerik.Windows.Controls.RibbonView.dll" Component_="Telerik.Windows.Controls.RibbonView.dll" FileName="TELER~10.DLL|Telerik.Windows.Controls.RibbonView.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.RibbonView.dll" SelfReg="false" NextFile="Telerik.Windows.Data.dll"/>
+    <ROW File="Telerik.Windows.Controls.dll" Component_="Telerik.Windows.Controls.dll" FileName="TELERI~4.DLL|Telerik.Windows.Controls.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.PivotFieldList.dll"/>
+    <ROW File="Telerik.Windows.Data.dll" Component_="Telerik.Windows.Data.dll" FileName="TELER~11.DLL|Telerik.Windows.Data.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Data.dll" SelfReg="false" NextFile="UIAutomationProvider.dll"/>
+    <ROW File="Telerik.Windows.Themes.Windows8.dll" Component_="Telerik.Windows.Themes.Windows8.dll" FileName="TELERI~2.DLL|Telerik.Windows.Themes.Windows8.dll" Attributes="0" SourcePath="..\Themes\Telerik.Windows.Themes.Windows8.dll" SelfReg="false" NextFile="System.Configuration.dll"/>
+    <ROW File="UIAutomationProvider.dll" Component_="UIAutomationProvider.dll" FileName="UIAUTO~1.DLL|UIAutomationProvider.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\UIAutomationProvider.dll" SelfReg="false" NextFile="UIAutomationTypes.dll"/>
+    <ROW File="UIAutomationTypes.dll" Component_="UIAutomationTypes.dll" FileName="UIAUTO~2.DLL|UIAutomationTypes.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\UIAutomationTypes.dll" SelfReg="false" NextFile="mscorlib.dll"/>
+    <ROW File="WindowsBase.dll" Component_="WindowsBase.dll" FileName="WINDOW~1.DLL|WindowsBase.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\WindowsBase.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.Pivot.dll"/>
+    <ROW File="Yakuza.JiraClient.Api.dll" Component_="Yakuza.JiraClient.Api.dll" FileName="YAKUZA~1.DLL|Yakuza.JiraClient.Api.dll" Attributes="0" SourcePath="..\Yakuza.JiraClient.Api\bin\x86\Release\Yakuza.JiraClient.Api.dll" SelfReg="false" NextFile="PresentationCore.dll"/>
+    <ROW File="Yakuza.JiraClient.IssueFields.dll" Component_="Yakuza.JiraClient.IssueFields.dll" FileName="YAKUZA~2.DLL|Yakuza.JiraClient.IssueFields.dll" Attributes="0" SourcePath="..\Yakuza.JiraClient.IssueFields\bin\x86\Release\Yakuza.JiraClient.IssueFields.dll" SelfReg="false" NextFile="Telerik.Pivot.Core.dll"/>
+    <ROW File="mscorlib.dll" Component_="mscorlib.dll" FileName="mscorlib.dll" Attributes="0" SourcePath="..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\mscorlib.dll" SelfReg="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
+    <ROW BuildKey="x86_Release_1" BuildName="x86_Release_1" BuildOrder="1" BuildType="0" PackageFolder="x86_Release_1SetupFiles" PackageFileName="setup" Languages="pl" InstallationType="4" UseLargeSchema="true"/>
+    <ATTRIBUTE name="CurrentBuild" value="x86_Release_1"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;ui_pl.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.FragmentComponent">
+    <ROW Fragment="CommonUI.aip" Path="&lt;AI_FRAGS&gt;CommonUI.aip"/>
+    <ROW Fragment="FolderDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\FolderDlg.aip"/>
+    <ROW Fragment="MaintenanceTypeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceTypeDlg.aip"/>
+    <ROW Fragment="MaintenanceWelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\MaintenanceWelcomeDlg.aip"/>
+    <ROW Fragment="SequenceDialogs.aip" Path="&lt;AI_THEMES&gt;classic\fragments\SequenceDialogs.aip"/>
+    <ROW Fragment="Sequences.aip" Path="&lt;AI_FRAGS&gt;Sequences.aip"/>
+    <ROW Fragment="StaticUIStrings.aip" Path="&lt;AI_FRAGS&gt;StaticUIStrings.aip"/>
+    <ROW Fragment="UI.aip" Path="&lt;AI_THEMES&gt;classic\fragments\UI.aip"/>
+    <ROW Fragment="Validation.aip" Path="&lt;AI_FRAGS&gt;Validation.aip"/>
+    <ROW Fragment="VerifyRemoveDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRemoveDlg.aip"/>
+    <ROW Fragment="VerifyRepairDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\VerifyRepairDlg.aip"/>
+    <ROW Fragment="WelcomeDlg.aip" Path="&lt;AI_THEMES&gt;classic\fragments\WelcomeDlg.aip"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiBinaryComponent">
+    <ROW Name="aicustact.dll" SourcePath="&lt;AI_CUSTACTS&gt;aicustact.dll"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiControlEventComponent">
+    <ROW Dialog_="WelcomeDlg" Control_="Next" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="FolderDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="FolderDlg" Control_="Back" Event="NewDialog" Argument="WelcomeDlg" Condition="AI_INSTALL" Ordering="1"/>
+    <ROW Dialog_="MaintenanceWelcomeDlg" Control_="Next" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="99"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_MAINT" Ordering="198"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="202"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_INSTALL" Ordering="197"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="FolderDlg" Condition="AI_INSTALL" Ordering="201"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_MAINT" Ordering="101"/>
+    <ROW Dialog_="CustomizeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="ChangeButton" Event="NewDialog" Argument="CustomizeDlg" Condition="AI_MAINT" Ordering="501"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceWelcomeDlg" Condition="AI_MAINT" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RemoveButton" Event="NewDialog" Argument="VerifyRemoveDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="1"/>
+    <ROW Dialog_="MaintenanceTypeDlg" Control_="RepairButton" Event="NewDialog" Argument="VerifyRepairDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="601"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Back" Event="NewDialog" Argument="MaintenanceTypeDlg" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="1"/>
+    <ROW Dialog_="VerifyRepairDlg" Control_="Repair" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Repair&quot;" Ordering="399" Options="1"/>
+    <ROW Dialog_="VerifyRemoveDlg" Control_="Remove" Event="EndDialog" Argument="Return" Condition="AI_MAINT AND InstallMode=&quot;Remove&quot;" Ordering="299" Options="1"/>
+    <ROW Dialog_="PatchWelcomeDlg" Control_="Next" Event="NewDialog" Argument="VerifyReadyDlg" Condition="AI_PATCH" Ordering="201"/>
+    <ROW Dialog_="ResumeDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_RESUME" Ordering="299"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Install" Event="EndDialog" Argument="Return" Condition="AI_PATCH" Ordering="199"/>
+    <ROW Dialog_="VerifyReadyDlg" Control_="Back" Event="NewDialog" Argument="PatchWelcomeDlg" Condition="AI_PATCH" Ordering="203"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
+    <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
+    <ROW Action="AI_DOWNGRADE" Type="19" Target="4010"/>
+    <ROW Action="AI_DpiContentScale" Type="1" Source="aicustact.dll" Target="DpiContentScale"/>
+    <ROW Action="AI_InstallModeCheck" Type="1" Source="aicustact.dll" Target="UpdateInstallMode" WithoutSeq="true"/>
+    <ROW Action="AI_LaunchApp" Type="1" Source="aicustact.dll" Target="[#JiraClient.exe]"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Type="65" Source="aicustact.dll" Target="PrepareUpgrade"/>
+    <ROW Action="AI_RESTORE_LOCATION" Type="65" Source="aicustact.dll" Target="RestoreLocation"/>
+    <ROW Action="AI_ResolveKnownFolders" Type="1" Source="aicustact.dll" Target="AI_ResolveKnownFolders"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Type="1" Source="aicustact.dll" Target="MixedAllUsersInstallLocation"/>
+    <ROW Action="AI_SHOW_LOG" Type="65" Source="aicustact.dll" Target="LaunchLogFile" WithoutSeq="true"/>
+    <ROW Action="AI_STORE_LOCATION" Type="51" Source="ARPINSTALLLOCATION" Target="[APPDIR]"/>
+    <ROW Action="SET_APPDIR" Type="307" Source="APPDIR" Target="[ProgramFilesFolder][Manufacturer]\[ProductName]"/>
+    <ROW Action="SET_SHORTCUTDIR" Type="307" Source="SHORTCUTDIR" Target="[ProgramMenuFolder][ProductName]"/>
+    <ROW Action="SET_TARGETDIR_TO_APPDIR" Type="51" Source="TARGETDIR" Target="[APPDIR]"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiIconsComponent">
+    <ROW Name="Icon.exe" SourcePath="..\Assets\Icon.ico" Index="0"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstExSeqComponent">
+    <ROW Action="AI_DOWNGRADE" Condition="AI_NEWERPRODUCTFOUND AND (UILevel &lt;&gt; 5)" Sequence="210"/>
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_STORE_LOCATION" Condition="(Not Installed) OR REINSTALL" Sequence="1501"/>
+    <ROW Action="AI_PREPARE_UPGRADE" Condition="AI_UPGRADE=&quot;No&quot; AND (Not Installed)" Sequence="1399"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="51"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Sequence="748"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiInstallUISequenceComponent">
+    <ROW Action="AI_RESTORE_LOCATION" Condition="APPDIR=&quot;&quot;" Sequence="749"/>
+    <ROW Action="AI_ResolveKnownFolders" Sequence="52"/>
+    <ROW Action="AI_DpiContentScale" Sequence="51"/>
+    <ROW Action="AI_SETMIXINSTLOCATION" Sequence="748"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiLaunchConditionsComponent">
+    <ROW Condition="(VersionNT &lt;&gt; 400)" Description="[ProductName] cannot be installed on the following Windows versions: [WindowsTypeNT40Display]." DescriptionLocId="AI.LaunchCondition.NoNT40" IsPredefined="true" Builds="x86_Release_1"/>
+    <ROW Condition="VersionNT" Description="[ProductName] nie może być zainstalowany w systemie [WindowsFamily9X]" DescriptionLocId="AI.LaunchCondition.No9X" IsPredefined="true" Builds="x86_Release_1"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiRegsComponent">
+    <ROW Registry="Path" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Path" Value="[APPDIR]" Component_="ProductInformation"/>
+    <ROW Registry="Version" Root="-1" Key="Software\[Manufacturer]\[ProductName]" Name="Version" Value="[ProductVersion]" Component_="ProductInformation"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiShortsComponent">
+    <ROW Shortcut="JiraClient" Directory_="SHORTCUTDIR" Name="JIRACL~2|Jira Client" Component_="JiraClient.exe" Target="[#JiraClient.exe]" Description="Jira Client" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="JiraClient.exe" Directory_="SHORTCUTDIR" Name="JIRACL~1|Jira Client" Component_="JiraClient.exe" Target="[#JiraClient.exe]" Description="Jira Client.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="JiraClient.exe_1" Directory_="DesktopFolder" Name="JIRACL~1|Jira Client" Component_="JiraClient.exe" Target="[#JiraClient.exe]" Description="Jira Client.exe" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="JiraClient_1" Directory_="DesktopFolder" Name="JIRACL~2|Jira Client" Component_="JiraClient.exe" Target="[#JiraClient.exe]" Description="Jira Client" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="JiraClient_2" Directory_="SHORTCUTDIR" Name="JIRACL~3|Jira Client" Component_="JiraClient.exe" Target="[#JiraClient.exe]" Description="Jira Client" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+    <ROW Shortcut="JiraClient_3" Directory_="DesktopFolder" Name="JIRACL~3|Jira Client" Component_="JiraClient.exe" Target="[#JiraClient.exe]" Description="Jira Client" Hotkey="0" IconIndex="0" ShowCmd="1" WkDir="APPDIR"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiThemeComponent">
+    <ATTRIBUTE name="UsedTheme" value="classic"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.MsiUpgradeComponent">
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="0.0.1" VersionMax="[|ProductVersion]" Attributes="257" ActionProperty="OLDPRODUCTS"/>
+    <ROW UpgradeCode="[|UpgradeCode]" VersionMin="[|ProductVersion]" Attributes="2" ActionProperty="AI_NEWERPRODUCTFOUND"/>
+  </COMPONENT>
+</DOCUMENT>
