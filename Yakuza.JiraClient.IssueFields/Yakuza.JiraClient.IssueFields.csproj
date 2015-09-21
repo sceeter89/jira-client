@@ -81,30 +81,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Search\ComboBoxField.cs" />
-    <Compile Include="Search\SearchByIssueTypeField.cs" />
-    <Compile Include="Search\SearchByIssueTypeFieldControl.xaml.cs">
-      <DependentUpon>SearchByIssueTypeFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Search\SearchByPriorityField.cs" />
-    <Compile Include="Search\SearchByPriorityFieldControl.xaml.cs">
-      <DependentUpon>SearchByPriorityFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Search\SearchByProjectField.cs" />
-    <Compile Include="Search\SearchByProjectFieldControl.xaml.cs">
-      <DependentUpon>SearchByProjectFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Search\SearchByResolutionField.cs" />
-    <Compile Include="Search\SearchByResolutionFieldControl.xaml.cs">
-      <DependentUpon>SearchByResolutionFieldControl.xaml</DependentUpon>
+    <Compile Include="Search\ComboBoxSearchField.cs" />
+    <Compile Include="Search\ComboBoxSearchFieldControl.xaml.cs">
+      <DependentUpon>ComboBoxSearchFieldControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Search\SearchBySprintField.cs" />
     <Compile Include="Search\SearchBySprintFieldControl.xaml.cs">
       <DependentUpon>SearchBySprintFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Search\SearchByStatusField.cs" />
-    <Compile Include="Search\SearchByStatusFieldControl.xaml.cs">
-      <DependentUpon>SearchByStatusFieldControl.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -118,27 +101,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Search\SearchByIssueTypeFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Search\SearchByPriorityFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Search\SearchByProjectFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Search\SearchByResolutionFieldControl.xaml">
+    <Page Include="Search\ComboBoxSearchFieldControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Search\SearchBySprintFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Search\SearchByStatusFieldControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

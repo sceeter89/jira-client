@@ -1,8 +1,8 @@
 ﻿namespace Yakuza.JiraClient.IssueFields.Search
 {
-   public partial class SearchByPriorityFieldControl
+   public partial class ComboBoxSearchFieldControl
    {
-      public SearchByPriorityFieldControl()
+      public ComboBoxSearchFieldControl()
       {
          InitializeComponent();
       }

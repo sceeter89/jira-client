@@ -10,6 +10,7 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Api.Messages.Status;
 
 namespace Yakuza.JiraClient.IssueFields.Search
 {
@@ -26,17 +27,20 @@ namespace Yakuza.JiraClient.IssueFields.Search
          BoardsList = new ObservableCollection<RawAgileBoard>();
          SprintsList = new ObservableCollection<RawAgileSprint>();
 
-         messenger.Register<LoggedInMessage>(this, async m =>
+         messenger.Register<LoggedInMessage>(this, async m => await RefreshItems());
+         messenger.Register<ConnectionEstablishedMessage>(this, async m => await RefreshItems());
+      }
+
+      private async Task RefreshItems()
+      {
+         var boards = await _operations.GetAgileBoards();
+         if (boards == null)
+            return;
+         DispatcherHelper.CheckBeginInvokeOnUI(() =>
          {
-            var boards = await _operations.GetAgileBoards();
-            if (boards == null)
-               return;
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-               BoardsList.Clear();
-               foreach (var board in boards.Where(x => x.Type == "scrum").OrderBy(x => x.Name))
-                  BoardsList.Add(board);
-            });
+            BoardsList.Clear();
+            foreach (var board in boards.Where(x => x.Type == "scrum").OrderBy(x => x.Name))
+               BoardsList.Add(board);
          });
       }
 

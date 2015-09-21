@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Yakuza.JiraClient.IssueFields.Search.SearchByStatusFieldControl"
+﻿<UserControl x:Class="Yakuza.JiraClient.IssueFields.Search.ComboBoxSearchFieldControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,8 +14,8 @@
          <ColumnDefinition Width="Auto"/>
          <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
-      <TextBlock Grid.Row="0" Grid.Column="0" Text="Select status:" Margin="5"/>
-      <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding StatusesList}" SelectedItem="{Binding SelectedStatus, Mode=TwoWay}"
+      <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Label}" Margin="5"/>
+      <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                       Margin="5" DisplayMemberPath="Name"/>
    </Grid>
 </UserControl>

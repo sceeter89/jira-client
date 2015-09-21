@@ -38,10 +38,30 @@ namespace Yakuza.JiraClient.ViewModel
          SearchableFields = new ISearchableField[]
          {
             new SearchBySprintField(messenger, operations),
-            new SearchByIssueTypeField(messenger, operations),
-            new SearchByProjectField(messenger, operations),
-            new SearchByPriorityField(messenger, operations),
-            new SearchByResolutionField(messenger, operations),
+            new ComboBoxSearchField<RawIssueType>(_messenger,
+                                                  ()=> _operations.GetIssueTypes(),
+                                                  x => x.Name,
+                                                  x => x.Name,
+                                                  "issuetype",
+                                                  "Select issue type"),
+            new ComboBoxSearchField<RawProjectInfo>(_messenger,
+                                                  ()=> _operations.GetProjectsList(),
+                                                  x => x.Name,
+                                                  x => x.Name,
+                                                  "project",
+                                                  "Select project"),
+            new ComboBoxSearchField<RawPriority>(_messenger,
+                                                  ()=> _operations.GetPrioritiesList(),
+                                                  x => x.Name,
+                                                  x => x.Name,
+                                                  "priority",
+                                                  "Select priority"),
+            new ComboBoxSearchField<RawResolution>(_messenger,
+                                                  ()=> _operations.GetResolutionsList(),
+                                                  x => x.Name,
+                                                  x => x.Name,
+                                                  "resolution",
+                                                  "Select resolution")
          };
 
          _messenger.Send(new IsLoggedInMessage());
