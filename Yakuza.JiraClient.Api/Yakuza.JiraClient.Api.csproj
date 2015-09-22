@@ -74,6 +74,8 @@
     <Compile Include="Messages\Actions\Authentication\LoggedInMessage.cs" />
     <Compile Include="Messages\Actions\Authentication\LoggedOutMessage.cs" />
     <Compile Include="Messages\Actions\ConnectionIsBroken.cs" />
+    <Compile Include="Messages\Actions\FilteredIssuesListMessage.cs" />
+    <Compile Include="Messages\Actions\GetFilteredIssuesListMessage.cs" />
     <Compile Include="Messages\Actions\LogMessage.cs" />
     <Compile Include="Messages\Actions\NewSearchResultsAvailable.cs" />
     <Compile Include="Messages\Navigation\OpenConnectionTabMessage.cs" />

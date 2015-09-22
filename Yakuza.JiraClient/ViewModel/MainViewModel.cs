@@ -12,14 +12,14 @@ using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Model;
 using System.Collections.Generic;
 using Yakuza.JiraClient.Api.Messages.Actions;
+using System;
 
 namespace Yakuza.JiraClient.ViewModel
 {
    public class MainViewModel : GalaSoft.MvvmLight.ViewModelBase
    {
       private bool _isLoggedIn = false;
-
-      private IEnumerable<JiraIssue> _foundIssues;
+      
       private readonly IMessenger _messenger;
       private int _selectedDocumentPaneIndex;
       private int _selectedPropertyPaneIndex;
@@ -32,7 +32,7 @@ namespace Yakuza.JiraClient.ViewModel
          _messenger.Register<LoggedInMessage>(this, LoadUi);
          _messenger.Register<LoggedOutMessage>(this, _ => SetIsLoggedOut());
          _messenger.Register<OpenConnectionTabMessage>(this, _ => FocusPropertyPane(ConnectionPropertyPane));
-         _messenger.Register<NewSearchResultsAvailable>(this, m => _foundIssues = m.SearchResults);
+         _messenger.Register<FilteredIssuesListMessage>(this, DumpIssueList);
 
          DocumentPanes = new ObservableCollection<RadPane>();
          PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane };
@@ -76,13 +76,18 @@ namespace Yakuza.JiraClient.ViewModel
 
       private void SaveXps()
       {
-         if (_foundIssues == null || _foundIssues.Any() == false)
+         _messenger.Send(new GetFilteredIssuesListMessage());
+      }
+
+      private void DumpIssueList(FilteredIssuesListMessage message)
+      {
+         if (message.FilteredIssues == null || message.FilteredIssues.Any() == false)
          {
             _messenger.LogMessage("No issues to export.", LogLevel.Warning);
             return;
          }
 
-         var document = CardsPrintPreview.GenerateDocument(_foundIssues);
+         var document = CardsPrintPreview.GenerateDocument(message.FilteredIssues);
          var dlg = new Microsoft.Win32.SaveFileDialog();
          dlg.FileName = "Scrum Cards.xps";
          dlg.DefaultExt = ".xps";
