@@ -144,11 +144,19 @@ namespace Yakuza.JiraClient.Service
          var client = BuildRestClient();
          var request = new RestRequest("/rest/agile/latest/board", Method.GET);
          request.AddQueryParameter("maxResults", "500");
+         request.AddQueryParameter("startAt", "0");
+         var allBoards = new List<RawAgileBoard>();
+         IRestResponse response;
+         RawAgileBoardsList result;
+         do
+         {
+            request.Parameters[1].Value = allBoards.Count;
+            response = await client.ExecuteTaskAsync(request);
+            result = JsonConvert.DeserializeObject<RawAgileBoardsList>(response.Content);
+            allBoards.AddRange(result.Values);
+         } while (result.IsLast == false);
 
-         var response = await client.ExecuteTaskAsync(request);
-         var result = JsonConvert.DeserializeObject<RawAgileBoardsList>(response.Content);
-
-         return result.Values;
+         return allBoards;
       }
 
       public async Task<IEnumerable<RawAgileSprint>> GetSprintsForBoard(int boardId)
@@ -156,12 +164,21 @@ namespace Yakuza.JiraClient.Service
          var client = BuildRestClient();
          var request = new RestRequest("/rest/agile/latest/board/{id}/sprint", Method.GET);
          request.AddQueryParameter("maxResults", "500");
+         request.AddQueryParameter("startAt", "0");
          request.AddUrlSegment("id", boardId.ToString());
 
-         var response = await client.ExecuteTaskAsync(request);
-         var result = JsonConvert.DeserializeObject<RawAgileSprintsList>(response.Content);
+         IRestResponse response;
+         RawAgileSprintsList result;
+         var allSprints = new List<RawAgileSprint>();
+         do
+         {
+            request.Parameters[1].Value = allSprints.Count;
+            response = await client.ExecuteTaskAsync(request);
+            result = JsonConvert.DeserializeObject<RawAgileSprintsList>(response.Content);
+            allSprints.AddRange(result.Values);
+         } while (result.IsLast == false);
 
-         return result.Values;
+         return allSprints;
       }
 
       public async Task<RawProfileDetails> GetProfileDetails()
