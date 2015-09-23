@@ -13,13 +13,14 @@ using Yakuza.JiraClient.Api.Model;
 using System.Collections.Generic;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using System;
+using System.Reflection;
 
 namespace Yakuza.JiraClient.ViewModel
 {
    public class MainViewModel : GalaSoft.MvvmLight.ViewModelBase
    {
       private bool _isLoggedIn = false;
-      
+
       private readonly IMessenger _messenger;
       private int _selectedDocumentPaneIndex;
       private int _selectedPropertyPaneIndex;
@@ -112,6 +113,13 @@ namespace Yakuza.JiraClient.ViewModel
       }
 
       public RelayCommand SaveXpsCommand { get; private set; }
+      public string AppTitle
+      {
+         get
+         {
+            return string.Format("Jira Client - {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString(3));
+         }
+      }
 
       public int SelectedDocumentPaneIndex
       {
