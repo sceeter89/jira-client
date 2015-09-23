@@ -194,3 +194,5 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+/installer-project/setup-cache
+/installer-project/x86_Release_1SetupFiles
