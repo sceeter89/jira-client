@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Api", "Ya
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Messaging", "Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj", "{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05CBDD8C-9F84-496F-A54D-6406468A047B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.UnitTests", "Tests\Yakuza.JiraClient.UnitTests\Yakuza.JiraClient.UnitTests.csproj", "{3BAEF616-C997-4B97-9BC7-01B4641C11AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,8 +49,19 @@ Global
 		{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4}.Release|x86.Build.0 = Release|Any CPU
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Debug|x86.Build.0 = Debug|Any CPU
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3BAEF616-C997-4B97-9BC7-01B4641C11AD} = {05CBDD8C-9F84-496F-A54D-6406468A047B}
 	EndGlobalSection
 EndGlobal
