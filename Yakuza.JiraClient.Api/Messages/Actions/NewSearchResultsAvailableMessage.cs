@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Yakuza.JiraClient.Api.Model;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.Api.Messages.Actions
 {
-   public class NewSearchResultsAvailable
+   public class NewSearchResultsAvailableMessage : IMessage
    {
-      public NewSearchResultsAvailable(IList<JiraIssue> searchResults)
+      public NewSearchResultsAvailableMessage(IList<JiraIssue> searchResults)
       {
          SearchResults = searchResults;
       }

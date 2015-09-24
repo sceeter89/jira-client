@@ -1,24 +1,26 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
 using Telerik.Pivot.Core;
 using System.Linq;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Model;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class PivotGridViewModel : ViewModelBase
+   public class PivotGridViewModel : ViewModelBase,
+      IHandleMessage<NewSearchResultsAvailableMessage>
    {
-      private readonly IMessenger _messenger;
+      private readonly IMessageBus _messenger;
 
-      public PivotGridViewModel(IMessenger messenger)
+      public PivotGridViewModel(IMessageBus messenger)
       {
          _messenger = messenger;
-         _messenger.Register<NewSearchResultsAvailable>(this, RefreshPivot);
          DataSource = new LocalDataSourceProvider();
-      }
 
-      private void RefreshPivot(NewSearchResultsAvailable message)
+         _messenger.Register(this);
+      }
+      
+      public void Handle(NewSearchResultsAvailableMessage message)
       {
          using (DataSource.DeferRefresh())
          {

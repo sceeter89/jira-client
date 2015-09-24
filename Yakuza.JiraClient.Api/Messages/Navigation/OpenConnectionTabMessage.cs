@@ -1,6 +1,8 @@
-﻿namespace Yakuza.JiraClient.Api.Messages.Navigation
+﻿using Yakuza.JiraClient.Messaging.Api;
+
+namespace Yakuza.JiraClient.Api.Messages.Navigation
 {
-   public class OpenConnectionTabMessage
+   public class OpenConnectionTabMessage : IMessage
    {
    }
 }

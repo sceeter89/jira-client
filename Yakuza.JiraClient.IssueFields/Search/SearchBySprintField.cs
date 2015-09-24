@@ -1,5 +1,4 @@
 ﻿using Yakuza.JiraClient.Api;
-using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
 using System.Linq;
@@ -11,24 +10,26 @@ using GalaSoft.MvvmLight.Command;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Messages.Status;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.IssueFields.Search
 {
-   public class SearchBySprintField : ViewModelBase, ISearchableField
+   public class SearchBySprintField : ViewModelBase, ISearchableField,
+      IHandleMessage<LoggedInMessage>,
+      IHandleMessage<ConnectionEstablishedMessage>
    {
       private readonly IJiraOperations _operations;
       private RawAgileBoard _selectedBoard;
       private RawAgileSprint _selectedSprint;
 
-      public SearchBySprintField(IMessenger messenger, IJiraOperations operations)
+      public SearchBySprintField(IMessageBus messenger, IJiraOperations operations)
       {
          _operations = operations;
 
          BoardsList = new ObservableCollection<RawAgileBoard>();
          SprintsList = new ObservableCollection<RawAgileSprint>();
 
-         messenger.Register<LoggedInMessage>(this, async m => await RefreshItems());
-         messenger.Register<ConnectionEstablishedMessage>(this, async m => await RefreshItems());
+         messenger.Register(this);
       }
 
       private async Task RefreshItems()
@@ -120,6 +121,16 @@ namespace Yakuza.JiraClient.IssueFields.Search
       public string GetSearchQuery()
       {
          return string.Format("Sprint = {0}", SelectedSprint.Id);
+      }
+
+      public async void Handle(ConnectionEstablishedMessage message)
+      {
+         await RefreshItems();
+      }
+
+      public async void Handle(LoggedInMessage message)
+      {
+         await RefreshItems();
       }
    }
 }

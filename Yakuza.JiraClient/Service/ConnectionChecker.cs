@@ -1,27 +1,29 @@
 ﻿using System;
-using GalaSoft.MvvmLight.Messaging;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using System.Windows.Threading;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Actions;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.Service
 {
-   class ConnectionChecker
+   internal class ConnectionChecker :
+      IHandleMessage<LoggedInMessage>,
+      IHandleMessage<LoggedOutMessage>
    {
       private readonly IJiraOperations _operations;
-      private readonly IMessenger _messenger;
+      private readonly IMessageBus _messenger;
       private readonly DispatcherTimer _timer;
 
-      public ConnectionChecker(IMessenger messenger, IJiraOperations operations)
+      public ConnectionChecker(IMessageBus messenger, IJiraOperations operations)
       {
          _operations = operations;
          _messenger = messenger;
-         _messenger.Register<LoggedInMessage>(this, m => StartChecking());
-         _messenger.Register<LoggedOutMessage>(this, m => StopChecking());
          _timer = new DispatcherTimer();
          _timer.Interval = TimeSpan.FromSeconds(3);
          _timer.Tick += CheckTick;
+
+         messenger.Register(this);
       }
 
       private async void CheckTick(object sender, EventArgs e)
@@ -38,13 +40,13 @@ namespace Yakuza.JiraClient.Service
          }
          catch { }
       }
-
-      private void StartChecking()
+      
+      public void Handle(LoggedInMessage message)
       {
          _timer.IsEnabled = true;
       }
 
-      private void StopChecking()
+      public void Handle(LoggedOutMessage message)
       {
          _timer.IsEnabled = false;
       }

@@ -115,6 +115,10 @@
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
       <Name>Yakuza.JiraClient.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
+      <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
+      <Name>Yakuza.JiraClient.Messaging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

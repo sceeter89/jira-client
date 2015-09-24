@@ -22,24 +22,17 @@ namespace Yakuza.JiraClient.Messaging
 
       public void Register<TListener>(TListener listener)
       {
-         Action<Type> addListenerForMessageType = t =>
+         var type = listener.GetType();
+
+         foreach (var handlerType in type.GetInterfaces()
+               .Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IHandleMessage<>)))
          {
-            var messageType = t.GenericTypeArguments[0];
+            var messageType = handlerType.GenericTypeArguments[0];
             if (_typeHandlers.ContainsKey(messageType) == false)
                _typeHandlers[messageType] = new List<dynamic>();
 
             _typeHandlers[messageType].Add(listener);
-         };
-
-         var type = typeof(TListener);
-         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IHandleMessage<>))
-            addListenerForMessageType(type);
-
-         foreach (var handlerType in type.GetInterfaces()
-                                         .Where(i => i.IsGenericType
-                                                  && i.GetGenericTypeDefinition() == typeof(IHandleMessage<>)))
-            addListenerForMessageType(handlerType);
-
+         }
       }
 
       public void Send<TMessage>(TMessage message) where TMessage : IMessage
@@ -48,17 +41,17 @@ namespace Yakuza.JiraClient.Messaging
 
          if (_concreteListeners.ContainsKey(messageType))
          {
-            foreach (var action in _concreteListeners[messageType])
+            foreach (var action in _concreteListeners[messageType].ToList())
                ((Action<TMessage>)action)(message);
          }
 
          if (_typeHandlers.ContainsKey(messageType))
          {
-            foreach (var handler in _typeHandlers[messageType])
+            foreach (var handler in _typeHandlers[messageType].ToList())
                (handler as IHandleMessage<TMessage>).Handle(message);
          }
 
-         foreach (var handler in _allMessagesHandlers)
+         foreach (var handler in _allMessagesHandlers.ToList())
             handler.Handle(message);
       }
 

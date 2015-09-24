@@ -1,6 +1,5 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Service;
@@ -12,13 +11,18 @@ using System.Windows.Threading;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Messages.Status;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class LoginViewModel : ViewModelBase
+   public class LoginViewModel : ViewModelBase,
+      IHandleMessage<ConnectionIsBroken>,
+      IHandleMessage<LoggedInMessage>,
+      IHandleMessage<LoggedOutMessage>,
+      IHandleMessage<IsLoggedInMessage>
    {
       private readonly Configuration _configuration;
-      private readonly IMessenger _messenger;
+      private readonly IMessageBus _messenger;
       private readonly IJiraOperations _operations;
       private bool _isBusy = false;
       private bool _isConnected;
@@ -26,7 +30,7 @@ namespace Yakuza.JiraClient.ViewModel
       private RawProfileDetails _profile;
       private BitmapImage _avatarSource;
 
-      public LoginViewModel(IMessenger messenger, Configuration configuration, IJiraOperations operations)
+      public LoginViewModel(IMessageBus messenger, Configuration configuration, IJiraOperations operations)
       {
          _messenger = messenger;
          _configuration = configuration;
@@ -52,47 +56,16 @@ namespace Yakuza.JiraClient.ViewModel
                _messenger.Send(new LoggedOutMessage());
             }
          };
-         _messenger.Register<ConnectionIsBroken>(this, OnConnectionBroken);
 
          LoginCommand = new RelayCommand<PasswordBox>(async password => await Login(password.Password), p => _isBusy == false);
          LogoutCommand = new RelayCommand(async () => await Logout(), () => _isBusy == false);
 
          IsConnected = false;
-
-         _messenger.Register<LoggedInMessage>(this, async _ =>
-         {
-            var details = await _operations.GetProfileDetails();
-            Profile = details;
-            var avatar = _operations.DownloadPicture(details.AvatarUrls.Avatar48x48);
-            AvatarSource = avatar;
-            IsConnected = true;
-         });
-         _messenger.Register<LoggedOutMessage>(this, _ =>
-         {
-            Profile = null;
-            AvatarSource = null;
-            IsConnected = false;
-         });
-         _messenger.Register<IsLoggedInMessage>(this, m =>
-         {
-            if (IsConnected)
-               _messenger.Send(new ConnectionEstablishedMessage(Profile));
-            else
-               _messenger.Send(new ConnectionDownMessage());
-         });
+         
          checkLoginTimer.IsEnabled = true;
+         _messenger.Register(this);
       }
-
-      private void OnConnectionBroken(ConnectionIsBroken message)
-      {
-         _messenger.LogMessage("Connection is broken. Security token might have been invalidated.");
-         if (IsConnected)
-         {
-            _messenger.Send(new LoggedOutMessage());
-         }
-         IsConnected = false;
-      }
-
+      
       private async Task Login(string password)
       {
          _isBusy = true;
@@ -147,6 +120,40 @@ namespace Yakuza.JiraClient.ViewModel
 
          _isBusy = false;
          LogoutCommand.RaiseCanExecuteChanged();
+      }
+
+      public void Handle(ConnectionIsBroken message)
+      {
+         _messenger.LogMessage("Connection is broken. Security token might have been invalidated.");
+         if (IsConnected)
+         {
+            _messenger.Send(new LoggedOutMessage());
+         }
+         IsConnected = false;
+      }
+
+      public async void Handle(LoggedInMessage message)
+      {
+         var details = await _operations.GetProfileDetails();
+         Profile = details;
+         var avatar = _operations.DownloadPicture(details.AvatarUrls.Avatar48x48);
+         AvatarSource = avatar;
+         IsConnected = true;
+      }
+
+      public void Handle(LoggedOutMessage message)
+      {
+         Profile = null;
+         AvatarSource = null;
+         IsConnected = false;
+      }
+
+      public void Handle(IsLoggedInMessage message)
+      {
+         if (IsConnected)
+            _messenger.Send(new ConnectionEstablishedMessage(Profile));
+         else
+            _messenger.Send(new ConnectionDownMessage());
       }
 
       public string JiraUrl

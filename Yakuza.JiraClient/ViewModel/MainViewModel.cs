@@ -1,5 +1,4 @@
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Controls;
 using System.Collections.ObjectModel;
@@ -9,51 +8,34 @@ using System.Windows.Xps.Packaging;
 using Telerik.Windows.Controls;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Api.Model;
-using System.Collections.Generic;
 using Yakuza.JiraClient.Api.Messages.Actions;
-using System;
 using System.Reflection;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class MainViewModel : GalaSoft.MvvmLight.ViewModelBase
+   public class MainViewModel : GalaSoft.MvvmLight.ViewModelBase,
+      IHandleMessage<LoggedInMessage>,
+      IHandleMessage<LoggedOutMessage>,
+      IHandleMessage<OpenConnectionTabMessage>,
+      IHandleMessage<FilteredIssuesListMessage>
    {
       private bool _isLoggedIn = false;
 
-      private readonly IMessenger _messenger;
+      private readonly IMessageBus _messenger;
       private int _selectedDocumentPaneIndex;
       private int _selectedPropertyPaneIndex;
 
-      public MainViewModel(IMessenger messenger)
+      public MainViewModel(IMessageBus messenger)
       {
          _messenger = messenger;
          SaveXpsCommand = new RelayCommand(SaveXps, () => _isLoggedIn);
-
-         _messenger.Register<LoggedInMessage>(this, LoadUi);
-         _messenger.Register<LoggedOutMessage>(this, _ => SetIsLoggedOut());
-         _messenger.Register<OpenConnectionTabMessage>(this, _ => FocusPropertyPane(ConnectionPropertyPane));
-         _messenger.Register<FilteredIssuesListMessage>(this, DumpIssueList);
-
+         
          DocumentPanes = new ObservableCollection<RadPane>();
          PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane };
+         _messenger.Register(this);
       }
-
-      private void LoadUi(LoggedInMessage message)
-      {
-         DocumentPanes.Clear();
-         DocumentPanes.Add(IssueListDocumentPane);
-         DocumentPanes.Add(PivotDocumentPane);
-         FocusDocumentPane(IssueListDocumentPane);
-
-         PropertyPanes.Clear();
-         PropertyPanes.Add(SearchPropertyPane);
-         PropertyPanes.Add(PivotPropertyPane);
-         PropertyPanes.Add(ConnectionPropertyPane);
-         FocusPropertyPane(SearchPropertyPane);
-
-         SetIsLoggedIn();
-      }
+      
 
       private void SetIsLoggedIn()
       {
@@ -79,38 +61,7 @@ namespace Yakuza.JiraClient.ViewModel
       {
          _messenger.Send(new GetFilteredIssuesListMessage());
       }
-
-      private void DumpIssueList(FilteredIssuesListMessage message)
-      {
-         if (message.FilteredIssues == null || message.FilteredIssues.Any() == false)
-         {
-            _messenger.LogMessage("No issues to export.", LogLevel.Warning);
-            return;
-         }
-
-         var document = CardsPrintPreview.GenerateDocument(message.FilteredIssues);
-         var dlg = new Microsoft.Win32.SaveFileDialog();
-         dlg.FileName = "Scrum Cards.xps";
-         dlg.DefaultExt = ".xps";
-         dlg.Filter = "XPS Documents (.xps)|*.xps";
-         dlg.OverwritePrompt = true;
-
-         var result = dlg.ShowDialog();
-
-         if (result == false)
-            return;
-
-         var filename = dlg.FileName;
-         if (File.Exists(filename))
-            File.Delete(filename);
-
-         using (var xpsd = new XpsDocument(filename, FileAccess.ReadWrite))
-         {
-            var xw = XpsDocument.CreateXpsDocumentWriter(xpsd);
-            xw.Write(document);
-            xpsd.Close();
-         }
-      }
+      
 
       public RelayCommand SaveXpsCommand { get; private set; }
       public string AppTitle
@@ -153,6 +104,64 @@ namespace Yakuza.JiraClient.ViewModel
       private void FocusDocumentPane(RadPane pane)
       {
          SelectedDocumentPaneIndex = DocumentPanes.IndexOf(pane);
+      }
+
+      public void Handle(LoggedInMessage message)
+      {
+         DocumentPanes.Clear();
+         DocumentPanes.Add(IssueListDocumentPane);
+         DocumentPanes.Add(PivotDocumentPane);
+         FocusDocumentPane(IssueListDocumentPane);
+
+         PropertyPanes.Clear();
+         PropertyPanes.Add(SearchPropertyPane);
+         PropertyPanes.Add(PivotPropertyPane);
+         PropertyPanes.Add(ConnectionPropertyPane);
+         FocusPropertyPane(SearchPropertyPane);
+
+         SetIsLoggedIn();
+      }
+
+      public void Handle(LoggedOutMessage message)
+      {
+         SetIsLoggedOut();
+      }
+
+      public void Handle(OpenConnectionTabMessage message)
+      {
+         FocusPropertyPane(ConnectionPropertyPane);
+      }
+
+      public void Handle(FilteredIssuesListMessage message)
+      {
+         if (message.FilteredIssues == null || message.FilteredIssues.Any() == false)
+         {
+            _messenger.LogMessage("No issues to export.", LogLevel.Warning);
+            return;
+         }
+
+         var document = CardsPrintPreview.GenerateDocument(message.FilteredIssues);
+         var dlg = new Microsoft.Win32.SaveFileDialog();
+         dlg.FileName = "Scrum Cards.xps";
+         dlg.DefaultExt = ".xps";
+         dlg.Filter = "XPS Documents (.xps)|*.xps";
+         dlg.OverwritePrompt = true;
+
+         var result = dlg.ShowDialog();
+
+         if (result == false)
+            return;
+
+         var filename = dlg.FileName;
+         if (File.Exists(filename))
+            File.Delete(filename);
+
+         using (var xpsd = new XpsDocument(filename, FileAccess.ReadWrite))
+         {
+            var xw = XpsDocument.CreateXpsDocumentWriter(xpsd);
+            xw.Write(document);
+            xpsd.Close();
+         }
       }
 
       public int SelectedPropertyPaneIndex

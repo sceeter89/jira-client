@@ -1,6 +1,8 @@
-﻿namespace Yakuza.JiraClient.Api.Messages.Actions
+﻿using Yakuza.JiraClient.Messaging.Api;
+
+namespace Yakuza.JiraClient.Api.Messages.Actions
 {
-   public class LogMessage
+   public class LogMessage : IMessage
    {
       public LogMessage(string message, LogLevel level = LogLevel.Debug)
       {

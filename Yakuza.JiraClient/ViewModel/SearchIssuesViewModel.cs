@@ -12,19 +12,20 @@ using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.IssueFields.Search;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.ViewModel
 {
    public class SearchIssuesViewModel : ViewModelBase
    {
-      private readonly IMessenger _messenger;
+      private readonly IMessageBus _messenger;
       private bool _isBusy = false;
       private readonly BackgroundWorker _backgroundWorker = new BackgroundWorker();
       private readonly IJiraOperations _operations;
       private RawIssueToJiraIssue _modelConverter;
       private string _searchQuery;
 
-      public SearchIssuesViewModel(IMessenger messenger, IJiraOperations operations)
+      public SearchIssuesViewModel(IMessageBus messenger, IJiraOperations operations)
       {
          _operations = operations;
          _messenger = messenger;
@@ -111,7 +112,7 @@ namespace Yakuza.JiraClient.ViewModel
             FoundIssues.Add(issue);
          }
          _messenger.LogMessage(string.Format("Search done. Found {0} issues.", FoundIssues.Count));
-         _messenger.Send(new NewSearchResultsAvailable(FoundIssues));
+         _messenger.Send(new NewSearchResultsAvailableMessage(FoundIssues));
          SetIsBusy(false);
       }
 

@@ -1,6 +1,8 @@
-﻿namespace Yakuza.JiraClient.Api.Messages.Actions
+﻿using Yakuza.JiraClient.Messaging.Api;
+
+namespace Yakuza.JiraClient.Api.Messages.Actions
 {
-   public class GetFilteredIssuesListMessage
+   public class GetFilteredIssuesListMessage : IMessage
    {
    }
 }

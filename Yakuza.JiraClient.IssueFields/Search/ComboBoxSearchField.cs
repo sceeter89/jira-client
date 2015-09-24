@@ -12,10 +12,13 @@ using Yakuza.JiraClient.Api.Messages.Status;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.IssueFields.Search
 {
-   public class ComboBoxSearchField<T> : ViewModelBase, ISearchableField
+   public class ComboBoxSearchField<T> : ViewModelBase, ISearchableField,
+      IHandleMessage<LoggedInMessage>,
+      IHandleMessage<ConnectionEstablishedMessage>
       where T : class
    {
       private PickUpItem<T> _selectedItem;
@@ -24,7 +27,7 @@ namespace Yakuza.JiraClient.IssueFields.Search
       private readonly Func<T, string> _queryValueGetter;
       private readonly string _queryFieldName;
 
-      public ComboBoxSearchField(IMessenger messenger,
+      public ComboBoxSearchField(IMessageBus messenger,
                                  Func<Task<IEnumerable<T>>> itemsGetter,
                                  Func<T, string> displayNameGetter,
                                  Func<T, string> queryValueGetter,
@@ -37,8 +40,8 @@ namespace Yakuza.JiraClient.IssueFields.Search
          _displayNameGetter = displayNameGetter;
          _queryValueGetter = queryValueGetter;
          _queryFieldName = queryFieldName;
-         messenger.Register<LoggedInMessage>(this, async m => await RefreshItems());
-         messenger.Register<ConnectionEstablishedMessage>(this, async m => await RefreshItems());
+
+         messenger.Register(this);
       }
 
       private async Task RefreshItems()
@@ -100,6 +103,16 @@ namespace Yakuza.JiraClient.IssueFields.Search
       public string GetSearchQuery()
       {
          return string.Format("{0} = '{1}'", _queryFieldName, _queryValueGetter(SelectedItem.Item));
+      }
+
+      public async void Handle(LoggedInMessage message)
+      {
+         await RefreshItems();
+      }
+
+      public async void Handle(ConnectionEstablishedMessage message)
+      {
+         await RefreshItems();
       }
 
       public class PickUpItem<T>

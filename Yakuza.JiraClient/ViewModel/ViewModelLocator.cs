@@ -1,6 +1,7 @@
 using GalaSoft.MvvmLight.Messaging;
 using Autofac;
 using System.Reflection;
+using Yakuza.JiraClient.Messaging;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -72,7 +73,7 @@ namespace Yakuza.JiraClient.ViewModel
 
          var clientAssembly = Assembly.Load("Jira Client");
 
-         builder.RegisterType<Messenger>()
+         builder.RegisterType<MessageBus>()
             .AsImplementedInterfaces()
             .SingleInstance();
 
