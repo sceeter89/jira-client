@@ -68,6 +68,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
+      <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
+      <Name>Yakuza.JiraClient.Messaging</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

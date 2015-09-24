@@ -7,7 +7,7 @@ namespace Yakuza.JiraClient.Messaging
 {
    public class MessageBus : IMessageBus
    {
-      private readonly IDictionary<Type, IList<dynamic>> _typeHandlers = new Dictionary<Type, IList<dynamic>>();
+      private readonly IDictionary<Type, IList<object>> _typeHandlers = new Dictionary<Type, IList<object>>();
       private readonly IList<IHandleAllMessages> _allMessagesHandlers = new List<IHandleAllMessages>();
       private readonly IDictionary<Type, IList<dynamic>> _concreteListeners = new Dictionary<Type, IList<dynamic>>();
 
@@ -22,14 +22,24 @@ namespace Yakuza.JiraClient.Messaging
 
       public void Register<TListener>(TListener listener)
       {
-         var type = typeof(TListener);
-         foreach (var handlerType in type.GetInterfaces().Where(i => i == typeof(IHandleMessage<>)))
+         Action<Type> addListenerForMessageType = t =>
          {
-            if (_concreteListeners.ContainsKey(handlerType) == false)
-               _concreteListeners[handlerType] = new List<dynamic>();
+            var messageType = t.GenericTypeArguments[0];
+            if (_typeHandlers.ContainsKey(messageType) == false)
+               _typeHandlers[messageType] = new List<dynamic>();
 
-            _concreteListeners[handlerType].Add(listener);
-         }
+            _typeHandlers[messageType].Add(listener);
+         };
+
+         var type = typeof(TListener);
+         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IHandleMessage<>))
+            addListenerForMessageType(type);
+
+         foreach (var handlerType in type.GetInterfaces()
+                                         .Where(i => i.IsGenericType
+                                                  && i.GetGenericTypeDefinition() == typeof(IHandleMessage<>)))
+            addListenerForMessageType(handlerType);
+
       }
 
       public void Send<TMessage>(TMessage message) where TMessage : IMessage
@@ -38,17 +48,17 @@ namespace Yakuza.JiraClient.Messaging
 
          if (_concreteListeners.ContainsKey(messageType))
          {
-            foreach(var action in _concreteListeners[messageType])
-               action(message);
+            foreach (var action in _concreteListeners[messageType])
+               ((Action<TMessage>)action)(message);
          }
 
-         if(_typeHandlers.ContainsKey(messageType))
+         if (_typeHandlers.ContainsKey(messageType))
          {
-            foreach(var handler in _typeHandlers[messageType])
-               handler.Handle(message);
+            foreach (var handler in _typeHandlers[messageType])
+               (handler as IHandleMessage<TMessage>).Handle(message);
          }
 
-         foreach(var handler in _allMessagesHandlers)
+         foreach (var handler in _allMessagesHandlers)
             handler.Handle(message);
       }
 
