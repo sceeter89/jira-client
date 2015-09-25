@@ -44,14 +44,12 @@ namespace Yakuza.JiraClient.ViewModel
             var sessionInfo = await _operations.CheckSession();
             if (sessionInfo.IsLoggedIn)
             {
-               _configuration.IsLoggedIn = true;
                IsConnected = true;
                _messenger.LogMessage("Logged in using existing security token.");
                _messenger.Send(new LoggedInMessage());
             }
             else
             {
-               _configuration.IsLoggedIn = false;
                IsConnected = false;
                _messenger.Send(new LoggedOutMessage());
             }

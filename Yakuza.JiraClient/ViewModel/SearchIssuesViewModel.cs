@@ -1,7 +1,6 @@
 ﻿using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using Yakuza.JiraClient.Api;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,9 +9,9 @@ using System.Linq;
 using Yakuza.JiraClient.Helpers;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.IssueFields.Search;
-using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Api.Messages.IO.Jira;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -112,7 +111,7 @@ namespace Yakuza.JiraClient.ViewModel
             FoundIssues.Add(issue);
          }
          _messenger.LogMessage(string.Format("Search done. Found {0} issues.", FoundIssues.Count));
-         _messenger.Send(new NewSearchResultsAvailableMessage(FoundIssues));
+         _messenger.Send(new SearchForIssuesResponse(FoundIssues));
          SetIsBusy(false);
       }
 

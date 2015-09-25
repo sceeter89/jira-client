@@ -1,16 +1,15 @@
 ﻿using GalaSoft.MvvmLight;
 using Yakuza.JiraClient.Api.Model;
-using GalaSoft.MvvmLight.Messaging;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Telerik.Windows.Data;
 using System.Linq;
 using Yakuza.JiraClient.Messaging.Api;
-using System;
+using Yakuza.JiraClient.Api.Messages.IO.Jira;
 
 namespace Yakuza.JiraClient.ViewModel
 {
    public class IssueListViewModel : ViewModelBase,
-      IHandleMessage<NewSearchResultsAvailableMessage>,
+      IHandleMessage<SearchForIssuesResponse>,
       IHandleMessage<GetFilteredIssuesListMessage>
    {
       private QueryableCollectionView _issues;
@@ -22,7 +21,7 @@ namespace Yakuza.JiraClient.ViewModel
          messenger.Register(this);
       }
       
-      public void Handle(NewSearchResultsAvailableMessage message)
+      public void Handle(SearchForIssuesResponse message)
       {
          Issues = new QueryableCollectionView(message.SearchResults);
       }

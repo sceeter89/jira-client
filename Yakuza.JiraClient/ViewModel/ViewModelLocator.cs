@@ -76,7 +76,7 @@ namespace Yakuza.JiraClient.ViewModel
          builder.RegisterType<MessageBus>()
             .AsImplementedInterfaces()
             .SingleInstance();
-
+         
          //Register ViewModels
          builder.RegisterAssemblyTypes(clientAssembly)
             .Where(t => t.Name.EndsWith("ViewModel"))

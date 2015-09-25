@@ -1,12 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
+using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Properties;
 
 namespace Yakuza.JiraClient.Service
 {
-   public class Configuration : ViewModelBase
+   public class Configuration : ViewModelBase, IConfiguration
    {
-      private bool _isLoggedIn;
-
       public string JiraUrl
       {
          get
@@ -48,17 +47,6 @@ namespace Yakuza.JiraClient.Service
          {
             Settings.Default.JiraSessionId = value;
             Settings.Default.Save();
-         }
-      }
-
-      public bool IsLoggedIn
-      {
-         get
-         { return _isLoggedIn; }
-         set
-         {
-            _isLoggedIn = value;
-            RaisePropertyChanged();
          }
       }
    }

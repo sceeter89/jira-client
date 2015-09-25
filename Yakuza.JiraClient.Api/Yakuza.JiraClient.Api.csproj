@@ -67,7 +67,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IConfiguration.cs" />
     <Compile Include="IJiraOperations.cs" />
+    <Compile Include="IMicroService.cs" />
     <Compile Include="ISearchableField.cs" />
     <Compile Include="LogLevel.cs" />
     <Compile Include="Messages\Actions\Authentication\IsLoggedInMessage.cs" />
@@ -77,7 +79,20 @@
     <Compile Include="Messages\Actions\FilteredIssuesListMessage.cs" />
     <Compile Include="Messages\Actions\GetFilteredIssuesListMessage.cs" />
     <Compile Include="Messages\Actions\LogMessage.cs" />
-    <Compile Include="Messages\Actions\NewSearchResultsAvailableMessage.cs" />
+    <Compile Include="Messages\IO\Jira\DownloadPicture.cs" />
+    <Compile Include="Messages\IO\Jira\GetAgileSprints.cs" />
+    <Compile Include="Messages\IO\Jira\GetAgileBoards.cs" />
+    <Compile Include="Messages\IO\Jira\GetStatuses.cs" />
+    <Compile Include="Messages\IO\Jira\GetResolutions.cs" />
+    <Compile Include="Messages\IO\Jira\GetPriorities.cs" />
+    <Compile Include="Messages\IO\Jira\GetProjects.cs" />
+    <Compile Include="Messages\IO\Jira\GetIssueTypes.cs" />
+    <Compile Include="Messages\IO\Jira\GetProfileDetails.cs" />
+    <Compile Include="Messages\IO\Jira\GetFieldsDescriptions.cs" />
+    <Compile Include="Messages\IO\Jira\AttemptLogin.cs" />
+    <Compile Include="Messages\IO\Jira\CheckJiraSession.cs" />
+    <Compile Include="Messages\IO\Jira\LogoutMessage.cs" />
+    <Compile Include="Messages\IO\Jira\SearchForIssues.cs" />
     <Compile Include="Messages\Navigation\OpenConnectionTabMessage.cs" />
     <Compile Include="Messages\Status\ConnectionDownMessage.cs" />
     <Compile Include="Messages\Status\ConnectionEstablishedMessage.cs" />
@@ -99,6 +114,7 @@
       <Name>Yakuza.JiraClient.Messaging</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

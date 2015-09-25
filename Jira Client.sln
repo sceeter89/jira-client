@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05CBDD8C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.UnitTests", "Tests\Yakuza.JiraClient.UnitTests\Yakuza.JiraClient.UnitTests.csproj", "{3BAEF616-C997-4B97-9BC7-01B4641C11AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.IO", "Yakuza.JiraClient.IO\Yakuza.JiraClient.IO.csproj", "{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,14 @@ Global
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|x86.ActiveCfg = Release|Any CPU
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|x86.Build.0 = Release|Any CPU
+		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Debug|x86.Build.0 = Debug|Any CPU
+		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Release|x86.ActiveCfg = Release|Any CPU
+		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

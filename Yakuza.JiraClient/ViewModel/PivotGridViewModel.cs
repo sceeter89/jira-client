@@ -1,14 +1,14 @@
 ﻿using GalaSoft.MvvmLight;
 using Telerik.Pivot.Core;
 using System.Linq;
-using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Api.Messages.IO.Jira;
 
 namespace Yakuza.JiraClient.ViewModel
 {
    public class PivotGridViewModel : ViewModelBase,
-      IHandleMessage<NewSearchResultsAvailableMessage>
+      IHandleMessage<SearchForIssuesResponse>
    {
       private readonly IMessageBus _messenger;
 
@@ -20,7 +20,7 @@ namespace Yakuza.JiraClient.ViewModel
          _messenger.Register(this);
       }
       
-      public void Handle(NewSearchResultsAvailableMessage message)
+      public void Handle(SearchForIssuesResponse message)
       {
          using (DataSource.DeferRefresh())
          {
