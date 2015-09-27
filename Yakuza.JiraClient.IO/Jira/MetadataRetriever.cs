@@ -10,7 +10,7 @@ using Yakuza.JiraClient.Messaging.Api;
 namespace Yakuza.JiraClient.IO.Jira
 {
    public class MetadataRetriever : RestMicroserviceBase,
-      IMicroService,
+      IMicroservice,
       IHandleMessage<GetFieldsDescriptionsMessage>,
       IHandleMessage<GetIssueTypesMessage>,
       IHandleMessage<GetPrioritiesMessage>,
@@ -21,7 +21,7 @@ namespace Yakuza.JiraClient.IO.Jira
       public MetadataRetriever(IConfiguration configuration, IMessageBus messageBus)
          : base(configuration, messageBus)
       {
-
+         _messageBus.Register(this);
       }
 
       public async void Handle(GetProjectsMessage message)

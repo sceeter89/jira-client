@@ -145,13 +145,13 @@ namespace Yakuza.JiraClient.ViewModel
 
       public void Handle(CheckJiraSessionResponse message)
       {
-         if (message.Response.IsLoggedIn)
+         if (IsConnected == false && message.Response.IsLoggedIn)
          {
             IsConnected = true;
             _messenger.LogMessage("Logged in using existing security token.");
             _messenger.Send(new LoggedInMessage());
          }
-         else
+         else if (IsConnected && message.Response.IsLoggedIn == false)
          {
             IsConnected = false;
             _messenger.Send(new LoggedOutMessage());

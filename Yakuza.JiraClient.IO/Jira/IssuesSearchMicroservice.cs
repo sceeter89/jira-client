@@ -14,7 +14,7 @@ using Yakuza.JiraClient.Messaging.Api;
 namespace Yakuza.JiraClient.IO.Jira
 {
    public class IssuesSearchMicroservice : RestMicroserviceBase,
-      IMicroService,
+      IMicroservice,
       IHandleMessage<SearchForIssuesMessage>,
       IHandleMessage<GetFieldsDescriptionsResponse>
    {
@@ -25,7 +25,7 @@ namespace Yakuza.JiraClient.IO.Jira
       public IssuesSearchMicroservice(IConfiguration configuration, IMessageBus messageBus)
          : base(configuration, messageBus)
       {
-
+         _messageBus.Register(this);
       }
 
       public void Handle(GetFieldsDescriptionsResponse message)
@@ -56,7 +56,10 @@ namespace Yakuza.JiraClient.IO.Jira
             var response = await client.ExecuteTaskAsync(request);
 
             if (response.StatusCode != HttpStatusCode.OK)
-               throw new InvalidOperationException(response.Content);
+            {
+               _messageBus.LogMessage(LogLevel.Fatal, "Search request failed with invalid response code: {0}.\r\nResponse content is: {1}", response.StatusCode, response.Content);
+               _messageBus.Send(new SearchFailedResponse(SearchFailedResponse.FailureReason.ExceptionOccured));
+            }
             var searchResults = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<RawSearchResults>(response.Content));
             foreach (var issue in searchResults.Issues)
             {
@@ -68,12 +71,15 @@ namespace Yakuza.JiraClient.IO.Jira
 
          if (_searchResult.Any() == false)
          {
-            _messageBus.Send(new SearchForIssuesResponse(new List<JiraIssue>()));
+            _messageBus.Send(new SearchFailedResponse(SearchFailedResponse.FailureReason.NoResultsYielded));
             return;
          }
 
          if (_fields == null)
+         {
+            _messageBus.Send(new GetFieldsDescriptionsMessage());
             return;
+         }
 
          _messageBus.Send(new SearchForIssuesResponse(ConvertIssuesToDomainModel()));
          _searchResult.Clear();

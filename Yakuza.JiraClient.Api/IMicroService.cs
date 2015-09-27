@@ -1,6 +1,6 @@
 ﻿namespace Yakuza.JiraClient.Api
 {
-   public interface IMicroService
+   public interface IMicroservice
    {
    }
 }

@@ -9,5 +9,10 @@ namespace Yakuza.JiraClient.Api
       {
          @this.Send(new LogMessage(message, level));
       }
+
+      public static void LogMessage(this IMessageBus @this, LogLevel level, string messageFormat, params object[] args)
+      {
+         @this.Send(new LogMessage(string.Format(messageFormat, args), level));
+      }
    }
 }

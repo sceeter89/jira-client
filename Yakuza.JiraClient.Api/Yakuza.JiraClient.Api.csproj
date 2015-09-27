@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IConfiguration.cs" />
-    <Compile Include="IMicroService.cs" />
+    <Compile Include="IMicroservice.cs" />
     <Compile Include="ISearchableField.cs" />
     <Compile Include="LogLevel.cs" />
     <Compile Include="Messages\Actions\Authentication\IsLoggedInMessage.cs" />

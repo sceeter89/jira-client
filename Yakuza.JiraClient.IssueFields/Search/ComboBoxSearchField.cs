@@ -106,12 +106,12 @@ namespace Yakuza.JiraClient.IssueFields.Search
          return string.Format("{0} = '{1}'", _queryFieldName, _queryValueGetter(SelectedItem.Item));
       }
 
-      public async void Handle(LoggedInMessage message)
+      public void Handle(LoggedInMessage message)
       {
          _messageBus.Send(new TRequestType());
       }
 
-      public async void Handle(ConnectionEstablishedMessage message)
+      public void Handle(ConnectionEstablishedMessage message)
       {
          _messageBus.Send(new TRequestType());
       }

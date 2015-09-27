@@ -26,7 +26,7 @@ namespace Yakuza.JiraClient.Service
          messageBus.Register(this);
       }
 
-      private async void CheckTick(object sender, EventArgs e)
+      private void CheckTick(object sender, EventArgs e)
       {
          _messageBus.Send(new CheckJiraSessionMessage());
       }

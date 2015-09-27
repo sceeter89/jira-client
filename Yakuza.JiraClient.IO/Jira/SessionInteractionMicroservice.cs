@@ -11,7 +11,7 @@ using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 namespace Yakuza.JiraClient.IO.Jira
 {
    public class SessionInteractionMicroservice : RestMicroserviceBase,
-      IMicroService,
+      IMicroservice,
       IHandleMessage<AttemptLoginMessage>,
       IHandleMessage<CheckJiraSessionMessage>,
       IHandleMessage<LogoutMessage>,

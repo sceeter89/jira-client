@@ -9,14 +9,14 @@ using Yakuza.JiraClient.Messaging.Api;
 namespace Yakuza.JiraClient.IO.Jira
 {
    public class JiraAgileIntegrationMicroservice : RestMicroserviceBase,
-      IMicroService,
-      IHandleMessage<GetAgileBoardsResponse>,
+      IMicroservice,
+      IHandleMessage<GetAgileBoardsMessage>,
       IHandleMessage<GetAgileSprintsMessage>
    {
       public JiraAgileIntegrationMicroservice(IConfiguration configuration, IMessageBus messageBus)
          : base(configuration, messageBus)
       {
-
+         _messageBus.Register(this);
       }
 
       public async void Handle(GetAgileSprintsMessage message)
@@ -41,7 +41,7 @@ namespace Yakuza.JiraClient.IO.Jira
          _messageBus.Send(new GetAgileSprintsResponse(message.Board, allSprints));
       }
 
-      public async void Handle(GetAgileBoardsResponse message)
+      public async void Handle(GetAgileBoardsMessage message)
       {
          var client = BuildRestClient();
          var request = new RestRequest("/rest/agile/latest/board", Method.GET);

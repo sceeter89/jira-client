@@ -23,6 +23,7 @@ namespace Yakuza.JiraClient.ViewModel
       public SearchIssuesViewModel(IMessageBus messenger)
       {
          _messageBus = messenger;
+         _messageBus.Register(this);
 
          FoundIssues = new ObservableCollection<JiraIssue>();
 
@@ -70,13 +71,12 @@ namespace Yakuza.JiraClient.ViewModel
          var searchString = string.Join(" AND ", searchClauses.Select(c => string.Format("( {0} )", c)));
 
          SearchQuery = searchString;
-         SearchCommand.Execute(null);
+         DoSearch();
       }
 
       private void DoSearch()
       {
          SetIsBusy(true);
-         _messageBus.LogMessage(SearchQuery);
          _messageBus.LogMessage("Initiating search for issues by JQL query", LogLevel.Info);
 
          FoundIssues.Clear();
