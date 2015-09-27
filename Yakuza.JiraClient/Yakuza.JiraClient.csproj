@@ -141,10 +141,8 @@
     <Compile Include="Controls\SearchIssues.xaml.cs">
       <DependentUpon>SearchIssues.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\RawIssueToJiraIssue.cs" />
     <Compile Include="Service\Configuration.cs" />
     <Compile Include="Service\ConnectionChecker.cs" />
-    <Compile Include="Service\JiraOperations.cs" />
     <Compile Include="ViewModel\IssueListViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />

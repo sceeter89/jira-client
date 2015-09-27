@@ -12,6 +12,7 @@ using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Messages.Status;
 using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Api.Messages.IO.Jira;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -19,105 +20,56 @@ namespace Yakuza.JiraClient.ViewModel
       IHandleMessage<ConnectionIsBroken>,
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<LoggedOutMessage>,
-      IHandleMessage<IsLoggedInMessage>
+      IHandleMessage<IsLoggedInMessage>,
+      IHandleMessage<GetProfileDetailsResponse>,
+      IHandleMessage<DownloadPictureResponse>,
+      IHandleMessage<AttemptLoginResponse>,
+      IHandleMessage<CheckJiraSessionResponse>
    {
       private readonly Configuration _configuration;
       private readonly IMessageBus _messenger;
-      private readonly IJiraOperations _operations;
       private bool _isBusy = false;
       private bool _isConnected;
       private bool _isDisconnected;
       private RawProfileDetails _profile;
       private BitmapImage _avatarSource;
 
-      public LoginViewModel(IMessageBus messenger, Configuration configuration, IJiraOperations operations)
+      public LoginViewModel(IMessageBus messenger, Configuration configuration)
       {
          _messenger = messenger;
          _configuration = configuration;
-         _operations = operations;
 
          var checkLoginTimer = new DispatcherTimer();
          checkLoginTimer.Interval = TimeSpan.FromMilliseconds(50);
-         checkLoginTimer.Tick += async (s, a) =>
+         checkLoginTimer.Tick += (s, a) =>
          {
+            _messenger.Send(new CheckJiraSessionMessage());
             checkLoginTimer.IsEnabled = false;
-            var sessionInfo = await _operations.CheckSession();
-            if (sessionInfo.IsLoggedIn)
-            {
-               IsConnected = true;
-               _messenger.LogMessage("Logged in using existing security token.");
-               _messenger.Send(new LoggedInMessage());
-            }
-            else
-            {
-               IsConnected = false;
-               _messenger.Send(new LoggedOutMessage());
-            }
          };
 
-         LoginCommand = new RelayCommand<PasswordBox>(async password => await Login(password.Password), p => _isBusy == false);
-         LogoutCommand = new RelayCommand(async () => await Logout(), () => _isBusy == false);
-
          IsConnected = false;
-         
+
          checkLoginTimer.IsEnabled = true;
          _messenger.Register(this);
       }
-      
+
       private async Task Login(string password)
       {
          _isBusy = true;
+         LogoutCommand.RaiseCanExecuteChanged();
          LoginCommand.RaiseCanExecuteChanged();
-
-         try
-         {
-            _messenger.LogMessage("Trying to log in JIRA: " + JiraUrl);
-            var result = await _operations.TryToLogin(Username, password);
-            if (result.WasSuccessful)
-            {
-               IsConnected = true;
-               _messenger.Send(new LoggedInMessage());
-               _messenger.LogMessage("Logged in successfully!", LogLevel.Info);
-            }
-            else
-            {
-               IsConnected = false;
-               _messenger.Send(new LoggedOutMessage());
-               _messenger.LogMessage("Failed to log in! Reason: " + result.ErrorMessage, LogLevel.Warning);
-            }
-         }
-         catch (Exception e)
-         {
-            _messenger.LogMessage("Stack Trace: " + Environment.NewLine + e.StackTrace, LogLevel.Debug);
-            _messenger.LogMessage("Unhandled exception occured during logging in: " + e.Message, LogLevel.Critical);
-         }
-
-         _isBusy = false;
-         LoginCommand.RaiseCanExecuteChanged();
+         _messenger.LogMessage("Trying to log in JIRA: " + JiraUrl);
+         _messenger.Send(new AttemptLoginMessage(JiraUrl, Username, password));
       }
 
       private async Task Logout()
       {
          _isBusy = true;
          LogoutCommand.RaiseCanExecuteChanged();
+         LoginCommand.RaiseCanExecuteChanged();
 
-         try
-         {
-            _messenger.LogMessage("Logging out...");
-            await _operations.Logout();
-            IsConnected = false;
-            _messenger.Send(new LoggedOutMessage());
-            _messenger.LogMessage("Logged out successfully", LogLevel.Info);
-
-         }
-         catch (Exception e)
-         {
-            _messenger.LogMessage("Stack Trace: " + Environment.NewLine + e.StackTrace, LogLevel.Debug);
-            _messenger.LogMessage("Unhandled exception occured during logging out: " + e.Message, LogLevel.Critical);
-         }
-
-         _isBusy = false;
-         LogoutCommand.RaiseCanExecuteChanged();
+         _messenger.LogMessage("Logging out...");
+         _messenger.Send(new LogoutMessage());
       }
 
       public void Handle(ConnectionIsBroken message)
@@ -130,13 +82,14 @@ namespace Yakuza.JiraClient.ViewModel
          IsConnected = false;
       }
 
-      public async void Handle(LoggedInMessage message)
+      public void Handle(LoggedInMessage message)
       {
-         var details = await _operations.GetProfileDetails();
-         Profile = details;
-         var avatar = _operations.DownloadPicture(details.AvatarUrls.Avatar48x48);
-         AvatarSource = avatar;
+         _messenger.Send(new GetProfileDetailsMessage());
          IsConnected = true;
+
+         _isBusy = false;
+         LogoutCommand.RaiseCanExecuteChanged();
+         LoginCommand.RaiseCanExecuteChanged();
       }
 
       public void Handle(LoggedOutMessage message)
@@ -144,6 +97,11 @@ namespace Yakuza.JiraClient.ViewModel
          Profile = null;
          AvatarSource = null;
          IsConnected = false;
+         _messenger.LogMessage("Logged out successfully", LogLevel.Info);
+
+         _isBusy = false;
+         LogoutCommand.RaiseCanExecuteChanged();
+         LoginCommand.RaiseCanExecuteChanged();
       }
 
       public void Handle(IsLoggedInMessage message)
@@ -152,6 +110,52 @@ namespace Yakuza.JiraClient.ViewModel
             _messenger.Send(new ConnectionEstablishedMessage(Profile));
          else
             _messenger.Send(new ConnectionDownMessage());
+      }
+
+      public void Handle(GetProfileDetailsResponse message)
+      {
+         Profile = message.Details;
+         _messenger.Send(new DownloadPictureMessage(Profile.AvatarUrls.Avatar48x48));
+      }
+
+      public void Handle(DownloadPictureResponse message)
+      {
+         AvatarSource = message.Image;
+      }
+
+      public void Handle(AttemptLoginResponse message)
+      {
+         if (message.Result.WasSuccessful)
+         {
+            IsConnected = true;
+            _messenger.Send(new LoggedInMessage());
+            _messenger.LogMessage("Logged in successfully!", LogLevel.Info);
+         }
+         else
+         {
+            IsConnected = false;
+            _messenger.Send(new LoggedOutMessage());
+            _messenger.LogMessage("Failed to log in! Reason: " + message.Result.ErrorMessage, LogLevel.Warning);
+         }
+
+         _isBusy = false;
+         LogoutCommand.RaiseCanExecuteChanged();
+         LoginCommand.RaiseCanExecuteChanged();
+      }
+
+      public void Handle(CheckJiraSessionResponse message)
+      {
+         if (message.Response.IsLoggedIn)
+         {
+            IsConnected = true;
+            _messenger.LogMessage("Logged in using existing security token.");
+            _messenger.Send(new LoggedInMessage());
+         }
+         else
+         {
+            IsConnected = false;
+            _messenger.Send(new LoggedOutMessage());
+         }
       }
 
       public string JiraUrl
@@ -206,8 +210,21 @@ namespace Yakuza.JiraClient.ViewModel
          }
       }
 
-      public RelayCommand<PasswordBox> LoginCommand { get; private set; }
-      public RelayCommand LogoutCommand { get; private set; }
+      public RelayCommand<PasswordBox> LoginCommand
+      {
+         get
+         {
+
+            return new RelayCommand<PasswordBox>(async password => await Login(password.Password), p => _isBusy == false);
+         }
+      }
+      public RelayCommand LogoutCommand
+      {
+         get
+         {
+            return new RelayCommand(async () => await Logout(), () => _isBusy == false);
+         }
+      }
 
       public RawProfileDetails Profile
       {

@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
 using System.Linq;
-using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,38 +10,33 @@ using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Messages.Status;
 using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Api.Messages.IO.Jira;
 
 namespace Yakuza.JiraClient.IssueFields.Search
 {
    public class SearchBySprintField : ViewModelBase, ISearchableField,
       IHandleMessage<LoggedInMessage>,
-      IHandleMessage<ConnectionEstablishedMessage>
+      IHandleMessage<ConnectionEstablishedMessage>,
+      IHandleMessage<GetAgileBoardsResponse>,
+      IHandleMessage<GetAgileSprintsResponse>
    {
-      private readonly IJiraOperations _operations;
       private RawAgileBoard _selectedBoard;
       private RawAgileSprint _selectedSprint;
+      private readonly IMessageBus _messageBus;
 
-      public SearchBySprintField(IMessageBus messenger, IJiraOperations operations)
+      public SearchBySprintField(IMessageBus messageBus)
       {
-         _operations = operations;
+         _messageBus = messageBus;
 
          BoardsList = new ObservableCollection<RawAgileBoard>();
          SprintsList = new ObservableCollection<RawAgileSprint>();
 
-         messenger.Register(this);
+         messageBus.Register(this);
       }
 
-      private async Task RefreshItems()
+      private void RefreshItems()
       {
-         var boards = await _operations.GetAgileBoards();
-         if (boards == null)
-            return;
-         DispatcherHelper.CheckBeginInvokeOnUI(() =>
-         {
-            BoardsList.Clear();
-            foreach (var board in boards.Where(x => x.Type == "scrum").OrderBy(x => x.Name))
-               BoardsList.Add(board);
-         });
+         _messageBus.Send(new GetAgileBoardsMessage());
       }
 
       public ObservableCollection<RawAgileBoard> BoardsList { get; private set; }
@@ -73,16 +67,7 @@ namespace Yakuza.JiraClient.IssueFields.Search
             if (value == null)
                return;
 
-            Task.Run(async () =>
-            {
-               var sprints = await _operations.GetSprintsForBoard(value.Id);
-               DispatcherHelper.CheckBeginInvokeOnUI(() =>
-               {
-                  SprintsList.Clear();
-                  foreach (var sprint in sprints.OrderBy(x => x.Name))
-                     SprintsList.Add(sprint);
-               });
-            });
+            _messageBus.Send(new GetAgileSprintsMessage(SelectedBoard));
 
             RaisePropertyChanged();
          }
@@ -123,14 +108,37 @@ namespace Yakuza.JiraClient.IssueFields.Search
          return string.Format("Sprint = {0}", SelectedSprint.Id);
       }
 
-      public async void Handle(ConnectionEstablishedMessage message)
+      public void Handle(ConnectionEstablishedMessage message)
       {
-         await RefreshItems();
+         RefreshItems();
       }
 
-      public async void Handle(LoggedInMessage message)
+      public void Handle(LoggedInMessage message)
       {
-         await RefreshItems();
+         RefreshItems();
+      }
+
+      public void Handle(GetAgileSprintsResponse message)
+      {
+         var sprints = message.Sprints;
+         DispatcherHelper.CheckBeginInvokeOnUI(() =>
+         {
+            SprintsList.Clear();
+            foreach (var sprint in sprints.OrderBy(x => x.Name))
+               SprintsList.Add(sprint);
+         });
+      }
+
+      public void Handle(GetAgileBoardsResponse message)
+      {
+         DispatcherHelper.CheckBeginInvokeOnUI(() =>
+         {
+            SprintsList.Clear();
+            SelectedSprint = null;
+            BoardsList.Clear();
+            foreach (var board in message.Boards.Where(x => x.Type == "scrum").OrderBy(x => x.Name))
+               BoardsList.Add(board);
+         });
       }
    }
 }

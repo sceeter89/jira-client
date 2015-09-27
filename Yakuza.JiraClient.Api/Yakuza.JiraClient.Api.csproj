@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IConfiguration.cs" />
-    <Compile Include="IJiraOperations.cs" />
     <Compile Include="IMicroService.cs" />
     <Compile Include="ISearchableField.cs" />
     <Compile Include="LogLevel.cs" />

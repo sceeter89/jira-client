@@ -23,4 +23,16 @@ namespace Yakuza.JiraClient.Api.Messages.IO.Jira
 
       public ICollection<JiraIssue> SearchResults { get; private set; }
    }
+
+   public class SearchFailedResponse : IMessage
+   {
+      public FailureReason Reason { get; private set; }
+
+      public enum FailureReason { NoResultsYielded, ExceptionOccured }
+
+      public SearchFailedResponse(FailureReason reason)
+      {
+         Reason = reason;
+      }
+   }
 }

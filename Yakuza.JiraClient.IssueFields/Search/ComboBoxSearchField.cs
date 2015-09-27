@@ -1,5 +1,4 @@
 ﻿using Yakuza.JiraClient.Api;
-using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
 using System.Linq;
@@ -9,60 +8,62 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Messages.Status;
-using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.IssueFields.Search
 {
-   public class ComboBoxSearchField<T> : ViewModelBase, ISearchableField,
+   public class ComboBoxSearchField<TItemType, TRequestType, TResponseType> : ViewModelBase, ISearchableField,
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<ConnectionEstablishedMessage>
-      where T : class
+      where TItemType : class
+      where TRequestType : IMessage, new()
+      where TResponseType : IMessage
    {
-      private PickUpItem<T> _selectedItem;
-      private readonly Func<Task<IEnumerable<T>>> _itemsGetter;
-      private readonly Func<T, string> _displayNameGetter;
-      private readonly Func<T, string> _queryValueGetter;
+      private PickUpItem<TItemType> _selectedItem;
+      private readonly Func<TResponseType, IEnumerable<TItemType>> _itemsGetter;
+      private readonly Func<TItemType, string> _displayNameGetter;
+      private readonly Func<TItemType, string> _queryValueGetter;
       private readonly string _queryFieldName;
+      private readonly IMessageBus _messageBus;
 
-      public ComboBoxSearchField(IMessageBus messenger,
-                                 Func<Task<IEnumerable<T>>> itemsGetter,
-                                 Func<T, string> displayNameGetter,
-                                 Func<T, string> queryValueGetter,
+      public ComboBoxSearchField(IMessageBus messageBus,
+                                 Func<TResponseType, IEnumerable<TItemType>> itemsGetter,
+                                 Func<TItemType, string> displayNameGetter,
+                                 Func<TItemType, string> queryValueGetter,
                                  string queryFieldName,
                                  string label)
       {
-         Items = new ObservableCollection<PickUpItem<T>>();
+         Items = new ObservableCollection<PickUpItem<TItemType>>();
          Label = label;
          _itemsGetter = itemsGetter;
          _displayNameGetter = displayNameGetter;
          _queryValueGetter = queryValueGetter;
          _queryFieldName = queryFieldName;
 
-         messenger.Register(this);
-      }
-
-      private async Task RefreshItems()
-      {
-         var items = await _itemsGetter();
-         if (items == null)
-            return;
-         DispatcherHelper.CheckBeginInvokeOnUI(() =>
+         _messageBus = messageBus;
+         _messageBus.Listen<TResponseType>(m =>
          {
-            Items.Clear();
-            foreach (var item in items.Select(x => new PickUpItem<T>
+            var items = _itemsGetter(m);
+            if (items == null)
+               return;
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-               IsSelected = false,
-               Item = x,
-               Name = _displayNameGetter(x)
-            }).OrderBy(x => x.Name))
-               Items.Add(item);
+               Items.Clear();
+               foreach (var item in items.Select(x => new PickUpItem<TItemType>
+               {
+                  IsSelected = false,
+                  Item = x,
+                  Name = _displayNameGetter(x)
+               }).OrderBy(x => x.Name))
+                  Items.Add(item);
+            });
          });
+         messageBus.Register(this);
       }
-
-      public ObservableCollection<PickUpItem<T>> Items { get; private set; }
+      
+      public ObservableCollection<PickUpItem<TItemType>> Items { get; private set; }
       public string Label { get; private set; }
 
       public bool IsFilled
@@ -73,7 +74,7 @@ namespace Yakuza.JiraClient.IssueFields.Search
          }
       }
 
-      public PickUpItem<T> SelectedItem
+      public PickUpItem<TItemType> SelectedItem
       {
          get { return _selectedItem; }
          set
@@ -107,12 +108,12 @@ namespace Yakuza.JiraClient.IssueFields.Search
 
       public async void Handle(LoggedInMessage message)
       {
-         await RefreshItems();
+         _messageBus.Send(new TRequestType());
       }
 
       public async void Handle(ConnectionEstablishedMessage message)
       {
-         await RefreshItems();
+         _messageBus.Send(new TRequestType());
       }
 
       public class PickUpItem<T>

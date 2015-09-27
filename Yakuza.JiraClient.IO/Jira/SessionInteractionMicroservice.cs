@@ -1,11 +1,12 @@
 ﻿using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Net;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Messaging.Api;
+using Newtonsoft.Json;
+using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 
 namespace Yakuza.JiraClient.IO.Jira
 {
@@ -13,12 +14,24 @@ namespace Yakuza.JiraClient.IO.Jira
       IMicroService,
       IHandleMessage<AttemptLoginMessage>,
       IHandleMessage<CheckJiraSessionMessage>,
-      IHandleMessage<LogoutMessage>
+      IHandleMessage<LogoutMessage>,
+      IHandleMessage<GetProfileDetailsMessage>
    {
       public SessionInteractionMicroservice(IConfiguration configuration, IMessageBus messageBus)
          : base(configuration, messageBus)
       {
          messageBus.Register(this);
+      }
+
+      public async void Handle(GetProfileDetailsMessage message)
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/myself", Method.GET);
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<RawProfileDetails>(response.Content);
+
+         _messageBus.Send(new GetProfileDetailsResponse(result));
       }
 
       public async void Handle(LogoutMessage message)
@@ -27,6 +40,7 @@ namespace Yakuza.JiraClient.IO.Jira
 
          var response = await client.ExecuteTaskAsync(new RestRequest("/rest/auth/1/session", Method.DELETE));
          _configuration.JiraSessionId = "";
+         _messageBus.Send(new LoggedOutMessage());
       }
 
       public async void Handle(CheckJiraSessionMessage message)
@@ -59,7 +73,7 @@ namespace Yakuza.JiraClient.IO.Jira
       {
          if (IsConfigValid() == false)
          {
-            _messageBus.Send(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Jira address is invalid" });
+            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Jira address is invalid" }));
             return;
          }
 
@@ -76,24 +90,24 @@ namespace Yakuza.JiraClient.IO.Jira
 
          if (response.StatusCode == HttpStatusCode.Unauthorized)
          {
-            _messageBus.Send(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Invalid username or password" });
+            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Invalid username or password" }));
             return;
          }
 
          if (response.StatusCode == HttpStatusCode.Forbidden)
          {
-            _messageBus.Send(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "User was not allowed to log in. Try to login via browser" });
+            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "User was not allowed to log in. Try to login via browser" }));
             return;
          }
 
          if (response.StatusCode != HttpStatusCode.OK)
          {
-            _messageBus.Send(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Server returned unexpected response code: " + response.StatusCode });
+            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Server returned unexpected response code: " + response.StatusCode }));
             return;
          }
 
          _configuration.JiraSessionId = response.Data.Session.Value;
-         _messageBus.Send(new LoginAttemptResult { WasSuccessful = true });
+         _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = true }));
       }
    }
 }
