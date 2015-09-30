@@ -53,21 +53,23 @@ namespace Yakuza.JiraClient.ViewModel
          _messenger.Register(this);
       }
 
-      private async Task Login(string password)
+      private void SetIsBusy(bool isBusy)
       {
-         _isBusy = true;
+         _isBusy = isBusy;
          LogoutCommand.RaiseCanExecuteChanged();
          LoginCommand.RaiseCanExecuteChanged();
+      }
+
+      private void Login(string password)
+      {
+         SetIsBusy(true);
          _messenger.LogMessage("Trying to log in JIRA: " + JiraUrl);
          _messenger.Send(new AttemptLoginMessage(JiraUrl, Username, password));
       }
 
-      private async Task Logout()
+      private void Logout()
       {
-         _isBusy = true;
-         LogoutCommand.RaiseCanExecuteChanged();
-         LoginCommand.RaiseCanExecuteChanged();
-
+         SetIsBusy(true);
          _messenger.LogMessage("Logging out...");
          _messenger.Send(new LogoutMessage());
       }
@@ -87,9 +89,7 @@ namespace Yakuza.JiraClient.ViewModel
          _messenger.Send(new GetProfileDetailsMessage());
          IsConnected = true;
 
-         _isBusy = false;
-         LogoutCommand.RaiseCanExecuteChanged();
-         LoginCommand.RaiseCanExecuteChanged();
+         SetIsBusy(false);
       }
 
       public void Handle(LoggedOutMessage message)
@@ -99,9 +99,7 @@ namespace Yakuza.JiraClient.ViewModel
          IsConnected = false;
          _messenger.LogMessage("Logged out successfully", LogLevel.Info);
 
-         _isBusy = false;
-         LogoutCommand.RaiseCanExecuteChanged();
-         LoginCommand.RaiseCanExecuteChanged();
+         SetIsBusy(false);
       }
 
       public void Handle(IsLoggedInMessage message)
@@ -210,19 +208,27 @@ namespace Yakuza.JiraClient.ViewModel
          }
       }
 
+      private RelayCommand<PasswordBox> _loginCommand;
       public RelayCommand<PasswordBox> LoginCommand
       {
          get
          {
+            if (_loginCommand == null)
+               _loginCommand = new RelayCommand<PasswordBox>(password => Login(password.Password), p => _isBusy == false);
 
-            return new RelayCommand<PasswordBox>(async password => await Login(password.Password), p => _isBusy == false);
+            return _loginCommand;
          }
       }
+
+      private RelayCommand _logoutCommand;
       public RelayCommand LogoutCommand
       {
          get
          {
-            return new RelayCommand(async () => await Logout(), () => _isBusy == false);
+            if(_logoutCommand == null)
+               _logoutCommand = new RelayCommand(() => Logout(), () => _isBusy == false);
+
+            return _logoutCommand;
          }
       }
 
@@ -233,7 +239,6 @@ namespace Yakuza.JiraClient.ViewModel
          {
             _profile = value;
             RaisePropertyChanged();
-
          }
       }
 

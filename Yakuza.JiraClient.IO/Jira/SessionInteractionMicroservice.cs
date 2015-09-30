@@ -106,6 +106,12 @@ namespace Yakuza.JiraClient.IO.Jira
             return;
          }
 
+         if (response.Data == null)
+         {
+            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = string.Format("Given address '{0}' does not point at valid JIRA server.", _configuration.JiraUrl) }));
+            return;
+         }
+
          _configuration.JiraSessionId = response.Data.Session.Value;
          _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = true }));
       }

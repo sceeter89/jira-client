@@ -4,6 +4,7 @@ using System;
 
 namespace Yakuza.JiraClient.Api.Model
 {
+#pragma warning disable JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
    public class RawSearchResults
    {
       public string Expand { get; set; }
@@ -336,5 +337,5 @@ namespace Yakuza.JiraClient.Api.Model
       public string Name { get; set; }
       public string Self { get; set; }
    }
-
+#pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
 }

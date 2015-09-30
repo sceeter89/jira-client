@@ -1,7 +1,6 @@
 ﻿using System;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using System.Windows.Threading;
-using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;

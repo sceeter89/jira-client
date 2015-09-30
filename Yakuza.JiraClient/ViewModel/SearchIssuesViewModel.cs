@@ -121,8 +121,28 @@ namespace Yakuza.JiraClient.ViewModel
          SetIsBusy(false);
       }
 
-      public RelayCommand SearchCommand { get { return new RelayCommand(DoSearch, () => _isBusy == false); } }
-      public RelayCommand CustomSearchCommand { get { return new RelayCommand(DoCustomSearch, () => _isBusy == false); } }
+      private RelayCommand _searchCommand;
+      public RelayCommand SearchCommand
+      {
+         get
+         {
+            if (_searchCommand == null)
+               _searchCommand = new RelayCommand(DoSearch, () => _isBusy == false);
+
+            return _searchCommand;
+         }
+      }
+      private RelayCommand _customSearchCommand;
+      public RelayCommand CustomSearchCommand
+      {
+         get
+         {
+            if (_customSearchCommand == null)
+               _customSearchCommand = new RelayCommand(DoCustomSearch, () => _isBusy == false);
+
+            return _customSearchCommand;
+         }
+      }
       public ObservableCollection<JiraIssue> FoundIssues { get; private set; }
       public IEnumerable<ISearchableField> SearchableFields { get; private set; }
 
