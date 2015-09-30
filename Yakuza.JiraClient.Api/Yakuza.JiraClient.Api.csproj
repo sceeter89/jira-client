@@ -78,6 +78,7 @@
     <Compile Include="Messages\Actions\FilteredIssuesListMessage.cs" />
     <Compile Include="Messages\Actions\GetFilteredIssuesListMessage.cs" />
     <Compile Include="Messages\Actions\LogMessage.cs" />
+    <Compile Include="Messages\IO\Exports\GenerateScrumCardsMessage.cs" />
     <Compile Include="Messages\IO\Jira\DownloadPicture.cs" />
     <Compile Include="Messages\IO\Jira\GetAgileSprints.cs" />
     <Compile Include="Messages\IO\Jira\GetAgileBoards.cs" />

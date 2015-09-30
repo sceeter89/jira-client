@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient", "Yakuza.JiraClient\Yakuza.JiraClient.csproj", "{97C43D4E-239B-401E-AC7A-F52F24D4CD64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.IssueFields", "Yakuza.JiraClient.IssueFields\Yakuza.JiraClient.IssueFields.csproj", "{19DF2ACB-AAD3-4DD7-9B8A-E75AA193D2CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Controls", "Yakuza.JiraClient.IssueFields\Yakuza.JiraClient.Controls.csproj", "{19DF2ACB-AAD3-4DD7-9B8A-E75AA193D2CE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Api", "Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj", "{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}"
 EndProject

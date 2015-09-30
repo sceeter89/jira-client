@@ -17,4 +17,8 @@ namespace Yakuza.JiraClient.Api.Messages.IO.Jira
 
       public IEnumerable<RawAgileBoard> Boards { get; private set; }
    }
+
+   public class JiraAgileSupportMissing : IMessage
+   {
+   }
 }

@@ -16,7 +16,7 @@ using Yakuza.JiraClient.Api.Messages.IO.Jira;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class LoginViewModel : ViewModelBase,
+   public class ConnectionViewModel : ViewModelBase,
       IHandleMessage<ConnectionIsBroken>,
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<LoggedOutMessage>,
@@ -34,7 +34,7 @@ namespace Yakuza.JiraClient.ViewModel
       private RawProfileDetails _profile;
       private BitmapImage _avatarSource;
 
-      public LoginViewModel(IMessageBus messenger, Configuration configuration)
+      public ConnectionViewModel(IMessageBus messenger, Configuration configuration)
       {
          _messenger = messenger;
          _configuration = configuration;

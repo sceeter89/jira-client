@@ -55,6 +55,11 @@ namespace Yakuza.JiraClient.IO.Jira
             request.Parameters[1].Value = allBoards.Count;
             response = await client.ExecuteTaskAsync(request);
             result = JsonConvert.DeserializeObject<RawAgileBoardsList>(response.Content);
+            if (result.Values == null)
+            {
+               _messageBus.Send(new JiraAgileSupportMissing());
+               break;
+            }
             allBoards.AddRange(result.Values);
          } while (result.IsLast == false);
 

@@ -2,15 +2,14 @@ using GalaSoft.MvvmLight.Command;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Controls;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Windows.Xps.Packaging;
 using Telerik.Windows.Controls;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using System.Reflection;
 using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Api.Messages.IO.Exports;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -140,28 +139,7 @@ namespace Yakuza.JiraClient.ViewModel
             return;
          }
 
-         var document = CardsPrintPreview.GenerateDocument(message.FilteredIssues);
-         var dlg = new Microsoft.Win32.SaveFileDialog();
-         dlg.FileName = "Scrum Cards.xps";
-         dlg.DefaultExt = ".xps";
-         dlg.Filter = "XPS Documents (.xps)|*.xps";
-         dlg.OverwritePrompt = true;
-
-         var result = dlg.ShowDialog();
-
-         if (result == false)
-            return;
-
-         var filename = dlg.FileName;
-         if (File.Exists(filename))
-            File.Delete(filename);
-
-         using (var xpsd = new XpsDocument(filename, FileAccess.ReadWrite))
-         {
-            var xw = XpsDocument.CreateXpsDocumentWriter(xpsd);
-            xw.Write(document);
-            xpsd.Close();
-         }
+         _messenger.Send(new GenerateScrumCardsMessage(message.FilteredIssues));
       }
 
       public int SelectedPropertyPaneIndex

@@ -7,7 +7,7 @@
              xmlns:converters="clr-namespace:Yakuza.JiraClient.Controls.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding Source={StaticResource Locator}, Path=Login}">
+             DataContext="{Binding Source={StaticResource Locator}, Path=Connection}">
    <UserControl.Resources>
       <converters:NullToCollapsedConverter x:Key="nullToCollapsed"/>
    </UserControl.Resources>

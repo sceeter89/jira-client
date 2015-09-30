@@ -7,8 +7,8 @@
     <ProjectGuid>{19DF2ACB-AAD3-4DD7-9B8A-E75AA193D2CE}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Yakuza.JiraClient.IssueFields</RootNamespace>
-    <AssemblyName>Yakuza.JiraClient.IssueFields</AssemblyName>
+    <RootNamespace>Yakuza.JiraClient.Controls</RootNamespace>
+    <AssemblyName>Yakuza.JiraClient.Controls</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -68,6 +68,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PrintPreview\CardsPrintPreview.xaml.cs">
+      <DependentUpon>CardsPrintPreview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,12 +84,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Search\ComboBoxSearchField.cs" />
-    <Compile Include="Search\ComboBoxSearchFieldControl.xaml.cs">
+    <Compile Include="SearchFields\ComboBoxSearchField.cs" />
+    <Compile Include="SearchFields\ComboBoxSearchFieldControl.xaml.cs">
       <DependentUpon>ComboBoxSearchFieldControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\SearchBySprintField.cs" />
-    <Compile Include="Search\SearchBySprintFieldControl.xaml.cs">
+    <Compile Include="SearchFields\SearchBySprintField.cs" />
+    <Compile Include="SearchFields\SearchBySprintFieldControl.xaml.cs">
       <DependentUpon>SearchBySprintFieldControl.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -101,11 +104,15 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Search\ComboBoxSearchFieldControl.xaml">
+    <Page Include="PrintPreview\CardsPrintPreview.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Search\SearchBySprintFieldControl.xaml">
+    <Page Include="SearchFields\ComboBoxSearchFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SearchFields\SearchBySprintFieldControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

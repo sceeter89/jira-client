@@ -6,7 +6,7 @@ using System.Windows.Documents;
 using System.Windows.Markup;
 using Yakuza.JiraClient.Api.Model;
 
-namespace Yakuza.JiraClient.Controls
+namespace Yakuza.JiraClient.Controls.PrintPreview
 {
    public partial class CardsPrintPreview : UserControl
    {

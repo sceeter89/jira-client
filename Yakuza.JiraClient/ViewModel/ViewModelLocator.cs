@@ -29,11 +29,11 @@ namespace Yakuza.JiraClient.ViewModel
          }
       }
 
-      public LoginViewModel Login
+      public ConnectionViewModel Connection
       {
          get
          {
-            return IocContainer.Resolve<LoginViewModel>();
+            return IocContainer.Resolve<ConnectionViewModel>();
          }
       }
 

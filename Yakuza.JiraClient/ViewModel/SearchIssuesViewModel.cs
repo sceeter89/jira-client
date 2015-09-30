@@ -9,6 +9,7 @@ using Yakuza.JiraClient.IssueFields.Search;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;
+using System.Windows;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -82,8 +83,13 @@ namespace Yakuza.JiraClient.ViewModel
          FoundIssues.Clear();
          if (string.IsNullOrWhiteSpace(SearchQuery))
          {
-            _messageBus.LogMessage("Query is not valid string");
-            return;
+            var dialog = MessageBox.Show("You are about to search for all issues in JIRA instance. Are you sure?", "Jira Client", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (dialog == MessageBoxResult.No)
+            {
+               SetIsBusy(false);
+               return;
+            }
+            SearchQuery = "";
          }
 
          _messageBus.Send(new SearchForIssuesMessage(SearchQuery));

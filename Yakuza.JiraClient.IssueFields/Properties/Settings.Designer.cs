@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Yakuza.JiraClient.IssueFields.Properties {
+namespace Yakuza.JiraClient.Controls.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

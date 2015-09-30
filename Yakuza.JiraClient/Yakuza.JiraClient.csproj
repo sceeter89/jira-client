@@ -53,7 +53,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ReachFramework" />
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
     </Reference>
@@ -123,9 +122,6 @@
     <Compile Include="Controls\IssueListDisplay.xaml.cs">
       <DependentUpon>IssueListDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CardsPrintPreview.xaml.cs">
-      <DependentUpon>CardsPrintPreview.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\ConnectionManager.xaml.cs">
       <DependentUpon>ConnectionManager.xaml</DependentUpon>
     </Compile>
@@ -144,17 +140,13 @@
     <Compile Include="Service\Configuration.cs" />
     <Compile Include="Service\ConnectionChecker.cs" />
     <Compile Include="ViewModel\IssueListViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ConnectionViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PivotGridViewModel.cs" />
     <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\IssueListDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\CardsPrintPreview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -229,9 +221,9 @@
       <Project>{fcbe50bc-7cc8-4c86-bee9-6f86ff34a912}</Project>
       <Name>Yakuza.JiraClient.IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Yakuza.JiraClient.IssueFields\Yakuza.JiraClient.IssueFields.csproj">
+    <ProjectReference Include="..\Yakuza.JiraClient.IssueFields\Yakuza.JiraClient.Controls.csproj">
       <Project>{19df2acb-aad3-4dd7-9b8a-e75aa193d2ce}</Project>
-      <Name>Yakuza.JiraClient.IssueFields</Name>
+      <Name>Yakuza.JiraClient.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
