@@ -10,12 +10,15 @@ using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;
 using System.Windows;
+using Yakuza.JiraClient.Api.Messages.Actions;
+using System;
 
 namespace Yakuza.JiraClient.ViewModel
 {
    public class SearchIssuesViewModel : ViewModelBase,
       IHandleMessage<SearchForIssuesResponse>,
-      IHandleMessage<SearchFailedResponse>
+      IHandleMessage<SearchFailedResponse>,
+      IHandleMessage<CurrentSearchResultsMessage>
    {
       private readonly IMessageBus _messageBus;
       private bool _isBusy = false;
@@ -125,6 +128,11 @@ namespace Yakuza.JiraClient.ViewModel
                break;
          }
          SetIsBusy(false);
+      }
+
+      public void Handle(CurrentSearchResultsMessage message)
+      {
+         _messageBus.Send(new CurrentSearchResultsResponse(FoundIssues));
       }
 
       private RelayCommand _searchCommand;

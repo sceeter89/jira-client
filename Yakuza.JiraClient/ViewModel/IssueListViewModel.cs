@@ -6,7 +6,6 @@ using System.Linq;
 using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;
 using GalaSoft.MvvmLight.Command;
-using System;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Controls.Panes;
 
@@ -32,7 +31,7 @@ namespace Yakuza.JiraClient.ViewModel
 
       public void Handle(GetFilteredIssuesListMessage message)
       {
-         _messenger.Send(new FilteredIssuesListMessage(Issues.Cast<JiraIssue>()));
+         _messenger.Send(new FilteredIssuesListMessage(Issues == null ? Enumerable.Empty<JiraIssue>() : Issues.Cast<JiraIssue>()));
       }
 
       public QueryableCollectionView Issues

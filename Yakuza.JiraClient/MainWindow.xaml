@@ -18,12 +18,34 @@
          <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
 
-      <telerik:RadRibbonView ApplicationButtonVisibility="Collapsed" TitleBarVisibility="Collapsed">
-         <telerik:RadRibbonTab Header="Issues">
-            <telerik:RadRibbonGroup Header="Export">
+      <telerik:RadRibbonView ApplicationButtonVisibility="Collapsed" TitleBarVisibility="Collapsed"
+                             DataContext="{Binding Source={StaticResource Locator}, Path=MenuBar}">
+         <telerik:RadRibbonTab Header="Home">
+            <telerik:RadRibbonGroup Header="Scrum Cards">
                <telerik:RadRibbonButton Text="XPS" LargeImage="/Assets/Icons/xpsicon.png" Size="Large"
                                         Command="{Binding SaveXpsCommand}"/>
 
+            </telerik:RadRibbonGroup>
+            <telerik:RadRibbonGroup Header="Views">
+               <telerik:RadRibbonButton Text="Pivot" LargeImage="/Assets/Icons/PivotTable.png" Size="Large"
+                                        Command="{Binding ShowPivotViewCommand}"/>
+
+            </telerik:RadRibbonGroup>
+         </telerik:RadRibbonTab>
+         <telerik:RadRibbonTab Header="About">
+            <telerik:RadRibbonGroup Header="Diagnostics">
+               <telerik:RadRibbonButton Text="Export Log" LargeImage="/Assets/Icons/SaveIcon.png" Size="Large"
+                                        Command="{Binding SaveLogCommand}"/>
+            </telerik:RadRibbonGroup>
+            <telerik:RadRibbonGroup Header="Help">
+               <telerik:RadRibbonButton Text="Website" LargeImage="/Assets/Icons/WebsiteIcon.png" Size="Large"
+                                        Command="{Binding OpenWebsiteCommand}"/>
+               <telerik:RadRibbonButton Text="Report" LargeImage="/Assets/Icons/ReportIssueIcon.png" Size="Large"
+                                        Command="{Binding ReportIssueCommand}"/>
+            </telerik:RadRibbonGroup>
+            <telerik:RadRibbonGroup Header="Updates">
+               <telerik:RadRibbonButton Text="Check" LargeImage="/Assets/Icons/CheckForUpdatesIcon.png" Size="Large"
+                                        Command="{Binding CheckForUpdatesCommand}"/>
             </telerik:RadRibbonGroup>
          </telerik:RadRibbonTab>
       </telerik:RadRibbonView>

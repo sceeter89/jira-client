@@ -1,4 +1,3 @@
-using GalaSoft.MvvmLight.Messaging;
 using Autofac;
 using System.Reflection;
 using Yakuza.JiraClient.Messaging;
@@ -58,6 +57,14 @@ namespace Yakuza.JiraClient.ViewModel
          get
          {
             return IocContainer.Resolve<PivotGridViewModel>();
+         }
+      }
+
+      public MenuBarViewModel MenuBar
+      {
+         get
+         {
+            return IocContainer.Resolve<MenuBarViewModel>();
          }
       }
 
