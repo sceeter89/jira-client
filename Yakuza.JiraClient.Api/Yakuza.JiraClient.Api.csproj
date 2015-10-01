@@ -74,12 +74,14 @@
     <Compile Include="Messages\Actions\Authentication\IsLoggedInMessage.cs" />
     <Compile Include="Messages\Actions\Authentication\LoggedInMessage.cs" />
     <Compile Include="Messages\Actions\Authentication\LoggedOutMessage.cs" />
+    <Compile Include="Messages\Actions\CheckForUpdatesMessage.cs" />
     <Compile Include="Messages\Actions\ConnectionIsBroken.cs" />
     <Compile Include="Messages\Actions\CurrentSearchResultsMessage.cs" />
     <Compile Include="Messages\Actions\FilteredIssuesListMessage.cs" />
     <Compile Include="Messages\Actions\GetFilteredIssuesListMessage.cs" />
     <Compile Include="Messages\Actions\LogMessage.cs" />
     <Compile Include="Messages\IO\Exports\GenerateScrumCardsMessage.cs" />
+    <Compile Include="Messages\IO\Exports\SaveLogOutputToFileMessage.cs" />
     <Compile Include="Messages\IO\Jira\DownloadPicture.cs" />
     <Compile Include="Messages\IO\Jira\GetAgileSprints.cs" />
     <Compile Include="Messages\IO\Jira\GetAgileBoards.cs" />
