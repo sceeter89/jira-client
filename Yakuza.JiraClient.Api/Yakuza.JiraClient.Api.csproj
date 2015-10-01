@@ -94,6 +94,7 @@
     <Compile Include="Messages\IO\Jira\LogoutMessage.cs" />
     <Compile Include="Messages\IO\Jira\SearchForIssues.cs" />
     <Compile Include="Messages\Navigation\OpenConnectionTabMessage.cs" />
+    <Compile Include="Messages\Navigation\ShowDocumentPaneMessage.cs" />
     <Compile Include="Messages\Status\ConnectionDownMessage.cs" />
     <Compile Include="Messages\Status\ConnectionEstablishedMessage.cs" />
     <Compile Include="MessengerExtensions.cs" />

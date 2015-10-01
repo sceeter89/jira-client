@@ -51,7 +51,8 @@ namespace Yakuza.JiraClient.IO.Jira
             {
                jql = message.JqlQuery,
                startAt = 0,
-               maxResults = 500
+               maxResults = 500,
+               fields = new string[] { "*all" }
             });
             var response = await client.ExecuteTaskAsync(request);
 

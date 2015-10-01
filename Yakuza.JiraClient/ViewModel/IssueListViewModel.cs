@@ -5,6 +5,10 @@ using Telerik.Windows.Data;
 using System.Linq;
 using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;
+using GalaSoft.MvvmLight.Command;
+using System;
+using Yakuza.JiraClient.Api.Messages.Navigation;
+using Yakuza.JiraClient.Controls.Panes;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -20,7 +24,7 @@ namespace Yakuza.JiraClient.ViewModel
          _messenger = messenger;
          messenger.Register(this);
       }
-      
+
       public void Handle(SearchForIssuesResponse message)
       {
          Issues = new QueryableCollectionView(message.SearchResults);
@@ -39,6 +43,26 @@ namespace Yakuza.JiraClient.ViewModel
             _issues = value;
             RaisePropertyChanged();
          }
+      }
+
+      public JiraIssue SelectedIssue { get; set; }
+      private RelayCommand _rowDoubleClickedCommand;
+      public RelayCommand RowDoubleClickedCommand
+      {
+         get
+         {
+            if (_rowDoubleClickedCommand == null)
+               _rowDoubleClickedCommand = new RelayCommand(ShowRowDetails);
+            return _rowDoubleClickedCommand;
+         }
+      }
+
+      private void ShowRowDetails()
+      {
+         if (SelectedIssue == null)
+            return;
+
+         _messenger.Send(new ShowDocumentPaneMessage(this, SelectedIssue.Key, new IssueDetails { DataContext = SelectedIssue }));
       }
    }
 }

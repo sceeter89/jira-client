@@ -10,6 +10,9 @@ using Yakuza.JiraClient.Api.Messages.Actions;
 using System.Reflection;
 using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Exports;
+using System;
+using System.Collections.Generic;
+using System.Windows;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -17,7 +20,8 @@ namespace Yakuza.JiraClient.ViewModel
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<LoggedOutMessage>,
       IHandleMessage<OpenConnectionTabMessage>,
-      IHandleMessage<FilteredIssuesListMessage>
+      IHandleMessage<FilteredIssuesListMessage>,
+      IHandleMessage<ShowDocumentPaneMessage>
    {
       private bool _isLoggedIn = false;
 
@@ -29,12 +33,32 @@ namespace Yakuza.JiraClient.ViewModel
       {
          _messenger = messenger;
          SaveXpsCommand = new RelayCommand(SaveXps, () => _isLoggedIn);
-         
+
          DocumentPanes = new ObservableCollection<RadPane>();
          PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane };
          _messenger.Register(this);
+
+         Application.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
       }
-      
+
+      private void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+      {
+         if (e.Exception.GetType() != typeof(InvalidOperationException))
+            return;
+
+         var exception = e.Exception as InvalidOperationException;
+
+         if (exception.Message != "Operation is not valid while ItemsSource is in use. Access and modify elements with ItemsControl.ItemsSource instead."
+            || exception.Source != "PresentationFramework")
+            return;
+
+         
+
+         //Most probably user attempted to close active DocumentPane, so let's do it for him
+         DocumentPanes.RemoveAt(SelectedDocumentPaneIndex);
+
+         e.Handled = true;
+      }
 
       private void SetIsLoggedIn()
       {
@@ -60,7 +84,7 @@ namespace Yakuza.JiraClient.ViewModel
       {
          _messenger.Send(new GetFilteredIssuesListMessage());
       }
-      
+
 
       public RelayCommand SaveXpsCommand { get; private set; }
       public string AppTitle
@@ -142,6 +166,28 @@ namespace Yakuza.JiraClient.ViewModel
          _messenger.Send(new GenerateScrumCardsMessage(message.FilteredIssues));
       }
 
+
+      private readonly IDictionary<string, RadPane> _customPanes = new Dictionary<string, RadPane>();
+      public void Handle(ShowDocumentPaneMessage message)
+      {
+         var paneKey = string.Format("{0}_{1}", message.Sender.GetType().AssemblyQualifiedName, message.Title);
+         if (_customPanes.ContainsKey(paneKey) == false)
+         {
+            var newPane = new RadPane();
+            newPane.CanDockInDocumentHost = true;
+
+            _customPanes[paneKey] = newPane;
+         }
+
+         var pane = _customPanes[paneKey];
+         pane.Content = message.PaneContent;
+         pane.Header = message.Title;
+         if (DocumentPanes.Contains(pane) == false)
+            DocumentPanes.Add(pane);
+
+         FocusDocumentPane(pane);
+      }
+
       public int SelectedPropertyPaneIndex
       {
          get
@@ -170,7 +216,7 @@ namespace Yakuza.JiraClient.ViewModel
          get
          {
             if (_searchPropertyPane == null)
-               _searchPropertyPane = new RadPane { Header = "search", Content = new SearchIssues() };
+               _searchPropertyPane = new RadPane { Header = "search", Content = new SearchIssues(), CanUserClose = false };
 
             return _searchPropertyPane;
          }
@@ -181,7 +227,7 @@ namespace Yakuza.JiraClient.ViewModel
          get
          {
             if (_pivotPropertyPane == null)
-               _pivotPropertyPane = new RadPane { Header = "pivot", Content = new PivotReportingProperties() };
+               _pivotPropertyPane = new RadPane { Header = "pivot", Content = new PivotReportingProperties(), CanUserClose = false };
 
             return _pivotPropertyPane;
          }
@@ -203,7 +249,7 @@ namespace Yakuza.JiraClient.ViewModel
          get
          {
             if (_issueListDocumentPane == null)
-               _issueListDocumentPane = new RadPane { Header = "issues", Content = new IssueListDisplay() };
+               _issueListDocumentPane = new RadPane { Header = "issues", Content = new IssueListDisplay(), CanUserClose = false };
 
             return _issueListDocumentPane;
          }

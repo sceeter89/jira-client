@@ -42,10 +42,10 @@ namespace Yakuza.JiraClient.Api.Model
    public class RawFields
    {
       public RawIssueType IssueType { get; set; }
-      public object TimeSpent { get; set; }
+      public long? TimeSpent { get; set; }
       public RawProjectInfo Project { get; set; }
       public object[] FixVersions { get; set; }
-      public object AggregateTimeSpent { get; set; }
+      public long? AggregateTimeSpent { get; set; }
       public RawResolution Resolution { get; set; }
       public DateTime? ResolutionDate { get; set; }
       public int Workratio { get; set; }
@@ -54,26 +54,32 @@ namespace Yakuza.JiraClient.Api.Model
       public DateTime Created { get; set; }
       public RawPriority Priority { get; set; }
       public object[] Labels { get; set; }
-      public object TimeEstimate { get; set; }
-      public object AggregateTimeOriginalEstimate { get; set; }
+      public long? TimeEstimate { get; set; }
+      public long? AggregateTimeOriginalEstimate { get; set; }
       public object[] Versions { get; set; }
-      public RawIssuelink[] IssueLinks { get; set; }
+      public RawIssueLink[] Issuelinks { get; set; }
       public RawUserInfo Assignee { get; set; }
       public DateTime Updated { get; set; }
       public RawStatus Status { get; set; }
       public object[] Components { get; set; }
-      public object TimeOriginalEstimate { get; set; }
+      public long? TimeOriginalEstimate { get; set; }
       public string Description { get; set; }
-      public object AggregateTimeEstimate { get; set; }
+      public RawTimeTracking TimeTracking { get; set; }
+      [JsonProperty("attachment")]
+      public RawAttachment[] Attachments { get; set; }
+      public long? AggregateTimeEstimate { get; set; }
       public string Summary { get; set; }
       public RawUserInfo Creator { get; set; }
       public RawSubtask[] Subtasks { get; set; }
       public RawUserInfo Reporter { get; set; }
       public RawProgressInfo AggregateProgress { get; set; }
-      public object Environment { get; set; }
-      public object DueDate { get; set; }
+      public string Environment { get; set; }
+      public DateTime? DueDate { get; set; }
       public RawProgressInfo Progress { get; set; }
+      [JsonProperty("comment")]
+      public RawComments Comments { get; set; }
       public RawVotesInfo Votes { get; set; }
+      public RawWorklog Worklog { get; set; }
       public RawParent Parent { get; set; }
    }
 
@@ -222,7 +228,7 @@ namespace Yakuza.JiraClient.Api.Model
       public RawIssueType Issuetype { get; set; }
    }
 
-   public class RawIssuelink
+   public class RawIssueLink
    {
       public string Id { get; set; }
       public string Self { get; set; }
@@ -325,7 +331,7 @@ namespace Yakuza.JiraClient.Api.Model
       public RawGroups Groups { get; set; }
       public string Expand { get; set; }
    }
-   
+
    public class RawGroups
    {
       public int Size { get; set; }
@@ -336,6 +342,50 @@ namespace Yakuza.JiraClient.Api.Model
    {
       public string Name { get; set; }
       public string Self { get; set; }
+   }
+   
+   public class RawTimeTracking
+   {
+   }
+     
+   public class RawComments
+   {
+      public int StartAt { get; set; }
+      public int MaxResults { get; set; }
+      public int Total { get; set; }
+      public RawComment[] Comments { get; set; }
+   }
+
+   public class RawComment
+   {
+      public string Self { get; set; }
+      public string Id { get; set; }
+      public RawUserInfo Author { get; set; }
+      public string Body { get; set; }
+      public RawUserInfo UpdateAuthor { get; set; }
+      public DateTime Created { get; set; }
+      public DateTime Updated { get; set; }
+   }
+   
+   public class RawWorklog
+   {
+      public int StartAt { get; set; }
+      public int MaxResults { get; set; }
+      public int Total { get; set; }
+      public object[] Worklogs { get; set; }
+   }
+   
+   public class RawAttachment
+   {
+      public string Self { get; set; }
+      public string Id { get; set; }
+      public string Filename { get; set; }
+      public RawUserInfo Author { get; set; }
+      public DateTime Created { get; set; }
+      public int Size { get; set; }
+      public string MimeType { get; set; }
+      public string Content { get; set; }
+      public string Thumbnail { get; set; }
    }
 #pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
 }

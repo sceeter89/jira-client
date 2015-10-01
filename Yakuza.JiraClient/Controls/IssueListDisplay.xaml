@@ -4,6 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ei="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
              xmlns:local="clr-namespace:Yakuza.JiraClient.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
@@ -13,8 +15,17 @@
          <RowDefinition Height="*"/>
          <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
-      <telerik:RadGridView ItemsSource="{Binding Issues, Mode=TwoWay}">
-
+      <telerik:RadGridView ItemsSource="{Binding Issues, Mode=TwoWay}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedIssue, Mode=TwoWay}"
+                           MouseDoubleClick="ItemDoubleClick" IsReadOnly="True">
+         <telerik:RadGridView.Columns>
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Key}" Header="Key" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Summary}" Header="Summary" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding StoryPoints}" Header="Story Points" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Priority}" Header="Priority" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding BuiltInFields.IssueType.Name}" Header="Type" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Reporter}" Header="Reporter" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Assignee}" Header="Assignee" />
+         </telerik:RadGridView.Columns>
       </telerik:RadGridView>
    </Grid>
 </UserControl>
