@@ -3,6 +3,13 @@ using System.Reflection;
 using Yakuza.JiraClient.Messaging;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Messaging.Api;
+using System;
+using Yakuza.JiraClient.Api.Plugins;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.IO;
+using GalaSoft.MvvmLight;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -10,7 +17,11 @@ namespace Yakuza.JiraClient.ViewModel
    {
       public ViewModelLocator()
       {
+         if (ViewModelBase.IsInDesignModeStatic)
+            return;
+
          BuildIocContainer();
+         LoadPlugins();
       }
 
       public MainViewModel Main
@@ -112,6 +123,19 @@ namespace Yakuza.JiraClient.ViewModel
          IocContainer = builder.Build();
       }
 
+      [ImportMany]
+      private IEnumerable<Lazy<IJiraClientPlugin>> _pluginDefinitions;
+      private CompositionContainer _container;
 
+      private void LoadPlugins()
+      {
+         var catalog = new AggregateCatalog();
+         catalog.Catalogs.Add(new DirectoryCatalog(Environment.CurrentDirectory));
+         catalog.Catalogs.Add(new DirectoryCatalog(Path.Combine(Environment.CurrentDirectory, "Plugins")));
+         _container = new CompositionContainer(catalog);
+         _container.ComposeParts(this);
+
+
+      }
    }
 }

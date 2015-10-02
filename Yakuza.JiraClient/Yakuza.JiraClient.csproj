@@ -64,6 +64,7 @@
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -240,6 +241,10 @@
     <ProjectReference Include="..\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>Yakuza.JiraClient.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Yakuza.JiraClient.Plugins.Charting\Yakuza.JiraClient.Plugins.Charting.csproj">
+      <Project>{e3b2571e-d4de-416a-93b5-33dfe37e732c}</Project>
+      <Name>Yakuza.JiraClient.Plugins.Charting</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

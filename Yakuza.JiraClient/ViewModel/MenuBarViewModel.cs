@@ -9,6 +9,8 @@ using Yakuza.JiraClient.Api.Messages.IO.Exports;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Controls;
 using System.Reflection;
+using System;
+using Yakuza.JiraClient.Api.Messages.IO.Plugins;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -17,7 +19,8 @@ namespace Yakuza.JiraClient.ViewModel
       IHandleMessage<LoggedOutMessage>,
       IHandleMessage<FilteredIssuesListMessage>,
       IHandleMessage<NoUpdatesAvailable>,
-      IHandleMessage<NewVersionAvailable>
+      IHandleMessage<NewVersionAvailable>,
+      IHandleMessage<NewPluginFoundMessage>
    {
       private const string WebSiteAddress = "https://github.com/sceeter89/jira-client";
       private const string ReportIssueSiteAddress = "https://github.com/sceeter89/jira-client/issues/new";
@@ -86,6 +89,11 @@ namespace Yakuza.JiraClient.ViewModel
       public void Handle(NewVersionAvailable message)
       {
          _messageBus.LogMessage("New version is available. Visit website for download: " + WebSiteAddress, LogLevel.Info);
+      }
+
+      public void Handle(NewPluginFoundMessage message)
+      {
+         throw new NotImplementedException();
       }
    }
 }
