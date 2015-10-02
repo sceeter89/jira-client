@@ -9,14 +9,12 @@ using Yakuza.JiraClient.Messaging.Api;
 namespace Yakuza.JiraClient.IO.Jira
 {
    public class JiraAgileIntegrationMicroservice : RestMicroserviceBase,
-      IMicroservice,
       IHandleMessage<GetAgileBoardsMessage>,
       IHandleMessage<GetAgileSprintsMessage>
    {
-      public JiraAgileIntegrationMicroservice(IConfiguration configuration, IMessageBus messageBus)
-         : base(configuration, messageBus)
+      public JiraAgileIntegrationMicroservice(IConfiguration configuration)
+         : base(configuration)
       {
-         _messageBus.Register(this);
       }
 
       public async void Handle(GetAgileSprintsMessage message)

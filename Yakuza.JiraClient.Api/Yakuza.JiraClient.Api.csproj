@@ -107,6 +107,10 @@
     <Compile Include="Model\LoginAttemptResult.cs" />
     <Compile Include="Model\PivotJiraIssue.cs" />
     <Compile Include="Model\SessionCheckResponse.cs" />
+    <Compile Include="Plugins\IJiraClientPlugin.cs" />
+    <Compile Include="Plugins\MenuEntryButton.cs" />
+    <Compile Include="Plugins\MenuEntryDescriptor.cs" />
+    <Compile Include="Plugins\MenuTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

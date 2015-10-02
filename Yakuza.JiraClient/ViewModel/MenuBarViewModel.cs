@@ -9,7 +9,6 @@ using Yakuza.JiraClient.Api.Messages.IO.Exports;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Controls;
 using System.Reflection;
-using System;
 
 namespace Yakuza.JiraClient.ViewModel
 {

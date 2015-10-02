@@ -5,15 +5,20 @@ using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.IO
 {
-   public class RestMicroserviceBase
+   public class RestMicroserviceBase : IMicroservice
    {
       protected readonly IConfiguration _configuration;
-      protected readonly IMessageBus _messageBus;
+      protected IMessageBus _messageBus;
 
-      public RestMicroserviceBase(IConfiguration configuration, IMessageBus messageBus)
+      public RestMicroserviceBase(IConfiguration configuration)
       {
          _configuration = configuration;
+      }
+
+      public void Initialize(IMessageBus messageBus)
+      {
          _messageBus = messageBus;
+         _messageBus.Register(this);
       }
 
       protected RestClient BuildRestClient()

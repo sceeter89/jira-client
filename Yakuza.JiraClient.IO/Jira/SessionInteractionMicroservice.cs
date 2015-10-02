@@ -11,16 +11,14 @@ using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 namespace Yakuza.JiraClient.IO.Jira
 {
    public class SessionInteractionMicroservice : RestMicroserviceBase,
-      IMicroservice,
       IHandleMessage<AttemptLoginMessage>,
       IHandleMessage<CheckJiraSessionMessage>,
       IHandleMessage<LogoutMessage>,
       IHandleMessage<GetProfileDetailsMessage>
    {
-      public SessionInteractionMicroservice(IConfiguration configuration, IMessageBus messageBus)
-         : base(configuration, messageBus)
+      public SessionInteractionMicroservice(IConfiguration configuration)
+         : base(configuration)
       {
-         messageBus.Register(this);
       }
 
       public async void Handle(GetProfileDetailsMessage message)

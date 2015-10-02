@@ -32,7 +32,7 @@
 
             </telerik:RadRibbonGroup>
          </telerik:RadRibbonTab>
-         <telerik:RadRibbonTab Header="About">
+         <telerik:RadRibbonTab Header="Support">
             <telerik:RadRibbonGroup Header="Diagnostics">
                <telerik:RadRibbonButton Text="Export Log" LargeImage="/Assets/Icons/SaveIcon.png" Size="Large"
                                         Command="{Binding SaveLogCommand}"/>

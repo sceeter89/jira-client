@@ -8,13 +8,11 @@ using Yakuza.JiraClient.Messaging.Api;
 namespace Yakuza.JiraClient.IO.Jira
 {
    public class ResourceDownloaderMicroservice : RestMicroserviceBase,
-      IMicroservice,
       IHandleMessage<DownloadPictureMessage>
    {
-      public ResourceDownloaderMicroservice(IMessageBus messageBus, IConfiguration configuration)
-         : base(configuration, messageBus)
+      public ResourceDownloaderMicroservice(IConfiguration configuration)
+         : base(configuration)
       {
-         _messageBus.Register(this);
       }
 
       public void Handle(DownloadPictureMessage message)

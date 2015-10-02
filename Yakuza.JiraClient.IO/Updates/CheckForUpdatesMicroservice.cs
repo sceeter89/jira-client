@@ -14,15 +14,8 @@ namespace Yakuza.JiraClient.IO.Updates
       IHandleMessage<CheckForUpdatesMessage>
    {
       private const string EndpointUrl = "https://api.github.com/repos/sceeter89/jira-client/releases";
-      private readonly IMessageBus _messageBus;
-
-      public CheckForUpdatesMicroservice(IMessageBus messageBus)
-      {
-         _messageBus = messageBus;
-
-         _messageBus.Register(this);
-      }
-
+      private IMessageBus _messageBus;
+      
       public async void Handle(CheckForUpdatesMessage message)
       {
          var client = new RestClient(EndpointUrl);
@@ -45,6 +38,13 @@ namespace Yakuza.JiraClient.IO.Updates
                newRelease.body
                ));
          }
+      }
+
+      public void Initialize(IMessageBus messageBus)
+      {
+         _messageBus = messageBus;
+
+         _messageBus.Register(this);
       }
    }
 }

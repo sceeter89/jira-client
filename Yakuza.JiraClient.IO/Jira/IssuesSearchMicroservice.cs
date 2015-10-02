@@ -14,7 +14,6 @@ using Yakuza.JiraClient.Messaging.Api;
 namespace Yakuza.JiraClient.IO.Jira
 {
    public class IssuesSearchMicroservice : RestMicroserviceBase,
-      IMicroservice,
       IHandleMessage<SearchForIssuesMessage>,
       IHandleMessage<GetFieldsDescriptionsResponse>
    {
@@ -22,10 +21,9 @@ namespace Yakuza.JiraClient.IO.Jira
       private readonly IList<RawIssue> _searchResult = new List<RawIssue>();
       private IDictionary<string, RawFieldDefinition> _fields;
 
-      public IssuesSearchMicroservice(IConfiguration configuration, IMessageBus messageBus)
-         : base(configuration, messageBus)
+      public IssuesSearchMicroservice(IConfiguration configuration)
+         : base(configuration)
       {
-         _messageBus.Register(this);
       }
 
       public void Handle(GetFieldsDescriptionsResponse message)
@@ -60,6 +58,7 @@ namespace Yakuza.JiraClient.IO.Jira
             {
                _messageBus.LogMessage(LogLevel.Fatal, "Search request failed with invalid response code: {0}.\r\nResponse content is: {1}", response.StatusCode, response.Content);
                _messageBus.Send(new SearchFailedResponse(SearchFailedResponse.FailureReason.ExceptionOccured));
+               return;
             }
             var searchResults = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<RawSearchResults>(response.Content));
             foreach (var issue in searchResults.Issues)

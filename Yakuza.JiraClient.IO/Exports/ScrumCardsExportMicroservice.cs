@@ -11,14 +11,7 @@ namespace Yakuza.JiraClient.IO.Exports
    public class ScrumCardsExportMicroservice : IMicroservice,
       IHandleMessage<GenerateScrumCardsMessage>
    {
-      private readonly IMessageBus _messageBus;
-
-      public ScrumCardsExportMicroservice(IMessageBus messageBus)
-      {
-         _messageBus = messageBus;
-
-         _messageBus.Register(this);
-      }
+      private IMessageBus _messageBus;
 
       public void Handle(GenerateScrumCardsMessage message)
       {
@@ -44,6 +37,13 @@ namespace Yakuza.JiraClient.IO.Exports
             xw.Write(document);
             xpsd.Close();
          }
+      }
+
+      public void Initialize(IMessageBus messageBus)
+      {
+         _messageBus = messageBus;
+
+         _messageBus.Register(this);
       }
    }
 }

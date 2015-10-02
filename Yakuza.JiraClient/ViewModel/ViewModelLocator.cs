@@ -2,6 +2,7 @@ using Autofac;
 using System.Reflection;
 using Yakuza.JiraClient.Messaging;
 using Yakuza.JiraClient.Api;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -82,10 +83,12 @@ namespace Yakuza.JiraClient.ViewModel
          var clientAssembly = Assembly.Load("Jira Client");
          var ioAssembly = Assembly.Load("Yakuza.JiraClient.IO");
 
-         builder.RegisterType<MessageBus>()
-            .AsImplementedInterfaces()
+         var messageBus = new MessageBus();
+
+         builder.Register(x => messageBus)
+            .As<IMessageBus>()
             .SingleInstance();
-         
+
          //Register ViewModels
          builder.RegisterAssemblyTypes(clientAssembly)
             .Where(t => t.Name.EndsWith("ViewModel"))
@@ -103,9 +106,12 @@ namespace Yakuza.JiraClient.ViewModel
             .AssignableTo<IMicroservice>()
             .AsSelf()
             .SingleInstance()
-            .AutoActivate();
+            .AutoActivate()
+            .OnActivated(s => (s.Instance as IMicroservice).Initialize(messageBus));
 
          IocContainer = builder.Build();
       }
+
+
    }
 }
