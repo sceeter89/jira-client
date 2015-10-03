@@ -8,6 +8,7 @@ using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Messages.IO.Exports;
 using Yakuza.JiraClient.Api.Plugins;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.Plugins.Diagnostics
 {
@@ -37,7 +38,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "export log",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/SaveIcon.png")),
-                     OnClick = bus => bus.Send(new SaveLogOutputToFileMessage())
+                     OnClick = SendSaveLogRequest
                   }
                }
          };
@@ -51,13 +52,13 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "website",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/WebsiteIcon.png")),
-                     OnClick = _ => System.Diagnostics.Process.Start(WebSiteAddress)
+                     OnClick = new Action<IMessageBus>(_ => System.Diagnostics.Process.Start(WebSiteAddress))
                   },
                   new MenuEntryButton
                   {
                      Label = "report",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/ReportIssueIcon.png")),
-                     OnClick = _ => System.Diagnostics.Process.Start(ReportIssueSiteAddress)
+                     OnClick = new Action<IMessageBus>(_ => System.Diagnostics.Process.Start(ReportIssueSiteAddress))
                   }
                }
          };
@@ -71,10 +72,20 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "check",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/CheckForUpdatesIcon.png")),
-                     OnClick = bus => bus.Send(new CheckForUpdatesMessage(Assembly.GetEntryAssembly().GetName().Version))
+                     OnClick = SendUpdatesCheckRequest
                   }
                }
          };
+      }
+
+      private void SendUpdatesCheckRequest(IMessageBus bus)
+      {
+         bus.Send(new CheckForUpdatesMessage(Assembly.GetEntryAssembly().GetName().Version));
+      }
+
+      private void SendSaveLogRequest(IMessageBus bus)
+      {
+         bus.Send(new SaveLogOutputToFileMessage());
       }
 
       public IEnumerable<IMicroservice> GetMicroservices()

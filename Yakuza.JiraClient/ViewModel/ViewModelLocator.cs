@@ -25,7 +25,7 @@ namespace Yakuza.JiraClient.ViewModel
          BuildIocContainer();
          Task.Factory.StartNew(async () =>
          {
-            await Task.Delay(TimeSpan.FromMilliseconds(50));
+            await Task.Delay(TimeSpan.FromMilliseconds(100));
             LoadPlugins();
          });
       }

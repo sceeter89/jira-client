@@ -12,7 +12,6 @@ using System;
 using Yakuza.JiraClient.Api.Messages.IO.Plugins;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
-using System.Windows.Input;
 using Yakuza.JiraClient.Api.Plugins;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Threading;
@@ -32,10 +31,7 @@ namespace Yakuza.JiraClient.ViewModel
 
       public RelayCommand SaveXpsCommand { get; private set; }
       public RelayCommand ShowPivotViewCommand { get; private set; }
-      public RelayCommand SaveLogCommand { get; private set; }
-      public RelayCommand OpenWebsiteCommand { get; private set; }
-      public RelayCommand ReportIssueCommand { get; private set; }
-      public RelayCommand CheckForUpdatesCommand { get; private set; }
+      public RelayCommand<Button> HandleButtonClickCommand { get; private set; }
 
       public MenuBarViewModel(IMessageBus messageBus)
       {
@@ -45,7 +41,7 @@ namespace Yakuza.JiraClient.ViewModel
          (
             this, "pivot", new PivotReportingGrid(), new PivotReportingProperties()
             )), () => _isLoggedIn);
-
+         HandleButtonClickCommand = new RelayCommand<Button>(HandleButtonClick);
 
          _messageBus.Register(this);
          MenuTabs = new ObservableCollection<Tab>();
@@ -116,13 +112,19 @@ namespace Yakuza.JiraClient.ViewModel
                {
                   Label = button.Label,
                   Icon = button.Icon,
-                  OnClickCommand = new RelayCommand(() => button.OnClick(_messageBus))
+                  OnClick = button.OnClick
                };
                newButton.Icon.Freeze();
                newMenuGroup.Buttons.Add(newButton);
             }
             DispatcherHelper.CheckBeginInvokeOnUI(() => tab.Groups.Add(newMenuGroup));
          }
+      }
+
+      private void HandleButtonClick(Button button)
+      {
+         _messageBus.LogMessage("Blablabla");
+         button.OnClick(_messageBus);
       }
 
       private readonly IDictionary<MenuTab, Tab> _menuTabsMap = new Dictionary<MenuTab, Tab>();
@@ -154,7 +156,7 @@ namespace Yakuza.JiraClient.ViewModel
       {
          public string Label { get; set; }
          public BitmapImage Icon { get; set; }
-         public ICommand OnClickCommand { get; set; }
+         public Action<IMessageBus> OnClick { get; set; }
       }
    }
 }

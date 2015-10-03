@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Plugins;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.Plugins.Charting
 {
@@ -32,7 +33,7 @@ namespace Yakuza.JiraClient.Plugins.Charting
                   new MenuEntryButton
                   {
                      Label = "engagement",
-                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Engagement chart",new EngagementChartControl { DataContext = _viewModel })),
+                     OnClick = new Action<IMessageBus>(bus => bus.Send(new ShowDocumentPaneMessage(this, "Engagement chart",new EngagementChartControl { DataContext = _viewModel }))),
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Charting Plugin;component/Assets/Chart_Engagement.png"))
                   }
                }
