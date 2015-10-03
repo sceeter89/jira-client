@@ -17,9 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.UnitTests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.IO", "Yakuza.JiraClient.IO\Yakuza.JiraClient.IO.csproj", "{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Charting", "Yakuza.JiraClient.Plugins.Charting\Yakuza.JiraClient.Plugins.Charting.csproj", "{E3B2571E-D4DE-416A-93B5-33DFE37E732C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Charting", "Plugins\Yakuza.JiraClient.Plugins.Charting\Yakuza.JiraClient.Plugins.Charting.csproj", "{E3B2571E-D4DE-416A-93B5-33DFE37E732C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Diagnostics", "Yakuza.JiraClient.Plugins.Diagnostics\Yakuza.JiraClient.Plugins.Diagnostics.csproj", "{5B62120A-19F0-4487-9D46-6E0CADDBB206}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Diagnostics", "Plugins\Yakuza.JiraClient.Plugins.Diagnostics\Yakuza.JiraClient.Plugins.Diagnostics.csproj", "{5B62120A-19F0-4487-9D46-6E0CADDBB206}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{711D570D-C54B-42DA-B51F-FF51D6128AC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,5 +89,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD} = {05CBDD8C-9F84-496F-A54D-6406468A047B}
+		{E3B2571E-D4DE-416A-93B5-33DFE37E732C} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 	EndGlobalSection
 EndGlobal

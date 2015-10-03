@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B62120A-19F0-4487-9D46-6E0CADDBB206}</ProjectGuid>
+    <ProjectGuid>{E3B2571E-D4DE-416A-93B5-33DFE37E732C}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Yakuza.JiraClient.Plugins.Diagnostics</RootNamespace>
-    <AssemblyName>JiraClient Diagnostics Plugin</AssemblyName>
+    <RootNamespace>Yakuza.JiraClient.Plugins.Charting</RootNamespace>
+    <AssemblyName>JiraClient Charting Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -64,13 +64,22 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DiagnosticsMicroservice.cs" />
-    <Compile Include="DiagnosticsPlugin.cs" />
+    <Compile Include="BasicChartingPlugin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChartingDisplayViewModel.cs" />
+    <Compile Include="EngagementChartControl.xaml.cs">
+      <DependentUpon>EngagementChartControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -96,26 +105,23 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\CheckForUpdatesIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\ReportIssueIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\SaveIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\WebsiteIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
+    <ProjectReference Include="..\..\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
       <Name>Yakuza.JiraClient.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
+    <ProjectReference Include="..\..\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>Yakuza.JiraClient.Messaging</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Chart_Engagement.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="EngagementChartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
