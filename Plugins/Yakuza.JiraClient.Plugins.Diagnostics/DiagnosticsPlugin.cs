@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Reflection;
 using System.Windows.Media.Imaging;
 using Yakuza.JiraClient.Api;
+using Yakuza.JiraClient.Api.Messages.Actions;
+using Yakuza.JiraClient.Api.Messages.IO.Exports;
 using Yakuza.JiraClient.Api.Plugins;
 
 namespace Yakuza.JiraClient.Plugins.Diagnostics
@@ -13,7 +16,6 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
    {
       private const string WebSiteAddress = "https://github.com/sceeter89/jira-client";
       private const string ReportIssueSiteAddress = "https://github.com/sceeter89/jira-client/issues/new";
-      private readonly DiagnosticsMicroservice _microservice = new DiagnosticsMicroservice();
 
       public string PluginName
       {
@@ -35,7 +37,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "export log",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/SaveIcon.png")),
-                     OnClickCommand = _microservice.ExportLogCommand
+                     OnClick = bus => bus.Send(new SaveLogOutputToFileMessage())
                   }
                }
          };
@@ -49,13 +51,13 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "website",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/WebsiteIcon.png")),
-                     OnClickCommand = new RelayCommand(() => System.Diagnostics.Process.Start(WebSiteAddress))
+                     OnClick = _ => System.Diagnostics.Process.Start(WebSiteAddress)
                   },
                   new MenuEntryButton
                   {
                      Label = "report",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/ReportIssueIcon.png")),
-                     OnClickCommand = new RelayCommand(() => System.Diagnostics.Process.Start(ReportIssueSiteAddress))
+                     OnClick = _ => System.Diagnostics.Process.Start(ReportIssueSiteAddress)
                   }
                }
          };
@@ -69,7 +71,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "check",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/CheckForUpdatesIcon.png")),
-                     OnClickCommand = _microservice.CheckForUpdatesCommand
+                     OnClick = bus => bus.Send(new CheckForUpdatesMessage(Assembly.GetEntryAssembly().GetName().Version))
                   }
                }
          };
@@ -77,7 +79,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
 
       public IEnumerable<IMicroservice> GetMicroservices()
       {
-         yield return _microservice;
+         return null;
       }
    }
 }

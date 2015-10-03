@@ -101,7 +101,11 @@ namespace Yakuza.JiraClient.ViewModel
       public void Handle(NewPluginFoundMessage message)
       {
          _messageBus.LogMessage(LogLevel.Debug, "Loading UI for plugin: {0}...", message.PluginDescription.PluginName);
-         foreach (var descriptor in message.PluginDescription.GetMenuEntries())
+         var menuEntries = message.PluginDescription.GetMenuEntries();
+         if (menuEntries == null)
+            return;
+
+         foreach (var descriptor in menuEntries)
          {
             var tab = _menuTabsMap[descriptor.Tab];
             var newMenuGroup = new Group(descriptor.ButtonsGroupName);
@@ -112,7 +116,7 @@ namespace Yakuza.JiraClient.ViewModel
                {
                   Label = button.Label,
                   Icon = button.Icon,
-                  OnClickCommand = button.OnClickCommand
+                  OnClickCommand = new RelayCommand(() => button.OnClick(_messageBus))
                };
                newButton.Icon.Freeze();
                newMenuGroup.Buttons.Add(newButton);

@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows.Xps.Packaging;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Exports;
-using Yakuza.JiraClient.Controls.PrintPreview;
+using Yakuza.JiraClient.Plugins.Agile.Controls;
 using Yakuza.JiraClient.Messaging.Api;
 
-namespace Yakuza.JiraClient.IO.Exports
+namespace Yakuza.JiraClient.Plugins.Agile
 {
    public class ScrumCardsExportMicroservice : IMicroservice,
       IHandleMessage<GenerateScrumCardsMessage>

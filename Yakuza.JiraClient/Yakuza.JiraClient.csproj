@@ -127,6 +127,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\Converters\NullToCollapsedConverter.cs" />
+    <Compile Include="Controls\IssueDetails.xaml.cs">
+      <DependentUpon>IssueDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\IssueListDisplay.xaml.cs">
       <DependentUpon>IssueListDisplay.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,14 @@
     <Compile Include="Controls\PivotReportingProperties.xaml.cs">
       <DependentUpon>PivotReportingProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SearchFields\ComboBoxSearchField.cs" />
+    <Compile Include="Controls\SearchFields\ComboBoxSearchFieldControl.xaml.cs">
+      <DependentUpon>ComboBoxSearchFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchFields\SearchBySprintField.cs" />
+    <Compile Include="Controls\SearchFields\SearchBySprintFieldControl.xaml.cs">
+      <DependentUpon>SearchBySprintFieldControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SearchIssues.xaml.cs">
       <DependentUpon>SearchIssues.xaml</DependentUpon>
     </Compile>
@@ -155,6 +166,10 @@
     <Compile Include="ViewModel\PivotGridViewModel.cs" />
     <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Controls\IssueDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\IssueListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,6 +189,14 @@
     <Page Include="Controls\PivotReportingProperties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SearchFields\ComboBoxSearchFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchFields\SearchBySprintFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\SearchIssues.xaml">
       <SubType>Designer</SubType>
@@ -226,13 +249,13 @@
     <Resource Include="Assets\Icons\xpsicon.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Plugins\Yakuza.JiraClient.Plugins.Agile\Yakuza.JiraClient.Plugins.Agile.csproj">
+      <Project>{08031eed-cf59-43f6-add3-d906ce439add}</Project>
+      <Name>Yakuza.JiraClient.Plugins.Agile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Yakuza.JiraClient.IO\Yakuza.JiraClient.IO.csproj">
       <Project>{fcbe50bc-7cc8-4c86-bee9-6f86ff34a912}</Project>
       <Name>Yakuza.JiraClient.IO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Yakuza.JiraClient.IssueFields\Yakuza.JiraClient.Controls.csproj">
-      <Project>{19df2acb-aad3-4dd7-9b8a-e75aa193d2ce}</Project>
-      <Name>Yakuza.JiraClient.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>

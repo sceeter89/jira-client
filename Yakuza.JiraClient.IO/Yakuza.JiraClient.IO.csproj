@@ -54,7 +54,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exports\ScrumCardsExportMicroservice.cs" />
     <Compile Include="Jira\IssuesSearchMicroservice.cs" />
     <Compile Include="Jira\JiraAgileIntegrationMicroservice.cs" />
     <Compile Include="Jira\MetadataRetriever.cs" />
@@ -69,10 +68,6 @@
     <ProjectReference Include="..\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
       <Name>Yakuza.JiraClient.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Yakuza.JiraClient.IssueFields\Yakuza.JiraClient.Controls.csproj">
-      <Project>{19df2acb-aad3-4dd7-9b8a-e75aa193d2ce}</Project>
-      <Name>Yakuza.JiraClient.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>

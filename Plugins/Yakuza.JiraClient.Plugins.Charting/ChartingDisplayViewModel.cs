@@ -35,13 +35,6 @@ namespace Yakuza.JiraClient.Plugins.Charting
       public void Initialize(IMessageBus messageBus)
       {
          messageBus.Register(this);
-
-         ShowEngagementChartCommand = new RelayCommand(() => messageBus.Send(
-            new ShowDocumentPaneMessage(
-                  this, "Engagement chart",
-                  new EngagementChartControl { DataContext = this }
-               )
-            ));
       }
    }
 }

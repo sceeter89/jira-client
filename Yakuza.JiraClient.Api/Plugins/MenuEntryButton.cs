@@ -1,5 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System;
 using System.Windows.Media.Imaging;
+using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.Api.Plugins
 {
@@ -7,6 +8,6 @@ namespace Yakuza.JiraClient.Api.Plugins
    {
       public string Label { get; set; }
       public BitmapImage Icon { get; set; }
-      public ICommand OnClickCommand { get; set; }
+      public Action<IMessageBus> OnClick { get; set; }
    }
 }
