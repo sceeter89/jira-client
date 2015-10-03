@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.IO", "Yak
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Charting", "Yakuza.JiraClient.Plugins.Charting\Yakuza.JiraClient.Plugins.Charting.csproj", "{E3B2571E-D4DE-416A-93B5-33DFE37E732C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Diagnostics", "Yakuza.JiraClient.Plugins.Diagnostics\Yakuza.JiraClient.Plugins.Diagnostics.csproj", "{5B62120A-19F0-4487-9D46-6E0CADDBB206}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,14 @@ Global
 		{E3B2571E-D4DE-416A-93B5-33DFE37E732C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E3B2571E-D4DE-416A-93B5-33DFE37E732C}.Release|x86.ActiveCfg = Release|Any CPU
 		{E3B2571E-D4DE-416A-93B5-33DFE37E732C}.Release|x86.Build.0 = Release|Any CPU
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206}.Debug|x86.Build.0 = Debug|Any CPU
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206}.Release|x86.ActiveCfg = Release|Any CPU
+		{5B62120A-19F0-4487-9D46-6E0CADDBB206}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,37 +17,27 @@
          <RowDefinition Height="Auto"/>
          <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
+      <Grid.Resources>
+         <DataTemplate x:Key="ButtonTemplate">
+            <telerik:RadRibbonButton Text="{Binding Label}" LargeImage="{Binding Icon}" Command="{Binding OnClickCommand}"
+                                     Size="Large"/>
+         </DataTemplate>
 
+         <HierarchicalDataTemplate x:Key="GroupTemplate"
+                              ItemsSource='{Binding Buttons}'
+                              ItemTemplate='{StaticResource ButtonTemplate}'>
+            <TextBlock Text='{Binding GroupName}' />
+         </HierarchicalDataTemplate>
+
+         <HierarchicalDataTemplate x:Key="TabTemplate"
+                              ItemsSource='{Binding Groups}'
+                              ItemTemplate='{StaticResource GroupTemplate}'>
+            <TextBlock Text='{Binding Title}' />
+         </HierarchicalDataTemplate>
+      </Grid.Resources>
       <telerik:RadRibbonView ApplicationButtonVisibility="Collapsed" TitleBarVisibility="Collapsed"
-                             DataContext="{Binding Source={StaticResource Locator}, Path=MenuBar}">
-         <telerik:RadRibbonTab Header="Home">
-            <telerik:RadRibbonGroup Header="Scrum Cards">
-               <telerik:RadRibbonButton Text="XPS" LargeImage="/Assets/Icons/xpsicon.png" Size="Large"
-                                        Command="{Binding SaveXpsCommand}"/>
-
-            </telerik:RadRibbonGroup>
-            <telerik:RadRibbonGroup Header="Views">
-               <telerik:RadRibbonButton Text="Pivot" LargeImage="/Assets/Icons/PivotTable.png" Size="Large"
-                                        Command="{Binding ShowPivotViewCommand}"/>
-
-            </telerik:RadRibbonGroup>
-         </telerik:RadRibbonTab>
-         <telerik:RadRibbonTab Header="Support">
-            <telerik:RadRibbonGroup Header="Diagnostics">
-               <telerik:RadRibbonButton Text="Export Log" LargeImage="/Assets/Icons/SaveIcon.png" Size="Large"
-                                        Command="{Binding SaveLogCommand}"/>
-            </telerik:RadRibbonGroup>
-            <telerik:RadRibbonGroup Header="Help">
-               <telerik:RadRibbonButton Text="Website" LargeImage="/Assets/Icons/WebsiteIcon.png" Size="Large"
-                                        Command="{Binding OpenWebsiteCommand}"/>
-               <telerik:RadRibbonButton Text="Report" LargeImage="/Assets/Icons/ReportIssueIcon.png" Size="Large"
-                                        Command="{Binding ReportIssueCommand}"/>
-            </telerik:RadRibbonGroup>
-            <telerik:RadRibbonGroup Header="Updates">
-               <telerik:RadRibbonButton Text="Check" LargeImage="/Assets/Icons/CheckForUpdatesIcon.png" Size="Large"
-                                        Command="{Binding CheckForUpdatesCommand}"/>
-            </telerik:RadRibbonGroup>
-         </telerik:RadRibbonTab>
+                             DataContext="{Binding Source={StaticResource Locator}, Path=MenuBar}"
+                             ItemTemplate="{StaticResource TabTemplate}" ItemsSource="{Binding MenuTabs}">
       </telerik:RadRibbonView>
 
       <telerik:RadDocking Grid.Row="1">

@@ -246,24 +246,16 @@
       <Project>{e3b2571e-d4de-416a-93b5-33dfe37e732c}</Project>
       <Name>Yakuza.JiraClient.Plugins.Charting</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Yakuza.JiraClient.Plugins.Diagnostics\Yakuza.JiraClient.Plugins.Diagnostics.csproj">
+      <Project>{5b62120a-19f0-4487-9d46-6e0caddbb206}</Project>
+      <Name>Yakuza.JiraClient.Plugins.Diagnostics</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\PivotTable.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Icons\SaveIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Icons\WebsiteIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Icons\ReportIssueIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Icons\CheckForUpdatesIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

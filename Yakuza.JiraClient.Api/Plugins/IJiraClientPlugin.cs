@@ -11,7 +11,7 @@ namespace Yakuza.JiraClient.Api.Plugins
    public interface IJiraClientPlugin
    {
       string PluginName { get; }
-      IEnumerable<IMicroservice> Microservices { get; }
-      MenuEntryDescriptor MenuEntryDescriptor { get; }
+      IEnumerable<IMicroservice> GetMicroservices();
+      IEnumerable<MenuEntryDescriptor> GetMenuEntries();
    }
 }

@@ -8,9 +8,14 @@ using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Exports;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Controls;
-using System.Reflection;
 using System;
 using Yakuza.JiraClient.Api.Messages.IO.Plugins;
+using System.Collections.ObjectModel;
+using System.Windows.Media.Imaging;
+using System.Windows.Input;
+using Yakuza.JiraClient.Api.Plugins;
+using System.Collections.Generic;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Yakuza.JiraClient.ViewModel
 {
@@ -22,8 +27,6 @@ namespace Yakuza.JiraClient.ViewModel
       IHandleMessage<NewVersionAvailable>,
       IHandleMessage<NewPluginFoundMessage>
    {
-      private const string WebSiteAddress = "https://github.com/sceeter89/jira-client";
-      private const string ReportIssueSiteAddress = "https://github.com/sceeter89/jira-client/issues/new";
       private bool _isLoggedIn;
       private readonly IMessageBus _messageBus;
 
@@ -42,12 +45,16 @@ namespace Yakuza.JiraClient.ViewModel
          (
             this, "pivot", new PivotReportingGrid(), new PivotReportingProperties()
             )), () => _isLoggedIn);
-         SaveLogCommand = new RelayCommand(() => _messageBus.Send(new SaveLogOutputToFileMessage()));
-         OpenWebsiteCommand = new RelayCommand(() => System.Diagnostics.Process.Start(WebSiteAddress));
-         ReportIssueCommand = new RelayCommand(() => System.Diagnostics.Process.Start(ReportIssueSiteAddress));
-         CheckForUpdatesCommand = new RelayCommand(() => _messageBus.Send(new CheckForUpdatesMessage(Assembly.GetEntryAssembly().GetName().Version)));
+
 
          _messageBus.Register(this);
+         MenuTabs = new ObservableCollection<Tab>();
+         foreach (MenuTab value in Enum.GetValues(typeof(MenuTab)))
+         {
+            var tab = new Tab(value.ToString());
+            this.MenuTabs.Add(tab);
+            _menuTabsMap[value] = tab;
+         }
       }
 
       public void Handle(LoggedOutMessage message)
@@ -88,12 +95,62 @@ namespace Yakuza.JiraClient.ViewModel
 
       public void Handle(NewVersionAvailable message)
       {
-         _messageBus.LogMessage("New version is available. Visit website for download: " + WebSiteAddress, LogLevel.Info);
+         _messageBus.LogMessage("New version is available. Visit website for download.", LogLevel.Info);
       }
 
       public void Handle(NewPluginFoundMessage message)
       {
-         throw new NotImplementedException();
+         _messageBus.LogMessage(LogLevel.Debug, "Loading UI for plugin: {0}...", message.PluginDescription.PluginName);
+         foreach (var descriptor in message.PluginDescription.GetMenuEntries())
+         {
+            var tab = _menuTabsMap[descriptor.Tab];
+            var newMenuGroup = new Group(descriptor.ButtonsGroupName);
+
+            foreach (var button in descriptor.Buttons)
+            {
+               var newButton = new Button
+               {
+                  Label = button.Label,
+                  Icon = button.Icon,
+                  OnClickCommand = button.OnClickCommand
+               };
+               newButton.Icon.Freeze();
+               newMenuGroup.Buttons.Add(newButton);
+            }
+            DispatcherHelper.CheckBeginInvokeOnUI(() => tab.Groups.Add(newMenuGroup));
+         }
+      }
+
+      private readonly IDictionary<MenuTab, Tab> _menuTabsMap = new Dictionary<MenuTab, Tab>();
+      public ObservableCollection<Tab> MenuTabs { get; private set; }
+
+      public class Tab
+      {
+         public Tab(string title)
+         {
+            Title = title;
+            Groups = new ObservableCollection<Group>();
+         }
+         public string Title { get; private set; }
+         public ObservableCollection<Group> Groups { get; private set; }
+      }
+
+      public class Group
+      {
+         public Group(string groupName)
+         {
+            GroupName = groupName;
+            Buttons = new ObservableCollection<Button>();
+         }
+         public string GroupName { get; private set; }
+         public ObservableCollection<Button> Buttons { get; private set; }
+      }
+
+      public class Button
+      {
+         public string Label { get; set; }
+         public BitmapImage Icon { get; set; }
+         public ICommand OnClickCommand { get; set; }
       }
    }
 }

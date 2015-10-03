@@ -12,41 +12,35 @@ namespace Yakuza.JiraClient.Plugins.Charting
    {
       private readonly ChartingDisplayViewModel _viewModel = new ChartingDisplayViewModel();
 
-      public MenuEntryDescriptor MenuEntryDescriptor
-      {
-         get
-         {
-            return new MenuEntryDescriptor
-            {
-               Tab = MenuTab.Home,
-               ButtonsGroupName = "charts",
-               Buttons = new[]
-               {
-                  new MenuEntryButton
-                  {
-                     Label = "engagement",
-                     OnClickCommand = _viewModel.ShowEngagementChartCommand,
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Assets/Chart_Engagement.png"))
-                  }
-               }
-            };
-         }
-      }
-
-      public IEnumerable<IMicroservice> Microservices
-      {
-         get
-         {
-            return new[] { _viewModel };
-         }
-      }
-
       public string PluginName
       {
          get
          {
             return "Basic charting plugin";
          }
+      }
+
+      public IEnumerable<MenuEntryDescriptor> GetMenuEntries()
+      {
+         yield return new MenuEntryDescriptor
+         {
+            Tab = MenuTab.Home,
+            ButtonsGroupName = "charts",
+            Buttons = new[]
+               {
+                  new MenuEntryButton
+                  {
+                     Label = "engagement",
+                     OnClickCommand = _viewModel.ShowEngagementChartCommand,
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Charting Plugin;component/Assets/Chart_Engagement.png"))
+                  }
+               }
+         };
+      }
+
+      public IEnumerable<IMicroservice> GetMicroservices()
+      {
+         yield return _viewModel;
       }
    }
 }
