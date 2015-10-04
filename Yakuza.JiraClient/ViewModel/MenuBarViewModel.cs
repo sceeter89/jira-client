@@ -98,7 +98,6 @@ namespace Yakuza.JiraClient.ViewModel
 
       private void HandleButtonClick(Button button)
       {
-         _messageBus.LogMessage("Blablabla");
          button.OnClick(_messageBus);
       }
 
