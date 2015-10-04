@@ -70,14 +70,6 @@ namespace Yakuza.JiraClient.ViewModel
          }
       }
 
-      public PivotGridViewModel Pivot
-      {
-         get
-         {
-            return IocContainer.Resolve<PivotGridViewModel>();
-         }
-      }
-
       public MenuBarViewModel MenuBar
       {
          get

@@ -85,12 +85,20 @@
     <Reference Include="Telerik.Pivot.Core">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Pivot.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Pivot.DataProviders.Queryable, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Charting, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Diagrams, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Diagrams.Extensions, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Docking">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Docking.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.Expressions, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.GridView">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.GridView.dll</HintPath>
     </Reference>
@@ -109,6 +117,7 @@
     <Reference Include="Telerik.Windows.Controls.RibbonView">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.RibbonView.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.Spreadsheet, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Data">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Data.dll</HintPath>
     </Reference>
@@ -139,12 +148,6 @@
     <Compile Include="Controls\LogViewer.xaml.cs">
       <DependentUpon>LogViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PivotReportingGrid.xaml.cs">
-      <DependentUpon>PivotReportingGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PivotReportingProperties.xaml.cs">
-      <DependentUpon>PivotReportingProperties.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\SearchFields\ComboBoxSearchField.cs" />
     <Compile Include="Controls\SearchFields\ComboBoxSearchFieldControl.xaml.cs">
       <DependentUpon>ComboBoxSearchFieldControl.xaml</DependentUpon>
@@ -163,7 +166,6 @@
     <Compile Include="ViewModel\LogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuBarViewModel.cs" />
-    <Compile Include="ViewModel\PivotGridViewModel.cs" />
     <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\IssueDetails.xaml">
@@ -179,14 +181,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\LogViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PivotReportingGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PivotReportingProperties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,7 +229,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -273,9 +269,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Icons\PivotTable.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

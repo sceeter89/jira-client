@@ -6,6 +6,7 @@ using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Plugins;
 using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Plugins.Analysis.Analysis;
 using Yakuza.JiraClient.Plugins.Analysis.Charts;
 
 namespace Yakuza.JiraClient.Plugins.Analysis
@@ -14,6 +15,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
    public class AnalysisPlugin : IJiraClientPlugin
    {
       private readonly ChartingDisplayViewModel _viewModel = new ChartingDisplayViewModel();
+      private readonly PivotGridViewModel _pivotViewModel = new PivotGridViewModel();
 
       public string PluginName
       {
@@ -39,11 +41,28 @@ namespace Yakuza.JiraClient.Plugins.Analysis
                   }
                }
          };
+         yield return new MenuEntryDescriptor
+         {
+            Tab = MenuTab.Home,
+            ButtonsGroupName = "analysis",
+            Buttons = new[]
+               {
+                  new MenuEntryButton
+                  {
+                     Label = "pivot",
+                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Pivot analysis", 
+                                                   new PivotReportingGrid {DataContext = _pivotViewModel},
+                                                   new PivotReportingProperties { DataContext = _pivotViewModel})),
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Analysis Plugin;component/Assets/PivotTable.png"))
+                  }
+               }
+         };
       }
 
       public IEnumerable<IMicroservice> GetMicroservices()
       {
          yield return _viewModel;
+         yield return _pivotViewModel;
       }
    }
 }

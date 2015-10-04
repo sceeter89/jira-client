@@ -4,24 +4,32 @@ namespace Yakuza.JiraClient.Api.Model
 {
    public class PivotJiraIssue
    {
-      private readonly JiraIssue _issue;
-
       public PivotJiraIssue(JiraIssue issue)
       {
-         _issue = issue;
+         Key = issue.Key;
+         Project = issue.Project;
+         IsResolved = issue.BuiltInFields.Resolution != null;
+         Created = issue.Created;
+         Resolved = issue.Resolved ?? DateTime.MinValue;
+         Assignee = issue.Assignee;
+         Reporter = issue.Reporter;
+         StoryPoints = issue.StoryPoints;
+         Priority = issue.Priority;
+         Type = issue.BuiltInFields.IssueType.Name;
+         Resolution = (issue.BuiltInFields.Resolution ?? RawResolution.EmptyResolution).Name;
       }
 
-      public string Key { get { return _issue.Key; } }
-      public string Project { get { return _issue.Project; } }
-      public bool IsResolved { get { return _issue.BuiltInFields.Resolution != null; } }
-      public DateTime Created { get { return _issue.Created; } }
-      public DateTime Resolved { get { return _issue.Resolved ?? DateTime.MinValue; } }
-      public string Assignee { get { return _issue.Assignee; } }
-      public string Reporter { get { return _issue.Reporter; } }
-      public int StoryPoints { get { return _issue.StoryPoints; } }
-      public string Priority { get { return _issue.Priority; } }
-      public string Type { get { return _issue.BuiltInFields.IssueType.Name; } }
-      public string Resolution { get { return (_issue.BuiltInFields.Resolution ?? RawResolution.EmptyResolution).Name; } }
+      public string Key { get; private set; }
+      public string Project { get; private set; }
+      public bool IsResolved { get; private set; }
+      public DateTime Created { get; private set; }
+      public DateTime Resolved { get; private set; }
+      public string Assignee { get; private set; }
+      public string Reporter { get; private set; }
+      public int StoryPoints { get; private set; }
+      public string Priority { get; private set; }
+      public string Type { get; private set; }
+      public string Resolution { get; private set; }
       public int CycleTimeHours
       {
          get

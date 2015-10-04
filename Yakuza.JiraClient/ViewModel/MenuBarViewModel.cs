@@ -5,9 +5,6 @@ using System.Linq;
 using GalaSoft.MvvmLight.Command;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Exports;
-using Yakuza.JiraClient.Api.Messages.Navigation;
-using Yakuza.JiraClient.Controls;
 using System;
 using Yakuza.JiraClient.Api.Messages.IO.Plugins;
 using System.Collections.ObjectModel;
@@ -28,16 +25,11 @@ namespace Yakuza.JiraClient.ViewModel
       private bool _isLoggedIn;
       private readonly IMessageBus _messageBus;
       
-      public RelayCommand ShowPivotViewCommand { get; private set; }
       public RelayCommand<Button> HandleButtonClickCommand { get; private set; }
 
       public MenuBarViewModel(IMessageBus messageBus)
       {
          _messageBus = messageBus;
-         ShowPivotViewCommand = new RelayCommand(() => _messageBus.Send(new ShowDocumentPaneMessage
-         (
-            this, "pivot", new PivotReportingGrid(), new PivotReportingProperties()
-            )), () => _isLoggedIn);
          HandleButtonClickCommand = new RelayCommand<Button>(HandleButtonClick);
 
          _messageBus.Register(this);
@@ -64,10 +56,7 @@ namespace Yakuza.JiraClient.ViewModel
 
       private void RefreshCommands()
       {
-         foreach (var command in GetType().GetProperties().Where(p => p.PropertyType == typeof(RelayCommand)))
-         {
-            ((RelayCommand)command.GetValue(this)).RaiseCanExecuteChanged();
-         }
+         HandleButtonClickCommand.RaiseCanExecuteChanged();
       }
 
       public void Handle(NoUpdatesAvailable message)

@@ -11,7 +11,6 @@ using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;
 using System.Windows;
 using Yakuza.JiraClient.Api.Messages.Actions;
-using System;
 
 namespace Yakuza.JiraClient.ViewModel
 {
