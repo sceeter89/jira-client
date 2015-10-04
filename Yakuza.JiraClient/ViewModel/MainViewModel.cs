@@ -88,6 +88,7 @@ namespace Yakuza.JiraClient.ViewModel
             || _customPaneProperties[documentPane] == null)
          {
             CustomPropertyPane.Content = null;
+            FocusPropertyPane(SearchPropertyPane);
             return;
          }
 

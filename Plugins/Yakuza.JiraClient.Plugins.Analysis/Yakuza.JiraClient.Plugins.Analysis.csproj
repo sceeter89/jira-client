@@ -88,7 +88,10 @@
     <Compile Include="Analysis\PivotReportingProperties.xaml.cs">
       <DependentUpon>PivotReportingProperties.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Charts\ChartingDisplayViewModel.cs" />
+    <Compile Include="Charts\EngagementChartProperties.xaml.cs">
+      <DependentUpon>EngagementChartProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Charts\EngagementChartViewModel.cs" />
     <Compile Include="Charts\EngagementChartControl.xaml.cs">
       <DependentUpon>EngagementChartControl.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Analysis\PivotReportingProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Charts\EngagementChartProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -5,7 +5,6 @@ using System.Windows.Media.Imaging;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Plugins;
-using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Plugins.Analysis.Analysis;
 using Yakuza.JiraClient.Plugins.Analysis.Charts;
 
@@ -14,7 +13,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
    [Export(typeof(IJiraClientPlugin))]
    public class AnalysisPlugin : IJiraClientPlugin
    {
-      private readonly ChartingDisplayViewModel _viewModel = new ChartingDisplayViewModel();
+      private readonly EngagementChartViewModel _engagementChartViewModel = new EngagementChartViewModel();
       private readonly PivotGridViewModel _pivotViewModel = new PivotGridViewModel();
 
       public string PluginName
@@ -36,7 +35,9 @@ namespace Yakuza.JiraClient.Plugins.Analysis
                   new MenuEntryButton
                   {
                      Label = "engagement",
-                     OnClick = new Action<IMessageBus>(bus => bus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",new EngagementChartControl { DataContext = _viewModel }))),
+                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",
+                                                   new EngagementChartControl { DataContext = _engagementChartViewModel },
+                                                   new EngagementChartProperties { DataContext = _engagementChartViewModel })),
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Analysis Plugin;component/Assets/Chart_Engagement.png"))
                   }
                }
@@ -50,7 +51,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
                   new MenuEntryButton
                   {
                      Label = "pivot",
-                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Pivot analysis", 
+                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Pivot analysis",
                                                    new PivotReportingGrid {DataContext = _pivotViewModel},
                                                    new PivotReportingProperties { DataContext = _pivotViewModel})),
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Analysis Plugin;component/Assets/PivotTable.png"))
@@ -61,7 +62,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
 
       public IEnumerable<IMicroservice> GetMicroservices()
       {
-         yield return _viewModel;
+         yield return _engagementChartViewModel;
          yield return _pivotViewModel;
       }
    }
