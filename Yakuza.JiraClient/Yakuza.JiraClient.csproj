@@ -246,9 +246,6 @@
     <Resource Include="Assets\Icons\JiraClient.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Icons\xpsicon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Plugins\Yakuza.JiraClient.Plugins.Agile\Yakuza.JiraClient.Plugins.Agile.csproj">
       <Project>{08031eed-cf59-43f6-add3-d906ce439add}</Project>
       <Name>Yakuza.JiraClient.Plugins.Agile</Name>

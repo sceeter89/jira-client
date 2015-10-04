@@ -33,7 +33,7 @@ namespace Yakuza.JiraClient.Plugins.Charting
                   new MenuEntryButton
                   {
                      Label = "engagement",
-                     OnClick = new Action<IMessageBus>(bus => bus.Send(new ShowDocumentPaneMessage(this, "Engagement chart",new EngagementChartControl { DataContext = _viewModel }))),
+                     OnClick = new Action<IMessageBus>(bus => bus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",new EngagementChartControl { DataContext = _viewModel }))),
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Charting Plugin;component/Assets/Chart_Engagement.png"))
                   }
                }

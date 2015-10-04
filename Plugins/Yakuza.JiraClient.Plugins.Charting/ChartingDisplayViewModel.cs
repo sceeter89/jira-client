@@ -29,7 +29,7 @@ namespace Yakuza.JiraClient.Plugins.Charting
 
       private void UpdateData(IEnumerable<JiraIssue> issues)
       {
-         throw new NotImplementedException();
+         //TODO
       }
 
       public void Initialize(IMessageBus messageBus)
