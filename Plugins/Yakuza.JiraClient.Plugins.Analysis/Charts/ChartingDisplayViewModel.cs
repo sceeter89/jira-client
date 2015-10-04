@@ -9,7 +9,7 @@ using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Messaging.Api;
 
-namespace Yakuza.JiraClient.Plugins.Charting
+namespace Yakuza.JiraClient.Plugins.Analysis
 {
    public class ChartingDisplayViewModel : IMicroservice,
       IHandleMessage<SearchForIssuesResponse>,

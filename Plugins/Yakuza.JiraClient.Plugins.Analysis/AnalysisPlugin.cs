@@ -6,11 +6,12 @@ using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Plugins;
 using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Plugins.Analysis.Charts;
 
-namespace Yakuza.JiraClient.Plugins.Charting
+namespace Yakuza.JiraClient.Plugins.Analysis
 {
    [Export(typeof(IJiraClientPlugin))]
-   public class BasicChartingPlugin : IJiraClientPlugin
+   public class AnalysisPlugin : IJiraClientPlugin
    {
       private readonly ChartingDisplayViewModel _viewModel = new ChartingDisplayViewModel();
 
@@ -34,7 +35,7 @@ namespace Yakuza.JiraClient.Plugins.Charting
                   {
                      Label = "engagement",
                      OnClick = new Action<IMessageBus>(bus => bus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",new EngagementChartControl { DataContext = _viewModel }))),
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Charting Plugin;component/Assets/Chart_Engagement.png"))
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Analysis Plugin;component/Assets/Chart_Engagement.png"))
                   }
                }
          };

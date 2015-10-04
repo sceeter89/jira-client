@@ -7,8 +7,8 @@
     <ProjectGuid>{E3B2571E-D4DE-416A-93B5-33DFE37E732C}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Yakuza.JiraClient.Plugins.Charting</RootNamespace>
-    <AssemblyName>JiraClient Charting Plugin</AssemblyName>
+    <RootNamespace>Yakuza.JiraClient.Plugins.Analysis</RootNamespace>
+    <AssemblyName>JiraClient Analysis Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -73,11 +73,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicChartingPlugin.cs" />
+    <Compile Include="AnalysisPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChartingDisplayViewModel.cs" />
-    <Compile Include="EngagementChartControl.xaml.cs">
+    <Compile Include="Charts\ChartingDisplayViewModel.cs" />
+    <Compile Include="Charts\EngagementChartControl.xaml.cs">
       <DependentUpon>EngagementChartControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -118,7 +118,7 @@
     <Resource Include="Assets\Chart_Engagement.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="EngagementChartControl.xaml">
+    <Page Include="Charts\EngagementChartControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
