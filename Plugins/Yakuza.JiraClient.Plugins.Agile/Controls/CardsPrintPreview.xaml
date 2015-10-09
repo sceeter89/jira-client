@@ -19,7 +19,7 @@
 
       <DataTemplate x:Key="CardView"  DataType="{x:Type model:JiraIssuePrintPreviewModel}">
          <Border Style="{StaticResource BorderStyle}">
-            <Grid Margin="2">
+            <Grid Margin="5">
                <Grid.RowDefinitions>
                   <RowDefinition Height="Auto"/>
                   <RowDefinition Height="*"/>
