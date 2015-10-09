@@ -246,15 +246,15 @@
       <Project>{08031eed-cf59-43f6-add3-d906ce439add}</Project>
       <Name>Yakuza.JiraClient.Plugins.Agile</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Yakuza.JiraClient.IO\Yakuza.JiraClient.IO.csproj">
+    <ProjectReference Include="..\Core\Yakuza.JiraClient.IO\Yakuza.JiraClient.IO.csproj">
       <Project>{fcbe50bc-7cc8-4c86-bee9-6f86ff34a912}</Project>
       <Name>Yakuza.JiraClient.IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
+    <ProjectReference Include="..\Core\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
       <Name>Yakuza.JiraClient.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
+    <ProjectReference Include="..\Core\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>Yakuza.JiraClient.Messaging</Name>
     </ProjectReference>

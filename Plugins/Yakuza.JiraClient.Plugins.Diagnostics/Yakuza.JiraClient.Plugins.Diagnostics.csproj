@@ -107,11 +107,11 @@
     <Resource Include="Assets\WebsiteIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
+    <ProjectReference Include="..\..\Core\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
       <Name>Yakuza.JiraClient.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
+    <ProjectReference Include="..\..\Core\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>Yakuza.JiraClient.Messaging</Name>
     </ProjectReference>
