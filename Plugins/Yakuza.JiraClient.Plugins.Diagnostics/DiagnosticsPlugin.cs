@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Reflection;
@@ -7,8 +6,9 @@ using System.Windows.Media.Imaging;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Messages.IO.Exports;
+using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Plugins;
-using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Plugins.Diagnostics.Controls;
 
 namespace Yakuza.JiraClient.Plugins.Diagnostics
 {
@@ -17,6 +17,8 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
    {
       private const string WebSiteAddress = "https://github.com/sceeter89/jira-client";
       private const string ReportIssueSiteAddress = "https://github.com/sceeter89/jira-client/issues/new";
+
+      private readonly PluginsViewModel _pluginsViewModel = new PluginsViewModel();
 
       public string PluginName
       {
@@ -38,7 +40,15 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "export log",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/SaveIcon.png")),
-                     OnClick = SendSaveLogRequest
+                     OnClick = bus =>bus.Send(new SaveLogOutputToFileMessage())
+                  },
+                  new MenuEntryButton
+                  {
+                     Label = "plugins",
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/PluginsIcon.png")),
+                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Plugins",
+                                                   new PluginView { DataContext = _pluginsViewModel },
+                                                   new PluginsListView {DataContext = _pluginsViewModel}))
                   }
                }
          };
@@ -52,13 +62,13 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "website",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/WebsiteIcon.png")),
-                     OnClick = new Action<IMessageBus>(_ => System.Diagnostics.Process.Start(WebSiteAddress))
+                     OnClick = _ => System.Diagnostics.Process.Start(WebSiteAddress)
                   },
                   new MenuEntryButton
                   {
                      Label = "report",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/ReportIssueIcon.png")),
-                     OnClick = new Action<IMessageBus>(_ => System.Diagnostics.Process.Start(ReportIssueSiteAddress))
+                     OnClick = _ => System.Diagnostics.Process.Start(ReportIssueSiteAddress)
                   }
                }
          };
@@ -72,25 +82,15 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   {
                      Label = "check",
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/CheckForUpdatesIcon.png")),
-                     OnClick = SendUpdatesCheckRequest
+                     OnClick = bus => bus.Send(new CheckForUpdatesMessage(Assembly.GetEntryAssembly().GetName().Version))
                   }
                }
          };
       }
 
-      private void SendUpdatesCheckRequest(IMessageBus bus)
-      {
-         bus.Send(new CheckForUpdatesMessage(Assembly.GetEntryAssembly().GetName().Version));
-      }
-
-      private void SendSaveLogRequest(IMessageBus bus)
-      {
-         bus.Send(new SaveLogOutputToFileMessage());
-      }
-
       public IEnumerable<IMicroservice> GetMicroservices()
       {
-         return null;
+         yield return _pluginsViewModel;
       }
    }
 }

@@ -28,7 +28,7 @@ namespace Yakuza.JiraClient.ViewModel
          _messenger = messenger;
 
          DocumentPanes = new ObservableCollection<RadPane>();
-         PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane };
+         PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane, CustomPropertyPane };
          _messenger.Register(this);
 
          Application.Current.DispatcherUnhandledException += DispatcherUnhandledException;
@@ -83,6 +83,12 @@ namespace Yakuza.JiraClient.ViewModel
 
       private void UpdatePropertiesPane()
       {
+         if(DocumentPanes.Any() == false)
+         {
+            CustomPropertyPane.Content = null;
+            SelectedPropertyPaneIndex = 0;
+            return;
+         }
          var documentPane = DocumentPanes[SelectedDocumentPaneIndex];
          if (_customPaneProperties.ContainsKey(documentPane) == false
             || _customPaneProperties[documentPane] == null)
@@ -124,6 +130,7 @@ namespace Yakuza.JiraClient.ViewModel
          DocumentPanes.Clear();
          PropertyPanes.Clear();
          PropertyPanes.Add(ConnectionPropertyPane);
+         PropertyPanes.Add(CustomPropertyPane);
       }
 
       public void Handle(OpenConnectionTabMessage message)
@@ -149,7 +156,9 @@ namespace Yakuza.JiraClient.ViewModel
          pane.Header = message.Title;
 
          if (message.PaneProperties != null)
+         {
             _customPaneProperties[pane] = message.PaneProperties;
+         }
 
          if (DocumentPanes.Contains(pane) == false)
             DocumentPanes.Add(pane);
