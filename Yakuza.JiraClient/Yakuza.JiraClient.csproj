@@ -159,8 +159,16 @@
     <Compile Include="Controls\SearchIssues.xaml.cs">
       <DependentUpon>SearchIssues.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InternalMessages\UI\ApplicationLoadedMessage.cs" />
+    <Compile Include="InternalMessages\UI\PluginsLoadedMessage.cs" />
+    <Compile Include="InternalMessages\UI\UpdateUiBootstrapMessage.cs" />
+    <Compile Include="InternalMessages\UI\ViewModelInitializedMessage.cs" />
+    <Compile Include="InternalMessages\UI\CoreUserInterfaceLoadedMessage.cs" />
     <Compile Include="Service\Configuration.cs" />
     <Compile Include="Service\ConnectionChecker.cs" />
+    <Compile Include="Service\PluginsLoader.cs" />
+    <Compile Include="Service\UiBootstrapper.cs" />
+    <Compile Include="ViewModel\ICoreViewModel.cs" />
     <Compile Include="ViewModel\IssueListViewModel.cs" />
     <Compile Include="ViewModel\ConnectionViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />

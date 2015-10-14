@@ -10,28 +10,36 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
+using Yakuza.JiraClient.InternalMessages.UI;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class MainViewModel : GalaSoft.MvvmLight.ViewModelBase,
+   internal class MainViewModel : GalaSoft.MvvmLight.ViewModelBase,
+      ICoreViewModel,
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<LoggedOutMessage>,
       IHandleMessage<OpenConnectionTabMessage>,
-      IHandleMessage<ShowDocumentPaneMessage>
+      IHandleMessage<ShowDocumentPaneMessage>,
+      IHandleMessage<UpdateUiBootstrapMessage>,
+      IHandleMessage<ApplicationLoadedMessage>
    {
-      private readonly IMessageBus _messenger;
+      private readonly IMessageBus _messageBus;
       private int _selectedDocumentPaneIndex;
       private int _selectedPropertyPaneIndex;
 
-      public MainViewModel(IMessageBus messenger)
+      public MainViewModel(IMessageBus messageBus)
       {
-         _messenger = messenger;
+         _messageBus = messageBus;
 
          DocumentPanes = new ObservableCollection<RadPane>();
          PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane, CustomPropertyPane };
-         _messenger.Register(this);
+         _messageBus.Register(this);
 
          Application.Current.DispatcherUnhandledException += DispatcherUnhandledException;
+
+         IsBusy = true;
+         BusinessMessage = "Loading application...";
       }
 
       private void DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
@@ -83,7 +91,7 @@ namespace Yakuza.JiraClient.ViewModel
 
       private void UpdatePropertiesPane()
       {
-         if(DocumentPanes.Any() == false)
+         if (DocumentPanes.Any() == false)
          {
             CustomPropertyPane.Content = null;
             SelectedPropertyPaneIndex = 0;
@@ -166,6 +174,25 @@ namespace Yakuza.JiraClient.ViewModel
          FocusDocumentPane(pane);
       }
 
+      public void Handle(UpdateUiBootstrapMessage message)
+      {
+         DispatcherHelper.CheckBeginInvokeOnUI(() => BusinessMessage = message.Message);
+      }
+
+      public void Handle(ApplicationLoadedMessage message)
+      {
+         DispatcherHelper.CheckBeginInvokeOnUI(()=>
+         {
+            IsBusy = false;
+            BusinessMessage = "";
+         });
+      }
+
+      public void OnControlInitialized()
+      {
+         _messageBus.Send(new ViewModelInitializedMessage(this.GetType()));
+      }
+
       public int SelectedPropertyPaneIndex
       {
          get
@@ -179,6 +206,32 @@ namespace Yakuza.JiraClient.ViewModel
          }
       }
 
+      public bool IsBusy
+      {
+         get
+         {
+            return _isBusy;
+         }
+         set
+         {
+            _isBusy = value;
+            RaisePropertyChanged();
+         }
+      }
+
+      public string BusinessMessage
+      {
+         get
+         {
+            return _businessMessage;
+         }
+         set
+         {
+            _businessMessage = value;
+            RaisePropertyChanged();
+         }
+      }
+
       public ObservableCollection<RadPane> DocumentPanes { get; private set; }
       public ObservableCollection<RadPane> PropertyPanes { get; private set; }
 
@@ -187,6 +240,8 @@ namespace Yakuza.JiraClient.ViewModel
       private RadPane _searchPropertyPane;
 
       private RadPane _issueListDocumentPane;
+      private bool _isBusy;
+      private string _businessMessage;
 
       private RadPane SearchPropertyPane
       {

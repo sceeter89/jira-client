@@ -13,10 +13,12 @@ using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api.Messages.Status;
 using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;
+using Yakuza.JiraClient.InternalMessages.UI;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class ConnectionViewModel : ViewModelBase,
+   internal class ConnectionViewModel : ViewModelBase,
+      ICoreViewModel,
       IHandleMessage<ConnectionIsBroken>,
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<LoggedOutMessage>,
@@ -27,30 +29,30 @@ namespace Yakuza.JiraClient.ViewModel
       IHandleMessage<CheckJiraSessionResponse>
    {
       private readonly Configuration _configuration;
-      private readonly IMessageBus _messenger;
+      private readonly IMessageBus _messageBus;
       private bool _isBusy = false;
       private bool _isConnected;
       private bool _isDisconnected;
       private RawProfileDetails _profile;
       private BitmapImage _avatarSource;
 
-      public ConnectionViewModel(IMessageBus messenger, Configuration configuration)
+      public ConnectionViewModel(IMessageBus messageBus, Configuration configuration)
       {
-         _messenger = messenger;
+         _messageBus = messageBus;
          _configuration = configuration;
 
          var checkLoginTimer = new DispatcherTimer();
          checkLoginTimer.Interval = TimeSpan.FromMilliseconds(50);
          checkLoginTimer.Tick += (s, a) =>
          {
-            _messenger.Send(new CheckJiraSessionMessage());
+            _messageBus.Send(new CheckJiraSessionMessage());
             checkLoginTimer.IsEnabled = false;
          };
 
          IsConnected = false;
 
          checkLoginTimer.IsEnabled = true;
-         _messenger.Register(this);
+         _messageBus.Register(this);
       }
 
       private void SetIsBusy(bool isBusy)
@@ -63,30 +65,30 @@ namespace Yakuza.JiraClient.ViewModel
       private void Login(string password)
       {
          SetIsBusy(true);
-         _messenger.LogMessage("Trying to log in JIRA: " + JiraUrl);
-         _messenger.Send(new AttemptLoginMessage(JiraUrl, Username, password));
+         _messageBus.LogMessage("Trying to log in JIRA: " + JiraUrl);
+         _messageBus.Send(new AttemptLoginMessage(JiraUrl, Username, password));
       }
 
       private void Logout()
       {
          SetIsBusy(true);
-         _messenger.LogMessage("Logging out...");
-         _messenger.Send(new LogoutMessage());
+         _messageBus.LogMessage("Logging out...");
+         _messageBus.Send(new LogoutMessage());
       }
 
       public void Handle(ConnectionIsBroken message)
       {
-         _messenger.LogMessage("Connection is broken. Security token might have been invalidated.");
+         _messageBus.LogMessage("Connection is broken. Security token might have been invalidated.");
          if (IsConnected)
          {
-            _messenger.Send(new LoggedOutMessage());
+            _messageBus.Send(new LoggedOutMessage());
          }
          IsConnected = false;
       }
 
       public void Handle(LoggedInMessage message)
       {
-         _messenger.Send(new GetProfileDetailsMessage());
+         _messageBus.Send(new GetProfileDetailsMessage());
          IsConnected = true;
 
          SetIsBusy(false);
@@ -97,7 +99,7 @@ namespace Yakuza.JiraClient.ViewModel
          Profile = null;
          AvatarSource = null;
          IsConnected = false;
-         _messenger.LogMessage("Logged out successfully", LogLevel.Info);
+         _messageBus.LogMessage("Logged out successfully", LogLevel.Info);
 
          SetIsBusy(false);
       }
@@ -105,15 +107,15 @@ namespace Yakuza.JiraClient.ViewModel
       public void Handle(IsLoggedInMessage message)
       {
          if (IsConnected)
-            _messenger.Send(new ConnectionEstablishedMessage(Profile));
+            _messageBus.Send(new ConnectionEstablishedMessage(Profile));
          else
-            _messenger.Send(new ConnectionDownMessage());
+            _messageBus.Send(new ConnectionDownMessage());
       }
 
       public void Handle(GetProfileDetailsResponse message)
       {
          Profile = message.Details;
-         _messenger.Send(new DownloadPictureMessage(Profile.AvatarUrls.Avatar48x48));
+         _messageBus.Send(new DownloadPictureMessage(Profile.AvatarUrls.Avatar48x48));
       }
 
       public void Handle(DownloadPictureResponse message)
@@ -126,14 +128,14 @@ namespace Yakuza.JiraClient.ViewModel
          if (message.Result.WasSuccessful)
          {
             IsConnected = true;
-            _messenger.Send(new LoggedInMessage());
-            _messenger.LogMessage("Logged in successfully!", LogLevel.Info);
+            _messageBus.Send(new LoggedInMessage());
+            _messageBus.LogMessage("Logged in successfully!", LogLevel.Info);
          }
          else
          {
             IsConnected = false;
-            _messenger.Send(new LoggedOutMessage());
-            _messenger.LogMessage("Failed to log in! Reason: " + message.Result.ErrorMessage, LogLevel.Warning);
+            _messageBus.Send(new LoggedOutMessage());
+            _messageBus.LogMessage("Failed to log in! Reason: " + message.Result.ErrorMessage, LogLevel.Warning);
          }
 
          _isBusy = false;
@@ -146,14 +148,19 @@ namespace Yakuza.JiraClient.ViewModel
          if (IsConnected == false && message.Response.IsLoggedIn)
          {
             IsConnected = true;
-            _messenger.LogMessage("Logged in using existing security token.");
-            _messenger.Send(new LoggedInMessage());
+            _messageBus.LogMessage("Logged in using existing security token.");
+            _messageBus.Send(new LoggedInMessage());
          }
          else if (IsConnected && message.Response.IsLoggedIn == false)
          {
             IsConnected = false;
-            _messenger.Send(new LoggedOutMessage());
+            _messageBus.Send(new LoggedOutMessage());
          }
+      }
+
+      public void OnControlInitialized()
+      {
+         _messageBus.Send(new ViewModelInitializedMessage(this.GetType()));
       }
 
       public string JiraUrl

@@ -14,7 +14,7 @@ using Yakuza.JiraClient.Api.Messages.Actions;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class SearchIssuesViewModel : ViewModelBase,
+   internal class SearchIssuesViewModel : ViewModelBase,
       IHandleMessage<SearchForIssuesResponse>,
       IHandleMessage<SearchFailedResponse>,
       IHandleMessage<CurrentSearchResultsMessage>

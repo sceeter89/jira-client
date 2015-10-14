@@ -59,5 +59,12 @@ namespace Yakuza.JiraClient.Messaging
       {
          _allMessagesHandlers.Add(handler);
       }
+
+      public void SendWithReply<TMessage, TReply>(TMessage message)
+         where TMessage : IDirectMessage<TReply>
+         where TReply : IMessage
+      {
+         Send(message);
+      }
    }
 }

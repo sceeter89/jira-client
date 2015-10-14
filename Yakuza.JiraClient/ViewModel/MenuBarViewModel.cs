@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Messaging.Api;
-using System.Linq;
 using GalaSoft.MvvmLight.Command;
 using Yakuza.JiraClient.Api.Messages.Actions;
 using Yakuza.JiraClient.Api;
@@ -12,10 +11,11 @@ using System.Windows.Media.Imaging;
 using Yakuza.JiraClient.Api.Plugins;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Threading;
+using Yakuza.JiraClient.InternalMessages.UI;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class MenuBarViewModel : ViewModelBase,
+   internal class MenuBarViewModel : ViewModelBase,
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<LoggedOutMessage>,
       IHandleMessage<NoUpdatesAvailable>,
@@ -40,6 +40,8 @@ namespace Yakuza.JiraClient.ViewModel
             this.MenuTabs.Add(tab);
             _menuTabsMap[value] = tab;
          }
+         
+         messageBus.Send(new ViewModelInitializedMessage(this.GetType()));
       }
 
       public void Handle(LoggedOutMessage message)

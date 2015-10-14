@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Telerik.Windows.Controls;
+using Yakuza.JiraClient.ViewModel;
 
 namespace Yakuza.JiraClient
 {
@@ -12,6 +13,12 @@ namespace Yakuza.JiraClient
       {
          StyleManager.ApplicationTheme = new Windows8Theme();
          InitializeComponent();
+         Loaded += OnMainWindowLoaded;
+      }
+
+      private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+      {
+         (DataContext as ICoreViewModel).OnControlInitialized();
       }
    }
 }

@@ -11,7 +11,7 @@ using Yakuza.JiraClient.Controls.Panes;
 
 namespace Yakuza.JiraClient.ViewModel
 {
-   public class IssueListViewModel : ViewModelBase,
+   internal class IssueListViewModel : ViewModelBase,
       IHandleMessage<SearchForIssuesResponse>,
       IHandleMessage<GetFilteredIssuesListMessage>
    {

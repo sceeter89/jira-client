@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Api\IHandleAllMessages.cs" />
     <Compile Include="Api\IHandleMessage.cs" />
+    <Compile Include="Api\IDirectMessage.cs" />
     <Compile Include="Api\IMessage.cs" />
     <Compile Include="Api\IMessageBus.cs" />
     <Compile Include="MessageBus.cs" />
