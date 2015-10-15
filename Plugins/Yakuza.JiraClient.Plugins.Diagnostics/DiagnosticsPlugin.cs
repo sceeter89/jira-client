@@ -19,6 +19,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
       private const string ReportIssueSiteAddress = "https://github.com/sceeter89/jira-client/issues/new";
 
       private readonly PluginsViewModel _pluginsViewModel = new PluginsViewModel();
+      private readonly PerformanceOverviewViewModel _performanceOverviewViewModel = new PerformanceOverviewViewModel();
 
       public string PluginName
       {
@@ -49,6 +50,13 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                      OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Plugins",
                                                    new PluginView { DataContext = _pluginsViewModel },
                                                    new PluginsListView {DataContext = _pluginsViewModel}))
+                  },
+                  new MenuEntryButton
+                  {
+                     Label = "performance",
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/PerformanceIcon.png")),
+                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Performance",
+                                                   new PerformanceOverview { DataContext = _performanceOverviewViewModel }))
                   }
                }
          };
@@ -91,6 +99,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
       public IEnumerable<IMicroservice> GetMicroservices()
       {
          yield return _pluginsViewModel;
+         yield return _performanceOverviewViewModel;
       }
    }
 }
