@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.Plugins.Diagnostics.Controls
+﻿namespace LightShell.Plugin.Jira.Diagnostics.Controls
 {
    public partial class PluginView
    {

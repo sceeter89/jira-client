@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Yakuza.JiraClient.Plugins.Diagnostics.Controls
+namespace LightShell.Plugin.Jira.Diagnostics.Controls
 {
    public class NullToInvisibleConverter : IValueConverter
    {

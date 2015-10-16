@@ -48,7 +48,7 @@
                              ItemTemplate="{StaticResource TabTemplate}" ItemsSource="{Binding MenuTabs}">
          </telerik:RadRibbonView>
 
-         <telerik:RadDocking Grid.Row="1">
+         <telerik:RadDocking Grid.Row="1" PreviewClose="PaneClosePreview">
             <telerik:RadDocking.DocumentHost>
                <telerik:RadSplitContainer>
                   <telerik:RadPaneGroup SelectedIndex="{Binding SelectedDocumentPaneIndex, Mode=TwoWay}"  ItemsSource="{Binding DocumentPanes}"/>

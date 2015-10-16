@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Reflection;
 using System.Windows.Media.Imaging;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Api.Messages.IO.Exports;
-using Yakuza.JiraClient.Api.Messages.Navigation;
-using Yakuza.JiraClient.Api.Plugins;
-using Yakuza.JiraClient.Plugins.Diagnostics.Controls;
+using LightShell.Plugin.Jira.Api.Messages.IO.Exports;
+using LightShell.Plugin.Jira.Diagnostics.Controls;
+using LightShell.Api.Plugins;
+using LightShell.Api.Messages.Navigation;
+using LightShell.Api.Messages.IO.Exports;
 
 namespace Yakuza.JiraClient.Plugins.Diagnostics
 {
-   [Export(typeof(IJiraClientPlugin))]
-   public class DiagnosticsPlugin : IJiraClientPlugin
+   [Export(typeof(ILightShellPlugin))]
+   public class DiagnosticsPlugin : ILightShellPlugin
    {
       private const string WebSiteAddress = "https://github.com/sceeter89/jira-client";
       private const string ReportIssueSiteAddress = "https://github.com/sceeter89/jira-client/issues/new";

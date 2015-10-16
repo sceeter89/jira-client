@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Model;
+using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Jira;
-using Yakuza.JiraClient.Api.Model;
-using Yakuza.JiraClient.Messaging.Api;
 
 namespace LightShell.Plugin.Jira.Microservices
 {

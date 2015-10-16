@@ -1,30 +1,21 @@
 ﻿using System;
-using LightShell.Api.Messages.Actions.Authentication;
 using System.Windows.Threading;
-using LightShell.Api.Messages.Actions;
 using LightShell.Messaging.Api;
-using LightShell.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
+using LightShell.Api;
 
 namespace LightShell.Service
 {
-   internal class ConnectionChecker :
+   internal class ConnectionChecker : IMicroservice,
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<LoggedOutMessage>,
       IHandleMessage<CheckJiraSessionResponse>
    {
-      private readonly IMessageBus _messageBus;
-      private readonly DispatcherTimer _timer;
-
-      public ConnectionChecker(IMessageBus messageBus)
-      {
-         _messageBus = messageBus;
-         _timer = new DispatcherTimer();
-         _timer.Interval = TimeSpan.FromSeconds(3);
-         _timer.Tick += CheckTick;
-
-         messageBus.Register(this);
-      }
-
+      private IMessageBus _messageBus;
+      private DispatcherTimer _timer;
+      
       private void CheckTick(object sender, EventArgs e)
       {
          _messageBus.Send(new CheckJiraSessionMessage());
@@ -47,6 +38,17 @@ namespace LightShell.Service
             _messageBus.Send(new ConnectionIsBroken());
             _timer.IsEnabled = false;
          }
+      }
+
+      public void Initialize(IMessageBus messageBus)
+      {
+
+         _messageBus = messageBus;
+         _timer = new DispatcherTimer();
+         _timer.Interval = TimeSpan.FromSeconds(3);
+         _timer.Tick += CheckTick;
+
+         messageBus.Register(this);
       }
    }
 }

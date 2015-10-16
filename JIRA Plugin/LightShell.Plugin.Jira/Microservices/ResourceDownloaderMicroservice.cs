@@ -1,9 +1,9 @@
-﻿using System.IO;
+﻿using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using System.IO;
 using System.Net;
 using System.Windows.Media.Imaging;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Jira;
-using Yakuza.JiraClient.Messaging.Api;
 
 namespace LightShell.Plugin.Jira.Microservices
 {

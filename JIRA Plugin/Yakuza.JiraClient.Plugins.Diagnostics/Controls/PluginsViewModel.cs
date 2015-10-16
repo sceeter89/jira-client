@@ -2,13 +2,14 @@
 using LightShell.Api;
 using LightShell.Api.Messages.IO.Plugins;
 using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 
-namespace Yakuza.JiraClient.Plugins.Diagnostics.Controls
+namespace LightShell.Plugin.Jira.Diagnostics.Controls
 {
    public class PluginsViewModel : ViewModelBase,
       IMicroservice,

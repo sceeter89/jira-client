@@ -6,6 +6,7 @@ using LightShell.Messaging.Api;
 using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
 using LightShell.Plugin.Jira.Api.Model;
 using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
+using LightShell.Plugin.Jira.Api;
 
 namespace LightShell.Plugin.Jira.Microservices
 {

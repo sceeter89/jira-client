@@ -1,8 +1,6 @@
-using LightShell.Controls;
 using System.Collections.ObjectModel;
 using Telerik.Windows.Controls;
 using LightShell.Api.Messages.Navigation;
-using LightShell.Api.Messages.Actions.Authentication;
 using System.Reflection;
 using LightShell.Messaging.Api;
 using System;
@@ -17,10 +15,12 @@ namespace LightShell.ViewModel
 {
    internal class MainViewModel : GalaSoft.MvvmLight.ViewModelBase,
       ICoreViewModel,
-      IHandleMessage<LoggedInMessage>,
-      IHandleMessage<LoggedOutMessage>,
-      IHandleMessage<OpenConnectionTabMessage>,
       IHandleMessage<ShowDocumentPaneMessage>,
+      IHandleMessage<ShowPropertyPaneMessage>,
+      IHandleMessage<RemoveDocumentPaneMessage>,
+      IHandleMessage<RemovePropertyPaneMessage>,
+      IHandleMessage<ClearDocumentPanesMessage>,
+      IHandleMessage<ClearPropertyPanesMessage>,
       IHandleMessage<UpdateUiBootstrapMessage>,
       IHandleMessage<ApplicationLoadedMessage>
    {
@@ -56,11 +56,11 @@ namespace LightShell.ViewModel
          //Most probably user attempted to close active DocumentPane, so let's do it for him
          var pane = DocumentPanes[SelectedDocumentPaneIndex];
          DocumentPanes.Remove(pane);
-         if (_customPanes.Values.Contains(pane))
+         if (_customDocumentPanes.Values.Contains(pane))
          {
-            var customPaneKey = _customPanes.First(x => x.Value == pane).Key;
-            _customPanes.Remove(customPaneKey);
-            _customPaneProperties.Remove(pane);
+            var customPaneKey = _customDocumentPanes.First(x => x.Value == pane).Key;
+            _customDocumentPanes.Remove(customPaneKey);
+            _customDocumentPaneProperties.Remove(pane);
          }
 
          e.Handled = true;
@@ -98,15 +98,15 @@ namespace LightShell.ViewModel
             return;
          }
          var documentPane = DocumentPanes[SelectedDocumentPaneIndex];
-         if (_customPaneProperties.ContainsKey(documentPane) == false
-            || _customPaneProperties[documentPane] == null)
+         if (_customDocumentPaneProperties.ContainsKey(documentPane) == false
+            || _customDocumentPaneProperties[documentPane] == null)
          {
             CustomPropertyPane.Content = null;
             FocusPropertyPane(SearchPropertyPane);
             return;
          }
 
-         CustomPropertyPane.Content = _customPaneProperties[documentPane];
+         CustomPropertyPane.Content = _customDocumentPaneProperties[documentPane];
          FocusPropertyPane(CustomPropertyPane);
       }
 
@@ -120,60 +120,6 @@ namespace LightShell.ViewModel
          SelectedDocumentPaneIndex = DocumentPanes.IndexOf(pane);
       }
 
-      public void Handle(LoggedInMessage message)
-      {
-         DocumentPanes.Clear();
-         DocumentPanes.Add(IssueListDocumentPane);
-         FocusDocumentPane(IssueListDocumentPane);
-
-         PropertyPanes.Clear();
-         PropertyPanes.Add(SearchPropertyPane);
-         PropertyPanes.Add(ConnectionPropertyPane);
-         PropertyPanes.Add(CustomPropertyPane);
-         FocusPropertyPane(SearchPropertyPane);
-      }
-
-      public void Handle(LoggedOutMessage message)
-      {
-         DocumentPanes.Clear();
-         PropertyPanes.Clear();
-         PropertyPanes.Add(ConnectionPropertyPane);
-         PropertyPanes.Add(CustomPropertyPane);
-      }
-
-      public void Handle(OpenConnectionTabMessage message)
-      {
-         FocusPropertyPane(ConnectionPropertyPane);
-      }
-
-      private readonly IDictionary<string, RadPane> _customPanes = new Dictionary<string, RadPane>();
-      private readonly IDictionary<RadPane, UserControl> _customPaneProperties = new Dictionary<RadPane, UserControl>();
-      public void Handle(ShowDocumentPaneMessage message)
-      {
-         var paneKey = string.Format("{0}_{1}", message.Sender.GetType().AssemblyQualifiedName, message.Title);
-         if (_customPanes.ContainsKey(paneKey) == false || _customPanes[paneKey] == null)
-         {
-            var newPane = new RadPane();
-            newPane.CanDockInDocumentHost = true;
-
-            _customPanes[paneKey] = newPane;
-         }
-
-         var pane = _customPanes[paneKey];
-         pane.Content = message.PaneContent;
-         pane.Header = message.Title;
-
-         if (message.PaneProperties != null)
-         {
-            _customPaneProperties[pane] = message.PaneProperties;
-         }
-
-         if (DocumentPanes.Contains(pane) == false)
-            DocumentPanes.Add(pane);
-
-         FocusDocumentPane(pane);
-      }
-
       public void Handle(UpdateUiBootstrapMessage message)
       {
          DispatcherHelper.CheckBeginInvokeOnUI(() => BusinessMessage = message.Message);
@@ -181,7 +127,7 @@ namespace LightShell.ViewModel
 
       public void Handle(ApplicationLoadedMessage message)
       {
-         DispatcherHelper.CheckBeginInvokeOnUI(()=>
+         DispatcherHelper.CheckBeginInvokeOnUI(() =>
          {
             IsBusy = false;
             BusinessMessage = "";
@@ -191,6 +137,98 @@ namespace LightShell.ViewModel
       public void OnControlInitialized()
       {
          _messageBus.Send(new ViewModelInitializedMessage(this.GetType()));
+      }
+
+      private readonly IDictionary<string, RadPane> _customDocumentPanes = new Dictionary<string, RadPane>();
+      private readonly IDictionary<string, RadPane> _customPropertyPanes = new Dictionary<string, RadPane>();
+      private readonly IDictionary<RadPane, UserControl> _customDocumentPaneProperties = new Dictionary<RadPane, UserControl>();
+      public void Handle(ShowDocumentPaneMessage message)
+      {
+         var paneKey = string.Format("{0}_{1}_{2}", message.Sender.GetType().AssemblyQualifiedName, message.Sender.GetType().FullName, message.Title);
+         if (_customDocumentPanes.ContainsKey(paneKey) == false || _customDocumentPanes[paneKey] == null)
+         {
+            var newPane = new RadPane();
+            newPane.CanDockInDocumentHost = true;
+
+            _customDocumentPanes[paneKey] = newPane;
+         }
+
+         var pane = _customDocumentPanes[paneKey];
+         pane.Content = message.PaneContent;
+         pane.Header = message.Title;
+
+         if (message.PaneProperties != null)
+         {
+            _customDocumentPaneProperties[pane] = message.PaneProperties;
+         }
+
+         if (DocumentPanes.Contains(pane) == false)
+            DocumentPanes.Add(pane);
+
+         FocusDocumentPane(pane);
+      }
+
+      public void Handle(ShowPropertyPaneMessage message)
+      {
+         var paneKey = string.Format("{0}_{1}_{2}", message.Sender.GetType().AssemblyQualifiedName, message.Sender.GetType().FullName, message.Title);
+         if (_customPropertyPanes.ContainsKey(paneKey) == false || _customPropertyPanes[paneKey] == null)
+         {
+            var newPane = new RadPane();
+            newPane.CanDockInDocumentHost = false;
+            newPane.CanUserClose = message.IsUserCloseable;
+
+            _customPropertyPanes[paneKey] = newPane;
+         }
+
+         var pane = _customPropertyPanes[paneKey];
+         pane.Content = message.PaneContent;
+         pane.Header = message.Title;
+
+         if (PropertyPanes.Contains(pane) == false)
+            PropertyPanes.Add(pane);
+
+         FocusDocumentPane(pane);
+      }
+
+      public void Handle(RemoveDocumentPaneMessage message)
+      {
+         var paneKey = string.Format("{0}_{1}_{2}", message.Sender.GetType().AssemblyQualifiedName, message.Sender.GetType().FullName, message.Title);
+
+         if (_customDocumentPanes.ContainsKey(paneKey) == false)
+            return;
+         
+
+         var pane = _customDocumentPanes[paneKey];
+         _customDocumentPaneProperties.Remove(pane);
+         DocumentPanes.Remove(pane);
+         _customDocumentPanes.Remove(paneKey);
+      }
+
+      public void Handle(RemovePropertyPaneMessage message)
+      {
+         var paneKey = string.Format("{0}_{1}_{2}", message.Sender.GetType().AssemblyQualifiedName, message.Sender.GetType().FullName, message.Title);
+
+         if(_customPropertyPanes.ContainsKey(paneKey) == false)
+            return;
+
+         var pane = _customPropertyPanes[paneKey];
+         _customPropertyPanes.Remove(paneKey);
+         PropertyPanes.Remove(pane);
+      }
+
+      public void Handle(ClearDocumentPanesMessage message)
+      {
+         throw new NotImplementedException();
+      }
+
+      public void Handle(ClearPropertyPanesMessage message)
+      {
+         throw new NotImplementedException();
+      }
+
+      public void PaneCloseAttempt(RadPane pane)
+      {
+         //TODO: Remove appropriate pane from appropriate section
       }
 
       public int SelectedPropertyPaneIndex

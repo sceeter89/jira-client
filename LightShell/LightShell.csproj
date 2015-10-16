@@ -136,28 +136,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Controls\Converters\NullToCollapsedConverter.cs" />
-    <Compile Include="Controls\IssueDetails.xaml.cs">
-      <DependentUpon>IssueDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IssueListDisplay.xaml.cs">
-      <DependentUpon>IssueListDisplay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ConnectionManager.xaml.cs">
-      <DependentUpon>ConnectionManager.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\LogViewer.xaml.cs">
       <DependentUpon>LogViewer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SearchFields\ComboBoxSearchField.cs" />
-    <Compile Include="Controls\SearchFields\ComboBoxSearchFieldControl.xaml.cs">
-      <DependentUpon>ComboBoxSearchFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SearchFields\SearchBySprintField.cs" />
-    <Compile Include="Controls\SearchFields\SearchBySprintFieldControl.xaml.cs">
-      <DependentUpon>SearchBySprintFieldControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SearchIssues.xaml.cs">
-      <DependentUpon>SearchIssues.xaml</DependentUpon>
     </Compile>
     <Compile Include="InternalMessages\UI\ApplicationLoadedMessage.cs" />
     <Compile Include="InternalMessages\UI\PluginsLoadedMessage.cs" />
@@ -167,38 +147,11 @@
     <Compile Include="Service\PluginsLoader.cs" />
     <Compile Include="Service\UiBootstrapper.cs" />
     <Compile Include="ViewModel\ICoreViewModel.cs" />
-    <Compile Include="ViewModel\IssueListViewModel.cs" />
-    <Compile Include="ViewModel\ConnectionViewModel.cs" />
     <Compile Include="ViewModel\LogViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuBarViewModel.cs" />
-    <Compile Include="ViewModel\SearchIssuesViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="Controls\IssueDetails.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\IssueListDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ConnectionManager.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\LogViewer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\SearchFields\ComboBoxSearchFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\SearchFields\SearchBySprintFieldControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\SearchIssues.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

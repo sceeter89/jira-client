@@ -73,7 +73,12 @@
     <Compile Include="Messages\Actions\LogMessage.cs" />
     <Compile Include="Messages\IO\Exports\SaveLogOutputToFileMessage.cs" />
     <Compile Include="Messages\IO\Plugins\NewPluginFoundMessage.cs" />
+    <Compile Include="Messages\Navigation\ClearDocumentPanesMessage.cs" />
+    <Compile Include="Messages\Navigation\ClearPropertyPanesMessage.cs" />
+    <Compile Include="Messages\Navigation\RemoveDocumentPaneMessage.cs" />
+    <Compile Include="Messages\Navigation\RemovePropertyPaneMessage.cs" />
     <Compile Include="Messages\Navigation\ShowDocumentPaneMessage.cs" />
+    <Compile Include="Messages\Navigation\ShowPropertyPaneMessage.cs" />
     <Compile Include="MessengerExtensions.cs" />
     <Compile Include="Plugins\ILightShellPlugin.cs" />
     <Compile Include="Plugins\MenuEntryButton.cs" />

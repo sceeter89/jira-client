@@ -41,6 +41,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,19 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ConnectionManager.xaml.cs">
+      <DependentUpon>ConnectionManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConnectionViewModel.cs" />
+    <Compile Include="Controls\IssueDetails.xaml.cs">
+      <DependentUpon>IssueDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IssueListDisplay.xaml.cs">
+      <DependentUpon>IssueListDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IssueListViewModel.cs" />
+    <Compile Include="Controls\SearchIssuesViewModel.cs" />
+    <Compile Include="JiraPlugin.cs" />
     <Compile Include="Microservices\Configuration.cs" />
     <Compile Include="Microservices\ConnectionChecker.cs" />
     <Compile Include="Microservices\IssuesSearchMicroservice.cs" />
@@ -64,6 +78,18 @@
     <Compile Include="Microservices\ResourceDownloaderMicroservice.cs" />
     <Compile Include="Microservices\SessionInteractionMicroservice.cs" />
     <Compile Include="Microservices\RestMicroserviceBase.cs" />
+    <Compile Include="Controls\SearchFields\ComboBoxSearchField.cs" />
+    <Compile Include="Controls\SearchFields\ComboBoxSearchFieldControl.xaml.cs">
+      <DependentUpon>ComboBoxSearchFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchFields\SearchBySprintField.cs" />
+    <Compile Include="Controls\SearchFields\SearchBySprintFieldControl.xaml.cs">
+      <DependentUpon>SearchBySprintFieldControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchIssues.xaml.cs">
+      <DependentUpon>SearchIssues.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Microservices\UiManager.cs" />
     <Compile Include="Updates\CheckForUpdatesMicroservice.cs" />
     <Compile Include="Updates\GithubReleasesResponse.cs" />
   </ItemGroup>
@@ -106,6 +132,32 @@
       <Project>{d666c6bd-8893-4b39-af80-39106349f083}</Project>
       <Name>LightShell.Plugin.Jira.Api</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\ConnectionManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\IssueDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\IssueListDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchFields\ComboBoxSearchFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchFields\SearchBySprintFieldControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchIssues.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

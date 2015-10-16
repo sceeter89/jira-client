@@ -138,6 +138,10 @@
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>LightShell.Messaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LightShell.Plugin.Jira.Api\LightShell.Plugin.Jira.Api.csproj">
+      <Project>{d666c6bd-8893-4b39-af80-39106349f083}</Project>
+      <Name>LightShell.Plugin.Jira.Api</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\PerformanceOverview.xaml">
