@@ -1,7 +1,7 @@
-﻿using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Messaging.Api;
+﻿using LightShell.Api.Messages.Actions;
+using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.Api
+namespace LightShell.Api
 {
    public static class MessengerExtensions
    {

@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using LightShell.Plugin.Jira.Api.Model;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Markup;
-using Yakuza.JiraClient.Api.Model;
 
-namespace Yakuza.JiraClient.Plugins.Agile.Controls
+namespace LightShell.Plugin.Jira.Agile.Controls
 {
    public partial class CardsPrintPreview : UserControl
    {

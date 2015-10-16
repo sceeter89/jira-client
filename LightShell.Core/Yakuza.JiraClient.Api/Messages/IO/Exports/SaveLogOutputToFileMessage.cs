@@ -1,4 +1,4 @@
-﻿using Yakuza.JiraClient.Messaging.Api;
+﻿using LightShell.Messaging.Api;
 
 namespace Yakuza.JiraClient.Api.Messages.IO.Exports
 {

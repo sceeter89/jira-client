@@ -1,4 +1,4 @@
-﻿using Yakuza.JiraClient.Api;
+﻿using LightShell.Api;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
 using System.Linq;
@@ -6,13 +6,13 @@ using GalaSoft.MvvmLight;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Api.Messages.Status;
+using LightShell.Api.Messages.Actions.Authentication;
+using LightShell.Api.Messages.Status;
 using System;
 using System.Collections.Generic;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.IssueFields.Search
+namespace LightShell.IssueFields.Search
 {
    public class ComboBoxSearchField<TItemType, TRequestType, TResponseType> : ViewModelBase, ISearchableField,
       IHandleMessage<LoggedInMessage>,

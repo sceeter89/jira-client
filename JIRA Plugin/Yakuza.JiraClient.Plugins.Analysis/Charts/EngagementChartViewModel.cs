@@ -1,20 +1,19 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
+using LightShell.Api;
+using LightShell.Api.Messages.Navigation;
+using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
+using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Controls.Primitives;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Api.Messages.IO.Jira;
-using Yakuza.JiraClient.Api.Messages.Navigation;
-using Yakuza.JiraClient.Api.Model;
-using Yakuza.JiraClient.Messaging.Api;
 using Yakuza.JiraClient.Plugins.Analysis.Charts;
 
-namespace Yakuza.JiraClient.Plugins.Analysis
+namespace LightShell.Plugin.Jira.Analysis.Charts
 {
    public class EngagementChartViewModel : IMicroservice,
       IHandleMessage<LoggedInMessage>,
@@ -85,7 +84,8 @@ namespace Yakuza.JiraClient.Plugins.Analysis
       public void Initialize(IMessageBus messageBus)
       {
          messageBus.Register(this);
-         messageBus.Send(new Is)
+         //messageBus.Send(new Is)
+         //TODO: create RelayCommand inheritor to handle all complexity in determining whether user is connected or not to JIRA
          OpenWindowCommand = new RelayCommand(()=>
          {
             messageBus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",

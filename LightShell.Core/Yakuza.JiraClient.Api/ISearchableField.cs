@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Yakuza.JiraClient.Api
+namespace LightShell.Api
 {
    public interface ISearchableField
    {

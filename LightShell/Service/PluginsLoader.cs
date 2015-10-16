@@ -4,13 +4,13 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Threading.Tasks;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Plugins;
-using Yakuza.JiraClient.Api.Plugins;
-using Yakuza.JiraClient.InternalMessages.UI;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Api;
+using LightShell.Api.Messages.IO.Plugins;
+using LightShell.Api.Plugins;
+using LightShell.InternalMessages.UI;
+using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.Service
+namespace LightShell.Service
 {
    internal class PluginsLoader :
       IHandleMessage<CoreUserInterfaceLoadedMessage>
@@ -23,7 +23,7 @@ namespace Yakuza.JiraClient.Service
       }
 
       [ImportMany]
-      private IEnumerable<Lazy<IJiraClientPlugin>> _pluginDefinitions;
+      private IEnumerable<Lazy<ILightShellPlugin>> _pluginDefinitions;
       private readonly IList<IMicroservice> _loadedMicroservices = new List<IMicroservice>();
       private CompositionContainer _container;
       private readonly IMessageBus _messageBus;

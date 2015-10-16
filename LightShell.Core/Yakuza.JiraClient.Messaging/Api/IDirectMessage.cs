@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.Messaging.Api
+﻿namespace LightShell.Messaging.Api
 {
    public interface IDirectMessage<TReplyType> : IMessage
                                     where TReplyType : IMessage

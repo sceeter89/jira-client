@@ -1,15 +1,15 @@
 ﻿using GalaSoft.MvvmLight;
-using Yakuza.JiraClient.Api.Model;
-using Yakuza.JiraClient.Api.Messages.Actions;
+using LightShell.Api.Model;
+using LightShell.Api.Messages.Actions;
 using Telerik.Windows.Data;
 using System.Linq;
-using Yakuza.JiraClient.Messaging.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Jira;
+using LightShell.Messaging.Api;
+using LightShell.Api.Messages.IO.Jira;
 using GalaSoft.MvvmLight.Command;
-using Yakuza.JiraClient.Api.Messages.Navigation;
-using Yakuza.JiraClient.Controls.Panes;
+using LightShell.Api.Messages.Navigation;
+using LightShell.Controls.Panes;
 
-namespace Yakuza.JiraClient.ViewModel
+namespace LightShell.ViewModel
 {
    internal class IssueListViewModel : ViewModelBase,
       IHandleMessage<SearchForIssuesResponse>,

@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.Controls.Panes
+﻿namespace LightShell.Controls.Panes
 {
    public partial class IssueDetails
    {

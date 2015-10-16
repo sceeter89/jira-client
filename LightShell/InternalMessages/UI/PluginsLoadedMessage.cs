@@ -1,6 +1,6 @@
-﻿using Yakuza.JiraClient.Messaging.Api;
+﻿using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.InternalMessages.UI
+namespace LightShell.InternalMessages.UI
 {
    internal class PluginsLoadedMessage : IMessage
    {

@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.Api.Plugins
+﻿namespace LightShell.Api.Plugins
 {
    public enum MenuTab
    {

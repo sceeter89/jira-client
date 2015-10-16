@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.Api
+﻿namespace LightShell.Api
 {
    public enum LogLevel
    {

@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Threading;
-using Yakuza.JiraClient.Properties;
+using LightShell.Properties;
 using System.Windows;
 
-namespace Yakuza.JiraClient
+namespace LightShell
 {
    /// <summary>
    /// Interaction logic for App.xaml

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
-using Yakuza.JiraClient.ViewModel;
+using LightShell.ViewModel;
 
-namespace Yakuza.JiraClient.Controls
+namespace LightShell.Controls
 {
    public partial class IssueListDisplay : UserControl
    {

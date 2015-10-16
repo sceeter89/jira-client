@@ -1,15 +1,15 @@
 ﻿using GalaSoft.MvvmLight;
 using Telerik.Pivot.Core;
 using System.Linq;
-using Yakuza.JiraClient.Api.Model;
-using Yakuza.JiraClient.Messaging.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Jira;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Api;
 using GalaSoft.MvvmLight.Threading;
 using System.Collections.Generic;
+using LightShell.Api;
+using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
+using LightShell.Plugin.Jira.Api.Model;
 
-namespace Yakuza.JiraClient.Plugins.Analysis.Analysis
+namespace LightShell.Plugin.Jira.Analysis.Analysis
 {
    public class PivotGridViewModel : ViewModelBase,
       IMicroservice,

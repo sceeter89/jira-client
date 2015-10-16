@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Yakuza.JiraClient.Messaging.Api
+namespace LightShell.Messaging.Api
 {
    public interface IMessageBus
    {

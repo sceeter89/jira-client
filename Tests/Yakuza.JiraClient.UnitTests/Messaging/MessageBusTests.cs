@@ -1,9 +1,8 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using Yakuza.JiraClient.Messaging;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Messaging;
+using LightShell.Messaging.Api;
 
 namespace Yakuza.JiraClient.UnitTests.Messaging
 {

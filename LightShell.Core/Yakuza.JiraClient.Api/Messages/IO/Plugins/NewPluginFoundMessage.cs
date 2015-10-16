@@ -1,15 +1,15 @@
-﻿using Yakuza.JiraClient.Api.Plugins;
-using Yakuza.JiraClient.Messaging.Api;
+﻿using LightShell.Api.Plugins;
+using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.Api.Messages.IO.Plugins
+namespace LightShell.Api.Messages.IO.Plugins
 {
    public class NewPluginFoundMessage : IMessage
    {
-      public NewPluginFoundMessage(IJiraClientPlugin pluginDescription)
+      public NewPluginFoundMessage(ILightShellPlugin pluginDescription)
       {
          PluginDescription = pluginDescription;
       }
 
-      public IJiraClientPlugin PluginDescription { get; private set; }
+      public ILightShellPlugin PluginDescription { get; private set; }
    }
 }

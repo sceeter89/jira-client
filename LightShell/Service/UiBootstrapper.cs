@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Yakuza.JiraClient.InternalMessages.UI;
-using Yakuza.JiraClient.Messaging.Api;
-using Yakuza.JiraClient.ViewModel;
+using LightShell.InternalMessages.UI;
+using LightShell.Messaging.Api;
+using LightShell.ViewModel;
 
-namespace Yakuza.JiraClient.Service
+namespace LightShell.Service
 {
    internal class UiBootstrapper :
       IHandleMessage<ViewModelInitializedMessage>,

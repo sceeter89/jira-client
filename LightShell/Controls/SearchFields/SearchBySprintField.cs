@@ -1,4 +1,4 @@
-﻿using Yakuza.JiraClient.Api;
+﻿using LightShell.Api;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
 using System.Linq;
@@ -6,13 +6,13 @@ using GalaSoft.MvvmLight;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using Yakuza.JiraClient.Api.Model;
-using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Api.Messages.Status;
-using Yakuza.JiraClient.Messaging.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Jira;
+using LightShell.Api.Model;
+using LightShell.Api.Messages.Actions.Authentication;
+using LightShell.Api.Messages.Status;
+using LightShell.Messaging.Api;
+using LightShell.Api.Messages.IO.Jira;
 
-namespace Yakuza.JiraClient.IssueFields.Search
+namespace LightShell.IssueFields.Search
 {
    public class SearchBySprintField : ViewModelBase, ISearchableField,
       IHandleMessage<LoggedInMessage>,

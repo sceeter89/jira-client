@@ -1,13 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
+using LightShell.Api;
+using LightShell.Api.Messages.IO.Plugins;
+using LightShell.Messaging.Api;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Api.Messages.IO.Plugins;
-using Yakuza.JiraClient.Messaging.Api;
 
 namespace Yakuza.JiraClient.Plugins.Diagnostics.Controls
 {

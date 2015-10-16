@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.Api.Plugins
+namespace LightShell.Api.Plugins
 {
    public class MenuEntryButton
    {

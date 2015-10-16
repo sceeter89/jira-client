@@ -1,11 +1,11 @@
 using Autofac;
 using System.Reflection;
-using Yakuza.JiraClient.Messaging;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Messaging;
+using LightShell.Api;
+using LightShell.Messaging.Api;
 using GalaSoft.MvvmLight;
 
-namespace Yakuza.JiraClient.ViewModel
+namespace LightShell.ViewModel
 {
    internal class ViewModelLocator
    {
@@ -77,7 +77,7 @@ namespace Yakuza.JiraClient.ViewModel
          var builder = new ContainerBuilder();
 
          var clientAssembly = Assembly.Load("Jira Client");
-         var ioAssembly = Assembly.Load("Yakuza.JiraClient.IO");
+         var ioAssembly = Assembly.Load("LightShell.IO");
 
          var messageBus = new MessageBus();
 
@@ -93,7 +93,7 @@ namespace Yakuza.JiraClient.ViewModel
 
          //Register and run background services
          builder.RegisterAssemblyTypes(clientAssembly)
-            .InNamespace("Yakuza.JiraClient.Service")
+            .InNamespace("LightShell.Service")
             .AsImplementedInterfaces()
             .AsSelf()
             .SingleInstance()

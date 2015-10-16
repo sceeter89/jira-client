@@ -1,18 +1,18 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Yakuza.JiraClient.Api;
+using LightShell.Api;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
-using Yakuza.JiraClient.Api.Model;
-using Yakuza.JiraClient.IssueFields.Search;
-using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Messaging.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Jira;
+using LightShell.Api.Model;
+using LightShell.IssueFields.Search;
+using LightShell.Api.Messages.Actions.Authentication;
+using LightShell.Messaging.Api;
+using LightShell.Api.Messages.IO.Jira;
 using System.Windows;
-using Yakuza.JiraClient.Api.Messages.Actions;
+using LightShell.Api.Messages.Actions;
 
-namespace Yakuza.JiraClient.ViewModel
+namespace LightShell.ViewModel
 {
    internal class SearchIssuesViewModel : ViewModelBase,
       IHandleMessage<SearchForIssuesResponse>,

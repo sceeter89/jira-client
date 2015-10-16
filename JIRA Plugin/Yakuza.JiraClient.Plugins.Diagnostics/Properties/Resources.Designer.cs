@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Yakuza.JiraClient.Plugins.Diagnostics.Properties {
+namespace LightShell.Plugin.Jira.Diagnostics.Properties {
+    using System;
     
     
     /// <summary>
@@ -37,8 +38,8 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics.Properties {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if ((resourceMan == null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Yakuza.JiraClient.Plugins.Diagnostics.Properties.Resources", typeof(Resources).Assembly);
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LightShell.Plugin.Jira.Diagnostics.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

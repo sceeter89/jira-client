@@ -3,27 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient", "LightShell\Yakuza.JiraClient.csproj", "{97C43D4E-239B-401E-AC7A-F52F24D4CD64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell", "LightShell\LightShell.csproj", "{97C43D4E-239B-401E-AC7A-F52F24D4CD64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Api", "LightShell.Core\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj", "{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Api", "LightShell.Core\Yakuza.JiraClient.Api\LightShell.Api.csproj", "{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Messaging", "LightShell.Core\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj", "{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Messaging", "LightShell.Core\Yakuza.JiraClient.Messaging\LightShell.Messaging.csproj", "{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05CBDD8C-9F84-496F-A54D-6406468A047B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.UnitTests", "Tests\Yakuza.JiraClient.UnitTests\Yakuza.JiraClient.UnitTests.csproj", "{3BAEF616-C997-4B97-9BC7-01B4641C11AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.IO", "LightShell.Core\Yakuza.JiraClient.IO\Yakuza.JiraClient.IO.csproj", "{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Jira.Analysis", "JIRA Plugin\Yakuza.JiraClient.Plugins.Analysis\LightShell.Plugin.Jira.Analysis.csproj", "{E3B2571E-D4DE-416A-93B5-33DFE37E732C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Analysis", "JIRA Plugin\Yakuza.JiraClient.Plugins.Analysis\Yakuza.JiraClient.Plugins.Analysis.csproj", "{E3B2571E-D4DE-416A-93B5-33DFE37E732C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Diagnostics", "JIRA Plugin\Yakuza.JiraClient.Plugins.Diagnostics\Yakuza.JiraClient.Plugins.Diagnostics.csproj", "{5B62120A-19F0-4487-9D46-6E0CADDBB206}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Jira.Diagnostics", "JIRA Plugin\Yakuza.JiraClient.Plugins.Diagnostics\LightShell.Plugin.Jira.Diagnostics.csproj", "{5B62120A-19F0-4487-9D46-6E0CADDBB206}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JIRA Plugin", "JIRA Plugin", "{711D570D-C54B-42DA-B51F-FF51D6128AC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yakuza.JiraClient.Plugins.Agile", "JIRA Plugin\Yakuza.JiraClient.Plugins.Agile\Yakuza.JiraClient.Plugins.Agile.csproj", "{08031EED-CF59-43F6-ADD3-D906CE439ADD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Jira.Agile", "JIRA Plugin\Yakuza.JiraClient.Plugins.Agile\LightShell.Plugin.Jira.Agile.csproj", "{08031EED-CF59-43F6-ADD3-D906CE439ADD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{60BD53AA-85EB-4133-BA9E-771A49B149C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Jira", "JIRA Plugin\LightShell.Plugin.Jira\LightShell.Plugin.Jira.csproj", "{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Jira.Api", "JIRA Plugin\LightShell.Plugin.Jira.Api\LightShell.Plugin.Jira.Api.csproj", "{D666C6BD-8893-4B39-AF80-39106349F083}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,12 +59,6 @@ Global
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|Any CPU.ActiveCfg = Release|x86
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|x86.ActiveCfg = Release|x86
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD}.Release|x86.Build.0 = Release|x86
-		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Debug|x86.ActiveCfg = Debug|x86
-		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Debug|x86.Build.0 = Debug|x86
-		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Release|Any CPU.ActiveCfg = Release|x86
-		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Release|x86.ActiveCfg = Release|x86
-		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912}.Release|x86.Build.0 = Release|x86
 		{E3B2571E-D4DE-416A-93B5-33DFE37E732C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3B2571E-D4DE-416A-93B5-33DFE37E732C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3B2571E-D4DE-416A-93B5-33DFE37E732C}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -87,6 +83,22 @@ Global
 		{08031EED-CF59-43F6-ADD3-D906CE439ADD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08031EED-CF59-43F6-ADD3-D906CE439ADD}.Release|x86.ActiveCfg = Release|Any CPU
 		{08031EED-CF59-43F6-ADD3-D906CE439ADD}.Release|x86.Build.0 = Release|Any CPU
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6}.Release|x86.Build.0 = Release|Any CPU
+		{D666C6BD-8893-4B39-AF80-39106349F083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D666C6BD-8893-4B39-AF80-39106349F083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D666C6BD-8893-4B39-AF80-39106349F083}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D666C6BD-8893-4B39-AF80-39106349F083}.Debug|x86.Build.0 = Debug|Any CPU
+		{D666C6BD-8893-4B39-AF80-39106349F083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D666C6BD-8893-4B39-AF80-39106349F083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D666C6BD-8893-4B39-AF80-39106349F083}.Release|x86.ActiveCfg = Release|Any CPU
+		{D666C6BD-8893-4B39-AF80-39106349F083}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,9 +107,10 @@ Global
 		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98} = {60BD53AA-85EB-4133-BA9E-771A49B149C5}
 		{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4} = {60BD53AA-85EB-4133-BA9E-771A49B149C5}
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD} = {05CBDD8C-9F84-496F-A54D-6406468A047B}
-		{FCBE50BC-7CC8-4C86-BEE9-6F86FF34A912} = {60BD53AA-85EB-4133-BA9E-771A49B149C5}
 		{E3B2571E-D4DE-416A-93B5-33DFE37E732C} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 		{5B62120A-19F0-4487-9D46-6E0CADDBB206} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 		{08031EED-CF59-43F6-ADD3-D906CE439ADD} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
+		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
+		{D666C6BD-8893-4B39-AF80-39106349F083} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using Telerik.Windows.Controls;
-using Yakuza.JiraClient.ViewModel;
+using LightShell.ViewModel;
 
-namespace Yakuza.JiraClient
+namespace LightShell
 {
    /// <summary>
    /// Interaction logic for MainWindow.xaml

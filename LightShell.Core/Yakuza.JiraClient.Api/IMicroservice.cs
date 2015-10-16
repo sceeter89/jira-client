@@ -1,6 +1,6 @@
-﻿using Yakuza.JiraClient.Messaging.Api;
+﻿using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.Api
+namespace LightShell.Api
 {
    public interface IMicroservice
    {

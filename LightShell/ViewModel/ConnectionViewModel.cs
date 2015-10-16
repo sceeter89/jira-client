@@ -1,21 +1,21 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Model;
-using Yakuza.JiraClient.Service;
+using LightShell.Api;
+using LightShell.Api.Model;
+using LightShell.Service;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Api.Messages.Status;
-using Yakuza.JiraClient.Messaging.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Jira;
-using Yakuza.JiraClient.InternalMessages.UI;
+using LightShell.Api.Messages.Actions.Authentication;
+using LightShell.Api.Messages.Actions;
+using LightShell.Api.Messages.Status;
+using LightShell.Messaging.Api;
+using LightShell.Api.Messages.IO.Jira;
+using LightShell.InternalMessages.UI;
 
-namespace Yakuza.JiraClient.ViewModel
+namespace LightShell.ViewModel
 {
    internal class ConnectionViewModel : ViewModelBase,
       ICoreViewModel,

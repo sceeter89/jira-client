@@ -1,15 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Threading;
+using LightShell.Api;
+using LightShell.Messaging.Api;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Windows.Data;
 using System.Windows.Threading;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Messaging.Api;
 
-namespace Yakuza.JiraClient.Plugins.Diagnostics.Controls
+namespace LightShell.Plugin.Jira.Diagnostics.Controls
 {
    public class PerformanceOverviewViewModel : IMicroservice,
       IHandleAllMessages

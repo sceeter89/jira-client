@@ -1,20 +1,20 @@
 ﻿using GalaSoft.MvvmLight;
-using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Api.Messages.Actions.Authentication;
+using LightShell.Messaging.Api;
 using GalaSoft.MvvmLight.Command;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Api;
+using LightShell.Api.Messages.Actions;
+using LightShell.Api;
 using System;
-using Yakuza.JiraClient.Api.Messages.IO.Plugins;
+using LightShell.Api.Messages.IO.Plugins;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
-using Yakuza.JiraClient.Api.Plugins;
+using LightShell.Api.Plugins;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Threading;
-using Yakuza.JiraClient.InternalMessages.UI;
+using LightShell.InternalMessages.UI;
 using System.Windows.Input;
 
-namespace Yakuza.JiraClient.ViewModel
+namespace LightShell.ViewModel
 {
    internal class MenuBarViewModel : ViewModelBase,
       IHandleMessage<NoUpdatesAvailable>,

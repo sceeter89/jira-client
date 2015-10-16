@@ -1,15 +1,14 @@
-﻿using System;
+﻿using LightShell.Api;
+using LightShell.Api.Plugins;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Media.Imaging;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Api.Plugins;
 
 namespace Yakuza.JiraClient.Plugins.Agile
 {
-   [Export(typeof(IJiraClientPlugin))]
-   public class AgilePlugin : IJiraClientPlugin
+   [Export(typeof(ILightShellPlugin))]
+   public class AgilePlugin : ILightShellPlugin
    {
       private readonly CardsPrintingHandler _cardsPrintingHandler = new CardsPrintingHandler();
 

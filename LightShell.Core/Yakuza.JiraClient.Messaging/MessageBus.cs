@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.Messaging
+namespace LightShell.Messaging
 {
    public class MessageBus : IMessageBus
    {

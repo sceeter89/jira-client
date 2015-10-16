@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.IssueFields.Search
+﻿namespace LightShell.IssueFields.Search
 {
    public partial class SearchBySprintFieldControl
    {

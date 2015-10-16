@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Yakuza.JiraClient.Api.Plugins
+namespace LightShell.Api.Plugins
 {
    public class MenuEntryDescriptor
    {

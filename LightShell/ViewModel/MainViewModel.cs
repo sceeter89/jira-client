@@ -1,19 +1,19 @@
-using Yakuza.JiraClient.Controls;
+using LightShell.Controls;
 using System.Collections.ObjectModel;
 using Telerik.Windows.Controls;
-using Yakuza.JiraClient.Api.Messages.Navigation;
-using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
+using LightShell.Api.Messages.Navigation;
+using LightShell.Api.Messages.Actions.Authentication;
 using System.Reflection;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Messaging.Api;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
-using Yakuza.JiraClient.InternalMessages.UI;
+using LightShell.InternalMessages.UI;
 using GalaSoft.MvvmLight.Threading;
 
-namespace Yakuza.JiraClient.ViewModel
+namespace LightShell.ViewModel
 {
    internal class MainViewModel : GalaSoft.MvvmLight.ViewModelBase,
       ICoreViewModel,

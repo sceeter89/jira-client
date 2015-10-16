@@ -2,13 +2,13 @@ using GalaSoft.MvvmLight;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Threading;
 using System;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Messaging.Api;
-using Yakuza.JiraClient.Api.Messages.IO.Exports;
+using LightShell.Api.Messages.Actions;
+using LightShell.Messaging.Api;
+using LightShell.Api.Messages.IO.Exports;
 using System.IO;
-using Yakuza.JiraClient.InternalMessages.UI;
+using LightShell.InternalMessages.UI;
 
-namespace Yakuza.JiraClient.ViewModel
+namespace LightShell.ViewModel
 {
    internal class LogViewModel : ViewModelBase,
       ICoreViewModel,

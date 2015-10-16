@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.ViewModel
+﻿namespace LightShell.ViewModel
 {
    interface ICoreViewModel
    {

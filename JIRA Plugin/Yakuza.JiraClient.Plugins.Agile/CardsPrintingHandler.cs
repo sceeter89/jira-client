@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.Actions;
-using Yakuza.JiraClient.Api.Messages.IO.Exports;
-using Yakuza.JiraClient.Messaging.Api;
+﻿using LightShell.Api;
+using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
+using LightShell.Plugin.Jira.Api.Messages.IO.Exports;
+using System.Linq;
 
 namespace Yakuza.JiraClient.Plugins.Agile
 {

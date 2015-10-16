@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
-using Yakuza.JiraClient.Messaging.Api;
+using LightShell.Messaging.Api;
 
-namespace Yakuza.JiraClient.Api.Messages.Navigation
+namespace LightShell.Api.Messages.Navigation
 {
    public class ShowDocumentPaneMessage : IMessage
    {
