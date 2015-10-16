@@ -250,27 +250,27 @@
     <Resource Include="Assets\Icons\JiraClient.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Plugins\Yakuza.JiraClient.Plugins.Agile\Yakuza.JiraClient.Plugins.Agile.csproj">
+    <ProjectReference Include="..\JIRA Plugin\Yakuza.JiraClient.Plugins.Agile\Yakuza.JiraClient.Plugins.Agile.csproj">
       <Project>{08031eed-cf59-43f6-add3-d906ce439add}</Project>
       <Name>Yakuza.JiraClient.Plugins.Agile</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Yakuza.JiraClient.IO\Yakuza.JiraClient.IO.csproj">
+    <ProjectReference Include="..\LightShell.Core\Yakuza.JiraClient.IO\Yakuza.JiraClient.IO.csproj">
       <Project>{fcbe50bc-7cc8-4c86-bee9-6f86ff34a912}</Project>
       <Name>Yakuza.JiraClient.IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
+    <ProjectReference Include="..\LightShell.Core\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
       <Name>Yakuza.JiraClient.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
+    <ProjectReference Include="..\LightShell.Core\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>Yakuza.JiraClient.Messaging</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugins\Yakuza.JiraClient.Plugins.Analysis\Yakuza.JiraClient.Plugins.Analysis.csproj">
+    <ProjectReference Include="..\JIRA Plugin\Yakuza.JiraClient.Plugins.Analysis\Yakuza.JiraClient.Plugins.Analysis.csproj">
       <Project>{e3b2571e-d4de-416a-93b5-33dfe37e732c}</Project>
       <Name>Yakuza.JiraClient.Plugins.Analysis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugins\Yakuza.JiraClient.Plugins.Diagnostics\Yakuza.JiraClient.Plugins.Diagnostics.csproj">
+    <ProjectReference Include="..\JIRA Plugin\Yakuza.JiraClient.Plugins.Diagnostics\Yakuza.JiraClient.Plugins.Diagnostics.csproj">
       <Project>{5b62120a-19f0-4487-9d46-6e0caddbb206}</Project>
       <Name>Yakuza.JiraClient.Plugins.Diagnostics</Name>
     </ProjectReference>

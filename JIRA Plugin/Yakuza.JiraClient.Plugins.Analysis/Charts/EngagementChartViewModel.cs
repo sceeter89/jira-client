@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Threading;
+﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,13 +7,18 @@ using System.Linq;
 using System.Windows.Controls.Primitives;
 using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Actions;
+using Yakuza.JiraClient.Api.Messages.Actions.Authentication;
 using Yakuza.JiraClient.Api.Messages.IO.Jira;
+using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Model;
 using Yakuza.JiraClient.Messaging.Api;
+using Yakuza.JiraClient.Plugins.Analysis.Charts;
 
 namespace Yakuza.JiraClient.Plugins.Analysis
 {
    public class EngagementChartViewModel : IMicroservice,
+      IHandleMessage<LoggedInMessage>,
+      IHandleMessage<LoggedOutMessage>,
       IHandleMessage<SearchForIssuesResponse>,
       IHandleMessage<CurrentSearchResultsResponse>
    {
@@ -53,6 +59,9 @@ namespace Yakuza.JiraClient.Plugins.Analysis
       private IEnumerable<JiraIssue> _issuesOnChart;
       private EngagementCriteria _selectedCriteria;
       private EngagementBase _selectedBase;
+      private bool _isLoggedIn;
+
+      public RelayCommand OpenWindowCommand { get; private set; }
 
       private void UpdateData(IEnumerable<JiraIssue> issues)
       {
@@ -76,6 +85,25 @@ namespace Yakuza.JiraClient.Plugins.Analysis
       public void Initialize(IMessageBus messageBus)
       {
          messageBus.Register(this);
+         messageBus.Send(new Is)
+         OpenWindowCommand = new RelayCommand(()=>
+         {
+            messageBus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",
+                                                   new EngagementChartControl { DataContext = this },
+                                                   new EngagementChartProperties { DataContext = this }));
+         }, () => _isLoggedIn);
+      }
+
+      public void Handle(LoggedInMessage message)
+      {
+         _isLoggedIn = true;
+         OpenWindowCommand.RaiseCanExecuteChanged();
+      }
+
+      public void Handle(LoggedOutMessage message)
+      {
+         _isLoggedIn = false;
+         OpenWindowCommand.RaiseCanExecuteChanged();
       }
 
       public ObservableCollection<EngagementItem> Items { get; private set; }

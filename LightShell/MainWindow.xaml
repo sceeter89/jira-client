@@ -26,8 +26,7 @@
          </Grid.RowDefinitions>
          <Grid.Resources>
             <DataTemplate x:Key="ButtonTemplate">
-               <telerik:RadRibbonButton Text="{Binding Label}" LargeImage="{Binding Icon}" Command="{Binding RelativeSource={RelativeSource 
-                           FindAncestor, AncestorType={x:Type telerik:RadRibbonView}},Path=DataContext.HandleButtonClickCommand}"
+               <telerik:RadRibbonButton Text="{Binding Label}" LargeImage="{Binding Icon}" Command="{Binding OnClick}"
                                      Size="Large" CommandParameter="{Binding .}"/>
             </DataTemplate>
 

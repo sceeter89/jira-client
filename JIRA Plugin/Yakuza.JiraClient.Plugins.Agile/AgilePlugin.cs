@@ -32,7 +32,7 @@ namespace Yakuza.JiraClient.Plugins.Agile
                new MenuEntryButton
                {
                   Label = "scrum cards",
-                  OnClick = _ => _cardsPrintingHandler.PrintCards(),
+                  OnClickDelegate = _ => _cardsPrintingHandler.PrintCards(),
                   Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Agile Plugin;component/Assets/XpsIcon.png"))
                }
             }

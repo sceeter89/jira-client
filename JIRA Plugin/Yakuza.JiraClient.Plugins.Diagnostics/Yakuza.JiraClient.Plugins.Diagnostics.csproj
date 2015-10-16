@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E3B2571E-D4DE-416A-93B5-33DFE37E732C}</ProjectGuid>
+    <ProjectGuid>{5B62120A-19F0-4487-9D46-6E0CADDBB206}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Yakuza.JiraClient.Plugins.Analysis</RootNamespace>
-    <AssemblyName>JiraClient Analysis Plugin</AssemblyName>
+    <RootNamespace>Yakuza.JiraClient.Plugins.Diagnostics</RootNamespace>
+    <AssemblyName>JiraClient Diagnostics Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,7 +50,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -64,37 +67,32 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Telerik.Pivot.Core, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Pivot.DataProviders.Queryable, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.Data, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.Pivot, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.PivotFieldList, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Charting, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Data, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnalysisPlugin.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Analysis\PivotGridViewModel.cs" />
-    <Compile Include="Analysis\PivotReportingGrid.xaml.cs">
-      <DependentUpon>PivotReportingGrid.xaml</DependentUpon>
+    <Compile Include="Controls\NullToVisibilityConverters.cs" />
+    <Compile Include="Controls\PerformanceOverview.xaml.cs">
+      <DependentUpon>PerformanceOverview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Analysis\PivotReportingProperties.xaml.cs">
-      <DependentUpon>PivotReportingProperties.xaml</DependentUpon>
+    <Compile Include="Controls\PerformanceOverviewViewModel.cs" />
+    <Compile Include="Controls\PluginView.xaml.cs">
+      <DependentUpon>PluginView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Charts\EngagementChartProperties.xaml.cs">
-      <DependentUpon>EngagementChartProperties.xaml</DependentUpon>
+    <Compile Include="Controls\PluginsListView.xaml.cs">
+      <DependentUpon>PluginsListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Charts\EngagementChartViewModel.cs" />
-    <Compile Include="Charts\EngagementChartControl.xaml.cs">
-      <DependentUpon>EngagementChartControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Controls\PluginsViewModel.cs" />
+    <Compile Include="DiagnosticsPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -120,38 +118,44 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
+    <Resource Include="Assets\CheckForUpdatesIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ReportIssueIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SaveIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\WebsiteIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LightShell.Core\Yakuza.JiraClient.Api\Yakuza.JiraClient.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
       <Name>Yakuza.JiraClient.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
+    <ProjectReference Include="..\..\LightShell.Core\Yakuza.JiraClient.Messaging\Yakuza.JiraClient.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>Yakuza.JiraClient.Messaging</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Chart_Engagement.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Analysis\PivotReportingGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Controls\PerformanceOverview.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Analysis\PivotReportingProperties.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Charts\EngagementChartProperties.xaml">
+    <Page Include="Controls\PluginView.xaml">
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Charts\EngagementChartControl.xaml">
+    <Page Include="Controls\PluginsListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\PivotTable.png" />
+    <Resource Include="Assets\PerformanceIcon.png" />
+    <Resource Include="Assets\PluginsIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

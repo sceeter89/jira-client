@@ -62,10 +62,10 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics.Controls
             };
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Start();
-         });
 
-         _messageBus = messageBus;
-         _messageBus.SubscribeAllMessages(this);
+            _messageBus = messageBus;
+            _messageBus.SubscribeAllMessages(this);
+         });
       }
 
       public class EventStats : ViewModelBase

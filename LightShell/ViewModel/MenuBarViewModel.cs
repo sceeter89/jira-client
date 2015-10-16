@@ -12,25 +12,20 @@ using Yakuza.JiraClient.Api.Plugins;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Threading;
 using Yakuza.JiraClient.InternalMessages.UI;
+using System.Windows.Input;
 
 namespace Yakuza.JiraClient.ViewModel
 {
    internal class MenuBarViewModel : ViewModelBase,
-      IHandleMessage<LoggedInMessage>,
-      IHandleMessage<LoggedOutMessage>,
       IHandleMessage<NoUpdatesAvailable>,
       IHandleMessage<NewVersionAvailable>,
       IHandleMessage<NewPluginFoundMessage>
    {
-      private bool _isLoggedIn;
       private readonly IMessageBus _messageBus;
       
-      public RelayCommand<Button> HandleButtonClickCommand { get; private set; }
-
       public MenuBarViewModel(IMessageBus messageBus)
       {
          _messageBus = messageBus;
-         HandleButtonClickCommand = new RelayCommand<Button>(HandleButtonClick);
 
          _messageBus.Register(this);
          MenuTabs = new ObservableCollection<Tab>();
@@ -40,25 +35,8 @@ namespace Yakuza.JiraClient.ViewModel
             this.MenuTabs.Add(tab);
             _menuTabsMap[value] = tab;
          }
-         
+
          messageBus.Send(new ViewModelInitializedMessage(this.GetType()));
-      }
-
-      public void Handle(LoggedOutMessage message)
-      {
-         _isLoggedIn = false;
-         RefreshCommands();
-      }
-
-      public void Handle(LoggedInMessage message)
-      {
-         _isLoggedIn = true;
-         RefreshCommands();
-      }
-
-      private void RefreshCommands()
-      {
-         HandleButtonClickCommand.RaiseCanExecuteChanged();
       }
 
       public void Handle(NoUpdatesAvailable message)
@@ -85,22 +63,28 @@ namespace Yakuza.JiraClient.ViewModel
 
             foreach (var button in descriptor.Buttons)
             {
+               if (string.IsNullOrWhiteSpace(button.Label))
+               {
+                  _messageBus.LogMessage(LogLevel.Warning, "Button {0}.{1}.{2} has no label defined. Skipping...", descriptor.Tab, descriptor.ButtonsGroupName, button.Label);
+                  continue;
+               }
+               if(button.OnClickCommand == null && button.OnClickDelegate == null)
+               {
+                  _messageBus.LogMessage(LogLevel.Warning, "Button {0}.{1}.{2} does not define any action. Skipping...", descriptor.Tab, descriptor.ButtonsGroupName, button.Label);
+                  continue;
+               }
+
                var newButton = new Button
                {
                   Label = button.Label,
                   Icon = button.Icon,
-                  OnClick = button.OnClick
+                  OnClick = button.OnClickCommand != null ? button.OnClickCommand : new RelayCommand(() => button.OnClickDelegate(_messageBus))
                };
                newButton.Icon.Freeze();
                newMenuGroup.Buttons.Add(newButton);
             }
             DispatcherHelper.CheckBeginInvokeOnUI(() => tab.Groups.Add(newMenuGroup));
          }
-      }
-
-      private void HandleButtonClick(Button button)
-      {
-         button.OnClick(_messageBus);
       }
 
       private readonly IDictionary<MenuTab, Tab> _menuTabsMap = new Dictionary<MenuTab, Tab>();
@@ -132,7 +116,7 @@ namespace Yakuza.JiraClient.ViewModel
       {
          public string Label { get; set; }
          public BitmapImage Icon { get; set; }
-         public Action<IMessageBus> OnClick { get; set; }
+         public ICommand OnClick { get; set; }
       }
    }
 }

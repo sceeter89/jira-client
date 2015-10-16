@@ -6,7 +6,6 @@ using Yakuza.JiraClient.Api;
 using Yakuza.JiraClient.Api.Messages.Navigation;
 using Yakuza.JiraClient.Api.Plugins;
 using Yakuza.JiraClient.Plugins.Analysis.Analysis;
-using Yakuza.JiraClient.Plugins.Analysis.Charts;
 
 namespace Yakuza.JiraClient.Plugins.Analysis
 {
@@ -35,9 +34,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
                   new MenuEntryButton
                   {
                      Label = "engagement",
-                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",
-                                                   new EngagementChartControl { DataContext = _engagementChartViewModel },
-                                                   new EngagementChartProperties { DataContext = _engagementChartViewModel })),
+                     OnClickCommand = _engagementChartViewModel.OpenWindowCommand,
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Analysis Plugin;component/Assets/Chart_Engagement.png"))
                   }
                }
@@ -51,7 +48,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
                   new MenuEntryButton
                   {
                      Label = "pivot",
-                     OnClick = bus => bus.Send(new ShowDocumentPaneMessage(this, "Pivot analysis",
+                     OnClickDelegate = bus => bus.Send(new ShowDocumentPaneMessage(this, "Pivot analysis",
                                                    new PivotReportingGrid {DataContext = _pivotViewModel},
                                                    new PivotReportingProperties { DataContext = _pivotViewModel})),
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Analysis Plugin;component/Assets/PivotTable.png"))
