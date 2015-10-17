@@ -17,7 +17,6 @@ namespace LightShell.Service
          typeof(MainViewModel),
          typeof(MenuBarViewModel),
          typeof(LogViewModel),
-         typeof(ConnectionViewModel),
       };
 
       public UiBootstrapper(IMessageBus messageBus)

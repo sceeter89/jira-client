@@ -1,8 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
-using LightShell.Api.Messages.Actions.Authentication;
 using LightShell.Messaging.Api;
 using GalaSoft.MvvmLight.Command;
-using LightShell.Api.Messages.Actions;
 using LightShell.Api;
 using System;
 using LightShell.Api.Messages.IO.Plugins;
@@ -17,8 +15,6 @@ using System.Windows.Input;
 namespace LightShell.ViewModel
 {
    internal class MenuBarViewModel : ViewModelBase,
-      IHandleMessage<NoUpdatesAvailable>,
-      IHandleMessage<NewVersionAvailable>,
       IHandleMessage<NewPluginFoundMessage>
    {
       private readonly IMessageBus _messageBus;
@@ -37,16 +33,6 @@ namespace LightShell.ViewModel
          }
 
          messageBus.Send(new ViewModelInitializedMessage(this.GetType()));
-      }
-
-      public void Handle(NoUpdatesAvailable message)
-      {
-         _messageBus.LogMessage("You are using latest version available.", LogLevel.Info);
-      }
-
-      public void Handle(NewVersionAvailable message)
-      {
-         _messageBus.LogMessage("New version is available. Visit website for download.", LogLevel.Info);
       }
 
       public void Handle(NewPluginFoundMessage message)

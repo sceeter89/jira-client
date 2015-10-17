@@ -6,13 +6,13 @@ using GalaSoft.MvvmLight;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using LightShell.Api.Messages.Actions.Authentication;
-using LightShell.Api.Messages.Status;
 using System;
 using System.Collections.Generic;
 using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
+using LightShell.Plugin.Jira.Api.Messages.Status;
 
-namespace LightShell.IssueFields.Search
+namespace LightShell.Plugin.Jira.Controls.SearchFields
 {
    public class ComboBoxSearchField<TItemType, TRequestType, TResponseType> : ViewModelBase, ISearchableField,
       IHandleMessage<LoggedInMessage>,

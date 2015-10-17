@@ -1,24 +1,21 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using LightShell.Api;
-using LightShell.Api.Model;
-using LightShell.Service;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using LightShell.Api.Messages.Actions.Authentication;
-using LightShell.Api.Messages.Actions;
-using LightShell.Api.Messages.Status;
 using LightShell.Messaging.Api;
-using LightShell.Api.Messages.IO.Jira;
-using LightShell.InternalMessages.UI;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
+using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api;
+using LightShell.Plugin.Jira.Api.Model;
+using LightShell.Plugin.Jira.Api.Messages.Status;
 
-namespace LightShell.ViewModel
+namespace LightShell.Plugin.Jira.Controls
 {
    internal class ConnectionViewModel : ViewModelBase,
-      ICoreViewModel,
       IHandleMessage<ConnectionIsBroken>,
       IHandleMessage<LoggedInMessage>,
       IHandleMessage<LoggedOutMessage>,
@@ -28,7 +25,7 @@ namespace LightShell.ViewModel
       IHandleMessage<AttemptLoginResponse>,
       IHandleMessage<CheckJiraSessionResponse>
    {
-      private readonly Configuration _configuration;
+      private readonly IConfiguration _configuration;
       private readonly IMessageBus _messageBus;
       private bool _isBusy = false;
       private bool _isConnected;
@@ -36,7 +33,7 @@ namespace LightShell.ViewModel
       private RawProfileDetails _profile;
       private BitmapImage _avatarSource;
 
-      public ConnectionViewModel(IMessageBus messageBus, Configuration configuration)
+      public ConnectionViewModel(IMessageBus messageBus, IConfiguration configuration)
       {
          _messageBus = messageBus;
          _configuration = configuration;
@@ -157,12 +154,7 @@ namespace LightShell.ViewModel
             _messageBus.Send(new LoggedOutMessage());
          }
       }
-
-      public void OnControlInitialized()
-      {
-         _messageBus.Send(new ViewModelInitializedMessage(this.GetType()));
-      }
-
+      
       public string JiraUrl
       {
          get { return _configuration.JiraUrl; }

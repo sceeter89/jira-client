@@ -8,6 +8,8 @@ using LightShell.Plugin.Jira.Diagnostics.Controls;
 using LightShell.Api.Plugins;
 using LightShell.Api.Messages.Navigation;
 using LightShell.Api.Messages.IO.Exports;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
+using LightShell.Api;
 
 namespace Yakuza.JiraClient.Plugins.Diagnostics
 {

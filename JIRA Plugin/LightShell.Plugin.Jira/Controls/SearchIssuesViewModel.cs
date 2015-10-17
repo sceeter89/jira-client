@@ -1,18 +1,18 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using LightShell.Api;
+﻿using LightShell.Api;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
-using LightShell.Api.Model;
-using LightShell.IssueFields.Search;
-using LightShell.Api.Messages.Actions.Authentication;
 using LightShell.Messaging.Api;
-using LightShell.Api.Messages.IO.Jira;
 using System.Windows;
-using LightShell.Api.Messages.Actions;
+using GalaSoft.MvvmLight;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
+using LightShell.Plugin.Jira.Api.Model;
+using GalaSoft.MvvmLight.Command;
+using LightShell.Plugin.Jira.Controls.SearchFields;
+using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
 
-namespace LightShell.ViewModel
+namespace LightShell.Plugin.Jira.Controls
 {
    internal class SearchIssuesViewModel : ViewModelBase,
       IHandleMessage<SearchForIssuesResponse>,

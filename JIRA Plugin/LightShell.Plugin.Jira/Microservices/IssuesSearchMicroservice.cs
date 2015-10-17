@@ -1,4 +1,5 @@
-﻿using LightShell.Messaging.Api;
+﻿using LightShell.Api;
+using LightShell.Messaging.Api;
 using LightShell.Plugin.Jira.Api;
 using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
 using LightShell.Plugin.Jira.Api.Model;

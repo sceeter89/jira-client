@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using LightShell.Api;
 using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
 
 namespace Yakuza.JiraClient.IO.Updates
 {
@@ -14,7 +15,7 @@ namespace Yakuza.JiraClient.IO.Updates
    {
       private const string EndpointUrl = "https://api.github.com/repos/sceeter89/jira-client/releases";
       private IMessageBus _messageBus;
-      
+
       public async void Handle(CheckForUpdatesMessage message)
       {
          var client = new RestClient(EndpointUrl);
@@ -27,9 +28,13 @@ namespace Yakuza.JiraClient.IO.Updates
                                                && Version.Parse(r.tag_name) > message.CurrentVersion)
                                            .OrderByDescending(r => r.tag_name);
          if (higherVersions.Any() == false)
+         {
+            _messageBus.LogMessage("You are using latest version available.", LogLevel.Debug);
             _messageBus.Send(new NoUpdatesAvailable());
+         }
          else
          {
+            _messageBus.LogMessage("New version is available. Visit website for download.", LogLevel.Info);
             var newRelease = higherVersions.First();
             _messageBus.Send(new NewVersionAvailable(
                Version.Parse(newRelease.tag_name),

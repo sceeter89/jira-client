@@ -1,4 +1,4 @@
-﻿namespace LightShell.Controls.Panes
+﻿namespace LightShell.Plugin.Jira.Controls
 {
    public partial class IssueDetails
    {

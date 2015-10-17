@@ -37,7 +37,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Yakuza.JiraClient.App</StartupObject>
+    <StartupObject>LightShell.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
@@ -135,7 +135,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\Converters\NullToCollapsedConverter.cs" />
     <Compile Include="Controls\LogViewer.xaml.cs">
       <DependentUpon>LogViewer.xaml</DependentUpon>
     </Compile>

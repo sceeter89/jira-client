@@ -1,15 +1,14 @@
 ﻿using GalaSoft.MvvmLight;
-using LightShell.Api.Model;
-using LightShell.Api.Messages.Actions;
-using Telerik.Windows.Data;
 using System.Linq;
 using LightShell.Messaging.Api;
-using LightShell.Api.Messages.IO.Jira;
 using GalaSoft.MvvmLight.Command;
 using LightShell.Api.Messages.Navigation;
-using LightShell.Controls.Panes;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Model;
+using Telerik.Windows.Data;
 
-namespace LightShell.ViewModel
+namespace LightShell.Plugin.Jira.Controls
 {
    internal class IssueListViewModel : ViewModelBase,
       IHandleMessage<SearchForIssuesResponse>,

@@ -33,30 +33,6 @@ namespace LightShell.ViewModel
          }
       }
 
-      public ConnectionViewModel Connection
-      {
-         get
-         {
-            return IocContainer.Resolve<ConnectionViewModel>();
-         }
-      }
-
-      public SearchIssuesViewModel Search
-      {
-         get
-         {
-            return IocContainer.Resolve<SearchIssuesViewModel>();
-         }
-      }
-
-      public IssueListViewModel IssueList
-      {
-         get
-         {
-            return IocContainer.Resolve<IssueListViewModel>();
-         }
-      }
-
       public MenuBarViewModel MenuBar
       {
          get
@@ -76,8 +52,7 @@ namespace LightShell.ViewModel
       {
          var builder = new ContainerBuilder();
 
-         var clientAssembly = Assembly.Load("Jira Client");
-         var ioAssembly = Assembly.Load("LightShell.IO");
+         var clientAssembly = Assembly.Load("LightShell");
 
          var messageBus = new MessageBus();
 
@@ -98,12 +73,6 @@ namespace LightShell.ViewModel
             .AsSelf()
             .SingleInstance()
             .AutoActivate();
-         builder.RegisterAssemblyTypes(ioAssembly)
-            .AssignableTo<IMicroservice>()
-            .AsSelf()
-            .SingleInstance()
-            .AutoActivate()
-            .OnActivated(s => (s.Instance as IMicroservice).Initialize(messageBus));
 
          IocContainer = builder.Build();
       }

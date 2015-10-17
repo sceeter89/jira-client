@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LightShell.Plugin.Jira.Api</RootNamespace>
-    <AssemblyName>Jira Plugin Api</AssemblyName>
+    <AssemblyName>LightShell.Plugin.Jira.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

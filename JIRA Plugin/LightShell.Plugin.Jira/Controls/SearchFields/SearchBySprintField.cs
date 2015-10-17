@@ -6,13 +6,13 @@ using GalaSoft.MvvmLight;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using LightShell.Api.Model;
-using LightShell.Api.Messages.Actions.Authentication;
-using LightShell.Api.Messages.Status;
 using LightShell.Messaging.Api;
-using LightShell.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
+using LightShell.Plugin.Jira.Api.Messages.Status;
+using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
+using LightShell.Plugin.Jira.Api.Model;
 
-namespace LightShell.IssueFields.Search
+namespace LightShell.Plugin.Jira.Controls.SearchFields
 {
    public class SearchBySprintField : ViewModelBase, ISearchableField,
       IHandleMessage<LoggedInMessage>,

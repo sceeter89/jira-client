@@ -1,9 +1,6 @@
-﻿using System.Windows.Controls;
-using LightShell.ViewModel;
-
-namespace LightShell.Controls
+﻿namespace LightShell.Plugin.Jira.Controls
 {
-   public partial class IssueListDisplay : UserControl
+   public partial class IssueListDisplay
    {
       public IssueListDisplay()
       {

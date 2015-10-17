@@ -1,4 +1,4 @@
-﻿namespace LightShell.IssueFields.Search
+﻿namespace LightShell.Plugin.Jira.Controls.SearchFields
 {
    public partial class SearchBySprintFieldControl
    {

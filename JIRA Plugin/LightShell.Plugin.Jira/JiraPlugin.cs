@@ -30,6 +30,7 @@ namespace LightShell.Plugin.Jira
          yield return new MetadataRetriever(_configuration);
          yield return new ResourceDownloaderMicroservice(_configuration);
          yield return new SessionInteractionMicroservice(_configuration);
+         yield return new UiManager(_configuration);
       }
    }
 }

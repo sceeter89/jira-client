@@ -1,10 +1,9 @@
-﻿<UserControl xmlns:Search="clr-namespace:LightShell.Controls"  x:Class="LightShell.Controls.SearchIssues"
+﻿<UserControl xmlns:Search="clr-namespace:LightShell.Plugin.Jira.Controls"  x:Class="LightShell.Plugin.Jira.Controls.SearchIssues"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             mc:Ignorable="d" d:DesignWidth="300"
-             DataContext="{Binding Source={StaticResource Locator}, Path=Search}">
+             mc:Ignorable="d" d:DesignWidth="300">
    <Grid>
       <Grid.RowDefinitions>
          <RowDefinition Height="Auto"/>

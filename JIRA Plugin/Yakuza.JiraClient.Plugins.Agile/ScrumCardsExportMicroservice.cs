@@ -1,9 +1,9 @@
 ﻿using LightShell.Api;
 using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Agile.Controls;
 using LightShell.Plugin.Jira.Api.Messages.IO.Exports;
 using System.IO;
 using System.Windows.Xps.Packaging;
-using Yakuza.JiraClient.Plugins.Agile.Controls;
 
 namespace Yakuza.JiraClient.Plugins.Agile
 {

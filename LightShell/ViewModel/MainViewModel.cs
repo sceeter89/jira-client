@@ -33,7 +33,7 @@ namespace LightShell.ViewModel
          _messageBus = messageBus;
 
          DocumentPanes = new ObservableCollection<RadPane>();
-         PropertyPanes = new ObservableCollection<RadPane> { ConnectionPropertyPane, CustomPropertyPane };
+         PropertyPanes = new ObservableCollection<RadPane> { CustomPropertyPane };
          _messageBus.Register(this);
 
          Application.Current.DispatcherUnhandledException += DispatcherUnhandledException;
@@ -102,7 +102,8 @@ namespace LightShell.ViewModel
             || _customDocumentPaneProperties[documentPane] == null)
          {
             CustomPropertyPane.Content = null;
-            FocusPropertyPane(SearchPropertyPane);
+            if (PropertyPanes.Any())
+               SelectedPropertyPaneIndex = 0;
             return;
          }
 
@@ -194,9 +195,14 @@ namespace LightShell.ViewModel
       {
          var paneKey = string.Format("{0}_{1}_{2}", message.Sender.GetType().AssemblyQualifiedName, message.Sender.GetType().FullName, message.Title);
 
+         RemoveDocumentPaneByKey(paneKey);
+      }
+
+      private void RemoveDocumentPaneByKey(string paneKey)
+      {
          if (_customDocumentPanes.ContainsKey(paneKey) == false)
             return;
-         
+
 
          var pane = _customDocumentPanes[paneKey];
          _customDocumentPaneProperties.Remove(pane);
@@ -208,7 +214,12 @@ namespace LightShell.ViewModel
       {
          var paneKey = string.Format("{0}_{1}_{2}", message.Sender.GetType().AssemblyQualifiedName, message.Sender.GetType().FullName, message.Title);
 
-         if(_customPropertyPanes.ContainsKey(paneKey) == false)
+         RemovePropertyPaneByKey(paneKey);
+      }
+
+      private void RemovePropertyPaneByKey(string paneKey)
+      {
+         if (_customPropertyPanes.ContainsKey(paneKey) == false)
             return;
 
          var pane = _customPropertyPanes[paneKey];
@@ -218,17 +229,27 @@ namespace LightShell.ViewModel
 
       public void Handle(ClearDocumentPanesMessage message)
       {
-         throw new NotImplementedException();
+         foreach (var paneKey in _customDocumentPanes.Keys)
+            RemoveDocumentPaneByKey(paneKey);
       }
 
       public void Handle(ClearPropertyPanesMessage message)
       {
-         throw new NotImplementedException();
+         foreach (var paneKey in _customPropertyPanes.Keys)
+            RemovePropertyPaneByKey(paneKey);
       }
 
       public void PaneCloseAttempt(RadPane pane)
       {
-         //TODO: Remove appropriate pane from appropriate section
+         var entry = _customDocumentPanes.Where(p => p.Value == pane);
+
+         if (entry.Any())
+            RemoveDocumentPaneByKey(entry.First().Key);
+
+         entry = _customPropertyPanes.Where(p => p.Value == pane);
+
+         if (entry.Any())
+            RemovePropertyPaneByKey(entry.First().Key);
       }
 
       public int SelectedPropertyPaneIndex
@@ -273,24 +294,12 @@ namespace LightShell.ViewModel
       public ObservableCollection<RadPane> DocumentPanes { get; private set; }
       public ObservableCollection<RadPane> PropertyPanes { get; private set; }
 
-      private RadPane _connectionPropertyPane;
       private RadPane _customPropertyPane;
-      private RadPane _searchPropertyPane;
 
-      private RadPane _issueListDocumentPane;
       private bool _isBusy;
       private string _businessMessage;
 
-      private RadPane SearchPropertyPane
-      {
-         get
-         {
-            if (_searchPropertyPane == null)
-               _searchPropertyPane = new RadPane { Header = "search", Content = new SearchIssues(), CanUserClose = false };
 
-            return _searchPropertyPane;
-         }
-      }
 
       private RadPane CustomPropertyPane
       {
@@ -303,26 +312,5 @@ namespace LightShell.ViewModel
          }
       }
 
-      private RadPane ConnectionPropertyPane
-      {
-         get
-         {
-            if (_connectionPropertyPane == null)
-               _connectionPropertyPane = new RadPane { Header = "JIRA", Content = new ConnectionManager(), CanUserClose = false };
-
-            return _connectionPropertyPane;
-         }
-      }
-
-      private RadPane IssueListDocumentPane
-      {
-         get
-         {
-            if (_issueListDocumentPane == null)
-               _issueListDocumentPane = new RadPane { Header = "issues", Content = new IssueListDisplay(), CanUserClose = false };
-
-            return _issueListDocumentPane;
-         }
-      }
    }
 }

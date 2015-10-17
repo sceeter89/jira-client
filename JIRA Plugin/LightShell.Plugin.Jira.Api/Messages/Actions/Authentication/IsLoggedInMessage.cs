@@ -2,7 +2,7 @@
 
 namespace LightShell.Plugin.Jira.Api.Messages.Actions.Authentication
 {
-   public class GetConnectionStatusMessage : IMessage
+   public class IsLoggedInMessage : IMessage
    {
    }
 }

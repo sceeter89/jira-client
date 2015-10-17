@@ -1,16 +1,18 @@
-﻿using System;
+﻿using LightShell.Api;
+using LightShell.Api.Messages.Navigation;
+using LightShell.Api.Plugins;
+using LightShell.Plugin.Jira.Analysis.Analysis;
+using LightShell.Plugin.Jira.Analysis.Charts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Media.Imaging;
-using Yakuza.JiraClient.Api;
-using Yakuza.JiraClient.Api.Messages.Navigation;
-using Yakuza.JiraClient.Api.Plugins;
 using Yakuza.JiraClient.Plugins.Analysis.Analysis;
 
 namespace Yakuza.JiraClient.Plugins.Analysis
 {
-   [Export(typeof(IJiraClientPlugin))]
-   public class AnalysisPlugin : IJiraClientPlugin
+   [Export(typeof(ILightShellPlugin))]
+   public class AnalysisPlugin : ILightShellPlugin
    {
       private readonly EngagementChartViewModel _engagementChartViewModel = new EngagementChartViewModel();
       private readonly PivotGridViewModel _pivotViewModel = new PivotGridViewModel();
