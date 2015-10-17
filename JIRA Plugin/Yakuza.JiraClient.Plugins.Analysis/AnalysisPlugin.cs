@@ -37,7 +37,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
                   {
                      Label = "engagement",
                      OnClickCommand = _engagementChartViewModel.OpenWindowCommand,
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Analysis Plugin;component/Assets/Chart_Engagement.png"))
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Analysis Plugin;component/Assets/Chart_Engagement.png"))
                   }
                }
          };
@@ -53,7 +53,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
                      OnClickDelegate = bus => bus.Send(new ShowDocumentPaneMessage(this, "Pivot analysis",
                                                    new PivotReportingGrid {DataContext = _pivotViewModel},
                                                    new PivotReportingProperties { DataContext = _pivotViewModel})),
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Analysis Plugin;component/Assets/PivotTable.png"))
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Analysis Plugin;component/Assets/PivotTable.png"))
                   }
                }
          };

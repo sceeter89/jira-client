@@ -32,7 +32,7 @@ namespace Yakuza.JiraClient.Plugins.Agile
                {
                   Label = "scrum cards",
                   OnClickDelegate = _ => _cardsPrintingHandler.PrintCards(),
-                  Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Agile Plugin;component/Assets/XpsIcon.png"))
+                  Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Agile Plugin;component/Assets/XpsIcon.png"))
                }
             }
          };

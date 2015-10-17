@@ -70,7 +70,7 @@ namespace LightShell.ViewModel
       {
          get
          {
-            return string.Format("Jira Client - {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString(3));
+            return string.Format("LightShell - {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString(3));
          }
       }
 

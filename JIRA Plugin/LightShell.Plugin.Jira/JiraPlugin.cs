@@ -20,7 +20,7 @@ namespace LightShell.Plugin.Jira
 
       public IEnumerable<MenuEntryDescriptor> GetMenuEntries()
       {
-         return null;
+         yield break;
       }
 
       public IEnumerable<IMicroservice> GetMicroservices()

@@ -41,13 +41,13 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   new MenuEntryButton
                   {
                      Label = "export log",
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/SaveIcon.png")),
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Diagnostics Plugin;component/Assets/SaveIcon.png")),
                      OnClickDelegate = bus =>bus.Send(new SaveLogOutputToFileMessage())
                   },
                   new MenuEntryButton
                   {
                      Label = "plugins",
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/PluginsIcon.png")),
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Diagnostics Plugin;component/Assets/PluginsIcon.png")),
                      OnClickDelegate = bus => bus.Send(new ShowDocumentPaneMessage(this, "Plugins",
                                                    new PluginView { DataContext = _pluginsViewModel },
                                                    new PluginsListView {DataContext = _pluginsViewModel}))
@@ -55,7 +55,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   new MenuEntryButton
                   {
                      Label = "performance",
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/PerformanceIcon.png")),
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Diagnostics Plugin;component/Assets/PerformanceIcon.png")),
                      OnClickDelegate = bus => bus.Send(new ShowDocumentPaneMessage(this, "Performance",
                                                    new PerformanceOverview { DataContext = _performanceOverviewViewModel }))
                   }
@@ -70,13 +70,13 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   new MenuEntryButton
                   {
                      Label = "website",
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/WebsiteIcon.png")),
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Diagnostics Plugin;component/Assets/WebsiteIcon.png")),
                      OnClickDelegate = _ => System.Diagnostics.Process.Start(WebSiteAddress)
                   },
                   new MenuEntryButton
                   {
                      Label = "report",
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/ReportIssueIcon.png")),
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Diagnostics Plugin;component/Assets/ReportIssueIcon.png")),
                      OnClickDelegate = _ => System.Diagnostics.Process.Start(ReportIssueSiteAddress)
                   }
                }
@@ -90,7 +90,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
                   new MenuEntryButton
                   {
                      Label = "check",
-                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/JiraClient Diagnostics Plugin;component/Assets/CheckForUpdatesIcon.png")),
+                     Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Diagnostics Plugin;component/Assets/CheckForUpdatesIcon.png")),
                      OnClickDelegate = bus => bus.Send(new CheckForUpdatesMessage(Assembly.GetEntryAssembly().GetName().Version))
                   }
                }

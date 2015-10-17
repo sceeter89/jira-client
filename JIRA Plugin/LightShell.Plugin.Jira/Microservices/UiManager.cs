@@ -8,6 +8,7 @@ using LightShell.Plugin.Jira.Controls;
 using LightShell.Api.Messages.Navigation;
 using System.Windows.Controls;
 using LightShell.Plugin.Jira.Api;
+using GalaSoft.MvvmLight.Threading;
 
 namespace LightShell.Plugin.Jira.Microservices
 {
@@ -30,17 +31,44 @@ namespace LightShell.Plugin.Jira.Microservices
 
       private void ShowConnectionPropertyPane()
       {
-         _messageBus.Send(new ShowPropertyPaneMessage(this, "JIRA", ConnectionPropertyPane, false));
+         if (_connectionPropertyPane == null)
+         {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+               _connectionPropertyPane = new ConnectionManager { DataContext = new ConnectionViewModel(_messageBus, _configuration) };
+               ShowConnectionPropertyPane();
+            });
+            return;
+         }
+         _messageBus.Send(new ShowPropertyPaneMessage(this, "JIRA", _connectionPropertyPane, false));
       }
 
       private void ShowSearchPropertyPane()
       {
-         _messageBus.Send(new ShowPropertyPaneMessage(this, "search", SearchPropertyPane, false));
+         if (_searchPropertyPane == null)
+         {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+               _searchPropertyPane = new SearchIssues { DataContext = new SearchIssuesViewModel(_messageBus) };
+               ShowConnectionPropertyPane();
+            });
+            return;
+         }
+         _messageBus.Send(new ShowPropertyPaneMessage(this, "search", _searchPropertyPane, false));
       }
 
       private void ShowIssuesListPane()
       {
-         _messageBus.Send(new ShowPropertyPaneMessage(this, "issues", IssueListDocumentPane, false));
+         if (_issueListDocumentPane == null)
+         {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+               _issueListDocumentPane = new IssueListDisplay { DataContext = new IssueListViewModel(_messageBus) };
+               ShowConnectionPropertyPane();
+            });
+            return;
+         }
+         _messageBus.Send(new ShowPropertyPaneMessage(this, "issues", _issueListDocumentPane, false));
       }
 
       public void Handle(LoggedOutMessage message)
@@ -64,45 +92,11 @@ namespace LightShell.Plugin.Jira.Microservices
       public void Initialize(IMessageBus messageBus)
       {
          _messageBus = messageBus;
-         ShowConnectionPropertyPane();
       }
 
       private UserControl _connectionPropertyPane;
       private UserControl _searchPropertyPane;
       private UserControl _issueListDocumentPane;
       private readonly IConfiguration _configuration;
-
-      private UserControl SearchPropertyPane
-      {
-         get
-         {
-            if (_searchPropertyPane == null)
-               _searchPropertyPane = new SearchIssues { DataContext = new SearchIssuesViewModel(_messageBus) };
-
-            return _searchPropertyPane;
-         }
-      }
-      private UserControl ConnectionPropertyPane
-      {
-         get
-         {
-            if (_connectionPropertyPane == null)
-               _connectionPropertyPane = new ConnectionManager { DataContext = new ConnectionViewModel(_messageBus, _configuration) };
-
-            return _connectionPropertyPane;
-         }
-      }
-
-      private UserControl IssueListDocumentPane
-      {
-         get
-         {
-            if (_issueListDocumentPane == null)
-               _issueListDocumentPane = new IssueListDisplay { DataContext = new IssueListViewModel(_messageBus) };
-
-            return _issueListDocumentPane;
-         }
-      }
-
    }
 }
