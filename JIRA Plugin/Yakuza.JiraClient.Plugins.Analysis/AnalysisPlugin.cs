@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Media.Imaging;
-using Yakuza.JiraClient.Plugins.Analysis.Analysis;
 
 namespace Yakuza.JiraClient.Plugins.Analysis
 {
@@ -50,9 +49,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
                   new MenuEntryButton
                   {
                      Label = "pivot",
-                     OnClickDelegate = bus => bus.Send(new ShowDocumentPaneMessage(this, "Pivot analysis",
-                                                   new PivotReportingGrid {DataContext = _pivotViewModel},
-                                                   new PivotReportingProperties { DataContext = _pivotViewModel})),
+                     OnClickCommand = _pivotViewModel.OpenWindowCommand,
                      Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Analysis Plugin;component/Assets/PivotTable.png"))
                   }
                }

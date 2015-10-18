@@ -188,7 +188,7 @@ namespace LightShell.ViewModel
          if (PropertyPanes.Contains(pane) == false)
             PropertyPanes.Add(pane);
 
-         FocusDocumentPane(pane);
+         FocusPropertyPane(pane);
       }
 
       public void Handle(RemoveDocumentPaneMessage message)
@@ -229,13 +229,13 @@ namespace LightShell.ViewModel
 
       public void Handle(ClearDocumentPanesMessage message)
       {
-         foreach (var paneKey in _customDocumentPanes.Keys)
+         foreach (var paneKey in _customDocumentPanes.Keys.ToList())
             RemoveDocumentPaneByKey(paneKey);
       }
 
       public void Handle(ClearPropertyPanesMessage message)
       {
-         foreach (var paneKey in _customPropertyPanes.Keys)
+         foreach (var paneKey in _customPropertyPanes.Keys.ToList())
             RemovePropertyPaneByKey(paneKey);
       }
 

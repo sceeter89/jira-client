@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Threading;
 using LightShell.Api;
 using LightShell.Api.Messages.Navigation;
 using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api;
 using LightShell.Plugin.Jira.Api.Messages.Actions;
 using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
 using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
@@ -11,13 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using Yakuza.JiraClient.Plugins.Analysis.Charts;
 
 namespace LightShell.Plugin.Jira.Analysis.Charts
 {
    public class EngagementChartViewModel : IMicroservice,
-      IHandleMessage<LoggedInMessage>,
-      IHandleMessage<LoggedOutMessage>,
       IHandleMessage<SearchForIssuesResponse>,
       IHandleMessage<CurrentSearchResultsResponse>
    {
@@ -58,9 +58,8 @@ namespace LightShell.Plugin.Jira.Analysis.Charts
       private IEnumerable<JiraIssue> _issuesOnChart;
       private EngagementCriteria _selectedCriteria;
       private EngagementBase _selectedBase;
-      private bool _isLoggedIn;
 
-      public RelayCommand OpenWindowCommand { get; private set; }
+      public ICommand OpenWindowCommand { get; private set; }
 
       private void UpdateData(IEnumerable<JiraIssue> issues)
       {
@@ -84,26 +83,12 @@ namespace LightShell.Plugin.Jira.Analysis.Charts
       public void Initialize(IMessageBus messageBus)
       {
          messageBus.Register(this);
-         //messageBus.Send(new Is)
-         //TODO: create RelayCommand inheritor to handle all complexity in determining whether user is connected or not to JIRA
-         OpenWindowCommand = new RelayCommand(()=>
+         OpenWindowCommand = new LoginEnabledRelayCommand(()=>
          {
             messageBus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",
                                                    new EngagementChartControl { DataContext = this },
                                                    new EngagementChartProperties { DataContext = this }));
-         }, () => _isLoggedIn);
-      }
-
-      public void Handle(LoggedInMessage message)
-      {
-         _isLoggedIn = true;
-         OpenWindowCommand.RaiseCanExecuteChanged();
-      }
-
-      public void Handle(LoggedOutMessage message)
-      {
-         _isLoggedIn = false;
-         OpenWindowCommand.RaiseCanExecuteChanged();
+         }, messageBus);
       }
 
       public ObservableCollection<EngagementItem> Items { get; private set; }

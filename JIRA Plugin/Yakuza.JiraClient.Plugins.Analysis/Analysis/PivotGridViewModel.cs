@@ -8,6 +8,11 @@ using LightShell.Messaging.Api;
 using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
 using LightShell.Plugin.Jira.Api.Messages.Actions;
 using LightShell.Plugin.Jira.Api.Model;
+using System;
+using LightShell.Plugin.Jira.Api;
+using System.Windows.Input;
+using LightShell.Api.Messages.Navigation;
+using Yakuza.JiraClient.Plugins.Analysis.Analysis;
 
 namespace LightShell.Plugin.Jira.Analysis.Analysis
 {
@@ -55,8 +60,14 @@ namespace LightShell.Plugin.Jira.Analysis.Analysis
          _messageBus.Register(this);
 
          _messageBus.Send(new CurrentSearchResultsMessage());
+
+         OpenWindowCommand = new LoginEnabledRelayCommand(
+            ()=> _messageBus.Send(new ShowDocumentPaneMessage(this, "Pivot analysis",
+                                                   new PivotReportingGrid { DataContext = this },
+                                                   new PivotReportingProperties { DataContext = this })), messageBus);
       }
 
       public LocalDataSourceProvider DataSource { get; private set; }
+      public ICommand OpenWindowCommand { get; private set; }
    }
 }

@@ -31,6 +31,7 @@ namespace LightShell.Plugin.Jira
          yield return new ResourceDownloaderMicroservice(_configuration);
          yield return new SessionInteractionMicroservice(_configuration);
          yield return new UiManager(_configuration);
+         yield return new JiraAgileIntegrationMicroservice(_configuration);
       }
    }
 }

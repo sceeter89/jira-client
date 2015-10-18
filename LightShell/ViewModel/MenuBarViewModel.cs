@@ -18,10 +18,13 @@ namespace LightShell.ViewModel
       IHandleMessage<NewPluginFoundMessage>
    {
       private readonly IMessageBus _messageBus;
-      
+      private readonly ICommand _delegateButtonHandler;
+
       public MenuBarViewModel(IMessageBus messageBus)
       {
          _messageBus = messageBus;
+
+         _delegateButtonHandler = new RelayCommand<Button>(b => b.Delegate(_messageBus));
 
          _messageBus.Register(this);
          MenuTabs = new ObservableCollection<Tab>();
@@ -54,7 +57,7 @@ namespace LightShell.ViewModel
                   _messageBus.LogMessage(LogLevel.Warning, "Button {0}.{1}.{2} has no label defined. Skipping...", descriptor.Tab, descriptor.ButtonsGroupName, button.Label);
                   continue;
                }
-               if(button.OnClickCommand == null && button.OnClickDelegate == null)
+               if (button.OnClickCommand == null && button.OnClickDelegate == null)
                {
                   _messageBus.LogMessage(LogLevel.Warning, "Button {0}.{1}.{2} does not define any action. Skipping...", descriptor.Tab, descriptor.ButtonsGroupName, button.Label);
                   continue;
@@ -64,7 +67,8 @@ namespace LightShell.ViewModel
                {
                   Label = button.Label,
                   Icon = button.Icon,
-                  OnClick = button.OnClickCommand != null ? button.OnClickCommand : new RelayCommand(() => button.OnClickDelegate(_messageBus))
+                  OnClick = button.OnClickCommand != null ? button.OnClickCommand : _delegateButtonHandler,
+                  Delegate = button.OnClickDelegate
                };
                newButton.Icon.Freeze();
                newMenuGroup.Buttons.Add(newButton);
@@ -103,6 +107,7 @@ namespace LightShell.ViewModel
          public string Label { get; set; }
          public BitmapImage Icon { get; set; }
          public ICommand OnClick { get; set; }
+         public Action<IMessageBus> Delegate { get; internal set; }
       }
    }
 }

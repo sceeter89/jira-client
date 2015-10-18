@@ -1,8 +1,10 @@
 ﻿using LightShell.Api;
 using LightShell.Messaging.Api;
+using LightShell.Plugin.Jira.Api;
 using LightShell.Plugin.Jira.Api.Messages.Actions;
 using LightShell.Plugin.Jira.Api.Messages.IO.Exports;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Yakuza.JiraClient.Plugins.Agile
 {
@@ -31,6 +33,8 @@ namespace Yakuza.JiraClient.Plugins.Agile
          _messageBus = messageBus;
 
          _messageBus.Register(this);
+
+         PrintCommand = new LoginEnabledRelayCommand(PrintCards, messageBus);
       }
 
       internal void PrintCards()
@@ -38,5 +42,7 @@ namespace Yakuza.JiraClient.Plugins.Agile
          _pendingGenerationRequest = true;
          _messageBus.Send(new GetFilteredIssuesListMessage());
       }
+
+      public ICommand PrintCommand { get; private set; }
    }
 }

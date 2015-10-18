@@ -11,7 +11,7 @@
         Height="732.873" Width="975.748"
         Title="{Binding AppTitle}"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
-        Icon="/Assets/Icons/JiraClient.png"
+        Icon="/Assets/Icons/LightShell.png"
         x:Name="Window">
    <Window.Resources>
       <DataTemplate x:Key="BusyContentDataTemplate">

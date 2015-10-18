@@ -26,12 +26,12 @@ namespace Yakuza.JiraClient.Plugins.Agile
          {
             ButtonsGroupName = "agile",
             Tab = MenuTab.Home,
-            Buttons = new []
+            Buttons = new[]
             {
                new MenuEntryButton
                {
                   Label = "scrum cards",
-                  OnClickDelegate = _ => _cardsPrintingHandler.PrintCards(),
+                  OnClickCommand = _cardsPrintingHandler.PrintCommand,
                   Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Agile Plugin;component/Assets/XpsIcon.png"))
                }
             }

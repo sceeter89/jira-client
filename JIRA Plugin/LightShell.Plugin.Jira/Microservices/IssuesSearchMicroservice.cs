@@ -41,49 +41,59 @@ namespace LightShell.Plugin.Jira.Microservices
 
       public async void Handle(SearchForIssuesMessage message)
       {
-         var client = BuildRestClient();
-         var request = new RestRequest("/rest/api/latest/search", Method.POST);
-         _searchResult.Clear();
-         do
+         try
          {
-            request.AddJsonBody(new
+            var client = BuildRestClient();
+            var request = new RestRequest("/rest/api/latest/search", Method.POST);
+            _searchResult.Clear();
+            do
             {
-               jql = message.JqlQuery,
-               startAt = 0,
-               maxResults = 500,
-               fields = new string[] { "*all" }
-            });
-            var response = await client.ExecuteTaskAsync(request);
+               request.AddJsonBody(new
+               {
+                  jql = message.JqlQuery,
+                  startAt = 0,
+                  maxResults = 500,
+                  fields = new string[] { "*all" }
+               });
+               var response = await client.ExecuteTaskAsync(request);
 
-            if (response.StatusCode != HttpStatusCode.OK)
+               if (response.StatusCode != HttpStatusCode.OK)
+               {
+                  _messageBus.LogMessage(LogLevel.Fatal, "Search request failed with invalid response code: {0}.\r\nResponse content is: {1}", response.StatusCode, response.Content);
+                  _messageBus.Send(new SearchFailedResponse(SearchFailedResponse.FailureReason.ExceptionOccured));
+                  return;
+               }
+               var searchResults = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<RawSearchResults>(response.Content));
+               foreach (var issue in searchResults.Issues)
+               {
+                  _searchResult.Add(issue);
+               }
+               if (_searchResult.Count >= searchResults.Total)
+                  break;
+            } while (true);
+
+            if (_searchResult.Any() == false)
             {
-               _messageBus.LogMessage(LogLevel.Fatal, "Search request failed with invalid response code: {0}.\r\nResponse content is: {1}", response.StatusCode, response.Content);
-               _messageBus.Send(new SearchFailedResponse(SearchFailedResponse.FailureReason.ExceptionOccured));
+               _messageBus.Send(new SearchFailedResponse(SearchFailedResponse.FailureReason.NoResultsYielded));
                return;
             }
-            var searchResults = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<RawSearchResults>(response.Content));
-            foreach (var issue in searchResults.Issues)
+
+            if (_fields == null)
             {
-               _searchResult.Add(issue);
+               _messageBus.Send(new GetFieldsDescriptionsMessage());
+               return;
             }
-            if (_searchResult.Count >= searchResults.Total)
-               break;
-         } while (true);
 
-         if (_searchResult.Any() == false)
-         {
-            _messageBus.Send(new SearchFailedResponse(SearchFailedResponse.FailureReason.NoResultsYielded));
-            return;
+            _messageBus.Send(new SearchForIssuesResponse(ConvertIssuesToDomainModel()));
+            _searchResult.Clear();
          }
-
-         if (_fields == null)
+         catch (Exception e)
          {
-            _messageBus.Send(new GetFieldsDescriptionsMessage());
-            return;
-         }
+            _messageBus.LogMessage(e.StackTrace);
+            _messageBus.LogMessage(LogLevel.Critical, "Exception thrown: {0}", e.Message);
 
-         _messageBus.Send(new SearchForIssuesResponse(ConvertIssuesToDomainModel()));
-         _searchResult.Clear();
+            _messageBus.Send(new SearchFailedResponse(SearchFailedResponse.FailureReason.ExceptionOccured));
+         }
       }
 
       private ICollection<JiraIssue> ConvertIssuesToDomainModel()

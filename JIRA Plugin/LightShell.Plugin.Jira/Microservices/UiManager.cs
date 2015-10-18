@@ -50,7 +50,7 @@ namespace LightShell.Plugin.Jira.Microservices
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
                _searchPropertyPane = new SearchIssues { DataContext = new SearchIssuesViewModel(_messageBus) };
-               ShowConnectionPropertyPane();
+               ShowSearchPropertyPane();
             });
             return;
          }
@@ -64,11 +64,11 @@ namespace LightShell.Plugin.Jira.Microservices
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
                _issueListDocumentPane = new IssueListDisplay { DataContext = new IssueListViewModel(_messageBus) };
-               ShowConnectionPropertyPane();
+               ShowIssuesListPane();
             });
             return;
          }
-         _messageBus.Send(new ShowPropertyPaneMessage(this, "issues", _issueListDocumentPane, false));
+         _messageBus.Send(new ShowDocumentPaneMessage(this, "issues", _issueListDocumentPane));
       }
 
       public void Handle(LoggedOutMessage message)
@@ -92,6 +92,9 @@ namespace LightShell.Plugin.Jira.Microservices
       public void Initialize(IMessageBus messageBus)
       {
          _messageBus = messageBus;
+         _messageBus.Register(this);
+
+         ShowConnectionPropertyPane();
       }
 
       private UserControl _connectionPropertyPane;

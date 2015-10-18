@@ -193,7 +193,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Icons\JiraClient.png" />
+    <Resource Include="Assets\Icons\LightShell.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JIRA Plugin\LightShell.Plugin.Jira.Api\LightShell.Plugin.Jira.Api.csproj">

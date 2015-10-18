@@ -2,6 +2,7 @@
 using LightShell.Messaging.Api;
 using LightShell.Plugin.Jira.Api;
 using RestSharp;
+using System;
 using System.Net;
 
 namespace LightShell.Plugin.Jira.Microservices
@@ -37,7 +38,8 @@ namespace LightShell.Plugin.Jira.Microservices
 
       protected bool IsConfigValid()
       {
-         return string.IsNullOrWhiteSpace(_configuration.JiraUrl) == false;
+         return string.IsNullOrWhiteSpace(_configuration.JiraUrl) == false
+            && (_configuration.JiraUrl.StartsWith("http://") || _configuration.JiraUrl.StartsWith("https://"));
       }
    }
 }
