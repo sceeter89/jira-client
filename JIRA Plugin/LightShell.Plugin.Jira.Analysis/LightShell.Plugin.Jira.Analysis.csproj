@@ -84,6 +84,7 @@
     <Compile Include="Analysis\PivotReportingProperties.xaml.cs">
       <DependentUpon>PivotReportingProperties.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AssemblyVersion.cs" />
     <Compile Include="Charts\EngagementChartProperties.xaml.cs">
       <DependentUpon>EngagementChartProperties.xaml</DependentUpon>
     </Compile>

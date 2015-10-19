@@ -121,6 +121,7 @@
       <DependentUpon>SearchIssues.xaml</DependentUpon>
     </Compile>
     <Compile Include="Microservices\UiManager.cs" />
+    <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="Updates\CheckForUpdatesMicroservice.cs" />
     <Compile Include="Updates\GithubReleasesResponse.cs" />
   </ItemGroup>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{08031EED-CF59-43F6-ADD3-D906CE439ADD}</ProjectGuid>
+    <ProjectGuid>{18CBF1BE-5C17-460D-8EDD-2B793AFD9763}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LightShell.Plugin.Jira.Agile</RootNamespace>
-    <AssemblyName>Jira Agile Plugin</AssemblyName>
+    <RootNamespace>LightShell.Plugin.Diagnostics</RootNamespace>
+    <AssemblyName>LightShell.Plugin.Diagnostics</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -32,12 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ReachFramework" />
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Printing" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -52,21 +48,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\LightShell.Plugin.Jira\Properties\AssemblyVersion.cs">
+    <Compile Include="..\..\LightShell\Properties\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="AgilePlugin.cs" />
-    <Compile Include="CardsPrintingHandler.cs" />
-    <Compile Include="ScrumCardsExportMicroservice.cs" />
-    <Page Include="Controls\CardsPrintPreview.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="Controls\CardsPrintPreview.xaml.cs">
-      <DependentUpon>CardsPrintPreview.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -84,29 +68,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\LightShell.Core\LightShell.Api\LightShell.Api.csproj">
-      <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
-      <Name>LightShell.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\LightShell.Core\LightShell.Messaging\LightShell.Messaging.csproj">
-      <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
-      <Name>LightShell.Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LightShell.Plugin.Jira.Api\LightShell.Plugin.Jira.Api.csproj">
-      <Project>{d666c6bd-8893-4b39-af80-39106349f083}</Project>
-      <Name>LightShell.Plugin.Jira.Api</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\XpsIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

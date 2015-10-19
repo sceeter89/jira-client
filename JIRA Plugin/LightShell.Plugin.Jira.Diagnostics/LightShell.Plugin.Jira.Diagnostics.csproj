@@ -76,6 +76,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\LightShell.Plugin.Jira\Properties\AssemblyVersion.cs">
+      <Link>AssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="Controls\NullToVisibilityConverters.cs" />
     <Compile Include="Controls\PerformanceOverview.xaml.cs">
       <DependentUpon>PerformanceOverview.xaml</DependentUpon>

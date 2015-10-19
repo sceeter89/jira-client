@@ -139,6 +139,7 @@
     <Compile Include="InternalMessages\UI\UpdateUiBootstrapMessage.cs" />
     <Compile Include="InternalMessages\UI\ViewModelInitializedMessage.cs" />
     <Compile Include="InternalMessages\UI\CoreUserInterfaceLoadedMessage.cs" />
+    <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="Service\PluginsLoader.cs" />
     <Compile Include="Service\UiBootstrapper.cs" />
     <Compile Include="ViewModel\ICoreViewModel.cs" />

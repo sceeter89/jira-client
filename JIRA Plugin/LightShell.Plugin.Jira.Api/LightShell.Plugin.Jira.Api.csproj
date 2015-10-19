@@ -66,6 +66,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\LightShell.Plugin.Jira\Properties\AssemblyVersion.cs">
+      <Link>AssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="IConfiguration.cs" />
     <Compile Include="LoginEnabledRelayCommand.cs" />
     <Compile Include="Messages\Actions\Authentication\IsLoggedInMessage.cs" />
