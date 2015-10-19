@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Threading;
 
-namespace LightShell.Plugin.Jira.Diagnostics.Controls
+namespace LightShell.Plugin.Diagnostics.Controls
 {
    public class PerformanceOverviewViewModel : IMicroservice,
       IHandleAllMessages

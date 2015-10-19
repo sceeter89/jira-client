@@ -79,18 +79,6 @@
     <Compile Include="..\LightShell.Plugin.Jira\Properties\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="Controls\NullToVisibilityConverters.cs" />
-    <Compile Include="Controls\PerformanceOverview.xaml.cs">
-      <DependentUpon>PerformanceOverview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PerformanceOverviewViewModel.cs" />
-    <Compile Include="Controls\PluginView.xaml.cs">
-      <DependentUpon>PluginView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PluginsListView.xaml.cs">
-      <DependentUpon>PluginsListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\PluginsViewModel.cs" />
     <Compile Include="DiagnosticsPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -123,9 +111,6 @@
     <Resource Include="Assets\ReportIssueIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\SaveIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\WebsiteIcon.png" />
   </ItemGroup>
   <ItemGroup>
@@ -141,24 +126,6 @@
       <Project>{d666c6bd-8893-4b39-af80-39106349f083}</Project>
       <Name>LightShell.Plugin.Jira.Api</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Controls\PerformanceOverview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PluginView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PluginsListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\PerformanceIcon.png" />
-    <Resource Include="Assets\PluginsIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

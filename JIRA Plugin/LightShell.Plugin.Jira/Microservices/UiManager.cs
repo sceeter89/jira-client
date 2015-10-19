@@ -9,6 +9,8 @@ using LightShell.Api.Messages.Navigation;
 using System.Windows.Controls;
 using LightShell.Plugin.Jira.Api;
 using GalaSoft.MvvmLight.Threading;
+using System.Reflection;
+using LightShell.Plugin.Jira.Api.Messages.Actions;
 
 namespace LightShell.Plugin.Jira.Microservices
 {
@@ -95,6 +97,8 @@ namespace LightShell.Plugin.Jira.Microservices
          _messageBus.Register(this);
 
          ShowConnectionPropertyPane();
+         messageBus.Send(new CheckForUpdatesMessage(this.GetType().Assembly.GetName().Version));
+
       }
 
       private UserControl _connectionPropertyPane;

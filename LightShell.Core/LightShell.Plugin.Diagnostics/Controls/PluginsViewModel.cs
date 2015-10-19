@@ -1,15 +1,16 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Threading;
 using LightShell.Api;
 using LightShell.Api.Messages.IO.Plugins;
+using LightShell.Api.Plugins;
 using LightShell.Messaging.Api;
-using LightShell.Plugin.Jira.Api.Messages.Actions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 
-namespace LightShell.Plugin.Jira.Diagnostics.Controls
+namespace LightShell.Plugin.Diagnostics.Controls
 {
    public class PluginsViewModel : ViewModelBase,
       IMicroservice,
@@ -19,15 +20,22 @@ namespace LightShell.Plugin.Jira.Diagnostics.Controls
 
       public void Handle(NewPluginFoundMessage message)
       {
-         var companyAttribute = message.PluginDescription.GetType().Assembly.GetCustomAttribute<AssemblyCompanyAttribute>();
-
-
-         Plugins.Add(new PluginInfo
+         DispatcherHelper.CheckBeginInvokeOnUI(() =>
          {
-            Name = message.PluginDescription.PluginName,
-            Version = message.PluginDescription.GetType().Assembly.GetName().Version,
+            Plugins.Add(PreparePluginInfo(message.PluginDescription));
+         });
+      }
+
+      private PluginInfo PreparePluginInfo(ILightShellPlugin plugin)
+      {
+         var companyAttribute = plugin.GetType().Assembly.GetCustomAttribute<AssemblyCompanyAttribute>();
+
+         return new PluginInfo
+         {
+            Name = plugin.PluginName,
+            Version = plugin.GetType().Assembly.GetName().Version,
             Vendor = companyAttribute == null ? "N/A" : companyAttribute.Company,
-            FilePath = message.PluginDescription.GetType().Assembly.Location,
+            FilePath = plugin.GetType().Assembly.Location,
 
             PluginStructure = new[] {
                new PluginStructureElement
@@ -38,31 +46,29 @@ namespace LightShell.Plugin.Jira.Diagnostics.Controls
                      new PluginStructureElement
                      {
                         Name = "Microservices",
-                        Children = message.PluginDescription.GetMicroservices().Select(m => new PluginStructureElement {Name = m.GetType().Name})
+                        Children = (plugin.GetMicroservices() ?? Enumerable.Empty<IMicroservice>())
+                                       .Select(m => new PluginStructureElement {Name = m.GetType().Name})
                      },
                      new PluginStructureElement
                      {
                         Name = "Menu entries",
-                        Children = message.PluginDescription.GetMenuEntries().SelectMany(m => m.Buttons.Select(b =>
-                                                                                           new PluginStructureElement {
-                                                                                              Name=string.Format("{0} » {1} » {2}",
-                                                                                              m.Tab,
-                                                                                              m.ButtonsGroupName,
-                                                                                              b.Label) }))
+                        Children = (plugin.GetMenuEntries() ?? Enumerable.Empty<MenuEntryDescriptor>())
+                                       .SelectMany(m => m.Buttons.Select(b =>
+                                          new PluginStructureElement { Name=string.Format("{0} » {1} » {2}", m.Tab, m.ButtonsGroupName, b.Label) }))
                      },
                   }
                }
             }
-         });
+         };
       }
 
       public void Initialize(IMessageBus messageBus)
       {
-         Plugins = new ObservableCollection<PluginInfo>();
-
+         DispatcherHelper.CheckBeginInvokeOnUI(() =>
+         {
+            Plugins = new ObservableCollection<PluginInfo>();
+         });
          messageBus.Register(this);
-
-         messageBus.Send(new CheckForUpdatesMessage(Assembly.GetEntryAssembly().GetName().Version));
       }
 
       public ObservableCollection<PluginInfo> Plugins { get; private set; }

@@ -6,11 +6,11 @@ using System;
 using LightShell.Api.Messages.IO.Plugins;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
-using LightShell.Api.Plugins;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight.Threading;
 using LightShell.InternalMessages.UI;
 using System.Windows.Input;
+using System.Linq;
 
 namespace LightShell.ViewModel
 {
@@ -76,12 +76,30 @@ namespace LightShell.ViewModel
                newButton.Icon.Freeze();
                newMenuGroup.Buttons.Add(newButton);
             }
-            DispatcherHelper.CheckBeginInvokeOnUI(() => tab.Groups.Add(newMenuGroup));
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+               foreach (var t in _menuTabsMap.Values.Where(x => MenuTabs.Contains(x) == false).ToList())
+                  MenuTabs.Add(t);
+
+               SelectedTab = MenuTabs[0];
+               tab.Groups.Add(newMenuGroup);
+            });
          }
       }
 
       private readonly IDictionary<string, Tab> _menuTabsMap = new Dictionary<string, Tab>();
+      private Tab _selectedTab;
+
       public ObservableCollection<Tab> MenuTabs { get; private set; }
+      public Tab SelectedTab
+      {
+         get { return _selectedTab; }
+         set
+         {
+            _selectedTab = value;
+            RaisePropertyChanged();
+         }
+      }
 
       public class Tab
       {

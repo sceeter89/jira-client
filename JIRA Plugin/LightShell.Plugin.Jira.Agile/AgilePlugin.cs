@@ -16,7 +16,7 @@ namespace Yakuza.JiraClient.Plugins.Agile
       {
          get
          {
-            return "Agile plugin";
+            return "JIRA Plugin - agile";
          }
       }
 

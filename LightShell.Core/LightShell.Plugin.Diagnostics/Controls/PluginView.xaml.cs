@@ -1,4 +1,4 @@
-﻿namespace LightShell.Plugin.Jira.Diagnostics.Controls
+﻿namespace LightShell.Plugin.Diagnostics.Controls
 {
    public partial class PluginView
    {

@@ -4,9 +4,9 @@ namespace LightShell.Api.Plugins
 {
    /// <summary>
    /// If you create a plugin make sure you implement this interface with metadata about your plugin.
-   /// Feel free to return nulls if you do not plan to use it.
+   /// If you are not going to use some of functionalities then either return empty IEnumerable or type "yield break;".
    /// 
-   /// Please return some meaningful plugin name. If will be null or empty then plugin will be skipped.
+   /// Please return some meaningful plugin name. If will be empty then plugin will be skipped.
    /// </summary>
    public interface ILightShellPlugin
    {

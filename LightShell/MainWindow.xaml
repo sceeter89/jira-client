@@ -27,25 +27,26 @@
          <Grid.Resources>
             <DataTemplate x:Key="ButtonTemplate">
                <telerik:RadRibbonButton Text="{Binding Label}" LargeImage="{Binding Icon}" Command="{Binding OnClick}"
-                                     Size="Large" CommandParameter="{Binding .}"/>
+                                        Size="Large" CommandParameter="{Binding .}"/>
             </DataTemplate>
 
             <HierarchicalDataTemplate x:Key="GroupTemplate"
-                              ItemsSource='{Binding Buttons}'
-                              ItemTemplate='{StaticResource ButtonTemplate}'>
+                                      ItemsSource='{Binding Buttons}'
+                                      ItemTemplate='{StaticResource ButtonTemplate}'>
                <TextBlock Text='{Binding GroupName}' />
             </HierarchicalDataTemplate>
 
             <HierarchicalDataTemplate x:Key="TabTemplate"
-                              ItemsSource='{Binding Groups}'
-                              ItemTemplate='{StaticResource GroupTemplate}'>
+                                      ItemsSource='{Binding Groups}'
+                                      ItemTemplate='{StaticResource GroupTemplate}'>
                <TextBlock Text='{Binding Title}' />
             </HierarchicalDataTemplate>
          </Grid.Resources>
 
          <telerik:RadRibbonView ApplicationButtonVisibility="Collapsed" TitleBarVisibility="Collapsed"
-                             DataContext="{Binding Source={StaticResource Locator}, Path=MenuBar}"
-                             ItemTemplate="{StaticResource TabTemplate}" ItemsSource="{Binding MenuTabs}">
+                                DataContext="{Binding Source={StaticResource Locator}, Path=MenuBar}"
+                                ItemTemplate="{StaticResource TabTemplate}" ItemsSource="{Binding MenuTabs}"
+                                SelectedItem="{Binding SelectedTab, Mode=TwoWay}">
          </telerik:RadRibbonView>
 
          <telerik:RadDocking Grid.Row="1" PreviewClose="PaneClosePreview">

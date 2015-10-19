@@ -20,7 +20,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
       {
          get
          {
-            return "Basic charting plugin";
+            return "JIRA Plugin - analysis";
          }
       }
 
