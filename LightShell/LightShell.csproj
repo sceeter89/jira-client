@@ -204,23 +204,23 @@
       <Project>{bd615799-bbf4-4db7-bd0f-fc0c1105a8c6}</Project>
       <Name>LightShell.Plugin.Jira</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JIRA Plugin\Yakuza.JiraClient.Plugins.Agile\LightShell.Plugin.Jira.Agile.csproj">
+    <ProjectReference Include="..\JIRA Plugin\LightShell.Plugin.Jira.Agile\LightShell.Plugin.Jira.Agile.csproj">
       <Project>{08031eed-cf59-43f6-add3-d906ce439add}</Project>
       <Name>LightShell.Plugin.Jira.Agile</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JIRA Plugin\Yakuza.JiraClient.Plugins.Analysis\LightShell.Plugin.Jira.Analysis.csproj">
+    <ProjectReference Include="..\JIRA Plugin\LightShell.Plugin.Jira.Analysis\LightShell.Plugin.Jira.Analysis.csproj">
       <Project>{e3b2571e-d4de-416a-93b5-33dfe37e732c}</Project>
       <Name>LightShell.Plugin.Jira.Analysis</Name>
     </ProjectReference>
-    <ProjectReference Include="..\JIRA Plugin\Yakuza.JiraClient.Plugins.Diagnostics\LightShell.Plugin.Jira.Diagnostics.csproj">
+    <ProjectReference Include="..\JIRA Plugin\LightShell.Plugin.Jira.Diagnostics\LightShell.Plugin.Jira.Diagnostics.csproj">
       <Project>{5b62120a-19f0-4487-9d46-6e0caddbb206}</Project>
       <Name>LightShell.Plugin.Jira.Diagnostics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LightShell.Core\Yakuza.JiraClient.Api\LightShell.Api.csproj">
+    <ProjectReference Include="..\LightShell.Core\LightShell.Api\LightShell.Api.csproj">
       <Project>{add8f9a1-dae9-4cc2-8b5d-a5b36f4e7d98}</Project>
       <Name>LightShell.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LightShell.Core\Yakuza.JiraClient.Messaging\LightShell.Messaging.csproj">
+    <ProjectReference Include="..\LightShell.Core\LightShell.Messaging\LightShell.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>LightShell.Messaging</Name>
     </ProjectReference>

@@ -90,7 +90,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Yakuza.JiraClient.Messaging\LightShell.Messaging.csproj">
+    <ProjectReference Include="..\LightShell.Messaging\LightShell.Messaging.csproj">
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>LightShell.Messaging</Name>
     </ProjectReference>
