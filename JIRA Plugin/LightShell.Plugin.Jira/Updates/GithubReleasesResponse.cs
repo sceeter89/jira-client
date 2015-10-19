@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Yakuza.JiraClient.IO.Updates
+namespace LightShell.Plugin.Jira.Updates
 {
    public class GithubApplicationRelease
    {

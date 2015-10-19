@@ -1,5 +1,4 @@
 ﻿using LightShell.Api;
-using LightShell.Api.Messages.Navigation;
 using LightShell.Api.Plugins;
 using LightShell.Plugin.Jira.Analysis.Analysis;
 using LightShell.Plugin.Jira.Analysis.Charts;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Media.Imaging;
 
-namespace Yakuza.JiraClient.Plugins.Analysis
+namespace LightShell.Plugin.Jira.Analysis
 {
    [Export(typeof(ILightShellPlugin))]
    public class AnalysisPlugin : ILightShellPlugin

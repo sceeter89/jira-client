@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.Plugins.Analysis.Charts
+﻿namespace LightShell.Plugin.Jira.Analysis.Charts
 {
    public partial class EngagementChartControl
    {

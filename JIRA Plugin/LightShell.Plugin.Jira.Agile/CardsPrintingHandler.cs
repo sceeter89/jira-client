@@ -6,7 +6,7 @@ using LightShell.Plugin.Jira.Api.Messages.IO.Exports;
 using System.Linq;
 using System.Windows.Input;
 
-namespace Yakuza.JiraClient.Plugins.Agile
+namespace LightShell.Plugin.Jira.Agile
 {
    public class CardsPrintingHandler : IMicroservice,
       IHandleMessage<FilteredIssuesListMessage>

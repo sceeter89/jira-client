@@ -5,7 +5,7 @@ using LightShell.Plugin.Jira.Api.Messages.IO.Exports;
 using System.IO;
 using System.Windows.Xps.Packaging;
 
-namespace Yakuza.JiraClient.Plugins.Agile
+namespace LightShell.Plugin.Jira.Agile
 {
    public class ScrumCardsExportMicroservice : IMicroservice,
       IHandleMessage<GenerateScrumCardsMessage>

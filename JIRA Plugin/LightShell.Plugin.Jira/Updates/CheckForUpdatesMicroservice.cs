@@ -8,7 +8,7 @@ using LightShell.Api;
 using LightShell.Messaging.Api;
 using LightShell.Plugin.Jira.Api.Messages.Actions;
 
-namespace Yakuza.JiraClient.IO.Updates
+namespace LightShell.Plugin.Jira.Updates
 {
    public class CheckForUpdatesMicroservice : IMicroservice,
       IHandleMessage<CheckForUpdatesMessage>

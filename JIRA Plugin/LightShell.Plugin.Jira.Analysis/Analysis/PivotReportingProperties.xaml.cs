@@ -1,4 +1,4 @@
-﻿namespace Yakuza.JiraClient.Plugins.Analysis.Analysis
+﻿namespace LightShell.Plugin.Jira.Analysis.Analysis
 {
    public partial class PivotReportingProperties
    {

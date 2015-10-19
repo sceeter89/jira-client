@@ -1,11 +1,9 @@
-﻿using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Threading;
+﻿using GalaSoft.MvvmLight.Threading;
 using LightShell.Api;
 using LightShell.Api.Messages.Navigation;
 using LightShell.Messaging.Api;
 using LightShell.Plugin.Jira.Api;
 using LightShell.Plugin.Jira.Api.Messages.Actions;
-using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
 using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
 using LightShell.Plugin.Jira.Api.Model;
 using System;
@@ -13,7 +11,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using Yakuza.JiraClient.Plugins.Analysis.Charts;
 
 namespace LightShell.Plugin.Jira.Analysis.Charts
 {

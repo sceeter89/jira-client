@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:pivot="http://schemas.telerik.com/2008/xaml/presentation/pivot"
-             xmlns:local="clr-namespace:Yakuza.JiraClient.Plugins.Analysis.Analysis"
-             x:Class="Yakuza.JiraClient.Plugins.Analysis.Analysis.PivotReportingGrid"
+             xmlns:local="clr-namespace:LightShell.Plugin.Jira.Analysis.Analysis"
+             x:Class="LightShell.Plugin.Jira.Analysis.Analysis.PivotReportingGrid"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance d:Type={x:Type local:PivotGridViewModel}}">

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Windows.Media.Imaging;
 
-namespace Yakuza.JiraClient.Plugins.Agile
+namespace LightShell.Plugin.Jira.Agile
 {
    [Export(typeof(ILightShellPlugin))]
    public class AgilePlugin : ILightShellPlugin

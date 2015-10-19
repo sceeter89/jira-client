@@ -7,7 +7,7 @@ using LightShell.Api;
 using LightShell.Api.Plugins;
 using LightShell.Plugin.Jira.Api.Messages.Actions;
 
-namespace Yakuza.JiraClient.Plugins.Diagnostics
+namespace LightShell.Plugin.Jira.Diagnostics
 {
    [Export(typeof(ILightShellPlugin))]
    public class DiagnosticsPlugin : ILightShellPlugin

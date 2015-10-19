@@ -12,7 +12,6 @@ using System;
 using LightShell.Plugin.Jira.Api;
 using System.Windows.Input;
 using LightShell.Api.Messages.Navigation;
-using Yakuza.JiraClient.Plugins.Analysis.Analysis;
 
 namespace LightShell.Plugin.Jira.Analysis.Analysis
 {
