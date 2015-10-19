@@ -225,6 +225,10 @@
       <Project>{7dbbde05-ef7f-4fb3-b4d5-540a03e4b9b4}</Project>
       <Name>LightShell.Messaging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LightShell.Core\LightShell.Plugin.Diagnostics\LightShell.Plugin.Diagnostics.csproj">
+      <Project>{18cbf1be-5c17-460d-8edd-2b793afd9763}</Project>
+      <Name>LightShell.Plugin.Diagnostics</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.ico" />

@@ -86,7 +86,6 @@
     <Compile Include="Plugins\ILightShellPlugin.cs" />
     <Compile Include="Plugins\MenuEntryButton.cs" />
     <Compile Include="Plugins\MenuEntryDescriptor.cs" />
-    <Compile Include="Plugins\MenuTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

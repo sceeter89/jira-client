@@ -25,7 +25,7 @@ namespace Yakuza.JiraClient.Plugins.Agile
          yield return new MenuEntryDescriptor
          {
             ButtonsGroupName = "agile",
-            Tab = MenuTab.Home,
+            Tab = "home",
             Buttons = new[]
             {
                new MenuEntryButton

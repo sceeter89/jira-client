@@ -28,12 +28,6 @@ namespace LightShell.ViewModel
 
          _messageBus.Register(this);
          MenuTabs = new ObservableCollection<Tab>();
-         foreach (MenuTab value in Enum.GetValues(typeof(MenuTab)))
-         {
-            var tab = new Tab(value.ToString());
-            this.MenuTabs.Add(tab);
-            _menuTabsMap[value] = tab;
-         }
 
          messageBus.Send(new ViewModelInitializedMessage(this.GetType()));
       }
@@ -47,19 +41,28 @@ namespace LightShell.ViewModel
 
          foreach (var descriptor in menuEntries)
          {
-            var tab = _menuTabsMap[descriptor.Tab];
+            var tabName = descriptor.Tab.ToLower();
+            Tab tab;
+            if (_menuTabsMap.ContainsKey(tabName) == false)
+            {
+               tab = new Tab(tabName);
+               _menuTabsMap[tabName] = tab;
+            }
+            else
+               tab = _menuTabsMap[tabName];
+
             var newMenuGroup = new Group(descriptor.ButtonsGroupName);
 
             foreach (var button in descriptor.Buttons)
             {
                if (string.IsNullOrWhiteSpace(button.Label))
                {
-                  _messageBus.LogMessage(LogLevel.Warning, "Button {0}.{1}.{2} has no label defined. Skipping...", descriptor.Tab, descriptor.ButtonsGroupName, button.Label);
+                  _messageBus.LogMessage(LogLevel.Warning, "Button {0}.{1}.{2} has no label defined. Skipping...", tabName, descriptor.ButtonsGroupName, button.Label);
                   continue;
                }
                if (button.OnClickCommand == null && button.OnClickDelegate == null)
                {
-                  _messageBus.LogMessage(LogLevel.Warning, "Button {0}.{1}.{2} does not define any action. Skipping...", descriptor.Tab, descriptor.ButtonsGroupName, button.Label);
+                  _messageBus.LogMessage(LogLevel.Warning, "Button {0}.{1}.{2} does not define any action. Skipping...", tabName, descriptor.ButtonsGroupName, button.Label);
                   continue;
                }
 
@@ -77,7 +80,7 @@ namespace LightShell.ViewModel
          }
       }
 
-      private readonly IDictionary<MenuTab, Tab> _menuTabsMap = new Dictionary<MenuTab, Tab>();
+      private readonly IDictionary<string, Tab> _menuTabsMap = new Dictionary<string, Tab>();
       public ObservableCollection<Tab> MenuTabs { get; private set; }
 
       public class Tab

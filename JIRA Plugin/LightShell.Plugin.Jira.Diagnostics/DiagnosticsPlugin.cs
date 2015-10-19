@@ -34,7 +34,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
       {
          yield return new MenuEntryDescriptor
          {
-            Tab = MenuTab.Support,
+            Tab = "support",
             ButtonsGroupName = "diagnostics",
             Buttons = new[]
                {
@@ -63,7 +63,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
          };
          yield return new MenuEntryDescriptor
          {
-            Tab = MenuTab.Support,
+            Tab = "support",
             ButtonsGroupName = "help",
             Buttons = new[]
                {
@@ -83,7 +83,7 @@ namespace Yakuza.JiraClient.Plugins.Diagnostics
          };
          yield return new MenuEntryDescriptor
          {
-            Tab = MenuTab.Support,
+            Tab = "support",
             ButtonsGroupName = "updates",
             Buttons = new[]
                {

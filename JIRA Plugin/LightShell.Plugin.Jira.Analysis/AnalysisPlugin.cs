@@ -28,7 +28,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
       {
          yield return new MenuEntryDescriptor
          {
-            Tab = MenuTab.Home,
+            Tab = "home",
             ButtonsGroupName = "charts",
             Buttons = new[]
                {
@@ -42,7 +42,7 @@ namespace Yakuza.JiraClient.Plugins.Analysis
          };
          yield return new MenuEntryDescriptor
          {
-            Tab = MenuTab.Home,
+            Tab = "home",
             ButtonsGroupName = "analysis",
             Buttons = new[]
                {
