@@ -27,9 +27,9 @@ namespace LightShell.Plugin.Diagnostics.Controls
 
          var eventName = message.GetType().Name;
 
-         var stat = Statistics.FirstOrDefault(s => s.EventName == eventName);
          DispatcherHelper.CheckBeginInvokeOnUI(() =>
          {
+            var stat = Statistics.FirstOrDefault(s => s.EventName == eventName);
             if (stat != null)
                stat.Hits++;
             else

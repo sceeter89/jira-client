@@ -16,11 +16,13 @@ namespace LightShell.Plugin.Jira.Api.Messages.IO.Jira
 
    public class SearchForIssuesResponse : IMessage
    {
-      public SearchForIssuesResponse(ICollection<JiraIssue> searchResults)
+      public SearchForIssuesResponse(ICollection<JiraIssue> searchResults, string query)
       {
          SearchResults = searchResults;
+         Query = query;
       }
 
+      public string Query { get; private set; }
       public ICollection<JiraIssue> SearchResults { get; private set; }
    }
 

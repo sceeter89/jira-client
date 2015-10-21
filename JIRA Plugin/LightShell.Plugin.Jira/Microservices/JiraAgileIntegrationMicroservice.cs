@@ -10,11 +10,24 @@ namespace LightShell.Plugin.Jira.Microservices
 {
    public class JiraAgileIntegrationMicroservice : RestMicroserviceBase,
       IHandleMessage<GetAgileBoardsMessage>,
-      IHandleMessage<GetAgileSprintsMessage>
+      IHandleMessage<GetAgileSprintsMessage>,
+      IHandleMessage<GetAgileSprintDetailsMessage>
    {
       public JiraAgileIntegrationMicroservice(IConfiguration configuration)
          : base(configuration)
       {
+      }
+
+      public async void Handle(GetAgileSprintDetailsMessage message)
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/agile/latest/sprint/{id}", Method.GET);
+         request.AddUrlSegment("id", message.SprintId.ToString());
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<RawAgileSprint>(response.Content);
+
+         _messageBus.Send(new GetAgileSprintDetailsResponse(result));
       }
 
       public async void Handle(GetAgileSprintsMessage message)

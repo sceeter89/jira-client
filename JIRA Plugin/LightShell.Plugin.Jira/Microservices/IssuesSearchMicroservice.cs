@@ -21,6 +21,7 @@ namespace LightShell.Plugin.Jira.Microservices
       private IEnumerable<RawFieldDefinition> _descriptions;
       private readonly IList<RawIssue> _searchResult = new List<RawIssue>();
       private IDictionary<string, RawFieldDefinition> _fields;
+      private string _currentQuery;
 
       public IssuesSearchMicroservice(IConfiguration configuration)
          : base(configuration)
@@ -34,8 +35,9 @@ namespace LightShell.Plugin.Jira.Microservices
 
          if (_searchResult.Any())
          {
-            _messageBus.Send(new SearchForIssuesResponse(ConvertIssuesToDomainModel()));
+            _messageBus.Send(new SearchForIssuesResponse(ConvertIssuesToDomainModel(), _currentQuery));
             _searchResult.Clear();
+            _currentQuery = "";
          }
       }
 
@@ -46,6 +48,7 @@ namespace LightShell.Plugin.Jira.Microservices
             var client = BuildRestClient();
             var request = new RestRequest("/rest/api/latest/search", Method.POST);
             _searchResult.Clear();
+            _currentQuery = message.JqlQuery;
             do
             {
                request.AddJsonBody(new
@@ -84,8 +87,9 @@ namespace LightShell.Plugin.Jira.Microservices
                return;
             }
 
-            _messageBus.Send(new SearchForIssuesResponse(ConvertIssuesToDomainModel()));
+            _messageBus.Send(new SearchForIssuesResponse(ConvertIssuesToDomainModel(), _currentQuery));
             _searchResult.Clear();
+            _currentQuery = "";
          }
          catch (Exception e)
          {

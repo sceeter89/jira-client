@@ -25,4 +25,24 @@ namespace LightShell.Plugin.Jira.Api.Messages.IO.Jira
       public RawAgileBoard Board { get; private set; }
       public IEnumerable<RawAgileSprint> Sprints { get; private set; }
    }
+
+   public class GetAgileSprintDetailsMessage : IMessage
+   {
+      public GetAgileSprintDetailsMessage(int sprintId)
+      {
+         SprintId = sprintId;
+      }
+
+      public int SprintId { get; private set; }
+   }
+
+   public class GetAgileSprintDetailsResponse : IMessage
+   {
+      public GetAgileSprintDetailsResponse(RawAgileSprint sprint)
+      {
+         Sprint = sprint;
+      }
+
+      public RawAgileSprint Sprint { get; private set; }
+   }
 }

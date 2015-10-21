@@ -5,12 +5,22 @@ using System.Collections.Generic;
 using LightShell.Plugin.Jira.Microservices;
 using LightShell.Plugin.Jira.Api;
 using LightShell.Service;
+using LightShell.Plugin.Jira.Properties;
 
 namespace LightShell.Plugin.Jira
 {
    [Export(typeof(ILightShellPlugin))]
    public class JiraPlugin : ILightShellPlugin
    {
+      static JiraPlugin()
+      {
+         if (Settings.Default.SettingsUpgradePending)
+         {
+            Settings.Default.Upgrade();
+            Settings.Default.SettingsUpgradePending = false;
+            Settings.Default.Save();
+         }
+      }
       private readonly IConfiguration _configuration = new Configuration();
 
       public string PluginName

@@ -15,12 +15,12 @@ namespace LightShell.Plugin.Jira.Controls
       IHandleMessage<GetFilteredIssuesListMessage>
    {
       private QueryableCollectionView _issues;
-      private readonly IMessageBus _messenger;
+      private readonly IMessageBus _messageBus;
 
-      public IssueListViewModel(IMessageBus messenger)
+      public IssueListViewModel(IMessageBus messageBus)
       {
-         _messenger = messenger;
-         messenger.Register(this);
+         _messageBus = messageBus;
+         messageBus.Register(this);
       }
 
       public void Handle(SearchForIssuesResponse message)
@@ -30,7 +30,7 @@ namespace LightShell.Plugin.Jira.Controls
 
       public void Handle(GetFilteredIssuesListMessage message)
       {
-         _messenger.Send(new FilteredIssuesListMessage(Issues == null ? Enumerable.Empty<JiraIssue>() : Issues.Cast<JiraIssue>()));
+         _messageBus.Send(new FilteredIssuesListMessage(Issues == null ? Enumerable.Empty<JiraIssue>() : Issues.Cast<JiraIssue>()));
       }
 
       public QueryableCollectionView Issues
@@ -60,7 +60,7 @@ namespace LightShell.Plugin.Jira.Controls
          if (SelectedIssue == null)
             return;
 
-         _messenger.Send(new ShowDocumentPaneMessage(this, SelectedIssue.Key, new IssueDetails { DataContext = SelectedIssue }));
+         _messageBus.Send(new ShowDocumentPaneMessage(this, SelectedIssue.Key, new IssueDetails { DataContext = SelectedIssue }));
       }
    }
 }

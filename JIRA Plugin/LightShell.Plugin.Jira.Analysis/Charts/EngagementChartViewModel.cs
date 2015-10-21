@@ -82,7 +82,7 @@ namespace LightShell.Plugin.Jira.Analysis.Charts
          messageBus.Register(this);
          OpenWindowCommand = new LoginEnabledRelayCommand(()=>
          {
-            messageBus.Send(new ShowDocumentPaneMessage(this, "Chart - Engagement",
+            messageBus.Send(new ShowDocumentPaneMessage(this, "chart - engagement",
                                                    new EngagementChartControl { DataContext = this },
                                                    new EngagementChartProperties { DataContext = this }));
          }, messageBus);

@@ -23,16 +23,16 @@ namespace LightShell.Plugin.Jira.Controls
       private bool _isBusy = false;
       private string _searchQuery;
 
-      public SearchIssuesViewModel(IMessageBus messenger)
+      public SearchIssuesViewModel(IMessageBus messageBus)
       {
-         _messageBus = messenger;
+         _messageBus = messageBus;
          _messageBus.Register(this);
 
          FoundIssues = new ObservableCollection<JiraIssue>();
 
          SearchableFields = new ISearchableField[]
          {
-            new SearchBySprintField(messenger),
+            new SearchBySprintField(messageBus),
             new ComboBoxSearchField<RawIssueType, GetIssueTypesMessage, GetIssueTypesResponse>(_messageBus,
                                                   r=> r.IssueTypes,
                                                   x => x.Name,

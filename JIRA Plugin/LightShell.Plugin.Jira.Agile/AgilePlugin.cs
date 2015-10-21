@@ -1,5 +1,6 @@
 ﻿using LightShell.Api;
 using LightShell.Api.Plugins;
+using LightShell.Plugin.Jira.Agile.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -11,6 +12,7 @@ namespace LightShell.Plugin.Jira.Agile
    public class AgilePlugin : ILightShellPlugin
    {
       private readonly CardsPrintingHandler _cardsPrintingHandler = new CardsPrintingHandler();
+      private readonly BurnDownChartViewModel _burndownViewModel = new BurnDownChartViewModel();
 
       public string PluginName
       {
@@ -33,6 +35,12 @@ namespace LightShell.Plugin.Jira.Agile
                   Label = "scrum cards",
                   OnClickCommand = _cardsPrintingHandler.PrintCommand,
                   Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Agile Plugin;component/Assets/XpsIcon.png"))
+               },
+               new MenuEntryButton
+               {
+                  Label = "burndown",
+                  OnClickCommand = _burndownViewModel.OpenCommand,
+                  Icon = new BitmapImage(new Uri(@"pack://application:,,,/Jira Agile Plugin;component/Assets/BurndownChart.png"))
                }
             }
          };
@@ -42,6 +50,7 @@ namespace LightShell.Plugin.Jira.Agile
       {
          yield return new ScrumCardsExportMicroservice();
          yield return _cardsPrintingHandler;
+         yield return _burndownViewModel;
       }
    }
 }
