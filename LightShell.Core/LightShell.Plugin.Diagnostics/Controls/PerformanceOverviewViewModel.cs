@@ -58,7 +58,7 @@ namespace LightShell.Plugin.Diagnostics.Controls
                if (TotalEventsStatistics.Count > TotalEventsStatisticsWindowSize)
                   TotalEventsStatistics.RemoveAt(0);
             };
-            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Start();
 
             _messageBus = messageBus;

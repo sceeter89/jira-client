@@ -73,7 +73,9 @@ namespace LightShell.Plugin.Jira.Agile.Controls
          IdealLineSeries.Add(new DataPoint
          {
             Date = SelectedSprint.StartDate.Date,
-            Value = _foundIssues.Count
+            Value = _foundIssues.Where(i => i.Created <= SelectedSprint.StartDate && i.Resolved >= SelectedSprint.StartDate).Count(),
+            ResolvedIssues = _foundIssues.Where(i => i.Resolved.HasValue && i.Resolved.Value.Date == SelectedSprint.StartDate.Date).Count(),
+            CreatedIssues = _foundIssues.Where(i => i.Created.Date == SelectedSprint.StartDate.Date).Count()
          });
          IdealLineSeries.Add(new DataPoint
          {
@@ -88,17 +90,19 @@ namespace LightShell.Plugin.Jira.Agile.Controls
             IssuesCountSeries.Add(new DataPoint
             {
                Date = iterator,
-               Value = _foundIssues.Where(i => i.Resolved == null || i.Resolved.Value > iterator).Count()
+               Value = _foundIssues.Where(i => i.Created <= iterator && (i.Resolved == null || i.Resolved.Value > iterator)).Count(),
+               ResolvedIssues = _foundIssues.Where(i => i.Resolved.HasValue && i.Resolved.Value.Date == iterator).Count(),
+               CreatedIssues = _foundIssues.Where(i => i.Created.Date == iterator).Count()
             });
             iterator = iterator.AddDays(1);
          }
 
          if (SelectedSprint.State != "closed")
-            BurndownSeriesBrush = new SolidColorBrush(Colors.CadetBlue);
+            BurndownSeriesBrush = new SolidColorBrush(Color.FromRgb(121, 117, 235));
          else if (IssuesCountSeries.Last().Value > 0)
-            BurndownSeriesBrush = new SolidColorBrush(Colors.Coral);
+            BurndownSeriesBrush = new SolidColorBrush(Color.FromRgb(212, 0, 0));
          else
-            BurndownSeriesBrush = new SolidColorBrush(Colors.ForestGreen);
+            BurndownSeriesBrush = new SolidColorBrush(Color.FromRgb(0, 181, 27));
       }
 
       private void ClearAndWaitForNewResults()
@@ -145,6 +149,8 @@ namespace LightShell.Plugin.Jira.Agile.Controls
       {
          public DateTime Date { get; set; }
          public int Value { get; set; }
+         public int CreatedIssues { get; set; }
+         public int ResolvedIssues { get; set; }
       }
    }
 }

@@ -19,6 +19,9 @@
       </Border>
 
       <telerik:RadCartesianChart Grid.Row="1">
+         <telerik:RadCartesianChart.Behaviors>
+            <telerik:ChartTooltipBehavior Placement="Top"/>
+         </telerik:RadCartesianChart.Behaviors>
          <telerik:RadCartesianChart.HorizontalAxis>
             <telerik:DateTimeCategoricalAxis LabelFitMode="MultiLine"
                                      LabelFormat="dd.MM"
@@ -28,16 +31,51 @@
             <telerik:LinearAxis />
          </telerik:RadCartesianChart.VerticalAxis>
          <telerik:RadCartesianChart.Series>
-            <telerik:AreaSeries ItemsSource="{Binding IssuesCountSeries}" 
+            <telerik:StepAreaSeries ItemsSource="{Binding IssuesCountSeries}" 
                                 CategoryBinding="Date"
                                 ValueBinding="Value"
-                                Fill="{Binding BurndownSeriesBrush}"/>
+                                Fill="{Binding BurndownSeriesBrush}">
+               <telerik:StepAreaSeries.PointTemplate>
+                  <DataTemplate>
+                     <Rectangle Fill="Navy" Width="10" Height="10"/>
+                  </DataTemplate>
+               </telerik:StepAreaSeries.PointTemplate>
+               <telerik:StepAreaSeries.TooltipTemplate>
+                  <DataTemplate>
+                     <Border BorderBrush="Navy" BorderThickness="1" Background="#FFF3D1">
+                        <Grid Margin="2">
+                           <Grid.RowDefinitions>
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                              <RowDefinition Height="Auto" />
+                           </Grid.RowDefinitions>
+                           <Grid.ColumnDefinitions>
+                              <ColumnDefinition Width="Auto" />
+                              <ColumnDefinition Width="*" />
+                           </Grid.ColumnDefinitions>
+                           <TextBlock Text="Date: " FontWeight="Bold" Grid.Row="0" Grid.Column="0"/>
+                           <TextBlock Text="{Binding DataItem.Date, StringFormat=dd.MM}" FontWeight="Bold" Grid.Row="0" Grid.Column="1"/>
+
+                           <TextBlock Text="Created: " Grid.Row="1" Grid.Column="0"/>
+                           <TextBlock Text="{Binding DataItem.CreatedIssues}" Grid.Row="1" Grid.Column="1"/>
+
+                           <TextBlock Text="Resolved: " Grid.Row="2" Grid.Column="0"/>
+                           <TextBlock Text="{Binding DataItem.ResolvedIssues}" Grid.Row="2" Grid.Column="1"/>
+
+                           <TextBlock Text="Total: " Grid.Row="3" Grid.Column="0"/>
+                           <TextBlock Text="{Binding DataItem.Value}" Grid.Row="3" Grid.Column="1"/>
+                        </Grid>
+                     </Border>
+                  </DataTemplate>
+               </telerik:StepAreaSeries.TooltipTemplate>
+            </telerik:StepAreaSeries>
             <telerik:LineSeries ItemsSource="{Binding IdealLineSeries}" 
                                 CategoryBinding="Date"
                                 ValueBinding="Value"/>
          </telerik:RadCartesianChart.Series>
       </telerik:RadCartesianChart>
- 
+
       <TextBlock Grid.Row="2"/>
    </Grid>
 </UserControl>

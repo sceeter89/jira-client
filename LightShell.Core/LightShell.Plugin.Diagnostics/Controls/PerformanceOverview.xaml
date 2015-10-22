@@ -22,45 +22,21 @@
          </telerik:RadGridView.SortDescriptors>
       </telerik:RadGridView>
 
-      <telerik:RadChart Grid.Row="1" ItemsSource="{Binding TotalEventsStatistics}" >
-         <telerik:RadChart.DefaultView>
-            <telerik:ChartDefaultView>
-               <telerik:ChartDefaultView.ChartTitle>
-                  <telerik:ChartTitle Content="Events sent" />
-               </telerik:ChartDefaultView.ChartTitle>
-               <telerik:ChartDefaultView.ChartArea>
-                  <telerik:ChartArea>
-                     <telerik:ChartArea.AxisX>
-                        <telerik:AxisX IsDateTime="True"
-                                               Step="5"
-                                               LabelStep="2"
-                                               DefaultLabelFormat="hh:mm:ss"
-                                               StepLabelLevelCount="3"
-                                               StepLabelLevelHeight="10">
-                        </telerik:AxisX>
-                     </telerik:ChartArea.AxisX>
-                  </telerik:ChartArea>
-               </telerik:ChartDefaultView.ChartArea>
-               <telerik:ChartDefaultView.ChartLegend>
-                  <telerik:ChartLegend Visibility="Collapsed" />
-               </telerik:ChartDefaultView.ChartLegend>
-            </telerik:ChartDefaultView>
-         </telerik:RadChart.DefaultView>
 
-         <telerik:RadChart.SeriesMappings>
-            <telerik:SeriesMapping LegendLabel="Count">
-               <telerik:SeriesMapping.SeriesDefinition>
-                  <telerik:SplineSeriesDefinition />
-               </telerik:SeriesMapping.SeriesDefinition>
-               <telerik:SeriesMapping.ItemMappings>
-                  <telerik:ItemMapping DataPointMember="XValue"
-                                            FieldName="Time" />
-                  <telerik:ItemMapping DataPointMember="YValue"
-                                            FieldName="Count" />
-               </telerik:SeriesMapping.ItemMappings>
-            </telerik:SeriesMapping>
-         </telerik:RadChart.SeriesMappings>
-      </telerik:RadChart>
-
+      <telerik:RadCartesianChart Grid.Row="1">
+         <telerik:RadCartesianChart.HorizontalAxis>
+            <telerik:DateTimeCategoricalAxis LabelFitMode="MultiLine"
+                                     LabelFormat="hh:mm:ss"
+                                     DateTimeComponent="Minute"/>
+         </telerik:RadCartesianChart.HorizontalAxis>
+         <telerik:RadCartesianChart.VerticalAxis>
+            <telerik:LinearAxis MajorStep="5"/>
+         </telerik:RadCartesianChart.VerticalAxis>
+         <telerik:RadCartesianChart.Series>
+            <telerik:LineSeries ItemsSource="{Binding TotalEventsStatistics}" 
+                                CategoryBinding="Time"
+                                ValueBinding="Count" />
+         </telerik:RadCartesianChart.Series>
+      </telerik:RadCartesianChart>
    </Grid>
 </UserControl>
