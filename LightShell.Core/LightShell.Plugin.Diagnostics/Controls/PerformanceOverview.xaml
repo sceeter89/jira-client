@@ -16,21 +16,17 @@
          <ColumnDefinition Width="*" />
          <ColumnDefinition Width="*" />
       </Grid.ColumnDefinitions>
-      <telerik:RadGridView ItemsSource="{Binding Statistics}" AutoGenerateColumns="True" Grid.ColumnSpan="2">
-         <telerik:RadGridView.SortDescriptors>
-            <telerik:SortDescriptor Member="Hits" SortDirection="Descending"/>
-         </telerik:RadGridView.SortDescriptors>
-      </telerik:RadGridView>
-
+      <telerik:RadGridView ItemsSource="{Binding Statistics}" AutoGenerateColumns="True" Grid.ColumnSpan="2" />
 
       <telerik:RadCartesianChart Grid.Row="1">
          <telerik:RadCartesianChart.HorizontalAxis>
-            <telerik:DateTimeCategoricalAxis LabelFitMode="MultiLine"
-                                     LabelFormat="hh:mm:ss"
-                                     DateTimeComponent="Minute"/>
+            <telerik:DateTimeCategoricalAxis LabelFormat="hh:mm:ss"
+                                             DateTimeComponent="Second"
+                                             MajorTickInterval="5"
+                                             Title="Time"/>
          </telerik:RadCartesianChart.HorizontalAxis>
          <telerik:RadCartesianChart.VerticalAxis>
-            <telerik:LinearAxis MajorStep="5"/>
+            <telerik:LinearAxis MajorStep="5" Title="Events count"/>
          </telerik:RadCartesianChart.VerticalAxis>
          <telerik:RadCartesianChart.Series>
             <telerik:LineSeries ItemsSource="{Binding TotalEventsStatistics}" 

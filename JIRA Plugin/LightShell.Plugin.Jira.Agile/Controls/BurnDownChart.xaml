@@ -24,11 +24,13 @@
          </telerik:RadCartesianChart.Behaviors>
          <telerik:RadCartesianChart.HorizontalAxis>
             <telerik:DateTimeCategoricalAxis LabelFitMode="MultiLine"
-                                     LabelFormat="dd.MM"
-                                     DateTimeComponent="Day"/>
+                                             LabelFormat="dd.MM"
+                                             DateTimeComponent="Day"
+                                             Title="Day"
+                                             />
          </telerik:RadCartesianChart.HorizontalAxis>
          <telerik:RadCartesianChart.VerticalAxis>
-            <telerik:LinearAxis />
+            <telerik:LinearAxis Title="Issues"/>
          </telerik:RadCartesianChart.VerticalAxis>
          <telerik:RadCartesianChart.Series>
             <telerik:StepAreaSeries ItemsSource="{Binding IssuesCountSeries}" 

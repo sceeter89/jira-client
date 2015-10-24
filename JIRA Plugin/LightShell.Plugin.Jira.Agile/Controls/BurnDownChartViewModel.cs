@@ -90,7 +90,7 @@ namespace LightShell.Plugin.Jira.Agile.Controls
             IssuesCountSeries.Add(new DataPoint
             {
                Date = iterator,
-               Value = _foundIssues.Where(i => i.Created <= iterator && (i.Resolved == null || i.Resolved.Value > iterator)).Count(),
+               Value = _foundIssues.Where(i => i.Created.Date <= iterator && (i.Resolved == null || i.Resolved.Value.Date > iterator)).Count(),
                ResolvedIssues = _foundIssues.Where(i => i.Resolved.HasValue && i.Resolved.Value.Date == iterator).Count(),
                CreatedIssues = _foundIssues.Where(i => i.Created.Date == iterator).Count()
             });
