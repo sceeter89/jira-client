@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell", "LightShell\LightShell.csproj", "{97C43D4E-239B-401E-AC7A-F52F24D4CD64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.App", "JIRA Plugin\LightShell.App\LightShell.App.csproj", "{97C43D4E-239B-401E-AC7A-F52F24D4CD64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Api", "LightShell.Core\LightShell.Api\LightShell.Api.csproj", "{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Jira.Api", "JIRA Plugin\LightShell.Plugin.Jira.Api\LightShell.Plugin.Jira.Api.csproj", "{D666C6BD-8893-4B39-AF80-39106349F083}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Diagnostics", "LightShell.Core\LightShell.Plugin.Diagnostics\LightShell.Plugin.Diagnostics.csproj", "{18CBF1BE-5C17-460D-8EDD-2B793AFD9763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell", "LightShell\LightShell.csproj", "{579B8082-42B3-4C67-943F-97BDDB2FFC62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,11 +111,20 @@ Global
 		{18CBF1BE-5C17-460D-8EDD-2B793AFD9763}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18CBF1BE-5C17-460D-8EDD-2B793AFD9763}.Release|x86.ActiveCfg = Release|Any CPU
 		{18CBF1BE-5C17-460D-8EDD-2B793AFD9763}.Release|x86.Build.0 = Release|Any CPU
+		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Debug|x86.Build.0 = Debug|Any CPU
+		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Release|x86.ActiveCfg = Release|Any CPU
+		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{97C43D4E-239B-401E-AC7A-F52F24D4CD64} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98} = {60BD53AA-85EB-4133-BA9E-771A49B149C5}
 		{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4} = {60BD53AA-85EB-4133-BA9E-771A49B149C5}
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD} = {05CBDD8C-9F84-496F-A54D-6406468A047B}
