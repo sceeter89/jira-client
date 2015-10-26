@@ -22,13 +22,12 @@ namespace LightShell.Plugin.Jira.Agile.Controls
       IHandleMessage<SearchForIssuesResponse>,
       IHandleMessage<GetAgileSprintDetailsResponse>
    {
-      private readonly Regex _sprintQueryRegex = new Regex(@"\(\s*sprint = (?<sprintId>\d+)\s*\)", RegexOptions.IgnoreCase);
+      private readonly Regex _sprintQueryRegex = new Regex(@"^\(\s*sprint = (?<sprintId>\d+)\s*\)$", RegexOptions.IgnoreCase);
       private IMessageBus _messageBus;
       private Visibility _searchForSprintMessageVisibility;
       private RawAgileSprint _selectedSprint;
       private ICollection<JiraIssue> _foundIssues;
       private Brush _burndownSeriesBrush;
-      private List<ObservableCollection<DataPoint>> _dataSeries;
 
       public void Handle(SearchForIssuesResponse message)
       {
@@ -39,7 +38,7 @@ namespace LightShell.Plugin.Jira.Agile.Controls
          var match = _sprintQueryRegex.Match(query);
          if (match.Success == false)
          {
-            ClearAndWaitForNewResults();
+            SearchForSprintMessageVisibility = Visibility.Visible;
             return;
          }
 
@@ -103,11 +102,6 @@ namespace LightShell.Plugin.Jira.Agile.Controls
             BurndownSeriesBrush = new SolidColorBrush(Color.FromRgb(212, 0, 0));
          else
             BurndownSeriesBrush = new SolidColorBrush(Color.FromRgb(0, 181, 27));
-      }
-
-      private void ClearAndWaitForNewResults()
-      {
-         SearchForSprintMessageVisibility = Visibility.Collapsed;
       }
 
       public Visibility SearchForSprintMessageVisibility

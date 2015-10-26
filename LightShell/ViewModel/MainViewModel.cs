@@ -33,7 +33,7 @@ namespace LightShell.ViewModel
          _messageBus = messageBus;
 
          DocumentPanes = new ObservableCollection<RadPane>();
-         PropertyPanes = new ObservableCollection<RadPane> { CustomPropertyPane };
+         PropertyPanes = new ObservableCollection<RadPane>();
          _messageBus.Register(this);
 
          Application.Current.DispatcherUnhandledException += DispatcherUnhandledException;
@@ -93,22 +93,31 @@ namespace LightShell.ViewModel
       {
          if (DocumentPanes.Any() == false)
          {
-            CustomPropertyPane.Content = null;
-            SelectedPropertyPaneIndex = 0;
+            ClearCustomPropertiesPane();
             return;
          }
+
          var documentPane = DocumentPanes[SelectedDocumentPaneIndex];
          if (_customDocumentPaneProperties.ContainsKey(documentPane) == false
             || _customDocumentPaneProperties[documentPane] == null)
          {
             CustomPropertyPane.Content = null;
-            if (PropertyPanes.Any())
-               SelectedPropertyPaneIndex = 0;
+            PropertyPanes.Remove(CustomPropertyPane);
             return;
          }
 
          CustomPropertyPane.Content = _customDocumentPaneProperties[documentPane];
+         PropertyPanes.Add(CustomPropertyPane);
          FocusPropertyPane(CustomPropertyPane);
+      }
+
+      private void ClearCustomPropertiesPane()
+      {
+         CustomPropertyPane.Content = null;
+         PropertyPanes.Remove(CustomPropertyPane);
+
+         if (PropertyPanes.Any())
+            SelectedPropertyPaneIndex = 0;
       }
 
       private void FocusPropertyPane(RadPane pane)
