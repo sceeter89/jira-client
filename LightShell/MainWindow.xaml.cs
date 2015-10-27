@@ -2,11 +2,17 @@
 using Telerik.Windows.Controls;
 using LightShell.ViewModel;
 using System.Linq;
+using GalaSoft.MvvmLight.Threading;
 
 namespace LightShell
 {
    public partial class MainWindow
    {
+      static MainWindow()
+      {
+         DispatcherHelper.Initialize();
+      }
+
       public MainWindow()
       {
          StyleManager.ApplicationTheme = new Windows8Theme();

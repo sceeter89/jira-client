@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.App", "JIRA Plugin\LightShell.App\LightShell.App.csproj", "{97C43D4E-239B-401E-AC7A-F52F24D4CD64}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Api", "LightShell.Core\LightShell.Api\LightShell.Api.csproj", "{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Messaging", "LightShell.Core\LightShell.Messaging\LightShell.Messaging.csproj", "{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4}"
@@ -31,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Diagnosti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell", "LightShell\LightShell.csproj", "{579B8082-42B3-4C67-943F-97BDDB2FFC62}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraClient", "JIRA Plugin\JiraClient\JiraClient.csproj", "{F267DA41-3012-435A-813C-6754D5BE723B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,12 +39,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Debug|x86.ActiveCfg = Debug|x86
-		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Debug|x86.Build.0 = Debug|x86
-		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Release|Any CPU.ActiveCfg = Release|x86
-		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Release|x86.ActiveCfg = Release|x86
-		{97C43D4E-239B-401E-AC7A-F52F24D4CD64}.Release|x86.Build.0 = Release|x86
 		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}.Debug|x86.ActiveCfg = Debug|x86
 		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98}.Debug|x86.Build.0 = Debug|x86
@@ -119,12 +113,19 @@ Global
 		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Release|x86.ActiveCfg = Release|Any CPU
 		{579B8082-42B3-4C67-943F-97BDDB2FFC62}.Release|x86.Build.0 = Release|Any CPU
+		{F267DA41-3012-435A-813C-6754D5BE723B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F267DA41-3012-435A-813C-6754D5BE723B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F267DA41-3012-435A-813C-6754D5BE723B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F267DA41-3012-435A-813C-6754D5BE723B}.Debug|x86.Build.0 = Debug|Any CPU
+		{F267DA41-3012-435A-813C-6754D5BE723B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F267DA41-3012-435A-813C-6754D5BE723B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F267DA41-3012-435A-813C-6754D5BE723B}.Release|x86.ActiveCfg = Release|Any CPU
+		{F267DA41-3012-435A-813C-6754D5BE723B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{97C43D4E-239B-401E-AC7A-F52F24D4CD64} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 		{ADD8F9A1-DAE9-4CC2-8B5D-A5B36F4E7D98} = {60BD53AA-85EB-4133-BA9E-771A49B149C5}
 		{7DBBDE05-EF7F-4FB3-B4D5-540A03E4B9B4} = {60BD53AA-85EB-4133-BA9E-771A49B149C5}
 		{3BAEF616-C997-4B97-9BC7-01B4641C11AD} = {05CBDD8C-9F84-496F-A54D-6406468A047B}
@@ -134,5 +135,6 @@ Global
 		{BD615799-BBF4-4DB7-BD0F-FC0C1105A8C6} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 		{D666C6BD-8893-4B39-AF80-39106349F083} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 		{18CBF1BE-5C17-460D-8EDD-2B793AFD9763} = {60BD53AA-85EB-4133-BA9E-771A49B149C5}
+		{F267DA41-3012-435A-813C-6754D5BE723B} = {711D570D-C54B-42DA-B51F-FF51D6128AC2}
 	EndGlobalSection
 EndGlobal

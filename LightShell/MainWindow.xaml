@@ -9,9 +9,9 @@
         xmlns:controls="clr-namespace:LightShell.Controls"
         mc:Ignorable="d"
         Height="732.873" Width="975.748"
-        Title="{Binding AppTitle}"
+        Title="{StaticResource ApplicationTitle}"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
-        Icon="/Assets/Icons/LightShell.png"
+        Icon="{StaticResource ApplicationLogo}"
         x:Name="Window">
    <Window.Resources>
       <DataTemplate x:Key="BusyContentDataTemplate">
