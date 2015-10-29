@@ -7,6 +7,7 @@ using LightShell.Plugin.Jira.Api.Messages.IO.Jira;
 using LightShell.Plugin.Jira.Api.Model;
 using LightShell.Plugin.Jira.Api.Messages.Actions.Authentication;
 using LightShell.Plugin.Jira.Api;
+using System;
 
 namespace LightShell.Plugin.Jira.Microservices
 {
@@ -49,22 +50,30 @@ namespace LightShell.Plugin.Jira.Microservices
             return;
          }
 
-         var client = BuildRestClient();
-
-         var response = await client.ExecuteGetTaskAsync<RawSessionInfo>(new RestRequest("/rest/auth/1/session"));
-
-         if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
+         try
          {
-            _configuration.JiraSessionId = "";
+            var client = BuildRestClient();
+
+            var response = await client.ExecuteGetTaskAsync<RawSessionInfo>(new RestRequest("/rest/auth/1/session"));
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
+            {
+               _configuration.JiraSessionId = "";
+               _messageBus.Send(new CheckJiraSessionResponse(new SessionCheckResponse { IsLoggedIn = false }));
+               return;
+            }
+
+            _messageBus.Send(new CheckJiraSessionResponse(new SessionCheckResponse
+            {
+               IsLoggedIn = true,
+               SessionInfo = response.Data
+            }));
+         }
+         catch (UriFormatException)
+         {
             _messageBus.Send(new CheckJiraSessionResponse(new SessionCheckResponse { IsLoggedIn = false }));
             return;
          }
-
-         _messageBus.Send(new CheckJiraSessionResponse(new SessionCheckResponse
-         {
-            IsLoggedIn = true,
-            SessionInfo = response.Data
-         }));
       }
 
       public async void Handle(AttemptLoginMessage message)
@@ -74,44 +83,51 @@ namespace LightShell.Plugin.Jira.Microservices
             _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Jira address is invalid" }));
             return;
          }
-
-         var client = BuildRestClient();
-
-         var sessionInfoRequest = new RestRequest("/rest/auth/1/session");
-         sessionInfoRequest.RequestFormat = DataFormat.Json;
-         sessionInfoRequest.AddJsonBody(new Dictionary<string, string>
+         try
          {
-            {"username", message.Username },
-            {"password", message.Password }
-         });
-         var response = await client.ExecutePostTaskAsync<RawSuccessfulLoginParameters>(sessionInfoRequest);
+            var client = BuildRestClient();
 
-         if (response.StatusCode == HttpStatusCode.Unauthorized)
+            var sessionInfoRequest = new RestRequest("/rest/auth/1/session");
+            sessionInfoRequest.RequestFormat = DataFormat.Json;
+            sessionInfoRequest.AddJsonBody(new Dictionary<string, string>
+            {
+               {"username", message.Username },
+               {"password", message.Password }
+            });
+            var response = await client.ExecutePostTaskAsync<RawSuccessfulLoginParameters>(sessionInfoRequest);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+               _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Invalid username or password" }));
+               return;
+            }
+
+            if (response.StatusCode == HttpStatusCode.Forbidden)
+            {
+               _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "User was not allowed to log in. Try to login via browser" }));
+               return;
+            }
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+               _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Server returned unexpected response code: " + response.StatusCode }));
+               return;
+            }
+
+            if (response.Data == null)
+            {
+               _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = string.Format("Given address '{0}' does not point at valid JIRA server.", _configuration.JiraUrl) }));
+               return;
+            }
+
+            _configuration.JiraSessionId = response.Data.Session.Value;
+            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = true }));
+         }
+         catch (UriFormatException)
          {
-            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Invalid username or password" }));
+            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = string.Format("Could not understand JIRA server address. Make sure it's correct.") }));
             return;
          }
-
-         if (response.StatusCode == HttpStatusCode.Forbidden)
-         {
-            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "User was not allowed to log in. Try to login via browser" }));
-            return;
-         }
-
-         if (response.StatusCode != HttpStatusCode.OK)
-         {
-            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = "Server returned unexpected response code: " + response.StatusCode }));
-            return;
-         }
-
-         if (response.Data == null)
-         {
-            _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = false, ErrorMessage = string.Format("Given address '{0}' does not point at valid JIRA server.", _configuration.JiraUrl) }));
-            return;
-         }
-
-         _configuration.JiraSessionId = response.Data.Session.Value;
-         _messageBus.Send(new AttemptLoginResponse(new LoginAttemptResult { WasSuccessful = true }));
       }
    }
 }

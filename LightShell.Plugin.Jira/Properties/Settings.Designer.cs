@@ -25,7 +25,7 @@ namespace LightShell.Plugin.Jira.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http//.....")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://.....")]
         public string JiraUrl {
             get {
                 return ((string)(this["JiraUrl"]));

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="JiraUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http//.....</Value>
+      <Value Profile="(Default)">http://.....</Value>
     </Setting>
     <Setting Name="Username" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
