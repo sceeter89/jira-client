@@ -15,15 +15,32 @@
          <RowDefinition Height="Auto"/>
       </Grid.RowDefinitions>
       <telerik:RadGridView ItemsSource="{Binding Issues, Mode=TwoWay}" AutoGenerateColumns="False" SelectionMode="Single" SelectedItem="{Binding SelectedIssue, Mode=TwoWay}"
-                           MouseDoubleClick="ItemDoubleClick" IsReadOnly="True">
+                           MouseDoubleClick="ItemDoubleClick">
          <telerik:RadGridView.Columns>
-            <telerik:GridViewDataColumn DataMemberBinding="{Binding Key}" Header="Key" />
-            <telerik:GridViewDataColumn DataMemberBinding="{Binding Summary}" Header="Summary" />
-            <telerik:GridViewDataColumn DataMemberBinding="{Binding StoryPoints}" Header="Story Points" />
-            <telerik:GridViewDataColumn DataMemberBinding="{Binding Priority}" Header="Priority" />
-            <telerik:GridViewDataColumn DataMemberBinding="{Binding BuiltInFields.IssueType.Name}" Header="Type" />
-            <telerik:GridViewDataColumn DataMemberBinding="{Binding Reporter}" Header="Reporter" />
-            <telerik:GridViewDataColumn DataMemberBinding="{Binding Assignee}" Header="Assignee" />
+            <telerik:GridViewColumn Header="Category">
+               <telerik:GridViewColumn.CellTemplate>
+                  <DataTemplate>
+                     <telerik:RadColorPicker SelectedColor="{Binding CategoryColor, Mode=TwoWay}">
+                        <telerik:RadColorPicker.ContentTemplate>
+                           <DataTemplate>
+                              <Rectangle Margin="3" Width="15" Height="15">
+                                 <Rectangle.Fill>
+                                    <SolidColorBrush Color="{Binding .}"/>
+                                 </Rectangle.Fill>
+                              </Rectangle>
+                           </DataTemplate>
+                        </telerik:RadColorPicker.ContentTemplate>
+                     </telerik:RadColorPicker>
+                  </DataTemplate>
+               </telerik:GridViewColumn.CellTemplate>
+            </telerik:GridViewColumn>
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Key}" Header="Key" IsReadOnly="True" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Summary}" Header="Summary" IsReadOnly="True" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding StoryPoints}" Header="Story Points" IsReadOnly="True" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Priority}" Header="Priority" IsReadOnly="True" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding BuiltInFields.IssueType.Name}" Header="Type" IsReadOnly="True" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Reporter}" Header="Reporter" IsReadOnly="True" />
+            <telerik:GridViewDataColumn DataMemberBinding="{Binding Assignee}" Header="Assignee" IsReadOnly="True" />
          </telerik:RadGridView.Columns>
       </telerik:RadGridView>
    </Grid>

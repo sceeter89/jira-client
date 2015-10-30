@@ -25,12 +25,19 @@
                   <RowDefinition Height="*"/>
                   <RowDefinition Height="Auto"/>
                </Grid.RowDefinitions>
+               <Rectangle Width="15" VerticalAlignment="Stretch" HorizontalAlignment="Right" Grid.RowSpan="3">
+                  <Rectangle.Fill>
+                     <SolidColorBrush Color="{Binding Issue.CategoryColor}" />
+                  </Rectangle.Fill>
+               </Rectangle>
+               
                <Border Grid.Row="0" Style="{StaticResource BorderStyle}" Padding="5">
                   <TextBlock HorizontalAlignment="Left" Text="{Binding Issue.Key}" FontSize="20" FontWeight="Bold"/>
                </Border>
 
                <Border Grid.Row="1" Style="{StaticResource BorderStyle}" Padding="5">
-                  <TextBlock HorizontalAlignment="Left" Text="{Binding Issue.Summary}" TextWrapping="Wrap" FontSize="15"/>
+                  <TextBlock HorizontalAlignment="Left" Text="{Binding Issue.Summary}" TextWrapping="Wrap"
+                             FontSize="15" Margin="0 0 10 0" />
                </Border>
 
                <Border Grid.Row="2" Style="{StaticResource BorderStyle}"/>
