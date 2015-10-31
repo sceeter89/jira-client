@@ -33,16 +33,16 @@
             <telerik:LinearAxis Title="Issues"/>
          </telerik:RadCartesianChart.VerticalAxis>
          <telerik:RadCartesianChart.Series>
-            <telerik:StepAreaSeries ItemsSource="{Binding IssuesCountSeries}" 
+            <telerik:LineSeries ItemsSource="{Binding IssuesCountSeries}" 
                                 CategoryBinding="Date"
                                 ValueBinding="Value"
-                                Fill="{Binding BurndownSeriesBrush}">
-               <telerik:StepAreaSeries.PointTemplate>
+                                Stroke="{Binding BurndownSeriesBrush}">
+               <telerik:LineSeries.PointTemplate>
                   <DataTemplate>
                      <Rectangle Fill="Navy" Width="10" Height="10"/>
                   </DataTemplate>
-               </telerik:StepAreaSeries.PointTemplate>
-               <telerik:StepAreaSeries.TooltipTemplate>
+               </telerik:LineSeries.PointTemplate>
+               <telerik:LineSeries.TooltipTemplate>
                   <DataTemplate>
                      <Border BorderBrush="Navy" BorderThickness="1" Background="#FFF3D1">
                         <Grid Margin="2">
@@ -70,8 +70,8 @@
                         </Grid>
                      </Border>
                   </DataTemplate>
-               </telerik:StepAreaSeries.TooltipTemplate>
-            </telerik:StepAreaSeries>
+               </telerik:LineSeries.TooltipTemplate>
+            </telerik:LineSeries>
             <telerik:LineSeries ItemsSource="{Binding IdealLineSeries}" 
                                 CategoryBinding="Date"
                                 ValueBinding="Value"/>

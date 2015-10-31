@@ -91,9 +91,16 @@
     <Compile Include="Controls\BurnDownChart.xaml.cs">
       <DependentUpon>BurnDownChart.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BurnDownChartProperties.xaml.cs">
+      <DependentUpon>BurnDownChartProperties.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BurnDownChartViewModel.cs" />
     <Compile Include="ScrumCardsExportMicroservice.cs" />
     <Page Include="Controls\BurnDownChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BurnDownChartProperties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

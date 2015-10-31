@@ -28,12 +28,10 @@ namespace LightShell.Plugin.Jira.Agile.Controls
       private RawAgileSprint _selectedSprint;
       private ICollection<JiraIssue> _foundIssues;
       private Brush _burndownSeriesBrush;
+      private DataIndicator _selectedIndicator;
 
       public void Handle(SearchForIssuesResponse message)
       {
-         IdealLineSeries.Clear();
-         IssuesCountSeries.Clear();
-
          var query = message.Query;
          var match = _sprintQueryRegex.Match(query);
          if (match.Success == false)
@@ -54,12 +52,20 @@ namespace LightShell.Plugin.Jira.Agile.Controls
          {
             IdealLineSeries = new ObservableCollection<DataPoint>();
             IssuesCountSeries = new ObservableCollection<DataPoint>();
+            AvailableIndicators = new ObservableCollection<DataIndicator>
+            {
+               new DataIndicator { Name = "Issues count", CalculateIssueWeight = i => 1 },
+               new DataIndicator { Name = "Story points", CalculateIssueWeight = i => i.StoryPoints }
+            };
+            SelectedIndicator = AvailableIndicators[0];
 
             OpenCommand = new LoginEnabledRelayCommand(() =>
             {
                _messageBus.Send(new ShowDocumentPaneMessage(this, "chart - burndown",
-                                                            new BurnDownChart { DataContext = this }));
+                                                            new BurnDownChart { DataContext = this },
+                                                            new BurnDownChartProperties { DataContext = this }));
             }, _messageBus);
+
          });
          _messageBus = messageBus;
 
@@ -69,34 +75,44 @@ namespace LightShell.Plugin.Jira.Agile.Controls
       public void Handle(GetAgileSprintDetailsResponse message)
       {
          SelectedSprint = message.Sprint;
+         GenerateChartData(SelectedIndicator, SelectedSprint, _foundIssues);
+      }
+
+      private void GenerateChartData(DataIndicator indicator, RawAgileSprint sprint, IEnumerable<JiraIssue> issues)
+      {
+         IdealLineSeries.Clear();
+         IssuesCountSeries.Clear();
+
          IdealLineSeries.Add(new DataPoint
          {
-            Date = SelectedSprint.StartDate.Date,
-            Value = _foundIssues.Where(i => i.Created <= SelectedSprint.StartDate && i.Resolved >= SelectedSprint.StartDate).Count(),
-            ResolvedIssues = _foundIssues.Where(i => i.Resolved.HasValue && i.Resolved.Value.Date == SelectedSprint.StartDate.Date).Count(),
-            CreatedIssues = _foundIssues.Where(i => i.Created.Date == SelectedSprint.StartDate.Date).Count()
+            Date = sprint.StartDate.Date,
+            Value = issues.Where(i => i.Created.Date <= sprint.StartDate && (i.Resolved == null || i.Resolved >= sprint.StartDate))
+                                .Select(indicator.CalculateIssueWeight).Sum(),
+            ResolvedIssues = issues.Where(i => i.Resolved.HasValue && i.Resolved.Value.Date == sprint.StartDate.Date).Count(),
+            CreatedIssues = issues.Where(i => i.Created.Date == sprint.StartDate.Date).Count()
          });
          IdealLineSeries.Add(new DataPoint
          {
-            Date = SelectedSprint.EndDate.Date,
+            Date = sprint.EndDate.Date,
             Value = 0
          });
-         var endDate = SelectedSprint.EndDate > DateTime.Now ? DateTime.Today : SelectedSprint.EndDate.Date;
-         var iterator = SelectedSprint.StartDate.Date;
+         var endDate = sprint.EndDate > DateTime.Now ? DateTime.Today : sprint.EndDate.Date;
+         var iterator = sprint.StartDate.Date;
 
          while (iterator <= endDate)
          {
             IssuesCountSeries.Add(new DataPoint
             {
                Date = iterator,
-               Value = _foundIssues.Where(i => i.Created.Date <= iterator && (i.Resolved == null || i.Resolved.Value.Date > iterator)).Count(),
-               ResolvedIssues = _foundIssues.Where(i => i.Resolved.HasValue && i.Resolved.Value.Date == iterator).Count(),
-               CreatedIssues = _foundIssues.Where(i => i.Created.Date == iterator).Count()
+               Value = issues.Where(i => i.Created.Date <= iterator && (i.Resolved == null || i.Resolved.Value.Date > iterator))
+                                   .Select(indicator.CalculateIssueWeight).Sum(),
+               ResolvedIssues = issues.Where(i => i.Resolved.HasValue && i.Resolved.Value.Date == iterator).Count(),
+               CreatedIssues = issues.Where(i => i.Created.Date == iterator).Count()
             });
             iterator = iterator.AddDays(1);
          }
 
-         if (SelectedSprint.State != "closed")
+         if (sprint.State != "closed")
             BurndownSeriesBrush = new SolidColorBrush(Color.FromRgb(121, 117, 235));
          else if (IssuesCountSeries.Last().Value > 0)
             BurndownSeriesBrush = new SolidColorBrush(Color.FromRgb(212, 0, 0));
@@ -137,6 +153,20 @@ namespace LightShell.Plugin.Jira.Agile.Controls
       public ObservableCollection<DataPoint> IssuesCountSeries { get; private set; }
       public ObservableCollection<DataPoint> IdealLineSeries { get; private set; }
 
+      public ObservableCollection<DataIndicator> AvailableIndicators { get; private set; }
+      public DataIndicator SelectedIndicator
+      {
+         get
+         { return _selectedIndicator; }
+         set
+         {
+            _selectedIndicator = value;
+            RaisePropertyChanged();
+            if (SelectedSprint != null && _foundIssues != null)
+               GenerateChartData(SelectedIndicator, SelectedSprint, _foundIssues);
+         }
+      }
+
       public ICommand OpenCommand { get; private set; }
 
       public class DataPoint
@@ -145,6 +175,12 @@ namespace LightShell.Plugin.Jira.Agile.Controls
          public int Value { get; set; }
          public int CreatedIssues { get; set; }
          public int ResolvedIssues { get; set; }
+      }
+
+      public class DataIndicator
+      {
+         public string Name { get; set; }
+         public Func<JiraIssue, int> CalculateIssueWeight { get; set; }
       }
    }
 }
