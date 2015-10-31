@@ -57,16 +57,16 @@
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LightShell, Version=0.5.1.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\LightShell.dll</HintPath>
+    <Reference Include="LightShell, Version=0.5.2.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\LightShell.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LightShell.Api, Version=0.5.1.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\LightShell.Api.dll</HintPath>
+    <Reference Include="LightShell.Api, Version=0.5.2.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\LightShell.Api.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LightShell.Messaging, Version=0.5.1.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\LightShell.Messaging.dll</HintPath>
+    <Reference Include="LightShell.Messaging, Version=0.5.2.0, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\LightShell.Messaging.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LightShell.Plugin.Diagnostics, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -80,7 +80,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -93,11 +93,11 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="Telerik.Pivot.Core, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Pivot.Core.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Pivot.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Windows.Controls.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
@@ -105,11 +105,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Data, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Windows.Controls.Data.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Windows.Controls.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Docking, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Windows.Controls.Docking.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Windows.Controls.Docking.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.GridView, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
@@ -117,23 +117,23 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Input, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Windows.Controls.Input.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Windows.Controls.Input.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Navigation, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Windows.Controls.Navigation.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Windows.Controls.Navigation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.RibbonView, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Windows.Controls.RibbonView.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Windows.Controls.RibbonView.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Data, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Windows.Data.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Windows.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Themes.Windows8, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LightShell.0.5.1.0\lib\net45\Telerik.Windows.Themes.Windows8.dll</HintPath>
+      <HintPath>..\packages\LightShell.0.5.2.0\lib\net45\Telerik.Windows.Themes.Windows8.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
