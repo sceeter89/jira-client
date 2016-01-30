@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{05CBDD8C-9F84-496F-A54D-6406468A047B}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightShell.Plugin.Jira.Api", "LightShell.Plugin.Jira.Api\LightShell.Plugin.Jira.Api.csproj", "{D666C6BD-8893-4B39-AF80-39106349F083}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraClient", "JiraClient\JiraClient.csproj", "{B7008557-5DF3-4679-B5BF-B209485CEAAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraAssistant", "JiraAssistant\JiraAssistant.csproj", "{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,12 @@ Global
 		{B7008557-5DF3-4679-B5BF-B209485CEAAF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B7008557-5DF3-4679-B5BF-B209485CEAAF}.Release|x86.ActiveCfg = Release|Any CPU
 		{B7008557-5DF3-4679-B5BF-B209485CEAAF}.Release|x86.Build.0 = Release|Any CPU
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Debug|x86.ActiveCfg = Debug|x86
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Debug|x86.Build.0 = Debug|x86
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Release|Any CPU.ActiveCfg = Release|x86
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Release|x86.ActiveCfg = Release|x86
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
