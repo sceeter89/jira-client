@@ -1,7 +1,8 @@
 ﻿using System;
 
-namespace LightShell.Plugin.Jira.Api.Model
+namespace JiraAssistant.Model.Jira
 {
+#pragma warning disable JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
    public class RawAgileBoardsList
    {
       public int MaxResults { get; set; }
@@ -38,5 +39,5 @@ namespace LightShell.Plugin.Jira.Api.Model
       public DateTime CompleteDate { get; set; }
       public int OriginBoardId { get; set; }
    }
-
+#pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
 }

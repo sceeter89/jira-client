@@ -1,4 +1,5 @@
 using Autofac;
+using JiraAssistant.Model;
 
 namespace JiraAssistant.ViewModel
 {
@@ -41,8 +42,13 @@ namespace JiraAssistant.ViewModel
 
          builder.RegisterAssemblyTypes(GetType().Assembly)
             .InNamespaceOf<ViewModelLocator>()
+            .Except<ViewModelLocator>()
             .AsSelf()
             .AsImplementedInterfaces()
+            .SingleInstance();
+
+         builder.RegisterType<AssistantConfiguration>()
+            .AsSelf()
             .SingleInstance();
 
          IocContainer = builder.Build();

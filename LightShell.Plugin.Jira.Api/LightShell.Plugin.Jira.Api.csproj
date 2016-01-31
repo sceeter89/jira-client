@@ -105,7 +105,6 @@
     <Compile Include="Messages\Actions\OpenConnectionTabMessage.cs" />
     <Compile Include="Messages\Status\ConnectionDownMessage.cs" />
     <Compile Include="Messages\Status\ConnectionEstablishedMessage.cs" />
-    <Compile Include="Model\JiraAgileModel.cs" />
     <Compile Include="Model\JiraIssue.cs" />
     <Compile Include="Model\JiraModel.cs" />
     <Compile Include="Model\LoginAttemptResult.cs" />

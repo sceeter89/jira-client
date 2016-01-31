@@ -2,7 +2,6 @@
 using LightShell.Messaging.Api;
 using LightShell.Plugin.Jira.Api;
 using RestSharp;
-using System;
 using System.Net;
 
 namespace LightShell.Plugin.Jira.Microservices

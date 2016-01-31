@@ -59,6 +59,14 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -90,6 +98,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\AssistantConfiguration.cs" />
+    <Compile Include="Model\Exceptions\LoginFailedException.cs" />
+    <Compile Include="Model\Exceptions\MissingJiraAgileSupportException.cs" />
+    <Compile Include="Model\Exceptions\SearchFailedException.cs" />
+    <Compile Include="ViewModel\JiraSessionViewModel.cs" />
+    <Compile Include="Model\Jira\JiraIssue.cs" />
+    <Compile Include="Model\Jira\PivotJiraIssue.cs" />
+    <Compile Include="Model\Jira\RawJiraAgileModel.cs" />
+    <Compile Include="Model\Jira\RawJiraModel.cs" />
     <Compile Include="Model\Ui\AnimationState.cs" />
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -98,6 +115,13 @@
       <DependentUpon>SelectProjectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\INavigator.cs" />
+    <Compile Include="Services\Resources\BaseRestService.cs" />
+    <Compile Include="Services\Resources\IssuesFinder.cs" />
+    <Compile Include="Services\Resources\JiraAgileService.cs" />
+    <Compile Include="Services\Resources\MetadataRetriever.cs" />
+    <Compile Include="Services\Resources\ResourceDownloader.cs" />
+    <Compile Include="Services\Resources\JiraSessionService.cs" />
+    <Compile Include="ViewModel\BackgroundJobStatusViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
