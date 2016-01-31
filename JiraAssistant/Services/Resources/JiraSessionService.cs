@@ -62,6 +62,8 @@ namespace JiraAssistant.Services.Resources
       {
          try
          {
+            Configuration.JiraUrl = jiraUrl;
+            Configuration.Username = username;
             var client = BuildRestClient();
 
             var sessionInfoRequest = new RestRequest("/rest/auth/1/session");

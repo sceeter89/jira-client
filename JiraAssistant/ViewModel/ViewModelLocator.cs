@@ -1,5 +1,6 @@
 using Autofac;
 using JiraAssistant.Model;
+using JiraAssistant.Services.Resources;
 
 namespace JiraAssistant.ViewModel
 {
@@ -28,6 +29,14 @@ namespace JiraAssistant.ViewModel
          }
       }
 
+      public JiraSessionViewModel JiraSession
+      {
+         get
+         {
+            return IocContainer.Resolve<JiraSessionViewModel>();
+         }
+      }
+
       public static void Cleanup()
       {
          IocContainer.Dispose();
@@ -43,6 +52,13 @@ namespace JiraAssistant.ViewModel
          builder.RegisterAssemblyTypes(GetType().Assembly)
             .InNamespaceOf<ViewModelLocator>()
             .Except<ViewModelLocator>()
+            .AsSelf()
+            .AsImplementedInterfaces()
+            .SingleInstance();
+
+         builder.RegisterAssemblyTypes(GetType().Assembly)
+            .InNamespaceOf<BaseRestService>()
+            .Except<BaseRestService>()
             .AsSelf()
             .AsImplementedInterfaces()
             .SingleInstance();

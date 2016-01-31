@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight;
 using JiraAssistant.Model.Ui;
 using JiraAssistant.Services;
 using System.Collections.Generic;
-using JiraAssistant.Pages;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Threading;
 
@@ -73,9 +72,7 @@ namespace JiraAssistant.ViewModel
 
       public async Task SetPage()
       {
-         CollapseAnimationState = AnimationState.Play;
-         await Task.Delay(250);
-         CollapseAnimationState = AnimationState.Stop;
+         await CollapseTab();
 
          await Task.Factory.StartNew(() =>
          {
@@ -85,9 +82,43 @@ namespace JiraAssistant.ViewModel
             });
          });
 
+         await ExpandTab();
+      }
+
+      private async Task ExpandTab()
+      {
          ExpandAnimationState = AnimationState.Play;
          await Task.Delay(250);
          ExpandAnimationState = AnimationState.Stop;
+
+         await Task.Factory.StartNew(() =>
+         {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+               CurrentPage.OnNavigatedTo();
+            });
+         });
+      }
+
+      private async Task CollapseTab()
+      {
+         CollapseAnimationState = AnimationState.Play;
+         await Task.Delay(250);
+         CollapseAnimationState = AnimationState.Stop;
+
+         await Task.Factory.StartNew(() =>
+         {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+               if (CurrentPage != null)
+                  CurrentPage.OnNavigatedFrom();
+            });
+         });
+      }
+
+      public void ClearHistory()
+      {
+         
       }
    }
 }

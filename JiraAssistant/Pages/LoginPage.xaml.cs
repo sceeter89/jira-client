@@ -1,6 +1,8 @@
 ﻿using JiraAssistant.Model.Ui;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
+using System;
+using JiraAssistant.ViewModel;
 
 namespace JiraAssistant.Pages
 {
@@ -25,6 +27,17 @@ namespace JiraAssistant.Pages
          {
             return this;
          }
+      }
+
+      public void OnNavigatedFrom()
+      {
+       
+      }
+
+      public void OnNavigatedTo()
+      {
+         var viewModel = DataContext as LoginPageViewModel;
+         viewModel.AttemptAutoLogin();
       }
    }
 }

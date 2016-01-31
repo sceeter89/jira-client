@@ -7,5 +7,7 @@ namespace JiraAssistant.Model.Ui
    {
       Control Control { get; }
       ObservableCollection<ToolbarButton> Buttons { get; }
+      void OnNavigatedTo();
+      void OnNavigatedFrom();
    }
 }

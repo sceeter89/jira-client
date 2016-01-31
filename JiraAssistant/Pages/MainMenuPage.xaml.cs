@@ -1,12 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using JiraAssistant.Model.Ui;
 
 namespace JiraAssistant.Pages
 {
-   public partial class SelectProjectPage : INavigationPage
+   public partial class MainMenuPage : INavigationPage
    {
-      public SelectProjectPage()
+      public MainMenuPage()
       {
          InitializeComponent();
       }
@@ -25,6 +26,16 @@ namespace JiraAssistant.Pages
          {
             return this;
          }
+      }
+
+      public void OnNavigatedFrom()
+      {
+         
+      }
+
+      public void OnNavigatedTo()
+      {
+         
       }
    }
 }

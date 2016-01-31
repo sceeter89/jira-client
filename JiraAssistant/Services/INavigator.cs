@@ -6,5 +6,6 @@ namespace JiraAssistant.Services
    {
       void NavigateTo(INavigationPage pane);
       void Back();
+      void ClearHistory();
    }
 }
