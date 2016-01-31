@@ -109,6 +109,7 @@
     <Compile Include="Model\JiraModel.cs" />
     <Compile Include="Model\LoginAttemptResult.cs" />
     <Compile Include="Model\PivotJiraIssue.cs" />
+    <Compile Include="Model\RawJiraAgileModel.cs" />
     <Compile Include="Model\SessionCheckResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
