@@ -96,6 +96,7 @@ namespace JiraAssistant.ViewModel
          }
          finally
          {
+            passwordBox.Password = string.Empty;
             IsBusy = false;
          }
       }

@@ -78,18 +78,20 @@ namespace JiraAssistant.ViewModel
          {
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
+               if (CurrentPage != null)
+                  CurrentPage.OnNavigatedFrom();
+            });
+         });
+
+         await Task.Factory.StartNew(() =>
+         {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
                CurrentPage = _navigationHistory.Peek();
             });
          });
 
          await ExpandTab();
-      }
-
-      private async Task ExpandTab()
-      {
-         ExpandAnimationState = AnimationState.Play;
-         await Task.Delay(250);
-         ExpandAnimationState = AnimationState.Stop;
 
          await Task.Factory.StartNew(() =>
          {
@@ -100,25 +102,26 @@ namespace JiraAssistant.ViewModel
          });
       }
 
+      private async Task ExpandTab()
+      {
+         ExpandAnimationState = AnimationState.Play;
+         await Task.Delay(250);
+         ExpandAnimationState = AnimationState.Stop;
+      }
+
       private async Task CollapseTab()
       {
          CollapseAnimationState = AnimationState.Play;
          await Task.Delay(250);
          CollapseAnimationState = AnimationState.Stop;
-
-         await Task.Factory.StartNew(() =>
-         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
-            {
-               if (CurrentPage != null)
-                  CurrentPage.OnNavigatedFrom();
-            });
-         });
       }
 
-      public void ClearHistory()
+      public async void ClearHistory()
       {
-         
+         while (_navigationHistory.Count > 1)
+            _navigationHistory.Pop();
+
+         await SetPage();
       }
    }
 }

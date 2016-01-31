@@ -43,9 +43,9 @@
               Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password}"
               Grid.Row="3" Grid.Column="1" Margin="0 5 5 5"  BorderBrush="LightGray" />
 
-         <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Margin="0 5 5 0" Height="60" TextWrapping="Wrap" Foreground="DarkRed"
-                 FontSize="10" FontWeight="SemiBold"
-                 Text="{Binding LoginErrorMessage, FallbackValue=Some weird error that occured}"/>
+         <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Margin="0 5 5 0" Height="60"
+                    TextWrapping="Wrap" Foreground="DarkRed" FontWeight="SemiBold"
+                    Text="{Binding LoginErrorMessage, FallbackValue=Some weird error that occured}"/>
       </Grid>
    </telerik:RadBusyIndicator>
 </UserControl>
