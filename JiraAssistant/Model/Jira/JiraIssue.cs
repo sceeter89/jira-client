@@ -19,7 +19,7 @@ namespace JiraAssistant.Model.Jira
       public string Reporter { get; set; }
       public DateTime? Resolved { get; set; }
       public string Status { get; set; }
-      public int StoryPoints { get; set; }
+      public float StoryPoints { get; set; }
       public int Subtasks { get; set; }
       public string Summary { get; set; }
       public Color CategoryColor

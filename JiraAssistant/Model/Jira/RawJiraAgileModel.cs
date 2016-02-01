@@ -18,8 +18,7 @@ namespace JiraAssistant.Model.Jira
       public string Name { get; set; }
       public string Type { get; set; }
    }
-
-
+   
    public class RawAgileSprintsList
    {
       public int MaxResults { get; set; }

@@ -6,10 +6,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JiraAssistant.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="300" d:DesignWidth="400"
              Background="White"
              DataContext="{Binding Source={StaticResource Locator}, Path=Login}">
-   <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
+   <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}" Margin="5">
+      <telerik:RadBusyIndicator.BusyContent>
+         <TextBlock Text="{Binding BusyMessage}" />
+      </telerik:RadBusyIndicator.BusyContent>
       <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
          <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -45,7 +48,7 @@
 
          <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Margin="0 5 5 0" Height="60"
                     TextWrapping="Wrap" Foreground="DarkRed" FontWeight="SemiBold"
-                    Text="{Binding LoginErrorMessage, FallbackValue=Some weird error that occured}"/>
+                    Text="{Binding LoginErrorMessage, FallbackValue='Some weird error that occured'}"/>
       </Grid>
    </telerik:RadBusyIndicator>
 </UserControl>

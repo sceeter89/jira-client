@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using JiraAssistant.Model.Ui;
+using JiraAssistant.ViewModel;
 
 namespace JiraAssistant.Pages
 {
@@ -35,7 +35,8 @@ namespace JiraAssistant.Pages
 
       public void OnNavigatedTo()
       {
-         
+         var viewModel = DataContext as MainMenuViewModel;
+         viewModel.OnNavigatedTo();
       }
    }
 }

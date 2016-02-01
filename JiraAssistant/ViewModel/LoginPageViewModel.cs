@@ -19,6 +19,7 @@ namespace JiraAssistant.ViewModel
       private string _jiraAddress;
       private string _username;
       private bool _isBusy;
+      private string _busyMessage;
 
       public LoginPageViewModel(INavigator navigator,
          JiraSessionViewModel jiraSession,
@@ -75,12 +76,22 @@ namespace JiraAssistant.ViewModel
          }
       }
 
+      public string BusyMessage
+      {
+         get { return _busyMessage; }
+         set
+         {
+            _busyMessage = value;
+            RaisePropertyChanged();
+         }
+      }
+
       private async void Login(PasswordBox passwordBox)
       {
          try
          {
+            BusyMessage = "Trying to log into JIRA...";
             IsBusy = true;
-
             await _sessionService.AttemptLogin(JiraAddress, Username, passwordBox.Password);
 
             _jiraSession.LoggedIn();
@@ -105,6 +116,7 @@ namespace JiraAssistant.ViewModel
       {
          try
          {
+            BusyMessage = "Checking existing credentials...";
             IsBusy = true;
 
             if (await _sessionService.CheckJiraSession())

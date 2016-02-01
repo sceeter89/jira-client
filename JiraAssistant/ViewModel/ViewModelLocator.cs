@@ -37,6 +37,14 @@ namespace JiraAssistant.ViewModel
          }
       }
 
+      public MainMenuViewModel MainMenu
+      {
+         get
+         {
+            return IocContainer.Resolve<MainMenuViewModel>();
+         }
+      }
+
       public static void Cleanup()
       {
          IocContainer.Dispose();

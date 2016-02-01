@@ -85,8 +85,8 @@
       <HintPath>..\lib\RCWPF\2016.1.112.45.NoXaml\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.Windows.Themes.Office2013">
-      <HintPath>..\lib\RCWPF\2016.1.112.45.NoXaml\Telerik.Windows.Themes.Office2013.dll</HintPath>
+    <Reference Include="Telerik.Windows.Themes.Windows8">
+      <HintPath>..\lib\RCWPF\2016.1.112.45.NoXaml\Telerik.Windows.Themes.Windows8.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -123,6 +123,7 @@
     <Compile Include="Services\Resources\JiraSessionService.cs" />
     <Compile Include="ViewModel\BackgroundJobStatusViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
+    <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
