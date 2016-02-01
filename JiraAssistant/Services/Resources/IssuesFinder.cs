@@ -84,7 +84,7 @@ namespace JiraAssistant.Services.Resources
             Project = issue.BuiltInFields.Project.Name,
             Summary = issue.BuiltInFields.Summary,
             Priority = issue.BuiltInFields.Priority.Name,
-            StoryPoints = (float)(GetFieldByName<float?>(issue, "Story Points") ?? 0),
+            StoryPoints = GetFieldByName<float?>(issue, "Story Points") ?? 0,
             Subtasks = issue.BuiltInFields.Subtasks.Count(),
             Created = issue.BuiltInFields.Created,
             Resolved = issue.BuiltInFields.ResolutionDate ?? DateTime.MinValue,
