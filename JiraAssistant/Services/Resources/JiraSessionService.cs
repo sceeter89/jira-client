@@ -17,6 +17,9 @@ namespace JiraAssistant.Services.Resources
       {
       }
 
+      public EventHandler OnSuccessfulLogin;
+      public EventHandler OnLogout;
+
       public async Task<RawProfileDetails> GetProfileDetails()
       {
          var client = BuildRestClient();
@@ -34,6 +37,9 @@ namespace JiraAssistant.Services.Resources
 
          var response = await client.ExecuteTaskAsync(new RestRequest("/rest/auth/1/session", Method.DELETE));
          Configuration.JiraSessionId = "";
+         
+         if (OnLogout != null)
+            OnLogout(this, EventArgs.Empty);
       }
 
       public async Task<bool> CheckJiraSession()

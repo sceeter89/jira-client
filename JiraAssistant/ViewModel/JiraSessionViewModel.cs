@@ -15,8 +15,6 @@ namespace JiraAssistant.ViewModel
 {
    public class JiraSessionViewModel : ViewModelBase
    {
-      public EventHandler OnSuccessfulLogin;
-      public EventHandler OnLogout;
       private readonly JiraSessionService _sessionService;
       private readonly AssistantConfiguration _configuration;
       private bool _isLoggedIn;
@@ -34,23 +32,21 @@ namespace JiraAssistant.ViewModel
          _configuration = configuration;
          _downloader = downloader;
          _navigator = navigator;
-         LogoutCommand = new RelayCommand(Logout, () => IsLoggedIn);
+
+         _sessionService.OnLogout += (sender, args) => LoggedOut();
+         _sessionService.OnSuccessfulLogin += (sender, args) => LoggedIn();
       }
 
-      private void Logout()
+      private void LoggedOut()
       {
-         _sessionService.Logout();
          IsLoggedIn = false;
          Profile = null;
          ProfileAvatar = null;
 
-         if (OnLogout != null)
-            OnLogout(this, EventArgs.Empty);
-
          _navigator.ClearHistory();
       }
 
-      public void LoggedIn()
+      internal void LoggedIn()
       {
          IsLoggedIn = true;
          Task.Factory.StartNew(async () =>
@@ -72,18 +68,17 @@ namespace JiraAssistant.ViewModel
       public bool IsLoggedIn
       {
          get { return _isLoggedIn; }
-         set
+         private set
          {
             _isLoggedIn = value;
             RaisePropertyChanged();
-            LogoutCommand.RaiseCanExecuteChanged();
          }
       }
 
       public RawProfileDetails Profile
       {
          get { return _profile; }
-         set
+         private set
          {
             _profile = value;
             RaisePropertyChanged();
@@ -93,13 +88,11 @@ namespace JiraAssistant.ViewModel
       public ImageSource ProfileAvatar
       {
          get { return _profileAvatar; }
-         set
+         private set
          {
             _profileAvatar = value;
             RaisePropertyChanged();
          }
       }
-
-      public RelayCommand LogoutCommand { get; private set; }
    }
 }

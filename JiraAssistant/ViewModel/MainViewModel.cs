@@ -5,6 +5,8 @@ using JiraAssistant.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Threading;
+using GalaSoft.MvvmLight.Command;
+using JiraAssistant.Services.Resources;
 
 namespace JiraAssistant.ViewModel
 {
@@ -14,6 +16,15 @@ namespace JiraAssistant.ViewModel
       private INavigationPage _currentPage;
       private AnimationState _collapseAnimationState;
       private AnimationState _expandAnimationState;
+      private readonly JiraSessionService _jiraSession;
+
+      public MainViewModel(JiraSessionService jiraSession)
+      {
+         _jiraSession = jiraSession;
+         BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1);
+      }
+
+      public RelayCommand BackCommand { get; private set; }
 
       public AnimationState CollapseAnimationState
       {
@@ -60,6 +71,10 @@ namespace JiraAssistant.ViewModel
             return;
 
          _navigationHistory.Pop();
+         if (_navigationHistory.Count == 1)
+         {
+            _jiraSession.Logout();
+         }
          await SetPage();
       }
 
@@ -98,6 +113,7 @@ namespace JiraAssistant.ViewModel
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
                CurrentPage.OnNavigatedTo();
+               BackCommand.RaiseCanExecuteChanged();
             });
          });
       }

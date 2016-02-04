@@ -1,15 +1,18 @@
-﻿using System.Collections.ObjectModel;
+﻿using JiraAssistant.Model.Ui;
 using System.Windows.Controls;
-using JiraAssistant.Model.Ui;
-using JiraAssistant.ViewModel;
+using System.Collections.ObjectModel;
+using JiraAssistant.Model.Jira;
 
 namespace JiraAssistant.Pages
 {
-   public partial class MainMenuPage : INavigationPage
+   public partial class AgileBoardPage : INavigationPage
    {
-      public MainMenuPage()
+      private readonly RawAgileBoard _board;
+
+      public AgileBoardPage(RawAgileBoard board)
       {
          InitializeComponent();
+         _board = board;
       }
 
       public ObservableCollection<ToolbarButton> Buttons
@@ -22,12 +25,13 @@ namespace JiraAssistant.Pages
          get { return this; }
       }
 
-      public void OnNavigatedFrom() { }
+      public void OnNavigatedFrom()
+      {
+      }
 
       public void OnNavigatedTo()
       {
-         var viewModel = DataContext as MainMenuViewModel;
-         viewModel.OnNavigatedTo();
+
       }
    }
 }

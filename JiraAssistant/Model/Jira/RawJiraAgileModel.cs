@@ -35,7 +35,7 @@ namespace JiraAssistant.Model.Jira
       public string Name { get; set; }
       public DateTime StartDate { get; set; }
       public DateTime EndDate { get; set; }
-      public DateTime CompleteDate { get; set; }
+      public DateTime? CompleteDate { get; set; }
       public int OriginBoardId { get; set; }
    }
 #pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names

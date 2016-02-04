@@ -93,8 +93,7 @@ namespace JiraAssistant.ViewModel
             BusyMessage = "Trying to log into JIRA...";
             IsBusy = true;
             await _sessionService.AttemptLogin(JiraAddress, Username, passwordBox.Password);
-
-            _jiraSession.LoggedIn();
+            
             _navigator.NavigateTo(new MainMenuPage());
          }
          catch (LoginFailedException e)
@@ -121,8 +120,8 @@ namespace JiraAssistant.ViewModel
 
             if (await _sessionService.CheckJiraSession())
             {
-               _jiraSession.LoggedIn();
                _navigator.NavigateTo(new MainMenuPage());
+               _jiraSession.LoggedIn();
             }
          }
          finally

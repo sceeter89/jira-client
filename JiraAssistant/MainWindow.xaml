@@ -45,14 +45,16 @@
          <RowDefinition Height="80"/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
-         <ColumnDefinition Width="*"/>
          <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>
 
       <ScrollViewer VerticalScrollBarVisibility="Hidden"
                     HorizontalScrollBarVisibility="Auto"
                     Background="Transparent"
-                    BorderThickness="0">
+                    BorderThickness="0"
+                    Grid.Row="0"
+                    Grid.Column="1">
          <ItemsControl ItemsSource="{Binding CurrentPage.Buttons}"
                        Margin="5 0 5 5"
                        Background="White">
@@ -66,10 +68,9 @@
          </ItemsControl>
       </ScrollViewer>
 
-      <StackPanel Orientation="Horizontal" Margin="0 0 5 5" Grid.Row="0" Grid.Column="1" Background="White"
-                  DataContext="{Binding Source={StaticResource Locator}, Path=JiraSession}">
-         <Button ToolTip="Log out" Command="{Binding LogoutCommand}" Margin="5">
-            <Image Source="/Assets/Icons/LogOutIcon.png" Width="30" Height="30"/>
+      <StackPanel Orientation="Horizontal" Margin="0 0 5 5" Grid.Row="0" Grid.Column="0" Background="White">
+         <Button ToolTip="Log out" Command="{Binding BackCommand}" Margin="5">
+            <Image Source="/Assets/Icons/BackIcon.png" Width="30" Height="30"/>
          </Button>
       </StackPanel>
 

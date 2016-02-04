@@ -1,6 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
+using JiraAssistant.Pages;
+using JiraAssistant.Services;
 using JiraAssistant.Services.Resources;
 using System;
 using System.Collections.ObjectModel;
@@ -14,11 +17,21 @@ namespace JiraAssistant.ViewModel
       private bool _isBusy;
       private string _busyMessage;
       private readonly JiraAgileService _jiraAgile;
+      private readonly INavigator _navigator;
 
-      public MainMenuViewModel(JiraAgileService jiraAgile)
+      public MainMenuViewModel(JiraAgileService jiraAgile,
+         INavigator navigator)
       {
          _jiraAgile = jiraAgile;
+         _navigator = navigator;
+
          Boards = new ObservableCollection<RawAgileBoard>();
+         OpenBoardCommand = new RelayCommand<RawAgileBoard>(OpenBoard);
+      }
+
+      private void OpenBoard(RawAgileBoard board)
+      {
+         _navigator.NavigateTo(new AgileBoardPage(board));
       }
 
       internal async void OnNavigatedTo()
@@ -28,6 +41,7 @@ namespace JiraAssistant.ViewModel
 
          try
          {
+            BusyMessage = "Downloading available agile boards...";
             IsBusy = true;
 
             var boards = await _jiraAgile.GetAgileBoards();
@@ -70,5 +84,7 @@ namespace JiraAssistant.ViewModel
       }
 
       public ObservableCollection<RawAgileBoard> Boards { get; private set; }
+
+      public RelayCommand<RawAgileBoard> OpenBoardCommand { get; private set; }
    }
 }
