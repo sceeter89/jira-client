@@ -18,12 +18,15 @@ namespace JiraAssistant.ViewModel
       private string _busyMessage;
       private readonly JiraAgileService _jiraAgile;
       private readonly INavigator _navigator;
+      private readonly IssuesFinder _issuesFinder;
 
       public MainMenuViewModel(JiraAgileService jiraAgile,
+         IssuesFinder issuesFinder,
          INavigator navigator)
       {
          _jiraAgile = jiraAgile;
          _navigator = navigator;
+         _issuesFinder = issuesFinder;
 
          Boards = new ObservableCollection<RawAgileBoard>();
          OpenBoardCommand = new RelayCommand<RawAgileBoard>(OpenBoard);
@@ -31,13 +34,12 @@ namespace JiraAssistant.ViewModel
 
       private void OpenBoard(RawAgileBoard board)
       {
-         _navigator.NavigateTo(new AgileBoardPage(board));
+         _navigator.NavigateTo(new AgileBoardPage(board, _jiraAgile, _issuesFinder));
       }
 
       internal async void OnNavigatedTo()
       {
-         if (Boards.Any())
-            return;
+         Boards.Clear();
 
          try
          {
@@ -49,7 +51,8 @@ namespace JiraAssistant.ViewModel
             foreach (var board in boards)
                Boards.Add(board);
          }
-         catch(MissingJiraAgileSupportException) {
+         catch (MissingJiraAgileSupportException)
+         {
             MessageBox.Show("Please log into JIRA instance with JIRA Agile installed.", "JIRA Assistant", MessageBoxButton.OK, MessageBoxImage.Information);
          }
          catch (Exception e)

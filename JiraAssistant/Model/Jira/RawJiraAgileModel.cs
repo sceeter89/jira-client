@@ -81,8 +81,8 @@ namespace JiraAssistant.Model.Jira
 
    public class RawAgileBoardFilter
    {
-      public string id { get; set; }
-      public string self { get; set; }
+      public int Id { get; set; }
+      public string Self { get; set; }
    }
 
    public class RawAgileIssueStatus

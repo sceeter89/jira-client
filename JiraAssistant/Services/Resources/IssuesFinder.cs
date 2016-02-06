@@ -29,11 +29,11 @@ namespace JiraAssistant.Services.Resources
          _jobStatus = jobStatus;
       }
 
-      public async Task<IEnumerable<JiraIssue>> Search(int filterId)
+      public async Task<IEnumerable<JiraIssue>> Search(RawAgileBoardFilter filter)
       {
          var client = BuildRestClient();
-         var request = new RestRequest("/rest/api/latest/filter/{id}", Method.POST);
-         request.AddQueryParameter("id", filterId.ToString());
+         var request = new RestRequest("/rest/api/latest/filter/{id}", Method.GET);
+         request.AddUrlSegment("id", filter.Id.ToString());
 
          var response = await client.ExecuteTaskAsync(request);
          var result = JsonConvert.DeserializeObject<RawFilterDefinition>(response.Content);
@@ -55,7 +55,7 @@ namespace JiraAssistant.Services.Resources
             {
                jql = jqlQuery,
                startAt = 0,
-               maxResults = 500,
+               maxResults = 800,
                fields = new string[] { "*all" }
             });
             var response = await client.ExecuteTaskAsync(request);

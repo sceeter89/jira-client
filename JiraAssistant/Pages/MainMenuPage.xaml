@@ -16,30 +16,32 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
          </Grid.RowDefinitions>
-         
+
          <TextBlock Text="Choose board you want to analyse" TextAlignment="Center" Margin="10"/>
 
-         <ItemsControl Grid.Row="1" ItemsSource="{Binding Boards}" Margin="10">
-            <ItemsControl.ItemsPanel>
-               <ItemsPanelTemplate>
-                  <WrapPanel />
-               </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-               <DataTemplate>
-                  <Button Command="{Binding DataContext.OpenBoardCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding .}"
-                          Width="100" Height="50" HorizontalContentAlignment="Center"
+         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Boards}" Margin="10">
+               <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                     <WrapPanel />
+                  </ItemsPanelTemplate>
+               </ItemsControl.ItemsPanel>
+               <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                     <Button Command="{Binding DataContext.OpenBoardCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding .}"
+                          Width="200" Height="50" HorizontalContentAlignment="Center"
                           VerticalContentAlignment="Center" Margin="5">
-                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text=" ("/>
-                        <TextBlock Text="{Binding Type}"/>
-                        <TextBlock Text=")"/>
-                     </StackPanel>
-                  </Button>
-               </DataTemplate>
-            </ItemsControl.ItemTemplate>
-         </ItemsControl>
+                        <StackPanel Orientation="Horizontal">
+                           <TextBlock Text="{Binding Name}"/>
+                           <TextBlock Text=" ("/>
+                           <TextBlock Text="{Binding Type}"/>
+                           <TextBlock Text=")"/>
+                        </StackPanel>
+                     </Button>
+                  </DataTemplate>
+               </ItemsControl.ItemTemplate>
+            </ItemsControl>
+         </ScrollViewer>
       </Grid>
    </telerik:RadBusyIndicator>
 </UserControl>

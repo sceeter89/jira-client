@@ -2,6 +2,7 @@
 using JiraAssistant.Services.Resources;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 
 namespace JiraAssistant.Pages
 {
@@ -12,23 +13,89 @@ namespace JiraAssistant.Pages
       private bool _issuesDownloaded;
       private bool _sprintsDownloaded;
       private bool _sprintAssignmentDownloaded;
-      private readonly JiraAgileService _jiraService;
+      private readonly JiraAgileService _jiraAgile;
+      private readonly IssuesFinder _issuesFinder;
 
       public AgileBoardPage(RawAgileBoard board,
-         JiraAgileService jiraService)
+         JiraAgileService jiraService,
+         IssuesFinder issuesFinder)
       {
          InitializeComponent();
+
          _board = board;
-         _jiraService = jiraService;
+         _jiraAgile = jiraService;
+         _issuesFinder = issuesFinder;
+
+         Epics = new ObservableCollection<RawAgileEpic>();
+         Sprints = new ObservableCollection<RawAgileSprint>();
+         Issues = new ObservableCollection<JiraIssue>();
+         IssuesInSprint = new Dictionary<int, IEnumerable<string>>();
+
          DataContext = this;
          DownloadElements();
       }
 
       public void DownloadElements()
       {
-         var downloadSprintsTask = _jiraService.GetSprints(_board.Id);
-         var downloadEpicsTask = _jiraService.GetEpics(_board.Id);
-         
+         Issues.Clear();
+         IssuesDownloaded = false;
+
+         Sprints.Clear();
+         IssuesInSprint.Clear();
+         SprintsDownloaded = false;
+         SprintAssignmentDownloaded = false;
+
+         Epics.Clear();
+         EpicsDownloaded = false;
+
+         DownloadSprints();
+         DownloadEpics();
+         DownloadIssues();
+      }
+
+      private async void DownloadIssues()
+      {
+         var boardConfig = await _jiraAgile.GetBoardConfiguration(_board.Id);
+         var issues = await _issuesFinder.Search(boardConfig.Filter);
+
+         foreach (var issue in issues)
+         {
+            Issues.Add(issue);
+         }
+
+         IssuesDownloaded = true;
+      }
+
+      private async void DownloadEpics()
+      {
+         var epics = await _jiraAgile.GetEpics(_board.Id);
+
+         foreach (var epic in epics)
+         {
+            Epics.Add(epic);
+         }
+
+         EpicsDownloaded = true;
+      }
+
+      private async void DownloadSprints()
+      {
+         var sprints = await _jiraAgile.GetSprints(_board.Id);
+
+         SprintsDownloaded = true;
+
+         foreach (var sprint in sprints)
+         {
+            Sprints.Add(sprint);
+         }
+
+         foreach (var sprint in sprints)
+         {
+            var issuesInSprint = await _jiraAgile.GetIssuesInSprint(_board.Id, sprint.Id);
+            IssuesInSprint[sprint.Id] = issuesInSprint;
+         }
+
+         SprintAssignmentDownloaded = true;
       }
 
       public bool EpicsDownloaded
@@ -86,6 +153,6 @@ namespace JiraAssistant.Pages
       public ObservableCollection<RawAgileEpic> Epics { get; private set; }
       public ObservableCollection<RawAgileSprint> Sprints { get; private set; }
       public ObservableCollection<JiraIssue> Issues { get; private set; }
-      public IDictionary<int, IList<string>> IssuesInSprint { get; private set; }
+      public IDictionary<int, IEnumerable<string>> IssuesInSprint { get; private set; }
    }
 }

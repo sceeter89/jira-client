@@ -8,9 +8,9 @@ namespace JiraAssistant.Model.Jira
    public class RawSearchResults
    {
       public string Expand { get; set; }
-      public int StartAt { get; set; }
-      public int MaxResults { get; set; }
-      public int Total { get; set; }
+      public long StartAt { get; set; }
+      public long MaxResults { get; set; }
+      public long Total { get; set; }
       public RawIssue[] Issues { get; set; }
    }
 
@@ -48,7 +48,7 @@ namespace JiraAssistant.Model.Jira
       public long? AggregateTimeSpent { get; set; }
       public RawResolution Resolution { get; set; }
       public DateTime? ResolutionDate { get; set; }
-      public int Workratio { get; set; }
+      public long Workratio { get; set; }
       public DateTime? LastViewed { get; set; }
       public RawWatches Watches { get; set; }
       public DateTime Created { get; set; }
@@ -144,7 +144,7 @@ namespace JiraAssistant.Model.Jira
    public class RawWatches
    {
       public string Self { get; set; }
-      public int WatchCount { get; set; }
+      public long WatchCount { get; set; }
       public bool IsWatching { get; set; }
    }
 
@@ -171,7 +171,7 @@ namespace JiraAssistant.Model.Jira
    public class RawStatusCategory
    {
       public string Self { get; set; }
-      public int Id { get; set; }
+      public long Id { get; set; }
       public string Key { get; set; }
       public string ColorName { get; set; }
       public string Name { get; set; }
@@ -201,14 +201,14 @@ namespace JiraAssistant.Model.Jira
 
    public class RawProgressInfo
    {
-      public int Progress { get; set; }
-      public int Total { get; set; }
+      public long Progress { get; set; }
+      public long Total { get; set; }
    }
 
    public class RawVotesInfo
    {
       public string Self { get; set; }
-      public int Votes { get; set; }
+      public long Votes { get; set; }
       public bool HasVoted { get; set; }
    }
 
@@ -279,8 +279,8 @@ namespace JiraAssistant.Model.Jira
 
    public class RawLoginInfo
    {
-      public int FailedLoginCount { get; set; }
-      public int LoginCount { get; set; }
+      public long FailedLoginCount { get; set; }
+      public long LoginCount { get; set; }
       public DateTime LastFailedLoginTime { get; set; }
       public DateTime PreviousLoginTime { get; set; }
    }
@@ -315,7 +315,7 @@ namespace JiraAssistant.Model.Jira
       public string System { get; set; }
       public string Items { get; set; }
       public string Custom { get; set; }
-      public int CustomId { get; set; }
+      public long CustomId { get; set; }
    }
 
 
@@ -334,7 +334,7 @@ namespace JiraAssistant.Model.Jira
 
    public class RawGroups
    {
-      public int Size { get; set; }
+      public long Size { get; set; }
       public RawGroup[] Items { get; set; }
    }
 
@@ -350,9 +350,9 @@ namespace JiraAssistant.Model.Jira
 
    public class RawComments
    {
-      public int StartAt { get; set; }
-      public int MaxResults { get; set; }
-      public int Total { get; set; }
+      public long StartAt { get; set; }
+      public long MaxResults { get; set; }
+      public long Total { get; set; }
       public RawComment[] Comments { get; set; }
    }
 
@@ -369,9 +369,9 @@ namespace JiraAssistant.Model.Jira
 
    public class RawWorklog
    {
-      public int StartAt { get; set; }
-      public int MaxResults { get; set; }
-      public int Total { get; set; }
+      public long StartAt { get; set; }
+      public long MaxResults { get; set; }
+      public long Total { get; set; }
       public object[] Worklogs { get; set; }
    }
 
@@ -382,7 +382,7 @@ namespace JiraAssistant.Model.Jira
       public string Filename { get; set; }
       public RawUserInfo Author { get; set; }
       public DateTime Created { get; set; }
-      public int Size { get; set; }
+      public long Size { get; set; }
       public string MimeType { get; set; }
       public string Content { get; set; }
       public string Thumbnail { get; set; }
