@@ -343,11 +343,11 @@ namespace JiraAssistant.Model.Jira
       public string Name { get; set; }
       public string Self { get; set; }
    }
-   
+
    public class RawTimeTracking
    {
    }
-     
+
    public class RawComments
    {
       public int StartAt { get; set; }
@@ -366,7 +366,7 @@ namespace JiraAssistant.Model.Jira
       public DateTime Created { get; set; }
       public DateTime Updated { get; set; }
    }
-   
+
    public class RawWorklog
    {
       public int StartAt { get; set; }
@@ -374,7 +374,7 @@ namespace JiraAssistant.Model.Jira
       public int Total { get; set; }
       public object[] Worklogs { get; set; }
    }
-   
+
    public class RawAttachment
    {
       public string Self { get; set; }
@@ -386,6 +386,19 @@ namespace JiraAssistant.Model.Jira
       public string MimeType { get; set; }
       public string Content { get; set; }
       public string Thumbnail { get; set; }
+   }
+
+   public class RawFilterDefinition
+   {
+      public string Self { get; set; }
+      public string Id { get; set; }
+      public string Name { get; set; }
+      public string Description { get; set; }
+      public RawUserInfo Owner { get; set; }
+      public string Jql { get; set; }
+      public string ViewUrl { get; set; }
+      public string SearchUrl { get; set; }
+      public bool Favourite { get; set; }
    }
 #pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
 }

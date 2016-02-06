@@ -1,37 +1,91 @@
-﻿using JiraAssistant.Model.Ui;
-using System.Windows.Controls;
+﻿using JiraAssistant.Model.Jira;
+using JiraAssistant.Services.Resources;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using JiraAssistant.Model.Jira;
 
 namespace JiraAssistant.Pages
 {
-   public partial class AgileBoardPage : INavigationPage
+   public partial class AgileBoardPage : BaseNavigationPage
    {
       private readonly RawAgileBoard _board;
+      private bool _epicsDownloaded;
+      private bool _issuesDownloaded;
+      private bool _sprintsDownloaded;
+      private bool _sprintAssignmentDownloaded;
+      private readonly JiraAgileService _jiraService;
 
-      public AgileBoardPage(RawAgileBoard board)
+      public AgileBoardPage(RawAgileBoard board,
+         JiraAgileService jiraService)
       {
          InitializeComponent();
          _board = board;
+         _jiraService = jiraService;
+         DataContext = this;
+         DownloadElements();
       }
 
-      public ObservableCollection<ToolbarButton> Buttons
+      public void DownloadElements()
       {
-         get { return new ObservableCollection<ToolbarButton>(); }
+         var downloadSprintsTask = _jiraService.GetSprints(_board.Id);
+         var downloadEpicsTask = _jiraService.GetEpics(_board.Id);
+         
       }
 
-      public Control Control
+      public bool EpicsDownloaded
       {
-         get { return this; }
+         get
+         {
+            return _epicsDownloaded;
+         }
+         set
+         {
+            _epicsDownloaded = value;
+            RaisePropertyChanged();
+         }
       }
 
-      public void OnNavigatedFrom()
+      public bool SprintsDownloaded
       {
+         get
+         {
+            return _sprintsDownloaded;
+         }
+         set
+         {
+            _sprintsDownloaded = value;
+            RaisePropertyChanged();
+         }
       }
 
-      public void OnNavigatedTo()
+      public bool IssuesDownloaded
       {
-
+         get
+         {
+            return _issuesDownloaded;
+         }
+         set
+         {
+            _issuesDownloaded = value;
+            RaisePropertyChanged();
+         }
       }
+
+      public bool SprintAssignmentDownloaded
+      {
+         get
+         {
+            return _sprintAssignmentDownloaded;
+         }
+         set
+         {
+            _sprintAssignmentDownloaded = value;
+            RaisePropertyChanged();
+         }
+      }
+
+      public ObservableCollection<RawAgileEpic> Epics { get; private set; }
+      public ObservableCollection<RawAgileSprint> Sprints { get; private set; }
+      public ObservableCollection<JiraIssue> Issues { get; private set; }
+      public IDictionary<int, IList<string>> IssuesInSprint { get; private set; }
    }
 }

@@ -98,6 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToIconConverter.cs" />
     <Compile Include="Model\AssistantConfiguration.cs" />
     <Compile Include="Model\Exceptions\LoginFailedException.cs" />
     <Compile Include="Model\Exceptions\MissingJiraAgileSupportException.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Pages\AgileBoardPage.xaml.cs">
       <DependentUpon>AgileBoardPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BaseNavigationPage.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />
@@ -191,6 +193,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\BackIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\CompletedIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\LoadingIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

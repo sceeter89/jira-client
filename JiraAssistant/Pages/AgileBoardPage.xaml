@@ -1,12 +1,33 @@
-﻿<UserControl x:Class="JiraAssistant.Pages.AgileBoardPage"
+﻿<local:BaseNavigationPage x:Class="JiraAssistant.Pages.AgileBoardPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JiraAssistant.Pages"
+             xmlns:converters="clr-namespace:JiraAssistant.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="500">
+   <local:BaseNavigationPage.Resources>
+      <converters:BoolToIconConverter x:Key="BoolToIcon"
+                                      TrueIcon="/Assets/Icons/CompletedIcon.png"
+                                      FalseIcon="/Assets/Icons/LoadingIcon.png"/>
+   </local:BaseNavigationPage.Resources>
    <Grid Background="White">
-      
+      <Grid.RowDefinitions>
+         <RowDefinition Height="*"/>
+         <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <StackPanel Orientation="Horizontal" Grid.Row="1">
+         <TextBlock Text="Downloading: " VerticalAlignment="Center"/>
+         <TextBlock Text="epics..." VerticalAlignment="Center"/>
+         <Image Source ="{Binding EpicsDownloaded, Converter={StaticResource BoolToIcon}}" Width="30" Height="30" Margin="5" />
+         <TextBlock Text="sprints..." VerticalAlignment="Center"/>
+         <Image Source ="{Binding SprintsDownloaded, Converter={StaticResource BoolToIcon}}" Width="30" Height="30" Margin="5" />
+         <TextBlock Text="issues..." VerticalAlignment="Center"/>
+         <Image Source ="{Binding IssuesDownloaded, Converter={StaticResource BoolToIcon}}"  Width="30" Height="30" Margin="5" />
+         <TextBlock Text="sprint assignments..." VerticalAlignment="Center"/>
+         <Image Source ="{Binding SprintAssignmentDownloaded, Converter={StaticResource BoolToIcon}}"  Width="30" Height="30" Margin="5" />
+      </StackPanel>
    </Grid>
-</UserControl>
+</local:BaseNavigationPage>

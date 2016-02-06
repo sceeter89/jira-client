@@ -29,6 +29,18 @@ namespace JiraAssistant.Services.Resources
          _jobStatus = jobStatus;
       }
 
+      public async Task<IEnumerable<JiraIssue>> Search(int filterId)
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/filter/{id}", Method.POST);
+         request.AddQueryParameter("id", filterId.ToString());
+
+         var response = await client.ExecuteTaskAsync(request);
+         var result = JsonConvert.DeserializeObject<RawFilterDefinition>(response.Content);
+
+         return await Search(result.Jql);
+      }
+
       public async Task<IEnumerable<JiraIssue>> Search(string jqlQuery)
       {
          _jobStatus.StartNewJob("Searching for issues...");
