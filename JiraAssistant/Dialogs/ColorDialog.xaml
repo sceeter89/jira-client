@@ -1,0 +1,45 @@
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        x:Class="JiraAssistant.Dialogs.ColorDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JiraAssistant.Dialogs"
+        mc:Ignorable="d"
+        Icon="/Assets/Icons/ApplicationIcon.png"
+        Title="Choose color..." Height="300" Width="400">
+   <Grid>
+      <Grid.Resources>
+         <telerik:ColorToBrushConverter x:Key="ColorConverter" />
+      </Grid.Resources>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="*" />
+         <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="*" />
+         <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <telerik:RadColorEditor x:Name="ColorEditor" Grid.ColumnSpan="2"/>
+
+      <ItemsControl ItemsSource="{Binding ColorHistory, ElementName=ColorEditor}" Height="20" Margin="8 0"
+                    Grid.Row="1" Grid.Column="0">
+         <ItemsControl.ItemTemplate>
+            <DataTemplate>
+               <Button Width="20" Height="20" Margin="5 0" Background="{Binding Converter={StaticResource ColorConverter}}"
+                       Click="HistoryButtonClicked"/>
+            </DataTemplate>
+         </ItemsControl.ItemTemplate>
+         <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+               <telerik:RadWrapPanel />
+            </ItemsPanelTemplate>
+         </ItemsControl.ItemsPanel>
+      </ItemsControl>
+
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1">
+         <Button Content="Save" Click="SaveClicked" Margin="5" Width="80"/>
+         <Button Content="Cancel" Click="CancelClicked" Margin="5" Width="80"/>
+      </StackPanel>
+   </Grid>
+</Window>

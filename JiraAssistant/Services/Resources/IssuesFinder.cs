@@ -104,7 +104,6 @@ namespace JiraAssistant.Services.Resources
             Description = issue.BuiltInFields.Description,
             Assignee = (issue.BuiltInFields.Assignee ?? RawUserInfo.EmptyInfo).DisplayName,
             Reporter = (issue.BuiltInFields.Reporter ?? RawUserInfo.EmptyInfo).DisplayName,
-            CategoryColor = Colors.White,
             BuiltInFields = issue.BuiltInFields
          };
       }

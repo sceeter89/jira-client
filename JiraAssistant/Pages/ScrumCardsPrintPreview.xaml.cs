@@ -1,6 +1,10 @@
-﻿using JiraAssistant.Model.Jira;
+﻿using GalaSoft.MvvmLight.Command;
+using JiraAssistant.Model.Jira;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
+using System;
+using JiraAssistant.Dialogs;
 
 namespace JiraAssistant.Pages
 {
@@ -31,9 +35,23 @@ namespace JiraAssistant.Pages
             Pages.Add(new PrintPage(issuesForPage));
          }
 
-         DataContext = this;
+         StatusBarControl = new ScrumCardsPrintPreviewStatusBar();
+         SetCardColorCommand = new RelayCommand<JiraIssuePrintPreviewModel>(SetCardColor);
 
+         DataContext = this;
       }
+
+      private void SetCardColor(JiraIssuePrintPreviewModel printPreview)
+      {
+         var dialog = new ColorDialog(printPreview.CategoryColor);
+
+         if(dialog.ShowDialog() == false)
+            return;
+
+         printPreview.CategoryColor = dialog.EditedColor;
+      }
+
+      public RelayCommand<JiraIssuePrintPreviewModel> SetCardColorCommand { get; private set; }
 
       public IList<PrintPage> Pages { get; private set; }
    }

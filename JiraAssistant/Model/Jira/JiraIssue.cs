@@ -4,12 +4,8 @@ using System.Windows.Media;
 
 namespace JiraAssistant.Model.Jira
 {
-   public class JiraIssue : INotifyPropertyChanged
+   public class JiraIssue
    {
-      private Color _categoryColor;
-
-      public event PropertyChangedEventHandler PropertyChanged;
-
       public string Assignee { get; set; }
       public DateTime Created { get; set; }
       public string Description { get; set; }
@@ -22,6 +18,22 @@ namespace JiraAssistant.Model.Jira
       public float StoryPoints { get; set; }
       public int Subtasks { get; set; }
       public string Summary { get; set; }
+      public RawFields BuiltInFields { get; set; }
+   }
+
+   public class JiraIssuePrintPreviewModel : INotifyPropertyChanged
+   {
+      private Color _categoryColor;
+
+      public JiraIssuePrintPreviewModel()
+      {
+         CategoryColor = Colors.White;
+      }
+
+      public event PropertyChangedEventHandler PropertyChanged;
+      public int Row { get; set; }
+      public int Column { get; set; }
+      public JiraIssue Issue { get; set; }
       public Color CategoryColor
       {
          get { return _categoryColor; }
@@ -32,13 +44,5 @@ namespace JiraAssistant.Model.Jira
                PropertyChanged(this, new PropertyChangedEventArgs("CategoryColor"));
          }
       }
-      public RawFields BuiltInFields { get; set; }
-   }
-
-   public class JiraIssuePrintPreviewModel
-   {
-      public int Row { get; set; }
-      public int Column { get; set; }
-      public JiraIssue Issue { get; set; }
    }
 }

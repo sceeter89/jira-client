@@ -24,6 +24,8 @@ namespace JiraAssistant.Pages
          ScrumCardsCommand = new RelayCommand(OpenScrumCards);
          BurnDownCommand = new RelayCommand(OpenBurnDownChart, () => false);
          EngagementCommand = new RelayCommand(OpenEngagementChart, () => false);
+
+         DataContext = this;
       }
 
       private void OpenEngagementChart()
