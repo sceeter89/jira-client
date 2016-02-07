@@ -58,5 +58,17 @@ namespace JiraAssistant.Properties {
                 this["JiraSessionId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RecentBoardsIds {
+            get {
+                return ((string)(this["RecentBoardsIds"]));
+            }
+            set {
+                this["RecentBoardsIds"] = value;
+            }
+        }
     }
 }

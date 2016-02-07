@@ -55,7 +55,7 @@ namespace JiraAssistant.Services.Resources
             {
                jql = jqlQuery,
                startAt = 0,
-               maxResults = 800,
+               maxResults = 1000,
                fields = new string[] { "*all" }
             });
             var response = await client.ExecuteTaskAsync(request);

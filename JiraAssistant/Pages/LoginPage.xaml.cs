@@ -1,7 +1,6 @@
 ﻿using JiraAssistant.Model.Ui;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
-using System;
 using JiraAssistant.ViewModel;
 
 namespace JiraAssistant.Pages
@@ -23,15 +22,17 @@ namespace JiraAssistant.Pages
 
       public Control Control
       {
-         get
-         {
-            return this;
-         }
+         get { return this; }
+      }
+
+      public Control StatusBarControl
+      {
+         get { return null; }
       }
 
       public void OnNavigatedFrom()
       {
-       
+
       }
 
       public void OnNavigatedTo()

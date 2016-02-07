@@ -22,6 +22,11 @@ namespace JiraAssistant.Pages
          get { return this; }
       }
 
+      public Control StatusBarControl
+      {
+         get { return null; }
+      }
+
       public void OnNavigatedFrom() { }
 
       public void OnNavigatedTo()

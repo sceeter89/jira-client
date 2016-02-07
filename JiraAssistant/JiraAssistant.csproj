@@ -106,6 +106,9 @@
     <Compile Include="Pages\AgileBoardPage.xaml.cs">
       <DependentUpon>AgileBoardPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AgileBoardPageStatusBar.xaml.cs">
+      <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BaseNavigationPage.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
@@ -143,6 +146,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AgileBoardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AgileBoardPageStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

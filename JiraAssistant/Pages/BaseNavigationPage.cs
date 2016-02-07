@@ -15,10 +15,12 @@ namespace JiraAssistant.Pages
 
       public Control Control
       {
-         get
-         {
-            return this;
-         }
+         get { return this; }
+      }
+
+      public Control StatusBarControl
+      {
+         get; protected set;
       }
 
       public event PropertyChangedEventHandler PropertyChanged;

@@ -31,6 +31,8 @@ namespace JiraAssistant.Pages
          Issues = new ObservableCollection<JiraIssue>();
          IssuesInSprint = new Dictionary<int, IEnumerable<string>>();
 
+         StatusBarControl = new AgileBoardPageStatusBar { DataContext = this };
+
          DataContext = this;
          DownloadElements();
       }

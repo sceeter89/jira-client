@@ -7,6 +7,20 @@
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300"
              Background="White"
              DataContext="{Binding Source={StaticResource Locator}, Path=MainMenu}">
+   <UserControl.Resources>
+      <DataTemplate x:Key="BoardButtonTemplate">
+         <Button Command="{Binding DataContext.OpenBoardCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding .}"
+                          Width="200" Height="50" HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center" Margin="5">
+            <StackPanel Orientation="Horizontal">
+               <TextBlock Text="{Binding Name}"/>
+               <TextBlock Text=" ("/>
+               <TextBlock Text="{Binding Type}"/>
+               <TextBlock Text=")"/>
+            </StackPanel>
+         </Button>
+      </DataTemplate>
+   </UserControl.Resources>
    <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
       <telerik:RadBusyIndicator.BusyContent>
          <TextBlock Text="{Binding BusyMessage}" />
@@ -14,32 +28,29 @@
       <Grid>
          <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
          </Grid.RowDefinitions>
 
          <TextBlock Text="Choose board you want to analyse" TextAlignment="Center" Margin="10"/>
-
-         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl ItemsSource="{Binding Boards}" Margin="10">
+         
+         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding RecentBoards}" Margin="10" ItemTemplate="{StaticResource BoardButtonTemplate}">
                <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
                      <WrapPanel />
                   </ItemsPanelTemplate>
                </ItemsControl.ItemsPanel>
-               <ItemsControl.ItemTemplate>
-                  <DataTemplate>
-                     <Button Command="{Binding DataContext.OpenBoardCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding .}"
-                          Width="200" Height="50" HorizontalContentAlignment="Center"
-                          VerticalContentAlignment="Center" Margin="5">
-                        <StackPanel Orientation="Horizontal">
-                           <TextBlock Text="{Binding Name}"/>
-                           <TextBlock Text=" ("/>
-                           <TextBlock Text="{Binding Type}"/>
-                           <TextBlock Text=")"/>
-                        </StackPanel>
-                     </Button>
-                  </DataTemplate>
-               </ItemsControl.ItemTemplate>
+            </ItemsControl>
+         </ScrollViewer>
+         
+         <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl ItemsSource="{Binding Boards}" Margin="10" ItemTemplate="{StaticResource BoardButtonTemplate}">
+               <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                     <WrapPanel />
+                  </ItemsPanelTemplate>
+               </ItemsControl.ItemsPanel>
             </ItemsControl>
          </ScrollViewer>
       </Grid>
