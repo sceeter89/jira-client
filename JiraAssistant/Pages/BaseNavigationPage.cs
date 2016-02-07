@@ -8,6 +8,11 @@ namespace JiraAssistant.Pages
 {
    public class BaseNavigationPage : UserControl, INavigationPage, INotifyPropertyChanged
    {
+      public BaseNavigationPage()
+      {
+         Buttons = new ObservableCollection<ToolbarButton>();
+      }
+
       public ObservableCollection<ToolbarButton> Buttons
       {
          get; private set;
