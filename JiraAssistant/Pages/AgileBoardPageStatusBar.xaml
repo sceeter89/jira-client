@@ -20,7 +20,7 @@
       <Image Source ="{Binding SprintsDownloaded, Converter={StaticResource BoolToIcon}}" Width="16" Height="16" Margin="5" />
       <TextBlock Text="issues..." VerticalAlignment="Center"/>
       <Image Source ="{Binding IssuesDownloaded, Converter={StaticResource BoolToIcon}}"  Width="16" Height="16" Margin="5" />
-      <TextBlock Text="sprint assignments..." VerticalAlignment="Center"/>
+      <TextBlock Text="issues in sprints..." VerticalAlignment="Center"/>
       <Image Source ="{Binding SprintAssignmentDownloaded, Converter={StaticResource BoolToIcon}}"  Width="16" Height="16" Margin="5" />
    </StackPanel>
 </UserControl>

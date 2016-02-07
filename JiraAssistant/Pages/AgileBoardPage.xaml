@@ -1,16 +1,69 @@
 ﻿<local:BaseNavigationPage x:Class="JiraAssistant.Pages.AgileBoardPage"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:JiraAssistant.Pages"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
-   <Grid Background="White">
-      <Grid.RowDefinitions>
-         <RowDefinition Height="*"/>
-         <RowDefinition Height="Auto"/>
-      </Grid.RowDefinitions>
+                          xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                          xmlns:local="clr-namespace:JiraAssistant.Pages"
+                          mc:Ignorable="d" 
+                          d:DesignHeight="300" d:DesignWidth="600">
+   <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
+      <telerik:RadBusyIndicator.BusyContent>
+         <TextBlock Text="Updating Agile Board data..." />
+      </telerik:RadBusyIndicator.BusyContent>
+      <Grid Background="White">
+         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
+         </Grid.ColumnDefinitions>
+         <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Disabled" BorderThickness="0">
+            <WrapPanel>
+               <WrapPanel.Resources>
+                  <Style TargetType="Button">
+                     <Setter Property="Width" Value="180" />
+                     <Setter Property="Height" Value="50" />
+                     <Setter Property="Margin" Value="10" />
+                     <Setter Property="HorizontalContentAlignment" Value="Center" />
+                     <Setter Property="VerticalContentAlignment" Value="Center" />
+                     <Setter Property="Background" Value="White"/>
+                  </Style>
+               </WrapPanel.Resources>
 
-   </Grid>
+               <Button Content="Sprint" Command="{Binding SprintDetailsCommand}" />
+               <Button Content="Issues Analysis" Command="{Binding OpenIssuesAnalysisCommand}" />
+               <Button Content="Epics Overview" Command="{Binding OpenEpicsOverviewCommand}" />
+               <Button Content="Sprints Overview" Command="{Binding OpenSprintsOverviewCommand}" />
+            </WrapPanel>
+         </ScrollViewer>
+
+         <Border Grid.Column="1" BorderThickness="1 0 0 0" BorderBrush="Black">
+            <StackPanel Margin="5">
+               <StackPanel.Resources>
+                  <Style x:Key="Title" TargetType="TextBlock">
+                     <Setter Property="FontWeight" Value="Heavy" />
+                     <Setter Property="HorizontalAlignment" Value="Center" />
+                  </Style>
+                  <Style x:Key="Label" TargetType="TextBlock">
+                     <Setter Property="FontWeight" Value="Bold" />
+                     <Setter Property="HorizontalAlignment" Value="Left" />
+                  </Style>
+                  <Style x:Key="Value" TargetType="TextBlock">
+                     <Setter Property="FontWeight" Value="Bold" />
+                     <Setter Property="HorizontalAlignment" Value="Right" />
+                  </Style>
+               </StackPanel.Resources>
+               <TextBlock Style="{StaticResource Title}" Text="Board summary" Margin="0 0 0 10"/>
+
+               <TextBlock Style="{StaticResource Label}" Text="# of epics"/>
+               <TextBlock Style="{StaticResource Value}" Text="{Binding Epics.Count}" />
+
+               <TextBlock Style="{StaticResource Label}" Text="# of sprints"/>
+               <TextBlock Style="{StaticResource Value}" Text="{Binding Sprints.Count}" />
+
+               <TextBlock Style="{StaticResource Label}" Text="# of issues"/>
+               <TextBlock Style="{StaticResource Value}" Text="{Binding Issues.Count}" />
+            </StackPanel>
+         </Border>
+      </Grid>
+   </telerik:RadBusyIndicator>
 </local:BaseNavigationPage>

@@ -40,7 +40,7 @@ namespace JiraAssistant.ViewModel
       {
          UpdateRecentBoardsIdsList(board);
 
-         _navigator.NavigateTo(new AgileBoardPage(board, _jiraAgile, _issuesFinder));
+         _navigator.NavigateTo(new AgileBoardPage(board, _jiraAgile, _issuesFinder, _navigator));
       }
 
       private static void UpdateRecentBoardsIdsList(RawAgileBoard board)

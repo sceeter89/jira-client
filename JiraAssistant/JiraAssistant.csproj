@@ -110,6 +110,15 @@
       <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaseNavigationPage.cs" />
+    <Compile Include="Pages\PickUpSprintPage.xaml.cs">
+      <DependentUpon>PickUpSprintPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ScrumCardsPrintPreview.xaml.cs">
+      <DependentUpon>ScrumCardsPrintPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SprintDetailsPage.xaml.cs">
+      <DependentUpon>SprintDetailsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />
@@ -158,6 +167,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PickUpSprintPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ScrumCardsPrintPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SprintDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

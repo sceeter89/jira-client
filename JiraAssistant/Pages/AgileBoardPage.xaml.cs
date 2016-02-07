@@ -3,6 +3,11 @@ using JiraAssistant.Services.Resources;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Linq;
+using GalaSoft.MvvmLight.Command;
+using JiraAssistant.Services;
 
 namespace JiraAssistant.Pages
 {
@@ -15,16 +20,20 @@ namespace JiraAssistant.Pages
       private bool _sprintAssignmentDownloaded;
       private readonly JiraAgileService _jiraAgile;
       private readonly IssuesFinder _issuesFinder;
+      private bool _isBusy;
+      private readonly INavigator _navigator;
 
       public AgileBoardPage(RawAgileBoard board,
          JiraAgileService jiraService,
-         IssuesFinder issuesFinder)
+         IssuesFinder issuesFinder,
+         INavigator navigator)
       {
          InitializeComponent();
 
          _board = board;
          _jiraAgile = jiraService;
          _issuesFinder = issuesFinder;
+         _navigator = navigator;
 
          Epics = new ObservableCollection<RawAgileEpic>();
          Sprints = new ObservableCollection<RawAgileSprint>();
@@ -33,12 +42,40 @@ namespace JiraAssistant.Pages
 
          StatusBarControl = new AgileBoardPageStatusBar { DataContext = this };
 
+         SprintDetailsCommand = new RelayCommand(OpenSprintDetails);
+         OpenIssuesAnalysisCommand = new RelayCommand(OpenIssuesAnalysis, () => false);
+         OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview, () => false);
+         OpenSprintsOverviewCommand = new RelayCommand(OpenSprintsOverview, () => false);
+
          DataContext = this;
          DownloadElements();
       }
 
-      public void DownloadElements()
+      private void OpenSprintsOverview()
       {
+         throw new NotImplementedException();
+      }
+
+      private void OpenEpicsOverview()
+      {
+         throw new NotImplementedException();
+      }
+
+      private void OpenIssuesAnalysis()
+      {
+         throw new NotImplementedException();
+      }
+
+      private void OpenSprintDetails()
+      {
+         _navigator.NavigateTo(new PickUpSprintPage(Sprints,
+            sprint => new SprintDetailsPage(sprint, Issues.Where(i => IssuesInSprint[sprint.Id].Contains(i.Key)), _navigator),
+            _navigator));
+      }
+
+      public async void DownloadElements()
+      {
+         IsBusy = true;
          Issues.Clear();
          IssuesDownloaded = false;
 
@@ -50,12 +87,15 @@ namespace JiraAssistant.Pages
          Epics.Clear();
          EpicsDownloaded = false;
 
-         DownloadSprints();
-         DownloadEpics();
-         DownloadIssues();
+         var sprintsTask = DownloadSprints();
+         var epicsTask = DownloadEpics();
+         var issuesTask = DownloadIssues();
+
+         await Task.Factory.StartNew(() => Task.WaitAll(sprintsTask, epicsTask, issuesTask));
+         IsBusy = false;
       }
 
-      private async void DownloadIssues()
+      private async Task DownloadIssues()
       {
          var boardConfig = await _jiraAgile.GetBoardConfiguration(_board.Id);
          var issues = await _issuesFinder.Search(boardConfig.Filter);
@@ -68,7 +108,7 @@ namespace JiraAssistant.Pages
          IssuesDownloaded = true;
       }
 
-      private async void DownloadEpics()
+      private async Task DownloadEpics()
       {
          var epics = await _jiraAgile.GetEpics(_board.Id);
 
@@ -80,13 +120,13 @@ namespace JiraAssistant.Pages
          EpicsDownloaded = true;
       }
 
-      private async void DownloadSprints()
+      private async Task DownloadSprints()
       {
          var sprints = await _jiraAgile.GetSprints(_board.Id);
 
          SprintsDownloaded = true;
 
-         foreach (var sprint in sprints)
+         foreach (var sprint in sprints.OrderByDescending(s => s.StartDate))
          {
             Sprints.Add(sprint);
          }
@@ -102,10 +142,7 @@ namespace JiraAssistant.Pages
 
       public bool EpicsDownloaded
       {
-         get
-         {
-            return _epicsDownloaded;
-         }
+         get { return _epicsDownloaded; }
          set
          {
             _epicsDownloaded = value;
@@ -115,10 +152,7 @@ namespace JiraAssistant.Pages
 
       public bool SprintsDownloaded
       {
-         get
-         {
-            return _sprintsDownloaded;
-         }
+         get { return _sprintsDownloaded; }
          set
          {
             _sprintsDownloaded = value;
@@ -128,10 +162,7 @@ namespace JiraAssistant.Pages
 
       public bool IssuesDownloaded
       {
-         get
-         {
-            return _issuesDownloaded;
-         }
+         get { return _issuesDownloaded; }
          set
          {
             _issuesDownloaded = value;
@@ -141,10 +172,7 @@ namespace JiraAssistant.Pages
 
       public bool SprintAssignmentDownloaded
       {
-         get
-         {
-            return _sprintAssignmentDownloaded;
-         }
+         get { return _sprintAssignmentDownloaded; }
          set
          {
             _sprintAssignmentDownloaded = value;
@@ -156,5 +184,20 @@ namespace JiraAssistant.Pages
       public ObservableCollection<RawAgileSprint> Sprints { get; private set; }
       public ObservableCollection<JiraIssue> Issues { get; private set; }
       public IDictionary<int, IEnumerable<string>> IssuesInSprint { get; private set; }
+
+      public ICommand SprintDetailsCommand { get; private set; }
+      public ICommand OpenIssuesAnalysisCommand { get; private set; }
+      public ICommand OpenEpicsOverviewCommand { get; private set; }
+      public ICommand OpenSprintsOverviewCommand { get; private set; }
+
+      public bool IsBusy
+      {
+         get { return _isBusy; }
+         private set
+         {
+            _isBusy = value;
+            RaisePropertyChanged();
+         }
+      }
    }
 }
