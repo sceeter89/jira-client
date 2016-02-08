@@ -4,7 +4,7 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
-        Title="JIRA Assistant" Height="600" Width="800"
+        Title="JIRA Assistant" Height="700" Width="800"
         Icon="/Assets/Icons/ApplicationIcon.png"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         Background="LightGray">
@@ -58,6 +58,11 @@
          <ItemsControl ItemsSource="{Binding CurrentPage.Buttons}"
                        Margin="5 0 5 5"
                        Background="White">
+            <ItemsControl.ItemsPanel>
+               <ItemsPanelTemplate>
+                  <StackPanel Orientation="Horizontal"/>
+               </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                <DataTemplate>
                   <Button ToolTip="{Binding Tooltip}" Command="{Binding Command}" Margin="5">

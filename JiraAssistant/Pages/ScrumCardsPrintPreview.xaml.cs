@@ -5,6 +5,14 @@ using System.Linq;
 using System.Windows.Input;
 using System;
 using JiraAssistant.Dialogs;
+using JiraAssistant.Model.Ui;
+using System.Windows.Media.Imaging;
+using System.Windows.Xps.Packaging;
+using System.IO;
+using System.Windows.Documents;
+using System.Windows;
+using System.Windows.Markup;
+using JiraAssistant.Controls;
 
 namespace JiraAssistant.Pages
 {
@@ -36,22 +44,67 @@ namespace JiraAssistant.Pages
          }
 
          StatusBarControl = new ScrumCardsPrintPreviewStatusBar();
-         SetCardColorCommand = new RelayCommand<JiraIssuePrintPreviewModel>(SetCardColor);
+         ExportCardsCommand = new RelayCommand(ExportCards);
+
+         Buttons.Add(new ToolbarButton
+         {
+            Tooltip = "Export cards...",
+            Command = ExportCardsCommand,
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ExportIcon.png"))
+         });
 
          DataContext = this;
       }
 
-      private void SetCardColor(JiraIssuePrintPreviewModel printPreview)
+      private void ExportCards()
       {
-         var dialog = new ColorDialog(printPreview.CategoryColor);
+         var dlg = new Microsoft.Win32.SaveFileDialog();
+         dlg.FileName = "Scrum Cards.xps";
+         dlg.DefaultExt = ".xps";
+         dlg.Filter = "XPS Documents (.xps)|*.xps";
+         dlg.OverwritePrompt = true;
 
-         if(dialog.ShowDialog() == false)
+         var result = dlg.ShowDialog();
+
+         if (result == false)
             return;
 
-         printPreview.CategoryColor = dialog.EditedColor;
+         var document = GenerateDocument();
+         var filename = dlg.FileName;
+         if (File.Exists(filename))
+            File.Delete(filename);
+
+         using (var xpsd = new XpsDocument(filename, FileAccess.ReadWrite))
+         {
+            var xw = XpsDocument.CreateXpsDocumentWriter(xpsd);
+            xw.Write(document);
+            xpsd.Close();
+         }
       }
 
-      public RelayCommand<JiraIssuePrintPreviewModel> SetCardColorCommand { get; private set; }
+      private FixedDocument GenerateDocument()
+      {
+         var document = new FixedDocument();
+         var pageSize = new Size(8.5 * 96.0, 11.0 * 96.0);
+
+         foreach (var page in Pages)
+         {
+            var pageContent = new PageContent();
+            var fixedPage = new FixedPage();
+            var pagePreview = new ScrumCardsPageControl { DataContext = page };
+            pagePreview.Height = pageSize.Height - 10;
+            pagePreview.Width = pageSize.Width - 10;
+            pagePreview.Margin = new Thickness(5);
+            pagePreview.UpdateLayout();
+
+            fixedPage.Children.Add(pagePreview);
+            ((IAddChild)pageContent).AddChild(fixedPage);
+            document.Pages.Add(pageContent);
+         }
+
+         return document;
+      }
+      public RelayCommand ExportCardsCommand { get; private set; }
 
       public IList<PrintPage> Pages { get; private set; }
    }
@@ -61,8 +114,20 @@ namespace JiraAssistant.Pages
       public PrintPage(IEnumerable<JiraIssuePrintPreviewModel> issuesForPage)
       {
          Issues = issuesForPage;
+         SetCardColorCommand = new RelayCommand<JiraIssuePrintPreviewModel>(SetCardColor);
       }
 
+
+      private void SetCardColor(JiraIssuePrintPreviewModel printPreview)
+      {
+         var dialog = new ColorDialog(printPreview.CategoryColor);
+
+         if (dialog.ShowDialog() == false)
+            return;
+
+         printPreview.CategoryColor = dialog.EditedColor;
+      }
       public IEnumerable<JiraIssuePrintPreviewModel> Issues { get; private set; }
+      public RelayCommand<JiraIssuePrintPreviewModel> SetCardColorCommand { get; private set; }
    }
 }

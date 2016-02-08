@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JiraAssistant.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="80" d:DesignWidth="500">
+             d:DesignHeight="80" d:DesignWidth="600">
    <Grid>
       <Grid.ColumnDefinitions>
          <ColumnDefinition Width="Auto"/>
@@ -20,7 +20,6 @@
       <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
          <TextBlock TextWrapping="Wrap">
             <Bold>Navigation</Bold><LineBreak/>
-            <LineBreak/>
             To move preview to another page grab any corner with mouse and flip it just like normal book's page.
          </TextBlock>
       </ScrollViewer>
@@ -28,8 +27,14 @@
       <ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Disabled">
          <TextBlock TextWrapping="Wrap">
             <Bold>Cards' coloring</Bold><LineBreak/>
-            <LineBreak/>
             You can color any card owith color of your choice by simply clicking on it.
+         </TextBlock>
+      </ScrollViewer>  
+
+      <ScrollViewer Grid.Column="3" HorizontalScrollBarVisibility="Disabled">
+         <TextBlock TextWrapping="Wrap">
+            <Bold>Export</Bold><LineBreak/>
+            To export pages to printable format press "Export" button on top, next to "Back" button.
          </TextBlock>
       </ScrollViewer>      
    </Grid>
