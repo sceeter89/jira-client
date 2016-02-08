@@ -21,7 +21,7 @@ namespace JiraAssistant.Pages
          _navigator = navigator;
 
          ScrumCardsCommand = new RelayCommand(OpenScrumCards);
-         BurnDownCommand = new RelayCommand(OpenBurnDownChart, () => false);
+         BurnDownCommand = new RelayCommand(OpenBurnDownChart);
          EngagementCommand = new RelayCommand(OpenEngagementChart);
 
          DataContext = this;
@@ -34,7 +34,7 @@ namespace JiraAssistant.Pages
 
       private void OpenBurnDownChart()
       {
-         throw new NotImplementedException();
+         _navigator.NavigateTo(new BurnDownChart(Sprint, _issues));
       }
 
       private void OpenScrumCards()

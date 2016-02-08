@@ -125,6 +125,12 @@
       <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaseNavigationPage.cs" />
+    <Compile Include="Pages\BurnDownChart.xaml.cs">
+      <DependentUpon>BurnDownChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BurnDownChartStatusBar.xaml.cs">
+      <DependentUpon>BurnDownChartStatusBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EngagementChart.xaml.cs">
       <DependentUpon>EngagementChart.xaml</DependentUpon>
     </Compile>
@@ -191,6 +197,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AgileBoardPageStatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BurnDownChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BurnDownChartStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
