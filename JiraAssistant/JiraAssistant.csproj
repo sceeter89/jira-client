@@ -88,6 +88,7 @@
       <HintPath>..\lib\RCWPF\2016.1.112.45.NoXaml\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Input, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Navigation, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Data, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
@@ -124,6 +125,12 @@
       <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaseNavigationPage.cs" />
+    <Compile Include="Pages\EngagementChart.xaml.cs">
+      <DependentUpon>EngagementChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\EngagementChartStatusBar.xaml.cs">
+      <DependentUpon>EngagementChartStatusBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PickUpSprintPage.xaml.cs">
       <DependentUpon>PickUpSprintPage.xaml</DependentUpon>
     </Compile>
@@ -184,6 +191,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AgileBoardPageStatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EngagementChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EngagementChartStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

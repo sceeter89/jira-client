@@ -22,14 +22,14 @@ namespace JiraAssistant.Pages
 
          ScrumCardsCommand = new RelayCommand(OpenScrumCards);
          BurnDownCommand = new RelayCommand(OpenBurnDownChart, () => false);
-         EngagementCommand = new RelayCommand(OpenEngagementChart, () => false);
+         EngagementCommand = new RelayCommand(OpenEngagementChart);
 
          DataContext = this;
       }
 
       private void OpenEngagementChart()
       {
-         throw new NotImplementedException();
+         _navigator.NavigateTo(new EngagementChart(_issues));
       }
 
       private void OpenBurnDownChart()

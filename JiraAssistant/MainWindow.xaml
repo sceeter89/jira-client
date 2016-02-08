@@ -88,7 +88,7 @@
       </ScrollViewer>
 
       <StackPanel Orientation="Horizontal" Margin="5 0 0 5" Grid.Row="0" Grid.Column="0" Background="White">
-         <Button ToolTip="Log out" Command="{Binding BackCommand}" Margin="5">
+         <Button ToolTip="Back" Command="{Binding BackCommand}" Margin="5">
             <Image Source="/Assets/Icons/BackIcon.png" Width="30" Height="30"/>
          </Button>
       </StackPanel>
