@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
+using JiraAssistant.Model.Ui;
 using JiraAssistant.Pages;
 using JiraAssistant.Properties;
 using JiraAssistant.Services;
@@ -22,6 +23,7 @@ namespace JiraAssistant.ViewModel
       private readonly INavigator _navigator;
       private readonly IssuesFinder _issuesFinder;
       private const int RecentBoardsCount = 3;
+      private readonly IDictionary<int, INavigationPage> _boardPagesCache = new Dictionary<int, INavigationPage>();
 
       public MainMenuViewModel(JiraAgileService jiraAgile,
          IssuesFinder issuesFinder,
@@ -40,7 +42,14 @@ namespace JiraAssistant.ViewModel
       {
          UpdateRecentBoardsIdsList(board);
 
-         _navigator.NavigateTo(new AgileBoardPage(board, _jiraAgile, _issuesFinder, _navigator));
+         if (_boardPagesCache.ContainsKey(board.Id))
+            _navigator.NavigateTo(_boardPagesCache[board.Id]);
+         else
+         {
+            var boardPage = new AgileBoardPage(board, _jiraAgile, _issuesFinder, _navigator);
+            _boardPagesCache[board.Id] = boardPage;
+            _navigator.NavigateTo(boardPage);
+         }
       }
 
       private static void UpdateRecentBoardsIdsList(RawAgileBoard board)

@@ -30,7 +30,7 @@
                </WrapPanel.Resources>
 
                <Button Content="Sprint" Command="{Binding SprintDetailsCommand}" />
-               <Button Content="Issues Analysis" Command="{Binding OpenIssuesAnalysisCommand}" />
+               <Button Content="Pivot Analysis" Command="{Binding OpenPivotAnalysisCommand}" />
                <Button Content="Epics Overview" Command="{Binding OpenEpicsOverviewCommand}" />
                <Button Content="Sprints Overview" Command="{Binding OpenSprintsOverviewCommand}" />
             </WrapPanel>

@@ -43,7 +43,7 @@ namespace JiraAssistant.Pages
          StatusBarControl = new AgileBoardPageStatusBar { DataContext = this };
 
          SprintDetailsCommand = new RelayCommand(OpenSprintDetails);
-         OpenIssuesAnalysisCommand = new RelayCommand(OpenIssuesAnalysis, () => false);
+         OpenPivotAnalysisCommand = new RelayCommand(OpenPivotAnalysis);
          OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview);
          OpenSprintsOverviewCommand = new RelayCommand(OpenSprintsOverview, () => false);
 
@@ -61,9 +61,9 @@ namespace JiraAssistant.Pages
          _navigator.NavigateTo(new EpicsOverviewPage(Issues, Epics));
       }
 
-      private void OpenIssuesAnalysis()
+      private void OpenPivotAnalysis()
       {
-         throw new NotImplementedException();
+         _navigator.NavigateTo(new PivotAnalysisPage(Issues));
       }
 
       private void OpenSprintDetails()
@@ -186,7 +186,7 @@ namespace JiraAssistant.Pages
       public IDictionary<int, IEnumerable<string>> IssuesInSprint { get; private set; }
 
       public ICommand SprintDetailsCommand { get; private set; }
-      public ICommand OpenIssuesAnalysisCommand { get; private set; }
+      public ICommand OpenPivotAnalysisCommand { get; private set; }
       public ICommand OpenEpicsOverviewCommand { get; private set; }
       public ICommand OpenSprintsOverviewCommand { get; private set; }
 

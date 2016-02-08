@@ -34,7 +34,7 @@ namespace JiraAssistant.Pages
          IsBusy = true;
          var newItems = await Task.Factory.StartNew(() =>
                _issues
-                  .Where(i => _epicKeyToIgnoreStatus[i.EpicLink] == false)
+                  .Where(i => _epicKeyToIgnoreStatus[i.EpicLink] == false && i.Resolved.HasValue == false)
                   .GroupBy(i => _epicKeyToName[i.EpicLink])
                   .Select(group => new EpicShare(group.Key, group.Count())));
 

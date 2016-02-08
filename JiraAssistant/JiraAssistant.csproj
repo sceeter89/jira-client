@@ -84,6 +84,7 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Telerik.Pivot.Core, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <HintPath>..\lib\RCWPF\2016.1.112.45.NoXaml\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
@@ -91,6 +92,8 @@
     <Reference Include="Telerik.Windows.Controls.Chart, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Input, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Navigation, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Pivot, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.PivotFieldList, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Data, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Themes.Windows8">
       <HintPath>..\lib\RCWPF\2016.1.112.45.NoXaml\Telerik.Windows.Themes.Windows8.dll</HintPath>
@@ -142,6 +145,9 @@
     </Compile>
     <Compile Include="Pages\PickUpSprintPage.xaml.cs">
       <DependentUpon>PickUpSprintPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PivotAnalysisPage.xaml.cs">
+      <DependentUpon>PivotAnalysisPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ScrumCardsPrintPreview.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreview.xaml</DependentUpon>
@@ -232,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PickUpSprintPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PivotAnalysisPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
