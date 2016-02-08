@@ -1,4 +1,5 @@
 ﻿using JiraAssistant.Model;
+using JiraAssistant.Model.Exceptions;
 using RestSharp;
 using System.Net;
 
@@ -13,6 +14,9 @@ namespace JiraAssistant.Services.Resources
 
       protected RestClient BuildRestClient()
       {
+         if (string.IsNullOrEmpty(Configuration.JiraUrl))
+            throw new IncompleteJiraConfiguration();
+
          var client = new RestClient(Configuration.JiraUrl);
          client.AddDefaultHeader("Content-Type", "Application/json");
          if (string.IsNullOrEmpty(Configuration.JiraSessionId) == false)

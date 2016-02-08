@@ -124,6 +124,7 @@ namespace JiraAssistant.ViewModel
                _jiraSession.LoggedIn();
             }
          }
+         catch(IncompleteJiraConfiguration) { }
          finally
          {
             IsBusy = false;
