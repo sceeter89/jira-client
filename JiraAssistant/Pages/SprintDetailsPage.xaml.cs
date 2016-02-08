@@ -10,14 +10,13 @@ namespace JiraAssistant.Pages
    public partial class SprintDetailsPage : BaseNavigationPage
    {
       private readonly IEnumerable<JiraIssue> _issues;
-      private readonly RawAgileSprint _sprint;
       private readonly INavigator _navigator;
 
       public SprintDetailsPage(RawAgileSprint sprint, IEnumerable<JiraIssue> issues, INavigator navigator)
       {
          InitializeComponent();
 
-         _sprint = sprint;
+         Sprint = sprint;
          _issues = issues;
          _navigator = navigator;
 
@@ -46,5 +45,6 @@ namespace JiraAssistant.Pages
       public ICommand ScrumCardsCommand { get; private set; }
       public ICommand BurnDownCommand { get; private set; }
       public ICommand EngagementCommand { get; private set; }
+      public RawAgileSprint Sprint { get; private set; }
    }
 }

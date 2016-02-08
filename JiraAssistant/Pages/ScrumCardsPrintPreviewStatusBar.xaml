@@ -18,21 +18,21 @@
              Width="32" Height="32"  Margin="5" />
 
       <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
-         <TextBlock TextWrapping="Wrap">
+         <TextBlock TextWrapping="Wrap" Margin="2">
             <Bold>Navigation</Bold><LineBreak/>
             To move preview to another page grab any corner with mouse and flip it just like normal book's page.
          </TextBlock>
       </ScrollViewer>
 
       <ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Disabled">
-         <TextBlock TextWrapping="Wrap">
+         <TextBlock TextWrapping="Wrap" Margin="2">
             <Bold>Cards' coloring</Bold><LineBreak/>
             You can color any card owith color of your choice by simply clicking on it.
          </TextBlock>
       </ScrollViewer>  
 
       <ScrollViewer Grid.Column="3" HorizontalScrollBarVisibility="Disabled">
-         <TextBlock TextWrapping="Wrap">
+         <TextBlock TextWrapping="Wrap" Margin="2">
             <Bold>Export</Bold><LineBreak/>
             To export pages to printable format press "Export" button on top, next to "Back" button.
          </TextBlock>

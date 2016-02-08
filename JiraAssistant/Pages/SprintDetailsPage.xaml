@@ -7,7 +7,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500">
    <Grid Background="White">
-      <ScrollViewer  HorizontalScrollBarVisibility="Disabled" BorderThickness="0">
+      <Grid.RowDefinitions>
+         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+         <StackPanel.Resources>
+            <Style TargetType="TextBlock">
+               <Setter Property="FontWeight" Value="Bold" />
+               <Setter Property="Margin" Value="0 5 0 10" />
+            </Style>
+         </StackPanel.Resources>
+         <TextBlock Text="Sprint: " />
+         <TextBlock Text="{Binding Sprint.Name}" />
+      </StackPanel>
+
+      <ScrollViewer HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Grid.Row="1">
          <WrapPanel>
             <WrapPanel.Resources>
                <Style TargetType="Button">
