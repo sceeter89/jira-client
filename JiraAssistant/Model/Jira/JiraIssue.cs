@@ -18,6 +18,7 @@ namespace JiraAssistant.Model.Jira
       public float StoryPoints { get; set; }
       public int Subtasks { get; set; }
       public string Summary { get; set; }
+      public string EpicLink { get; set; }
       public RawFields BuiltInFields { get; set; }
    }
 

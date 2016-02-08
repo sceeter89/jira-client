@@ -44,7 +44,7 @@ namespace JiraAssistant.Pages
 
          SprintDetailsCommand = new RelayCommand(OpenSprintDetails);
          OpenIssuesAnalysisCommand = new RelayCommand(OpenIssuesAnalysis, () => false);
-         OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview, () => false);
+         OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview);
          OpenSprintsOverviewCommand = new RelayCommand(OpenSprintsOverview, () => false);
 
          DataContext = this;
@@ -58,7 +58,7 @@ namespace JiraAssistant.Pages
 
       private void OpenEpicsOverview()
       {
-         throw new NotImplementedException();
+         _navigator.NavigateTo(new EpicsOverviewPage(Issues, Epics));
       }
 
       private void OpenIssuesAnalysis()

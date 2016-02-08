@@ -137,6 +137,9 @@
     <Compile Include="Pages\EngagementChartStatusBar.xaml.cs">
       <DependentUpon>EngagementChartStatusBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EpicsOverviewPage.xaml.cs">
+      <DependentUpon>EpicsOverviewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PickUpSprintPage.xaml.cs">
       <DependentUpon>PickUpSprintPage.xaml</DependentUpon>
     </Compile>
@@ -213,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EngagementChartStatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\EpicsOverviewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

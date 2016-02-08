@@ -51,6 +51,7 @@ namespace JiraAssistant.Model.Jira
    public class RawAgileEpic
    {
       public int Id { get; set; }
+      public string Key { get; set; }
       public string Self { get; set; }
       public string Name { get; set; }
       public string Summary { get; set; }

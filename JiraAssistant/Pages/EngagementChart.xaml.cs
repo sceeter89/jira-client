@@ -36,7 +36,7 @@ namespace JiraAssistant.Pages
               new EngagementBase("Reporter", issue => issue.Reporter ?? "")
             };
          SelectedBase = AvailableBases[0];
-         
+
          DataContext = this;
       }
 
@@ -49,12 +49,9 @@ namespace JiraAssistant.Pages
                Issues.GroupBy(SelectedBase.Selector)
                      .Select(group => new EngagementItem(group.Key, SelectedCriteria.Aggregation(group))));
 
-         DispatcherHelper.CheckBeginInvokeOnUI(() =>
-         {
-            ChartItems.Clear();
-            foreach (var item in newItems)
-               ChartItems.Add(item);
-         });
+         ChartItems.Clear();
+         foreach (var item in newItems)
+            ChartItems.Add(item);
       }
 
       public ObservableCollection<EngagementItem> ChartItems { get; private set; }
