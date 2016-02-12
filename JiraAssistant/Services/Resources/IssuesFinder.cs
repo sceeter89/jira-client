@@ -16,6 +16,7 @@ namespace JiraAssistant.Services.Resources
 {
    public class IssuesFinder : BaseRestService
    {
+      private const int BATCH_SIZE = 1000;
       private IDictionary<string, RawFieldDefinition> _fields;
       private readonly MetadataRetriever _metadata;
       private readonly BackgroundJobStatusViewModel _jobStatus;
@@ -41,46 +42,56 @@ namespace JiraAssistant.Services.Resources
          return await Search(result.Jql);
       }
 
+      private async Task<RawSearchResults> DownloadSearchResultsBatch(string jqlQuery, int startAt)
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/search", Method.POST);
+         request.AddJsonBody(new
+         {
+            jql = jqlQuery,
+            startAt = startAt,
+            maxResults = BATCH_SIZE,
+            fields = new string[] { "*all" }
+         });
+         var response = await client.ExecuteTaskAsync(request);
+
+         if (response.StatusCode != HttpStatusCode.OK)
+         {
+            throw new SearchFailedException(string.Format("Search request failed with invalid response code: {0}.\r\nResponse content is: {1}", response.StatusCode, response.Content));
+         }
+
+         var batch = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<RawSearchResults>(response.Content));
+
+         return batch;
+      }
+
       public async Task<IEnumerable<JiraIssue>> Search(string jqlQuery)
       {
          _jobStatus.StartNewJob("Searching for issues...");
 
          var searchResults = new List<RawIssue>();
-         var client = BuildRestClient();
-         var request = new RestRequest("/rest/api/latest/search", Method.POST);
 
-         do
+         var firstBatch = await DownloadSearchResultsBatch(jqlQuery, 0);
+         var batches = new List<RawSearchResults> { firstBatch };
+         if (firstBatch.Total > BATCH_SIZE)
          {
-            request.AddJsonBody(new
-            {
-               jql = jqlQuery,
-               startAt = 0,
-               maxResults = 1000,
-               fields = new string[] { "*all" }
-            });
-            var response = await client.ExecuteTaskAsync(request);
+            var pendingBatchesCount = (firstBatch.Total - BATCH_SIZE) / BATCH_SIZE + 1;
+            var tasks = new Task<RawSearchResults>[pendingBatchesCount];
 
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-               throw new SearchFailedException(string.Format("Search request failed with invalid response code: {0}.\r\nResponse content is: {1}", response.StatusCode, response.Content));
-            }
+            for (int i = 1; i <= pendingBatchesCount; i++)
+               tasks[i - 1] = DownloadSearchResultsBatch(jqlQuery, i * BATCH_SIZE);
 
-            var batch = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<RawSearchResults>(response.Content));
-            foreach (var issue in batch.Issues)
-            {
-               searchResults.Add(issue);
-            }
-            if (searchResults.Count >= batch.Total)
-               break;
+            await Task.Factory.StartNew(() => Task.WaitAll(tasks));
 
-         } while (true);
+            batches.AddRange(tasks.Select(t => t.Result));
+         }
 
          if (_fields == null)
          {
             _fields = (await _metadata.GetFieldsDefinitions()).ToDictionary(d => d.Name, d => d);
          }
 
-         return ConvertIssuesToDomainModel(searchResults);
+         return ConvertIssuesToDomainModel(batches.SelectMany(b => b.Issues));
       }
 
       private ICollection<JiraIssue> ConvertIssuesToDomainModel(IEnumerable<RawIssue> issues)
