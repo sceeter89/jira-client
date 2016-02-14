@@ -32,6 +32,9 @@
                </StackPanel.Resources>
                <TextBlock Text="Board: " />
                <TextBlock Text="{Binding Board.Name}" />
+               <TextBlock Text=" (#" />
+               <TextBlock Text="{Binding Board.Id}" />
+               <TextBlock Text=")" />
             </StackPanel>
          </Border>
 

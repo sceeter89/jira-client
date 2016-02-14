@@ -29,6 +29,9 @@
             </StackPanel.Resources>
             <TextBlock Text="Sprint: " />
             <TextBlock Text="{Binding Sprint.Name}" />
+            <TextBlock Text=" (#" />
+            <TextBlock Text="{Binding Sprint.Id}" />
+            <TextBlock Text=")" />
          </StackPanel>
       </Border>
 
