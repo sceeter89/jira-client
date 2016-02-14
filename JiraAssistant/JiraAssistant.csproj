@@ -94,6 +94,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Chart, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Input, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Navigation, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Pivot, Version=2016.1.112.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
@@ -139,6 +140,9 @@
       <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaseNavigationPage.cs" />
+    <Compile Include="Pages\BrowseIssuesPage.xaml.cs">
+      <DependentUpon>BrowseIssuesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BurnDownChart.xaml.cs">
       <DependentUpon>BurnDownChart.xaml</DependentUpon>
     </Compile>
@@ -153,6 +157,9 @@
     </Compile>
     <Compile Include="Pages\EpicsOverviewPage.xaml.cs">
       <DependentUpon>EpicsOverviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\IssueDetailsPage.xaml.cs">
+      <DependentUpon>IssueDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PickUpSprintPage.xaml.cs">
       <DependentUpon>PickUpSprintPage.xaml</DependentUpon>
@@ -228,6 +235,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\BrowseIssuesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\BurnDownChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -245,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EpicsOverviewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\IssueDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

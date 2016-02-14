@@ -62,6 +62,7 @@ namespace JiraAssistant.Pages
          SprintDetailsCommand = new RelayCommand(OpenSprintDetails);
          OpenPivotAnalysisCommand = new RelayCommand(OpenPivotAnalysis);
          OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview);
+         BrowseIssuesCommand = new RelayCommand(BrowseIssues);
 
          RefreshDataCommand = new RelayCommand(() => DownloadElements(), () => IsBusy == false);
 
@@ -74,6 +75,11 @@ namespace JiraAssistant.Pages
 
          DataContext = this;
          DownloadElements();
+      }
+
+      private void BrowseIssues()
+      {
+         _navigator.NavigateTo(new BrowseIssuesPage(Issues, _navigator));
       }
 
       private void OpenEpicsOverview()
@@ -261,5 +267,6 @@ namespace JiraAssistant.Pages
 
       public RelayCommand RefreshDataCommand { get; private set; }
       public RawAgileBoard Board { get; private set; }
+      public RelayCommand BrowseIssuesCommand { get; private set; }
    }
 }

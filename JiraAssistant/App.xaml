@@ -19,6 +19,7 @@
          <Style x:Key="SummaryTitle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Heavy" />
             <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0 0 0 10" />
          </Style>
          <Style x:Key="SummaryLabel" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Bold" />

@@ -48,6 +48,7 @@
             <Button Content="Scrum Cards" Command="{Binding ScrumCardsCommand}" />
             <Button Content="Burn-down" Command="{Binding BurnDownCommand}" />
             <Button Content="Engagement" Command="{Binding EngagementCommand}" />
+            <Button Content="Browse Issues" Command="{Binding BrowseIssuesCommand}" />
          </WrapPanel>
       </ScrollViewer>
 
@@ -57,8 +58,21 @@
                <RowDefinition Height="Auto" />
                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" Margin="0 0 0 10"/>
-            
+            <StackPanel>
+               <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" />
+
+               <TextBlock Style="{StaticResource SummaryLabel}" Text="Start" />
+               <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Sprint.StartDate, StringFormat=yyyy-MM-dd hh:mm}" />
+
+               <TextBlock Style="{StaticResource SummaryLabel}" Text="End" />
+               <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Sprint.EndDate, StringFormat=yyyy-MM-dd hh:mm}" />
+
+               <TextBlock Style="{StaticResource SummaryLabel}" Text="Completed" />
+               <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Sprint.CompleteDate, StringFormat=yyyy-MM-dd hh:mm}" />
+
+               <TextBlock Style="{StaticResource SummaryLabel}" Text="Status" />
+               <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Sprint.State}" />
+            </StackPanel>
             <controls:IssueCollectionStatisticsControl Statistics="{Binding Statistics}" Grid.Row="1"/>
          </Grid>
       </Border>

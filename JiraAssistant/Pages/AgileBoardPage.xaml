@@ -15,7 +15,7 @@
       <Grid Background="White">
          <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="170"/>
          </Grid.ColumnDefinitions>
          <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -51,6 +51,7 @@
                <Button Content="Sprint" Command="{Binding SprintDetailsCommand}" />
                <Button Content="Pivot Analysis" Command="{Binding OpenPivotAnalysisCommand}" />
                <Button Content="Epics Overview" Command="{Binding OpenEpicsOverviewCommand}" />
+               <Button Content="Browse Issues" Command="{Binding BrowseIssuesCommand}" />
             </WrapPanel>
          </ScrollViewer>
 
@@ -61,8 +62,16 @@
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="*" />
                   </Grid.RowDefinitions>
-                  <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" Margin="0 0 0 10"/>
+                  <StackPanel>
+                     <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" Margin="0 0 0 10"/>
 
+                     <TextBlock Style="{StaticResource SummaryLabel}" Text="# of epics"/>
+                     <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Epics.Count}" />
+
+                     <TextBlock Style="{StaticResource SummaryLabel}" Text="# of sprints"/>
+                     <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Sprints.Count}" />
+                  </StackPanel>
+                  
                   <controls:IssueCollectionStatisticsControl Statistics="{Binding Statistics}" Grid.Row="1"/>
                </Grid>
             </Border>

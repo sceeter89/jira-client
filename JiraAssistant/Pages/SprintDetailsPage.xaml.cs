@@ -29,10 +29,16 @@ namespace JiraAssistant.Pages
          ScrumCardsCommand = new RelayCommand(OpenScrumCards);
          BurnDownCommand = new RelayCommand(OpenBurnDownChart);
          EngagementCommand = new RelayCommand(OpenEngagementChart);
+         BrowseIssuesCommand = new RelayCommand(BrowseIssues);
 
          DataContext = this;
 
          GatherStatistics();
+      }
+
+      private void BrowseIssues()
+      {
+         _navigator.NavigateTo(new BrowseIssuesPage(Issues, _navigator));
       }
 
       private async void GatherStatistics()
@@ -68,6 +74,7 @@ namespace JiraAssistant.Pages
       public ICommand ScrumCardsCommand { get; private set; }
       public ICommand BurnDownCommand { get; private set; }
       public ICommand EngagementCommand { get; private set; }
+      public ICommand BrowseIssuesCommand { get; private set; }
       public RawAgileSprint Sprint { get; private set; }
       public IList<JiraIssue> Issues { get; private set; }
    }

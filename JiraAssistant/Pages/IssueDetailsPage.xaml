@@ -1,0 +1,123 @@
+﻿<local:BaseNavigationPage xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="JiraAssistant.Pages.IssueDetailsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JiraAssistant.Pages"
+             mc:Ignorable="d" Background="White"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+      <StackPanel Orientation="Horizontal">
+         <TextBlock Text="{Binding Issue.Key}" FontSize="20" FontWeight="Heavy" Margin="10"/>
+         <TextBlock Text="{Binding Issue.Summary}" FontSize="10" Margin="10" VerticalAlignment="Bottom"/>
+      </StackPanel>
+      <telerik:RadTabControl Grid.Row="1">
+         <telerik:RadTabItem Header="Details">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+               <StackPanel>
+                  <StackPanel.Resources>
+                     <Style x:Key="Label" TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Margin" Value="5 5 5 0"/>
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                     </Style>
+                     <Style x:Key="Value" TargetType="TextBlock">
+                        <Setter Property="FontSize" Value="10"/>
+                        <Setter Property="Margin" Value="5 5 5 0"/>
+                     </Style>
+                  </StackPanel.Resources>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Description"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Description}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Reporter"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Reporter}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Created"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Created}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Priority"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Priority}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Status"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Status}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Project"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Project}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Story Points"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.StoryPoints}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Assignee"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Assignee}"/>
+                  </StackPanel>
+               </StackPanel>
+            </ScrollViewer>
+         </telerik:RadTabItem>
+         <telerik:RadTabItem Header="Comments">
+            <ItemsControl ItemsSource="{Binding Issue.BuiltInFields.Comments.Comments}" HorizontalAlignment="Left" VerticalAlignment="Top">
+               <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                     <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+                        <Grid Margin="5">
+                           <Grid.RowDefinitions>
+                              <RowDefinition Height="Auto"/>
+                              <RowDefinition Height="*"/>
+                           </Grid.RowDefinitions>
+                           <Grid.ColumnDefinitions>
+                              <ColumnDefinition Width="*" />
+                              <ColumnDefinition Width="*" />
+                           </Grid.ColumnDefinitions>
+                           
+                           <TextBlock Text="{Binding Author.DisplayName}" HorizontalAlignment="Left"/>
+                           <TextBlock Text="{Binding Created}" HorizontalAlignment="Right" Grid.Column="1"/>
+
+                           <TextBlock Text="{Binding Body}" TextWrapping="Wrap" Grid.Row="1" Grid.ColumnSpan="2"/>
+                        </Grid>
+                     </Border>
+                  </DataTemplate>
+               </ItemsControl.ItemTemplate>
+               <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                     <StackPanel />
+                  </ItemsPanelTemplate>
+               </ItemsControl.ItemsPanel>
+            </ItemsControl>
+         </telerik:RadTabItem>
+         <telerik:RadTabItem Header="Attachments">
+            <ItemsControl ItemsSource="{Binding Issue.BuiltInFields.Attachments}" HorizontalAlignment="Left" VerticalAlignment="Top">
+               <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                     <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Author.DisplayName}" HorizontalAlignment="Left" Margin="0 0 5 0" />
+                        <TextBlock Text="{Binding Created}" HorizontalAlignment="Right" Margin="0 0 5 0" />
+                        <TextBlock Text="Size: " Margin="0 0 5 0" />
+                        <TextBlock Text="{Binding Size}" />
+                        <TextBlock Text="B (" />
+                        <TextBlock Text="{Binding FileName}" />
+                        <TextBlock Text=")" />
+                     </StackPanel>
+                  </DataTemplate>
+               </ItemsControl.ItemTemplate>
+               <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                     <StackPanel />
+                  </ItemsPanelTemplate>
+               </ItemsControl.ItemsPanel>
+            </ItemsControl>
+         </telerik:RadTabItem>
+      </telerik:RadTabControl>
+   </Grid>
+</local:BaseNavigationPage>
