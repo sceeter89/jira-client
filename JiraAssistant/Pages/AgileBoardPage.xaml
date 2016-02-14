@@ -5,6 +5,7 @@
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:local="clr-namespace:JiraAssistant.Pages"
+                          xmlns:controls="clr-namespace:JiraAssistant.Controls"
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="600">
    <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
@@ -16,7 +17,25 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="150"/>
          </Grid.ColumnDefinitions>
-         <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Disabled" BorderThickness="0">
+         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+         </Grid.RowDefinitions>
+
+         <Border Grid.ColumnSpan="2" BorderThickness="0 0 0 1" BorderBrush="Black">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+               <StackPanel.Resources>
+                  <Style TargetType="TextBlock">
+                     <Setter Property="FontWeight" Value="Bold" />
+                     <Setter Property="Margin" Value="0 5 0 10" />
+                  </Style>
+               </StackPanel.Resources>
+               <TextBlock Text="Board: " />
+               <TextBlock Text="{Binding Board.Name}" />
+            </StackPanel>
+         </Border>
+
+         <ScrollViewer Grid.Column="0" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" BorderThickness="0">
             <WrapPanel>
                <WrapPanel.Resources>
                   <Style TargetType="Button">
@@ -32,37 +51,21 @@
                <Button Content="Sprint" Command="{Binding SprintDetailsCommand}" />
                <Button Content="Pivot Analysis" Command="{Binding OpenPivotAnalysisCommand}" />
                <Button Content="Epics Overview" Command="{Binding OpenEpicsOverviewCommand}" />
-               <Button Content="Sprints Overview" Command="{Binding OpenSprintsOverviewCommand}" />
             </WrapPanel>
          </ScrollViewer>
 
-         <Border Grid.Column="1" BorderThickness="1 0 0 0" BorderBrush="Black">
-            <StackPanel Margin="5">
-               <StackPanel.Resources>
-                  <Style x:Key="Title" TargetType="TextBlock">
-                     <Setter Property="FontWeight" Value="Heavy" />
-                     <Setter Property="HorizontalAlignment" Value="Center" />
-                  </Style>
-                  <Style x:Key="Label" TargetType="TextBlock">
-                     <Setter Property="FontWeight" Value="Bold" />
-                     <Setter Property="HorizontalAlignment" Value="Left" />
-                  </Style>
-                  <Style x:Key="Value" TargetType="TextBlock">
-                     <Setter Property="FontWeight" Value="Bold" />
-                     <Setter Property="HorizontalAlignment" Value="Right" />
-                  </Style>
-               </StackPanel.Resources>
-               <TextBlock Style="{StaticResource Title}" Text="Board summary" Margin="0 0 0 10"/>
+         <Border Grid.Column="1" Grid.Row="1" BorderThickness="1 0 0 0" BorderBrush="Black">
+            <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1 0 0 0" BorderBrush="Black">
+               <Grid>
+                  <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+                  <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" Margin="0 0 0 10"/>
 
-               <TextBlock Style="{StaticResource Label}" Text="# of epics"/>
-               <TextBlock Style="{StaticResource Value}" Text="{Binding Epics.Count}" />
-
-               <TextBlock Style="{StaticResource Label}" Text="# of sprints"/>
-               <TextBlock Style="{StaticResource Value}" Text="{Binding Sprints.Count}" />
-
-               <TextBlock Style="{StaticResource Label}" Text="# of issues"/>
-               <TextBlock Style="{StaticResource Value}" Text="{Binding Issues.Count}" />
-            </StackPanel>
+                  <controls:IssueCollectionStatisticsControl Statistics="{Binding Statistics}" Grid.Row="1"/>
+               </Grid>
+            </Border>
          </Border>
       </Grid>
    </telerik:RadBusyIndicator>

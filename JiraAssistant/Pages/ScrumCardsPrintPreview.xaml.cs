@@ -20,6 +20,7 @@ namespace JiraAssistant.Pages
    {
       private const int Rows = 5;
       private const int Columns = 3;
+      private int _rightPageIndex;
 
       public ScrumCardsPrintPreview(IEnumerable<JiraIssue> issues)
       {
@@ -30,7 +31,7 @@ namespace JiraAssistant.Pages
 
          while (issuesLeft.Any())
          {
-            var issuesForPage = 
+            var issuesForPage =
                issuesLeft.Take(Rows * Columns)
                          .Select((issue, index) => new JiraIssuePrintPreviewModel
                          {
@@ -43,6 +44,7 @@ namespace JiraAssistant.Pages
             Pages.Add(new PrintPage(issuesForPage));
          }
 
+         AllCardsCount = issues.Count();
          StatusBarControl = new ScrumCardsPrintPreviewStatusBar();
          ExportCardsCommand = new RelayCommand(ExportCards);
 
@@ -51,6 +53,10 @@ namespace JiraAssistant.Pages
             Tooltip = "Export cards...",
             Command = ExportCardsCommand,
             Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ExportIcon.png"))
+         });
+         Buttons.Add(new ToolbarControl
+         {
+            Control = new ScrumCardsPrintPreviewPageIndicator { DataContext = this }
          });
 
          DataContext = this;
@@ -107,6 +113,18 @@ namespace JiraAssistant.Pages
       public RelayCommand ExportCardsCommand { get; private set; }
 
       public IList<PrintPage> Pages { get; private set; }
+
+      public int RightPageIndex
+      {
+         get { return _rightPageIndex; }
+         set
+         {
+            _rightPageIndex = value;
+            RaisePropertyChanged();
+         }
+      }
+
+      public int AllCardsCount { get; private set; }
    }
 
    public class PrintPage

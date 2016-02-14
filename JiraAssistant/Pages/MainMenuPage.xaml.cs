@@ -12,9 +12,9 @@ namespace JiraAssistant.Pages
          InitializeComponent();
       }
 
-      public ObservableCollection<ToolbarButton> Buttons
+      public ObservableCollection<IToolbarItem> Buttons
       {
-         get { return new ObservableCollection<ToolbarButton>(); }
+         get { return new ObservableCollection<IToolbarItem>(); }
       }
 
       public Control Control

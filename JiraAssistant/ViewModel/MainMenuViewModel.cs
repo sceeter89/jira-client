@@ -24,14 +24,20 @@ namespace JiraAssistant.ViewModel
       private readonly IssuesFinder _issuesFinder;
       private const int RecentBoardsCount = 3;
       private readonly IDictionary<int, INavigationPage> _boardPagesCache = new Dictionary<int, INavigationPage>();
+      private readonly JiraSessionViewModel _jiraSession;
+      private readonly IssuesStatisticsCalculator _statisticsCalculator;
 
       public MainMenuViewModel(JiraAgileService jiraAgile,
          IssuesFinder issuesFinder,
-         INavigator navigator)
+         JiraSessionViewModel jiraSession,
+         INavigator navigator,
+         IssuesStatisticsCalculator statisticsCalculator)
       {
          _jiraAgile = jiraAgile;
          _navigator = navigator;
          _issuesFinder = issuesFinder;
+         _jiraSession = jiraSession;
+         _statisticsCalculator = statisticsCalculator;
 
          Boards = new ObservableCollection<RawAgileBoard>();
          RecentBoards = new ObservableCollection<RawAgileBoard>();
@@ -46,7 +52,7 @@ namespace JiraAssistant.ViewModel
             _navigator.NavigateTo(_boardPagesCache[board.Id]);
          else
          {
-            var boardPage = new AgileBoardPage(board, _jiraAgile, _issuesFinder, _navigator);
+            var boardPage = new AgileBoardPage(board, _jiraAgile, _issuesFinder, _jiraSession, _navigator, _statisticsCalculator);
             _boardPagesCache[board.Id] = boardPage;
             _navigator.NavigateTo(boardPage);
          }

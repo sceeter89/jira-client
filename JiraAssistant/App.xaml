@@ -14,6 +14,21 @@
             <ResourceDictionary Source="/Telerik.Windows.Themes.Windows8;component/Themes/Telerik.Windows.Controls.xaml" />
          </ResourceDictionary.MergedDictionaries>
          <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:JiraAssistant.ViewModel" />
+
+
+         <Style x:Key="SummaryTitle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Heavy" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+         </Style>
+         <Style x:Key="SummaryLabel" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+         </Style>
+         <Style x:Key="SummaryValue" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="0 1 0 3" />
+         </Style>
       </ResourceDictionary>
    </Application.Resources>
 </Application>

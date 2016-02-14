@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Background="White">
    <Grid>
-      <telerik:RadBook ItemsSource="{Binding Pages}">
+      <telerik:RadBook ItemsSource="{Binding Pages}" RightPageIndex="{Binding RightPageIndex, Mode=OneWayToSource}">
          <telerik:RadBook.ItemTemplate>
             <DataTemplate>
                <controls:ScrumCardsPageControl Margin="20"/>

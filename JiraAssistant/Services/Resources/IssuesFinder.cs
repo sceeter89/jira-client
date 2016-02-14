@@ -110,7 +110,7 @@ namespace JiraAssistant.Services.Resources
             StoryPoints = GetFieldByName<float?>(issue, "Story Points") ?? 0,
             Subtasks = issue.BuiltInFields.Subtasks.Count(),
             Created = issue.BuiltInFields.Created,
-            Resolved = issue.BuiltInFields.ResolutionDate ?? DateTime.MinValue,
+            Resolved = issue.BuiltInFields.ResolutionDate,
             Status = issue.BuiltInFields.Status.Name,
             Description = issue.BuiltInFields.Description,
             Assignee = (issue.BuiltInFields.Assignee ?? RawUserInfo.EmptyInfo).DisplayName,

@@ -63,6 +63,10 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.2.3\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
@@ -110,6 +114,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\IssueCollectionStatisticsControl.xaml.cs">
+      <DependentUpon>IssueCollectionStatisticsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ScrumCardsPageControl.xaml.cs">
       <DependentUpon>ScrumCardsPageControl.xaml</DependentUpon>
     </Compile>
@@ -122,6 +129,9 @@
     <Compile Include="Model\Exceptions\LoginFailedException.cs" />
     <Compile Include="Model\Exceptions\MissingJiraAgileSupportException.cs" />
     <Compile Include="Model\Exceptions\SearchFailedException.cs" />
+    <Compile Include="Model\IssuesCollectionStatistics.cs" />
+    <Compile Include="Model\Ui\IToolbarItem.cs" />
+    <Compile Include="Model\Ui\ToolbarControl.cs" />
     <Compile Include="Pages\AgileBoardPage.xaml.cs">
       <DependentUpon>AgileBoardPage.xaml</DependentUpon>
     </Compile>
@@ -153,12 +163,16 @@
     <Compile Include="Pages\ScrumCardsPrintPreview.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreview.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ScrumCardsPrintPreviewPageIndicator.xaml.cs">
+      <DependentUpon>ScrumCardsPrintPreviewPageIndicator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ScrumCardsPrintPreviewStatusBar.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreviewStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SprintDetailsPage.xaml.cs">
       <DependentUpon>SprintDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\IssuesStatisticsCalculator.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />
@@ -183,6 +197,10 @@
     <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Controls\IssueCollectionStatisticsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ScrumCardsPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -250,6 +268,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ScrumCardsPrintPreviewPageIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ScrumCardsPrintPreviewStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -279,6 +301,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Assets\Icons\RefreshIcon.png" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

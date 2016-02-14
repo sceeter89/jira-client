@@ -10,10 +10,10 @@ namespace JiraAssistant.Pages
    {
       public BaseNavigationPage()
       {
-         Buttons = new ObservableCollection<ToolbarButton>();
+         Buttons = new ObservableCollection<IToolbarItem>();
       }
 
-      public ObservableCollection<ToolbarButton> Buttons
+      public ObservableCollection<IToolbarItem> Buttons
       {
          get; private set;
       }

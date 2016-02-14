@@ -70,6 +70,12 @@ namespace JiraAssistant.ViewModel
             .AsSelf()
             .AsImplementedInterfaces()
             .SingleInstance();
+         
+         builder.RegisterAssemblyTypes(GetType().Assembly)
+            .InNamespace("JiraAssistant.Services")
+            .AsImplementedInterfaces()
+            .AsSelf()
+            .SingleInstance();
 
          builder.RegisterType<AssistantConfiguration>()
             .AsSelf()

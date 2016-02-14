@@ -8,12 +8,20 @@ using System.Windows.Input;
 using System.Linq;
 using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Services;
+using JiraAssistant.Model.Ui;
+using System.Windows.Media.Imaging;
+using System.Windows;
+using NLog;
+using System.Net;
+using JiraAssistant.ViewModel;
+using JiraAssistant.Model;
 
 namespace JiraAssistant.Pages
 {
    public partial class AgileBoardPage : BaseNavigationPage
    {
-      private readonly RawAgileBoard _board;
+      private static Logger _logger = LogManager.GetCurrentClassLogger();
+
       private bool _epicsDownloaded;
       private bool _issuesDownloaded;
       private bool _sprintsDownloaded;
@@ -22,18 +30,27 @@ namespace JiraAssistant.Pages
       private readonly IssuesFinder _issuesFinder;
       private bool _isBusy;
       private readonly INavigator _navigator;
+      private readonly JiraSessionViewModel _jiraSession;
+      private readonly IssuesStatisticsCalculator _statisticsCalculator;
+      private IssuesCollectionStatistics _statistics;
+
+      private readonly Dictionary<int, INavigationPage> _sprintsDetailsCache = new Dictionary<int, INavigationPage>();
 
       public AgileBoardPage(RawAgileBoard board,
          JiraAgileService jiraService,
          IssuesFinder issuesFinder,
-         INavigator navigator)
+         JiraSessionViewModel jiraSession,
+         INavigator navigator,
+         IssuesStatisticsCalculator statisticsCalculator)
       {
          InitializeComponent();
 
-         _board = board;
+         Board = board;
          _jiraAgile = jiraService;
          _issuesFinder = issuesFinder;
          _navigator = navigator;
+         _jiraSession = jiraSession;
+         _statisticsCalculator = statisticsCalculator;
 
          Epics = new ObservableCollection<RawAgileEpic>();
          Sprints = new ObservableCollection<RawAgileSprint>();
@@ -45,15 +62,18 @@ namespace JiraAssistant.Pages
          SprintDetailsCommand = new RelayCommand(OpenSprintDetails);
          OpenPivotAnalysisCommand = new RelayCommand(OpenPivotAnalysis);
          OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview);
-         OpenSprintsOverviewCommand = new RelayCommand(OpenSprintsOverview, () => false);
+
+         RefreshDataCommand = new RelayCommand(() => DownloadElements(), () => IsBusy == false);
+
+         Buttons.Add(new ToolbarButton
+         {
+            Tooltip = "Refresh data",
+            Command = RefreshDataCommand,
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/RefreshIcon.png"))
+         });
 
          DataContext = this;
          DownloadElements();
-      }
-
-      private void OpenSprintsOverview()
-      {
-         throw new NotImplementedException();
       }
 
       private void OpenEpicsOverview()
@@ -69,13 +89,49 @@ namespace JiraAssistant.Pages
       private void OpenSprintDetails()
       {
          _navigator.NavigateTo(new PickUpSprintPage(Sprints,
-            sprint => new SprintDetailsPage(sprint, Issues.Where(i => IssuesInSprint[sprint.Id].Contains(i.Key)), _navigator),
-            _navigator));
+            sprint =>
+            {
+               if (_sprintsDetailsCache.ContainsKey(sprint.Id) == false)
+                  _sprintsDetailsCache[sprint.Id] = new SprintDetailsPage(sprint, Issues.Where(i => IssuesInSprint[sprint.Id].Contains(i.Key)).ToList(), _navigator, _statisticsCalculator);
+
+               return _sprintsDetailsCache[sprint.Id];
+            }, _navigator));
       }
 
       public async void DownloadElements()
       {
          IsBusy = true;
+         ClearData();
+
+         try
+         {
+            var sprintsTask = DownloadSprints();
+            var epicsTask = DownloadEpics();
+            var issuesTask = DownloadIssues();
+
+            await Task.Factory.StartNew(() => Task.WaitAll(sprintsTask, epicsTask, issuesTask));
+         }
+         catch (Exception e)
+         {
+            if (e is WebException && _jiraSession.IsLoggedIn == false)
+            {
+               _logger.Trace("Download interrupted due to log out from JIRA.");
+               return;
+            }
+
+            _logger.Error(e, "Download failed for issues in board: {0} ({1})", Board.Name, Board.Id);
+            ClearData();
+            MessageBox.Show("Failed to retrieve issues belonging board: " + Board.Name, "Jira Assistant");
+         }
+         finally
+         {
+            IsBusy = false;
+         }
+         Statistics = await _statisticsCalculator.Calculate(Issues);
+      }
+
+      private void ClearData()
+      {
          Issues.Clear();
          IssuesDownloaded = false;
 
@@ -86,18 +142,11 @@ namespace JiraAssistant.Pages
 
          Epics.Clear();
          EpicsDownloaded = false;
-
-         var sprintsTask = DownloadSprints();
-         var epicsTask = DownloadEpics();
-         var issuesTask = DownloadIssues();
-
-         await Task.Factory.StartNew(() => Task.WaitAll(sprintsTask, epicsTask, issuesTask));
-         IsBusy = false;
       }
 
       private async Task DownloadIssues()
       {
-         var boardConfig = await _jiraAgile.GetBoardConfiguration(_board.Id);
+         var boardConfig = await _jiraAgile.GetBoardConfiguration(Board.Id);
          var issues = await _issuesFinder.Search(boardConfig.Filter);
 
          foreach (var issue in issues)
@@ -110,7 +159,7 @@ namespace JiraAssistant.Pages
 
       private async Task DownloadEpics()
       {
-         var epics = await _jiraAgile.GetEpics(_board.Id);
+         var epics = await _jiraAgile.GetEpics(Board.Id);
 
          foreach (var epic in epics)
          {
@@ -122,7 +171,7 @@ namespace JiraAssistant.Pages
 
       private async Task DownloadSprints()
       {
-         var sprints = await _jiraAgile.GetSprints(_board.Id);
+         var sprints = await _jiraAgile.GetSprints(Board.Id);
 
          SprintsDownloaded = true;
 
@@ -133,7 +182,7 @@ namespace JiraAssistant.Pages
 
          foreach (var sprint in sprints)
          {
-            var issuesInSprint = await _jiraAgile.GetIssuesInSprint(_board.Id, sprint.Id);
+            var issuesInSprint = await _jiraAgile.GetIssuesInSprint(Board.Id, sprint.Id);
             IssuesInSprint[sprint.Id] = issuesInSprint;
          }
 
@@ -180,6 +229,16 @@ namespace JiraAssistant.Pages
          }
       }
 
+      public IssuesCollectionStatistics Statistics
+      {
+         get { return _statistics; }
+         set
+         {
+            _statistics = value;
+            RaisePropertyChanged();
+         }
+      }
+
       public ObservableCollection<RawAgileEpic> Epics { get; private set; }
       public ObservableCollection<RawAgileSprint> Sprints { get; private set; }
       public ObservableCollection<JiraIssue> Issues { get; private set; }
@@ -188,7 +247,6 @@ namespace JiraAssistant.Pages
       public ICommand SprintDetailsCommand { get; private set; }
       public ICommand OpenPivotAnalysisCommand { get; private set; }
       public ICommand OpenEpicsOverviewCommand { get; private set; }
-      public ICommand OpenSprintsOverviewCommand { get; private set; }
 
       public bool IsBusy
       {
@@ -197,7 +255,11 @@ namespace JiraAssistant.Pages
          {
             _isBusy = value;
             RaisePropertyChanged();
+            RefreshDataCommand.RaiseCanExecuteChanged();
          }
       }
+
+      public RelayCommand RefreshDataCommand { get; private set; }
+      public RawAgileBoard Board { get; private set; }
    }
 }
