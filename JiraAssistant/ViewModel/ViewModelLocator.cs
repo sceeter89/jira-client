@@ -45,6 +45,14 @@ namespace JiraAssistant.ViewModel
          }
       }
 
+      public AgileBoardSelectViewModel AgileBoardSelect
+      {
+         get
+         {
+            return IocContainer.Resolve<AgileBoardSelectViewModel>();
+         }
+      }
+
       public static void Cleanup()
       {
          IocContainer.Dispose();

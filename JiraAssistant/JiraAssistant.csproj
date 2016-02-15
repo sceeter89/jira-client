@@ -161,6 +161,9 @@
     <Compile Include="Pages\IssueDetailsPage.xaml.cs">
       <DependentUpon>IssueDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PickUpAgileBoardPage.xaml.cs">
+      <DependentUpon>PickUpAgileBoardPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PickUpSprintPage.xaml.cs">
       <DependentUpon>PickUpSprintPage.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,7 @@
     <Compile Include="Services\Resources\JiraSessionService.cs" />
     <Compile Include="ViewModel\BackgroundJobStatusViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
+    <Compile Include="ViewModel\AgileBoardSelectViewModel.cs" />
     <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -266,6 +270,10 @@
     <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PickUpAgileBoardPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\MainMenuPage.xaml">
       <SubType>Designer</SubType>

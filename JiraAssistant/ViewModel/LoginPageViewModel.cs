@@ -94,7 +94,7 @@ namespace JiraAssistant.ViewModel
             IsBusy = true;
             await _sessionService.AttemptLogin(JiraAddress, Username, passwordBox.Password);
             
-            _navigator.NavigateTo(new MainMenuPage());
+            _navigator.NavigateTo(new PickUpAgileBoardPage());
          }
          catch (LoginFailedException e)
          {
