@@ -87,7 +87,7 @@ namespace JiraAssistant.ViewModel
 
       public async Task SetPage()
       {
-         await CollapseTab();
+         CollapseTab();
 
          await Task.Factory.StartNew(() =>
          {
@@ -98,6 +98,7 @@ namespace JiraAssistant.ViewModel
             });
          });
 
+         await Task.Delay(250);
          await Task.Factory.StartNew(() =>
          {
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
@@ -106,7 +107,8 @@ namespace JiraAssistant.ViewModel
             });
          });
 
-         await ExpandTab();
+         await Task.Delay(200);
+         ExpandTab();
 
          await Task.Factory.StartNew(() =>
          {
@@ -118,18 +120,16 @@ namespace JiraAssistant.ViewModel
          });
       }
 
-      private async Task ExpandTab()
+      private void ExpandTab()
       {
-         ExpandAnimationState = AnimationState.Play;
-         await Task.Delay(250);
          ExpandAnimationState = AnimationState.Stop;
+         ExpandAnimationState = AnimationState.Play;
       }
 
-      private async Task CollapseTab()
+      private void CollapseTab()
       {
-         CollapseAnimationState = AnimationState.Play;
-         await Task.Delay(250);
          CollapseAnimationState = AnimationState.Stop;
+         CollapseAnimationState = AnimationState.Play;
       }
 
       public async void ClearHistory()

@@ -24,13 +24,13 @@
       <Storyboard x:Key="ExpandAnimation">
          <DoubleAnimation Storyboard.TargetName="DocumentHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleX" From="0" To="1" 
-          Duration="0:0:.250" RepeatBehavior="1x"/>
+          Duration="0:0:.350" RepeatBehavior="1x"/>
          <DoubleAnimation Storyboard.TargetName="StatusBarHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleY" From="0" To="1" 
-          Duration="0:0:.250" RepeatBehavior="1x"/>
+          Duration="0:0:.350" RepeatBehavior="1x"/>
          <DoubleAnimation Storyboard.TargetName="ToolBarHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleY" From="0" To="1" 
-          Duration="0:0:.250" RepeatBehavior="1x"/>
+          Duration="0:0:.350" RepeatBehavior="1x"/>
       </Storyboard>
    </Window.Resources>
    <i:Interaction.Triggers>

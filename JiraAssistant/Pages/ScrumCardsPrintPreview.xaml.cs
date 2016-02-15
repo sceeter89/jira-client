@@ -119,7 +119,7 @@ namespace JiraAssistant.Pages
          get { return _rightPageIndex; }
          set
          {
-            _rightPageIndex = value;
+            _rightPageIndex = value * 2 - 1;
             RaisePropertyChanged();
          }
       }
@@ -135,7 +135,6 @@ namespace JiraAssistant.Pages
          SetCardColorCommand = new RelayCommand<JiraIssuePrintPreviewModel>(SetCardColor);
       }
 
-
       private void SetCardColor(JiraIssuePrintPreviewModel printPreview)
       {
          var dialog = new ColorDialog(printPreview.CategoryColor);
@@ -145,6 +144,7 @@ namespace JiraAssistant.Pages
 
          printPreview.CategoryColor = dialog.EditedColor;
       }
+
       public IEnumerable<JiraIssuePrintPreviewModel> Issues { get; private set; }
       public RelayCommand<JiraIssuePrintPreviewModel> SetCardColorCommand { get; private set; }
    }
