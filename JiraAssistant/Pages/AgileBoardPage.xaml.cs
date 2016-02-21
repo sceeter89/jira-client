@@ -17,6 +17,7 @@ using JiraAssistant.ViewModel;
 using JiraAssistant.Model;
 using Autofac;
 using JiraAssistant.Model.Exceptions;
+using JiraAssistant.Controls;
 
 namespace JiraAssistant.Pages
 {

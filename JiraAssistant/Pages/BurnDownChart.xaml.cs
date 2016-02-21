@@ -1,4 +1,5 @@
-﻿using JiraAssistant.Model.Jira;
+﻿using JiraAssistant.Controls;
+using JiraAssistant.Model.Jira;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

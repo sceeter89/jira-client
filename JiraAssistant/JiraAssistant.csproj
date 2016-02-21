@@ -142,7 +142,7 @@
     <Compile Include="Pages\AgileBoardPage.xaml.cs">
       <DependentUpon>AgileBoardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AgileBoardPageStatusBar.xaml.cs">
+    <Compile Include="Controls\AgileBoardPageStatusBar.xaml.cs">
       <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaseNavigationPage.cs" />
@@ -152,13 +152,13 @@
     <Compile Include="Pages\BurnDownChart.xaml.cs">
       <DependentUpon>BurnDownChart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BurnDownChartStatusBar.xaml.cs">
+    <Compile Include="Controls\BurnDownChartStatusBar.xaml.cs">
       <DependentUpon>BurnDownChartStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EngagementChart.xaml.cs">
       <DependentUpon>EngagementChart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\EngagementChartStatusBar.xaml.cs">
+    <Compile Include="Controls\EngagementChartStatusBar.xaml.cs">
       <DependentUpon>EngagementChartStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EpicsOverviewPage.xaml.cs">
@@ -247,7 +247,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AgileBoardPageStatusBar.xaml">
+    <Page Include="Controls\AgileBoardPageStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,7 +259,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BurnDownChartStatusBar.xaml">
+    <Page Include="Controls\BurnDownChartStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -267,7 +267,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\EngagementChartStatusBar.xaml">
+    <Page Include="Controls\EngagementChartStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

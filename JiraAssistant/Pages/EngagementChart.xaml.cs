@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Threading;
+﻿using JiraAssistant.Controls;
 using JiraAssistant.Model.Jira;
 using System;
 using System.Collections.Generic;
