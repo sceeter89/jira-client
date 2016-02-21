@@ -10,7 +10,7 @@
              MinWidth="170">
    <Grid>
       <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                       VerticalScrollBarVisibility="Auto">
+                       VerticalScrollBarVisibility="Auto" BorderThickness="0">
          <StackPanel Margin="5">
             <TextBlock Style="{StaticResource SummaryLabel}" Text="# of issues"/>
             <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Statistics.IssuesCount}" />

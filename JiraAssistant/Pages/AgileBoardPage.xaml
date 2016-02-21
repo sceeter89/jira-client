@@ -59,25 +59,23 @@
          </ScrollViewer>
 
          <Border Grid.Column="1" Grid.Row="1" BorderThickness="1 0 0 0" BorderBrush="Black">
-            <Border Grid.Column="1" Grid.Row="1"  BorderThickness="1 0 0 0" BorderBrush="Black">
-               <Grid>
-                  <Grid.RowDefinitions>
-                     <RowDefinition Height="Auto" />
-                     <RowDefinition Height="*" />
-                  </Grid.RowDefinitions>
-                  <StackPanel>
-                     <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" Margin="0 0 0 10"/>
+            <Grid>
+               <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="*" />
+               </Grid.RowDefinitions>
+               <StackPanel Margin="5 5 5 0">
+                  <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" Margin="0 0 0 10"/>
 
-                     <TextBlock Style="{StaticResource SummaryLabel}" Text="# of epics"/>
-                     <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Epics.Count}" />
+                  <TextBlock Style="{StaticResource SummaryLabel}" Text="# of epics"/>
+                  <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Epics.Count}" />
 
-                     <TextBlock Style="{StaticResource SummaryLabel}" Text="# of sprints"/>
-                     <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Sprints.Count}" />
-                  </StackPanel>
-                  
-                  <controls:IssueCollectionStatisticsControl Statistics="{Binding Statistics}" Grid.Row="1"/>
-               </Grid>
-            </Border>
+                  <TextBlock Style="{StaticResource SummaryLabel}" Text="# of sprints"/>
+                  <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Sprints.Count}" />
+               </StackPanel>
+
+               <controls:IssueCollectionStatisticsControl Statistics="{Binding Statistics}" Grid.Row="1"/>
+            </Grid>
          </Border>
       </Grid>
    </telerik:RadBusyIndicator>

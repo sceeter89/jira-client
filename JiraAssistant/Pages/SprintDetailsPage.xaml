@@ -61,7 +61,7 @@
                <RowDefinition Height="Auto" />
                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackPanel>
+            <StackPanel Margin="5 5 5 0">
                <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" />
 
                <TextBlock Style="{StaticResource SummaryLabel}" Text="Start" />
