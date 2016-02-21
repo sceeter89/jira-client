@@ -1,0 +1,36 @@
+﻿<local:BaseNavigationPage x:Class="JiraAssistant.Pages.PickUpSprintPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JiraAssistant.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Background="White">
+   <Grid>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="*"/>
+      </Grid.RowDefinitions>
+
+      <TextBlock Text="Choose sprint" TextAlignment="Center" Margin="10"/>
+
+      <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled">
+         <ItemsControl ItemsSource="{Binding Sprints}" Margin="10">
+            <ItemsControl.ItemsPanel>
+               <ItemsPanelTemplate>
+                  <WrapPanel />
+               </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+               <DataTemplate>
+                  <Button Command="{Binding DataContext.PickUpSprintCommand, RelativeSource={RelativeSource AncestorType=local:BaseNavigationPage}}"
+                          CommandParameter="{Binding .}" Width="200" Height="50" HorizontalContentAlignment="Center"
+                          VerticalContentAlignment="Center" Margin="5">
+                     <TextBlock Text="{Binding Name}"/>
+                  </Button>
+               </DataTemplate>
+            </ItemsControl.ItemTemplate>
+         </ItemsControl>
+      </ScrollViewer>
+   </Grid>
+</local:BaseNavigationPage>

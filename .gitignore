@@ -196,3 +196,4 @@ FakesAssemblies/
 *.opt
 /installer-project/setup-cache
 /installer-project/x86_Release_1SetupFiles
+lib/

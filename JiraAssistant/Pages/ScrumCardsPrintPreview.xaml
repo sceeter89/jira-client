@@ -1,0 +1,19 @@
+﻿<local:BaseNavigationPage xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="JiraAssistant.Pages.ScrumCardsPrintPreview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JiraAssistant.Pages"
+             xmlns:controls="clr-namespace:JiraAssistant.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500" Background="White">
+   <Grid>
+      <telerik:RadBook ItemsSource="{Binding Pages}" RightPageIndex="{Binding RightPageIndex, Mode=OneWayToSource}">
+         <telerik:RadBook.ItemTemplate>
+            <DataTemplate>
+               <controls:ScrumCardsPageControl Margin="20"/>
+            </DataTemplate>
+         </telerik:RadBook.ItemTemplate>
+      </telerik:RadBook>
+   </Grid>
+</local:BaseNavigationPage>

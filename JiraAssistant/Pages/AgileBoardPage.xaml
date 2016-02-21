@@ -1,0 +1,82 @@
+﻿<local:BaseNavigationPage x:Class="JiraAssistant.Pages.AgileBoardPage"
+                          xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                          xmlns:local="clr-namespace:JiraAssistant.Pages"
+                          xmlns:controls="clr-namespace:JiraAssistant.Controls"
+                          mc:Ignorable="d" 
+                          d:DesignHeight="300" d:DesignWidth="600">
+   <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
+      <telerik:RadBusyIndicator.BusyContent>
+         <TextBlock Text="Updating Agile Board data..." />
+      </telerik:RadBusyIndicator.BusyContent>
+      <Grid Background="White">
+         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="170"/>
+         </Grid.ColumnDefinitions>
+         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+         </Grid.RowDefinitions>
+
+         <Border Grid.ColumnSpan="2" BorderThickness="0 0 0 1" BorderBrush="Black">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+               <StackPanel.Resources>
+                  <Style TargetType="TextBlock">
+                     <Setter Property="FontWeight" Value="Bold" />
+                     <Setter Property="Margin" Value="0 5 0 10" />
+                  </Style>
+               </StackPanel.Resources>
+               <TextBlock Text="Board: " />
+               <TextBlock Text="{Binding Board.Name}" />
+               <TextBlock Text=" (#" />
+               <TextBlock Text="{Binding Board.Id}" />
+               <TextBlock Text=")" />
+            </StackPanel>
+         </Border>
+
+         <ScrollViewer Grid.Column="0" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" BorderThickness="0">
+            <WrapPanel>
+               <WrapPanel.Resources>
+                  <Style TargetType="Button">
+                     <Setter Property="Width" Value="180" />
+                     <Setter Property="Height" Value="50" />
+                     <Setter Property="Margin" Value="10" />
+                     <Setter Property="HorizontalContentAlignment" Value="Center" />
+                     <Setter Property="VerticalContentAlignment" Value="Center" />
+                     <Setter Property="Background" Value="White"/>
+                  </Style>
+               </WrapPanel.Resources>
+
+               <Button Content="Sprint" Command="{Binding SprintDetailsCommand}" />
+               <Button Content="Pivot Analysis" Command="{Binding OpenPivotAnalysisCommand}" />
+               <Button Content="Epics Overview" Command="{Binding OpenEpicsOverviewCommand}" />
+               <Button Content="Browse Issues" Command="{Binding BrowseIssuesCommand}" />
+            </WrapPanel>
+         </ScrollViewer>
+
+         <Border Grid.Column="1" Grid.Row="1" BorderThickness="1 0 0 0" BorderBrush="Black">
+            <Grid>
+               <Grid.RowDefinitions>
+                  <RowDefinition Height="Auto" />
+                  <RowDefinition Height="*" />
+               </Grid.RowDefinitions>
+               <StackPanel Margin="5 5 5 0">
+                  <TextBlock Style="{StaticResource SummaryTitle}" Text="Summary" Margin="0 0 0 10"/>
+
+                  <TextBlock Style="{StaticResource SummaryLabel}" Text="# of epics"/>
+                  <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Epics.Count}" />
+
+                  <TextBlock Style="{StaticResource SummaryLabel}" Text="# of sprints"/>
+                  <TextBlock Style="{StaticResource SummaryValue}" Text="{Binding Sprints.Count}" />
+               </StackPanel>
+
+               <controls:IssueCollectionStatisticsControl Statistics="{Binding Statistics}" Grid.Row="1"/>
+            </Grid>
+         </Border>
+      </Grid>
+   </telerik:RadBusyIndicator>
+</local:BaseNavigationPage>
