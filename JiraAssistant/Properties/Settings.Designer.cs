@@ -70,5 +70,17 @@ namespace JiraAssistant.Properties {
                 this["RecentBoardsIds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SettingsUpgradePending {
+            get {
+                return ((bool)(this["SettingsUpgradePending"]));
+            }
+            set {
+                this["SettingsUpgradePending"] = value;
+            }
+        }
     }
 }

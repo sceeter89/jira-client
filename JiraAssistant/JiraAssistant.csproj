@@ -125,8 +125,10 @@
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\IsolatedStorageExtensions.cs" />
     <Compile Include="Model\AgileBoardCacheMetadata.cs" />
     <Compile Include="Model\AssistantConfiguration.cs" />
+    <Compile Include="Model\Exceptions\CacheCorruptedException.cs" />
     <Compile Include="Model\Exceptions\IncompleteJiraConfiguration.cs" />
     <Compile Include="Model\Exceptions\LoginFailedException.cs" />
     <Compile Include="Model\Exceptions\MissingJiraAgileSupportException.cs" />

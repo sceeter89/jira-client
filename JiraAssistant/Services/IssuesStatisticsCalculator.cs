@@ -10,6 +10,9 @@ namespace JiraAssistant.Services
    {
       public async Task<IssuesCollectionStatistics> Calculate(IList<JiraIssue> issues)
       {
+         if(issues == null || issues.Any() == false)
+            return null;
+
          return await Task.Factory.StartNew(() =>
          {
             return new IssuesCollectionStatistics

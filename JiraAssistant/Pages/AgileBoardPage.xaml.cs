@@ -16,17 +16,17 @@ using System.Net;
 using JiraAssistant.ViewModel;
 using JiraAssistant.Model;
 using Autofac;
+using JiraAssistant.Model.Exceptions;
 
 namespace JiraAssistant.Pages
 {
    public partial class AgileBoardPage : BaseNavigationPage
    {
-      private static Logger _logger = LogManager.GetCurrentClassLogger();
+      private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
       private bool _epicsDownloaded;
       private bool _issuesDownloaded;
       private bool _sprintsDownloaded;
-      private bool _sprintAssignmentDownloaded;
       private readonly JiraAgileService _jiraAgile;
       private readonly IssuesFinder _issuesFinder;
       private bool _isBusy;
@@ -40,12 +40,14 @@ namespace JiraAssistant.Pages
       private readonly MetadataRetriever _retriever;
       private readonly IContainer _iocContainer;
       private bool _cacheLoaded;
+      private readonly AgileBoardDataCache _boardCache;
 
       public AgileBoardPage(RawAgileBoard board, IContainer iocContainer)
       {
          InitializeComponent();
 
          Board = board;
+
          _iocContainer = iocContainer;
          _jiraAgile = iocContainer.Resolve<JiraAgileService>();
          _issuesFinder = iocContainer.Resolve<IssuesFinder>();
@@ -53,6 +55,7 @@ namespace JiraAssistant.Pages
          _jiraSession = iocContainer.Resolve<JiraSessionViewModel>();
          _statisticsCalculator = iocContainer.Resolve<IssuesStatisticsCalculator>();
          _cache = iocContainer.Resolve<ApplicationCache>();
+         _boardCache = _cache.GetAgileBoardCache(Board.Id);
          _retriever = iocContainer.Resolve<MetadataRetriever>();
 
          Epics = new ObservableCollection<RawAgileEpic>();
@@ -67,7 +70,11 @@ namespace JiraAssistant.Pages
          OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview);
          BrowseIssuesCommand = new RelayCommand(BrowseIssues);
 
-         RefreshDataCommand = new RelayCommand(() => DownloadElements(), () => IsBusy == false);
+         RefreshDataCommand = new RelayCommand(() =>
+         {
+            _boardCache.Invalidate();
+            DownloadElements();
+         }, () => IsBusy == false);
 
          Buttons.Add(new ToolbarButton
          {
@@ -122,6 +129,12 @@ namespace JiraAssistant.Pages
 
             Statistics = await _statisticsCalculator.Calculate(Issues);
          }
+         catch (CacheCorruptedException)
+         {
+            _boardCache.Invalidate();
+            MessageBox.Show("There were problems to save board data. We'll try to re-download it.", "Jira Assistant");
+            await DownloadIssues();
+         }
          catch (Exception e)
          {
             if (e is WebException && _jiraSession.IsLoggedIn == false)
@@ -157,12 +170,11 @@ namespace JiraAssistant.Pages
       private async Task DownloadIssues()
       {
          var boardConfig = await _jiraAgile.GetBoardConfiguration(Board.Id);
-         var boardCache = _cache.GetAgileBoardCache(Board.Id);
          var filter = await _retriever.GetFilterDefinition(boardConfig.Filter.Id);
 
-         var issues = await _issuesFinder.Search(boardCache.PrepareSearchStatement(filter.Jql));
+         var issues = await _issuesFinder.Search(_boardCache.PrepareSearchStatement(filter.Jql));
 
-         issues = await boardCache.UpdateCache(issues);
+         issues = await _boardCache.UpdateCache(issues);
 
          CacheLoaded = true;
 

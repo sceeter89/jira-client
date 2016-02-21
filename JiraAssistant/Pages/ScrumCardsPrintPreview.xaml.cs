@@ -2,7 +2,6 @@
 using JiraAssistant.Model.Jira;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 using System;
 using JiraAssistant.Dialogs;
 using JiraAssistant.Model.Ui;
@@ -26,7 +25,7 @@ namespace JiraAssistant.Pages
       {
          InitializeComponent();
 
-         Pages = new List<PrintPage>();
+         Pages = new List<PrintPreviewPage>();
          var issuesLeft = issues;
 
          while (issuesLeft.Any())
@@ -41,7 +40,7 @@ namespace JiraAssistant.Pages
                          });
             issuesLeft = issuesLeft.Skip(Rows * Columns);
 
-            Pages.Add(new PrintPage(issuesForPage));
+            Pages.Add(new PrintPreviewPage(issuesForPage));
          }
 
          AllCardsCount = issues.Count();
@@ -112,7 +111,7 @@ namespace JiraAssistant.Pages
       }
       public RelayCommand ExportCardsCommand { get; private set; }
 
-      public IList<PrintPage> Pages { get; private set; }
+      public IList<PrintPreviewPage> Pages { get; private set; }
 
       public int RightPageIndex
       {
@@ -127,9 +126,9 @@ namespace JiraAssistant.Pages
       public int AllCardsCount { get; private set; }
    }
 
-   public class PrintPage
+   public class PrintPreviewPage
    {
-      public PrintPage(IEnumerable<JiraIssuePrintPreviewModel> issuesForPage)
+      public PrintPreviewPage(IEnumerable<JiraIssuePrintPreviewModel> issuesForPage)
       {
          Issues = issuesForPage;
          SetCardColorCommand = new RelayCommand<JiraIssuePrintPreviewModel>(SetCardColor);

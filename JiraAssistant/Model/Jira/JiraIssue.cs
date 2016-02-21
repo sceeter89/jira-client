@@ -7,6 +7,8 @@ namespace JiraAssistant.Model.Jira
 {
    public class JiraIssue : IEquatable<JiraIssue>
    {
+      public static readonly Version ModelVersion = new Version(1, 0, 0, 1);
+
       public string Assignee { get; set; }
       public DateTime Created { get; set; }
       public string Description { get; set; }

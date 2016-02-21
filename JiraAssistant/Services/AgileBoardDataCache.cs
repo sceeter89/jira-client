@@ -1,6 +1,9 @@
-﻿using JiraAssistant.Model;
+﻿using JiraAssistant.Extensions;
+using JiraAssistant.Model;
+using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
 using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +15,10 @@ namespace JiraAssistant.Services
 {
    public class AgileBoardDataCache
    {
+      private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
       private const string MetaFileName = ".metafile";
+      private const string IssuesCacheFileName = "issues.db";
       private readonly DateTime _initialDateTime = new DateTime(1970, 1, 1);
 
       private readonly int _boardId;
@@ -55,6 +61,13 @@ namespace JiraAssistant.Services
             using (var reader = new StreamReader(stream))
             {
                _metadata = JsonConvert.DeserializeObject<AgileBoardCacheMetadata>(reader.ReadToEnd());
+
+               if (_metadata.ModelVersion != JiraIssue.ModelVersion)
+               {
+                  IsAvailable = false;
+                  return;
+               }
+
                IsAvailable = true;
             }
          }
@@ -67,22 +80,35 @@ namespace JiraAssistant.Services
 
       public async Task<IEnumerable<JiraIssue>> UpdateCache(IEnumerable<JiraIssue> updatedIssues)
       {
-         if (IsAvailable == false)
-            InitializeCacheDirectory();
+         try
+         {
+            if (IsAvailable == false)
+               InitializeCacheDirectory();
 
-         var cachedItems = await LoadIssuesFromCache();
+            var cachedItems = await LoadIssuesFromCache();
 
-         var updatedCache = await Task.Factory.StartNew(() => updatedIssues.Union(cachedItems));
+            var updatedCache = await Task.Factory.StartNew(() => updatedIssues.Union(cachedItems));
 
-         await DumpCache(updatedCache);
-         await StoreMetafile();
+            await DumpCache(updatedCache);
+            await StoreMetafile();
 
-         return updatedCache;
+            return updatedCache;
+         }
+         catch (Exception e)
+         {
+            _logger.Warn(e, "Cache update failed");
+            throw new CacheCorruptedException();
+         }
       }
 
       private async Task StoreMetafile()
       {
-         var metadata = new AgileBoardCacheMetadata { DownloadedTime = DateTime.Now };
+         var metadata = new AgileBoardCacheMetadata
+         {
+            DownloadedTime = DateTime.Now,
+            GeneratorVersion = GetType().Assembly.GetName().Version,
+            ModelVersion = JiraIssue.ModelVersion
+         };
 
          var metaFilePath = Path.Combine(_directoryName, MetaFileName);
 
@@ -98,7 +124,7 @@ namespace JiraAssistant.Services
          if (_storage.DirectoryExists(_directoryName) == false)
             _storage.CreateDirectory(_directoryName);
 
-         var issuesCachePath = Path.Combine(_directoryName, "issues.db");
+         var issuesCachePath = Path.Combine(_directoryName, IssuesCacheFileName);
 
          await Task.Factory.StartNew(async () =>
          {
@@ -116,7 +142,7 @@ namespace JiraAssistant.Services
 
       private async Task<IEnumerable<JiraIssue>> LoadIssuesFromCache()
       {
-         var issuesCachePath = Path.Combine(_directoryName, "issues.db");
+         var issuesCachePath = Path.Combine(_directoryName, IssuesCacheFileName);
 
          var result = new List<JiraIssue>();
 
@@ -145,10 +171,19 @@ namespace JiraAssistant.Services
          return string.Format("updated >= '{1:yyyy-MM-dd hh:mm}' AND {0}", originalJql, _metadata.DownloadedTime);
       }
 
-      private void InitializeCacheDirectory()
+      private async void InitializeCacheDirectory()
       {
+         _storage.DeleteFolder(_directoryName);
+
          _storage.CreateDirectory(_directoryName);
-         StoreMetafile();
+
+         await StoreMetafile();
+      }
+
+      public void Invalidate()
+      {
+         _storage.DeleteFolder(_directoryName);
+         FetchCacheInformation();
       }
    }
 }

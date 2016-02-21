@@ -70,6 +70,7 @@ namespace JiraAssistant.ViewModel
          recentBoardsIds.Insert(0, board.Id);
 
          Settings.Default.RecentBoardsIds = string.Join(",", recentBoardsIds);
+         Settings.Default.Save();
       }
 
       private static IList<int> GetRecentBoardsIds()
