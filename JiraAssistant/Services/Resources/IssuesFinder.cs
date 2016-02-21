@@ -30,18 +30,6 @@ namespace JiraAssistant.Services.Resources
          _jobStatus = jobStatus;
       }
 
-      public async Task<IEnumerable<JiraIssue>> Search(RawAgileBoardFilter filter)
-      {
-         var client = BuildRestClient();
-         var request = new RestRequest("/rest/api/latest/filter/{id}", Method.GET);
-         request.AddUrlSegment("id", filter.Id.ToString());
-
-         var response = await client.ExecuteTaskAsync(request);
-         var result = JsonConvert.DeserializeObject<RawFilterDefinition>(response.Content);
-
-         return await Search(result.Jql);
-      }
-
       private async Task<RawSearchResults> DownloadSearchResultsBatch(string jqlQuery, int startAt)
       {
          var client = BuildRestClient();
@@ -117,7 +105,18 @@ namespace JiraAssistant.Services.Resources
             Reporter = (issue.BuiltInFields.Reporter ?? RawUserInfo.EmptyInfo).DisplayName,
             BuiltInFields = issue.BuiltInFields,
             EpicLink = GetFieldByName<string>(issue, "Epic Link") ?? "",
+            SprintIds = (GetArrayByName<string>(issue, "Sprint"))
+                        .Select(i => int.Parse(i.Substring(i.IndexOf('=') + 1, i.IndexOf(',') - i.IndexOf('=') - 1)))
          };
+      }
+
+      private IEnumerable<T> GetArrayByName<T>(RawIssue issue, string fieldName)
+      {
+         if (_fields.ContainsKey(fieldName) == false)
+            return Enumerable.Empty<T>();
+
+         var fieldId = _fields[fieldName].Id;
+         return issue.RawFields[fieldId].Select(i => i.Value<T>());
       }
 
       private T GetFieldByName<T>(RawIssue issue, string fieldName, string path = null)

@@ -44,6 +44,16 @@ namespace JiraAssistant.Services.Resources
          return await GetResourceList<RawStatus>("status");
       }
 
+      public async Task<RawFilterDefinition> GetFilterDefinition(int filterId)
+      {
+         var client = BuildRestClient();
+         var request = new RestRequest("/rest/api/latest/filter/{id}", Method.GET);
+         request.AddUrlSegment("id", filterId.ToString());
+
+         var response = await client.ExecuteTaskAsync(request);
+         return JsonConvert.DeserializeObject<RawFilterDefinition>(response.Content);
+      }
+
       private async Task<IEnumerable<T>> GetResourceList<T>(string resourceName)
       {
          var client = BuildRestClient();

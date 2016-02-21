@@ -120,7 +120,7 @@ namespace JiraAssistant.ViewModel
 
             if (await _sessionService.CheckJiraSession())
             {
-               _navigator.NavigateTo(new MainMenuPage());
+               _navigator.NavigateTo(new PickUpAgileBoardPage());
                _jiraSession.LoggedIn();
             }
          }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media;
 
 namespace JiraAssistant.Model.Jira
 {
-   public class JiraIssue
+   public class JiraIssue : IEquatable<JiraIssue>
    {
       public string Assignee { get; set; }
       public DateTime Created { get; set; }
@@ -20,6 +21,36 @@ namespace JiraAssistant.Model.Jira
       public string Summary { get; set; }
       public string EpicLink { get; set; }
       public RawFields BuiltInFields { get; set; }
+      public IEnumerable<int> SprintIds { get; set; }
+
+      public override bool Equals(object other)
+      {
+         return Equals(other as JiraIssue);
+      }
+
+      public override int GetHashCode()
+      {
+         return Key.GetHashCode();
+      }
+
+      public bool Equals(JiraIssue other)
+      {
+         if ((object) other == null)
+         {
+            return false;
+         }
+         return Key == other.Key;
+      }
+
+      public static bool operator ==(JiraIssue left, JiraIssue right)
+      {
+         return object.Equals(left, right);
+      }
+
+      public static bool operator !=(JiraIssue left, JiraIssue right)
+      {
+         return !(left == right);
+      }
    }
 
    public class JiraIssuePrintPreviewModel : INotifyPropertyChanged

@@ -6,6 +6,9 @@ namespace JiraAssistant.ViewModel
 {
    public class ViewModelLocator
    {
+      private AgileBoardSelectViewModel _agileBoardSelect;
+      private MainMenuViewModel _mainMenu;
+
       public ViewModelLocator()
       {
          BuildContainer();
@@ -41,7 +44,8 @@ namespace JiraAssistant.ViewModel
       {
          get
          {
-            return IocContainer.Resolve<MainMenuViewModel>();
+            _mainMenu = _mainMenu ?? new MainMenuViewModel(IocContainer);
+            return _mainMenu;
          }
       }
 
@@ -49,7 +53,8 @@ namespace JiraAssistant.ViewModel
       {
          get
          {
-            return IocContainer.Resolve<AgileBoardSelectViewModel>();
+            _agileBoardSelect = _agileBoardSelect ?? new AgileBoardSelectViewModel(IocContainer);
+            return _agileBoardSelect;
          }
       }
 

@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Autofac;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
@@ -26,18 +27,18 @@ namespace JiraAssistant.ViewModel
       private readonly IDictionary<int, INavigationPage> _boardPagesCache = new Dictionary<int, INavigationPage>();
       private readonly JiraSessionViewModel _jiraSession;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
+      private readonly ApplicationCache _cache;
+      private readonly IContainer _iocContainer;
 
-      public AgileBoardSelectViewModel(JiraAgileService jiraAgile,
-         IssuesFinder issuesFinder,
-         JiraSessionViewModel jiraSession,
-         INavigator navigator,
-         IssuesStatisticsCalculator statisticsCalculator)
+      public AgileBoardSelectViewModel(IContainer iocContainer)
       {
-         _jiraAgile = jiraAgile;
-         _navigator = navigator;
-         _issuesFinder = issuesFinder;
-         _jiraSession = jiraSession;
-         _statisticsCalculator = statisticsCalculator;
+         _iocContainer = iocContainer;
+         _jiraAgile = iocContainer.Resolve<JiraAgileService>();
+         _navigator = iocContainer.Resolve<INavigator>();
+         _issuesFinder = iocContainer.Resolve<IssuesFinder>();
+         _jiraSession = iocContainer.Resolve<JiraSessionViewModel>();
+         _statisticsCalculator = iocContainer.Resolve<IssuesStatisticsCalculator>();
+         _cache = iocContainer.Resolve<ApplicationCache>();
 
          Boards = new ObservableCollection<RawAgileBoard>();
          RecentBoards = new ObservableCollection<RawAgileBoard>();
@@ -52,7 +53,7 @@ namespace JiraAssistant.ViewModel
             _navigator.NavigateTo(_boardPagesCache[board.Id]);
          else
          {
-            var boardPage = new AgileBoardPage(board, _jiraAgile, _issuesFinder, _jiraSession, _navigator, _statisticsCalculator);
+            var boardPage = new AgileBoardPage(board, _iocContainer);
             _boardPagesCache[board.Id] = boardPage;
             _navigator.NavigateTo(boardPage);
          }

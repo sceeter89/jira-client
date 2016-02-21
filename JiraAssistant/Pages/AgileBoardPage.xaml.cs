@@ -15,6 +15,7 @@ using NLog;
 using System.Net;
 using JiraAssistant.ViewModel;
 using JiraAssistant.Model;
+using Autofac;
 
 namespace JiraAssistant.Pages
 {
@@ -35,27 +36,29 @@ namespace JiraAssistant.Pages
       private IssuesCollectionStatistics _statistics;
 
       private readonly Dictionary<int, INavigationPage> _sprintsDetailsCache = new Dictionary<int, INavigationPage>();
+      private readonly ApplicationCache _cache;
+      private readonly MetadataRetriever _retriever;
+      private readonly IContainer _iocContainer;
+      private bool _cacheLoaded;
 
-      public AgileBoardPage(RawAgileBoard board,
-         JiraAgileService jiraService,
-         IssuesFinder issuesFinder,
-         JiraSessionViewModel jiraSession,
-         INavigator navigator,
-         IssuesStatisticsCalculator statisticsCalculator)
+      public AgileBoardPage(RawAgileBoard board, IContainer iocContainer)
       {
          InitializeComponent();
 
          Board = board;
-         _jiraAgile = jiraService;
-         _issuesFinder = issuesFinder;
-         _navigator = navigator;
-         _jiraSession = jiraSession;
-         _statisticsCalculator = statisticsCalculator;
+         _iocContainer = iocContainer;
+         _jiraAgile = iocContainer.Resolve<JiraAgileService>();
+         _issuesFinder = iocContainer.Resolve<IssuesFinder>();
+         _navigator = iocContainer.Resolve<INavigator>();
+         _jiraSession = iocContainer.Resolve<JiraSessionViewModel>();
+         _statisticsCalculator = iocContainer.Resolve<IssuesStatisticsCalculator>();
+         _cache = iocContainer.Resolve<ApplicationCache>();
+         _retriever = iocContainer.Resolve<MetadataRetriever>();
 
          Epics = new ObservableCollection<RawAgileEpic>();
          Sprints = new ObservableCollection<RawAgileSprint>();
          Issues = new ObservableCollection<JiraIssue>();
-         IssuesInSprint = new Dictionary<int, IEnumerable<string>>();
+         IssuesInSprint = new Dictionary<int, IList<string>>();
 
          StatusBarControl = new AgileBoardPageStatusBar { DataContext = this };
 
@@ -116,6 +119,8 @@ namespace JiraAssistant.Pages
             var issuesTask = DownloadIssues();
 
             await Task.Factory.StartNew(() => Task.WaitAll(sprintsTask, epicsTask, issuesTask));
+
+            Statistics = await _statisticsCalculator.Calculate(Issues);
          }
          catch (Exception e)
          {
@@ -133,18 +138,17 @@ namespace JiraAssistant.Pages
          {
             IsBusy = false;
          }
-         Statistics = await _statisticsCalculator.Calculate(Issues);
       }
 
       private void ClearData()
       {
          Issues.Clear();
          IssuesDownloaded = false;
+         CacheLoaded = false;
 
          Sprints.Clear();
          IssuesInSprint.Clear();
          SprintsDownloaded = false;
-         SprintAssignmentDownloaded = false;
 
          Epics.Clear();
          EpicsDownloaded = false;
@@ -153,11 +157,25 @@ namespace JiraAssistant.Pages
       private async Task DownloadIssues()
       {
          var boardConfig = await _jiraAgile.GetBoardConfiguration(Board.Id);
-         var issues = await _issuesFinder.Search(boardConfig.Filter);
+         var boardCache = _cache.GetAgileBoardCache(Board.Id);
+         var filter = await _retriever.GetFilterDefinition(boardConfig.Filter.Id);
+
+         var issues = await _issuesFinder.Search(boardCache.PrepareSearchStatement(filter.Jql));
+
+         issues = await boardCache.UpdateCache(issues);
+
+         CacheLoaded = true;
 
          foreach (var issue in issues)
          {
             Issues.Add(issue);
+            foreach (var sprintId in issue.SprintIds)
+            {
+               if (IssuesInSprint.ContainsKey(sprintId) == false)
+                  IssuesInSprint[sprintId] = new List<string>();
+
+               IssuesInSprint[sprintId].Add(issue.Key);
+            }
          }
 
          IssuesDownloaded = true;
@@ -179,20 +197,12 @@ namespace JiraAssistant.Pages
       {
          var sprints = await _jiraAgile.GetSprints(Board.Id);
 
-         SprintsDownloaded = true;
-
          foreach (var sprint in sprints.OrderByDescending(s => s.StartDate))
          {
             Sprints.Add(sprint);
          }
 
-         foreach (var sprint in sprints)
-         {
-            var issuesInSprint = await _jiraAgile.GetIssuesInSprint(Board.Id, sprint.Id);
-            IssuesInSprint[sprint.Id] = issuesInSprint;
-         }
-
-         SprintAssignmentDownloaded = true;
+         SprintsDownloaded = true;
       }
 
       public bool EpicsDownloaded
@@ -225,12 +235,12 @@ namespace JiraAssistant.Pages
          }
       }
 
-      public bool SprintAssignmentDownloaded
+      public bool CacheLoaded
       {
-         get { return _sprintAssignmentDownloaded; }
+         get { return _cacheLoaded; }
          set
          {
-            _sprintAssignmentDownloaded = value;
+            _cacheLoaded = value;
             RaisePropertyChanged();
          }
       }
@@ -248,7 +258,7 @@ namespace JiraAssistant.Pages
       public ObservableCollection<RawAgileEpic> Epics { get; private set; }
       public ObservableCollection<RawAgileSprint> Sprints { get; private set; }
       public ObservableCollection<JiraIssue> Issues { get; private set; }
-      public IDictionary<int, IEnumerable<string>> IssuesInSprint { get; private set; }
+      public IDictionary<int, IList<string>> IssuesInSprint { get; private set; }
 
       public ICommand SprintDetailsCommand { get; private set; }
       public ICommand OpenPivotAnalysisCommand { get; private set; }

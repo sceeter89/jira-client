@@ -125,6 +125,7 @@
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AgileBoardCacheMetadata.cs" />
     <Compile Include="Model\AssistantConfiguration.cs" />
     <Compile Include="Model\Exceptions\IncompleteJiraConfiguration.cs" />
     <Compile Include="Model\Exceptions\LoginFailedException.cs" />
@@ -182,6 +183,8 @@
     <Compile Include="Pages\SprintDetailsPage.xaml.cs">
       <DependentUpon>SprintDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\AgileBoardDataCache.cs" />
+    <Compile Include="Services\ApplicationCache.cs" />
     <Compile Include="Services\IssuesStatisticsCalculator.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
