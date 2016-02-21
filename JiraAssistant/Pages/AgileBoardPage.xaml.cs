@@ -108,7 +108,7 @@ namespace JiraAssistant.Pages
             sprint =>
             {
                if (_sprintsDetailsCache.ContainsKey(sprint.Id) == false)
-                  _sprintsDetailsCache[sprint.Id] = new SprintDetailsPage(sprint, Issues.Where(i => IssuesInSprint[sprint.Id].Contains(i.Key)).ToList(), _navigator, _statisticsCalculator);
+                  _sprintsDetailsCache[sprint.Id] = new SprintDetailsPage(sprint, Issues.Where(i => IssuesInSprint[sprint.Id].Contains(i.Key)).ToList(), _iocContainer);
 
                return _sprintsDetailsCache[sprint.Id];
             }, _navigator));

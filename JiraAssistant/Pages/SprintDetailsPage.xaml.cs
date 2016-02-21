@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System;
 using JiraAssistant.Services;
 using JiraAssistant.Model;
+using Autofac;
 
 namespace JiraAssistant.Pages
 {
@@ -13,18 +14,20 @@ namespace JiraAssistant.Pages
       private readonly INavigator _navigator;
       private IssuesCollectionStatistics _statistics;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
+      private readonly IContainer _iocContainer;
 
       public SprintDetailsPage(RawAgileSprint sprint,
          IList<JiraIssue> issues,
-         INavigator navigator,
-         IssuesStatisticsCalculator statisticsCalculator)
+         IContainer iocContainer)
       {
          InitializeComponent();
 
          Sprint = sprint;
          Issues = issues;
-         _navigator = navigator;
-         _statisticsCalculator = statisticsCalculator;
+
+         _iocContainer = iocContainer;
+         _navigator = _iocContainer.Resolve<INavigator>();
+         _statisticsCalculator = _iocContainer.Resolve<IssuesStatisticsCalculator>();
 
          ScrumCardsCommand = new RelayCommand(OpenScrumCards);
          BurnDownCommand = new RelayCommand(OpenBurnDownChart);
@@ -58,7 +61,7 @@ namespace JiraAssistant.Pages
 
       private void OpenScrumCards()
       {
-         _navigator.NavigateTo(new ScrumCardsPrintPreview(Issues));
+         _navigator.NavigateTo(new ScrumCardsPrintPreview(Issues, _iocContainer));
       }
 
       public IssuesCollectionStatistics Statistics

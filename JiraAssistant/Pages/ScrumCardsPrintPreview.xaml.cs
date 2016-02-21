@@ -12,6 +12,10 @@ using System.Windows.Documents;
 using System.Windows;
 using System.Windows.Markup;
 using JiraAssistant.Controls;
+using Autofac;
+using GalaSoft.MvvmLight;
+using JiraAssistant.Services.Resources;
+using System.Collections.ObjectModel;
 
 namespace JiraAssistant.Pages
 {
@@ -20,14 +24,53 @@ namespace JiraAssistant.Pages
       private const int Rows = 5;
       private const int Columns = 3;
       private int _rightPageIndex;
+      private readonly IContainer _iocContainer;
+      private readonly string[] _defaultIssueTypes = { "user story", "bug", "story bug", "story" };
+      private int _cardsCount;
 
-      public ScrumCardsPrintPreview(IEnumerable<JiraIssue> issues)
+      public ScrumCardsPrintPreview(IEnumerable<JiraIssue> issues, IContainer iocContainer)
       {
          InitializeComponent();
 
-         Pages = new List<PrintPreviewPage>();
-         var issuesLeft = issues;
+         _iocContainer = iocContainer;
 
+         Pages = new ObservableCollection<PrintPreviewPage>();
+
+         Issues = issues;
+
+         AllCardsCount = issues.Count();
+         StatusBarControl = new ScrumCardsPrintPreviewStatusBar();
+         ExportCardsCommand = new RelayCommand(ExportCards);
+
+         GetIssueTypes();
+
+         Buttons.Add(new ToolbarButton
+         {
+            Tooltip = "Export cards...",
+            Command = ExportCardsCommand,
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ExportIcon.png"))
+         });
+         Buttons.Add(new ToolbarControl
+         {
+            Control = new ScrumCardsPrintPreviewPageIndicator { DataContext = this }
+         });
+         Buttons.Add(new ToolbarControl
+         {
+            Control = new ScrumCardsPrintPreviewIssueTypeFilter { DataContext = this }
+         });
+
+         DataContext = this;
+      }
+
+      private void GeneratePreviewPages()
+      {
+         Pages.Clear();
+         var issuesLeft = Issues;
+         
+         if (AvailableIssueTypes != null)
+            issuesLeft = issuesLeft.Where(i => AvailableIssueTypes.Where(t => t.IsSelected).Select(t => t.IssueType.Name).Contains(i.BuiltInFields.IssueType.Name));
+
+         AllCardsCount = issuesLeft.Count();
          while (issuesLeft.Any())
          {
             var issuesForPage =
@@ -42,23 +85,24 @@ namespace JiraAssistant.Pages
 
             Pages.Add(new PrintPreviewPage(issuesForPage));
          }
+      }
 
-         AllCardsCount = issues.Count();
-         StatusBarControl = new ScrumCardsPrintPreviewStatusBar();
-         ExportCardsCommand = new RelayCommand(ExportCards);
+      private async void GetIssueTypes()
+      {
+         var retriever = _iocContainer.Resolve<MetadataRetriever>();
+         var issueTypes = (await retriever.GetIssueTypes())
+            .Select(i => new SelectableIssueType(i)
+            {
+               IsSelected = _defaultIssueTypes.Contains(i.Name.ToLower())
+            }).ToList();
 
-         Buttons.Add(new ToolbarButton
-         {
-            Tooltip = "Export cards...",
-            Command = ExportCardsCommand,
-            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ExportIcon.png"))
-         });
-         Buttons.Add(new ToolbarControl
-         {
-            Control = new ScrumCardsPrintPreviewPageIndicator { DataContext = this }
-         });
+         foreach (var issueType in issueTypes)
+            issueType.PropertyChanged += (sender, args) => GeneratePreviewPages();
 
-         DataContext = this;
+         AvailableIssueTypes = issueTypes;
+         RaisePropertyChanged("AvailableIssueTypes");
+
+         GeneratePreviewPages();
       }
 
       private void ExportCards()
@@ -103,15 +147,16 @@ namespace JiraAssistant.Pages
             pagePreview.UpdateLayout();
 
             fixedPage.Children.Add(pagePreview);
-            ((IAddChild)pageContent).AddChild(fixedPage);
+            ((IAddChild) pageContent).AddChild(fixedPage);
             document.Pages.Add(pageContent);
          }
 
          return document;
       }
+
       public RelayCommand ExportCardsCommand { get; private set; }
 
-      public IList<PrintPreviewPage> Pages { get; private set; }
+      public ObservableCollection<PrintPreviewPage> Pages { get; private set; }
 
       public int RightPageIndex
       {
@@ -123,7 +168,18 @@ namespace JiraAssistant.Pages
          }
       }
 
-      public int AllCardsCount { get; private set; }
+      public IEnumerable<SelectableIssueType> AvailableIssueTypes { get; private set; }
+
+      public int AllCardsCount
+      {
+         get { return _cardsCount; }
+         set
+         {
+            _cardsCount = value;
+            RaisePropertyChanged();
+         }
+      }
+      public IEnumerable<JiraIssue> Issues { get; private set; }
    }
 
    public class PrintPreviewPage
@@ -146,5 +202,27 @@ namespace JiraAssistant.Pages
 
       public IEnumerable<JiraIssuePrintPreviewModel> Issues { get; private set; }
       public RelayCommand<JiraIssuePrintPreviewModel> SetCardColorCommand { get; private set; }
+   }
+
+   public class SelectableIssueType : ViewModelBase
+   {
+      public SelectableIssueType(RawIssueType issueType)
+      {
+         IssueType = issueType;
+      }
+
+      private bool _isSelected;
+
+      public bool IsSelected
+      {
+         get { return _isSelected; }
+         set
+         {
+            _isSelected = value;
+            RaisePropertyChanged();
+         }
+      }
+
+      public RawIssueType IssueType { get; private set; }
    }
 }

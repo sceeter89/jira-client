@@ -121,6 +121,9 @@
     <Compile Include="Controls\ScrumCardsPageControl.xaml.cs">
       <DependentUpon>ScrumCardsPageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ScrumCardsPrintPreviewIssueTypeFilter.xaml.cs">
+      <DependentUpon>ScrumCardsPrintPreviewIssueTypeFilter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolToIconConverter.cs" />
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
@@ -176,10 +179,10 @@
     <Compile Include="Pages\ScrumCardsPrintPreview.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ScrumCardsPrintPreviewPageIndicator.xaml.cs">
+    <Compile Include="Controls\ScrumCardsPrintPreviewPageIndicator.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreviewPageIndicator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ScrumCardsPrintPreviewStatusBar.xaml.cs">
+    <Compile Include="Controls\ScrumCardsPrintPreviewStatusBar.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreviewStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SprintDetailsPage.xaml.cs">
@@ -218,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ScrumCardsPageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ScrumCardsPrintPreviewIssueTypeFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,11 +303,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ScrumCardsPrintPreviewPageIndicator.xaml">
+    <Page Include="Controls\ScrumCardsPrintPreviewPageIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\ScrumCardsPrintPreviewStatusBar.xaml">
+    <Page Include="Controls\ScrumCardsPrintPreviewStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

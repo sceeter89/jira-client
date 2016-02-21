@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace JiraAssistant.Pages
+namespace JiraAssistant.Controls
 {
    /// <summary>
-   /// Interaction logic for ScrumCardsPrintPreviewPageIndicator.xaml
+   /// Interaction logic for ScrumCardsPrintPreviewIssueTypeFilter.xaml
    /// </summary>
-   public partial class ScrumCardsPrintPreviewPageIndicator : UserControl
+   public partial class ScrumCardsPrintPreviewIssueTypeFilter : UserControl
    {
-      public ScrumCardsPrintPreviewPageIndicator()
+      public ScrumCardsPrintPreviewIssueTypeFilter()
       {
          InitializeComponent();
       }
