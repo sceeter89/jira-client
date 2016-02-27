@@ -8,7 +8,7 @@
                           d:DesignHeight="300" d:DesignWidth="500">
    <Grid>
       <telerik:RadTabControl TabStripPlacement="Left" TabOrientation="Vertical"
-                             SelectedIndex="{Binding SelectedTab, Mode=TwoWay}">
+                             SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
          <telerik:RadTabItem Header="Graveyard" DataContext="{Binding Source={StaticResource Locator}, Path=GraveyardSettings}">
             <ScrollViewer>
                <Grid>
@@ -23,13 +23,28 @@
                   </Grid.ColumnDefinitions>
 
                   <TextBlock Text="Select issues with last update older than: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <telerik:RadTimeSpanPicker Grid.Row="0" Grid.Column="1" Margin="3" Value="{Binding UpdateMoreThanBefore, Mode=TwoWay}" />
+                  <telerik:RadTimeSpanPicker Grid.Row="0" Grid.Column="1" Margin="3" Value="{Binding UpdateMoreThanBefore, Mode=TwoWay}">
+                     <telerik:RadTimeSpanPicker.TimeSpanComponents>
+                        <telerik:DayTimeSpanComponent Step="1" Maximum="365" />
+                        <telerik:HourTimeSpanComponent Step="1" Maximum="23" />
+                     </telerik:RadTimeSpanPicker.TimeSpanComponents>
+                  </telerik:RadTimeSpanPicker>
 
                   <TextBlock Text="Select issues older than: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <telerik:RadTimeSpanPicker Grid.Row="1" Grid.Column="1" Margin="3" Value="{Binding CreatedMoreThanBefore, Mode=TwoWay}" />
+                  <telerik:RadTimeSpanPicker Grid.Row="1" Grid.Column="1" Margin="3" Value="{Binding CreatedMoreThanBefore, Mode=TwoWay}">
+                     <telerik:RadTimeSpanPicker.TimeSpanComponents>
+                        <telerik:DayTimeSpanComponent Step="1" Maximum="365" />
+                        <telerik:HourTimeSpanComponent Step="1" Maximum="23" />
+                     </telerik:RadTimeSpanPicker.TimeSpanComponents>
+                  </telerik:RadTimeSpanPicker>
 
                   <TextBlock Text="Treat as archaic issues older than: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <telerik:RadTimeSpanPicker Grid.Row="2" Grid.Column="1" Margin="3" Value="{Binding ArchaicCreatedMoreThanBefore, Mode=TwoWay}" />
+                  <telerik:RadTimeSpanPicker Grid.Row="2" Grid.Column="1" Margin="3" Value="{Binding ArchaicCreatedMoreThanBefore, Mode=TwoWay}">
+                     <telerik:RadTimeSpanPicker.TimeSpanComponents>
+                        <telerik:DayTimeSpanComponent Step="1" Maximum="365" />
+                        <telerik:HourTimeSpanComponent Step="1" Maximum="23" />
+                     </telerik:RadTimeSpanPicker.TimeSpanComponents>
+                  </telerik:RadTimeSpanPicker>
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>

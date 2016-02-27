@@ -106,11 +106,7 @@ namespace JiraAssistant.ViewModel
             .AsImplementedInterfaces()
             .AsSelf()
             .SingleInstance();
-
-         builder.RegisterType<AssistantConfiguration>()
-            .AsSelf()
-            .SingleInstance();
-
+         
          IocContainer = builder.Build();
       }
    }

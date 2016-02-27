@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Net;
 using Newtonsoft.Json;
 using System;
-using JiraAssistant.Model;
 using System.Threading.Tasks;
 using JiraAssistant.Model.Jira;
 using JiraAssistant.Model.Exceptions;
+using JiraAssistant.Services.Settings;
 
 namespace JiraAssistant.Services.Resources
 {
    public class JiraSessionService : BaseRestService
    {
-      public JiraSessionService(AssistantConfiguration configuration)
+      public JiraSessionService(AssistantSettings configuration)
          : base(configuration)
       {
       }

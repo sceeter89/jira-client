@@ -1,14 +1,14 @@
-﻿using JiraAssistant.Model;
+﻿using JiraAssistant.Services.Settings;
 using System.IO;
 
 namespace JiraAssistant.Services
 {
    public class ApplicationCache
    {
-      private readonly AssistantConfiguration _configuration;
+      private readonly AssistantSettings _configuration;
       private readonly string _baseCacheDirectory;
 
-      public ApplicationCache(AssistantConfiguration configuration)
+      public ApplicationCache(AssistantSettings configuration)
       {
          _configuration = configuration;
 

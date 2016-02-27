@@ -150,7 +150,6 @@
     </Compile>
     <Compile Include="Extensions\IsolatedStorageExtensions.cs" />
     <Compile Include="Model\AgileBoardCacheMetadata.cs" />
-    <Compile Include="Model\AssistantConfiguration.cs" />
     <Compile Include="Model\Exceptions\CacheCorruptedException.cs" />
     <Compile Include="Model\Exceptions\IncompleteJiraConfiguration.cs" />
     <Compile Include="Model\Exceptions\LoginFailedException.cs" />
@@ -217,6 +216,7 @@
     <Compile Include="Services\AgileBoardDataCache.cs" />
     <Compile Include="Services\ApplicationCache.cs" />
     <Compile Include="Services\IssuesStatisticsCalculator.cs" />
+    <Compile Include="Services\Settings\AssistantSettings.cs" />
     <Compile Include="Services\Settings\GraveyardSettings.cs" />
     <Compile Include="Services\Settings\SettingsBase.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />

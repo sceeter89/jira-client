@@ -6,6 +6,7 @@ using JiraAssistant.Model.Jira;
 using JiraAssistant.Pages;
 using JiraAssistant.Services;
 using JiraAssistant.Services.Resources;
+using JiraAssistant.Services.Settings;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,7 +17,7 @@ namespace JiraAssistant.ViewModel
    public class JiraSessionViewModel : ViewModelBase
    {
       private readonly JiraSessionService _sessionService;
-      private readonly AssistantConfiguration _configuration;
+      private readonly AssistantSettings _configuration;
       private bool _isLoggedIn;
       private RawProfileDetails _profile;
       private ImageSource _profileAvatar;
@@ -24,7 +25,7 @@ namespace JiraAssistant.ViewModel
       private readonly INavigator _navigator;
 
       public JiraSessionViewModel(JiraSessionService sessionService,
-         AssistantConfiguration configuration,
+         AssistantSettings configuration,
          ResourceDownloader downloader,
          INavigator navigator)
       {
@@ -49,6 +50,7 @@ namespace JiraAssistant.ViewModel
       internal void LoggedIn()
       {
          IsLoggedIn = true;
+         _configuration.LastLogin = DateTime.Now;
          Task.Factory.StartNew(async () =>
          {
             var details = await _sessionService.GetProfileDetails();

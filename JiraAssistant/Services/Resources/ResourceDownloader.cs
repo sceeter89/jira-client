@@ -1,4 +1,4 @@
-﻿using JiraAssistant.Model;
+﻿using JiraAssistant.Services.Settings;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ namespace JiraAssistant.Services.Resources
 {
    public class ResourceDownloader : BaseRestService
    {
-      public ResourceDownloader(AssistantConfiguration configuration)
+      public ResourceDownloader(AssistantSettings configuration)
          : base(configuration)
       {
       }

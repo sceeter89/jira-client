@@ -12,7 +12,7 @@ namespace JiraAssistant.Services.Settings
 
       public TimeSpan CreatedMoreThanBefore
       {
-         get { return GetValue(TimeSpan.FromDays(180)); }
+         get { return GetValue(TimeSpan.FromDays(90)); }
          set { SetValue(value); }
       }
 

@@ -1,6 +1,7 @@
 ﻿using JiraAssistant.Model;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
+using JiraAssistant.Services.Settings;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace JiraAssistant.Services.Resources
 {
    public class JiraAgileService : BaseRestService
    {
-      public JiraAgileService(AssistantConfiguration configuration)
+      public JiraAgileService(AssistantSettings configuration)
          : base(configuration)
       {
       }

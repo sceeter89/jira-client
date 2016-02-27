@@ -19,6 +19,10 @@ namespace JiraAssistant.Services.Settings
       public SettingsBase()
       {
          var fileName = string.Format("{0}.json", GetType().Name);
+
+         if (_storage.DirectoryExists("Settings") == false)
+            _storage.CreateDirectory("Settings");
+
          _filePath = Path.Combine("Settings", fileName);
 
          Load();
@@ -32,7 +36,7 @@ namespace JiraAssistant.Services.Settings
          using (var stream = _storage.OpenFile(_filePath, FileMode.Open))
          using (var reader = new StreamReader(stream))
          {
-            _settings = JsonConvert.DeserializeObject<IDictionary<string, object>>(reader.ReadToEnd());
+            _settings = JsonConvert.DeserializeObject<IDictionary<string, object>>(reader.ReadToEnd()) ?? _settings;
          }
       }
 
@@ -41,7 +45,7 @@ namespace JiraAssistant.Services.Settings
          using (var stream = _storage.OpenFile(_filePath, FileMode.Create))
          using (var writer = new StreamWriter(stream))
          {
-            SetValue(DateTime.Now, "$$__last_save_date__$$");
+            _settings["$$__last_save_date__$$"] = DateTime.Now;
             writer.Write(JsonConvert.SerializeObject(_settings));
          }
       }
@@ -56,7 +60,7 @@ namespace JiraAssistant.Services.Settings
 
       protected void SetValue<T>(T value, [CallerMemberName]string name = null)
       {
-         if (GetValue<T>(name: name).Equals(value))
+         if (Equals(GetValue<T>(name: name), value))
             return;
 
          _settings[name] = value;

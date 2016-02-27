@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
-using JiraAssistant.Model;
 using JiraAssistant.Model.Jira;
 using JiraAssistant.Model.Ui;
 using JiraAssistant.Services;
@@ -22,7 +21,7 @@ namespace JiraAssistant.Pages
       private readonly GraveyardSettings _settings;
       private bool _reloadNeeded = true;
       private bool _isBusy;
-      private readonly AssistantConfiguration _appSettings;
+      private readonly AssistantSettings _appSettings;
 
       public BoardGraveyard(IList<JiraIssue> issues, IContainer iocContainer)
       {
@@ -32,7 +31,7 @@ namespace JiraAssistant.Pages
          _navigator = iocContainer.Resolve<INavigator>();
          _settings = iocContainer.Resolve<GraveyardSettings>();
          _settings.PropertyChanged += (sender, args) => _reloadNeeded = true;
-         _appSettings = iocContainer.Resolve<AssistantConfiguration>();
+         _appSettings = iocContainer.Resolve<AssistantSettings>();
 
          Buttons.Add(new ToolbarButton
          {

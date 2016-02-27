@@ -1,5 +1,5 @@
-﻿using JiraAssistant.Model;
-using JiraAssistant.Model.Exceptions;
+﻿using JiraAssistant.Model.Exceptions;
+using JiraAssistant.Services.Settings;
 using RestSharp;
 using System.Net;
 
@@ -7,7 +7,7 @@ namespace JiraAssistant.Services.Resources
 {
    public class BaseRestService
    {
-      public BaseRestService(AssistantConfiguration configuration)
+      public BaseRestService(AssistantSettings configuration)
       {
          Configuration = configuration;
       }
@@ -28,6 +28,6 @@ namespace JiraAssistant.Services.Resources
          return client;
       }
 
-      protected AssistantConfiguration Configuration { get; private set; }
+      protected AssistantSettings Configuration { get; private set; }
    }
 }

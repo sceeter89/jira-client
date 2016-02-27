@@ -1,10 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using JiraAssistant.Model;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Pages;
 using JiraAssistant.Services;
 using JiraAssistant.Services.Resources;
+using JiraAssistant.Services.Settings;
 using System;
 using System.Windows.Controls;
 
@@ -24,7 +24,7 @@ namespace JiraAssistant.ViewModel
       public LoginPageViewModel(INavigator navigator,
          JiraSessionViewModel jiraSession,
          JiraSessionService sessionService,
-         AssistantConfiguration configuration)
+         AssistantSettings configuration)
       {
          _navigator = navigator;
          _jiraSession = jiraSession;

@@ -1,5 +1,5 @@
-﻿using JiraAssistant.Model;
-using JiraAssistant.Model.Jira;
+﻿using JiraAssistant.Model.Jira;
+using JiraAssistant.Services.Settings;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace JiraAssistant.Services.Resources
 {
    public class MetadataRetriever : BaseRestService
    {
-      public MetadataRetriever(AssistantConfiguration configuration)
+      public MetadataRetriever(AssistantSettings configuration)
          : base(configuration)
       {
       }

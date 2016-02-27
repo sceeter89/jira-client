@@ -1,16 +1,14 @@
-﻿using JiraAssistant.Model;
-using JiraAssistant.Model.Exceptions;
+﻿using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
+using JiraAssistant.Services.Settings;
 using JiraAssistant.ViewModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace JiraAssistant.Services.Resources
 {
@@ -21,7 +19,7 @@ namespace JiraAssistant.Services.Resources
       private readonly MetadataRetriever _metadata;
       private readonly BackgroundJobStatusViewModel _jobStatus;
 
-      public IssuesFinder(AssistantConfiguration configuration,
+      public IssuesFinder(AssistantSettings configuration,
          MetadataRetriever metadata,
          BackgroundJobStatusViewModel jobStatus)
          : base(configuration)
