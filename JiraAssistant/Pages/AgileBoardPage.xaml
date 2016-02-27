@@ -55,6 +55,7 @@
                <Button Content="Pivot Analysis" Command="{Binding OpenPivotAnalysisCommand}" />
                <Button Content="Epics Overview" Command="{Binding OpenEpicsOverviewCommand}" />
                <Button Content="Browse Issues" Command="{Binding BrowseIssuesCommand}" />
+               <Button Content="Issues Graveyard" Command="{Binding OpenGraveyardCommand}" />
             </WrapPanel>
          </ScrollViewer>
 

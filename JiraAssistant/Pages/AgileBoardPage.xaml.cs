@@ -70,6 +70,7 @@ namespace JiraAssistant.Pages
          OpenPivotAnalysisCommand = new RelayCommand(OpenPivotAnalysis);
          OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview);
          BrowseIssuesCommand = new RelayCommand(BrowseIssues);
+         OpenGraveyardCommand = new RelayCommand(OpenGraveyard);
 
          RefreshDataCommand = new RelayCommand(() =>
          {
@@ -86,6 +87,11 @@ namespace JiraAssistant.Pages
 
          DataContext = this;
          DownloadElements();
+      }
+
+      private void OpenGraveyard()
+      {
+         _navigator.NavigateTo(new BoardGraveyard(Issues, _iocContainer));
       }
 
       private void BrowseIssues()
@@ -276,6 +282,7 @@ namespace JiraAssistant.Pages
       public ICommand SprintDetailsCommand { get; private set; }
       public ICommand OpenPivotAnalysisCommand { get; private set; }
       public ICommand OpenEpicsOverviewCommand { get; private set; }
+      public ICommand OpenGraveyardCommand { get; private set; }
 
       public bool IsBusy
       {

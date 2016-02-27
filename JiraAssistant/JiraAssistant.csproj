@@ -165,7 +165,13 @@
     <Compile Include="Controls\AgileBoardPageStatusBar.xaml.cs">
       <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ApplicationSettings.xaml.cs">
+      <DependentUpon>ApplicationSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BaseNavigationPage.cs" />
+    <Compile Include="Pages\BoardGraveyard.xaml.cs">
+      <DependentUpon>BoardGraveyard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BrowseIssuesPage.xaml.cs">
       <DependentUpon>BrowseIssuesPage.xaml</DependentUpon>
     </Compile>
@@ -211,6 +217,8 @@
     <Compile Include="Services\AgileBoardDataCache.cs" />
     <Compile Include="Services\ApplicationCache.cs" />
     <Compile Include="Services\IssuesStatisticsCalculator.cs" />
+    <Compile Include="Services\Settings\GraveyardSettings.cs" />
+    <Compile Include="Services\Settings\SettingsBase.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />
@@ -268,6 +276,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AgileBoardPageStatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ApplicationSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\BoardGraveyard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -357,6 +373,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Assets\Icons\RefreshIcon.png" />
+    <Resource Include="Assets\Icons\Settings.png" />
+    <Resource Include="Assets\Icons\Website.png" />
+    <Resource Include="Assets\Icons\Details.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

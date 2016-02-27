@@ -33,7 +33,7 @@ namespace JiraAssistant.Services
          _jiraUrl = jiraUrl;
          _directoryName = Path.Combine(baseCacheDirectory, "AgileBoards", boardId.ToString());
 
-         _storage = IsolatedStorageFile.GetMachineStoreForAssembly();
+         _storage = IsolatedStorageFile.GetUserStoreForAssembly();
 
          FetchCacheInformation();
       }
