@@ -148,6 +148,9 @@
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\UpdateInstallPrompt.xaml.cs">
+      <DependentUpon>UpdateInstallPrompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\IsolatedStorageExtensions.cs" />
     <Compile Include="Model\AgileBoardCacheMetadata.cs" />
     <Compile Include="Model\Exceptions\CacheCorruptedException.cs" />
@@ -155,6 +158,8 @@
     <Compile Include="Model\Exceptions\LoginFailedException.cs" />
     <Compile Include="Model\Exceptions\MissingJiraAgileSupportException.cs" />
     <Compile Include="Model\Exceptions\SearchFailedException.cs" />
+    <Compile Include="Model\Github\GithubApplicationRelease.cs" />
+    <Compile Include="Model\Github\GithubReleaseArtifact.cs" />
     <Compile Include="Model\IssuesCollectionStatistics.cs" />
     <Compile Include="Model\Ui\IToolbarItem.cs" />
     <Compile Include="Model\Ui\ToolbarControl.cs" />
@@ -219,6 +224,8 @@
     <Compile Include="Services\Settings\AssistantSettings.cs" />
     <Compile Include="Services\Settings\GraveyardSettings.cs" />
     <Compile Include="Services\Settings\SettingsBase.cs" />
+    <Compile Include="Services\Settings\UpdateSettings.cs" />
+    <Compile Include="Services\UpdateService.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />
@@ -257,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\ColorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\UpdateInstallPrompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
