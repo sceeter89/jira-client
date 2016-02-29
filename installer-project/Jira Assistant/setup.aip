@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="12.7.1" version="12.7.1" Modules="simple" RootPath="." Language="pl" Id="{FC2E9867-7E6F-4061-9BEC-EDB349895FCC}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="12.7.1" version="12.7.2" Modules="simple" RootPath="." Language="pl" Id="{FC2E9867-7E6F-4061-9BEC-EDB349895FCC}">
   <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
     <ROW Name="HiddenItems" Value="MsiThemeComponent;BackgroundImagesComponent;UpdaterComponent;SerValComponent;DigCertStoreComponent;MsiInstExSeqComponent;DictionaryComponent;MsiAppSearchComponent;MsiAssemblyComponent;MsiClassComponent;MsiOdbcDataSrcComponent;MsiServInstComponent;MsiOrgComponent;MsiExtComponent;CPLAppletComponent;ActSyncAppComponent;PreReqComponent;WebApplicationsComponent;MsiJavaComponent;MsiDriverPackagesComponent;UserAccountsComponent;ScheduledTasksComponent;SqlConnectionComponent;AutorunComponent;FirewallExceptionComponent;GameUxComponent;MsiDirectEditorComponent;SharePointSlnComponent;SilverlightSlnComponent;MultipleInstancesComponent;SccmComponent;ActSyncAppComponent"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="ALLUSERS" Value="1"/>
-    <ROW Property="ARPCOMMENTS" Value="Install Jira Assistant on your PC and get productive with your Jira instance." ValueLocId="*"/>
+    <ROW Property="ARPCOMMENTS" Value="Install JIRA Assistant on your PC and get productive with your JIRA instance." ValueLocId="*"/>
     <ROW Property="ARPHELPLINK" Value="https://github.com/sceeter89/jira-client/issues"/>
     <ROW Property="ARPNOMODIFY" MultiBuildValue="AnyCPU_Release:1"/>
     <ROW Property="ARPNOREPAIR" Value="1"/>

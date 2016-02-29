@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("Jira Assistant")]
+[assembly: AssemblyTitle("JIRA Assistant")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Yakuza")]
-[assembly: AssemblyProduct("Jira Assistant")]
+[assembly: AssemblyProduct("JIRA Assistant")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -18,5 +18,5 @@ using System.Windows;
     ResourceDictionaryLocation.SourceAssembly 
 )]
 
-[assembly: AssemblyVersion("0.5.0.2")]
-[assembly: AssemblyFileVersion("0.5.0.2")]
+[assembly: AssemblyVersion("0.7.0.3")]
+[assembly: AssemblyFileVersion("0.7.0.3")]
