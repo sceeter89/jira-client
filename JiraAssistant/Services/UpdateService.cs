@@ -8,13 +8,21 @@ using JiraAssistant.Model.Github;
 using System.Collections.Generic;
 using System.Linq;
 using JiraAssistant.Dialogs;
+using RestSharp.Extensions;
+using Microsoft.Win32;
+using System.IO;
+using System.Diagnostics;
+using NLog;
 
 namespace JiraAssistant.Services
 {
    public class UpdateService
    {
+      private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
       private const string EndpointUrl = "https://api.github.com/repos/sceeter89/jira-client/releases";
       private readonly UpdateSettings _settings;
+      private bool _runInstaller;
+      private string _installerPath;
 
       public UpdateService(UpdateSettings settings)
       {
@@ -25,40 +33,86 @@ namespace JiraAssistant.Services
          CheckForUpdates();
       }
 
+      private async Task DownloadToFile(string url, string destinationPath)
+      {
+         var client = new RestClient(url);
+         var request = new RestRequest("/");
+         await Task.Factory.StartNew(() => client.DownloadData(request).SaveAs(destinationPath));
+      }
+
       private async void CheckForUpdates()
       {
-         var client = new RestClient(EndpointUrl);
-         var request = new RestRequest("/", Method.GET);
-
-         var response = await client.ExecuteGetTaskAsync(request);
-         var releases = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<GithubApplicationRelease>>(response.Content));
-         var higherVersions = releases.Where(r => r.Draft == false
-                                               && r.Prerelease != _settings.OnlyStableVersions
-                                               && Version.Parse(r.TagName) > GetType().Assembly.GetName().Version)
-                                           .OrderByDescending(r => r.TagName);
-
-         if (higherVersions.Any() == false)
+         if (_settings.EnableUpdates == false)
             return;
-
-         if(_settings.InformAboutUpdate)
+         try
          {
-            var dialog = new UpdateInstallPrompt();
+            var client = new RestClient(EndpointUrl);
+            var request = new RestRequest("/", Method.GET);
+
+            var currentVersion = GetType().Assembly.GetName().Version;
+
+            var response = await client.ExecuteGetTaskAsync(request);
+            var releases = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<GithubApplicationRelease>>(response.Content));
+            var higherVersions = releases.Where(r => r.Draft == false
+                                                  && r.Prerelease != _settings.OnlyStableVersions
+                                                  && Version.Parse(r.TagName) > currentVersion)
+                                              .OrderByDescending(r => r.TagName);
+
+            if (higherVersions.Any() == false)
+               return;
+
+            var higherVersion = higherVersions.First();
+
+            var closeApplicationAfterDownload = false;
+            var installer = higherVersion.Assets.First(a => a.Name.EndsWith(".msi"));
+
+            _installerPath = Path.Combine(Path.GetTempPath(), installer.Name);
+
+            if (File.Exists(_installerPath) == false || new FileInfo(_installerPath).Length != installer.Size)
+               await DownloadToFile(installer.BrowserDownloadUrl, _installerPath);
+
+            if (_settings.InformAboutUpdate)
+            {
+               var dialog = new UpdateInstallPrompt(currentVersion, Version.Parse(higherVersion.TagName), higherVersion.Prerelease == false);
+
+               var result = dialog.Prompt();
+
+               if (result == UpdatePromptResult.None)
+                  return;
+
+               if (result == UpdatePromptResult.InstallManually)
+               {
+                  var saveDialog = new SaveFileDialog { FileName = installer.Name };
+                  if (saveDialog.ShowDialog() == true)
+                     File.Copy(_installerPath, saveDialog.FileName);
+                  return;
+               }
+               if (result == UpdatePromptResult.ExitAndInstall)
+                  closeApplicationAfterDownload = true;
+            }
+
+            _runInstaller = true;
+            if (closeApplicationAfterDownload)
+               Application.Current.Shutdown();
          }
-
-
-         _messageBus.LogMessage("New version is available. Visit website for download.", LogLevel.Info);
-         var newRelease = higherVersions.First();
-         _messageBus.Send(new NewVersionAvailable(
-            Version.Parse(newRelease.tag_name),
-            newRelease.assets.First(a => a.name.EndsWith(".msi")).browser_download_url,
-            newRelease.body
-            ));
-
+         catch (Exception e)
+         {
+            _logger.Warn(e, "Failed to check for updates.");
+         }
       }
 
       private void OnApplicationExit(object sender, ExitEventArgs e)
       {
-
+         if (_runInstaller)
+         {
+            var processInfo = new ProcessStartInfo
+            {
+               FileName = _installerPath,
+               UseShellExecute = true,
+               Arguments = "/quiet /passive"
+            };
+            Process.Start(processInfo);
+         }
       }
    }
 }

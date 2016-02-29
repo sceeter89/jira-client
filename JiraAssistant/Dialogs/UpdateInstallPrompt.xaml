@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JiraAssistant.Dialogs"
         mc:Ignorable="d"
-        Title="Jira Assistant" Height="200" Width="450"
-        Icon="Icon.ico">
+        Title="JIRA Assistant" Height="200" Width="450"
+        Icon="/Icon.ico">
    <Grid>
       <Grid.RowDefinitions>
          <RowDefinition Height="Auto" />
@@ -26,6 +26,7 @@
          <TextBlock Text="Latest version available: " />
          <TextBlock Text="{Binding LatestVersion}" />
          <TextBlock Text=" (stable)" FontWeight="SemiBold" Visibility="{Binding StableVersionNoticeVisibility}" />
+         <TextBlock Text=" (prerelease)" FontWeight="SemiBold" Visibility="{Binding PrereleaseVersionNoticeVisibility}" />
       </StackPanel>
 
       <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">

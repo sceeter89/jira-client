@@ -9,6 +9,36 @@
    <Grid>
       <telerik:RadTabControl TabStripPlacement="Left" TabOrientation="Vertical"
                              SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
+         <telerik:RadTabItem Header="Updates" DataContext="{Binding Source={StaticResource Locator}, Path=UpdateSettings}">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+               <Grid>
+                  <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="Auto" />
+                     <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+
+                  <TextBlock Text="Enable updates: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding EnableUpdates, Mode=TwoWay}" />
+
+                  <TextBlock Text="Prompt before install: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InformAboutUpdate, Mode=TwoWay}" />
+
+                  <TextBlock Grid.Row="2" Grid.ColumnSpan="2" FontSize="8" Foreground="Gray" Margin="5" TextWrapping="Wrap">
+                     If box above will unchecked then once update is available it will be automatically installed once you close application.
+                     If you check it, once update is available you will see prompt if you want to install it and in what way.
+                  </TextBlock>
+
+                  <TextBlock Text="Only stable versions: " Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding OnlyStableVersions, Mode=TwoWay}" />
+               </Grid>
+            </ScrollViewer>
+         </telerik:RadTabItem>
          <telerik:RadTabItem Header="Graveyard" DataContext="{Binding Source={StaticResource Locator}, Path=GraveyardSettings}">
             <ScrollViewer>
                <Grid>

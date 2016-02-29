@@ -15,10 +15,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/sceeter89/jira-client/releases"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Yakuza"/>
-    <ROW Property="ProductCode" Value="1045:{ABA5278B-C9B3-419A-A569-950367457713} " Type="16"/>
+    <ROW Property="ProductCode" Value="1045:{58D4756B-4FCC-4BEF-873B-EAC515008A55} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="Jira Assistant"/>
-    <ROW Property="ProductVersion" Value="0.6.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.7.0" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{A9552DC2-4382-42C2-BF0D-3CD48972867C}"/>

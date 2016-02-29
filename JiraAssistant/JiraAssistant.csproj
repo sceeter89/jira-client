@@ -245,7 +245,6 @@
     <Compile Include="Services\Resources\MetadataRetriever.cs" />
     <Compile Include="Services\Resources\ResourceDownloader.cs" />
     <Compile Include="Services\Resources\JiraSessionService.cs" />
-    <Compile Include="ViewModel\BackgroundJobStatusViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\AgileBoardSelectViewModel.cs" />
     <Compile Include="ViewModel\MainMenuViewModel.cs" />

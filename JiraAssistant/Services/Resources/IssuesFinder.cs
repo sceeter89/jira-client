@@ -17,15 +17,12 @@ namespace JiraAssistant.Services.Resources
       private const int BATCH_SIZE = 1000;
       private IDictionary<string, RawFieldDefinition> _fields;
       private readonly MetadataRetriever _metadata;
-      private readonly BackgroundJobStatusViewModel _jobStatus;
 
       public IssuesFinder(AssistantSettings configuration,
-         MetadataRetriever metadata,
-         BackgroundJobStatusViewModel jobStatus)
+         MetadataRetriever metadata)
          : base(configuration)
       {
          _metadata = metadata;
-         _jobStatus = jobStatus;
       }
 
       private async Task<RawSearchResults> DownloadSearchResultsBatch(string jqlQuery, int startAt)
@@ -53,8 +50,6 @@ namespace JiraAssistant.Services.Resources
 
       public async Task<IEnumerable<JiraIssue>> Search(string jqlQuery)
       {
-         _jobStatus.StartNewJob("Searching for issues...");
-
          var searchResults = new List<RawIssue>();
 
          var firstBatch = await DownloadSearchResultsBatch(jqlQuery, 0);

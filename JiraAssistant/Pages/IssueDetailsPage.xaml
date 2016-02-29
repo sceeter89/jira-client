@@ -63,6 +63,14 @@
                      <TextBlock Style="{StaticResource Label}" Text="Assignee"/>
                      <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Assignee}"/>
                   </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Resolved"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.Resolved}"/>
+                  </StackPanel>
+                  <StackPanel Orientation="Horizontal">
+                     <TextBlock Style="{StaticResource Label}" Text="Resolution"/>
+                     <TextBlock Style="{StaticResource Value}" Text="{Binding Issue.BuiltInFields.Resolution.Name}"/>
+                  </StackPanel>
                </StackPanel>
             </ScrollViewer>
          </telerik:RadTabItem>

@@ -7,19 +7,19 @@ namespace JiraAssistant.Services.Settings
       public TimeSpan UpdateMoreThanBefore
       {
          get { return GetValue(TimeSpan.FromDays(60)); }
-         set { SetValue(value); }
+         set { SetValue(value, TimeSpan.FromDays(60)); }
       }
 
       public TimeSpan CreatedMoreThanBefore
       {
          get { return GetValue(TimeSpan.FromDays(90)); }
-         set { SetValue(value); }
+         set { SetValue(value, TimeSpan.FromDays(90)); }
       }
 
       public TimeSpan ArchaicCreatedMoreThanBefore
       {
          get { return GetValue(TimeSpan.FromDays(180)); }
-         set { SetValue(value); }
+         set { SetValue(value, TimeSpan.FromDays(180)); }
       }
    }
 }

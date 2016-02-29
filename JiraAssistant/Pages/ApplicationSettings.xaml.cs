@@ -30,6 +30,7 @@
 
    public enum SettingsPage
    {
-      Graveyard = 0
+      Updates = 0,
+      Graveyard = 1
    }
 }

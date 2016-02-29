@@ -2,6 +2,8 @@
 using System.Windows.Controls;
 using JiraAssistant.Model.Ui;
 using JiraAssistant.ViewModel;
+using System.Windows.Media.Imaging;
+using System;
 
 namespace JiraAssistant.Pages
 {
@@ -10,11 +12,20 @@ namespace JiraAssistant.Pages
       public PickUpAgileBoardPage()
       {
          InitializeComponent();
+         Buttons = new ObservableCollection<IToolbarItem>
+         {
+            new ToolbarButton
+            {
+               Tooltip = "Settings",
+               Command = (DataContext as AgileBoardSelectViewModel).OpenSettingsCommand,
+               Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/Settings.png"))
+            }
+         };
       }
 
       public ObservableCollection<IToolbarItem> Buttons
       {
-         get { return new ObservableCollection<IToolbarItem>(); }
+         get; private set;
       }
 
       public Control Control

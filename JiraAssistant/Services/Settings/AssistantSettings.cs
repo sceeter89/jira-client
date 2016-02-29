@@ -6,33 +6,33 @@ namespace JiraAssistant.Services.Settings
    {
       public string JiraUrl
       {
-         get { return GetValue<string>(); }
+         get { return GetValue(defaultValue: string.Empty); }
 
          set
          {
             if (value.StartsWith("http") == false)
                value = "https://" + value;
 
-            SetValue(value);
+            SetValue(value, defaultValue: string.Empty);
          }
       }
 
       public string Username
       {
-         get { return GetValue<string>(); }
-         set { SetValue(value); }
+         get { return GetValue(defaultValue: string.Empty); }
+         set { SetValue(value, defaultValue: string.Empty); }
       }
 
       public string JiraSessionId
       {
-         get { return GetValue<string>(); }
-         set { SetValue(value); }
+         get { return GetValue(defaultValue: string.Empty); }
+         set { SetValue(value, defaultValue: string.Empty); }
       }
 
       public DateTime LastLogin
       {
-         get { return GetValue<DateTime>(); }
-         set { SetValue(value); }
+         get { return GetValue(defaultValue: DateTime.MinValue); }
+         set { SetValue(value, defaultValue: DateTime.MinValue); }
       }
    }
 }

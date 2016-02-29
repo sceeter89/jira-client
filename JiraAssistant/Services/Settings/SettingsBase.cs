@@ -50,7 +50,7 @@ namespace JiraAssistant.Services.Settings
          }
       }
 
-      protected T GetValue<T>(T defaultValue = default(T), [CallerMemberName]string name = null)
+      protected T GetValue<T>(T defaultValue, [CallerMemberName]string name = null)
       {
          if (_settings.ContainsKey(name) == false)
             return defaultValue;
@@ -58,9 +58,9 @@ namespace JiraAssistant.Services.Settings
          return (T) _settings[name];
       }
 
-      protected void SetValue<T>(T value, [CallerMemberName]string name = null)
+      protected void SetValue<T>(T value, T defaultValue, [CallerMemberName]string name = null)
       {
-         if (Equals(GetValue<T>(name: name), value))
+         if (Equals(GetValue<T>(defaultValue, name: name), value))
             return;
 
          _settings[name] = value;

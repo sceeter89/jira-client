@@ -1,5 +1,6 @@
 using Autofac;
 using JiraAssistant.Model;
+using JiraAssistant.Services;
 using JiraAssistant.Services.Resources;
 using JiraAssistant.Services.Settings;
 
@@ -10,6 +11,7 @@ namespace JiraAssistant.ViewModel
       private AgileBoardSelectViewModel _agileBoardSelect;
       private MainMenuViewModel _mainMenu;
       private GraveyardSettings _graveyardSettings;
+      private UpdateSettings _updateSettings;
 
       public ViewModelLocator()
       {
@@ -69,6 +71,15 @@ namespace JiraAssistant.ViewModel
          }
       }
 
+      public UpdateSettings UpdateSettings
+      {
+         get
+         {
+            _updateSettings = _updateSettings ?? new UpdateSettings();
+            return _updateSettings;
+         }
+      }
+
       public static void Cleanup()
       {
          IocContainer.Dispose();
@@ -100,13 +111,15 @@ namespace JiraAssistant.ViewModel
             .Except<SettingsBase>()
             .AsSelf()
             .SingleInstance();
-         
+
          builder.RegisterAssemblyTypes(GetType().Assembly)
             .InNamespace("JiraAssistant.Services")
             .AsImplementedInterfaces()
             .AsSelf()
             .SingleInstance();
-         
+
+         builder.RegisterType<UpdateService>().AutoActivate();
+
          IocContainer = builder.Build();
       }
    }

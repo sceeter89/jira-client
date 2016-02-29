@@ -43,6 +43,7 @@ namespace JiraAssistant.ViewModel
          Boards = new ObservableCollection<RawAgileBoard>();
          RecentBoards = new ObservableCollection<RawAgileBoard>();
          OpenBoardCommand = new RelayCommand<RawAgileBoard>(OpenBoard);
+         OpenSettingsCommand = new RelayCommand(() => _navigator.NavigateTo(new ApplicationSettings()));
       }
 
       private void OpenBoard(RawAgileBoard board)
@@ -136,5 +137,6 @@ namespace JiraAssistant.ViewModel
       public ObservableCollection<RawAgileBoard> RecentBoards { get; private set; }
 
       public RelayCommand<RawAgileBoard> OpenBoardCommand { get; private set; }
+      public RelayCommand OpenSettingsCommand { get; private set; }
    }
 }
