@@ -66,7 +66,7 @@ namespace JiraAssistant.Pages
 
          StatusBarControl = new AgileBoardPageStatusBar { DataContext = this };
 
-         SprintDetailsCommand = new RelayCommand(OpenSprintDetails);
+         SprintDetailsCommand = new RelayCommand(OpenSprintDetails, () => Board.Type == "scrum");
          OpenPivotAnalysisCommand = new RelayCommand(OpenPivotAnalysis);
          OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview);
          BrowseIssuesCommand = new RelayCommand(BrowseIssues);
@@ -279,10 +279,11 @@ namespace JiraAssistant.Pages
       public ObservableCollection<JiraIssue> Issues { get; private set; }
       public IDictionary<int, IList<string>> IssuesInSprint { get; private set; }
 
-      public ICommand SprintDetailsCommand { get; private set; }
-      public ICommand OpenPivotAnalysisCommand { get; private set; }
-      public ICommand OpenEpicsOverviewCommand { get; private set; }
-      public ICommand OpenGraveyardCommand { get; private set; }
+      public RelayCommand SprintDetailsCommand { get; private set; }
+      public RelayCommand OpenPivotAnalysisCommand { get; private set; }
+      public RelayCommand OpenEpicsOverviewCommand { get; private set; }
+      public RelayCommand OpenGraveyardCommand { get; private set; }
+      public RelayCommand BrowseIssuesCommand { get; private set; }
 
       public bool IsBusy
       {
@@ -297,6 +298,5 @@ namespace JiraAssistant.Pages
 
       public RelayCommand RefreshDataCommand { get; private set; }
       public RawAgileBoard Board { get; private set; }
-      public RelayCommand BrowseIssuesCommand { get; private set; }
    }
 }

@@ -45,6 +45,9 @@ namespace JiraAssistant.Services.Resources
             request.Parameters[1].Value = allSprints.Count;
             response = await client.ExecuteTaskAsync(request);
             result = JsonConvert.DeserializeObject<RawAgileSprintsList>(response.Content);
+            if (result.Values == null)
+               return allSprints;
+
             allSprints.AddRange(result.Values);
          } while (result.IsLast == false);
 
