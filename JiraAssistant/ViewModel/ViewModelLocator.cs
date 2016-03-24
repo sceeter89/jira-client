@@ -12,6 +12,7 @@ namespace JiraAssistant.ViewModel
       private MainMenuViewModel _mainMenu;
       private GraveyardSettings _graveyardSettings;
       private UpdateSettings _updateSettings;
+      private ScrumCardsSettings _scrumCardsSettings;
 
       public ViewModelLocator()
       {
@@ -77,6 +78,15 @@ namespace JiraAssistant.ViewModel
          {
             _updateSettings = _updateSettings ?? new UpdateSettings();
             return _updateSettings;
+         }
+      }
+
+      public ScrumCardsSettings ScrumCardsSettings
+      {
+         get
+         {
+            _scrumCardsSettings = _scrumCardsSettings ?? new ScrumCardsSettings();
+            return _scrumCardsSettings;
          }
       }
 

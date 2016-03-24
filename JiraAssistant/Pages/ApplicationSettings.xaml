@@ -4,6 +4,7 @@
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:local="clr-namespace:JiraAssistant.Pages"
+                          xmlns:controls="clr-namespace:JiraAssistant.Controls"
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="500">
    <Grid>
@@ -40,7 +41,7 @@
             </ScrollViewer>
          </telerik:RadTabItem>
          <telerik:RadTabItem Header="Graveyard" DataContext="{Binding Source={StaticResource Locator}, Path=GraveyardSettings}">
-            <ScrollViewer>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                <Grid>
                   <Grid.RowDefinitions>
                      <RowDefinition Height="Auto" />
@@ -75,6 +76,29 @@
                         <telerik:HourTimeSpanComponent Step="1" Maximum="23" />
                      </telerik:RadTimeSpanPicker.TimeSpanComponents>
                   </telerik:RadTimeSpanPicker>
+               </Grid>
+            </ScrollViewer>
+         </telerik:RadTabItem>
+         <telerik:RadTabItem Header="Scrum Cards" DataContext="{Binding Source={StaticResource Locator}, Path=ScrumCardsSettings}">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+               <Grid>
+                  <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="Auto" />
+                     <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+
+                  <TextBlock Text="Show number of story points: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding ShowStoryPoints, Mode=TwoWay}" />
+
+                  <TextBlock Text="Show issue type: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding ShowIssueType, Mode=TwoWay}" />
+
+                  <controls:IssueScrumCard DataContext="{Binding Sample}" Grid.Row="2" Grid.ColumnSpan="2" Width="300" HorizontalAlignment="Center"/>
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>

@@ -138,6 +138,9 @@
     <Compile Include="Controls\IssueCollectionStatisticsControl.xaml.cs">
       <DependentUpon>IssueCollectionStatisticsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\IssueScrumCard.xaml.cs">
+      <DependentUpon>IssueScrumCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ScrumCardsPageControl.xaml.cs">
       <DependentUpon>ScrumCardsPageControl.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,7 @@
       <DependentUpon>ScrumCardsPrintPreviewIssueTypeFilter.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToIconConverter.cs" />
+    <Compile Include="Converters\BoolToVisibleConverter.cs" />
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
     </Compile>
@@ -222,6 +226,7 @@
     <Compile Include="Services\ApplicationCache.cs" />
     <Compile Include="Services\IssuesStatisticsCalculator.cs" />
     <Compile Include="Services\Settings\AssistantSettings.cs" />
+    <Compile Include="Services\Settings\ScrumCardsSettings.cs" />
     <Compile Include="Services\Settings\GraveyardSettings.cs" />
     <Compile Include="Services\Settings\SettingsBase.cs" />
     <Compile Include="Services\Settings\UpdateSettings.cs" />
@@ -251,6 +256,10 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\IssueCollectionStatisticsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\IssueScrumCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
