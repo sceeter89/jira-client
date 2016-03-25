@@ -96,7 +96,7 @@ namespace JiraAssistant.Pages
 
       private void BrowseIssues()
       {
-         _navigator.NavigateTo(new BrowseIssuesPage(Issues, _navigator));
+         _navigator.NavigateTo(new BrowseIssuesPage(Issues, _iocContainer));
       }
 
       private void OpenEpicsOverview()

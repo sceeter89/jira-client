@@ -20,6 +20,7 @@
             <telerik:GridViewDataColumn Header="Created" DataMemberBinding="{Binding Created}" IsReadOnly="True"/>
             <telerik:GridViewDataColumn Header="StoryPoints" DataMemberBinding="{Binding StoryPoints}" IsReadOnly="True"/>
             <telerik:GridViewDataColumn Header="Type" DataMemberBinding="{Binding BuiltInFields.IssueType.Name}" IsReadOnly="True" />
+            <telerik:GridViewDataColumn Header="Resolution" DataMemberBinding="{Binding BuiltInFields.Resolution.Name}" IsReadOnly="True" />
          </telerik:RadGridView.Columns>
       </telerik:RadGridView>
    </Grid>
