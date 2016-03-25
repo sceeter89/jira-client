@@ -26,147 +26,82 @@
                <Setter Property="VerticalContentAlignment" Value="Center" />
                <Setter Property="Background" Value="White"/>
             </Style>
+
+            <DataTemplate x:Key="SmallTemplate">
+               <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" DataContext="{Binding .}">
+                  <TextBlock Text="# issues: " />
+                  <TextBlock Text="{Binding Path=Count}" />
+               </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="NormalTemplate">
+               <telerik:RadGridView ItemsSource="{Binding .}" AutoGenerateColumns="False" SelectionMode="Single">
+                  <telerik:RadGridView.Columns>
+                     <telerik:GridViewDataColumn Header="Key" DataMemberBinding="{Binding Key}" IsReadOnly="True"/>
+                     <telerik:GridViewDataColumn Header="Summary" DataMemberBinding="{Binding Summary}" IsReadOnly="True"/>
+                     <telerik:GridViewDataColumn Header="Reporter" DataMemberBinding="{Binding Reporter}" IsReadOnly="True"/>
+                     <telerik:GridViewDataColumn Header="Priority" DataMemberBinding="{Binding Priority}" IsReadOnly="True"/>
+                     <telerik:GridViewDataColumn Header="Status" DataMemberBinding="{Binding Status}" IsReadOnly="True"/>
+                     <telerik:GridViewDataColumn Header="Created" DataMemberBinding="{Binding Created}" IsReadOnly="True"/>
+                     <telerik:GridViewDataColumn Header="Type" DataMemberBinding="{Binding BuiltInFields.IssueType.Name}" IsReadOnly="True" />
+                     <telerik:GridViewColumn Header="Detail">
+                        <telerik:GridViewColumn.CellTemplate>
+                           <DataTemplate>
+                              <Button Command="{Binding DataContext.OpenDetailsCommand, RelativeSource={RelativeSource AncestorType=local:BaseNavigationPage}}"
+                                   CommandParameter="{Binding .}">
+                                 <Image Source="/Assets/Icons/Details.png" />
+                              </Button>
+                           </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                     </telerik:GridViewColumn>
+                     <telerik:GridViewColumn Header="Website">
+                        <telerik:GridViewColumn.CellTemplate>
+                           <DataTemplate>
+                              <Button Command="{Binding DataContext.OpenInBrowserCommand, RelativeSource={RelativeSource AncestorType=local:BaseNavigationPage}}"
+                                   CommandParameter="{Binding .}">
+                                 <Image Source="/Assets/Icons/Website.png" />
+                              </Button>
+                           </DataTemplate>
+                        </telerik:GridViewColumn.CellTemplate>
+                     </telerik:GridViewColumn>
+                  </telerik:RadGridView.Columns>
+               </telerik:RadGridView>
+            </DataTemplate>
          </Grid.Resources>
          <telerik:RadTileView MaximizeMode="One" MinimizedItemsPosition="Left">
-            <telerik:RadTileView.Resources>
-               <DataTemplate DataType="{x:Type model:JiraIssue}">
-                  <Border Width="180" Height="60" BorderThickness="1" BorderBrush="Black" Margin="5">
-                     <Grid Margin="2">
-                        <Grid.RowDefinitions>
-                           <RowDefinition Height="Auto" />
-                           <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                           <ColumnDefinition Width="*"/>
-                           <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Text="{Binding Key}" />
-
-                        <StackPanel Orientation="Horizontal" Grid.Column="1">
-                           <Button Command="{Binding DataContext.OpenDetailsCommand, RelativeSource={RelativeSource AncestorType=local:BaseNavigationPage}}"
-                                   CommandParameter="{Binding .}">
-                              <Image Source="/Assets/Icons/Details.png" />
-                           </Button>
-                           <Button Command="{Binding DataContext.OpenInBrowserCommand, RelativeSource={RelativeSource AncestorType=local:BaseNavigationPage}}"
-                                   CommandParameter="{Binding .}">
-                              <Image Source="/Assets/Icons/Website.png" />
-                           </Button>
-                        </StackPanel>
-
-                        <TextBlock Text="{Binding Summary}" Grid.Row="1" Grid.ColumnSpan="2" Foreground="Gray" TextTrimming="WordEllipsis"/>
-                     </Grid>
-                  </Border>
-               </DataTemplate>
-            </telerik:RadTileView.Resources>
             <telerik:RadTileViewItem Header="Old issues">
-               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000">
-                  <telerik:RadFluidContentControl.SmallContent>
-                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="# issues: " />
-                        <TextBlock Text="{Binding OldCreated.Count}" />
-                     </StackPanel>
-                  </telerik:RadFluidContentControl.SmallContent>
-                  <telerik:RadFluidContentControl.Content>
-                     <ScrollViewer BorderThickness="0" HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{Binding OldCreated}">
-                           <ItemsControl.ItemsPanel>
-                              <ItemsPanelTemplate>
-                                 <WrapPanel />
-                              </ItemsPanelTemplate>
-                           </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                     </ScrollViewer>
-                  </telerik:RadFluidContentControl.Content>
-               </telerik:RadFluidContentControl>
+               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000"
+                                               SmallContentTemplate="{StaticResource SmallTemplate}"
+                                               ContentTemplate="{StaticResource NormalTemplate}"
+                                               Content="{Binding OldCreated}" 
+                                               SmallContent="{Binding OldCreated}" />
             </telerik:RadTileViewItem>
-
             <telerik:RadTileViewItem Header="Archaic issues">
-               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000">
-                  <telerik:RadFluidContentControl.SmallContent>
-                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="# issues: " />
-                        <TextBlock Text="{Binding ArchaicCreated.Count}" />
-                     </StackPanel>
-                  </telerik:RadFluidContentControl.SmallContent>
-                  <telerik:RadFluidContentControl.Content>
-                     <ScrollViewer BorderThickness="0" HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{Binding ArchaicCreated}">
-                           <ItemsControl.ItemsPanel>
-                              <ItemsPanelTemplate>
-                                 <WrapPanel />
-                              </ItemsPanelTemplate>
-                           </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                     </ScrollViewer>
-                  </telerik:RadFluidContentControl.Content>
-               </telerik:RadFluidContentControl>
+               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000"
+                                               SmallContentTemplate="{StaticResource SmallTemplate}"
+                                               ContentTemplate="{StaticResource NormalTemplate}"
+                                               Content="{Binding ArchaicCreated}" 
+                                               SmallContent="{Binding ArchaicCreated}" />
             </telerik:RadTileViewItem>
-
             <telerik:RadTileViewItem Header="Not updated">
-               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000">
-                  <telerik:RadFluidContentControl.SmallContent>
-                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="# issues: " />
-                        <TextBlock Text="{Binding OldUpdated.Count}" />
-                     </StackPanel>
-                  </telerik:RadFluidContentControl.SmallContent>
-                  <telerik:RadFluidContentControl.Content>
-                     <ScrollViewer BorderThickness="0" HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{Binding OldUpdated}">
-                           <ItemsControl.ItemsPanel>
-                              <ItemsPanelTemplate>
-                                 <WrapPanel />
-                              </ItemsPanelTemplate>
-                           </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                     </ScrollViewer>
-                  </telerik:RadFluidContentControl.Content>
-               </telerik:RadFluidContentControl>
+               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000"
+                                               SmallContentTemplate="{StaticResource SmallTemplate}"
+                                               ContentTemplate="{StaticResource NormalTemplate}"
+                                               Content="{Binding OldUpdated}"
+                                               SmallContent="{Binding OldUpdated}" />
             </telerik:RadTileViewItem>
-
             <telerik:RadTileViewItem Header="Inactive assignee">
-               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000">
-                  <telerik:RadFluidContentControl.SmallContent>
-                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="# issues: " />
-                        <TextBlock Text="{Binding InactiveAssignee.Count}" />
-                     </StackPanel>
-                  </telerik:RadFluidContentControl.SmallContent>
-                  <telerik:RadFluidContentControl.Content>
-                     <ScrollViewer BorderThickness="0" HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{Binding InactiveAssignee}">
-                           <ItemsControl.ItemsPanel>
-                              <ItemsPanelTemplate>
-                                 <WrapPanel />
-                              </ItemsPanelTemplate>
-                           </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                     </ScrollViewer>
-                  </telerik:RadFluidContentControl.Content>
-               </telerik:RadFluidContentControl>
+               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000"
+                                               SmallContentTemplate="{StaticResource SmallTemplate}"
+                                               ContentTemplate="{StaticResource NormalTemplate}"
+                                               Content="{Binding InactiveAssignee}"
+                                               SmallContent="{Binding InactiveAssignee}" />
             </telerik:RadTileViewItem>
-
             <telerik:RadTileViewItem Header="Missing description">
-               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000">
-                  <telerik:RadFluidContentControl.SmallContent>
-                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock Text="# issues: " />
-                        <TextBlock Text="{Binding MissingDescription.Count}" />
-                     </StackPanel>
-                  </telerik:RadFluidContentControl.SmallContent>
-                  <telerik:RadFluidContentControl.Content>
-                     <ScrollViewer BorderThickness="0" HorizontalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{Binding MissingDescription}">
-                           <ItemsControl.ItemsPanel>
-                              <ItemsPanelTemplate>
-                                 <WrapPanel />
-                              </ItemsPanelTemplate>
-                           </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                     </ScrollViewer>
-                  </telerik:RadFluidContentControl.Content>
-               </telerik:RadFluidContentControl>
+               <telerik:RadFluidContentControl NormalToSmallThreshold="500 500" NormalToLargeThreshold="5000 5000"
+                                               SmallContentTemplate="{StaticResource SmallTemplate}"
+                                               ContentTemplate="{StaticResource NormalTemplate}"
+                                               Content="{Binding MissingDescription}" 
+                                               SmallContent="{Binding MissingDescription}" />
             </telerik:RadTileViewItem>
          </telerik:RadTileView>
       </Grid>
