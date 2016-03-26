@@ -56,6 +56,7 @@
                <Button Content="Epics Overview" Command="{Binding OpenEpicsOverviewCommand}" />
                <Button Content="Browse Issues" Command="{Binding BrowseIssuesCommand}" />
                <Button Content="Issues Graveyard" Command="{Binding OpenGraveyardCommand}" />
+               <Button Content="Sprints' Velocity" Command="{Binding OpenSprintsVelocityCommand}" />
             </WrapPanel>
          </ScrollViewer>
 

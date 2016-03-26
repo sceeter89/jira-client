@@ -222,6 +222,9 @@
     <Compile Include="Pages\SprintDetailsPage.xaml.cs">
       <DependentUpon>SprintDetailsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SprintsVelocity.xaml.cs">
+      <DependentUpon>SprintsVelocity.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\AgileBoardDataCache.cs" />
     <Compile Include="Services\ApplicationCache.cs" />
     <Compile Include="Services\IssuesStatisticsCalculator.cs" />
@@ -367,6 +370,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SprintDetailsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SprintsVelocity.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

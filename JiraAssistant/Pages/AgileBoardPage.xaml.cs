@@ -62,15 +62,16 @@ namespace JiraAssistant.Pages
          Epics = new ObservableCollection<RawAgileEpic>();
          Sprints = new ObservableCollection<RawAgileSprint>();
          Issues = new ObservableCollection<JiraIssue>();
-         IssuesInSprint = new Dictionary<int, IList<string>>();
+         IssuesInSprint = new Dictionary<int, IList<JiraIssue>>();
 
          StatusBarControl = new AgileBoardPageStatusBar { DataContext = this };
 
          SprintDetailsCommand = new RelayCommand(OpenSprintDetails, () => Board.Type == "scrum");
-         OpenPivotAnalysisCommand = new RelayCommand(OpenPivotAnalysis);
-         OpenEpicsOverviewCommand = new RelayCommand(OpenEpicsOverview);
-         BrowseIssuesCommand = new RelayCommand(BrowseIssues);
-         OpenGraveyardCommand = new RelayCommand(OpenGraveyard);
+         OpenPivotAnalysisCommand = new RelayCommand(() => _navigator.NavigateTo(new PivotAnalysisPage(Issues)));
+         OpenEpicsOverviewCommand = new RelayCommand(() => _navigator.NavigateTo(new EpicsOverviewPage(Issues, Epics)));
+         BrowseIssuesCommand = new RelayCommand(() => _navigator.NavigateTo(new BrowseIssuesPage(Issues, _iocContainer)));
+         OpenGraveyardCommand = new RelayCommand(() => _navigator.NavigateTo(new BoardGraveyard(Issues, _iocContainer)));
+         OpenSprintsVelocityCommand = new RelayCommand(() => _navigator.NavigateTo(new SprintsVelocity(IssuesInSprint, Sprints)), () => Board.Type == "scrum");
 
          RefreshDataCommand = new RelayCommand(() =>
          {
@@ -89,33 +90,13 @@ namespace JiraAssistant.Pages
          DownloadElements();
       }
 
-      private void OpenGraveyard()
-      {
-         _navigator.NavigateTo(new BoardGraveyard(Issues, _iocContainer));
-      }
-
-      private void BrowseIssues()
-      {
-         _navigator.NavigateTo(new BrowseIssuesPage(Issues, _iocContainer));
-      }
-
-      private void OpenEpicsOverview()
-      {
-         _navigator.NavigateTo(new EpicsOverviewPage(Issues, Epics));
-      }
-
-      private void OpenPivotAnalysis()
-      {
-         _navigator.NavigateTo(new PivotAnalysisPage(Issues));
-      }
-
       private void OpenSprintDetails()
       {
          _navigator.NavigateTo(new PickUpSprintPage(Sprints,
             sprint =>
             {
                if (_sprintsDetailsCache.ContainsKey(sprint.Id) == false)
-                  _sprintsDetailsCache[sprint.Id] = new SprintDetailsPage(sprint, Issues.Where(i => IssuesInSprint[sprint.Id].Contains(i.Key)).ToList(), _iocContainer);
+                  _sprintsDetailsCache[sprint.Id] = new SprintDetailsPage(sprint, IssuesInSprint[sprint.Id], _iocContainer);
 
                return _sprintsDetailsCache[sprint.Id];
             }, _navigator));
@@ -191,9 +172,9 @@ namespace JiraAssistant.Pages
             foreach (var sprintId in issue.SprintIds)
             {
                if (IssuesInSprint.ContainsKey(sprintId) == false)
-                  IssuesInSprint[sprintId] = new List<string>();
+                  IssuesInSprint[sprintId] = new List<JiraIssue>();
 
-               IssuesInSprint[sprintId].Add(issue.Key);
+               IssuesInSprint[sprintId].Add(issue);
             }
          }
 
@@ -277,13 +258,14 @@ namespace JiraAssistant.Pages
       public ObservableCollection<RawAgileEpic> Epics { get; private set; }
       public ObservableCollection<RawAgileSprint> Sprints { get; private set; }
       public ObservableCollection<JiraIssue> Issues { get; private set; }
-      public IDictionary<int, IList<string>> IssuesInSprint { get; private set; }
+      public IDictionary<int, IList<JiraIssue>> IssuesInSprint { get; private set; }
 
       public RelayCommand SprintDetailsCommand { get; private set; }
       public RelayCommand OpenPivotAnalysisCommand { get; private set; }
       public RelayCommand OpenEpicsOverviewCommand { get; private set; }
       public RelayCommand OpenGraveyardCommand { get; private set; }
       public RelayCommand BrowseIssuesCommand { get; private set; }
+      public RelayCommand OpenSprintsVelocityCommand { get; private set; }
 
       public bool IsBusy
       {
