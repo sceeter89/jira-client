@@ -102,6 +102,24 @@
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>
+         <telerik:RadTabItem Header="Analysis" DataContext="{Binding Source={StaticResource Locator}, Path=AnalysisSettings}">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+               <Grid>
+                  <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="Auto" />
+                     <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+
+                  <TextBlock Text="Number of most recent sprints to analyse: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <telerik:RadNumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding NumberOfLastSprintsAnalysed, Mode=TwoWay}" />
+               </Grid>
+            </ScrollViewer>
+         </telerik:RadTabItem>
       </telerik:RadTabControl>
    </Grid>
 </local:BaseNavigationPage>

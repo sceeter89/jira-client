@@ -1,5 +1,4 @@
 using Autofac;
-using JiraAssistant.Model;
 using JiraAssistant.Services;
 using JiraAssistant.Services.Resources;
 using JiraAssistant.Services.Settings;
@@ -10,9 +9,6 @@ namespace JiraAssistant.ViewModel
    {
       private AgileBoardSelectViewModel _agileBoardSelect;
       private MainMenuViewModel _mainMenu;
-      private GraveyardSettings _graveyardSettings;
-      private UpdateSettings _updateSettings;
-      private ScrumCardsSettings _scrumCardsSettings;
 
       public ViewModelLocator()
       {
@@ -23,26 +19,17 @@ namespace JiraAssistant.ViewModel
 
       public MainViewModel Main
       {
-         get
-         {
-            return IocContainer.Resolve<MainViewModel>();
-         }
+         get { return IocContainer.Resolve<MainViewModel>(); }
       }
 
       public LoginPageViewModel Login
       {
-         get
-         {
-            return IocContainer.Resolve<LoginPageViewModel>();
-         }
+         get { return IocContainer.Resolve<LoginPageViewModel>(); }
       }
 
       public JiraSessionViewModel JiraSession
       {
-         get
-         {
-            return IocContainer.Resolve<JiraSessionViewModel>();
-         }
+         get { return IocContainer.Resolve<JiraSessionViewModel>(); }
       }
 
       public MainMenuViewModel MainMenu
@@ -65,29 +52,22 @@ namespace JiraAssistant.ViewModel
 
       public GraveyardSettings GraveyardSettings
       {
-         get
-         {
-            _graveyardSettings = _graveyardSettings ?? new GraveyardSettings();
-            return _graveyardSettings;
-         }
+         get { return IocContainer.Resolve<GraveyardSettings>(); }
       }
 
       public UpdateSettings UpdateSettings
       {
-         get
-         {
-            _updateSettings = _updateSettings ?? new UpdateSettings();
-            return _updateSettings;
-         }
+         get { return IocContainer.Resolve<UpdateSettings>(); }
       }
 
       public ScrumCardsSettings ScrumCardsSettings
       {
-         get
-         {
-            _scrumCardsSettings = _scrumCardsSettings ?? new ScrumCardsSettings();
-            return _scrumCardsSettings;
-         }
+         get { return IocContainer.Resolve<ScrumCardsSettings>(); }
+      }
+
+      public AnalysisSettings AnalysisSettings
+      {
+         get { return IocContainer.Resolve<AnalysisSettings>(); }
       }
 
       public static void Cleanup()

@@ -8,6 +8,14 @@
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="300">
    <Grid>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="*"/>
+         <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="*"/>
+         <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
       <telerik:RadCartesianChart>
          <telerik:RadCartesianChart.Behaviors>
             <telerik:ChartTooltipBehavior Placement="Top"/>
@@ -20,30 +28,27 @@
             <telerik:LinearAxis Title="Value"/>
          </telerik:RadCartesianChart.VerticalAxis>
          <telerik:RadCartesianChart.Series>
-            <telerik:BarSeries ItemsSource="{Binding VelocityPerSprint}"
-                               CategoryBinding="Category"
-                               ValueBinding="Value">
+            <telerik:BarSeries ItemsSource="{Binding Statistics}"
+                               CategoryBinding="SprintName"
+                               ValueBinding="Velocity">
                <telerik:BarSeries.PointTemplate>
                   <DataTemplate>
                      <Rectangle Fill="Green"/>
                   </DataTemplate>
                </telerik:BarSeries.PointTemplate>
             </telerik:BarSeries>
-            <telerik:BarSeries ItemsSource="{Binding CommitmentPerSprint}"
-                               CategoryBinding="Category"
-                               ValueBinding="Value">
+            <telerik:BarSeries ItemsSource="{Binding Statistics}"
+                               CategoryBinding="SprintName"
+                               ValueBinding="Commitment">
                <telerik:BarSeries.PointTemplate>
                   <DataTemplate>
                      <Rectangle Fill="Orange"/>
                   </DataTemplate>
                </telerik:BarSeries.PointTemplate>
             </telerik:BarSeries>
-            <!--<telerik:LineSeries ItemsSource="{Binding IssuesCountSeries}">
-            </telerik:LineSeries>
-            <telerik:LineSeries ItemsSource="{Binding IdealLineSeries}" 
-                                CategoryBinding="Date"
-                                ValueBinding="Value"/>-->
          </telerik:RadCartesianChart.Series>
       </telerik:RadCartesianChart>
+      
+      
    </Grid>
 </local:BaseNavigationPage>
