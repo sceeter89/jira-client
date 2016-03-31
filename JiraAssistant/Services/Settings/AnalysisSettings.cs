@@ -4,8 +4,8 @@
    {
       public int NumberOfLastSprintsAnalysed
       {
-         get { return GetValue(15); }
-         set { SetValue(value, 15); }
+         get { return (int)GetValue(15L); }
+         set { SetValue(value, 15L); }
       }
    }
 }

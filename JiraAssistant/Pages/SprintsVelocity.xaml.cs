@@ -20,6 +20,9 @@ namespace JiraAssistant.Pages
          _sprints = sprints;
          _settings = iocContainer.Resolve<AnalysisSettings>();
          Statistics = new ObservableCollection<SprintStatistic>();
+         Minimum = new ObservableCollection<SprintStatistic>();
+         Maximum = new ObservableCollection<SprintStatistic>();
+         Average = new ObservableCollection<SprintStatistic>();
 
          LoadData();
 
@@ -29,16 +32,33 @@ namespace JiraAssistant.Pages
       private void LoadData()
       {
          var toSkip = _sprints.Count - _settings.NumberOfLastSprintsAnalysed;
-         foreach (var sprint in _sprints.OrderBy(s => s.StartDate).Skip(toSkip))
+         var sprints = _sprints.Where(s => s.CompleteDate.HasValue).OrderBy(s => s.StartDate).Skip(toSkip);
+         foreach (var sprint in sprints)
          {
             var commitment = _sprintsIssues[sprint.Id].Sum(i => i.StoryPoints);
             var completed = _sprintsIssues[sprint.Id].Where(i => i.Resolved.HasValue && i.Resolved <= sprint.CompleteDate).Sum(i => i.StoryPoints);
 
             Statistics.Add(new SprintStatistic { SprintName = sprint.Name, Velocity = completed, Commitment = commitment });
          }
+
+         var minimumVelocity = Statistics.Min(s => s.Velocity);
+         var maximumVelocity = Statistics.Max(s => s.Velocity);
+         var averageVelocity = Statistics.Average(s => s.Velocity);
+         var minimumCommitment = Statistics.Min(s => s.Commitment);
+         var maximumCommitment = Statistics.Max(s => s.Commitment);
+         var averageCommitment = Statistics.Average(s => s.Commitment);
+         Minimum.Add(new SprintStatistic { SprintName = Statistics.First().SprintName, Velocity = minimumVelocity, Commitment = minimumCommitment });
+         Minimum.Add(new SprintStatistic { SprintName = Statistics.Last().SprintName, Velocity = minimumVelocity, Commitment = minimumCommitment });
+         Maximum.Add(new SprintStatistic { SprintName = Statistics.First().SprintName, Velocity = maximumVelocity, Commitment = maximumCommitment });
+         Maximum.Add(new SprintStatistic { SprintName = Statistics.Last().SprintName, Velocity = maximumVelocity, Commitment = maximumCommitment });
+         Average.Add(new SprintStatistic { SprintName = Statistics.First().SprintName, Velocity = averageVelocity, Commitment = averageCommitment });
+         Average.Add(new SprintStatistic { SprintName = Statistics.Last().SprintName, Velocity = averageVelocity, Commitment = averageCommitment });
       }
 
       public ObservableCollection<SprintStatistic> Statistics { get; private set; }
+      public ObservableCollection<SprintStatistic> Minimum { get; private set; }
+      public ObservableCollection<SprintStatistic> Maximum { get; private set; }
+      public ObservableCollection<SprintStatistic> Average { get; private set; }
 
       public class SprintStatistic
       {

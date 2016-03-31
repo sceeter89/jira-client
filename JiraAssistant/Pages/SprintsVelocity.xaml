@@ -46,9 +46,22 @@
                   </DataTemplate>
                </telerik:BarSeries.PointTemplate>
             </telerik:BarSeries>
+
+            <telerik:LineSeries ItemsSource="{Binding Minimum}" 
+                                CategoryBinding="SprintName"
+                                ValueBinding="Velocity"
+                                Stroke="Olive"/>
+
+            <telerik:LineSeries ItemsSource="{Binding Average}" 
+                                CategoryBinding="SprintName"
+                                ValueBinding="Velocity"
+                                Stroke="GreenYellow"/>
+
+            <telerik:LineSeries ItemsSource="{Binding Maximum}" 
+                                CategoryBinding="SprintName"
+                                ValueBinding="Velocity"
+                                Stroke="RosyBrown"/>
          </telerik:RadCartesianChart.Series>
       </telerik:RadCartesianChart>
-      
-      
    </Grid>
 </local:BaseNavigationPage>
