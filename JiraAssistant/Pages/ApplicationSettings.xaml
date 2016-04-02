@@ -79,10 +79,17 @@
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>
-         <telerik:RadTabItem Header="Scrum Cards" DataContext="{Binding Source={StaticResource Locator}, Path=ScrumCardsSettings}">
+         <telerik:RadTabItem Header="Issues" DataContext="{Binding Source={StaticResource Locator}, Path=IssuesSettings}">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                <Grid>
+                  <Grid.Resources>
+                     <Style x:Key="DraggableListBoxItem" TargetType="telerik:RadListBoxItem">
+                        <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="True" />
+                     </Style>
+                  </Grid.Resources>
                   <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
@@ -92,13 +99,52 @@
                      <ColumnDefinition Width="*" />
                   </Grid.ColumnDefinitions>
 
-                  <TextBlock Text="Show number of story points: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding ShowStoryPoints, Mode=TwoWay}" />
+                  <TextBlock Text="Scrum cards" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3 7 3 3" FontWeight="Bold"/>
+                  <TextBlock Text="Show number of story points: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding ShowStoryPoints, Mode=TwoWay}" />
 
-                  <TextBlock Text="Show issue type: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding ShowIssueType, Mode=TwoWay}" />
+                  <TextBlock Text="Show issue type: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding ShowIssueType, Mode=TwoWay}" />
 
-                  <controls:IssueScrumCard DataContext="{Binding Sample}" Grid.Row="2" Grid.ColumnSpan="2" Width="300" HorizontalAlignment="Center"/>
+                  <controls:IssueScrumCard DataContext="{Binding Sample}" Grid.Row="3" Grid.ColumnSpan="2" Width="300" HorizontalAlignment="Center"/>
+
+
+                  <TextBlock Text="Issues list" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3 7 3 3" FontWeight="Bold"/>
+
+                  <TextBlock Text="Columns and order: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <Grid Grid.Row="2" Grid.Column="0" Margin="3" HorizontalAlignment="Center">
+                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                     </Grid.RowDefinitions>
+                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="Auto" />
+                     </Grid.ColumnDefinitions>
+
+                     <TextBlock Text="Available" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="3"/>
+                     <telerik:RadListBox ItemContainerStyle="{StaticResource DraggableListBoxItem}"
+                                         Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AvailableColumns}">
+                        <telerik:RadListBox.DragDropBehavior>
+                           <telerik:ListBoxDragDropBehavior />
+                        </telerik:RadListBox.DragDropBehavior>
+                        <telerik:RadListBox.DragVisualProvider>
+                           <telerik:ScreenshotDragVisualProvider />
+                        </telerik:RadListBox.DragVisualProvider>
+                     </telerik:RadListBox>
+
+                     <TextBlock Text="Selected" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="3"/>
+                     <telerik:RadListBox ItemContainerStyle="{StaticResource DraggableListBoxItem}"
+                                         Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedColumns}">
+                        <telerik:RadListBox.DragDropBehavior>
+                           <telerik:ListBoxDragDropBehavior />
+                        </telerik:RadListBox.DragDropBehavior>
+                        <telerik:RadListBox.DragVisualProvider>
+                           <telerik:ScreenshotDragVisualProvider />
+                        </telerik:RadListBox.DragVisualProvider>
+                     </telerik:RadListBox>
+                  </Grid>
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>

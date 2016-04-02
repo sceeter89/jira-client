@@ -53,7 +53,7 @@ namespace JiraAssistant.Model.Jira
       public RawWatches Watches { get; set; }
       public DateTime Created { get; set; }
       public RawPriority Priority { get; set; }
-      public object[] Labels { get; set; }
+      public string[] Labels { get; set; }
       public long? TimeEstimate { get; set; }
       public long? AggregateTimeOriginalEstimate { get; set; }
       public object[] Versions { get; set; }

@@ -31,6 +31,8 @@
    public enum SettingsPage
    {
       Updates = 0,
-      Graveyard = 1
+      Graveyard = 1,
+      Issues = 2,
+      Analysis = 3
    }
 }

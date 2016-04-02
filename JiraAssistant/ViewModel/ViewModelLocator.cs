@@ -60,9 +60,9 @@ namespace JiraAssistant.ViewModel
          get { return IocContainer.Resolve<UpdateSettings>(); }
       }
 
-      public ScrumCardsSettings ScrumCardsSettings
+      public IssuesSettings IssuesSettings
       {
-         get { return IocContainer.Resolve<ScrumCardsSettings>(); }
+         get { return IocContainer.Resolve<IssuesSettings>(); }
       }
 
       public AnalysisSettings AnalysisSettings

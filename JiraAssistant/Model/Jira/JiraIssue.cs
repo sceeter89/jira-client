@@ -23,6 +23,16 @@ namespace JiraAssistant.Model.Jira
       public string Summary { get; set; }
       public string EpicLink { get; set; }
       public RawFields BuiltInFields { get; set; }
+
+      public string Labels
+      {
+         get
+         {
+            return string.Join(", ", BuiltInFields.Labels);
+         }
+         set { }
+      }
+
       public IEnumerable<int> SprintIds { get; set; }
 
       public override bool Equals(object other)

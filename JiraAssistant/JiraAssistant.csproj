@@ -198,6 +198,9 @@
     <Compile Include="Pages\EpicsOverviewPage.xaml.cs">
       <DependentUpon>EpicsOverviewPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ExportIssuesListPage.xaml.cs">
+      <DependentUpon>ExportIssuesListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\IssueDetailsPage.xaml.cs">
       <DependentUpon>IssueDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -228,9 +231,12 @@
     <Compile Include="Services\AgileBoardDataCache.cs" />
     <Compile Include="Services\ApplicationCache.cs" />
     <Compile Include="Services\IssuesStatisticsCalculator.cs" />
+    <Compile Include="Services\Resources\FakeRestClient.cs" />
+    <Compile Include="Services\Resources\IRestClient.cs" />
+    <Compile Include="Services\Resources\JiraRestClient.cs" />
     <Compile Include="Services\Settings\AnalysisSettings.cs" />
     <Compile Include="Services\Settings\AssistantSettings.cs" />
-    <Compile Include="Services\Settings\ScrumCardsSettings.cs" />
+    <Compile Include="Services\Settings\IssuesSettings.cs" />
     <Compile Include="Services\Settings\GraveyardSettings.cs" />
     <Compile Include="Services\Settings\SettingsBase.cs" />
     <Compile Include="Services\Settings\UpdateSettings.cs" />
@@ -331,6 +337,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EpicsOverviewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ExportIssuesListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

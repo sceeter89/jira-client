@@ -25,14 +25,26 @@ namespace JiraAssistant.Pages
          _iocContainer = iocContainer;
          _navigator = _iocContainer.Resolve<INavigator>();
          ScrumCardsCommand = new RelayCommand(OpenScrumCards);
+         ExportCommand = new RelayCommand(ExportResults);
          Buttons.Add(new ToolbarButton
          {
             Tooltip = "Scrum Cards",
             Command = ScrumCardsCommand,
             Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ScrumCard.png"))
          });
+         Buttons.Add(new ToolbarButton
+         {
+            Tooltip = "Export",
+            Command = ExportCommand,
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ExportIcon.png"))
+         });
 
          DataContext = this;
+      }
+
+      private void ExportResults()
+      {
+         throw new NotImplementedException();
       }
 
       private void OpenScrumCards()
@@ -49,5 +61,6 @@ namespace JiraAssistant.Pages
       public QueryableCollectionView Issues { get; private set; }
       public JiraIssue SelectedIssue { get; set; }
       public RelayCommand ScrumCardsCommand { get; private set; }
+      public RelayCommand ExportCommand { get; private set; }
    }
 }

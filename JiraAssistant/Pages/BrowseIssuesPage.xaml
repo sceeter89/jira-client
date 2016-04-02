@@ -18,9 +18,13 @@
             <telerik:GridViewDataColumn Header="Priority" DataMemberBinding="{Binding Priority}" IsReadOnly="True"/>
             <telerik:GridViewDataColumn Header="Status" DataMemberBinding="{Binding Status}" IsReadOnly="True"/>
             <telerik:GridViewDataColumn Header="Created" DataMemberBinding="{Binding Created}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="StoryPoints" DataMemberBinding="{Binding StoryPoints}" IsReadOnly="True"/>
+            <telerik:GridViewDataColumn Header="Story points" DataMemberBinding="{Binding StoryPoints}" IsReadOnly="True"/>
             <telerik:GridViewDataColumn Header="Type" DataMemberBinding="{Binding BuiltInFields.IssueType.Name}" IsReadOnly="True" />
             <telerik:GridViewDataColumn Header="Resolution" DataMemberBinding="{Binding BuiltInFields.Resolution.Name}" IsReadOnly="True" />
+            <telerik:GridViewDataColumn Header="Assignee" DataMemberBinding="{Binding Assignee}" IsReadOnly="True"/>
+            <telerik:GridViewDataColumn Header="Resolved" DataMemberBinding="{Binding Resolved}" IsReadOnly="True" />
+            <telerik:GridViewDataColumn Header="Epic link" DataMemberBinding="{Binding EpicLink}" IsReadOnly="True" />
+            <telerik:GridViewDataColumn Header="Time spent" DataMemberBinding="{Binding BuiltInFields.TimeSpent}" IsReadOnly="True" />
          </telerik:RadGridView.Columns>
       </telerik:RadGridView>
    </Grid>
