@@ -7,18 +7,19 @@ using System.Threading.Tasks;
 using JiraAssistant.Model.Jira;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Services.Settings;
+using JiraAssistant.Services.Jira;
 
 namespace JiraAssistant.Services.Resources
 {
-   public class JiraSessionService : BaseRestService
+   public class JiraSessionService : BaseRestService, IJiraSessionApi
    {
       public JiraSessionService(AssistantSettings configuration)
          : base(configuration)
       {
       }
 
-      public EventHandler OnSuccessfulLogin;
-      public EventHandler OnLogout;
+      public event EventHandler OnSuccessfulLogin;
+      public event EventHandler OnLogout;
 
       public async Task<RawProfileDetails> GetProfileDetails()
       {
@@ -31,7 +32,7 @@ namespace JiraAssistant.Services.Resources
          return result;
       }
 
-      public async void Logout()
+      public async Task Logout()
       {
          var client = BuildRestClient();
 

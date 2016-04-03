@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Pages;
 using JiraAssistant.Services;
-using JiraAssistant.Services.Resources;
+using JiraAssistant.Services.Jira;
 using JiraAssistant.Services.Settings;
 using System;
 using System.Windows.Controls;
@@ -13,22 +13,22 @@ namespace JiraAssistant.ViewModel
    public class LoginPageViewModel : ViewModelBase
    {
       private readonly JiraSessionViewModel _jiraSession;
-      private readonly JiraSessionService _sessionService;
       private readonly INavigator _navigator;
       private string _loginErrorMessage;
       private string _jiraAddress;
       private string _username;
       private bool _isBusy;
       private string _busyMessage;
+      private readonly IJiraApi _jiraApi;
 
       public LoginPageViewModel(INavigator navigator,
          JiraSessionViewModel jiraSession,
-         JiraSessionService sessionService,
+         IJiraApi jiraApi,
          AssistantSettings configuration)
       {
          _navigator = navigator;
          _jiraSession = jiraSession;
-         _sessionService = sessionService;
+         _jiraApi = jiraApi;
 
          JiraAddress = configuration.JiraUrl;
          Username = configuration.Username;
@@ -92,7 +92,7 @@ namespace JiraAssistant.ViewModel
          {
             BusyMessage = "Trying to log into JIRA...";
             IsBusy = true;
-            await _sessionService.AttemptLogin(JiraAddress, Username, passwordBox.Password);
+            await _jiraApi.Session.AttemptLogin(JiraAddress, Username, passwordBox.Password);
             
             _navigator.NavigateTo(new PickUpAgileBoardPage());
          }
@@ -118,7 +118,7 @@ namespace JiraAssistant.ViewModel
             BusyMessage = "Checking existing credentials...";
             IsBusy = true;
 
-            if (await _sessionService.CheckJiraSession())
+            if (await _jiraApi.Session.CheckJiraSession())
             {
                _navigator.NavigateTo(new PickUpAgileBoardPage());
                _jiraSession.LoggedIn();

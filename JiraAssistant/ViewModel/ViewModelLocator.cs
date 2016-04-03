@@ -1,6 +1,5 @@
 using Autofac;
 using JiraAssistant.Services;
-using JiraAssistant.Services.Resources;
 using JiraAssistant.Services.Settings;
 
 namespace JiraAssistant.ViewModel
@@ -88,14 +87,7 @@ namespace JiraAssistant.ViewModel
             .AsSelf()
             .AsImplementedInterfaces()
             .SingleInstance();
-
-         builder.RegisterAssemblyTypes(GetType().Assembly)
-            .InNamespaceOf<BaseRestService>()
-            .Except<BaseRestService>()
-            .AsSelf()
-            .AsImplementedInterfaces()
-            .SingleInstance();
-
+         
          builder.RegisterAssemblyTypes(GetType().Assembly)
             .InNamespaceOf<SettingsBase>()
             .Except<SettingsBase>()
@@ -109,6 +101,9 @@ namespace JiraAssistant.ViewModel
             .SingleInstance();
 
          builder.RegisterType<UpdateService>().AutoActivate();
+         builder.RegisterType<JiraApi>()
+            .AsImplementedInterfaces()
+            .AutoActivate();
 
          IocContainer = builder.Build();
       }

@@ -7,7 +7,7 @@ using JiraAssistant.Model.Ui;
 using JiraAssistant.Pages;
 using JiraAssistant.Properties;
 using JiraAssistant.Services;
-using JiraAssistant.Services.Resources;
+using JiraAssistant.Services.Jira;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,22 +20,20 @@ namespace JiraAssistant.ViewModel
    {
       private bool _isBusy;
       private string _busyMessage;
-      private readonly JiraAgileService _jiraAgile;
       private readonly INavigator _navigator;
-      private readonly IssuesFinder _issuesFinder;
       private const int RecentBoardsCount = 3;
       private readonly IDictionary<int, INavigationPage> _boardPagesCache = new Dictionary<int, INavigationPage>();
       private readonly JiraSessionViewModel _jiraSession;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
       private readonly ApplicationCache _cache;
       private readonly IContainer _iocContainer;
+      private readonly IJiraApi _jiraApi;
 
       public AgileBoardSelectViewModel(IContainer iocContainer)
       {
          _iocContainer = iocContainer;
-         _jiraAgile = iocContainer.Resolve<JiraAgileService>();
          _navigator = iocContainer.Resolve<INavigator>();
-         _issuesFinder = iocContainer.Resolve<IssuesFinder>();
+         _jiraApi = iocContainer.Resolve<IJiraApi>();
          _jiraSession = iocContainer.Resolve<JiraSessionViewModel>();
          _statisticsCalculator = iocContainer.Resolve<IssuesStatisticsCalculator>();
          _cache = iocContainer.Resolve<ApplicationCache>();
@@ -89,7 +87,7 @@ namespace JiraAssistant.ViewModel
             BusyMessage = "Downloading available agile boards...";
             IsBusy = true;
 
-            var boards = await _jiraAgile.GetAgileBoards();
+            var boards = await _jiraApi.Agile.GetAgileBoards();
             var recentBoards = GetRecentBoardsIds();
             foreach (var board in boards.OrderBy(b => b.Name))
             {

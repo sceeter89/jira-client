@@ -231,9 +231,11 @@
     <Compile Include="Services\AgileBoardDataCache.cs" />
     <Compile Include="Services\ApplicationCache.cs" />
     <Compile Include="Services\IssuesStatisticsCalculator.cs" />
-    <Compile Include="Services\Resources\FakeRestClient.cs" />
-    <Compile Include="Services\Resources\IRestClient.cs" />
-    <Compile Include="Services\Resources\JiraRestClient.cs" />
+    <Compile Include="Services\Jira\IJiraAgileApi.cs" />
+    <Compile Include="Services\Jira\IJiraApi.cs" />
+    <Compile Include="Services\Jira\IJiraServerApi.cs" />
+    <Compile Include="Services\Jira\IJiraSessionApi.cs" />
+    <Compile Include="Services\Jira\JiraApi.cs" />
     <Compile Include="Services\Settings\AnalysisSettings.cs" />
     <Compile Include="Services\Settings\AssistantSettings.cs" />
     <Compile Include="Services\Settings\IssuesSettings.cs" />

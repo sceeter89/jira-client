@@ -1,10 +1,8 @@
 ﻿using JiraAssistant.Model.Jira;
-using JiraAssistant.Services.Resources;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Linq;
 using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Services;
@@ -18,6 +16,7 @@ using JiraAssistant.Model;
 using Autofac;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Controls;
+using JiraAssistant.Services.Jira;
 
 namespace JiraAssistant.Pages
 {
@@ -28,8 +27,6 @@ namespace JiraAssistant.Pages
       private bool _epicsDownloaded;
       private bool _issuesDownloaded;
       private bool _sprintsDownloaded;
-      private readonly JiraAgileService _jiraAgile;
-      private readonly IssuesFinder _issuesFinder;
       private bool _isBusy;
       private readonly INavigator _navigator;
       private readonly JiraSessionViewModel _jiraSession;
@@ -38,10 +35,10 @@ namespace JiraAssistant.Pages
 
       private readonly Dictionary<int, INavigationPage> _sprintsDetailsCache = new Dictionary<int, INavigationPage>();
       private readonly ApplicationCache _cache;
-      private readonly MetadataRetriever _retriever;
       private readonly IContainer _iocContainer;
       private bool _cacheLoaded;
       private readonly AgileBoardDataCache _boardCache;
+      private readonly IJiraApi _jiraApi;
 
       public AgileBoardPage(RawAgileBoard board, IContainer iocContainer)
       {
@@ -50,14 +47,12 @@ namespace JiraAssistant.Pages
          Board = board;
 
          _iocContainer = iocContainer;
-         _jiraAgile = iocContainer.Resolve<JiraAgileService>();
-         _issuesFinder = iocContainer.Resolve<IssuesFinder>();
+         _jiraApi = iocContainer.Resolve<IJiraApi>();
          _navigator = iocContainer.Resolve<INavigator>();
          _jiraSession = iocContainer.Resolve<JiraSessionViewModel>();
          _statisticsCalculator = iocContainer.Resolve<IssuesStatisticsCalculator>();
          _cache = iocContainer.Resolve<ApplicationCache>();
          _boardCache = _cache.GetAgileBoardCache(Board.Id);
-         _retriever = iocContainer.Resolve<MetadataRetriever>();
 
          Epics = new ObservableCollection<RawAgileEpic>();
          Sprints = new ObservableCollection<RawAgileSprint>();
@@ -157,10 +152,10 @@ namespace JiraAssistant.Pages
 
       private async Task DownloadIssues()
       {
-         var boardConfig = await _jiraAgile.GetBoardConfiguration(Board.Id);
-         var filter = await _retriever.GetFilterDefinition(boardConfig.Filter.Id);
+         var boardConfig = await _jiraApi.Agile.GetBoardConfiguration(Board.Id);
+         var filter = await _jiraApi.Server.GetFilterDefinition(boardConfig.Filter.Id);
 
-         var issues = await _issuesFinder.Search(_boardCache.PrepareSearchStatement(filter.Jql));
+         var issues = await _jiraApi.SearchForIssues(_boardCache.PrepareSearchStatement(filter.Jql));
 
          issues = await _boardCache.UpdateCache(issues);
 
@@ -183,7 +178,7 @@ namespace JiraAssistant.Pages
 
       private async Task DownloadEpics()
       {
-         var epics = await _jiraAgile.GetEpics(Board.Id);
+         var epics = await _jiraApi.Agile.GetEpics(Board.Id);
 
          foreach (var epic in epics)
          {
@@ -195,7 +190,7 @@ namespace JiraAssistant.Pages
 
       private async Task DownloadSprints()
       {
-         var sprints = await _jiraAgile.GetSprints(Board.Id);
+         var sprints = await _jiraApi.Agile.GetSprints(Board.Id);
 
          foreach (var sprint in sprints.OrderByDescending(s => s.StartDate))
          {

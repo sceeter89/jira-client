@@ -1,6 +1,6 @@
-﻿using JiraAssistant.Model;
-using JiraAssistant.Model.Exceptions;
+﻿using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
+using JiraAssistant.Services.Jira;
 using JiraAssistant.Services.Settings;
 using Newtonsoft.Json;
 using RestSharp;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace JiraAssistant.Services.Resources
 {
-   public class JiraAgileService : BaseRestService
+   public class JiraAgileService : BaseRestService, IJiraAgileApi
    {
       public JiraAgileService(AssistantSettings configuration)
          : base(configuration)

@@ -14,8 +14,8 @@ using System.Windows.Markup;
 using JiraAssistant.Controls;
 using Autofac;
 using GalaSoft.MvvmLight;
-using JiraAssistant.Services.Resources;
 using System.Collections.ObjectModel;
+using JiraAssistant.Services.Jira;
 
 namespace JiraAssistant.Pages
 {
@@ -89,8 +89,8 @@ namespace JiraAssistant.Pages
 
       private async void GetIssueTypes()
       {
-         var retriever = _iocContainer.Resolve<MetadataRetriever>();
-         var issueTypes = (await retriever.GetIssueTypes())
+         var jiraApi = _iocContainer.Resolve<IJiraApi>();
+         var issueTypes = (await jiraApi.Server.GetIssueTypes())
             .Select(i => new SelectableIssueType(i)
             {
                IsSelected = _defaultIssueTypes.Contains(i.Name.ToLower())

@@ -1,7 +1,7 @@
 ﻿using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
+using JiraAssistant.Services.Jira;
 using JiraAssistant.Services.Settings;
-using JiraAssistant.ViewModel;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -16,10 +16,10 @@ namespace JiraAssistant.Services.Resources
    {
       private const int BATCH_SIZE = 1000;
       private IDictionary<string, RawFieldDefinition> _fields;
-      private readonly MetadataRetriever _metadata;
+      private readonly IJiraServerApi _metadata;
 
       public IssuesFinder(AssistantSettings configuration,
-         MetadataRetriever metadata)
+         IJiraServerApi metadata)
          : base(configuration)
       {
          _metadata = metadata;

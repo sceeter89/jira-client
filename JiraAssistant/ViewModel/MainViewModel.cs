@@ -1,4 +1,3 @@
-using System;
 using GalaSoft.MvvmLight;
 using JiraAssistant.Model.Ui;
 using JiraAssistant.Services;
@@ -6,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
-using JiraAssistant.Services.Resources;
+using JiraAssistant.Services.Jira;
 
 namespace JiraAssistant.ViewModel
 {
@@ -16,11 +15,11 @@ namespace JiraAssistant.ViewModel
       private INavigationPage _currentPage;
       private AnimationState _collapseAnimationState;
       private AnimationState _expandAnimationState;
-      private readonly JiraSessionService _jiraSession;
+      private readonly IJiraApi _jiraApi;
 
-      public MainViewModel(JiraSessionService jiraSession)
+      public MainViewModel(IJiraApi jiraApi)
       {
-         _jiraSession = jiraSession;
+         _jiraApi = jiraApi;
          BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1);
       }
 
@@ -73,7 +72,7 @@ namespace JiraAssistant.ViewModel
          _navigationHistory.Pop();
          if (_navigationHistory.Count == 1)
          {
-            _jiraSession.Logout();
+            await _jiraApi.Session.Logout();
          }
          await SetPage();
       }

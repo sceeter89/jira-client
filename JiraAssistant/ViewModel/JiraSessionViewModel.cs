@@ -1,41 +1,34 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
-using JiraAssistant.Model;
 using JiraAssistant.Model.Jira;
-using JiraAssistant.Pages;
 using JiraAssistant.Services;
-using JiraAssistant.Services.Resources;
+using JiraAssistant.Services.Jira;
 using JiraAssistant.Services.Settings;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace JiraAssistant.ViewModel
 {
    public class JiraSessionViewModel : ViewModelBase
    {
-      private readonly JiraSessionService _sessionService;
       private readonly AssistantSettings _configuration;
       private bool _isLoggedIn;
       private RawProfileDetails _profile;
       private ImageSource _profileAvatar;
-      private readonly ResourceDownloader _downloader;
       private readonly INavigator _navigator;
+      private readonly IJiraApi _jiraApi;
 
-      public JiraSessionViewModel(JiraSessionService sessionService,
-         AssistantSettings configuration,
-         ResourceDownloader downloader,
-         INavigator navigator)
+      public JiraSessionViewModel(AssistantSettings configuration,
+         INavigator navigator,
+         IJiraApi jiraApi)
       {
-         _sessionService = sessionService;
+         _jiraApi = jiraApi;
          _configuration = configuration;
-         _downloader = downloader;
          _navigator = navigator;
 
-         _sessionService.OnLogout += (sender, args) => LoggedOut();
-         _sessionService.OnSuccessfulLogin += (sender, args) => LoggedIn();
+         _jiraApi.Session.OnLogout += (sender, args) => LoggedOut();
+         _jiraApi.Session.OnSuccessfulLogin += (sender, args) => LoggedIn();
       }
 
       private void LoggedOut()
@@ -53,13 +46,13 @@ namespace JiraAssistant.ViewModel
          _configuration.LastLogin = DateTime.Now;
          Task.Factory.StartNew(async () =>
          {
-            var details = await _sessionService.GetProfileDetails();
+            var details = await _jiraApi.Session.GetProfileDetails();
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
                Profile = details;
             });
 
-            var avatar = await _downloader.DownloadPicture(details.AvatarUrls.Avatar48x48);
+            var avatar = await _jiraApi.DownloadPicture(details.AvatarUrls.Avatar48x48);
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
                ProfileAvatar = avatar;
