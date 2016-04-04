@@ -80,6 +80,9 @@ namespace JiraAssistant.Services
 
       public async Task<IEnumerable<JiraIssue>> UpdateCache(IEnumerable<JiraIssue> updatedIssues)
       {
+         if (_jiraUrl == "demo")
+            return updatedIssues;
+
          try
          {
             if (IsAvailable == false)

@@ -41,6 +41,8 @@ namespace JiraAssistant.Pages
          AllCardsCount = issues.Count();
          StatusBarControl = new ScrumCardsPrintPreviewStatusBar();
          ExportCardsCommand = new RelayCommand(ExportCards);
+         PreviousPageCommand = new RelayCommand(() => RightPageIndex -= 2, () => RightPageIndex > 1);
+         NextPageCommand = new RelayCommand(() => RightPageIndex += 2, () => RightPageIndex < Pages.Count - 1);
 
          GetIssueTypes();
 
@@ -66,7 +68,7 @@ namespace JiraAssistant.Pages
       {
          Pages.Clear();
          var issuesLeft = Issues;
-         
+
          if (AvailableIssueTypes != null)
             issuesLeft = issuesLeft.Where(i => AvailableIssueTypes.Where(t => t.IsSelected).Select(t => t.IssueType.Name).Contains(i.BuiltInFields.IssueType.Name));
 
@@ -165,6 +167,8 @@ namespace JiraAssistant.Pages
          {
             _rightPageIndex = value * 2 - 1;
             RaisePropertyChanged();
+            PreviousPageCommand.RaiseCanExecuteChanged();
+            NextPageCommand.RaiseCanExecuteChanged();
          }
       }
 
@@ -180,6 +184,8 @@ namespace JiraAssistant.Pages
          }
       }
       public IEnumerable<JiraIssue> Issues { get; private set; }
+      public RelayCommand PreviousPageCommand { get; private set; }
+      public RelayCommand NextPageCommand { get; private set; }
    }
 
    public class PrintPreviewPage
