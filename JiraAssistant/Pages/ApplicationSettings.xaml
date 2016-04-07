@@ -5,6 +5,7 @@
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:local="clr-namespace:JiraAssistant.Pages"
                           xmlns:controls="clr-namespace:JiraAssistant.Controls"
+                          xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="500">
    <Grid>
@@ -83,11 +84,12 @@
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                <Grid>
                   <Grid.Resources>
-                     <Style x:Key="DraggableListBoxItem" TargetType="telerik:RadListBoxItem">
+                     <Style x:Key="DraggableListBoxItem" TargetType="telerik:RadListBoxItem" BasedOn="{StaticResource RadListBoxItemStyle}">
                         <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="True" />
                      </Style>
                   </Grid.Resources>
                   <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
@@ -111,20 +113,20 @@
 
                   <TextBlock Text="Issues list" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3 7 3 3" FontWeight="Bold"/>
 
-                  <TextBlock Text="Columns and order: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <Grid Grid.Row="2" Grid.Column="0" Margin="3" HorizontalAlignment="Center">
+                  <TextBlock Text="Columns and order: " Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <Grid Grid.Row="5" Grid.Column="1" Margin="3" HorizontalAlignment="Center">
                      <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="180" />
                      </Grid.RowDefinitions>
                      <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="30" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="150" />
                      </Grid.ColumnDefinitions>
 
                      <TextBlock Text="Available" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="3"/>
-                     <telerik:RadListBox ItemContainerStyle="{StaticResource DraggableListBoxItem}"
+                     <telerik:RadListBox DisplayMemberPath="Header" ItemContainerStyle="{StaticResource DraggableListBoxItem}"
                                          Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AvailableColumns}">
                         <telerik:RadListBox.DragDropBehavior>
                            <telerik:ListBoxDragDropBehavior />
@@ -135,7 +137,7 @@
                      </telerik:RadListBox>
 
                      <TextBlock Text="Selected" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="3"/>
-                     <telerik:RadListBox ItemContainerStyle="{StaticResource DraggableListBoxItem}"
+                     <telerik:RadListBox DisplayMemberPath="Header" ItemContainerStyle="{StaticResource DraggableListBoxItem}"
                                          Grid.Row="1" Grid.Column="2" ItemsSource="{Binding SelectedColumns}">
                         <telerik:RadListBox.DragDropBehavior>
                            <telerik:ListBoxDragDropBehavior />

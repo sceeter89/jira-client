@@ -19,7 +19,7 @@
       <Grid.RowDefinitions>
          <RowDefinition Height="Auto"/>
          <RowDefinition Height="*"/>
-         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="Auto" MinHeight="30"/>
       </Grid.RowDefinitions>
       <Rectangle Width="15" VerticalAlignment="Stretch" HorizontalAlignment="Right" Grid.RowSpan="3">
          <Rectangle.Fill>
@@ -38,13 +38,13 @@
 
       <Border Grid.Row="2" Style="{StaticResource BorderStyle}"/>
       <StackPanel Grid.Row="2" HorizontalAlignment="Left" Margin="5"
-                  Visibility="{Binding Source={StaticResource Locator}, Path=ScrumCardsSettings.ShowStoryPoints, Converter={StaticResource BoolToVisible}}" >
+                  Visibility="{Binding Source={StaticResource Locator}, Path=IssuesSettings.ShowStoryPoints, Converter={StaticResource BoolToVisible}}" >
          <TextBlock Text="Story Points: "/>
          <TextBlock Text="{Binding Issue.StoryPoints}"/>
       </StackPanel>
 
       <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="5 5 20 5"
                  Text="{Binding Issue.BuiltInFields.IssueType.Name}"
-                 Visibility="{Binding Source={StaticResource Locator}, Path=ScrumCardsSettings.ShowIssueType, Converter={StaticResource BoolToVisible}}" />
+                 Visibility="{Binding Source={StaticResource Locator}, Path=IssuesSettings.ShowIssueType, Converter={StaticResource BoolToVisible}}" />
    </Grid>
 </UserControl>

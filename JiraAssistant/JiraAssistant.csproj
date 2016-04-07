@@ -156,6 +156,7 @@
       <DependentUpon>UpdateInstallPrompt.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\IsolatedStorageExtensions.cs" />
+    <Compile Include="Extensions\BindableRadGridView.cs" />
     <Compile Include="Model\AgileBoardCacheMetadata.cs" />
     <Compile Include="Model\Exceptions\CacheCorruptedException.cs" />
     <Compile Include="Model\Exceptions\IncompleteJiraConfiguration.cs" />

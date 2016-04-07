@@ -44,6 +44,7 @@ namespace JiraAssistant.Services.Settings
             return _selectedColumns;
          }
       }
+
       public ObservableCollection<GridViewDataColumn> AvailableColumns
       {
          get

@@ -4,28 +4,14 @@
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:local="clr-namespace:JiraAssistant.Pages"
+                          xmlns:ext="clr-namespace:JiraAssistant.Extensions"
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="700"
                           d:DataContext="{d:DesignInstance Type={x:Type local:BrowseIssuesPage}}"
                           Background="White">
    <Grid>
-      <telerik:RadGridView ItemsSource="{Binding Issues}" AutoGenerateColumns="False" SelectionMode="Single"
-                           SelectedItem="{Binding SelectedIssue, Mode=OneWayToSource}" MouseDoubleClick="ItemDoubleClick">
-         <telerik:RadGridView.Columns>
-            <telerik:GridViewDataColumn Header="Key" DataMemberBinding="{Binding Key}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="Summary" DataMemberBinding="{Binding Summary}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="Reporter" DataMemberBinding="{Binding Reporter}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="Priority" DataMemberBinding="{Binding Priority}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="Status" DataMemberBinding="{Binding Status}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="Created" DataMemberBinding="{Binding Created}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="Story points" DataMemberBinding="{Binding StoryPoints}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="Type" DataMemberBinding="{Binding BuiltInFields.IssueType.Name}" IsReadOnly="True" />
-            <telerik:GridViewDataColumn Header="Resolution" DataMemberBinding="{Binding BuiltInFields.Resolution.Name}" IsReadOnly="True" />
-            <telerik:GridViewDataColumn Header="Assignee" DataMemberBinding="{Binding Assignee}" IsReadOnly="True"/>
-            <telerik:GridViewDataColumn Header="Resolved" DataMemberBinding="{Binding Resolved}" IsReadOnly="True" />
-            <telerik:GridViewDataColumn Header="Epic link" DataMemberBinding="{Binding EpicLink}" IsReadOnly="True" />
-            <telerik:GridViewDataColumn Header="Time spent" DataMemberBinding="{Binding BuiltInFields.TimeSpent}" IsReadOnly="True" />
-         </telerik:RadGridView.Columns>
-      </telerik:RadGridView>
+      <ext:BindableRadGridView ItemsSource="{Binding Issues}" AutoGenerateColumns="False" SelectionMode="Single"
+                           SelectedItem="{Binding SelectedIssue, Mode=OneWayToSource}" MouseDoubleClick="ItemDoubleClick"
+                           ColumnsCollection="{Binding Source={StaticResource Locator}, Path=IssuesSettings.SelectedColumns}"/>
    </Grid>
 </local:BaseNavigationPage>
