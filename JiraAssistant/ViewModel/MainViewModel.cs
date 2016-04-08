@@ -64,6 +64,11 @@ namespace JiraAssistant.ViewModel
          }
       }
 
+      public string ApplicationTitle
+      {
+         get { return string.Format("JIRA Assistant - {0}", GetType().Assembly.GetName().Version.ToString(3)); }
+      }
+
       public async void Back()
       {
          if (_navigationHistory.Count == 1)

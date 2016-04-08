@@ -73,12 +73,22 @@ namespace JiraAssistant.Pages
             _boardCache.Invalidate();
             DownloadElements();
          }, () => IsBusy == false);
+         FetchChangesCommand = new RelayCommand(() =>
+         {
+            DownloadElements();
+         }, () => IsBusy == false);
 
          Buttons.Add(new ToolbarButton
          {
-            Tooltip = "Refresh data",
+            Tooltip = "Reload local cache",
             Command = RefreshDataCommand,
             Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/RefreshIcon.png"))
+         });
+         Buttons.Add(new ToolbarButton
+         {
+            Tooltip = "Fetch changes since last visit",
+            Command = FetchChangesCommand,
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/DownloadIcon.png"))
          });
 
          DataContext = this;
@@ -275,5 +285,6 @@ namespace JiraAssistant.Pages
 
       public RelayCommand RefreshDataCommand { get; private set; }
       public RawAgileBoard Board { get; private set; }
+      public RelayCommand FetchChangesCommand { get; private set; }
    }
 }

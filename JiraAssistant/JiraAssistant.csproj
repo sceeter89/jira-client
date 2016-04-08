@@ -418,6 +418,7 @@
     <Resource Include="Assets\Icons\Website.png" />
     <Resource Include="Assets\Icons\Details.png" />
     <Resource Include="Assets\Icons\ScrumCard.png" />
+    <Resource Include="Assets\Icons\DownloadIcon.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
