@@ -58,6 +58,7 @@ namespace JiraAssistant.Pages
          Sprints = new ObservableCollection<RawAgileSprint>();
          Issues = new ObservableCollection<JiraIssue>();
          IssuesInSprint = new Dictionary<int, IList<JiraIssue>>();
+         IssuesByKey = new Dictionary<string, JiraIssue>();
 
          StatusBarControl = new AgileBoardPageStatusBar { DataContext = this };
 
@@ -173,6 +174,7 @@ namespace JiraAssistant.Pages
 
          foreach (var issue in issues)
          {
+            IssuesByKey[issue.Key] = issue;
             Issues.Add(issue);
             foreach (var sprintId in issue.SprintIds)
             {
@@ -182,6 +184,10 @@ namespace JiraAssistant.Pages
                IssuesInSprint[sprintId].Add(issue);
             }
          }
+
+         foreach (var issue in issues)
+            if (string.IsNullOrWhiteSpace(issue.EpicLink) == false && IssuesByKey.ContainsKey(issue.EpicLink))
+               issue.EpicName = IssuesByKey[issue.EpicLink].EpicName;
 
          IssuesDownloaded = true;
       }
@@ -264,6 +270,7 @@ namespace JiraAssistant.Pages
       public ObservableCollection<RawAgileSprint> Sprints { get; private set; }
       public ObservableCollection<JiraIssue> Issues { get; private set; }
       public IDictionary<int, IList<JiraIssue>> IssuesInSprint { get; private set; }
+      public IDictionary<string, JiraIssue> IssuesByKey { get; private set; }
 
       public RelayCommand SprintDetailsCommand { get; private set; }
       public RelayCommand OpenPivotAnalysisCommand { get; private set; }
@@ -280,6 +287,7 @@ namespace JiraAssistant.Pages
             _isBusy = value;
             RaisePropertyChanged();
             RefreshDataCommand.RaiseCanExecuteChanged();
+            FetchChangesCommand.RaiseCanExecuteChanged();
          }
       }
 

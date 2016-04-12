@@ -147,10 +147,14 @@
     <Compile Include="Controls\ScrumCardsPrintPreviewIssueTypeFilter.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreviewIssueTypeFilter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToIconConverter.cs" />
     <Compile Include="Converters\BoolToVisibleConverter.cs" />
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\TextualPreview.xaml.cs">
+      <DependentUpon>TextualPreview.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\UpdateInstallPrompt.xaml.cs">
       <DependentUpon>UpdateInstallPrompt.xaml</DependentUpon>
@@ -198,9 +202,6 @@
     </Compile>
     <Compile Include="Pages\EpicsOverviewPage.xaml.cs">
       <DependentUpon>EpicsOverviewPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ExportIssuesListPage.xaml.cs">
-      <DependentUpon>ExportIssuesListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\IssueDetailsPage.xaml.cs">
       <DependentUpon>IssueDetailsPage.xaml</DependentUpon>
@@ -288,6 +289,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Dialogs\TextualPreview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\UpdateInstallPrompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -340,10 +345,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\EpicsOverviewPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\ExportIssuesListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -419,6 +420,7 @@
     <Resource Include="Assets\Icons\Details.png" />
     <Resource Include="Assets\Icons\ScrumCard.png" />
     <Resource Include="Assets\Icons\DownloadIcon.png" />
+    <Resource Include="Assets\Icons\ListIcon.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

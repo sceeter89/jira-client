@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Diagnostics;
 using NLog;
+using JiraAssistant.ViewModel;
 
 namespace JiraAssistant.Services
 {
@@ -23,12 +24,14 @@ namespace JiraAssistant.Services
       private readonly UpdateSettings _settings;
       private bool _runInstaller;
       private string _installerPath;
+      private readonly MainViewModel _mainViewModel;
 
-      public UpdateService(UpdateSettings settings)
+      public UpdateService(UpdateSettings settings, MainViewModel mainViewModel)
       {
          _settings = settings;
 
          Application.Current.Exit += OnApplicationExit;
+         _mainViewModel = mainViewModel;
 
          CheckForUpdates();
       }
@@ -54,7 +57,7 @@ namespace JiraAssistant.Services
             var response = await client.ExecuteGetTaskAsync(request);
             var releases = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<GithubApplicationRelease>>(response.Content));
             var higherVersions = releases.Where(r => r.Draft == false
-                                                  && r.Prerelease != _settings.OnlyStableVersions
+                                                  && (_settings.OnlyStableVersions == false || r.Prerelease != _settings.OnlyStableVersions)
                                                   && Version.Parse(r.TagName) > currentVersion)
                                               .OrderByDescending(r => r.TagName);
 
@@ -93,7 +96,12 @@ namespace JiraAssistant.Services
 
             _runInstaller = true;
             if (closeApplicationAfterDownload)
+            {
                Application.Current.Shutdown();
+               return;
+            }
+
+            _mainViewModel.UserMessage = string.Format("New version ({0}) will be installed once you close application.", higherVersion.TagName);
          }
          catch (Exception e)
          {

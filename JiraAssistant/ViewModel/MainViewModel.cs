@@ -16,14 +16,17 @@ namespace JiraAssistant.ViewModel
       private AnimationState _collapseAnimationState;
       private AnimationState _expandAnimationState;
       private readonly IJiraApi _jiraApi;
+      private string _userMessage;
 
       public MainViewModel(IJiraApi jiraApi)
       {
          _jiraApi = jiraApi;
          BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1);
+         ClearMessageCommand = new RelayCommand(() => { UserMessage = ""; });
       }
 
       public RelayCommand BackCommand { get; private set; }
+      public RelayCommand ClearMessageCommand { get; private set; }
 
       public AnimationState CollapseAnimationState
       {
@@ -67,6 +70,16 @@ namespace JiraAssistant.ViewModel
       public string ApplicationTitle
       {
          get { return string.Format("JIRA Assistant - {0}", GetType().Assembly.GetName().Version.ToString(3)); }
+      }
+
+      public string UserMessage
+      {
+         get { return _userMessage; }
+         set
+         {
+            _userMessage = value;
+            RaisePropertyChanged();
+         }
       }
 
       public async void Back()

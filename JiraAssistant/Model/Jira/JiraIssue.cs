@@ -22,6 +22,7 @@ namespace JiraAssistant.Model.Jira
       public int Subtasks { get; set; }
       public string Summary { get; set; }
       public string EpicLink { get; set; }
+      public string EpicName { get; set; }
       public RawFields BuiltInFields { get; set; }
 
       public string Labels

@@ -112,6 +112,7 @@ namespace JiraAssistant.Services.Settings
          /* 13 */new GridViewDataColumn { Header = "Time spent", DataMemberBinding = new Binding("BuiltInFields.TimeSpent"), IsReadOnly = true },
          /* 14 */new GridViewDataColumn { Header = "Time spent (with subtasks)", DataMemberBinding = new Binding("BuiltInFields.AggregateTimeSpent"), IsReadOnly = true },
          /* 15 */new GridViewDataColumn { Header = "Labels", DataMemberBinding = new Binding("Labels"), IsReadOnly = true },
+         /* 16 */new GridViewDataColumn { Header = "Epic name", DataMemberBinding = new Binding("EpicName"), IsReadOnly = true },
       };
 
       private ObservableCollection<GridViewDataColumn> _selectedColumns;

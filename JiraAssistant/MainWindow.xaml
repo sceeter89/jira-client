@@ -5,6 +5,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
         xmlns:model="clr-namespace:JiraAssistant.Model.Ui"
+        xmlns:converters="clr-namespace:JiraAssistant.Converters"
         Title="{Binding ApplicationTitle}" Height="700" Width="800"
         Icon="/Assets/Icons/ApplicationIcon.png"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
@@ -32,6 +33,7 @@
           Storyboard.TargetProperty="RenderTransform.ScaleY" From="0" To="1" 
           Duration="0:0:.350" RepeatBehavior="1x"/>
       </Storyboard>
+      <converters:StringToVisibilityConverter x:Key="MessageVisibilityConverter" />
    </Window.Resources>
    <i:Interaction.Triggers>
       <ei:DataTrigger Binding="{Binding CollapseAnimationState, Mode=OneWay}" Value="Play">
@@ -114,5 +116,20 @@
 
          <ContentControl Content="{Binding CurrentPage.StatusBarControl}"/>
       </Grid>
+
+      <Border Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="50"
+              Background="CornflowerBlue" Visibility="{Binding UserMessage, Converter={StaticResource MessageVisibilityConverter}, FallbackValue=Visible}">
+         <Grid>
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="*" />
+               <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock TextTrimming="WordEllipsis" Text="{Binding UserMessage}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="15"/>
+
+            <Button Content="X" Grid.Column="1" Command="{Binding ClearMessageCommand}" Width="40" Background="CornflowerBlue" Foreground="White"
+                    VerticalAlignment="Center"/>
+         </Grid>
+      </Border>
    </Grid>
 </Window>

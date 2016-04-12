@@ -9,6 +9,8 @@ using System.Linq;
 using System.Windows.Media.Imaging;
 using Autofac;
 using Telerik.Windows.Data;
+using JiraAssistant.Dialogs;
+using System.Text;
 
 namespace JiraAssistant.Pages
 {
@@ -24,27 +26,40 @@ namespace JiraAssistant.Pages
          Issues = new QueryableCollectionView(issues);
          _iocContainer = iocContainer;
          _navigator = _iocContainer.Resolve<INavigator>();
-         ScrumCardsCommand = new RelayCommand(OpenScrumCards);
-         ExportCommand = new RelayCommand(ExportResults);
          Buttons.Add(new ToolbarButton
          {
             Tooltip = "Scrum Cards",
-            Command = ScrumCardsCommand,
+            Command = new RelayCommand(OpenScrumCards),
             Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ScrumCard.png"))
          });
          Buttons.Add(new ToolbarButton
          {
-            Tooltip = "Export",
-            Command = ExportCommand,
-            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ExportIcon.png"))
+            Tooltip = "Export as text list",
+            Command = new RelayCommand(ExportAsTextListResults),
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ListIcon.png"))
          });
 
          DataContext = this;
       }
 
-      private void ExportResults()
+      private void ExportAsTextListResults()
       {
-         throw new NotImplementedException();
+         var resultBuilder = new StringBuilder();
+         var grouped = Issues.OfType<JiraIssue>().GroupBy(i => i.EpicName);
+
+         foreach(var group in grouped)
+         {
+            if (string.IsNullOrWhiteSpace(group.Key))
+               resultBuilder.AppendLine("(No Epic)");
+            else
+               resultBuilder.AppendLine(group.Key);
+
+            foreach(var issue in group)
+               resultBuilder.AppendLine(string.Format("\t* [{0}] {1}", issue.Key, issue.Summary));
+         }
+
+         var dialog = new TextualPreview(resultBuilder.ToString());
+         dialog.ShowDialog();
       }
 
       private void OpenScrumCards()
@@ -60,7 +75,5 @@ namespace JiraAssistant.Pages
 
       public QueryableCollectionView Issues { get; private set; }
       public JiraIssue SelectedIssue { get; set; }
-      public RelayCommand ScrumCardsCommand { get; private set; }
-      public RelayCommand ExportCommand { get; private set; }
    }
 }
