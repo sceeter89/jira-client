@@ -23,6 +23,7 @@ namespace JiraAssistant.Services
       private const string EndpointUrl = "https://api.github.com/repos/sceeter89/jira-client/releases";
       private readonly UpdateSettings _settings;
       private bool _runInstaller;
+      private bool _showInstallerUi;
       private string _installerPath;
       private readonly MainViewModel _mainViewModel;
 
@@ -97,6 +98,7 @@ namespace JiraAssistant.Services
             _runInstaller = true;
             if (closeApplicationAfterDownload)
             {
+               _showInstallerUi = true;
                Application.Current.Shutdown();
                return;
             }
@@ -111,16 +113,16 @@ namespace JiraAssistant.Services
 
       private void OnApplicationExit(object sender, ExitEventArgs e)
       {
-         if (_runInstaller)
+         if (_runInstaller == false)
+            return;
+
+         var processInfo = new ProcessStartInfo
          {
-            var processInfo = new ProcessStartInfo
-            {
-               FileName = _installerPath,
-               UseShellExecute = true,
-               Arguments = "/quiet /passive"
-            };
-            Process.Start(processInfo);
-         }
+            FileName = _installerPath,
+            UseShellExecute = true,
+            Arguments = _showInstallerUi ? "" : "/quiet /passive"
+         };
+         Process.Start(processInfo);
       }
    }
 }
