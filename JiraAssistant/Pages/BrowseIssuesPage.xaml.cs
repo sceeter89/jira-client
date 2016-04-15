@@ -11,6 +11,11 @@ using Autofac;
 using Telerik.Windows.Data;
 using JiraAssistant.Dialogs;
 using System.Text;
+using Telerik.Windows.Documents.Model;
+using Telerik.Windows.Documents.Model.Styles;
+using Telerik.Windows.Documents.Layout;
+using System.Windows.Media;
+using Telerik.Windows.Documents.Lists;
 
 namespace JiraAssistant.Pages
 {
@@ -34,15 +39,47 @@ namespace JiraAssistant.Pages
          });
          Buttons.Add(new ToolbarButton
          {
-            Tooltip = "Export as text list",
-            Command = new RelayCommand(ExportAsTextListResults),
-            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ListIcon.png"))
+            Tooltip = "Export as text",
+            Command = new RelayCommand(ExportAsTextResults),
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/TxtFormatIcon.png"))
+         });
+         Buttons.Add(new ToolbarButton
+         {
+            Tooltip = "Export as rich text",
+            Command = new RelayCommand(ExportAsRichTextResults),
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/RtfFormatIcon.png"))
          });
 
          DataContext = this;
       }
 
-      private void ExportAsTextListResults()
+      private void ExportAsRichTextResults()
+      {
+         var document = new RadDocument();
+         var editor = new RadDocumentEditor(document);
+         
+         var grouped = Issues.OfType<JiraIssue>().GroupBy(i => i.EpicName);
+
+         foreach (var group in grouped)
+         {
+            editor.InsertParagraph();
+            editor.ChangeStyleName(RadDocumentDefaultStyles.GetHeadingStyleNameByIndex(1));
+            if (string.IsNullOrWhiteSpace(group.Key))
+               editor.Insert("(No epic)");
+            else
+               editor.Insert(group.Key);
+
+            editor.InsertParagraph();
+            editor.ChangeParagraphListStyle(DefaultListStyles.Bulleted);
+            foreach (var issue in group)
+               editor.InsertLine(string.Format("* [{0}] {1}", issue.Key, issue.Summary));
+         }
+
+         var dialog = new RichTextPreview(document);
+         dialog.ShowDialog();
+      }
+
+      private void ExportAsTextResults()
       {
          var resultBuilder = new StringBuilder();
          var grouped = Issues.OfType<JiraIssue>().GroupBy(i => i.EpicName);
@@ -55,7 +92,7 @@ namespace JiraAssistant.Pages
                resultBuilder.AppendLine(group.Key);
 
             foreach(var issue in group)
-               resultBuilder.AppendLine(string.Format("\t* [{0}] {1}", issue.Key, issue.Summary));
+               resultBuilder.AppendLine(string.Format("* [{0}] {1}", issue.Key, issue.Summary));
          }
 
          var dialog = new TextualPreview(resultBuilder.ToString());
