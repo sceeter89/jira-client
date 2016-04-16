@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Windows;
 using Telerik.Windows.Controls;
 
@@ -11,12 +10,7 @@ namespace JiraAssistant.Extensions
             DependencyProperty.RegisterAttached("ColumnsCollection", typeof(ObservableCollection<GridViewDataColumn>),
                                                 typeof(BindableRadGridView),
                                                 new PropertyMetadata(OnColumnsCollectionChanged));
-
-      public BindableRadGridView()
-      {
-         this.Unloaded += (sender, args) => Columns.Clear();
-      }
-
+      
       private static void OnColumnsCollectionChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
       {
          var gridView = o as BindableRadGridView;

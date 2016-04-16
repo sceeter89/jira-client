@@ -476,6 +476,7 @@
     <Resource Include="Assets\Icons\ListIcon.png" />
     <Resource Include="Assets\Icons\RtfFormatIcon.png" />
     <Resource Include="Assets\Icons\TxtFormatIcon.png" />
+    <Resource Include="Assets\Icons\ConfluenceIcon.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

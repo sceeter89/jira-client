@@ -12,10 +12,8 @@ using Telerik.Windows.Data;
 using JiraAssistant.Dialogs;
 using System.Text;
 using Telerik.Windows.Documents.Model;
-using Telerik.Windows.Documents.Model.Styles;
-using Telerik.Windows.Documents.Layout;
-using System.Windows.Media;
 using Telerik.Windows.Documents.Lists;
+using System.Text.RegularExpressions;
 
 namespace JiraAssistant.Pages
 {
@@ -46,37 +44,36 @@ namespace JiraAssistant.Pages
          Buttons.Add(new ToolbarButton
          {
             Tooltip = "Export as rich text",
-            Command = new RelayCommand(ExportAsRichTextResults),
-            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/RtfFormatIcon.png"))
+            Command = new RelayCommand(ExportAsConfluenceMarkupResults),
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ConfluenceIcon.png"))
          });
 
          DataContext = this;
       }
 
-      private void ExportAsRichTextResults()
+      private void ExportAsConfluenceMarkupResults()
       {
-         var document = new RadDocument();
-         var editor = new RadDocumentEditor(document);
-         
+         var resultBuilder = new StringBuilder();
          var grouped = Issues.OfType<JiraIssue>().GroupBy(i => i.EpicName);
 
          foreach (var group in grouped)
          {
-            editor.InsertParagraph();
-            editor.ChangeStyleName(RadDocumentDefaultStyles.GetHeadingStyleNameByIndex(1));
             if (string.IsNullOrWhiteSpace(group.Key))
-               editor.Insert("(No epic)");
+               resultBuilder.AppendLine("h2. (No Epic)");
             else
-               editor.Insert(group.Key);
+               resultBuilder.AppendLine(group.Key);
 
-            editor.InsertParagraph();
-            editor.ChangeParagraphListStyle(DefaultListStyles.Bulleted);
             foreach (var issue in group)
-               editor.InsertLine(string.Format("* [{0}] {1}", issue.Key, issue.Summary));
+               resultBuilder.AppendLine(string.Format("* *{0}* - {1}", issue.Key, EscapeConfluenceMarkupCharacters(issue.Summary)));
          }
 
-         var dialog = new RichTextPreview(document);
+         var dialog = new TextualPreview(resultBuilder.ToString());
          dialog.ShowDialog();
+      }
+
+      private string EscapeConfluenceMarkupCharacters(string summary)
+      {
+         return Regex.Replace(summary, @"[{\[\]\}\(\)!@\\]", m => "\\" + m.Value);
       }
 
       private void ExportAsTextResults()
@@ -84,15 +81,15 @@ namespace JiraAssistant.Pages
          var resultBuilder = new StringBuilder();
          var grouped = Issues.OfType<JiraIssue>().GroupBy(i => i.EpicName);
 
-         foreach(var group in grouped)
+         foreach (var group in grouped)
          {
             if (string.IsNullOrWhiteSpace(group.Key))
                resultBuilder.AppendLine("(No Epic)");
             else
                resultBuilder.AppendLine(group.Key);
 
-            foreach(var issue in group)
-               resultBuilder.AppendLine(string.Format("* [{0}] {1}", issue.Key, issue.Summary));
+            foreach (var issue in group)
+               resultBuilder.AppendLine(string.Format("* {0} - {1}", issue.Key, issue.Summary));
          }
 
          var dialog = new TextualPreview(resultBuilder.ToString());

@@ -10,10 +10,6 @@
                           d:DataContext="{d:DesignInstance Type={x:Type local:BrowseIssuesPage}}"
                           Background="White">
    <Grid>
-      <Grid.Resources>
-         <Style TargetType="{x:Type ext:BindableRadGridView}" BasedOn="{StaticResource RadGridViewStyle}">
-         </Style>
-      </Grid.Resources>
       <ext:BindableRadGridView ItemsSource="{Binding Issues}" AutoGenerateColumns="False" SelectionMode="Single"
                            SelectedItem="{Binding SelectedIssue, Mode=OneWayToSource}" MouseDoubleClick="ItemDoubleClick"
                            ColumnsCollection="{Binding Source={StaticResource Locator}, Path=IssuesSettings.SelectedColumns}"/>
