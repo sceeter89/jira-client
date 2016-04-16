@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Services.Jira;
+using JiraAssistant.Pages;
 
 namespace JiraAssistant.ViewModel
 {
@@ -23,6 +24,7 @@ namespace JiraAssistant.ViewModel
          _jiraApi = jiraApi;
          BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1);
          ClearMessageCommand = new RelayCommand(() => { UserMessage = ""; });
+         OpenSettingsCommand = new RelayCommand(() => NavigateTo(new ApplicationSettings()));
       }
 
       public RelayCommand BackCommand { get; private set; }
@@ -81,6 +83,8 @@ namespace JiraAssistant.ViewModel
             RaisePropertyChanged();
          }
       }
+
+      public RelayCommand OpenSettingsCommand { get; private set; }
 
       public async void Back()
       {

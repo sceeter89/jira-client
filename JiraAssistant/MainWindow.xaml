@@ -34,6 +34,17 @@
           Duration="0:0:.350" RepeatBehavior="1x"/>
       </Storyboard>
       <converters:StringToVisibilityConverter x:Key="MessageVisibilityConverter" />
+      <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" x:Key="MenuButtonStyle">
+         <Setter Property="Background" Value="Transparent" />
+         <Setter Property="BorderThickness" Value="0" />
+         <Setter Property="IsEnabled" Value="True" />
+         <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+               <Setter Property="Foreground" Value="DarkGray"/>
+               <Setter Property="Background" Value="DarkGray"/>
+            </Trigger>
+         </Style.Triggers>
+      </Style>
    </Window.Resources>
    <i:Interaction.Triggers>
       <ei:DataTrigger Binding="{Binding CollapseAnimationState, Mode=OneWay}" Value="Play">
@@ -71,7 +82,7 @@
                     Grid.Row="0"
                     Grid.Column="1">
          <ItemsControl ItemsSource="{Binding CurrentPage.Buttons}"
-                       Margin="5 0 5 5" Background="White" x:Name="ToolBarHost">
+                       Margin="5 0 5 5" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" x:Name="ToolBarHost">
             <ItemsControl.RenderTransform>
                <ScaleTransform ScaleY="1"/>
             </ItemsControl.RenderTransform>
@@ -81,6 +92,7 @@
                </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.Resources>
+               <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}"></Style>
                <DataTemplate DataType="{x:Type model:ToolbarButton}">
                   <Button ToolTip="{Binding Tooltip}" Command="{Binding Command}" Margin="5">
                      <Image Source="{Binding Icon}" Width="30" Height="30"/>
@@ -93,22 +105,27 @@
          </ItemsControl>
       </ScrollViewer>
 
-      <StackPanel Orientation="Horizontal" Margin="5 0 0 5" Grid.Row="0" Grid.Column="0" Background="White">
+      <StackPanel Orientation="Horizontal" Margin="5 0 0 5" Grid.Row="0" Grid.Column="0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}">
+         <StackPanel.Resources>
+            <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}"></Style>
+         </StackPanel.Resources>
          <Button ToolTip="Back" Command="{Binding BackCommand}" Margin="5">
             <Image Source="/Assets/Icons/BackIcon.png" Width="30" Height="30"/>
+         </Button>
+         <Button ToolTip="Back" Command="{Binding OpenSettingsCommand}" Margin="5">
+            <Image Source="/Assets/Icons/Settings.png" Width="30" Height="30"/>
          </Button>
       </StackPanel>
 
       <ContentControl Content="{Binding CurrentPage.Control}" Grid.Row="1"  Grid.ColumnSpan="2"
-                      Margin="5 0 5 0" Padding="5 0 0 0"
-                      Background="White"
-                      x:Name="DocumentHost">
+                      Margin="5 0 5 0" Padding="5 0 0 0" x:Name="DocumentHost"
+                      Background="{telerik:Windows8Resource ResourceKey=AccentBrush}">
          <ContentControl.RenderTransform>
             <ScaleTransform ScaleX="1"/>
          </ContentControl.RenderTransform>
       </ContentControl>
 
-      <Grid Grid.Row="2" Margin="5 5 5 0" Background="White" Grid.ColumnSpan="2" x:Name="StatusBarHost"
+      <Grid Grid.Row="2" Margin="5 5 5 0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Grid.ColumnSpan="2" x:Name="StatusBarHost"
             RenderTransformOrigin="0 1">
          <Grid.RenderTransform>
             <ScaleTransform ScaleY="1"/>
@@ -118,7 +135,7 @@
       </Grid>
 
       <Border Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="50"
-              Background="CornflowerBlue" Visibility="{Binding UserMessage, Converter={StaticResource MessageVisibilityConverter}, FallbackValue=Visible}">
+              Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Visibility="{Binding UserMessage, Converter={StaticResource MessageVisibilityConverter}, FallbackValue=Visible}">
          <Grid>
             <Grid.ColumnDefinitions>
                <ColumnDefinition Width="*" />
@@ -127,7 +144,7 @@
             <TextBlock TextTrimming="WordEllipsis" Text="{Binding UserMessage}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="15"/>
 
-            <Button Content="X" Grid.Column="1" Command="{Binding ClearMessageCommand}" Width="40" Background="CornflowerBlue" Foreground="White"
+            <Button Content="X" Grid.Column="1" Command="{Binding ClearMessageCommand}" Width="40" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Foreground="White"
                     VerticalAlignment="Center"/>
          </Grid>
       </Border>

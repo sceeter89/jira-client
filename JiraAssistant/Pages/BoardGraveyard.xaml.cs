@@ -2,7 +2,6 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 using JiraAssistant.Model.Jira;
-using JiraAssistant.Model.Ui;
 using JiraAssistant.Services;
 using JiraAssistant.Services.Settings;
 using System;
@@ -11,7 +10,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace JiraAssistant.Pages
 {
@@ -32,14 +30,7 @@ namespace JiraAssistant.Pages
          _settings = iocContainer.Resolve<GraveyardSettings>();
          _settings.PropertyChanged += (sender, args) => _reloadNeeded = true;
          _appSettings = iocContainer.Resolve<AssistantSettings>();
-
-         Buttons.Add(new ToolbarButton
-         {
-            Tooltip = "Settings",
-            Command = new RelayCommand(() => _navigator.NavigateTo(new ApplicationSettings(SettingsPage.Graveyard))),
-            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/Settings.png"))
-         });
-
+         
          OpenDetailsCommand = new RelayCommand<JiraIssue>(issue => _navigator.NavigateTo(new IssueDetailsPage(issue)));
          OpenInBrowserCommand = new RelayCommand<JiraIssue>(issue => Process.Start(string.Format("{0}/browse/{1}", _appSettings.JiraUrl, issue.Key)));
 
