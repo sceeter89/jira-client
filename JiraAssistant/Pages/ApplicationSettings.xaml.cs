@@ -26,6 +26,7 @@
             RaisePropertyChanged();
          }
       }
+      public override string Title { get { return "Settings"; } }
    }
 
    public enum SettingsPage

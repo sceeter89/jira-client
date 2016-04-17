@@ -11,8 +11,6 @@ using Autofac;
 using Telerik.Windows.Data;
 using JiraAssistant.Dialogs;
 using System.Text;
-using Telerik.Windows.Documents.Model;
-using Telerik.Windows.Documents.Lists;
 using System.Text.RegularExpressions;
 
 namespace JiraAssistant.Pages
@@ -109,5 +107,6 @@ namespace JiraAssistant.Pages
 
       public QueryableCollectionView Issues { get; private set; }
       public JiraIssue SelectedIssue { get; set; }
+      public override string Title { get { return "Issues browser"; } }
    }
 }

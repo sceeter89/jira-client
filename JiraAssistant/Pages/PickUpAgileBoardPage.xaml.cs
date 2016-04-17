@@ -34,5 +34,7 @@ namespace JiraAssistant.Pages
          var viewModel = DataContext as AgileBoardSelectViewModel;
          viewModel.OnNavigatedTo();
       }
+
+      public string Title { get { return "Board selection"; } }
    }
 }

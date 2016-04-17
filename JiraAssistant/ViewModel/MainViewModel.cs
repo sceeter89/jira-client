@@ -7,6 +7,8 @@ using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Services.Jira;
 using JiraAssistant.Pages;
+using System.Collections.ObjectModel;
+using System;
 
 namespace JiraAssistant.ViewModel
 {
@@ -25,6 +27,8 @@ namespace JiraAssistant.ViewModel
          BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1);
          ClearMessageCommand = new RelayCommand(() => { UserMessage = ""; });
          OpenSettingsCommand = new RelayCommand(() => NavigateTo(new ApplicationSettings()));
+         BackToPageCommand = new RelayCommand<NavigationHistoryEntry>(BackToPage);
+         NavigationHistory = new ObservableCollection<NavigationHistoryEntry>();
       }
 
       public RelayCommand BackCommand { get; private set; }
@@ -32,10 +36,7 @@ namespace JiraAssistant.ViewModel
 
       public AnimationState CollapseAnimationState
       {
-         get
-         {
-            return _collapseAnimationState;
-         }
+         get { return _collapseAnimationState; }
          set
          {
             _collapseAnimationState = value;
@@ -45,10 +46,7 @@ namespace JiraAssistant.ViewModel
 
       public AnimationState ExpandAnimationState
       {
-         get
-         {
-            return _expandAnimationState;
-         }
+         get { return _expandAnimationState; }
          set
          {
             _expandAnimationState = value;
@@ -58,10 +56,7 @@ namespace JiraAssistant.ViewModel
 
       public INavigationPage CurrentPage
       {
-         get
-         {
-            return _currentPage;
-         }
+         get { return _currentPage; }
          set
          {
             _currentPage = value;
@@ -85,6 +80,22 @@ namespace JiraAssistant.ViewModel
       }
 
       public RelayCommand OpenSettingsCommand { get; private set; }
+      public ObservableCollection<NavigationHistoryEntry> NavigationHistory { get; private set; }
+      public RelayCommand<NavigationHistoryEntry> BackToPageCommand { get; private set; }
+
+      private async void BackToPage(NavigationHistoryEntry entry)
+      {
+         if (_navigationHistory.Peek() == entry.Page)
+            return;
+
+         while (_navigationHistory.Peek() != entry.Page)
+         {
+            _navigationHistory.Pop();
+            NavigationHistory.RemoveAt(0);
+         }
+
+         await SetPage();
+      }
 
       public async void Back()
       {
@@ -92,6 +103,7 @@ namespace JiraAssistant.ViewModel
             return;
 
          _navigationHistory.Pop();
+         NavigationHistory.RemoveAt(0);
          if (_navigationHistory.Count == 1)
          {
             await _jiraApi.Session.Logout();
@@ -102,7 +114,7 @@ namespace JiraAssistant.ViewModel
       public async void NavigateTo(INavigationPage page)
       {
          _navigationHistory.Push(page);
-
+         NavigationHistory.Insert(0, new NavigationHistoryEntry(page));
          await SetPage();
       }
 
@@ -156,9 +168,23 @@ namespace JiraAssistant.ViewModel
       public async void ClearHistory()
       {
          while (_navigationHistory.Count > 1)
+         {
             _navigationHistory.Pop();
+            NavigationHistory.RemoveAt(0);
+         }
 
          await SetPage();
       }
+   }
+
+   public class NavigationHistoryEntry
+   {
+      public NavigationHistoryEntry(INavigationPage page)
+      {
+         Page = page;
+         Title = page.Title;
+      }
+      public INavigationPage Page { get; private set; }
+      public string Title { get; private set; }
    }
 }

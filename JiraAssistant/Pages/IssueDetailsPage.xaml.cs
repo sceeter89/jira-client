@@ -14,5 +14,6 @@ namespace JiraAssistant.Pages
       }
 
       public JiraIssue Issue { get; private set; }
+      public override string Title { get { return string.Format("Issue: {0}", Issue.Key); } }
    }
 }

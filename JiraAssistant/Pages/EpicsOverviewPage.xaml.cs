@@ -72,6 +72,7 @@ namespace JiraAssistant.Pages
       }
 
       public RelayCommand<IList<JiraIssue>> ShowIssuesCommand { get; private set; }
+      public override string Title { get { return "Epics overview"; } }
    }
 
    public class EpicShare

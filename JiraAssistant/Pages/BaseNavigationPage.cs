@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace JiraAssistant.Pages
 {
-   public class BaseNavigationPage : UserControl, INavigationPage, INotifyPropertyChanged
+   public abstract class BaseNavigationPage : UserControl, INavigationPage, INotifyPropertyChanged
    {
       public BaseNavigationPage()
       {
@@ -28,17 +28,18 @@ namespace JiraAssistant.Pages
          get; protected set;
       }
 
+      public abstract string Title
+      {
+         get;
+      }
+
       public event PropertyChangedEventHandler PropertyChanged;
 
       public virtual void OnNavigatedFrom()
-      {
-
-      }
+      { }
 
       public virtual void OnNavigatedTo()
-      {
-
-      }
+      { }
 
       protected void RaisePropertyChanged([CallerMemberName]string memberName = null)
       {

@@ -80,5 +80,6 @@ namespace JiraAssistant.Pages
       public ICommand BrowseIssuesCommand { get; private set; }
       public RawAgileSprint Sprint { get; private set; }
       public IList<JiraIssue> Issues { get; private set; }
+      public override string Title { get { return string.Format("Sprint: {0}", Sprint.Name); } }
    }
 }

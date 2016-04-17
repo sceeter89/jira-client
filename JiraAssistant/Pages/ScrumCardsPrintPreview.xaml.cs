@@ -186,6 +186,7 @@ namespace JiraAssistant.Pages
       public IEnumerable<JiraIssue> Issues { get; private set; }
       public RelayCommand PreviousPageCommand { get; private set; }
       public RelayCommand NextPageCommand { get; private set; }
+      public override string Title { get { return "Scrum cards"; } }
    }
 
    public class PrintPreviewPage

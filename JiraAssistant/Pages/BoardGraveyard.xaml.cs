@@ -83,6 +83,7 @@ namespace JiraAssistant.Pages
          });
       }
 
+      public override string Title { get { return "Issues graveyard"; } }
       public IList<JiraIssue> Issues { get; private set; }
       public ObservableCollection<JiraIssue> OldUpdated { get; private set; }
       public ObservableCollection<JiraIssue> OldCreated { get; private set; }

@@ -34,5 +34,7 @@ namespace JiraAssistant.Pages
          var viewModel = DataContext as MainMenuViewModel;
          viewModel.OnNavigatedTo();
       }
+
+      public string Title { get { return "Main menu"; } }
    }
 }

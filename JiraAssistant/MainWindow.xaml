@@ -40,8 +40,8 @@
          <Setter Property="IsEnabled" Value="True" />
          <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-               <Setter Property="Foreground" Value="DarkGray"/>
-               <Setter Property="Background" Value="DarkGray"/>
+               <Setter Property="Foreground" Value="DarkGray" />
+               <Setter Property="Background" Value="DarkGray" />
             </Trigger>
          </Style.Triggers>
       </Style>
@@ -112,6 +112,25 @@
          <Button ToolTip="Back" Command="{Binding BackCommand}" Margin="5">
             <Image Source="/Assets/Icons/BackIcon.png" Width="30" Height="30"/>
          </Button>
+         <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0"
+                           Content="" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0">
+            <telerik:RadDropDownButton.DropDownContent>
+               <ItemsControl ItemsSource="{Binding NavigationHistory}">
+                  <ItemsControl.ItemTemplate>
+                     <DataTemplate>
+                        <Button Width="150" HorizontalContentAlignment="Left" Content="{Binding Title}"
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.BackToPageCommand}"
+                                CommandParameter="{Binding .}"/>
+                     </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                  <ItemsControl.ItemsPanel>
+                     <ItemsPanelTemplate>
+                        <StackPanel/>
+                     </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+               </ItemsControl>
+            </telerik:RadDropDownButton.DropDownContent>
+         </telerik:RadDropDownButton>
          <Button ToolTip="Back" Command="{Binding OpenSettingsCommand}" Margin="5">
             <Image Source="/Assets/Icons/Settings.png" Width="30" Height="30"/>
          </Button>

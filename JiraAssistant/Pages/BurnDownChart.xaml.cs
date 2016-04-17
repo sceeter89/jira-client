@@ -103,6 +103,8 @@ namespace JiraAssistant.Pages
          else
             BurndownSeriesBrush = new SolidColorBrush(Color.FromRgb(0, 181, 27));
       }
+
+      public override string Title { get { return "Burn-down chart"; } }
    }
 
    public class DataPoint

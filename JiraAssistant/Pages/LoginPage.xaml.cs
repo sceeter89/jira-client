@@ -40,5 +40,7 @@ namespace JiraAssistant.Pages
          var viewModel = DataContext as LoginPageViewModel;
          viewModel.AttemptAutoLogin();
       }
+
+      public string Title { get { return "Login page (Log out)"; } }
    }
 }

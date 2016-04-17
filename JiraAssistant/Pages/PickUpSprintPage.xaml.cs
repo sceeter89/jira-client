@@ -35,5 +35,6 @@ namespace JiraAssistant.Pages
 
       public RelayCommand<RawAgileSprint> PickUpSprintCommand { get; private set; }
       public ObservableCollection<RawAgileSprint> Sprints { get; set; }
+      public override string Title { get { return "Sprints selection"; } }
    }
 }

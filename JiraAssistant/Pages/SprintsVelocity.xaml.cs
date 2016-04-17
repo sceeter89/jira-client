@@ -59,6 +59,7 @@ namespace JiraAssistant.Pages
       public ObservableCollection<SprintStatistic> Minimum { get; private set; }
       public ObservableCollection<SprintStatistic> Maximum { get; private set; }
       public ObservableCollection<SprintStatistic> Average { get; private set; }
+      public override string Title { get { return "Sprints' velocity"; } }
 
       public class SprintStatistic
       {

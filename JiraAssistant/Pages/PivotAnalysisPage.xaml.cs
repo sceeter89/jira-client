@@ -47,5 +47,6 @@ namespace JiraAssistant.Pages
             RaisePropertyChanged();
          }
       }
+      public override string Title { get { return "Pivot analysis"; } }
    }
 }

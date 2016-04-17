@@ -292,7 +292,8 @@ namespace JiraAssistant.Pages
       }
 
       public RelayCommand RefreshDataCommand { get; private set; }
-      public RawAgileBoard Board { get; private set; }
       public RelayCommand FetchChangesCommand { get; private set; }
+      public RawAgileBoard Board { get; private set; }
+      public override string Title { get { return string.Format("Board: {0}", Board.Name); } }
    }
 }
