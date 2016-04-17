@@ -64,7 +64,7 @@ namespace JiraAssistant.Pages
 
          SprintDetailsCommand = new RelayCommand(OpenSprintDetails, () => Board.Type == "scrum");
          OpenPivotAnalysisCommand = new RelayCommand(() => _navigator.NavigateTo(new PivotAnalysisPage(Issues)));
-         OpenEpicsOverviewCommand = new RelayCommand(() => _navigator.NavigateTo(new EpicsOverviewPage(Issues, Epics)));
+         OpenEpicsOverviewCommand = new RelayCommand(() => _navigator.NavigateTo(new EpicsOverviewPage(Issues, Epics, _iocContainer)));
          BrowseIssuesCommand = new RelayCommand(() => _navigator.NavigateTo(new BrowseIssuesPage(Issues, _iocContainer)));
          OpenGraveyardCommand = new RelayCommand(() => _navigator.NavigateTo(new BoardGraveyard(Issues, _iocContainer)));
          OpenSprintsVelocityCommand = new RelayCommand(() => _navigator.NavigateTo(new SprintsVelocity(IssuesInSprint, Sprints, _iocContainer)), () => Board.Type == "scrum");
