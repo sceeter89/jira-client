@@ -8,7 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Services.Jira;
 using JiraAssistant.Pages;
 using System.Collections.ObjectModel;
-using System;
+using JiraAssistant.Model.Exceptions;
 
 namespace JiraAssistant.ViewModel
 {
@@ -24,7 +24,7 @@ namespace JiraAssistant.ViewModel
       public MainViewModel(IJiraApi jiraApi)
       {
          _jiraApi = jiraApi;
-         BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1);
+         BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1 && _navigationHistory.Peek().GetType() != typeof(ApplicationSettings));
          ClearMessageCommand = new RelayCommand(() => { UserMessage = ""; });
          OpenSettingsCommand = new RelayCommand(() => NavigateTo(new ApplicationSettings()));
          BackToPageCommand = new RelayCommand<NavigationHistoryEntry>(BackToPage);
@@ -106,7 +106,12 @@ namespace JiraAssistant.ViewModel
          NavigationHistory.RemoveAt(0);
          if (_navigationHistory.Count == 1)
          {
-            await _jiraApi.Session.Logout();
+            try
+            {
+               await _jiraApi.Session.Logout();
+            }
+            catch (IncompleteJiraConfiguration)
+            { }
          }
          await SetPage();
       }
@@ -149,6 +154,7 @@ namespace JiraAssistant.ViewModel
             {
                CurrentPage.OnNavigatedTo();
                BackCommand.RaiseCanExecuteChanged();
+               OpenSettingsCommand.RaiseCanExecuteChanged();
             });
          });
       }

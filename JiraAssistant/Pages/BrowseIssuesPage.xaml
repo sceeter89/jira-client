@@ -11,7 +11,8 @@
                           Background="White">
    <Grid>
       <ext:BindableRadGridView ItemsSource="{Binding Issues}" AutoGenerateColumns="False" SelectionMode="Single"
-                           SelectedItem="{Binding SelectedIssue, Mode=OneWayToSource}" MouseDoubleClick="ItemDoubleClick"
-                           ColumnsCollection="{Binding Source={StaticResource Locator}, Path=IssuesSettings.SelectedColumns}"/>
+                               SelectedItem="{Binding SelectedIssue, Mode=OneWayToSource}" MouseDoubleClick="ItemDoubleClick"
+                               ColumnsCollection="{Binding Source={StaticResource Locator}, Path=IssuesSettings.SelectedColumns}"
+                               x:Name="grid"/>
    </Grid>
 </local:BaseNavigationPage>

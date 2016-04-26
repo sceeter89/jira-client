@@ -12,6 +12,12 @@ using Telerik.Windows.Data;
 using JiraAssistant.Dialogs;
 using System.Text;
 using System.Text.RegularExpressions;
+using Telerik.Windows.Persistence.Services;
+using JiraAssistant.Extensions;
+using Telerik.Windows.Persistence;
+using System.IO.IsolatedStorage;
+using System.IO;
+using System.Windows;
 
 namespace JiraAssistant.Pages
 {
@@ -19,10 +25,17 @@ namespace JiraAssistant.Pages
    {
       private readonly INavigator _navigator;
       private readonly IContainer _iocContainer;
+      private readonly IsolatedStorageFile _storage;
+      private readonly string _directoryName;
 
       public BrowseIssuesPage(IList<JiraIssue> issues, IContainer iocContainer)
       {
          InitializeComponent();
+         ServiceProvider.RegisterPersistenceProvider<ICustomPropertyProvider>(typeof(BindableRadGridView), new BindableGridViewPropertyProvider());
+         _storage = IsolatedStorageFile.GetUserStoreForAssembly();
+         _directoryName = Path.Combine("Settings", "GridFilters");
+         if (_storage.DirectoryExists(_directoryName) == false)
+            _storage.CreateDirectory(_directoryName);
 
          Issues = new QueryableCollectionView(issues);
          _iocContainer = iocContainer;
@@ -45,8 +58,59 @@ namespace JiraAssistant.Pages
             Command = new RelayCommand(ExportAsConfluenceMarkupResults),
             Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ConfluenceIcon.png"))
          });
+         Buttons.Add(new ToolbarButton
+         {
+            Tooltip = "Save current filter",
+            Command = new RelayCommand(SaveGridState),
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/SaveIcon.png"))
+         });
+         Buttons.Add(new ToolbarButton
+         {
+            Tooltip = "Saved filters",
+            Command = new RelayCommand(LoadGridState),
+            Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/FilterIcon.png"))
+         });
 
          DataContext = this;
+      }
+
+      private void SaveGridState()
+      {
+         var dialog = new FilterNameDialog();
+         if (dialog.ShowDialog() == false)
+            return;
+
+         var name = Regex.Replace(dialog.FilterName, @"[^\w\s]", "_");
+
+         if (_storage.FileExists(Path.Combine(_directoryName, name)))
+         {
+            var result = MessageBox.Show("Do you want to overwrite existing filter?", "JIRA Assistant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.No)
+               return;
+         }
+
+         var manager = new PersistenceManager();
+         var savedState = manager.Save(grid);
+         using (var reader = new StreamReader(savedState))
+         using (var writer = new StreamWriter(_storage.OpenFile(Path.Combine(_directoryName, name), FileMode.Create)))
+         {
+            writer.Write(reader.ReadToEnd());
+         }
+      }
+
+      private void LoadGridState()
+      {
+         var filters = _storage.GetFileNames(Path.Combine(_directoryName, "*"));
+         var dialog = new SelectFilterDialog(filters);
+         if (dialog.ShowDialog() == false)
+            return;
+
+         var manager = new PersistenceManager();
+         using (var reader = _storage.OpenFile(Path.Combine(_directoryName, dialog.FilterName), FileMode.Open))
+         {
+            manager.Load(grid, reader);
+         }
       }
 
       private void ExportAsConfluenceMarkupResults()
