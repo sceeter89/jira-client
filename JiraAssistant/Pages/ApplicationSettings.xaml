@@ -11,10 +11,12 @@
    <Grid>
       <telerik:RadTabControl TabStripPlacement="Left" TabOrientation="Vertical"
                              SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
-         <telerik:RadTabItem Header="Updates" DataContext="{Binding Source={StaticResource Locator}, Path=UpdateSettings}">
+         <telerik:RadTabItem Header="General" DataContext="{Binding Source={StaticResource Locator}, Path=GeneralSettings}">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                <Grid>
                   <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
@@ -38,6 +40,12 @@
 
                   <TextBlock Text="Only stable versions: " Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
                   <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding OnlyStableVersions, Mode=TwoWay}" />
+
+                  <TextBlock Text="Run on windows start: " Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding RunOnWindowsStart, Mode=TwoWay}" />
+
+                  <TextBlock Text="Close to tray: " Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding CloseToTray, Mode=TwoWay}" />
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>

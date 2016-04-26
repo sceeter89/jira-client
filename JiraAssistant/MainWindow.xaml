@@ -6,10 +6,11 @@
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
         xmlns:model="clr-namespace:JiraAssistant.Model.Ui"
         xmlns:converters="clr-namespace:JiraAssistant.Converters"
+        xmlns:tb="http://www.hardcodet.net/taskbar" 
         Title="{Binding ApplicationTitle}" Height="700" Width="800"
         Icon="/Assets/Icons/ApplicationIcon.png"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
-        Background="LightGray">
+        Background="LightGray" Visibility="{Binding WindowVisibility}">
    <Window.Resources>
       <Storyboard x:Key="CollapseAnimation">
          <DoubleAnimation Storyboard.TargetName="DocumentHost" 
@@ -167,5 +168,9 @@
                     VerticalAlignment="Center"/>
          </Grid>
       </Border>
+
+      <tb:TaskbarIcon IconSource="/Icon.ico"
+                      ToolTipText="JIRA Assistant" 
+                      LeftClickCommand="{Binding ActivateWindowCommand}"/>
    </Grid>
 </Window>

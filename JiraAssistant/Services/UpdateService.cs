@@ -21,13 +21,13 @@ namespace JiraAssistant.Services
    {
       private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
       private const string EndpointUrl = "https://api.github.com/repos/sceeter89/jira-client/releases";
-      private readonly UpdateSettings _settings;
+      private readonly GeneralSettings _settings;
       private bool _runInstaller;
       private bool _showInstallerUi;
       private string _installerPath;
       private readonly MainViewModel _mainViewModel;
 
-      public UpdateService(UpdateSettings settings, MainViewModel mainViewModel)
+      public UpdateService(GeneralSettings settings, MainViewModel mainViewModel)
       {
          _settings = settings;
 

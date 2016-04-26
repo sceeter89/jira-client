@@ -54,9 +54,9 @@ namespace JiraAssistant.ViewModel
          get { return IocContainer.Resolve<GraveyardSettings>(); }
       }
 
-      public UpdateSettings UpdateSettings
+      public GeneralSettings GeneralSettings
       {
-         get { return IocContainer.Resolve<UpdateSettings>(); }
+         get { return IocContainer.Resolve<GeneralSettings>(); }
       }
 
       public IssuesSettings IssuesSettings

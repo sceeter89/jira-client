@@ -12,6 +12,10 @@ namespace JiraAssistant
             var viewModel = DataContext as MainViewModel;
             viewModel.NavigateTo(new LoginPage());
          };
+         Closing += (sender, args) => {
+            var viewModel = DataContext as MainViewModel;
+            viewModel.HandleClosing(args);
+         };
       }
    }
 }

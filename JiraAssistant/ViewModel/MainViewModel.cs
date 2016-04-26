@@ -9,6 +9,9 @@ using JiraAssistant.Services.Jira;
 using JiraAssistant.Pages;
 using System.Collections.ObjectModel;
 using JiraAssistant.Model.Exceptions;
+using JiraAssistant.Services.Settings;
+using System.Windows;
+using System.ComponentModel;
 
 namespace JiraAssistant.ViewModel
 {
@@ -20,8 +23,9 @@ namespace JiraAssistant.ViewModel
       private AnimationState _expandAnimationState;
       private readonly IJiraApi _jiraApi;
       private string _userMessage;
+      private Visibility _windowVisibility;
 
-      public MainViewModel(IJiraApi jiraApi)
+      public MainViewModel(IJiraApi jiraApi, GeneralSettings settings)
       {
          _jiraApi = jiraApi;
          BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1 && _navigationHistory.Peek().GetType() != typeof(ApplicationSettings));
@@ -29,6 +33,9 @@ namespace JiraAssistant.ViewModel
          OpenSettingsCommand = new RelayCommand(() => NavigateTo(new ApplicationSettings()));
          BackToPageCommand = new RelayCommand<NavigationHistoryEntry>(BackToPage);
          NavigationHistory = new ObservableCollection<NavigationHistoryEntry>();
+         Settings = settings;
+
+         ActivateWindowCommand = new RelayCommand(() => WindowVisibility = Visibility.Visible);
       }
 
       public RelayCommand BackCommand { get; private set; }
@@ -82,6 +89,18 @@ namespace JiraAssistant.ViewModel
       public RelayCommand OpenSettingsCommand { get; private set; }
       public ObservableCollection<NavigationHistoryEntry> NavigationHistory { get; private set; }
       public RelayCommand<NavigationHistoryEntry> BackToPageCommand { get; private set; }
+      public GeneralSettings Settings { get; private set; }
+      public Visibility WindowVisibility
+      {
+         get { return _windowVisibility; }
+         set
+         {
+            _windowVisibility = value;
+            RaisePropertyChanged();
+         }
+      }
+
+      public RelayCommand ActivateWindowCommand { get; private set; }
 
       private async void BackToPage(NavigationHistoryEntry entry)
       {
@@ -180,6 +199,15 @@ namespace JiraAssistant.ViewModel
          }
 
          await SetPage();
+      }
+
+      internal void HandleClosing(CancelEventArgs args)
+      {
+         if (Settings.CloseToTray)
+         {
+            WindowVisibility = Visibility.Hidden;
+            args.Cancel = true;
+         }
       }
    }
 
