@@ -176,6 +176,29 @@
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>
+
+         <telerik:RadTabItem Header="Reports" DataContext="{Binding Source={StaticResource Locator}, Path=ReportsSettings}">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+               <Grid>
+                  <Grid.RowDefinitions>
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                     <ColumnDefinition Width="Auto" />
+                     <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  
+                  <TextBlock Text="Remind to fill work log: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding RemindAboutWorklog, Mode=TwoWay}" />
+
+                  <TextBlock Text="Remind at: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <telerik:RadTimePicker Grid.Column="1" Margin="3" Grid.Row="1" SelectedValue="{Binding RemindAt, Mode=TwoWay}"
+                                         TimeInterval="00:30:00" StartTime="08:00:00" EndTime="20:00:00"/>
+               </Grid>
+            </ScrollViewer>
+         </telerik:RadTabItem>
       </telerik:RadTabControl>
    </Grid>
 </local:BaseNavigationPage>

@@ -69,6 +69,11 @@ namespace JiraAssistant.ViewModel
          get { return IocContainer.Resolve<AnalysisSettings>(); }
       }
 
+      public ReportsSettings ReportsSettings
+      {
+         get { return IocContainer.Resolve<ReportsSettings>(); }
+      }
+
       public static void Cleanup()
       {
          IocContainer.Dispose();

@@ -102,6 +102,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -126,6 +128,7 @@
       <HintPath>..\lib\RCWPF\2016.1.217.45.NoXaml\Telerik.Windows.Controls.Chart.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Expressions, Version=2016.1.217.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <HintPath>..\lib\RCWPF\2016.1.217.45.NoXaml\Telerik.Windows.Controls.Expressions.dll</HintPath>
       <Private>True</Private>
@@ -206,6 +209,9 @@
     <Compile Include="Converters\BoolToVisibleConverter.cs" />
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\LogWorkDialog.xaml.cs">
+      <DependentUpon>LogWorkDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\SelectFilterDialog.xaml.cs">
       <DependentUpon>SelectFilterDialog.xaml</DependentUpon>
@@ -305,11 +311,13 @@
     <Compile Include="Services\Jira\JiraApi.cs" />
     <Compile Include="Services\Settings\AnalysisSettings.cs" />
     <Compile Include="Services\Settings\AssistantSettings.cs" />
+    <Compile Include="Services\Settings\ReportsSettings.cs" />
     <Compile Include="Services\Settings\IssuesSettings.cs" />
     <Compile Include="Services\Settings\GraveyardSettings.cs" />
     <Compile Include="Services\Settings\SettingsBase.cs" />
     <Compile Include="Services\Settings\GeneralSettings.cs" />
     <Compile Include="Services\UpdateService.cs" />
+    <Compile Include="Services\WorkLogUpdater.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />
@@ -351,6 +359,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\ColorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\LogWorkDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
