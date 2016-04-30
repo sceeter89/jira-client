@@ -65,7 +65,6 @@ namespace JiraAssistant.Services.Resources
             if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
             {
                Configuration.JiraSessionId = "";
-               RaiseOnLogout();
                return false;
             }
 
@@ -74,7 +73,6 @@ namespace JiraAssistant.Services.Resources
          }
          catch (UriFormatException)
          {
-            RaiseOnLogout();
             return false;
          }
       }
