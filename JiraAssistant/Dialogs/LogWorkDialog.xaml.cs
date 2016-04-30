@@ -30,7 +30,7 @@ namespace JiraAssistant.Dialogs
 
    public class WorkLogEntry
    {
-      public int Hours { get; set; }
+      public double Hours { get; set; }
       public JiraIssue Issue { get; set; }
    }
 }

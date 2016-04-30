@@ -15,7 +15,7 @@ namespace JiraAssistant.Services.Resources
       {
       }
 
-      public async Task Log(JiraIssue issue, float hoursSpent)
+      public async Task Log(JiraIssue issue, double hoursSpent)
       {
          var client = BuildRestClient();
 

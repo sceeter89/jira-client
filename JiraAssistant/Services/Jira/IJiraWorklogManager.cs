@@ -5,6 +5,6 @@ namespace JiraAssistant.Services.Jira
 {
    public interface IJiraWorklogManager
    {
-      Task Log(JiraIssue issue, float hoursSpent);
+      Task Log(JiraIssue issue, double hoursSpent);
    }
 }
