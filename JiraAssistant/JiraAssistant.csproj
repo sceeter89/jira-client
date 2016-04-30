@@ -230,7 +230,6 @@
     </Compile>
     <Compile Include="Extensions\BindableGridViewPropertyProvider.cs" />
     <Compile Include="Extensions\BindableGridViewProxies.cs" />
-    <Compile Include="Extensions\IsolatedStorageExtensions.cs" />
     <Compile Include="Extensions\BindableRadGridView.cs" />
     <Compile Include="Model\AgileBoardCacheMetadata.cs" />
     <Compile Include="Model\Exceptions\CacheCorruptedException.cs" />

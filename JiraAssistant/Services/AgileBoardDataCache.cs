@@ -1,5 +1,4 @@
-﻿using JiraAssistant.Extensions;
-using JiraAssistant.Model;
+﻿using JiraAssistant.Model;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
 using Newtonsoft.Json;
@@ -7,7 +6,6 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,18 +20,16 @@ namespace JiraAssistant.Services
       private readonly DateTime _initialDateTime = new DateTime(1970, 1, 1);
 
       private readonly int _boardId;
-      private readonly string _directoryName;
       private AgileBoardCacheMetadata _metadata;
-      private readonly IsolatedStorageFile _storage;
+      private readonly string _cachePath;
       private readonly string _jiraUrl;
 
       public AgileBoardDataCache(string baseCacheDirectory, int boardId, string jiraUrl)
       {
          _boardId = boardId;
          _jiraUrl = jiraUrl;
-         _directoryName = Path.Combine(baseCacheDirectory, "AgileBoards", boardId.ToString());
-
-         _storage = IsolatedStorageFile.GetUserStoreForAssembly();
+         _cachePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                                           "Yakuza", "Jira Assistant", "Cache", "AgileBoards", boardId.ToString());
 
          FetchCacheInformation();
       }
@@ -42,14 +38,14 @@ namespace JiraAssistant.Services
 
       private void FetchCacheInformation()
       {
-         if (_storage.DirectoryExists(_directoryName) == false)
+         if (Directory.Exists(_cachePath) == false)
          {
             IsAvailable = false;
             return;
          }
 
-         var metaFilePath = Path.Combine(_directoryName, MetaFileName);
-         if (_storage.FileExists(metaFilePath) == false)
+         var metaFilePath = Path.Combine(_cachePath, MetaFileName);
+         if (File.Exists(_cachePath) == false)
          {
             IsAvailable = false;
             return;
@@ -57,8 +53,7 @@ namespace JiraAssistant.Services
 
          try
          {
-            using (var stream = _storage.OpenFile(metaFilePath, FileMode.Open))
-            using (var reader = new StreamReader(stream))
+            using (var reader = new StreamReader(metaFilePath))
             {
                _metadata = JsonConvert.DeserializeObject<AgileBoardCacheMetadata>(reader.ReadToEnd());
 
@@ -113,10 +108,9 @@ namespace JiraAssistant.Services
             ModelVersion = JiraIssue.ModelVersion
          };
 
-         var metaFilePath = Path.Combine(_directoryName, MetaFileName);
+         var metaFilePath = Path.Combine(_cachePath, MetaFileName);
 
-         using (var stream = _storage.OpenFile(metaFilePath, FileMode.Create))
-         using (var writer = new StreamWriter(stream))
+         using (var writer = new StreamWriter(metaFilePath))
          {
             await writer.WriteAsync(JsonConvert.SerializeObject(metadata));
          }
@@ -124,15 +118,14 @@ namespace JiraAssistant.Services
 
       private async Task DumpCache(IEnumerable<JiraIssue> updatedCache)
       {
-         if (_storage.DirectoryExists(_directoryName) == false)
-            _storage.CreateDirectory(_directoryName);
+         if (Directory.Exists(_cachePath) == false)
+            Directory.CreateDirectory(_cachePath);
 
-         var issuesCachePath = Path.Combine(_directoryName, IssuesCacheFileName);
+         var issuesCachePath = Path.Combine(_cachePath, IssuesCacheFileName);
 
          await Task.Factory.StartNew(async () =>
          {
-            using (var stream = _storage.OpenFile(issuesCachePath, FileMode.Create))
-            using (var writer = new StreamWriter(stream))
+            using (var writer = new StreamWriter(issuesCachePath))
             {
                foreach (var issue in updatedCache)
                {
@@ -145,15 +138,14 @@ namespace JiraAssistant.Services
 
       private async Task<IEnumerable<JiraIssue>> LoadIssuesFromCache()
       {
-         var issuesCachePath = Path.Combine(_directoryName, IssuesCacheFileName);
+         var issuesCachePath = Path.Combine(_cachePath, IssuesCacheFileName);
 
          var result = new List<JiraIssue>();
 
-         if (_storage.FileExists(issuesCachePath) == false)
+         if (File.Exists(issuesCachePath) == false)
             return result;
 
-         using (var stream = _storage.OpenFile(issuesCachePath, FileMode.Open))
-         using (var reader = new StreamReader(stream))
+         using (var reader = new StreamReader(issuesCachePath))
          {
             string line = null;
             while ((line = await reader.ReadLineAsync()) != null)
@@ -176,16 +168,17 @@ namespace JiraAssistant.Services
 
       private async void InitializeCacheDirectory()
       {
-         _storage.DeleteFolder(_directoryName);
+         if (Directory.Exists(_cachePath))
+            Directory.Delete(_cachePath, recursive: true);
 
-         _storage.CreateDirectory(_directoryName);
+         Directory.CreateDirectory(_cachePath);
 
          await StoreMetafile();
       }
 
       public void Invalidate()
       {
-         _storage.DeleteFolder(_directoryName);
+         Directory.Delete(_cachePath, recursive: true);
          FetchCacheInformation();
       }
    }

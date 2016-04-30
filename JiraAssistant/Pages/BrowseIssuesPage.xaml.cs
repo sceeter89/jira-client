@@ -15,7 +15,6 @@ using System.Text.RegularExpressions;
 using Telerik.Windows.Persistence.Services;
 using JiraAssistant.Extensions;
 using Telerik.Windows.Persistence;
-using System.IO.IsolatedStorage;
 using System.IO;
 using System.Windows;
 
@@ -25,17 +24,15 @@ namespace JiraAssistant.Pages
    {
       private readonly INavigator _navigator;
       private readonly IContainer _iocContainer;
-      private readonly IsolatedStorageFile _storage;
-      private readonly string _directoryName;
+      private readonly string _settingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                                           "Yakuza", "Jira Assistant", "GridFilters");
 
       public BrowseIssuesPage(IList<JiraIssue> issues, IContainer iocContainer)
       {
          InitializeComponent();
          ServiceProvider.RegisterPersistenceProvider<ICustomPropertyProvider>(typeof(BindableRadGridView), new BindableGridViewPropertyProvider());
-         _storage = IsolatedStorageFile.GetUserStoreForAssembly();
-         _directoryName = Path.Combine("Settings", "GridFilters");
-         if (_storage.DirectoryExists(_directoryName) == false)
-            _storage.CreateDirectory(_directoryName);
+         if (Directory.Exists(_settingsPath) == false)
+            Directory.CreateDirectory(_settingsPath);
 
          Issues = new QueryableCollectionView(issues);
          _iocContainer = iocContainer;
@@ -82,7 +79,7 @@ namespace JiraAssistant.Pages
 
          var name = Regex.Replace(dialog.FilterName, @"[^\w\s]", "_");
 
-         if (_storage.FileExists(Path.Combine(_directoryName, name)))
+         if (File.Exists(Path.Combine(_settingsPath, name)))
          {
             var result = MessageBox.Show("Do you want to overwrite existing filter?", "JIRA Assistant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
@@ -93,7 +90,7 @@ namespace JiraAssistant.Pages
          var manager = new PersistenceManager();
          var savedState = manager.Save(grid);
          using (var reader = new StreamReader(savedState))
-         using (var writer = new StreamWriter(_storage.OpenFile(Path.Combine(_directoryName, name), FileMode.Create)))
+         using (var writer = new StreamWriter(Path.Combine(_settingsPath, name)))
          {
             writer.Write(reader.ReadToEnd());
          }
@@ -101,15 +98,15 @@ namespace JiraAssistant.Pages
 
       private void LoadGridState()
       {
-         var filters = _storage.GetFileNames(Path.Combine(_directoryName, "*"));
+         var filters = Directory.EnumerateFiles(_settingsPath).ToArray();
          var dialog = new SelectFilterDialog(filters);
          if (dialog.ShowDialog() == false)
             return;
 
          var manager = new PersistenceManager();
-         using (var reader = _storage.OpenFile(Path.Combine(_directoryName, dialog.FilterName), FileMode.Open))
+         using (var stream = File.OpenRead(Path.Combine(_settingsPath, dialog.FilterName)))
          {
-            manager.Load(grid, reader);
+            manager.Load(grid, stream);
          }
       }
 

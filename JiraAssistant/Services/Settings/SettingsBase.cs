@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Runtime.CompilerServices;
 
 namespace JiraAssistant.Services.Settings
@@ -11,7 +10,8 @@ namespace JiraAssistant.Services.Settings
    public class SettingsBase : INotifyPropertyChanged
    {
       private readonly string _filePath;
-      private readonly IsolatedStorageFile _storage = IsolatedStorageFile.GetUserStoreForAssembly();
+      private readonly string _settingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                                           "Yakuza", "Jira Assistant");
       private IDictionary<string, object> _settings = new Dictionary<string, object>();
 
       public event PropertyChangedEventHandler PropertyChanged;
@@ -20,21 +20,20 @@ namespace JiraAssistant.Services.Settings
       {
          var fileName = string.Format("{0}.json", GetType().Name);
 
-         if (_storage.DirectoryExists("Settings") == false)
-            _storage.CreateDirectory("Settings");
+         if (Directory.Exists(_settingsPath) == false)
+            Directory.CreateDirectory(_settingsPath);
 
-         _filePath = Path.Combine("Settings", fileName);
+         _filePath = Path.Combine(_settingsPath, fileName);
 
          Load();
       }
 
       private void Load()
       {
-         if (_storage.FileExists(_filePath) == false)
+         if (File.Exists(_filePath) == false)
             return;
-
-         using (var stream = _storage.OpenFile(_filePath, FileMode.Open))
-         using (var reader = new StreamReader(stream))
+         
+         using (var reader = new StreamReader(_filePath))
          {
             _settings = JsonConvert.DeserializeObject<IDictionary<string, object>>(reader.ReadToEnd()) ?? _settings;
          }
@@ -42,8 +41,7 @@ namespace JiraAssistant.Services.Settings
 
       private void Save()
       {
-         using (var stream = _storage.OpenFile(_filePath, FileMode.Create))
-         using (var writer = new StreamWriter(stream))
+         using (var writer = new StreamWriter(_filePath))
          {
             _settings["$$__last_save_date__$$"] = DateTime.Now;
             writer.Write(JsonConvert.SerializeObject(_settings));
