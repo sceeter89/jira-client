@@ -308,7 +308,9 @@
     <Compile Include="Services\Jira\IJiraApi.cs" />
     <Compile Include="Services\Jira\IJiraServerApi.cs" />
     <Compile Include="Services\Jira\IJiraSessionApi.cs" />
+    <Compile Include="Services\Jira\IJiraWorklogManager.cs" />
     <Compile Include="Services\Jira\JiraApi.cs" />
+    <Compile Include="Services\Resources\WorklogManager.cs" />
     <Compile Include="Services\Settings\AnalysisSettings.cs" />
     <Compile Include="Services\Settings\AssistantSettings.cs" />
     <Compile Include="Services\Settings\ReportsSettings.cs" />
@@ -327,9 +329,6 @@
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainMenuPage.xaml.cs">
-      <DependentUpon>MainMenuPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Services\INavigator.cs" />
     <Compile Include="Services\Resources\BaseRestService.cs" />
     <Compile Include="Services\Resources\IssuesFinder.cs" />
@@ -339,7 +338,6 @@
     <Compile Include="Services\Resources\JiraSessionService.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\AgileBoardSelectViewModel.cs" />
-    <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\IssueCollectionStatisticsControl.xaml">
@@ -449,10 +447,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\MainMenuPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\PickUpSprintPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -515,6 +509,7 @@
     <Resource Include="Assets\Icons\ConfluenceIcon.png" />
     <Resource Include="Assets\Icons\SaveIcon.png" />
     <Resource Include="Assets\Icons\FilterIcon.png" />
+    <Resource Include="Assets\Icons\ToolIcon.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

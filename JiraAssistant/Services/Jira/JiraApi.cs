@@ -2,7 +2,6 @@
 using JiraAssistant.Services.Jira;
 using JiraAssistant.Services.Resources;
 using JiraAssistant.Services.Settings;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -19,6 +18,8 @@ namespace JiraAssistant.Services
          Session = new JiraSessionService(configuration);
          Agile = new JiraAgileService(configuration);
          Server = new MetadataRetriever(configuration);
+         Worklog = new WorklogManager(configuration);
+
          _resourceDownloader = new ResourceDownloader(configuration);
          _issuesFinder = new IssuesFinder(configuration, Server);
       }
@@ -34,6 +35,11 @@ namespace JiraAssistant.Services
       }
 
       public IJiraSessionApi Session
+      {
+         get; private set;
+      }
+
+      public IJiraWorklogManager Worklog
       {
          get; private set;
       }

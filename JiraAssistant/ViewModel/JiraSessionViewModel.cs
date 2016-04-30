@@ -31,7 +31,7 @@ namespace JiraAssistant.ViewModel
          _jiraApi.Session.OnSuccessfulLogin += (sender, args) => LoggedIn();
       }
 
-      private void LoggedOut()
+      internal void LoggedOut()
       {
          IsLoggedIn = false;
          Profile = null;

@@ -172,7 +172,8 @@
                   </Grid.ColumnDefinitions>
 
                   <TextBlock Text="Number of most recent sprints to analyse: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <telerik:RadNumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding NumberOfLastSprintsAnalysed, Mode=TwoWay}" />
+                  <telerik:RadNumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding NumberOfLastSprintsAnalysed, Mode=TwoWay}"
+                                            IsInteger="True"/>
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>

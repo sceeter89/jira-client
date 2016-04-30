@@ -38,9 +38,20 @@ namespace JiraAssistant.Services.Resources
 
          var response = await client.ExecuteTaskAsync(new RestRequest("/rest/auth/1/session", Method.DELETE));
          Configuration.JiraSessionId = "";
-         
+
+         RaiseOnLogout();
+      }
+
+      private void RaiseOnLogout()
+      {
          if (OnLogout != null)
             OnLogout(this, EventArgs.Empty);
+      }
+
+      private void RaiseOnSuccessfulLogin()
+      {
+         if (OnSuccessfulLogin != null)
+            OnSuccessfulLogin(this, EventArgs.Empty);
       }
 
       public async Task<bool> CheckJiraSession()
@@ -54,13 +65,16 @@ namespace JiraAssistant.Services.Resources
             if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
             {
                Configuration.JiraSessionId = "";
+               RaiseOnLogout();
                return false;
             }
 
+            RaiseOnSuccessfulLogin();
             return true;
          }
          catch (UriFormatException)
          {
+            RaiseOnLogout();
             return false;
          }
       }
@@ -103,6 +117,7 @@ namespace JiraAssistant.Services.Resources
             }
 
             Configuration.JiraSessionId = response.Data.Session.Value;
+            RaiseOnSuccessfulLogin();
          }
          catch (UriFormatException)
          {

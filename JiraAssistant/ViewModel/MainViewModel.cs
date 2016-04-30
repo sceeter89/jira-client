@@ -25,17 +25,24 @@ namespace JiraAssistant.ViewModel
       private string _userMessage;
       private Visibility _windowVisibility;
 
-      public MainViewModel(IJiraApi jiraApi, GeneralSettings settings)
+      public MainViewModel(IJiraApi jiraApi, GeneralSettings settings, WorkLogUpdater workLogUpdater)
       {
          _jiraApi = jiraApi;
          BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1 && _navigationHistory.Peek().GetType() != typeof(ApplicationSettings));
          ClearMessageCommand = new RelayCommand(() => { UserMessage = ""; });
          OpenSettingsCommand = new RelayCommand(() => NavigateTo(new ApplicationSettings()));
+         LogWorkCommand = workLogUpdater.LogWorkCommand;
          BackToPageCommand = new RelayCommand<NavigationHistoryEntry>(BackToPage);
+         CloseApplicationCommand = new RelayCommand(CloseApplication);
          NavigationHistory = new ObservableCollection<NavigationHistoryEntry>();
          Settings = settings;
 
          ActivateWindowCommand = new RelayCommand(() => WindowVisibility = Visibility.Visible);
+      }
+
+      private void CloseApplication()
+      {
+         Application.Current.Shutdown();
       }
 
       public RelayCommand BackCommand { get; private set; }
@@ -101,6 +108,8 @@ namespace JiraAssistant.ViewModel
       }
 
       public RelayCommand ActivateWindowCommand { get; private set; }
+      public RelayCommand LogWorkCommand { get; private set; }
+      public RelayCommand CloseApplicationCommand { get; private set; }
 
       private async void BackToPage(NavigationHistoryEntry entry)
       {

@@ -132,9 +132,20 @@
                </ItemsControl>
             </telerik:RadDropDownButton.DropDownContent>
          </telerik:RadDropDownButton>
-         <Button ToolTip="Back" Command="{Binding OpenSettingsCommand}" Margin="5">
-            <Image Source="/Assets/Icons/Settings.png" Width="30" Height="30"/>
+         <Button ToolTip="Settings" Command="{Binding OpenSettingsCommand}" Margin="5">
+            <Image Source="/Assets/Icons/ToolIcon.png" Width="30" Height="30" />
          </Button>
+         <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0"
+                                     ToolTip="Tools">
+            <telerik:RadDropDownButton.DropDownContent>
+               <StackPanel Width="120">
+                  <Button Content="Log work" Command="{Binding LogWorkCommand}" IsEnabled="{Binding Source={StaticResource Locator}, Path=JiraSession.IsLoggedIn}" 
+                          HorizontalContentAlignment="Center" />
+                  <Separator />
+                  <Button Content="Exit" Command="{Binding CloseApplicationCommand}" HorizontalContentAlignment="Center" />
+               </StackPanel>
+            </telerik:RadDropDownButton.DropDownContent>
+         </telerik:RadDropDownButton>
       </StackPanel>
 
       <ContentControl Content="{Binding CurrentPage.Control}" Grid.Row="1"  Grid.ColumnSpan="2"
@@ -171,6 +182,15 @@
 
       <tb:TaskbarIcon IconSource="/Icon.ico"
                       ToolTipText="JIRA Assistant" 
-                      LeftClickCommand="{Binding ActivateWindowCommand}"/>
+                      LeftClickCommand="{Binding ActivateWindowCommand}">
+
+         <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu>
+               <MenuItem Header="Open" Command="{Binding ActivateWindowCommand}" />
+               <Separator />
+               <MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}" />
+            </ContextMenu>
+         </tb:TaskbarIcon.ContextMenu>
+      </tb:TaskbarIcon>
    </Grid>
 </Window>

@@ -14,5 +14,6 @@ namespace JiraAssistant.Services.Jira
       IJiraAgileApi Agile { get; }
       IJiraServerApi Server { get; }
       IJiraSessionApi Session { get; }
+      IJiraWorklogManager Worklog {get; }
    }
 }

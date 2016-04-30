@@ -1,27 +1,36 @@
-﻿using System;
+﻿using JiraAssistant.Model.Jira;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace JiraAssistant.Dialogs
 {
-   /// <summary>
-   /// Interaction logic for LogWorkDialog.xaml
-   /// </summary>
-   public partial class LogWorkDialog : Window
+   public partial class LogWorkDialog
    {
-      public LogWorkDialog()
+      public LogWorkDialog(IEnumerable<JiraIssue> issues)
       {
          InitializeComponent();
+
+         Entries = issues.Select(i => new WorkLogEntry { Issue = i, Hours = 0 }).ToList();
+
+         DataContext = this;
       }
+
+      public IList<WorkLogEntry> Entries { get; private set; }
+
+      private void AcceptClicked(object sender, System.Windows.RoutedEventArgs e)
+      {
+         DialogResult = true;
+      }
+
+      private void CancelClicked(object sender, System.Windows.RoutedEventArgs e)
+      {
+         DialogResult = false;
+      }
+   }
+
+   public class WorkLogEntry
+   {
+      public int Hours { get; set; }
+      public JiraIssue Issue { get; set; }
    }
 }

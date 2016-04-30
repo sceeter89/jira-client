@@ -1,13 +1,54 @@
-﻿<Window x:Class="JiraAssistant.Dialogs.LogWorkDialog"
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="JiraAssistant.Dialogs.LogWorkDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JiraAssistant.Dialogs"
         mc:Ignorable="d"
-        Title="JIRA Assistant" Height="300" Width="300"
+        Title="JIRA Assistant" Height="300" Width="420" MinWidth="420" MinHeight="250"
         Icon="/Assets/Icons/ApplicationIcon.png">
-    <Grid>
-        
-    </Grid>
+   <Grid>
+      <Grid.RowDefinitions>
+         <RowDefinition Height="Auto" />
+         <RowDefinition Height="*" />
+         <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <TextBlock Text="Select how long did you work on these issues today:" HorizontalAlignment="Center" Margin="5" />
+
+      <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto">
+         <ItemsControl ItemsSource="{Binding Entries}" >
+            <ItemsControl.ItemsPanel>
+               <ItemsPanelTemplate>
+                  <StackPanel />
+               </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+               <DataTemplate>
+                  <Grid Width="400" Height="40">
+                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                     </Grid.RowDefinitions>
+                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="80" />
+                     </Grid.ColumnDefinitions>
+                     <TextBlock HorizontalAlignment="Left" Text="{Binding Issue.Key}" FontWeight="DemiBold"/>
+
+                     <TextBlock HorizontalAlignment="Left" Text="{Binding Issue.Summary}" Foreground="DarkGray"
+                             FontStyle="Italic" Grid.Row="1" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+
+                     <telerik:RadNumericUpDown Value="{Binding Hours, Mode=TwoWay}" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" />
+                  </Grid>
+               </DataTemplate>
+            </ItemsControl.ItemTemplate>
+         </ItemsControl>
+      </ScrollViewer>
+            
+      <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="3" Orientation="Horizontal">
+         <Button Content="Log work" Margin="5" Width="70" Click="AcceptClicked" />
+         <Button Content="Cancel" Margin="5" Width="70" Click="CancelClicked" />
+      </StackPanel>
+   </Grid>
 </Window>
