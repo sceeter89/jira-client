@@ -10,6 +10,11 @@ namespace JiraAssistant.Services.Resources
 {
    public class MetadataRetriever : BaseRestService, IJiraServerApi
    {
+      public string ServerUri
+      {
+         get { return Configuration.JiraUrl; }
+      }
+
       public MetadataRetriever(AssistantSettings configuration)
          : base(configuration)
       {

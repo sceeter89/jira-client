@@ -28,10 +28,10 @@
                   </Grid.ColumnDefinitions>
 
                   <TextBlock Text="Enable updates: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding EnableUpdates, Mode=TwoWay}" />
+                  <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding EnableUpdates, Mode=TwoWay}" Margin="3" />
 
                   <TextBlock Text="Prompt before install: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InformAboutUpdate, Mode=TwoWay}" />
+                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InformAboutUpdate, Mode=TwoWay}" Margin="3" />
 
                   <TextBlock Grid.Row="2" Grid.ColumnSpan="2" FontSize="8" Foreground="Gray" Margin="5" TextWrapping="Wrap">
                      If box above will unchecked then once update is available it will be automatically installed once you close application.
@@ -39,13 +39,13 @@
                   </TextBlock>
 
                   <TextBlock Text="Only stable versions: " Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding OnlyStableVersions, Mode=TwoWay}" />
+                  <CheckBox Grid.Row="3" Grid.Column="1" IsChecked="{Binding OnlyStableVersions, Mode=TwoWay}" Margin="3" />
 
                   <TextBlock Text="Run on windows start: " Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding RunOnWindowsStart, Mode=TwoWay}" />
+                  <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding RunOnWindowsStart, Mode=TwoWay}" Margin="3" />
 
                   <TextBlock Text="Close to tray: " Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding CloseToTray, Mode=TwoWay}" />
+                  <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding CloseToTray, Mode=TwoWay}" Margin="3" />
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>
@@ -111,10 +111,10 @@
 
                   <TextBlock Text="Scrum cards" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3 7 3 3" FontWeight="Bold"/>
                   <TextBlock Text="Show number of story points: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding ShowStoryPoints, Mode=TwoWay}" />
+                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding ShowStoryPoints, Mode=TwoWay}" Margin="3" />
 
                   <TextBlock Text="Show issue type: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding ShowIssueType, Mode=TwoWay}" />
+                  <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding ShowIssueType, Mode=TwoWay}" Margin="3" />
 
                   <controls:IssueScrumCard DataContext="{Binding Sample}" Grid.Row="3" Grid.ColumnSpan="2" Width="300" HorizontalAlignment="Center"/>
 
@@ -185,18 +185,53 @@
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
                   </Grid.RowDefinitions>
                   <Grid.ColumnDefinitions>
                      <ColumnDefinition Width="Auto" />
                      <ColumnDefinition Width="*" />
                   </Grid.ColumnDefinitions>
-                  
-                  <TextBlock Text="Remind to fill work log: " Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="0" Grid.Column="1" IsChecked="{Binding RemindAboutWorklog, Mode=TwoWay}" />
 
-                  <TextBlock Text="Remind at: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <telerik:RadTimePicker Grid.Column="1" Margin="3" Grid.Row="1" SelectedValue="{Binding RemindAt, Mode=TwoWay}"
+                  <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="8" Foreground="Gray" Margin="5" TextWrapping="Wrap">
+                     Check field below and setup time to configure reminders to fill in worklog to issues you have been working on recently.
+                  </TextBlock>
+                  <TextBlock Text="Remind to fill work log: " Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding RemindAboutWorklog, Mode=TwoWay}" Margin="3" />
+
+                  <TextBlock Text="Remind at: " Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <telerik:RadTimePicker Grid.Column="1" Margin="3" Grid.Row="2" SelectedValue="{Binding RemindAt, Mode=TwoWay}"
                                          TimeInterval="00:30:00" StartTime="08:00:00" EndTime="20:00:00"/>
+
+
+
+                  <TextBlock Grid.Row="3" Grid.ColumnSpan="2" FontSize="8" Foreground="Gray" Margin="5" TextWrapping="Wrap">
+                     Check field below and configure frequency and project keys to receive updates about what's going on in projects you care about.
+                  </TextBlock>
+                  <TextBlock Text="Check for updates: " Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding ShowUpdatedIssues, Mode=TwoWay}" Margin="3" />
+
+                  <TextBlock Text="Check for updates every: " Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <telerik:RadTimeSpanPicker Grid.Row="5" Grid.Column="1" Margin="3" Value="{Binding ScanForUpdatesInterval, Mode=TwoWay}">
+                     <telerik:RadTimeSpanPicker.TimeSpanComponents>
+                        <telerik:MinuteTimeSpanComponent Step="1" Maximum="60" />
+                        <telerik:SecondTimeSpanComponent Step="30" />
+                     </telerik:RadTimeSpanPicker.TimeSpanComponents>
+                  </telerik:RadTimeSpanPicker>
+
+                  <TextBlock Text="Watched projects' keys: " Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <TextBox Grid.Row="6" Grid.Column="1" Margin="3" Text="{Binding ProjectsList, Mode=TwoWay}"/>
+                  <TextBlock Grid.Row="7" Grid.ColumnSpan="2" FontSize="8" Foreground="Gray" Margin="5" TextWrapping="Wrap">
+                     Project key is short name of a project that prefixes number of issue in issue key.
+                     For example if you have JIRA project named "My Project", and issue numbers are in form: MP-1234, then project key is "MP".
+                     <LineBreak/>
+                     If you want to watch multiple projects type multiple keys separated with comma.
+                     <LineBreak/>
+                     WARNING: If you leave this field empty you will receive updates from all projects
+                  </TextBlock>
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>

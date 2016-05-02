@@ -48,12 +48,28 @@ namespace JiraAssistant.Services.Settings
          }
       }
 
-      protected T GetValue<T>(T defaultValue, [CallerMemberName]string name = null)
+      protected DateTime GetValue(DateTime defaultValue, [CallerMemberName]string name = null)
       {
          if (_settings.ContainsKey(name) == false)
             return defaultValue;
 
-         return (T) _settings[name];
+         return DateTime.Parse(_settings[name].ToString());
+      }
+
+      protected TimeSpan GetValue(TimeSpan defaultValue, [CallerMemberName]string name = null)
+      {
+         if (_settings.ContainsKey(name) == false)
+            return defaultValue;
+
+         return TimeSpan.Parse(_settings[name].ToString());
+      }
+
+      protected T GetValue<T>(T defaultValue, [CallerMemberName]string name = null)
+      {
+         if (_settings.ContainsKey(name) == false)
+            return defaultValue;
+         
+         return (T) Convert.ChangeType(_settings[name], typeof(T));
       }
 
       protected void SetValue<T>(T value, T defaultValue, [CallerMemberName]string name = null)

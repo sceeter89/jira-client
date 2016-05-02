@@ -318,6 +318,7 @@
     <Compile Include="Services\Settings\SettingsBase.cs" />
     <Compile Include="Services\Settings\GeneralSettings.cs" />
     <Compile Include="Services\UpdateService.cs" />
+    <Compile Include="Services\IssuesUpdatesChecker.cs" />
     <Compile Include="Services\WorkLogUpdater.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
@@ -509,6 +510,8 @@
     <Resource Include="Assets\Icons\SaveIcon.png" />
     <Resource Include="Assets\Icons\FilterIcon.png" />
     <Resource Include="Assets\Icons\ToolIcon.png" />
+    <Resource Include="Assets\Avatars\EditSign.png" />
+    <Resource Include="Assets\Avatars\PlusSign.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

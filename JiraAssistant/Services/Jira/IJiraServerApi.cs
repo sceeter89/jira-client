@@ -13,5 +13,7 @@ namespace JiraAssistant.Services.Jira
       Task<IEnumerable<RawResolution>> GetResolutions();
       Task<IEnumerable<RawStatus>> GetStatuses();
       Task<RawFilterDefinition> GetFilterDefinition(int filterId);
+
+      string ServerUri { get; }
    }
 }
