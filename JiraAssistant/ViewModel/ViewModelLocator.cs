@@ -95,9 +95,13 @@ namespace JiraAssistant.ViewModel
             .AsSelf()
             .SingleInstance();
 
-         builder.RegisterType<UpdateService>().AutoActivate();
-         builder.RegisterType<WorkLogUpdater>().AutoActivate();
-         builder.RegisterType<IssuesUpdatesChecker>().AutoActivate();
+         builder.RegisterAssemblyTypes(GetType().Assembly)
+            .InNamespace("JiraAssistant.Services.Daemons")
+            .AsImplementedInterfaces()
+            .AsSelf()
+            .SingleInstance()
+            .AutoActivate();
+
          builder.RegisterType<JiraApi>()
             .SingleInstance()
             .AsImplementedInterfaces()

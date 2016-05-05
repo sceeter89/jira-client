@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Telerik.Windows.Controls;
 
-namespace JiraAssistant.Services
+namespace JiraAssistant.Services.Daemons
 {
    public class IssuesUpdatesChecker
    {

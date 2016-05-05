@@ -15,7 +15,7 @@ using System.Diagnostics;
 using NLog;
 using JiraAssistant.ViewModel;
 
-namespace JiraAssistant.Services
+namespace JiraAssistant.Services.Daemons
 {
    public class UpdateService
    {

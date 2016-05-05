@@ -12,6 +12,7 @@ using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Services.Settings;
 using System.Windows;
 using System.ComponentModel;
+using JiraAssistant.Services.Daemons;
 
 namespace JiraAssistant.ViewModel
 {
