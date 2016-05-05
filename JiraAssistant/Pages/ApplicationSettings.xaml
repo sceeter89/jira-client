@@ -218,7 +218,7 @@
                   <telerik:RadTimeSpanPicker Grid.Row="5" Grid.Column="1" Margin="3" Value="{Binding ScanForUpdatesInterval, Mode=TwoWay}">
                      <telerik:RadTimeSpanPicker.TimeSpanComponents>
                         <telerik:MinuteTimeSpanComponent Step="1" Maximum="60" />
-                        <telerik:SecondTimeSpanComponent Step="30" />
+                        <telerik:SecondTimeSpanComponent Step="20" Maximum="59" />
                      </telerik:RadTimeSpanPicker.TimeSpanComponents>
                   </telerik:RadTimeSpanPicker>
 

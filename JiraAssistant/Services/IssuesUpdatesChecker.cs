@@ -43,7 +43,7 @@ namespace JiraAssistant.Services
          if (_reportsSettings.ShowUpdatedIssues == false)
             return;
 
-         if (DateTime.Now - _reportsSettings.LastUpdatesScan >= _reportsSettings.ScanForUpdatesInterval)
+         if (DateTime.Now - _reportsSettings.LastUpdatesScan > _reportsSettings.ScanForUpdatesInterval)
             ScanForUpdates();
       }
 
@@ -65,7 +65,7 @@ namespace JiraAssistant.Services
                query += string.Format(" AND project IN ({0})", string.Join(",", projectKeys));
 
             var updatedIssues = await _jiraApi.SearchForIssues(query);
-            foreach (var issue in updatedIssues)
+            foreach (var issue in updatedIssues.Where(i => i.BuiltInFields.Updated >= _reportsSettings.LastUpdatesScan))
             {
                var openIssueCommand = new RelayCommand(() =>
                {
