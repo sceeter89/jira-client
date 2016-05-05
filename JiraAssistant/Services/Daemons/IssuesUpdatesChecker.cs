@@ -40,7 +40,7 @@ namespace JiraAssistant.Services.Daemons
          if (_jiraSession.IsLoggedIn == false)
             return;
 
-         if (_reportsSettings.ShowUpdatedIssues == false)
+         if (_reportsSettings.MonitorIssuesUpdates == false)
             return;
 
          if (DateTime.Now - _reportsSettings.LastUpdatesScan > _reportsSettings.ScanForUpdatesInterval)
@@ -73,7 +73,7 @@ namespace JiraAssistant.Services.Daemons
                   Process.Start(string.Format("{0}/browse/{1}", _jiraApi.Server.ServerUri, i.Key));
                });
 
-               if (issue.Created >= changesSince)
+               if (issue.Created >= changesSince && _reportsSettings.ShowCreatedIssues)
                   alertManager.ShowAlert(new RadDesktopAlert
                   {
                      Header = "New issue: " + issue.Key,
@@ -83,7 +83,7 @@ namespace JiraAssistant.Services.Daemons
                      IconColumnWidth = 48,
                      Command = openIssueCommand
                   });
-               else
+               else if(issue.Created < changesSince && _reportsSettings.ShowUpdatedIssues)
                   alertManager.ShowAlert(new RadDesktopAlert
                   {
                      Header = "Updated: " + issue.Key,

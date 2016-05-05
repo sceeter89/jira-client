@@ -16,10 +16,22 @@ namespace JiraAssistant.Settings
          set { SetValue(value, defaultValue: new DateTime(1, 1, 1, 16, 0, 0)); }
       }
 
-      public bool ShowUpdatedIssues
+      public bool MonitorIssuesUpdates
       {
          get { return GetValue(defaultValue: false); }
          set { SetValue(value, defaultValue: false); }
+      }
+
+      public bool ShowCreatedIssues
+      {
+         get { return GetValue(defaultValue: true); }
+         set { SetValue(value, defaultValue: true); }
+      }
+
+      public bool ShowUpdatedIssues
+      {
+         get { return GetValue(defaultValue: true); }
+         set { SetValue(value, defaultValue: true); }
       }
 
       public TimeSpan ScanForUpdatesInterval

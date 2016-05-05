@@ -190,6 +190,8 @@
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
                   </Grid.RowDefinitions>
                   <Grid.ColumnDefinitions>
                      <ColumnDefinition Width="Auto" />
@@ -212,7 +214,7 @@
                      Check field below and configure frequency and project keys to receive updates about what's going on in projects you care about.
                   </TextBlock>
                   <TextBlock Text="Check for updates: " Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
-                  <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding ShowUpdatedIssues, Mode=TwoWay}" Margin="3" />
+                  <CheckBox Grid.Row="4" Grid.Column="1" IsChecked="{Binding MonitorIssuesUpdates, Mode=TwoWay}" Margin="3" />
 
                   <TextBlock Text="Check for updates every: " Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
                   <telerik:RadTimeSpanPicker Grid.Row="5" Grid.Column="1" Margin="3" Value="{Binding ScanForUpdatesInterval, Mode=TwoWay}">
@@ -232,6 +234,12 @@
                      <LineBreak/>
                      WARNING: If you leave this field empty you will receive updates from all projects
                   </TextBlock>
+
+                  <TextBlock Text="Inform about created: " Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding ShowCreatedIssues, Mode=TwoWay}" Margin="3" />
+
+                  <TextBlock Text="Inform about updated: " Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="9" Grid.Column="1" IsChecked="{Binding ShowUpdatedIssues, Mode=TwoWay}" Margin="3" />
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>
