@@ -29,9 +29,9 @@ namespace JiraAssistant.ViewModel
       public MainViewModel(IJiraApi jiraApi, GeneralSettings settings, WorkLogUpdater workLogUpdater)
       {
          _jiraApi = jiraApi;
-         BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1 && _navigationHistory.Peek().GetType() != typeof(ApplicationSettings));
+         BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1);
          ClearMessageCommand = new RelayCommand(() => { UserMessage = ""; });
-         OpenSettingsCommand = new RelayCommand(() => NavigateTo(new ApplicationSettings()));
+         OpenSettingsCommand = new RelayCommand(() => NavigateTo(new ApplicationSettings()), () => _navigationHistory.Count > 1 && _navigationHistory.Peek().GetType() != typeof(ApplicationSettings));
          LogWorkCommand = workLogUpdater.LogWorkCommand;
          BackToPageCommand = new RelayCommand<NavigationHistoryEntry>(BackToPage);
          CloseApplicationCommand = new RelayCommand(CloseApplication);
