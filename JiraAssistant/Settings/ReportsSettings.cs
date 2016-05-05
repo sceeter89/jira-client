@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JiraAssistant.Services.Settings
+namespace JiraAssistant.Settings
 {
    public class ReportsSettings : SettingsBase
    {

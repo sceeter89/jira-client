@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using Telerik.Windows.Controls;
 using Telerik.Windows.Data;
 
 namespace JiraAssistant.Extensions
 {
-
+#pragma warning disable JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
    public class SortDescriptorProxy
    {
       public string ColumnUniqueName { get; set; }
@@ -47,4 +46,6 @@ namespace JiraAssistant.Extensions
       public FilterCompositionLogicalOperator FieldFilterLogicalOperator { get; set; }
       public FilterDescriptorProxy Filter2 { get; set; }
    }
+
+#pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
 }

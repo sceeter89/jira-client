@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Threading;
-using JiraAssistant.Properties;
 
 namespace JiraAssistant
 {
@@ -7,11 +6,11 @@ namespace JiraAssistant
    {
       static App()
       {
-         if (Settings.Default.SettingsUpgradePending)
+         if (JiraAssistant.Properties.Settings.Default.SettingsUpgradePending)
          {
-            Settings.Default.Upgrade();
-            Settings.Default.SettingsUpgradePending = false;
-            Settings.Default.Save();
+            JiraAssistant.Properties.Settings.Default.Upgrade();
+            JiraAssistant.Properties.Settings.Default.SettingsUpgradePending = false;
+            JiraAssistant.Properties.Settings.Default.Save();
          }
       }
 

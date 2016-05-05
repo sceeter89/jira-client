@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Dialogs;
 using JiraAssistant.Services.Jira;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using System;
 using System.Linq;
 using System.Windows.Threading;

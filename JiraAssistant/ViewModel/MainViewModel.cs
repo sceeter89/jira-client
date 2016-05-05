@@ -9,7 +9,7 @@ using JiraAssistant.Services.Jira;
 using JiraAssistant.Pages;
 using System.Collections.ObjectModel;
 using JiraAssistant.Model.Exceptions;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using System.Windows;
 using System.ComponentModel;
 using JiraAssistant.Services.Daemons;

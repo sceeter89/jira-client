@@ -1,7 +1,7 @@
 ﻿using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
 using JiraAssistant.Services.Jira;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -14,7 +14,7 @@ namespace JiraAssistant.Services.Resources
 {
    public class IssuesFinder : BaseRestService
    {
-      private const int BATCH_SIZE = 1000;
+      private const int BatchSize = 1000;
       private IDictionary<string, RawFieldDefinition> _fields;
       private readonly IJiraServerApi _metadata;
 
@@ -33,7 +33,7 @@ namespace JiraAssistant.Services.Resources
          {
             jql = jqlQuery,
             startAt = startAt,
-            maxResults = BATCH_SIZE,
+            maxResults = BatchSize,
             fields = new string[] { "*all" }
          });
          var response = await client.ExecuteTaskAsync(request);
@@ -54,13 +54,13 @@ namespace JiraAssistant.Services.Resources
 
          var firstBatch = await DownloadSearchResultsBatch(jqlQuery, 0);
          var batches = new List<RawSearchResults> { firstBatch };
-         if (firstBatch.Total > BATCH_SIZE)
+         if (firstBatch.Total > BatchSize)
          {
-            var pendingBatchesCount = (firstBatch.Total - BATCH_SIZE) / BATCH_SIZE + 1;
+            var pendingBatchesCount = (firstBatch.Total - BatchSize) / BatchSize + 1;
             var tasks = new Task<RawSearchResults>[pendingBatchesCount];
 
             for (int i = 1; i <= pendingBatchesCount; i++)
-               tasks[i - 1] = DownloadSearchResultsBatch(jqlQuery, i * BATCH_SIZE);
+               tasks[i - 1] = DownloadSearchResultsBatch(jqlQuery, i * BatchSize);
 
             await Task.Factory.StartNew(() => Task.WaitAll(tasks));
 

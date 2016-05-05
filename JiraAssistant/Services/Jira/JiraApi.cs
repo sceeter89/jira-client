@@ -1,7 +1,7 @@
 ﻿using JiraAssistant.Model.Jira;
 using JiraAssistant.Services.Jira;
 using JiraAssistant.Services.Resources;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Media;

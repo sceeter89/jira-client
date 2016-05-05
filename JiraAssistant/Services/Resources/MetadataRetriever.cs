@@ -1,6 +1,6 @@
 ﻿using JiraAssistant.Model.Jira;
 using JiraAssistant.Services.Jira;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Collections.Generic;

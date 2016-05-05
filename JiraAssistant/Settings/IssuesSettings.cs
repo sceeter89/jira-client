@@ -6,7 +6,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Telerik.Windows.Controls;
 
-namespace JiraAssistant.Services.Settings
+namespace JiraAssistant.Settings
 {
    public class IssuesSettings : SettingsBase
    {

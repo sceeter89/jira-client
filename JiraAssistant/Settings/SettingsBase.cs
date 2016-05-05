@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-namespace JiraAssistant.Services.Settings
+namespace JiraAssistant.Settings
 {
    public class SettingsBase : INotifyPropertyChanged
    {

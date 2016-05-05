@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using JiraAssistant.Model.Jira;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;

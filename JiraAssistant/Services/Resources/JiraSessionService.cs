@@ -6,7 +6,7 @@ using System;
 using System.Threading.Tasks;
 using JiraAssistant.Model.Jira;
 using JiraAssistant.Model.Exceptions;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using JiraAssistant.Services.Jira;
 
 namespace JiraAssistant.Services.Resources

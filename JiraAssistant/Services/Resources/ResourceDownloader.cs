@@ -1,4 +1,4 @@
-﻿using JiraAssistant.Services.Settings;
+﻿using JiraAssistant.Settings;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;

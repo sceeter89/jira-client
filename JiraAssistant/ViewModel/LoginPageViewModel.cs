@@ -4,7 +4,7 @@ using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Pages;
 using JiraAssistant.Services;
 using JiraAssistant.Services.Jira;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using System;
 using System.Windows.Controls;
 

@@ -1,4 +1,4 @@
-﻿namespace JiraAssistant.Services.Settings
+﻿namespace JiraAssistant.Settings
 {
    public class AnalysisSettings : SettingsBase
    {

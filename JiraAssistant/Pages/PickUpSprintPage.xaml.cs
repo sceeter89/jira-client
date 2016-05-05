@@ -10,7 +10,6 @@ namespace JiraAssistant.Pages
    public partial class PickUpSprintPage : BaseNavigationPage
    {
       private readonly Func<RawAgileSprint, INavigationPage> _followUp;
-      private readonly ObservableCollection<RawAgileSprint> _sprints;
       private readonly INavigator _navigator;
 
       public PickUpSprintPage(ObservableCollection<RawAgileSprint> sprints,

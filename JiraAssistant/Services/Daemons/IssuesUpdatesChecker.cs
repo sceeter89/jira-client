@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Services.Jira;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using JiraAssistant.ViewModel;
 using NLog;
 using System;

@@ -68,13 +68,13 @@ namespace JiraAssistant.ViewModel
          recentBoardsIds.Remove(board.Id);
          recentBoardsIds.Insert(0, board.Id);
 
-         Settings.Default.RecentBoardsIds = string.Join(",", recentBoardsIds);
-         Settings.Default.Save();
+         Properties.Settings.Default.RecentBoardsIds = string.Join(",", recentBoardsIds);
+         Properties.Settings.Default.Save();
       }
 
       private static IList<int> GetRecentBoardsIds()
       {
-         return Settings.Default.RecentBoardsIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+         return Properties.Settings.Default.RecentBoardsIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
       }
 
       internal async void OnNavigatedTo()

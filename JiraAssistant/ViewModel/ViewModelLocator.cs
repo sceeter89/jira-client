@@ -1,6 +1,6 @@
 using Autofac;
 using JiraAssistant.Services;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 
 namespace JiraAssistant.ViewModel
 {

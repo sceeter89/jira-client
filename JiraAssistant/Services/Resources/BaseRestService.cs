@@ -1,5 +1,5 @@
 ﻿using JiraAssistant.Model.Exceptions;
-using JiraAssistant.Services.Settings;
+using JiraAssistant.Settings;
 using RestSharp;
 using System.Net;
 

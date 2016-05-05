@@ -1,4 +1,4 @@
-﻿using JiraAssistant.Services.Settings;
+﻿using JiraAssistant.Settings;
 using System.Windows;
 using System;
 using RestSharp;

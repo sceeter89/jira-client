@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Reflection;
 
-namespace JiraAssistant.Services.Settings
+namespace JiraAssistant.Settings
 {
    public class GeneralSettings : SettingsBase
    {
