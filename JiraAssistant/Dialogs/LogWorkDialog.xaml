@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JiraAssistant.Dialogs"
         mc:Ignorable="d"
-        Title="JIRA Assistant" Height="300" Width="420" MinWidth="420" MinHeight="250"
+        Title="JIRA Assistant" Height="300" Width="440" MinWidth="440" MinHeight="250"
         Icon="/Assets/Icons/ApplicationIcon.png">
    <Grid>
       <Grid.RowDefinitions>
@@ -32,14 +32,21 @@
                      </Grid.RowDefinitions>
                      <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
                         <ColumnDefinition Width="80" />
                      </Grid.ColumnDefinitions>
                      <TextBlock HorizontalAlignment="Left" Text="{Binding Issue.Key}" FontWeight="DemiBold"/>
 
                      <TextBlock HorizontalAlignment="Left" Text="{Binding Issue.Summary}" Foreground="DarkGray"
-                             FontStyle="Italic" Grid.Row="1" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+                                FontStyle="Italic" Grid.Row="1" TextWrapping="Wrap" TextTrimming="WordEllipsis" />
 
-                     <telerik:RadNumericUpDown Value="{Binding Hours, Mode=TwoWay}" Grid.RowSpan="2" Grid.Column="1" VerticalAlignment="Center" />
+                     <TextBlock HorizontalAlignment="Left" Text="Logged" Foreground="DarkGray"
+                                FontStyle="Italic" Grid.Row="0" Grid.Column="1" />
+
+                     <TextBlock HorizontalAlignment="Left" Text="{Binding HoursSpent, StringFormat={}{0:0.00}}" FontWeight="Bold"
+                                Grid.Column="1" Grid.Row="1" />
+                     
+                     <telerik:RadNumericUpDown Value="{Binding Hours, Mode=TwoWay}" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center" />
                   </Grid>
                </DataTemplate>
             </ItemsControl.ItemTemplate>

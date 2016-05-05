@@ -1,4 +1,5 @@
 ﻿using JiraAssistant.Model.Jira;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +11,12 @@ namespace JiraAssistant.Dialogs
       {
          InitializeComponent();
 
-         Entries = issues.Select(i => new WorkLogEntry { Issue = i, Hours = 0 }).ToList();
+         Entries = issues.Select(i => new WorkLogEntry
+         {
+            Issue = i,
+            Hours = 0,
+            HoursSpent = TimeSpan.FromSeconds(i.BuiltInFields.TimeSpent ?? 0).TotalHours
+         }).ToList();
 
          DataContext = this;
       }
@@ -31,6 +37,7 @@ namespace JiraAssistant.Dialogs
    public class WorkLogEntry
    {
       public double Hours { get; set; }
+      public double HoursSpent { get; set; }
       public JiraIssue Issue { get; set; }
    }
 }
