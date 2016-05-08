@@ -14,7 +14,7 @@
       </telerik:RadBusyIndicator.BusyContent>
       <Grid>
          <Grid.Resources>
-            <Style TargetType="{x:Type telerik:RadTileViewItem}">
+            <Style TargetType="{x:Type telerik:RadTileViewItem}" BasedOn="{StaticResource RadTileViewItemStyle}">
                <Setter Property="MinimizedWidth" Value="180" />
             </Style>
 
