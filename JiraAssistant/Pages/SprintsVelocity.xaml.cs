@@ -9,14 +9,14 @@ namespace JiraAssistant.Pages
 {
    public partial class SprintsVelocity
    {
-      private readonly IDictionary<int, IList<JiraIssue>> _sprintsIssues;
       private readonly IList<RawAgileSprint> _sprints;
       private readonly AnalysisSettings _settings;
+      private readonly AgileBoardIssues _boardContent;
 
-      public SprintsVelocity(IDictionary<int, IList<JiraIssue>> sprintsIssues, IList<RawAgileSprint> sprints, IContainer iocContainer)
+      public SprintsVelocity(AgileBoardIssues boardContent, IList<RawAgileSprint> sprints, IContainer iocContainer)
       {
          InitializeComponent();
-         _sprintsIssues = sprintsIssues;
+         _boardContent = boardContent;
          _sprints = sprints;
          _settings = iocContainer.Resolve<AnalysisSettings>();
          Statistics = new ObservableCollection<SprintStatistic>();
@@ -35,8 +35,8 @@ namespace JiraAssistant.Pages
          var sprints = _sprints.Where(s => s.CompleteDate.HasValue).OrderBy(s => s.StartDate).Skip(toSkip);
          foreach (var sprint in sprints)
          {
-            var commitment = _sprintsIssues[sprint.Id].Sum(i => i.StoryPoints);
-            var completed = _sprintsIssues[sprint.Id].Where(i => i.Resolved.HasValue && i.Resolved <= sprint.CompleteDate).Sum(i => i.StoryPoints);
+            var commitment = _boardContent.IssuesInSprint(sprint.Id).Sum(i => i.StoryPoints);
+            var completed = _boardContent.IssuesInSprint(sprint.Id).Where(i => i.Resolved.HasValue && i.Resolved <= sprint.CompleteDate).Sum(i => i.StoryPoints);
 
             Statistics.Add(new SprintStatistic { SprintName = sprint.Name, Velocity = completed, Commitment = commitment });
          }

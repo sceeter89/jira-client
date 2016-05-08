@@ -8,9 +8,9 @@ namespace JiraAssistant.Services.Jira
    {
       Task<RawAgileSprint> GetAgileSprintDetails(int sprintId);
       Task<IEnumerable<RawAgileSprint>> GetSprints(int boardId);
-      Task<IEnumerable<string>> GetIssuesInSprint(int boardId, int sprintId);
       Task<IEnumerable<RawAgileEpic>> GetEpics(int boardId);
       Task<IEnumerable<RawAgileBoard>> GetAgileBoards();
       Task<RawAgileBoardConfiguration> GetBoardConfiguration(int boardId);
+      Task<AgileBoardIssues> GetBoardContent(int boardId, bool forceReload = false);
    }
 }

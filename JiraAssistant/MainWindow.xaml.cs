@@ -8,11 +8,13 @@ namespace JiraAssistant
       public MainWindow()
       {
          InitializeComponent();
-         Loaded += (sender, args) => {
+         Loaded += (sender, args) =>
+         {
             var viewModel = DataContext as MainViewModel;
             viewModel.NavigateTo(new LoginPage());
          };
-         Closing += (sender, args) => {
+         Closing += (sender, args) =>
+         {
             var viewModel = DataContext as MainViewModel;
             viewModel.HandleClosing(args);
          };

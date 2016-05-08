@@ -240,6 +240,7 @@
     <Compile Include="Model\Github\GithubApplicationRelease.cs" />
     <Compile Include="Model\Github\GithubReleaseArtifact.cs" />
     <Compile Include="Model\IssuesCollectionStatistics.cs" />
+    <Compile Include="Model\Jira\AgileBoardIssues.cs" />
     <Compile Include="Model\Ui\IToolbarItem.cs" />
     <Compile Include="Model\Ui\ToolbarControl.cs" />
     <Compile Include="Pages\AgileBoardPage.xaml.cs">

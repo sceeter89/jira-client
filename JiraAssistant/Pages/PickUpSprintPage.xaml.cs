@@ -3,7 +3,7 @@ using JiraAssistant.Model.Jira;
 using JiraAssistant.Model.Ui;
 using JiraAssistant.Services;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace JiraAssistant.Pages
 {
@@ -12,7 +12,7 @@ namespace JiraAssistant.Pages
       private readonly Func<RawAgileSprint, INavigationPage> _followUp;
       private readonly INavigator _navigator;
 
-      public PickUpSprintPage(ObservableCollection<RawAgileSprint> sprints,
+      public PickUpSprintPage(IList<RawAgileSprint> sprints,
          Func<RawAgileSprint, INavigationPage> followUp,
          INavigator navigator)
       {
@@ -33,7 +33,7 @@ namespace JiraAssistant.Pages
       }
 
       public RelayCommand<RawAgileSprint> PickUpSprintCommand { get; private set; }
-      public ObservableCollection<RawAgileSprint> Sprints { get; set; }
+      public IList<RawAgileSprint> Sprints { get; set; }
       public override string Title { get { return "Sprints selection"; } }
    }
 }

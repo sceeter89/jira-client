@@ -12,9 +12,17 @@ namespace JiraAssistant.Services.Resources
 {
    public class JiraAgileService : BaseRestService, IJiraAgileApi
    {
-      public JiraAgileService(AssistantSettings configuration)
+      private readonly IDictionary<int, AgileBoardDataCache> _boardCaches = new Dictionary<int, AgileBoardDataCache>();
+      private readonly ApplicationCache _applicationCache;
+      private readonly IJiraServerApi _metadataRetriever;
+      private readonly IssuesFinder _issuesFinder;
+
+      public JiraAgileService(AssistantSettings configuration, ApplicationCache applicationCache, IJiraServerApi metadataRetriever, IssuesFinder issuesFinder)
          : base(configuration)
       {
+         _applicationCache = applicationCache;
+         _metadataRetriever = metadataRetriever;
+         _issuesFinder = issuesFinder;
       }
 
       public async Task<RawAgileSprint> GetAgileSprintDetails(int sprintId)
@@ -52,29 +60,6 @@ namespace JiraAssistant.Services.Resources
          } while (result.IsLast == false);
 
          return allSprints;
-      }
-
-      public async Task<IEnumerable<string>> GetIssuesInSprint(int boardId, int sprintId)
-      {
-         var client = BuildRestClient();
-         var request = new RestRequest("/rest/agile/latest/board/{boardId}/sprint/{sprintId}/issue?fields=key", Method.GET);
-         request.AddQueryParameter("maxResults", "500");
-         request.AddQueryParameter("startAt", "0");
-         request.AddUrlSegment("boardId", boardId.ToString());
-         request.AddUrlSegment("sprintId", sprintId.ToString());
-
-         IRestResponse response;
-         RawAgileSprintAssignments result;
-         var allIssues = new List<string>();
-         do
-         {
-            request.Parameters[1].Value = allIssues.Count;
-            response = await client.ExecuteTaskAsync(request);
-            result = JsonConvert.DeserializeObject<RawAgileSprintAssignments>(response.Content);
-            allIssues.AddRange(result.Issues.Select(i => i.Key));
-         } while (result.Total < allIssues.Count);
-
-         return allIssues;
       }
 
       public async Task<IEnumerable<RawAgileEpic>> GetEpics(int boardId)
@@ -133,6 +118,52 @@ namespace JiraAssistant.Services.Resources
          var result = JsonConvert.DeserializeObject<RawAgileBoardConfiguration>(response.Content);
 
          return result;
+      }
+
+      private async Task<IList<JiraIssue>> DownloadIssues(int boardId, bool forceReload)
+      {
+         var boardConfig = await GetBoardConfiguration(boardId);
+         var filter = await _metadataRetriever.GetFilterDefinition(boardConfig.Filter.Id);
+
+         if (_boardCaches.ContainsKey(boardId) == false)
+            _boardCaches[boardId] = _applicationCache.GetAgileBoardCache(boardId);
+         var boardCache = _boardCaches[boardId];
+
+         if (forceReload)
+            boardCache.Invalidate();
+
+         var issues = await _issuesFinder.Search(boardCache.PrepareSearchStatement(filter.Jql));
+
+         issues = await boardCache.UpdateCache(issues);
+
+         return issues;
+      }
+
+      private async Task<IList<RawAgileEpic>> DownloadEpics(int boardId)
+      {
+         var epics = await GetEpics(boardId);
+
+         return epics.ToList();
+      }
+
+      private async Task<IList<RawAgileSprint>> DownloadSprints(int boardId)
+      {
+         var sprints = await GetSprints(boardId);
+
+         return sprints.ToList();
+      }
+
+      public async Task<AgileBoardIssues> GetBoardContent(int boardId, bool forceReload = false)
+      {
+         var sprintsTask = DownloadSprints(boardId);
+         var epicsTask = DownloadEpics(boardId);
+         var issuesTask = DownloadIssues(boardId, forceReload);
+
+         await Task.Factory.StartNew(() => Task.WaitAll(sprintsTask, epicsTask, issuesTask));
+
+         var boardData = await Task.Factory.StartNew(() => new AgileBoardIssues(issuesTask.Result, epicsTask.Result, sprintsTask.Result));
+
+         return boardData;
       }
    }
 }

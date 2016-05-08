@@ -5,7 +5,6 @@ using JiraAssistant.Settings;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using System;
 
 namespace JiraAssistant.Services
 {
@@ -14,15 +13,15 @@ namespace JiraAssistant.Services
       private readonly IssuesFinder _issuesFinder;
       private readonly ResourceDownloader _resourceDownloader;
 
-      public JiraApi(AssistantSettings configuration)
+      public JiraApi(AssistantSettings configuration, ApplicationCache applicationCache)
       {
-         Session = new JiraSessionService(configuration);
-         Agile = new JiraAgileService(configuration);
-         Server = new MetadataRetriever(configuration);
-         Worklog = new WorklogManager(configuration);
-
          _resourceDownloader = new ResourceDownloader(configuration);
+
+         Session = new JiraSessionService(configuration);
+         Server = new MetadataRetriever(configuration);
          _issuesFinder = new IssuesFinder(configuration, Server);
+         Agile = new JiraAgileService(configuration, applicationCache, Server, _issuesFinder);
+         Worklog = new WorklogManager(configuration);
       }
 
       public IJiraAgileApi Agile

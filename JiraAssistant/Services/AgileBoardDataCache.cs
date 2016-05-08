@@ -45,7 +45,7 @@ namespace JiraAssistant.Services
          }
 
          var metaFilePath = Path.Combine(_cachePath, MetaFileName);
-         if (File.Exists(_cachePath) == false)
+         if (File.Exists(metaFilePath) == false)
          {
             IsAvailable = false;
             return;
@@ -73,7 +73,7 @@ namespace JiraAssistant.Services
          }
       }
 
-      public async Task<IEnumerable<JiraIssue>> UpdateCache(IEnumerable<JiraIssue> updatedIssues)
+      public async Task<IList<JiraIssue>> UpdateCache(IList<JiraIssue> updatedIssues)
       {
          if (_jiraUrl == "demo")
             return updatedIssues;
@@ -85,7 +85,7 @@ namespace JiraAssistant.Services
 
             var cachedItems = await LoadIssuesFromCache();
 
-            var updatedCache = await Task.Factory.StartNew(() => updatedIssues.Union(cachedItems));
+            var updatedCache = (await Task.Factory.StartNew(() => updatedIssues.Union(cachedItems))).ToList();
 
             await DumpCache(updatedCache);
             await StoreMetafile();

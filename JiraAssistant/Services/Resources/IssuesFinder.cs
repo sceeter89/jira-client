@@ -48,7 +48,7 @@ namespace JiraAssistant.Services.Resources
          return batch;
       }
 
-      public async Task<IEnumerable<JiraIssue>> Search(string jqlQuery)
+      public async Task<IList<JiraIssue>> Search(string jqlQuery)
       {
          var searchResults = new List<RawIssue>();
 
@@ -75,7 +75,7 @@ namespace JiraAssistant.Services.Resources
          return ConvertIssuesToDomainModel(batches.SelectMany(b => b.Issues));
       }
 
-      private ICollection<JiraIssue> ConvertIssuesToDomainModel(IEnumerable<RawIssue> issues)
+      private IList<JiraIssue> ConvertIssuesToDomainModel(IEnumerable<RawIssue> issues)
       {
          return issues.Select(Convert).ToList();
       }
