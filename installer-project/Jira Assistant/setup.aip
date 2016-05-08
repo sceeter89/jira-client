@@ -15,10 +15,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/sceeter89/jira-client/releases"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Yakuza"/>
-    <ROW Property="ProductCode" Value="1045:{412059CE-97EB-4517-8609-1EB77F51CE03} " Type="16"/>
+    <ROW Property="ProductCode" Value="1045:{4CBB37EB-FA45-4EE5-B98E-0700EA82A6E2} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1045"/>
     <ROW Property="ProductName" Value="Jira Assistant"/>
-    <ROW Property="ProductVersion" Value="0.7.3" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.7.4" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{A9552DC2-4382-42C2-BF0D-3CD48972867C}"/>
@@ -51,14 +51,13 @@
     <ROW Directory="zhHant_Dir" Directory_Parent="APPDIR" DefaultDir="zh-Hant"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCompsComponent">
-    <ROW Component="Autofac.dll" ComponentId="{295932DC-2311-4D51-BC75-8573A46CDB5B}" Directory_="APPDIR" Attributes="0" KeyPath="Autofac.dll"/>
-    <ROW Component="GalaSoft.MvvmLight.Extras.dll" ComponentId="{1D8F2984-CB62-442A-A4B6-930FB42EB202}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.Extras.dll"/>
-    <ROW Component="GalaSoft.MvvmLight.Platform.dll" ComponentId="{C7ED10F7-FE1E-4153-BFA1-BA3484BA446E}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.Platform.dll"/>
-    <ROW Component="GalaSoft.MvvmLight.dll" ComponentId="{3FC7D496-819F-49E1-9A50-69B7F699A829}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.dll"/>
-    <ROW Component="Hardcodet.Wpf.TaskbarNotification.dll" ComponentId="{210C9625-C669-4A95-B39D-EFB2B43961D2}" Directory_="APPDIR" Attributes="0" KeyPath="Hardcodet.Wpf.TaskbarNotification.dll"/>
+    <ROW Component="Autofac.dll" ComponentId="{D0A5496F-DF45-4E0B-8369-D653540F943A}" Directory_="APPDIR" Attributes="0" KeyPath="Autofac.dll"/>
+    <ROW Component="GalaSoft.MvvmLight.Extras.dll" ComponentId="{94AA1F25-E41C-4964-8DB5-0C62D614E663}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.Extras.dll"/>
+    <ROW Component="GalaSoft.MvvmLight.Platform.dll" ComponentId="{2FAF59EB-67F2-40EE-A1A9-EC55C57BB0C7}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.Platform.dll"/>
+    <ROW Component="GalaSoft.MvvmLight.dll" ComponentId="{31E3FDE3-38A8-4EB2-AACB-1F350F7C0F1F}" Directory_="APPDIR" Attributes="0" KeyPath="GalaSoft.MvvmLight.dll"/>
+    <ROW Component="Hardcodet.Wpf.TaskbarNotification.dll" ComponentId="{A69889D1-0339-4447-A92F-96E6A2B010B2}" Directory_="APPDIR" Attributes="0" KeyPath="Hardcodet.Wpf.TaskbarNotification.dll"/>
     <ROW Component="JiraAssistant.exe" ComponentId="{9A6B05EB-BCD6-40E0-B1D0-EB96A11B2408}" Directory_="APPDIR" Attributes="0" KeyPath="JiraAssistant.exe"/>
-    <ROW Component="JiraAssistant.exe.config" ComponentId="{9A2EC28F-73A9-4AF5-88E4-859BA7BBF569}" Directory_="APPDIR" Attributes="0" KeyPath="JiraAssistant.exe.config" Type="0"/>
-    <ROW Component="Microsoft.Expression.Interactions.dll" ComponentId="{E0D11F55-3AB0-407E-88D8-375E99749734}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Expression.Interactions.dll"/>
+    <ROW Component="Microsoft.Expression.Interactions.dll" ComponentId="{4A48E5D3-BAB4-48B3-80DF-712032662F3B}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Expression.Interactions.dll"/>
     <ROW Component="Microsoft.Expression.Interactions.reso_1" ComponentId="{16F8F870-20B8-4611-88AA-C46E994F1055}" Directory_="en_Dir" Attributes="0" KeyPath="Microsoft.Expression.Interactions.resources.dll_1"/>
     <ROW Component="Microsoft.Expression.Interactions.reso_2" ComponentId="{0822794B-3B8E-4FBF-A27B-7074462A628B}" Directory_="es_Dir" Attributes="0" KeyPath="Microsoft.Expression.Interactions.resources.dll_2"/>
     <ROW Component="Microsoft.Expression.Interactions.reso_3" ComponentId="{9CBDD0E6-3C2E-4851-B495-376C644D9B09}" Directory_="fr_Dir" Attributes="0" KeyPath="Microsoft.Expression.Interactions.resources.dll_3"/>
@@ -69,51 +68,51 @@
     <ROW Component="Microsoft.Expression.Interactions.reso_8" ComponentId="{5D15ED7F-5570-4CF2-984D-6D35EF665106}" Directory_="zhHans_Dir" Attributes="0" KeyPath="Microsoft.Expression.Interactions.resources.dll_8"/>
     <ROW Component="Microsoft.Expression.Interactions.reso_9" ComponentId="{0F2C0ECF-DAB0-4FB0-A16B-7705742D25E4}" Directory_="zhHant_Dir" Attributes="0" KeyPath="Microsoft.Expression.Interactions.resources.dll_9"/>
     <ROW Component="Microsoft.Expression.Interactions.resour" ComponentId="{5B2CDADE-552B-4081-95B6-AC32EAB88E58}" Directory_="de_Dir" Attributes="0" KeyPath="Microsoft.Expression.Interactions.resources.dll"/>
-    <ROW Component="Microsoft.Practices.ServiceLocation.dll" ComponentId="{9D894333-307E-4316-8FBB-A933145DDFDF}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Practices.ServiceLocation.dll"/>
-    <ROW Component="NLog.dll" ComponentId="{97210C92-FC87-4E78-A969-01CAF8264290}" Directory_="APPDIR" Attributes="0" KeyPath="NLog.dll"/>
-    <ROW Component="Newtonsoft.Json.dll" ComponentId="{89F39C79-FF26-451B-8C56-3D5A9A5387F8}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
+    <ROW Component="Microsoft.Practices.ServiceLocation.dll" ComponentId="{649061FE-DEDF-4ED2-A274-955592E5A9A6}" Directory_="APPDIR" Attributes="0" KeyPath="Microsoft.Practices.ServiceLocation.dll"/>
+    <ROW Component="NLog.config" ComponentId="{0A61CC0D-48D4-4251-AAB3-AEDEAF9F8E54}" Directory_="APPDIR" Attributes="0" KeyPath="NLog.config" Type="0"/>
+    <ROW Component="NLog.dll" ComponentId="{56C21845-FA36-4D6F-BA93-DD7FB44307F9}" Directory_="APPDIR" Attributes="0" KeyPath="NLog.dll"/>
+    <ROW Component="Newtonsoft.Json.dll" ComponentId="{DC517B37-24B8-4937-A5D7-B840EFD6E241}" Directory_="APPDIR" Attributes="0" KeyPath="Newtonsoft.Json.dll"/>
     <ROW Component="ProductInformation" ComponentId="{F701767A-3084-4BA5-AF99-893CFEC47487}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
-    <ROW Component="RestSharp.dll" ComponentId="{BCA0A1AC-56C4-49E4-B705-F4D46C0BF8A1}" Directory_="APPDIR" Attributes="0" KeyPath="RestSharp.dll"/>
+    <ROW Component="RestSharp.dll" ComponentId="{7E3B6355-5850-4694-92D1-C1781E9462D7}" Directory_="APPDIR" Attributes="0" KeyPath="RestSharp.dll"/>
     <ROW Component="SHORTCUTDIR" ComponentId="{3C586ED5-FA4A-41AB-AE2F-485BE0F305F6}" Directory_="SHORTCUTDIR" Attributes="0"/>
-    <ROW Component="System.Windows.Interactivity.dll" ComponentId="{B6B5E00F-BAA8-40E8-880A-978B2B10A57B}" Directory_="APPDIR" Attributes="0" KeyPath="System.Windows.Interactivity.dll"/>
-    <ROW Component="Telerik.Pivot.Core.dll" ComponentId="{3B294F65-EAC0-43FE-B061-2ECA8B4A18FE}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Pivot.Core.dll"/>
-    <ROW Component="Telerik.Windows.Controls.Chart.dll" ComponentId="{F5347401-6231-44CC-B833-C8CE65A0274B}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Chart.dll"/>
-    <ROW Component="Telerik.Windows.Controls.DataVisualizati" ComponentId="{1B79DCF4-2F2A-45CD-9ABF-3E90786AE89E}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.DataVisualization.dll"/>
-    <ROW Component="Telerik.Windows.Controls.Expressions.dll" ComponentId="{E905D51D-F82A-428A-9743-DBBC93F30AEC}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Expressions.dll"/>
-    <ROW Component="Telerik.Windows.Controls.GridView.dll" ComponentId="{3252DA95-2B95-4298-9E3A-903DA4595F4A}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.GridView.dll"/>
-    <ROW Component="Telerik.Windows.Controls.Input.dll" ComponentId="{34A7E8F4-1BA1-4802-B5D4-1D76D02F7F03}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Input.dll"/>
-    <ROW Component="Telerik.Windows.Controls.Navigation.dll" ComponentId="{07F0CE6A-846C-4062-B947-F738C4069323}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Navigation.dll"/>
-    <ROW Component="Telerik.Windows.Controls.Pivot.dll" ComponentId="{6602141B-AD8F-4616-8B41-D394F7FD9461}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Pivot.dll"/>
-    <ROW Component="Telerik.Windows.Controls.PivotFieldList." ComponentId="{86BA3CCB-65BC-4A76-882D-A015EF0AF3DC}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.PivotFieldList.dll"/>
-    <ROW Component="Telerik.Windows.Controls.dll" ComponentId="{A47793F8-FB4B-4D36-9C3C-47BCFD570565}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.dll"/>
+    <ROW Component="System.Windows.Interactivity.dll" ComponentId="{276ED9CE-5699-4187-A2D8-3A0E2493B67C}" Directory_="APPDIR" Attributes="0" KeyPath="System.Windows.Interactivity.dll"/>
+    <ROW Component="Telerik.Pivot.Core.dll" ComponentId="{C1D1D338-E286-4B00-87F3-FB4499C5D409}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Pivot.Core.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Chart.dll" ComponentId="{119B9058-8493-4B68-B639-924B79CA7982}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Chart.dll"/>
+    <ROW Component="Telerik.Windows.Controls.DataVisualizati" ComponentId="{34137D10-D89C-48BB-B9F2-95A0323C1F0B}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.DataVisualization.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Expressions.dll" ComponentId="{438CC01B-E78E-42C3-BBB0-9521462F19D4}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Expressions.dll"/>
+    <ROW Component="Telerik.Windows.Controls.GridView.dll" ComponentId="{E08BB23B-2C36-4A2D-9AEC-A7A322DE8259}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.GridView.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Input.dll" ComponentId="{97315312-A8F8-48B8-AE17-4751B1B885AA}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Input.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Navigation.dll" ComponentId="{3CBD0B54-90F3-47D9-B321-2177EC1C1AE2}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Navigation.dll"/>
+    <ROW Component="Telerik.Windows.Controls.Pivot.dll" ComponentId="{8DB0FB73-014C-4F6D-8FB6-FBA9FDF55E67}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.Pivot.dll"/>
+    <ROW Component="Telerik.Windows.Controls.PivotFieldList." ComponentId="{6DC12EC0-D12D-4A3E-9F85-6B6CB33890AC}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.PivotFieldList.dll"/>
+    <ROW Component="Telerik.Windows.Controls.dll" ComponentId="{E8957491-108D-4C5E-BF07-3CD732D75ABE}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Controls.dll"/>
     <ROW Component="Telerik.Windows.Controls.resources.dll" ComponentId="{2C4014DD-371D-4F14-B2A8-B8DCF1BD0E6F}" Directory_="de_Dir" Attributes="0" KeyPath="Telerik.Windows.Controls.resources.dll"/>
     <ROW Component="Telerik.Windows.Controls.resources.dll_1" ComponentId="{E2FB569E-F93A-446F-94F0-EF7EA541CB96}" Directory_="es_Dir" Attributes="0" KeyPath="Telerik.Windows.Controls.resources.dll_1"/>
     <ROW Component="Telerik.Windows.Controls.resources.dll_2" ComponentId="{A0561009-984C-4BC0-B559-343BA9BBD6E0}" Directory_="fr_Dir" Attributes="0" KeyPath="Telerik.Windows.Controls.resources.dll_2"/>
     <ROW Component="Telerik.Windows.Controls.resources.dll_3" ComponentId="{668CE97D-A40A-47F2-874C-6AEDAB9E9DF1}" Directory_="it_Dir" Attributes="0" KeyPath="Telerik.Windows.Controls.resources.dll_3"/>
     <ROW Component="Telerik.Windows.Controls.resources.dll_4" ComponentId="{1CB4AD9A-A201-40D6-8CB2-6D43FA90402A}" Directory_="nl_Dir" Attributes="0" KeyPath="Telerik.Windows.Controls.resources.dll_4"/>
     <ROW Component="Telerik.Windows.Controls.resources.dll_5" ComponentId="{459ED238-FAAD-45C9-86D1-8FC58309E2A5}" Directory_="tr_Dir" Attributes="0" KeyPath="Telerik.Windows.Controls.resources.dll_5"/>
-    <ROW Component="Telerik.Windows.Data.dll" ComponentId="{8AD12C48-2F9D-4652-95A0-A1940E0D55D6}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Data.dll"/>
-    <ROW Component="Telerik.Windows.Documents.Core.dll" ComponentId="{40A27BD6-2D8D-4145-A414-CAE871714C1E}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Documents.Core.dll"/>
-    <ROW Component="Telerik.Windows.Documents.Flow.dll" ComponentId="{C6B3F628-CD25-453D-997A-5C6E2AD185B3}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Documents.Flow.dll"/>
-    <ROW Component="Telerik.Windows.Documents.dll" ComponentId="{7F5246F4-27C1-4DDC-B4B3-A7AB6245EEBC}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Documents.dll"/>
-    <ROW Component="Telerik.Windows.PersistenceFramework.dll" ComponentId="{F507775B-1439-4864-83F6-8E0717A57E41}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.PersistenceFramework.dll"/>
-    <ROW Component="Telerik.Windows.Themes.Office2013.dll" ComponentId="{5CB5E711-7B43-4878-9581-47BADA4AD9B3}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Themes.Office2013.dll"/>
-    <ROW Component="Telerik.Windows.Themes.Windows8.dll" ComponentId="{F5A35C92-A202-4083-8767-2D13D47858C3}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Themes.Windows8.dll"/>
-    <ROW Component="Telerik.Windows.Zip.dll" ComponentId="{07B5AB0E-E964-4285-9553-DFED0573C802}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Zip.dll"/>
-    <ROW Component="logs" ComponentId="{DEE7C022-25FC-4A30-953C-67E07CB93AF6}" Directory_="logs_Dir" Attributes="0"/>
+    <ROW Component="Telerik.Windows.Data.dll" ComponentId="{2F73BEAE-E9D6-497D-AF66-678CEC2BEB23}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Data.dll"/>
+    <ROW Component="Telerik.Windows.Documents.Core.dll" ComponentId="{E052C8F2-2AC9-472C-BDED-86D3EDF01C7C}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Documents.Core.dll"/>
+    <ROW Component="Telerik.Windows.Documents.Flow.dll" ComponentId="{8EBEBF9C-982A-4639-BFEA-25C4FD07A178}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Documents.Flow.dll"/>
+    <ROW Component="Telerik.Windows.Documents.dll" ComponentId="{E2D6F408-7A6E-4FA7-92DA-7788825BD470}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Documents.dll"/>
+    <ROW Component="Telerik.Windows.PersistenceFramework.dll" ComponentId="{6DEC918F-D421-44C1-BC50-0A1BD906437D}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.PersistenceFramework.dll"/>
+    <ROW Component="Telerik.Windows.Themes.Office2013.dll" ComponentId="{6EEA1E68-BD6C-4ED1-B117-AAF38B57367D}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Themes.Office2013.dll"/>
+    <ROW Component="Telerik.Windows.Themes.Windows8.dll" ComponentId="{67BBBAE1-9BC6-4DDF-A1F3-38AB31314C16}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Themes.Windows8.dll"/>
+    <ROW Component="Telerik.Windows.Zip.dll" ComponentId="{538232E5-A1BB-47F1-91EF-AE72D1B80183}" Directory_="APPDIR" Attributes="0" KeyPath="Telerik.Windows.Zip.dll"/>
+    <ROW Component="log" ComponentId="{A199717F-729D-413D-BD1A-3F75211D2F4F}" Directory_="logs_Dir" Attributes="0" KeyPath="log" Type="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
-    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="Autofac.dll GalaSoft.MvvmLight.Extras.dll GalaSoft.MvvmLight.Platform.dll GalaSoft.MvvmLight.dll Hardcodet.Wpf.TaskbarNotification.dll JiraAssistant.exe JiraAssistant.exe.config Microsoft.Expression.Interactions.dll Microsoft.Expression.Interactions.reso_1 Microsoft.Expression.Interactions.reso_2 Microsoft.Expression.Interactions.reso_3 Microsoft.Expression.Interactions.reso_4 Microsoft.Expression.Interactions.reso_5 Microsoft.Expression.Interactions.reso_6 Microsoft.Expression.Interactions.reso_7 Microsoft.Expression.Interactions.reso_8 Microsoft.Expression.Interactions.reso_9 Microsoft.Expression.Interactions.resour Microsoft.Practices.ServiceLocation.dll NLog.dll Newtonsoft.Json.dll ProductInformation RestSharp.dll SHORTCUTDIR System.Windows.Interactivity.dll Telerik.Pivot.Core.dll Telerik.Windows.Controls.Chart.dll Telerik.Windows.Controls.DataVisualizati Telerik.Windows.Controls.Expressions.dll Telerik.Windows.Controls.GridView.dll Telerik.Windows.Controls.Input.dll Telerik.Windows.Controls.Navigation.dll Telerik.Windows.Controls.Pivot.dll Telerik.Windows.Controls.PivotFieldList. Telerik.Windows.Controls.dll Telerik.Windows.Controls.resources.dll Telerik.Windows.Controls.resources.dll_1 Telerik.Windows.Controls.resources.dll_2 Telerik.Windows.Controls.resources.dll_3 Telerik.Windows.Controls.resources.dll_4 Telerik.Windows.Controls.resources.dll_5 Telerik.Windows.Data.dll Telerik.Windows.Documents.Core.dll Telerik.Windows.Documents.Flow.dll Telerik.Windows.Documents.dll Telerik.Windows.PersistenceFramework.dll Telerik.Windows.Themes.Office2013.dll Telerik.Windows.Themes.Windows8.dll Telerik.Windows.Zip.dll logs"/>
+    <ROW Feature="MainFeature" Title="MainFeature" Description="Description" Display="1" Level="1" Directory_="APPDIR" Attributes="0" Components="Autofac.dll GalaSoft.MvvmLight.Extras.dll GalaSoft.MvvmLight.Platform.dll GalaSoft.MvvmLight.dll Hardcodet.Wpf.TaskbarNotification.dll JiraAssistant.exe Microsoft.Expression.Interactions.dll Microsoft.Expression.Interactions.reso_1 Microsoft.Expression.Interactions.reso_2 Microsoft.Expression.Interactions.reso_3 Microsoft.Expression.Interactions.reso_4 Microsoft.Expression.Interactions.reso_5 Microsoft.Expression.Interactions.reso_6 Microsoft.Expression.Interactions.reso_7 Microsoft.Expression.Interactions.reso_8 Microsoft.Expression.Interactions.reso_9 Microsoft.Expression.Interactions.resour Microsoft.Practices.ServiceLocation.dll NLog.config NLog.dll Newtonsoft.Json.dll ProductInformation RestSharp.dll SHORTCUTDIR System.Windows.Interactivity.dll Telerik.Pivot.Core.dll Telerik.Windows.Controls.Chart.dll Telerik.Windows.Controls.DataVisualizati Telerik.Windows.Controls.Expressions.dll Telerik.Windows.Controls.GridView.dll Telerik.Windows.Controls.Input.dll Telerik.Windows.Controls.Navigation.dll Telerik.Windows.Controls.Pivot.dll Telerik.Windows.Controls.PivotFieldList. Telerik.Windows.Controls.dll Telerik.Windows.Controls.resources.dll Telerik.Windows.Controls.resources.dll_1 Telerik.Windows.Controls.resources.dll_2 Telerik.Windows.Controls.resources.dll_3 Telerik.Windows.Controls.resources.dll_4 Telerik.Windows.Controls.resources.dll_5 Telerik.Windows.Data.dll Telerik.Windows.Documents.Core.dll Telerik.Windows.Documents.Flow.dll Telerik.Windows.Documents.dll Telerik.Windows.PersistenceFramework.dll Telerik.Windows.Themes.Office2013.dll Telerik.Windows.Themes.Windows8.dll Telerik.Windows.Zip.dll log"/>
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
     <ROW File="Autofac.dll" Component_="Autofac.dll" FileName="Autofac.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Autofac.dll" SelfReg="false" NextFile="GalaSoft.MvvmLight.dll"/>
     <ROW File="GalaSoft.MvvmLight.Extras.dll" Component_="GalaSoft.MvvmLight.Extras.dll" FileName="GALASO~2.DLL|GalaSoft.MvvmLight.Extras.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\GalaSoft.MvvmLight.Extras.dll" SelfReg="false" NextFile="GalaSoft.MvvmLight.Platform.dll"/>
-    <ROW File="GalaSoft.MvvmLight.Platform.dll" Component_="GalaSoft.MvvmLight.Platform.dll" FileName="GALASO~3.DLL|GalaSoft.MvvmLight.Platform.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\GalaSoft.MvvmLight.Platform.dll" SelfReg="false" NextFile="Hardcodet.Wpf.TaskbarNotification.dll"/>
+    <ROW File="GalaSoft.MvvmLight.Platform.dll" Component_="GalaSoft.MvvmLight.Platform.dll" FileName="GALASO~3.DLL|GalaSoft.MvvmLight.Platform.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\GalaSoft.MvvmLight.Platform.dll" SelfReg="false" NextFile="Microsoft.Expression.Interactions.dll"/>
     <ROW File="GalaSoft.MvvmLight.dll" Component_="GalaSoft.MvvmLight.dll" FileName="GALASO~1.DLL|GalaSoft.MvvmLight.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\GalaSoft.MvvmLight.dll" SelfReg="false" NextFile="GalaSoft.MvvmLight.Extras.dll"/>
-    <ROW File="Hardcodet.Wpf.TaskbarNotification.dll" Component_="Hardcodet.Wpf.TaskbarNotification.dll" FileName="HARDCO~1.DLL|Hardcodet.Wpf.TaskbarNotification.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll" SelfReg="false" NextFile="Microsoft.Expression.Interactions.dll"/>
+    <ROW File="Hardcodet.Wpf.TaskbarNotification.dll" Component_="Hardcodet.Wpf.TaskbarNotification.dll" FileName="HARDCO~1.DLL|Hardcodet.Wpf.TaskbarNotification.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll" SelfReg="false" NextFile="log"/>
     <ROW File="JiraAssistant.exe" Component_="JiraAssistant.exe" FileName="JIRAAS~1.EXE|JiraAssistant.exe" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.exe" SelfReg="false" NextFile="Microsoft.Expression.Interactions.resources.dll" DigSign="true"/>
-    <ROW File="JiraAssistant.exe.config" Component_="JiraAssistant.exe.config" FileName="JIRAAS~1.CON|JiraAssistant.exe.config" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.exe.config" SelfReg="false" NextFile="Autofac.dll"/>
     <ROW File="JiraAssistant.pdb" Component_="JiraAssistant.exe" FileName="JIRAAS~1.PDB|JiraAssistant.pdb" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.pdb" SelfReg="false"/>
     <ROW File="Microsoft.Expression.Interactions.dll" Component_="Microsoft.Expression.Interactions.dll" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Microsoft.Expression.Interactions.dll" SelfReg="false" NextFile="Microsoft.Practices.ServiceLocation.dll"/>
     <ROW File="Microsoft.Expression.Interactions.resources.dll" Component_="Microsoft.Expression.Interactions.resour" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.resources.dll"/>
@@ -125,8 +124,9 @@
     <ROW File="Microsoft.Expression.Interactions.resources.dll_6" Component_="Microsoft.Expression.Interactions.reso_6" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.resources.dll_4"/>
     <ROW File="Microsoft.Expression.Interactions.resources.dll_7" Component_="Microsoft.Expression.Interactions.reso_7" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.resources.dll_5"/>
     <ROW File="Microsoft.Expression.Interactions.resources.dll_8" Component_="Microsoft.Expression.Interactions.reso_8" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Microsoft.Expression.Interactions.resources.dll_9"/>
-    <ROW File="Microsoft.Expression.Interactions.resources.dll_9" Component_="Microsoft.Expression.Interactions.reso_9" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="JiraAssistant.exe.config"/>
+    <ROW File="Microsoft.Expression.Interactions.resources.dll_9" Component_="Microsoft.Expression.Interactions.reso_9" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Hardcodet.Wpf.TaskbarNotification.dll"/>
     <ROW File="Microsoft.Practices.ServiceLocation.dll" Component_="Microsoft.Practices.ServiceLocation.dll" FileName="MICROS~2.DLL|Microsoft.Practices.ServiceLocation.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Microsoft.Practices.ServiceLocation.dll" SelfReg="false" NextFile="Newtonsoft.Json.dll"/>
+    <ROW File="NLog.config" Component_="NLog.config" FileName="NLOG~1.CON|NLog.config" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\NLog.config" SelfReg="false" NextFile="Autofac.dll"/>
     <ROW File="NLog.dll" Component_="NLog.dll" FileName="NLog.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\NLog.dll" SelfReg="false" NextFile="RestSharp.dll"/>
     <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Newtonsoft.Json.dll" SelfReg="false" NextFile="NLog.dll"/>
     <ROW File="RestSharp.dll" Component_="RestSharp.dll" FileName="RESTSH~1.DLL|RestSharp.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\RestSharp.dll" SelfReg="false" NextFile="System.Windows.Interactivity.dll"/>
@@ -155,6 +155,13 @@
     <ROW File="Telerik.Windows.Themes.Office2013.dll" Component_="Telerik.Windows.Themes.Office2013.dll" FileName="TELER~16.DLL|Telerik.Windows.Themes.Office2013.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Telerik.Windows.Themes.Office2013.dll" SelfReg="false" NextFile="Telerik.Windows.Themes.Windows8.dll"/>
     <ROW File="Telerik.Windows.Themes.Windows8.dll" Component_="Telerik.Windows.Themes.Windows8.dll" FileName="TELER~17.DLL|Telerik.Windows.Themes.Windows8.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Telerik.Windows.Themes.Windows8.dll" SelfReg="false" NextFile="Telerik.Windows.Zip.dll"/>
     <ROW File="Telerik.Windows.Zip.dll" Component_="Telerik.Windows.Zip.dll" FileName="TELER~18.DLL|Telerik.Windows.Zip.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Telerik.Windows.Zip.dll" SelfReg="false" NextFile="JiraAssistant.pdb"/>
+    <ROW File="log" Component_="log" FileName="2016-0~1.LOG|2016-02-12.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-02-12.log" SelfReg="false" NextFile="log_1"/>
+    <ROW File="log_1" Component_="log" FileName="2016-0~2.LOG|2016-02-21.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-02-21.log" SelfReg="false" NextFile="log_2"/>
+    <ROW File="log_2" Component_="log" FileName="2016-0~3.LOG|2016-02-28.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-02-28.log" SelfReg="false" NextFile="log_3"/>
+    <ROW File="log_3" Component_="log" FileName="2016-0~4.LOG|2016-03-30.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-03-30.log" SelfReg="false" NextFile="log_4"/>
+    <ROW File="log_4" Component_="log" FileName="2016-0~5.LOG|2016-03-31.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-03-31.log" SelfReg="false" NextFile="log_5"/>
+    <ROW File="log_5" Component_="log" FileName="2016-0~6.LOG|2016-04-17.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-04-17.log" SelfReg="false" NextFile="log_6"/>
+    <ROW File="log_6" Component_="log" FileName="2016-0~7.LOG|2016-05-05.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-05-05.log" SelfReg="false" NextFile="NLog.config"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="AnyCPU_Release" BuildName="AnyCPU_Release" BuildOrder="1" BuildType="0" PackageFolder="H:\InstallerOutput\Jira Assistant" Languages="pl" InstallationType="4" UseLargeSchema="true"/>
@@ -210,7 +217,6 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCreateFolderComponent">
     <ROW Directory_="SHORTCUTDIR" Component_="SHORTCUTDIR" ManualDelete="false"/>
-    <ROW Directory_="logs_Dir" Component_="logs" ManualDelete="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiCustActComponent">
     <ROW Action="AI_AuthorSinglePackage" Type="1" Source="aicustact.dll" Target="AI_AuthorSinglePackage" WithoutSeq="true"/>

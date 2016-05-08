@@ -8,6 +8,7 @@ using JiraAssistant.Pages;
 using JiraAssistant.Properties;
 using JiraAssistant.Services;
 using JiraAssistant.Services.Jira;
+using JiraAssistant.Settings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,6 +29,7 @@ namespace JiraAssistant.ViewModel
       private readonly ApplicationCache _cache;
       private readonly IContainer _iocContainer;
       private readonly IJiraApi _jiraApi;
+      private readonly AssistantSettings _settings;
 
       public AgileBoardSelectViewModel(IContainer iocContainer)
       {
@@ -37,6 +39,7 @@ namespace JiraAssistant.ViewModel
          _jiraSession = iocContainer.Resolve<JiraSessionViewModel>();
          _statisticsCalculator = iocContainer.Resolve<IssuesStatisticsCalculator>();
          _cache = iocContainer.Resolve<ApplicationCache>();
+         _settings = iocContainer.Resolve<AssistantSettings>();
 
          Boards = new ObservableCollection<RawAgileBoard>();
          RecentBoards = new ObservableCollection<RawAgileBoard>();
@@ -58,7 +61,7 @@ namespace JiraAssistant.ViewModel
          }
       }
 
-      private static void UpdateRecentBoardsIdsList(RawAgileBoard board)
+      private void UpdateRecentBoardsIdsList(RawAgileBoard board)
       {
          var recentBoardsIds = GetRecentBoardsIds();
          if (recentBoardsIds.Contains(board.Id) == false && recentBoardsIds.Count >= RecentBoardsCount)
@@ -68,13 +71,12 @@ namespace JiraAssistant.ViewModel
          recentBoardsIds.Remove(board.Id);
          recentBoardsIds.Insert(0, board.Id);
 
-         Properties.Settings.Default.RecentBoardsIds = string.Join(",", recentBoardsIds);
-         Properties.Settings.Default.Save();
+         _settings.RecentBoardsIds = string.Join(",", recentBoardsIds);
       }
 
-      private static IList<int> GetRecentBoardsIds()
+      private IList<int> GetRecentBoardsIds()
       {
-         return Properties.Settings.Default.RecentBoardsIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
+         return _settings.RecentBoardsIds.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToList();
       }
 
       internal async void OnNavigatedTo()
