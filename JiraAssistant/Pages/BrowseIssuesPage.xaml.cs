@@ -117,10 +117,12 @@ namespace JiraAssistant.Pages
 
          foreach (var group in grouped)
          {
+            resultBuilder.AppendLine();
             if (string.IsNullOrWhiteSpace(group.Key))
                resultBuilder.AppendLine("h2. (No Epic)");
             else
-               resultBuilder.AppendLine(group.Key);
+               resultBuilder.AppendLine("h2. " + group.Key);
+            resultBuilder.AppendLine();
 
             foreach (var issue in group)
                resultBuilder.AppendLine(string.Format("* *{0}* - {1}", issue.Key, EscapeConfluenceMarkupCharacters(issue.Summary)));
