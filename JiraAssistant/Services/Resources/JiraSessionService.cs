@@ -8,6 +8,7 @@ using JiraAssistant.Model.Jira;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Settings;
 using JiraAssistant.Services.Jira;
+using System.Linq;
 
 namespace JiraAssistant.Services.Resources
 {
@@ -37,7 +38,7 @@ namespace JiraAssistant.Services.Resources
          var client = BuildRestClient();
 
          var response = await client.ExecuteTaskAsync(new RestRequest("/rest/auth/1/session", Method.DELETE));
-         Configuration.JiraSessionId = "";
+         Configuration.SessionCookies = "";
 
          RaiseOnLogout();
       }
@@ -64,7 +65,7 @@ namespace JiraAssistant.Services.Resources
 
             if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
             {
-               Configuration.JiraSessionId = "";
+               Configuration.SessionCookies = "";
                return false;
             }
 
@@ -113,8 +114,8 @@ namespace JiraAssistant.Services.Resources
             {
                throw new LoginFailedException(string.Format("Given address '{0}' does not point at valid JIRA server.", jiraUrl));
             }
-
-            Configuration.JiraSessionId = response.Data.Session.Value;
+            
+            Configuration.SessionCookies = response.Headers.First(h => h.Name.ToLowerInvariant() == "set-cookie").Value.ToString();
             RaiseOnSuccessfulLogin();
          }
          catch (UriFormatException)

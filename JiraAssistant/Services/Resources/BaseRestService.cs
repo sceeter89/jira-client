@@ -19,10 +19,10 @@ namespace JiraAssistant.Services.Resources
 
          var client = new RestClient(Configuration.JiraUrl);
          client.AddDefaultHeader("Content-Type", "Application/json");
-         if (string.IsNullOrEmpty(Configuration.JiraSessionId) == false)
+         if (string.IsNullOrEmpty(Configuration.SessionCookies) == false)
          {
             client.CookieContainer = new CookieContainer();
-            client.CookieContainer.Add(new Cookie("JSESSIONID", Configuration.JiraSessionId, "/", client.BaseUrl.Host));
+            client.CookieContainer.SetCookies(client.BaseUrl, Configuration.SessionCookies);
          }
 
          return client;

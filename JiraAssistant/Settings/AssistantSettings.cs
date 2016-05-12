@@ -23,12 +23,6 @@ namespace JiraAssistant.Settings
          set { SetValue(value, defaultValue: string.Empty); }
       }
 
-      public string JiraSessionId
-      {
-         get { return GetValue(defaultValue: string.Empty); }
-         set { SetValue(value, defaultValue: string.Empty); }
-      }
-
       public string RecentBoardsIds
       {
          get { return GetValue(defaultValue: string.Empty); }
@@ -39,6 +33,12 @@ namespace JiraAssistant.Settings
       {
          get { return GetValue(defaultValue: DateTime.MinValue); }
          set { SetValue(value, defaultValue: DateTime.MinValue); }
+      }
+
+      public string SessionCookies
+      {
+         get { return GetValue(defaultValue: string.Empty); }
+         set { SetValue(value, defaultValue: string.Empty); }
       }
    }
 }

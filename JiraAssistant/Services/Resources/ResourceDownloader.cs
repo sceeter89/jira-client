@@ -17,10 +17,10 @@ namespace JiraAssistant.Services.Resources
       public async Task<ImageSource> DownloadPicture(string imageUri)
       {
          var request = (HttpWebRequest)WebRequest.Create(imageUri);
-         if (string.IsNullOrEmpty(Configuration.JiraSessionId) == false)
+         if (string.IsNullOrEmpty(Configuration.SessionCookies) == false)
          {
             request.CookieContainer = new CookieContainer();
-            request.CookieContainer.Add(new Cookie("JSESSIONID", Configuration.JiraSessionId, "/", request.RequestUri.Host));
+            request.CookieContainer.SetCookies(request.RequestUri, Configuration.SessionCookies);
          }
 
          var response = (HttpWebResponse)(await request.GetResponseAsync());
