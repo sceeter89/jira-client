@@ -5,17 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JiraAssistant.Dialogs"
         mc:Ignorable="d"
-        Title="JIRA Assistant" Height="80" Width="300">
+        Title="Jira Assistant" Height="90" Width="300"
+        Icon="/Assets/Icons/ApplicationIcon.png">
    <Grid>
       <Grid.RowDefinitions>
          <RowDefinition Height="Auto" />
          <RowDefinition Height="*" />
       </Grid.RowDefinitions>
-      <TextBlock Text="Select filter to load then 'Enter'" />
-      <ComboBox VerticalAlignment="Center" Grid.Row="1" ItemsSource="{Binding Options}" SelectedItem="{Binding FilterName}" >
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="*" />
+         <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <TextBlock Text="Select filter to load then press 'Enter' or click 'Load'" Grid.ColumnSpan="2" Margin="3"/>
+      <ComboBox VerticalAlignment="Center" Grid.Row="1" ItemsSource="{Binding Options}" SelectedItem="{Binding FilterName}" 
+               Margin="3 0 0 0">
          <ComboBox.InputBindings>
             <KeyBinding Command="{Binding AcceptCommand}" Key="Return"/>
          </ComboBox.InputBindings>
       </ComboBox>
+
+      <Button Grid.Row="1" Grid.Column="1" Content="Load" Command="{Binding AcceptCommand}" VerticalAlignment="Center" Margin="3 0 3 0" Width="60"/>
    </Grid>
 </Window>

@@ -5,17 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JiraAssistant.Dialogs"
         mc:Ignorable="d"
-        Title="JIRA Assistant" Height="80" Width="300">
+        Title="Jira Assistant" Height="90" Width="300"
+        Icon="/Assets/Icons/ApplicationIcon.png">
    <Grid>
       <Grid.RowDefinitions>
          <RowDefinition Height="Auto" />
          <RowDefinition Height="*" />
       </Grid.RowDefinitions>
-      <TextBlock Text="Type filter name then press 'Enter'" />
-      <TextBox VerticalAlignment="Center" Grid.Row="1" Text="{Binding FilterName, FallbackValue=My Filter}">
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="*" />
+         <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <TextBlock Text="Type filter name then press 'Enter' or click 'Save'" Grid.ColumnSpan="2" Margin="3" />
+      
+      <TextBox VerticalAlignment="Center" Grid.Row="1" Text="{Binding FilterName, FallbackValue=My Filter}"
+               Margin="3 0 0 0">
          <TextBox.InputBindings>
             <KeyBinding Command="{Binding AcceptCommand}" Key="Return"/>
          </TextBox.InputBindings>
       </TextBox>
+
+      <Button Grid.Row="1" Grid.Column="1" Content="Save" Command="{Binding AcceptCommand}" VerticalAlignment="Center" Margin="3 0 3 0" Width="60"/>
    </Grid>
 </Window>

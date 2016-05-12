@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:JiraAssistant.Dialogs"
         mc:Ignorable="d"
         Title="JIRA Assistant" Height="200" Width="450"
-        Icon="/Icon.ico">
+        Icon="/Assets/Icons/ApplicationIcon.png">
    <Grid>
       <Grid.RowDefinitions>
          <RowDefinition Height="Auto" />

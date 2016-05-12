@@ -32,9 +32,9 @@ namespace JiraAssistant.Settings
             var key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
             if (value)
-               key.SetValue("JIRA Assistant", Assembly.GetExecutingAssembly().Location);
+               key.SetValue("Jira Assistant", Assembly.GetExecutingAssembly().Location);
             else
-               key.DeleteValue("JIRA Assistant", false);
+               key.DeleteValue("Jira Assistant", false);
          }
       }
 

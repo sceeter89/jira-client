@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("JIRA Assistant")]
+[assembly: AssemblyTitle("Jira Assistant")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Yakuza")]
-[assembly: AssemblyProduct("JIRA Assistant")]
+[assembly: AssemblyProduct("Jira Assistant")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

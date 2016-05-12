@@ -51,7 +51,7 @@ namespace JiraAssistant.Pages
          });
          Buttons.Add(new ToolbarButton
          {
-            Tooltip = "Export as rich text",
+            Tooltip = "Export as Confluence Markup",
             Command = new RelayCommand(ExportAsConfluenceMarkupResults),
             Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/ConfluenceIcon.png"))
          });
@@ -63,7 +63,7 @@ namespace JiraAssistant.Pages
          });
          Buttons.Add(new ToolbarButton
          {
-            Tooltip = "Saved filters",
+            Tooltip = "Load saved filter",
             Command = new RelayCommand(LoadGridState),
             Icon = new BitmapImage(new Uri(@"pack://application:,,,/;component/Assets/Icons/FilterIcon.png"))
          });
@@ -81,13 +81,14 @@ namespace JiraAssistant.Pages
 
          if (File.Exists(Path.Combine(_settingsPath, name)))
          {
-            var result = MessageBox.Show("Do you want to overwrite existing filter?", "JIRA Assistant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Do you want to overwrite existing filter?", "Jira Assistant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.No)
                return;
          }
 
          var manager = new PersistenceManager();
+         manager.AllowCrossVersion = true;
          var savedState = manager.Save(grid);
          using (var reader = new StreamReader(savedState))
          using (var writer = new StreamWriter(Path.Combine(_settingsPath, name)))
@@ -98,12 +99,13 @@ namespace JiraAssistant.Pages
 
       private void LoadGridState()
       {
-         var filters = Directory.EnumerateFiles(_settingsPath).ToArray();
+         var filters = Directory.EnumerateFiles(_settingsPath).Select(p => Path.GetFileName(p)).ToArray();
          var dialog = new SelectFilterDialog(filters);
          if (dialog.ShowDialog() == false)
             return;
 
          var manager = new PersistenceManager();
+         manager.AllowCrossVersion = true;
          using (var stream = File.OpenRead(Path.Combine(_settingsPath, dialog.FilterName)))
          {
             manager.Load(grid, stream);
