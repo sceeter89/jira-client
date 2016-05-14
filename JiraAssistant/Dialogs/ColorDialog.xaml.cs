@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace JiraAssistant.Dialogs
@@ -29,6 +30,10 @@ namespace JiraAssistant.Dialogs
 
          ColorEditor.SelectedColor = EditedColor;
          ColorEditor.SelectedColorChanged += (sender, args) => EditedColor = args.Color;
+
+         var mousePosition = App.Current.MainWindow.PointToScreen(Mouse.GetPosition(null));
+         this.Top = mousePosition.Y;
+         this.Left = mousePosition.X;
       }
 
       public void SaveClicked(object sender, RoutedEventArgs args)

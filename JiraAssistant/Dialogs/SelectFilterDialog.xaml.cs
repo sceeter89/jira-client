@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using System.Windows.Input;
 
 namespace JiraAssistant.Dialogs
 {
@@ -10,6 +11,10 @@ namespace JiraAssistant.Dialogs
          AcceptCommand = new RelayCommand(() => DialogResult = true);
          Options = filters;
          DataContext = this;
+
+         var mousePosition = App.Current.MainWindow.PointToScreen(Mouse.GetPosition(null));
+         this.Top = mousePosition.Y;
+         this.Left = mousePosition.X;
       }
 
       public string[] Options { get; set; }

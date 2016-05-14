@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace JiraAssistant.Dialogs
 {
@@ -12,6 +13,10 @@ namespace JiraAssistant.Dialogs
          ReadOnly = readOnly;
 
          DataContext = this;
+
+         var mousePosition = App.Current.MainWindow.PointToScreen(Mouse.GetPosition(null));
+         this.Top = mousePosition.Y;
+         this.Left = mousePosition.X;
       }
 
       public bool ReadOnly { get; private set; }
