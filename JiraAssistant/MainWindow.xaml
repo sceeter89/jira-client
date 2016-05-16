@@ -116,20 +116,22 @@
          <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0"
                            Content="" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0">
             <telerik:RadDropDownButton.DropDownContent>
-               <ItemsControl ItemsSource="{Binding NavigationHistory}">
-                  <ItemsControl.ItemTemplate>
-                     <DataTemplate>
-                        <Button Width="150" HorizontalContentAlignment="Left" Content="{Binding Title}"
+               <Border BorderBrush="{telerik:Windows8Resource ResourceKey=AccentBrush}" BorderThickness="2">
+                  <ItemsControl ItemsSource="{Binding NavigationHistory}">
+                     <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                           <Button Width="150" HorizontalContentAlignment="Left" Content="{Binding Title}"
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.BackToPageCommand}"
                                 CommandParameter="{Binding .}"/>
-                     </DataTemplate>
-                  </ItemsControl.ItemTemplate>
-                  <ItemsControl.ItemsPanel>
-                     <ItemsPanelTemplate>
-                        <StackPanel/>
-                     </ItemsPanelTemplate>
-                  </ItemsControl.ItemsPanel>
-               </ItemsControl>
+                        </DataTemplate>
+                     </ItemsControl.ItemTemplate>
+                     <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                           <StackPanel/>
+                        </ItemsPanelTemplate>
+                     </ItemsControl.ItemsPanel>
+                  </ItemsControl>
+               </Border>
             </telerik:RadDropDownButton.DropDownContent>
          </telerik:RadDropDownButton>
          <Button ToolTip="Settings" Command="{Binding OpenSettingsCommand}" Margin="5">
@@ -138,12 +140,14 @@
          <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0"
                                      ToolTip="Tools">
             <telerik:RadDropDownButton.DropDownContent>
-               <StackPanel Width="120">
-                  <Button Content="Log work" Command="{Binding LogWorkCommand}" IsEnabled="{Binding Source={StaticResource Locator}, Path=JiraSession.IsLoggedIn}" 
+               <Border BorderBrush="{telerik:Windows8Resource ResourceKey=AccentBrush}" BorderThickness="2">
+                  <StackPanel Width="120">
+                     <Button Content="Log work" Command="{Binding LogWorkCommand}" IsEnabled="{Binding Source={StaticResource Locator}, Path=JiraSession.IsLoggedIn}" 
                           HorizontalContentAlignment="Center" />
-                  <Separator />
-                  <Button Content="Exit" Command="{Binding CloseApplicationCommand}" HorizontalContentAlignment="Center" />
-               </StackPanel>
+                     <Separator />
+                     <Button Content="Exit" Command="{Binding CloseApplicationCommand}" HorizontalContentAlignment="Center" />
+                  </StackPanel>
+               </Border>
             </telerik:RadDropDownButton.DropDownContent>
          </telerik:RadDropDownButton>
       </StackPanel>
