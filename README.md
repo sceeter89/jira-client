@@ -15,7 +15,7 @@ This application's aim is to make interaction with JIRA more pleasant and powerf
 
 ## How to install
 
-Please download latest release from: https://github.com/sceeter89/jira-client/releases and run installer. It's signed with my public key available via [Keybase.io](https://keybase.io) profile.
+Please download latest release from: https://github.com/sceeter89/jira-client/releases and run installer. It's signed with my private key (public key is available via my [Keybase.io](https://keybase.io/yakuza) profile).
 
 ### Prerequisities
 
