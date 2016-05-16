@@ -10,6 +10,8 @@ This application's aim is to make interaction with JIRA more pleasant and powerf
 * "_Issues Graveyard_" - hints on which tasks that should probably be already closed
 * Export list of issues to text or Confluence Markup
 * Auto-updater
+* Watch selected project for toast-like updates when something changes (updated or created issues)
+* Get prompted to log work for issues on which user worked recently.
 
 ## How to install
 
