@@ -86,14 +86,12 @@ namespace JiraAssistant.Services.Resources
             Configuration.Username = username;
             var client = BuildRestClient();
 
-            var sessionInfoRequest = new RestRequest("/rest/auth/1/session");
-            sessionInfoRequest.RequestFormat = DataFormat.Json;
-            sessionInfoRequest.AddJsonBody(new Dictionary<string, string>
-            {
-               {"username", username },
-               {"password", password }
-            });
-            var response = await client.ExecutePostTaskAsync<RawSuccessfulLoginParameters>(sessionInfoRequest);
+            var sessionInfoRequest = new RestRequest("/rest/gadget/1.0/login");
+            sessionInfoRequest.AddParameter("os_username", username, ParameterType.GetOrPost);
+            sessionInfoRequest.AddParameter("os_password", password, ParameterType.GetOrPost);
+            sessionInfoRequest.AddParameter("os_cookie", "true", ParameterType.GetOrPost);
+            
+            var response = await client.ExecutePostTaskAsync(sessionInfoRequest);
 
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
@@ -110,7 +108,7 @@ namespace JiraAssistant.Services.Resources
                throw new LoginFailedException("Server returned unexpected response code: " + response.StatusCode);
             }
 
-            if (response.Data == null)
+            if (string.IsNullOrEmpty(response.Content))
             {
                throw new LoginFailedException(string.Format("Given address '{0}' does not point at valid JIRA server.", jiraUrl));
             }
