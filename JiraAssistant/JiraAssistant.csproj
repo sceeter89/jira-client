@@ -248,6 +248,8 @@
     <Compile Include="Model\Github\GithubReleaseArtifact.cs" />
     <Compile Include="Model\IssuesCollectionStatistics.cs" />
     <Compile Include="Model\Jira\AgileBoardIssues.cs" />
+    <Compile Include="Model\NavigationMessages\OpenEpicsOverviewMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenIssuesBrowserMessage.cs" />
     <Compile Include="Model\NavigationMessages\OpenPivotAnalysisMessage.cs" />
     <Compile Include="Model\NavigationMessages\OpenAgileBoardMessage.cs" />
     <Compile Include="Model\Ui\IToolbarItem.cs" />
@@ -332,6 +334,7 @@
     <Compile Include="Services\Daemons\IssuesUpdatesChecker.cs" />
     <Compile Include="Services\Daemons\WorkLogUpdater.cs" />
     <Compile Include="ViewModel\AgileBoardViewModel.cs" />
+    <Compile Include="ViewModel\EpicsOverviewViewModel.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />

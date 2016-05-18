@@ -48,9 +48,9 @@ namespace JiraAssistant.ViewModel
          _statisticsCalculator = statisticsCalculator;
 
          SprintDetailsCommand = new RelayCommand(OpenSprintDetails, () => Board.Type == "scrum");
-         //OpenPivotAnalysisCommand = new RelayCommand(() => _navigator.NavigateTo(new PivotAnalysisPage(BoardContent.Issues)));
          OpenPivotAnalysisCommand = new RelayCommand(() => _messenger.Send(new OpenPivotAnalysisMessage(BoardContent.Issues)));
          //OpenEpicsOverviewCommand = new RelayCommand(() => _navigator.NavigateTo(new EpicsOverviewPage(BoardContent.Issues, BoardContent.Epics, _iocContainer)));
+         OpenEpicsOverviewCommand = new RelayCommand(() => _messenger.Send(new OpenEpicsOverviewMessage(BoardContent.Issues, BoardContent.Epics)));
          //BrowseIssuesCommand = new RelayCommand(() => _navigator.NavigateTo(new BrowseIssuesPage(BoardContent.Issues, _iocContainer)));
          //OpenGraveyardCommand = new RelayCommand(() => _navigator.NavigateTo(new BoardGraveyard(BoardContent.Issues, _iocContainer)));
          //OpenSprintsVelocityCommand = new RelayCommand(() => _navigator.NavigateTo(new SprintsVelocity(BoardContent, BoardContent.Sprints, _iocContainer)), () => Board.Type == "scrum");

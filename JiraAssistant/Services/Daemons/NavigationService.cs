@@ -18,6 +18,26 @@ namespace JiraAssistant.Services.Daemons
          _mainWindowViewModel = mainWindowViewModel;
          messenger.Register<OpenAgileBoardMessage>(this, OpenAgileBoard);
          messenger.Register<OpenPivotAnalysisMessage>(this, OpenPivotAnalysis);
+         messenger.Register<OpenEpicsOverviewMessage>(this, OpenEpicsOverview);
+         messenger.Register<OpenIssuesBrowserMessage>(this, OpenIssuesBrowser);
+      }
+
+      private void OpenIssuesBrowser(OpenIssuesBrowserMessage message)
+      {
+         var page = _resolver.Resolve<BrowseIssuesPage>(new NamedParameter("issues", message.Issues));
+         
+         _mainWindowViewModel.NavigateTo(page);
+      }
+
+      private void OpenEpicsOverview(OpenEpicsOverviewMessage message)
+      {
+         var viewModel = _resolver.Resolve<EpicsOverviewViewModel>(
+            new NamedParameter("issues", message.Issues),
+            new NamedParameter("epics", message.Epics)
+            );
+         var page = new EpicsOverviewPage(viewModel);
+
+         _mainWindowViewModel.NavigateTo(page);
       }
 
       private void OpenPivotAnalysis(OpenPivotAnalysisMessage message)
