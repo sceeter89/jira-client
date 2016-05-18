@@ -1,7 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Model.Jira;
+using JiraAssistant.Model.NavigationMessages;
 using JiraAssistant.Model.Ui;
-using JiraAssistant.Services;
 using System;
 using System.Collections.Generic;
 
@@ -10,17 +11,17 @@ namespace JiraAssistant.Pages
    public partial class PickUpSprintPage : BaseNavigationPage
    {
       private readonly Func<RawAgileSprint, INavigationPage> _followUp;
-      private readonly INavigator _navigator;
+      private readonly IMessenger _messenger;
 
       public PickUpSprintPage(IList<RawAgileSprint> sprints,
          Func<RawAgileSprint, INavigationPage> followUp,
-         INavigator navigator)
+         IMessenger messenger)
       {
          InitializeComponent();
 
          Sprints = sprints;
          _followUp = followUp;
-         _navigator = navigator;
+         _messenger = messenger;
 
          PickUpSprintCommand = new RelayCommand<RawAgileSprint>(PickUpSprint);
 
@@ -29,7 +30,7 @@ namespace JiraAssistant.Pages
 
       private void PickUpSprint(RawAgileSprint sprint)
       {
-         _navigator.NavigateTo(_followUp(sprint));
+         _messenger.Send(new OpenPageMessage(_followUp(sprint)));
       }
 
       public RelayCommand<RawAgileSprint> PickUpSprintCommand { get; private set; }

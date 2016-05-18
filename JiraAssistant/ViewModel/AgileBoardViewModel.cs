@@ -5,13 +5,10 @@ using JiraAssistant.Model;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
 using JiraAssistant.Model.NavigationMessages;
-using JiraAssistant.Model.Ui;
-using JiraAssistant.Pages;
 using JiraAssistant.Services;
 using JiraAssistant.Services.Jira;
 using NLog;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Windows;
 
@@ -22,12 +19,10 @@ namespace JiraAssistant.ViewModel
       private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
       private bool _isBusy;
-      private readonly INavigator _navigator;
       private readonly JiraSessionViewModel _jiraSession;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
       private IssuesCollectionStatistics _statistics;
 
-      private readonly Dictionary<int, INavigationPage> _sprintsDetailsCache = new Dictionary<int, INavigationPage>();
       private readonly IJiraApi _jiraApi;
       private bool _forceReload;
       private bool _downloadCompleted;
@@ -49,11 +44,10 @@ namespace JiraAssistant.ViewModel
 
          SprintDetailsCommand = new RelayCommand(OpenSprintDetails, () => Board.Type == "scrum");
          OpenPivotAnalysisCommand = new RelayCommand(() => _messenger.Send(new OpenPivotAnalysisMessage(BoardContent.Issues)));
-         //OpenEpicsOverviewCommand = new RelayCommand(() => _navigator.NavigateTo(new EpicsOverviewPage(BoardContent.Issues, BoardContent.Epics, _iocContainer)));
          OpenEpicsOverviewCommand = new RelayCommand(() => _messenger.Send(new OpenEpicsOverviewMessage(BoardContent.Issues, BoardContent.Epics)));
-         //BrowseIssuesCommand = new RelayCommand(() => _navigator.NavigateTo(new BrowseIssuesPage(BoardContent.Issues, _iocContainer)));
-         //OpenGraveyardCommand = new RelayCommand(() => _navigator.NavigateTo(new BoardGraveyard(BoardContent.Issues, _iocContainer)));
-         //OpenSprintsVelocityCommand = new RelayCommand(() => _navigator.NavigateTo(new SprintsVelocity(BoardContent, BoardContent.Sprints, _iocContainer)), () => Board.Type == "scrum");
+         BrowseIssuesCommand = new RelayCommand(() => _messenger.Send(new OpenIssuesBrowserMessage(BoardContent.Issues)));
+         OpenGraveyardCommand = new RelayCommand(() => _messenger.Send(new OpenBoardGraveyardMessage(BoardContent.Issues)));
+         OpenSprintsVelocityCommand = new RelayCommand(() => _messenger.Send(new OpenSprintsVelocityMessage(BoardContent)), () => Board.Type == "scrum");
 
          RefreshDataCommand = new RelayCommand(() =>
          {
@@ -68,18 +62,9 @@ namespace JiraAssistant.ViewModel
          DownloadElements();
       }
 
-
-
       private void OpenSprintDetails()
       {
-         _navigator.NavigateTo(new PickUpSprintPage(BoardContent.Sprints,
-            sprint =>
-            {
-               //if (_sprintsDetailsCache.ContainsKey(sprint.Id) == false)
-               //   _sprintsDetailsCache[sprint.Id] = new SprintDetailsPage(sprint, BoardContent.IssuesInSprint(sprint.Id), _iocContainer);
-
-               return _sprintsDetailsCache[sprint.Id];
-            }, _navigator));
+         _messenger.Send(new OpenSprintsPickupMessage(BoardContent));
       }
 
       public async void DownloadElements()

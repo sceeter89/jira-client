@@ -248,6 +248,12 @@
     <Compile Include="Model\Github\GithubReleaseArtifact.cs" />
     <Compile Include="Model\IssuesCollectionStatistics.cs" />
     <Compile Include="Model\Jira\AgileBoardIssues.cs" />
+    <Compile Include="Model\NavigationMessages\OpenSprintsPickupMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenPageMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenSprintsVelocityMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenIssueDetailsMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenBoardGraveyardMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenScrumCardsMessage.cs" />
     <Compile Include="Model\NavigationMessages\OpenEpicsOverviewMessage.cs" />
     <Compile Include="Model\NavigationMessages\OpenIssuesBrowserMessage.cs" />
     <Compile Include="Model\NavigationMessages\OpenPivotAnalysisMessage.cs" />
@@ -334,7 +340,9 @@
     <Compile Include="Services\Daemons\IssuesUpdatesChecker.cs" />
     <Compile Include="Services\Daemons\WorkLogUpdater.cs" />
     <Compile Include="ViewModel\AgileBoardViewModel.cs" />
+    <Compile Include="ViewModel\BoardGraveyardViewModel.cs" />
     <Compile Include="ViewModel\EpicsOverviewViewModel.cs" />
+    <Compile Include="ViewModel\IssuesBrowserViewModel.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />
@@ -355,6 +363,8 @@
     <Compile Include="ViewModel\AgileBoardSelectViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PivotAnalysisViewModel.cs" />
+    <Compile Include="ViewModel\ScrumCardsViewModel.cs" />
+    <Compile Include="ViewModel\SprintsVelocityViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\IssueCollectionStatisticsControl.xaml">
       <SubType>Designer</SubType>

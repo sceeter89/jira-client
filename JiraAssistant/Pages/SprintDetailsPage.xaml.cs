@@ -6,6 +6,8 @@ using System;
 using JiraAssistant.Services;
 using JiraAssistant.Model;
 using Autofac;
+using GalaSoft.MvvmLight.Messaging;
+using JiraAssistant.Model.NavigationMessages;
 
 namespace JiraAssistant.Pages
 {
@@ -15,9 +17,11 @@ namespace JiraAssistant.Pages
       private IssuesCollectionStatistics _statistics;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
       private readonly IComponentContext _iocContainer;
+      private readonly IMessenger _messenger;
 
       public SprintDetailsPage(RawAgileSprint sprint,
          IList<JiraIssue> issues,
+         IMessenger messenger,
          IComponentContext iocContainer)
       {
          InitializeComponent();
@@ -25,6 +29,7 @@ namespace JiraAssistant.Pages
          Sprint = sprint;
          Issues = issues;
 
+         _messenger = messenger;
          _iocContainer = iocContainer;
          _navigator = _iocContainer.Resolve<INavigator>();
          _statisticsCalculator = _iocContainer.Resolve<IssuesStatisticsCalculator>();
@@ -41,7 +46,7 @@ namespace JiraAssistant.Pages
 
       private void BrowseIssues()
       {
-         _navigator.NavigateTo(new BrowseIssuesPage(Issues, _iocContainer));
+         _messenger.Send(new OpenIssuesBrowserMessage(Issues));
       }
 
       private async void GatherStatistics()
@@ -61,7 +66,7 @@ namespace JiraAssistant.Pages
 
       private void OpenScrumCards()
       {
-         _navigator.NavigateTo(new ScrumCardsPrintPreview(Issues, _iocContainer));
+         _messenger.Send(new OpenScrumCardsMessage(Issues));
       }
 
       public IssuesCollectionStatistics Statistics

@@ -8,8 +8,6 @@ namespace JiraAssistant.ViewModel
 {
    public class ViewModelLocator
    {
-      private AgileBoardSelectViewModel _agileBoardSelect;
-
       public ViewModelLocator()
       {
          BuildContainer();
