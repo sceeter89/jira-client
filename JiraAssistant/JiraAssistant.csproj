@@ -248,6 +248,8 @@
     <Compile Include="Model\Github\GithubReleaseArtifact.cs" />
     <Compile Include="Model\IssuesCollectionStatistics.cs" />
     <Compile Include="Model\Jira\AgileBoardIssues.cs" />
+    <Compile Include="Model\NavigationMessages\OpenPivotAnalysisMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenAgileBoardMessage.cs" />
     <Compile Include="Model\Ui\IToolbarItem.cs" />
     <Compile Include="Model\Ui\ToolbarControl.cs" />
     <Compile Include="Pages\AgileBoardPage.xaml.cs">
@@ -317,6 +319,7 @@
     <Compile Include="Services\Jira\IJiraSessionApi.cs" />
     <Compile Include="Services\Jira\IJiraWorklogManager.cs" />
     <Compile Include="Services\Jira\JiraApi.cs" />
+    <Compile Include="Services\Daemons\NavigationService.cs" />
     <Compile Include="Services\Resources\WorklogManager.cs" />
     <Compile Include="Settings\AnalysisSettings.cs" />
     <Compile Include="Settings\AssistantSettings.cs" />
@@ -328,6 +331,7 @@
     <Compile Include="Services\Daemons\UpdateService.cs" />
     <Compile Include="Services\Daemons\IssuesUpdatesChecker.cs" />
     <Compile Include="Services\Daemons\WorkLogUpdater.cs" />
+    <Compile Include="ViewModel\AgileBoardViewModel.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
     <Compile Include="Model\Jira\JiraIssue.cs" />
     <Compile Include="Model\Jira\PivotJiraIssue.cs" />
@@ -347,6 +351,7 @@
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\AgileBoardSelectViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\PivotAnalysisViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Controls\IssueCollectionStatisticsControl.xaml">
       <SubType>Designer</SubType>

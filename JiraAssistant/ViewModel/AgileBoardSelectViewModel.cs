@@ -1,11 +1,12 @@
 ﻿using Autofac;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Model.Exceptions;
 using JiraAssistant.Model.Jira;
+using JiraAssistant.Model.NavigationMessages;
 using JiraAssistant.Model.Ui;
 using JiraAssistant.Pages;
-using JiraAssistant.Properties;
 using JiraAssistant.Services;
 using JiraAssistant.Services.Jira;
 using JiraAssistant.Settings;
@@ -27,12 +28,14 @@ namespace JiraAssistant.ViewModel
       private readonly JiraSessionViewModel _jiraSession;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
       private readonly ApplicationCache _cache;
-      private readonly IContainer _iocContainer;
+      private readonly IComponentContext _iocContainer;
       private readonly IJiraApi _jiraApi;
       private readonly AssistantSettings _settings;
+      private readonly IMessenger _messenger;
 
-      public AgileBoardSelectViewModel(IContainer iocContainer)
+      public AgileBoardSelectViewModel(IMessenger messenger, IComponentContext iocContainer)
       {
+         _messenger = messenger;
          _iocContainer = iocContainer;
          _navigator = iocContainer.Resolve<INavigator>();
          _jiraApi = iocContainer.Resolve<IJiraApi>();
@@ -55,9 +58,11 @@ namespace JiraAssistant.ViewModel
             _navigator.NavigateTo(_boardPagesCache[board.Id]);
          else
          {
+            _messenger.Send(new OpenAgileBoardMessage(board));
+            /*
             var boardPage = new AgileBoardPage(board, _iocContainer);
             _boardPagesCache[board.Id] = boardPage;
-            _navigator.NavigateTo(boardPage);
+            _navigator.NavigateTo(boardPage);*/
          }
       }
 

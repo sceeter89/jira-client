@@ -13,7 +13,7 @@ namespace JiraAssistant.Pages
       private readonly AnalysisSettings _settings;
       private readonly AgileBoardIssues _boardContent;
 
-      public SprintsVelocity(AgileBoardIssues boardContent, IList<RawAgileSprint> sprints, IContainer iocContainer)
+      public SprintsVelocity(AgileBoardIssues boardContent, IList<RawAgileSprint> sprints, IComponentContext iocContainer)
       {
          InitializeComponent();
          _boardContent = boardContent;

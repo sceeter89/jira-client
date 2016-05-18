@@ -21,7 +21,7 @@ namespace JiraAssistant.Pages
       private bool _isBusy;
       private readonly AssistantSettings _appSettings;
 
-      public BoardGraveyard(IList<JiraIssue> issues, IContainer iocContainer)
+      public BoardGraveyard(IList<JiraIssue> issues, IComponentContext iocContainer)
       {
          InitializeComponent();
 

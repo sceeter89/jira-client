@@ -23,11 +23,11 @@ namespace JiraAssistant.Pages
    public partial class BrowseIssuesPage
    {
       private readonly INavigator _navigator;
-      private readonly IContainer _iocContainer;
+      private readonly IComponentContext _iocContainer;
       private readonly string _settingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                                            "Yakuza", "Jira Assistant", "GridFilters");
 
-      public BrowseIssuesPage(IList<JiraIssue> issues, IContainer iocContainer)
+      public BrowseIssuesPage(IList<JiraIssue> issues, IComponentContext iocContainer)
       {
          InitializeComponent();
          ServiceProvider.RegisterPersistenceProvider<ICustomPropertyProvider>(typeof(BindableRadGridView), new BindableGridViewPropertyProvider());

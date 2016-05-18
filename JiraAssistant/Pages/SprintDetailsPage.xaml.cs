@@ -14,11 +14,11 @@ namespace JiraAssistant.Pages
       private readonly INavigator _navigator;
       private IssuesCollectionStatistics _statistics;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
-      private readonly IContainer _iocContainer;
+      private readonly IComponentContext _iocContainer;
 
       public SprintDetailsPage(RawAgileSprint sprint,
          IList<JiraIssue> issues,
-         IContainer iocContainer)
+         IComponentContext iocContainer)
       {
          InitializeComponent();
 

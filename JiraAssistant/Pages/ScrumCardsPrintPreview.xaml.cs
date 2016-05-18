@@ -24,11 +24,11 @@ namespace JiraAssistant.Pages
       private const int Rows = 5;
       private const int Columns = 3;
       private int _rightPageIndex;
-      private readonly IContainer _iocContainer;
+      private readonly IComponentContext _iocContainer;
       private readonly string[] _defaultIssueTypes = { "user story", "bug", "story bug", "story" };
       private int _cardsCount;
 
-      public ScrumCardsPrintPreview(IEnumerable<JiraIssue> issues, IContainer iocContainer)
+      public ScrumCardsPrintPreview(IEnumerable<JiraIssue> issues, IComponentContext iocContainer)
       {
          InitializeComponent();
 

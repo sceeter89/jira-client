@@ -17,9 +17,9 @@ namespace JiraAssistant.Pages
       private readonly IDictionary<string, bool> _epicKeyToIgnoreStatus;
       private bool _isBusy;
       private readonly INavigator _navigator;
-      private readonly IContainer _iocContainer;
+      private readonly IComponentContext _iocContainer;
 
-      public EpicsOverviewPage(IEnumerable<JiraIssue> issues, IEnumerable<RawAgileEpic> epics, IContainer iocContainer)
+      public EpicsOverviewPage(IEnumerable<JiraIssue> issues, IEnumerable<RawAgileEpic> epics, IComponentContext iocContainer)
       {
          InitializeComponent();
 

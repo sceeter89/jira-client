@@ -1,4 +1,6 @@
 using Autofac;
+using GalaSoft.MvvmLight.Messaging;
+using JiraAssistant.Pages;
 using JiraAssistant.Services;
 using JiraAssistant.Settings;
 
@@ -34,8 +36,7 @@ namespace JiraAssistant.ViewModel
       {
          get
          {
-            _agileBoardSelect = _agileBoardSelect ?? new AgileBoardSelectViewModel(IocContainer);
-            return _agileBoardSelect;
+            return IocContainer.Resolve<AgileBoardSelectViewModel>();
          }
       }
 
@@ -82,10 +83,16 @@ namespace JiraAssistant.ViewModel
             .AsSelf()
             .AsImplementedInterfaces()
             .SingleInstance();
-         
+
          builder.RegisterAssemblyTypes(GetType().Assembly)
             .InNamespaceOf<SettingsBase>()
             .Except<SettingsBase>()
+            .AsSelf()
+            .SingleInstance();
+
+         builder.RegisterAssemblyTypes(GetType().Assembly)
+            .InNamespaceOf<BaseNavigationPage>()
+            .Except<BaseNavigationPage>()
             .AsSelf()
             .SingleInstance();
 
@@ -106,6 +113,10 @@ namespace JiraAssistant.ViewModel
             .SingleInstance()
             .AsImplementedInterfaces()
             .AutoActivate();
+
+         builder.RegisterType<Messenger>()
+            .As<IMessenger>()
+            .SingleInstance();
 
          IocContainer = builder.Build();
       }
