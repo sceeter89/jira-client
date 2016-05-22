@@ -22,48 +22,27 @@ namespace JiraAssistant.ViewModel
    {
       private bool _isBusy;
       private string _busyMessage;
-      private readonly INavigator _navigator;
       private const int RecentBoardsCount = 3;
-      private readonly IDictionary<int, INavigationPage> _boardPagesCache = new Dictionary<int, INavigationPage>();
-      private readonly JiraSessionViewModel _jiraSession;
-      private readonly IssuesStatisticsCalculator _statisticsCalculator;
-      private readonly ApplicationCache _cache;
-      private readonly IComponentContext _iocContainer;
       private readonly IJiraApi _jiraApi;
       private readonly AssistantSettings _settings;
       private readonly IMessenger _messenger;
 
-      public AgileBoardSelectViewModel(IMessenger messenger, IComponentContext iocContainer)
+      public AgileBoardSelectViewModel(IMessenger messenger, AssistantSettings settings, IJiraApi jiraApi)
       {
          _messenger = messenger;
-         _iocContainer = iocContainer;
-         _navigator = iocContainer.Resolve<INavigator>();
-         _jiraApi = iocContainer.Resolve<IJiraApi>();
-         _jiraSession = iocContainer.Resolve<JiraSessionViewModel>();
-         _statisticsCalculator = iocContainer.Resolve<IssuesStatisticsCalculator>();
-         _cache = iocContainer.Resolve<ApplicationCache>();
-         _settings = iocContainer.Resolve<AssistantSettings>();
+         _jiraApi = jiraApi;
+         _settings = settings;
 
          Boards = new ObservableCollection<RawAgileBoard>();
          RecentBoards = new ObservableCollection<RawAgileBoard>();
          OpenBoardCommand = new RelayCommand<RawAgileBoard>(OpenBoard);
-         OpenSettingsCommand = new RelayCommand(() => _navigator.NavigateTo(new ApplicationSettings()));
+         OpenSettingsCommand = new RelayCommand(() => _messenger.Send(new OpenSettingsMessage()));
       }
 
       private void OpenBoard(RawAgileBoard board)
       {
          UpdateRecentBoardsIdsList(board);
-
-         if (_boardPagesCache.ContainsKey(board.Id))
-            _navigator.NavigateTo(_boardPagesCache[board.Id]);
-         else
-         {
-            _messenger.Send(new OpenAgileBoardMessage(board));
-            /*
-            var boardPage = new AgileBoardPage(board, _iocContainer);
-            _boardPagesCache[board.Id] = boardPage;
-            _navigator.NavigateTo(boardPage);*/
-         }
+         _messenger.Send(new OpenAgileBoardMessage(board));
       }
 
       private void UpdateRecentBoardsIdsList(RawAgileBoard board)

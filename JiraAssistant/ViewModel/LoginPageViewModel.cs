@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Model.Exceptions;
-using JiraAssistant.Pages;
-using JiraAssistant.Services;
+using JiraAssistant.Model.NavigationMessages;
 using JiraAssistant.Services.Jira;
 using JiraAssistant.Settings;
 using System;
@@ -13,7 +13,7 @@ namespace JiraAssistant.ViewModel
    public class LoginPageViewModel : ViewModelBase
    {
       private readonly JiraSessionViewModel _jiraSession;
-      private readonly INavigator _navigator;
+      private readonly IMessenger _messenger;
       private string _loginErrorMessage;
       private string _jiraAddress;
       private string _username;
@@ -21,12 +21,12 @@ namespace JiraAssistant.ViewModel
       private string _busyMessage;
       private readonly IJiraApi _jiraApi;
 
-      public LoginPageViewModel(INavigator navigator,
+      public LoginPageViewModel(IMessenger messenger,
          JiraSessionViewModel jiraSession,
          IJiraApi jiraApi,
          AssistantSettings configuration)
       {
-         _navigator = navigator;
+         _messenger = messenger;
          _jiraSession = jiraSession;
          _jiraApi = jiraApi;
 
@@ -94,7 +94,7 @@ namespace JiraAssistant.ViewModel
             IsBusy = true;
             await _jiraApi.Session.AttemptLogin(JiraAddress, Username, passwordBox.Password);
             
-            _navigator.NavigateTo(new PickUpAgileBoardPage());
+            _messenger.Send(new OpenAgileBoardPickupMessage());
          }
          catch (LoginFailedException e)
          {
@@ -120,7 +120,7 @@ namespace JiraAssistant.ViewModel
 
             if (await _jiraApi.Session.CheckJiraSession())
             {
-               _navigator.NavigateTo(new PickUpAgileBoardPage());
+               _messenger.Send(new OpenAgileBoardPickupMessage());
                _jiraSession.LoggedIn();
             }
          }

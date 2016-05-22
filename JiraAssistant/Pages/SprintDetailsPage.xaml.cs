@@ -2,10 +2,8 @@
 using JiraAssistant.Model.Jira;
 using System.Collections.Generic;
 using System.Windows.Input;
-using System;
 using JiraAssistant.Services;
 using JiraAssistant.Model;
-using Autofac;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Model.NavigationMessages;
 
@@ -13,16 +11,14 @@ namespace JiraAssistant.Pages
 {
    public partial class SprintDetailsPage : BaseNavigationPage
    {
-      private readonly INavigator _navigator;
       private IssuesCollectionStatistics _statistics;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
-      private readonly IComponentContext _iocContainer;
       private readonly IMessenger _messenger;
 
       public SprintDetailsPage(RawAgileSprint sprint,
          IList<JiraIssue> issues,
          IMessenger messenger,
-         IComponentContext iocContainer)
+         IssuesStatisticsCalculator statisticsCalculator)
       {
          InitializeComponent();
 
@@ -30,45 +26,23 @@ namespace JiraAssistant.Pages
          Issues = issues;
 
          _messenger = messenger;
-         _iocContainer = iocContainer;
-         _navigator = _iocContainer.Resolve<INavigator>();
-         _statisticsCalculator = _iocContainer.Resolve<IssuesStatisticsCalculator>();
+         _statisticsCalculator = statisticsCalculator;
 
-         ScrumCardsCommand = new RelayCommand(OpenScrumCards);
-         BurnDownCommand = new RelayCommand(OpenBurnDownChart);
-         EngagementCommand = new RelayCommand(OpenEngagementChart);
-         BrowseIssuesCommand = new RelayCommand(BrowseIssues);
+         ScrumCardsCommand = new RelayCommand(() => _messenger.Send(new OpenScrumCardsMessage(Issues)));
+         BurnDownCommand = new RelayCommand(() => _messenger.Send(new OpenBurnDownMessage(Sprint, Issues)));
+         EngagementCommand = new RelayCommand(() => _messenger.Send(new OpenEngagementChartMessage(Issues)));
+         BrowseIssuesCommand = new RelayCommand(() => _messenger.Send(new OpenIssuesBrowserMessage(Issues)));
 
          DataContext = this;
 
          GatherStatistics();
       }
 
-      private void BrowseIssues()
-      {
-         _messenger.Send(new OpenIssuesBrowserMessage(Issues));
-      }
-
       private async void GatherStatistics()
       {
          Statistics = await _statisticsCalculator.Calculate(Issues);
       }
-
-      private void OpenEngagementChart()
-      {
-         _navigator.NavigateTo(new EngagementChart(Issues));
-      }
-
-      private void OpenBurnDownChart()
-      {
-         _navigator.NavigateTo(new BurnDownChart(Sprint, Issues));
-      }
-
-      private void OpenScrumCards()
-      {
-         _messenger.Send(new OpenScrumCardsMessage(Issues));
-      }
-
+      
       public IssuesCollectionStatistics Statistics
       {
          get { return _statistics; }

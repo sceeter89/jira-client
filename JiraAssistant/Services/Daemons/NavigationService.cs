@@ -12,16 +12,17 @@ namespace JiraAssistant.Services.Daemons
 {
    public class NavigationService
    {
-      private readonly MainViewModel _mainWindowViewModel;
+      private readonly INavigator _navigator;
       private readonly IComponentContext _resolver;
-      private readonly Dictionary<int, INavigationPage> _sprintsDetailsCache = new Dictionary<int, INavigationPage>();
+      private readonly IDictionary<int, INavigationPage> _sprintsDetailsCache = new Dictionary<int, INavigationPage>();
+      private readonly IDictionary<int, INavigationPage> _boardPagesCache = new Dictionary<int, INavigationPage>();
       private readonly IMessenger _messenger;
 
-      public NavigationService(IMessenger messenger, MainViewModel mainWindowViewModel, IComponentContext resolver)
+      public NavigationService(IMessenger messenger, INavigator navigator, IComponentContext resolver)
       {
          _resolver = resolver;
-         _mainWindowViewModel = mainWindowViewModel;
-         _messenger = messenger; 
+         _navigator = navigator;
+         _messenger = messenger;
 
          messenger.Register<OpenAgileBoardMessage>(this, OpenAgileBoard);
          messenger.Register<OpenPivotAnalysisMessage>(this, OpenPivotAnalysis);
@@ -33,6 +34,46 @@ namespace JiraAssistant.Services.Daemons
          messenger.Register<OpenSprintsVelocityMessage>(this, OpenSprintsVelocity);
          messenger.Register<OpenPageMessage>(this, OpenPage);
          messenger.Register<OpenSprintsPickupMessage>(this, OpenSprintsPickup);
+         messenger.Register<OpenBurnDownMessage>(this, OpenBurnDown);
+         messenger.Register<OpenEngagementChartMessage>(this, OpenEngagementChart);
+         messenger.Register<OpenSettingsMessage>(this, OpenSettings);
+         messenger.Register<OpenAgileBoardPickupMessage>(this, OpenAgileBoardPickup);
+         messenger.Register<ClearNavigationHistoryMessage>(this, ClearNavigationStack);
+      }
+
+      private void OpenAgileBoardPickup(OpenAgileBoardPickupMessage message)
+      {
+         var page = _resolver.Resolve<PickUpAgileBoardPage>();
+
+         _navigator.NavigateTo(page);
+      }
+
+      private void ClearNavigationStack(ClearNavigationHistoryMessage message)
+      {
+         _navigator.ClearHistory();
+      }
+
+      private void OpenSettings(OpenSettingsMessage message)
+      {
+         var page = _resolver.Resolve<ApplicationSettings>(new NamedParameter("initialPage", message.InitialPage));
+
+         _navigator.NavigateTo(page);
+      }
+
+      private void OpenEngagementChart(OpenEngagementChartMessage message)
+      {
+         var viewModel = _resolver.Resolve<EngagementChartViewModel>(new NamedParameter("issues", message.Issues));
+         var page = new EngagementChart(viewModel);
+
+         _navigator.NavigateTo(page);
+      }
+
+      private void OpenBurnDown(OpenBurnDownMessage message)
+      {
+         var viewModel = _resolver.Resolve<BurnDownChartViewModel>(new NamedParameter("issues", message.Issues), new NamedParameter("sprint", message.Sprint));
+         var page = new BurnDownChart(viewModel);
+
+         _navigator.NavigateTo(page);
       }
 
       private void OpenSprintsPickup(OpenSprintsPickupMessage message)
@@ -45,14 +86,14 @@ namespace JiraAssistant.Services.Daemons
 
             return _sprintsDetailsCache[sprint.Id];
          };
-         var page = _resolver.Resolve<PickUpSprintPage>(new NamedParameter("sprints", sprints), new NamedParameter("followUp", followUpCallback)); 
-         
-         _mainWindowViewModel.NavigateTo(page);
+         var page = _resolver.Resolve<PickUpSprintPage>(new NamedParameter("sprints", sprints), new NamedParameter("followUp", followUpCallback));
+
+         _navigator.NavigateTo(page);
       }
 
       private void OpenPage(OpenPageMessage message)
       {
-         _mainWindowViewModel.NavigateTo(message.Page);
+         _navigator.NavigateTo(message.Page);
       }
 
       private void OpenSprintsVelocity(OpenSprintsVelocityMessage message)
@@ -60,7 +101,7 @@ namespace JiraAssistant.Services.Daemons
          var viewModel = _resolver.Resolve<SprintsVelocityViewModel>(new NamedParameter("issues", message.Issues));
          var page = new SprintsVelocity(viewModel);
 
-         _mainWindowViewModel.NavigateTo(page);
+         _navigator.NavigateTo(page);
       }
 
       private void OpenBoardGraveyard(OpenBoardGraveyardMessage message)
@@ -68,14 +109,14 @@ namespace JiraAssistant.Services.Daemons
          var viewModel = _resolver.Resolve<BoardGraveyardViewModel>(new NamedParameter("issues", message.Issues));
          var page = new BoardGraveyard(viewModel);
 
-         _mainWindowViewModel.NavigateTo(page);
+         _navigator.NavigateTo(page);
       }
 
       private void OpenIssueDetails(OpenIssueDetailsMessage message)
       {
          var page = _resolver.Resolve<IssueDetailsPage>(new NamedParameter("issue", message.Issue));
 
-         _mainWindowViewModel.NavigateTo(page);
+         _navigator.NavigateTo(page);
       }
 
       private void OpenScrumCards(OpenScrumCardsMessage message)
@@ -83,7 +124,7 @@ namespace JiraAssistant.Services.Daemons
          var viewModel = _resolver.Resolve<ScrumCardsViewModel>(new NamedParameter("issues", message.Issues));
          var page = new ScrumCardsPrintPreview(viewModel);
 
-         _mainWindowViewModel.NavigateTo(page);
+         _navigator.NavigateTo(page);
       }
 
       private void OpenIssuesBrowser(OpenIssuesBrowserMessage message)
@@ -91,7 +132,7 @@ namespace JiraAssistant.Services.Daemons
          var viewModel = _resolver.Resolve<IssuesBrowserViewModel>(new NamedParameter("issues", message.Issues));
          var page = new BrowseIssuesPage(viewModel);
 
-         _mainWindowViewModel.NavigateTo(page);
+         _navigator.NavigateTo(page);
       }
 
       private void OpenEpicsOverview(OpenEpicsOverviewMessage message)
@@ -102,7 +143,7 @@ namespace JiraAssistant.Services.Daemons
             );
          var page = new EpicsOverviewPage(viewModel);
 
-         _mainWindowViewModel.NavigateTo(page);
+         _navigator.NavigateTo(page);
       }
 
       private void OpenPivotAnalysis(OpenPivotAnalysisMessage message)
@@ -110,15 +151,21 @@ namespace JiraAssistant.Services.Daemons
          var viewModel = _resolver.Resolve<PivotAnalysisViewModel>(new NamedParameter("issues", message.Issues));
          var page = new PivotAnalysisPage(viewModel);
 
-         _mainWindowViewModel.NavigateTo(page);
+         _navigator.NavigateTo(page);
       }
 
       private void OpenAgileBoard(OpenAgileBoardMessage message)
       {
+         if (_boardPagesCache.ContainsKey(message.Board.Id))
+         {
+            _navigator.NavigateTo(_boardPagesCache[message.Board.Id]);
+            return;
+         }
+
          var viewModel = _resolver.Resolve<AgileBoardViewModel>(new NamedParameter("board", message.Board));
          var page = new AgileBoardPage(viewModel);
-
-         _mainWindowViewModel.NavigateTo(page);
+         _boardPagesCache[message.Board.Id] = page;
+         _navigator.NavigateTo(page);
       }
    }
 }

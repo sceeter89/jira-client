@@ -51,7 +51,7 @@
                   </Style>
                </WrapPanel.Resources>
 
-               <Button Content="Sprint" Command="{Binding SprintDetailsCommand}" />
+               <Button Content="Sprint" Command="{Binding PickUpSprintCommand}" />
                <Button Content="Pivot Analysis" Command="{Binding OpenPivotAnalysisCommand}" />
                <Button Content="Epics Overview" Command="{Binding OpenEpicsOverviewCommand}" />
                <Button Content="Browse Issues" Command="{Binding BrowseIssuesCommand}" />

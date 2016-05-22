@@ -42,7 +42,7 @@ namespace JiraAssistant.ViewModel
          _jiraSession = jiraSession;
          _statisticsCalculator = statisticsCalculator;
 
-         SprintDetailsCommand = new RelayCommand(OpenSprintDetails, () => Board.Type == "scrum");
+         PickUpSprintCommand = new RelayCommand(OpenPickUpSprint, () => Board.Type == "scrum");
          OpenPivotAnalysisCommand = new RelayCommand(() => _messenger.Send(new OpenPivotAnalysisMessage(BoardContent.Issues)));
          OpenEpicsOverviewCommand = new RelayCommand(() => _messenger.Send(new OpenEpicsOverviewMessage(BoardContent.Issues, BoardContent.Epics)));
          BrowseIssuesCommand = new RelayCommand(() => _messenger.Send(new OpenIssuesBrowserMessage(BoardContent.Issues)));
@@ -62,7 +62,7 @@ namespace JiraAssistant.ViewModel
          DownloadElements();
       }
 
-      private void OpenSprintDetails()
+      private void OpenPickUpSprint()
       {
          _messenger.Send(new OpenSprintsPickupMessage(BoardContent));
       }
@@ -148,7 +148,7 @@ namespace JiraAssistant.ViewModel
          }
       }
 
-      public RelayCommand SprintDetailsCommand { get; private set; }
+      public RelayCommand PickUpSprintCommand { get; private set; }
       public RelayCommand OpenPivotAnalysisCommand { get; private set; }
       public RelayCommand OpenEpicsOverviewCommand { get; private set; }
       public RelayCommand OpenGraveyardCommand { get; private set; }

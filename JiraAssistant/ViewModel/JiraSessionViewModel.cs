@@ -1,7 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using JiraAssistant.Model.Jira;
-using JiraAssistant.Services;
+using JiraAssistant.Model.NavigationMessages;
 using JiraAssistant.Services.Jira;
 using JiraAssistant.Settings;
 using System;
@@ -16,16 +17,16 @@ namespace JiraAssistant.ViewModel
       private bool _isLoggedIn;
       private RawProfileDetails _profile;
       private ImageSource _profileAvatar;
-      private readonly INavigator _navigator;
       private readonly IJiraApi _jiraApi;
+      private readonly IMessenger _messenger;
 
       public JiraSessionViewModel(AssistantSettings configuration,
-         INavigator navigator,
+         IMessenger messenger,
          IJiraApi jiraApi)
       {
          _jiraApi = jiraApi;
          _configuration = configuration;
-         _navigator = navigator;
+         _messenger = messenger;
 
          _jiraApi.Session.OnLogout += (sender, args) => LoggedOut();
          _jiraApi.Session.OnSuccessfulLogin += (sender, args) => LoggedIn();
@@ -37,7 +38,7 @@ namespace JiraAssistant.ViewModel
          Profile = null;
          ProfileAvatar = null;
 
-         _navigator.ClearHistory();
+         _messenger.Send(new ClearNavigationHistoryMessage());
       }
 
       internal void LoggedIn()

@@ -248,6 +248,11 @@
     <Compile Include="Model\Github\GithubReleaseArtifact.cs" />
     <Compile Include="Model\IssuesCollectionStatistics.cs" />
     <Compile Include="Model\Jira\AgileBoardIssues.cs" />
+    <Compile Include="Model\NavigationMessages\OpenAgileBoardPickupMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenBurnDownMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenEngagementChartMessage.cs" />
+    <Compile Include="Model\NavigationMessages\ClearNavigationHistoryMessage.cs" />
+    <Compile Include="Model\NavigationMessages\OpenSettingsMessage.cs" />
     <Compile Include="Model\NavigationMessages\OpenSprintsPickupMessage.cs" />
     <Compile Include="Model\NavigationMessages\OpenPageMessage.cs" />
     <Compile Include="Model\NavigationMessages\OpenSprintsVelocityMessage.cs" />
@@ -341,6 +346,8 @@
     <Compile Include="Services\Daemons\WorkLogUpdater.cs" />
     <Compile Include="ViewModel\AgileBoardViewModel.cs" />
     <Compile Include="ViewModel\BoardGraveyardViewModel.cs" />
+    <Compile Include="ViewModel\BurnDownChartViewModel.cs" />
+    <Compile Include="ViewModel\EngagementChartViewModel.cs" />
     <Compile Include="ViewModel\EpicsOverviewViewModel.cs" />
     <Compile Include="ViewModel\IssuesBrowserViewModel.cs" />
     <Compile Include="ViewModel\JiraSessionViewModel.cs" />
