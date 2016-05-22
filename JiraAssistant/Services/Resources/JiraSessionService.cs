@@ -63,6 +63,11 @@ namespace JiraAssistant.Services.Resources
 
             var response = await client.ExecuteGetTaskAsync<RawSessionInfo>(new RestRequest("/rest/auth/1/session"));
 
+            if (response.StatusCode == 0)
+            {
+               throw new ServerNotFoundException();
+            }
+
             if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
             {
                Configuration.SessionCookies = "";
@@ -100,11 +105,14 @@ namespace JiraAssistant.Services.Resources
 
             if (response.StatusCode == HttpStatusCode.Forbidden)
             {
-               throw new LoginFailedException("User was not allowed to log in. Try to login via browser");
+               throw new LoginFailedException("User was not allowed to log in. Try to login via browser.");
             }
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
+               if (response.StatusCode == 0)
+                  throw new ServerNotFoundException();
+
                throw new LoginFailedException("Server returned unexpected response code: " + response.StatusCode);
             }
 

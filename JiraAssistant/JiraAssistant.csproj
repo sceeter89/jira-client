@@ -241,6 +241,7 @@
     <Compile Include="Model\AgileBoardCacheMetadata.cs" />
     <Compile Include="Model\Exceptions\CacheCorruptedException.cs" />
     <Compile Include="Model\Exceptions\IncompleteJiraConfiguration.cs" />
+    <Compile Include="Model\Exceptions\ServerNotFoundException.cs" />
     <Compile Include="Model\Exceptions\LoginFailedException.cs" />
     <Compile Include="Model\Exceptions\MissingJiraAgileSupportException.cs" />
     <Compile Include="Model\Exceptions\SearchFailedException.cs" />

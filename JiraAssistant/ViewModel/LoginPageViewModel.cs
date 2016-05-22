@@ -93,8 +93,12 @@ namespace JiraAssistant.ViewModel
             BusyMessage = "Trying to log into JIRA...";
             IsBusy = true;
             await _jiraApi.Session.AttemptLogin(JiraAddress, Username, passwordBox.Password);
-            
+
             _messenger.Send(new OpenAgileBoardPickupMessage());
+         }
+         catch (ServerNotFoundException)
+         {
+            LoginErrorMessage = "Server did not respond. Please check address and/or connection.";
          }
          catch (LoginFailedException e)
          {
@@ -124,7 +128,11 @@ namespace JiraAssistant.ViewModel
                _jiraSession.LoggedIn();
             }
          }
-         catch(IncompleteJiraConfiguration) { }
+         catch (ServerNotFoundException)
+         {
+            LoginErrorMessage = "Could not find most recent server. Try again later.";
+         }
+         catch (IncompleteJiraConfiguration) { }
          finally
          {
             IsBusy = false;
