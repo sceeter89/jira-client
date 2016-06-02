@@ -16,6 +16,12 @@ namespace JiraAssistant.Settings
          set { SetValue(value, defaultValue: new DateTime(1, 1, 1, 16, 0, 0)); }
       }
 
+      public DateTime LastLogWorkDisplayed
+      {
+         get { return GetValue(defaultValue: new DateTime(1900, 1, 1)); }
+         set { SetValue(value, defaultValue: new DateTime(1900, 1, 1)); }
+      }
+
       public bool MonitorIssuesUpdates
       {
          get { return GetValue(defaultValue: false); }

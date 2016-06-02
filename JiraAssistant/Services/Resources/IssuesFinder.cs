@@ -98,7 +98,6 @@ namespace JiraAssistant.Services.Resources
             Reporter = (issue.BuiltInFields.Reporter ?? RawUserInfo.EmptyInfo).DisplayName,
             BuiltInFields = issue.BuiltInFields,
             EpicLink = GetFieldByName<string>(issue, "Epic Link") ?? "",
-            EpicName = GetFieldByName<string>(issue, "Epic Name") ?? "",
             SprintIds = (GetArrayByName<string>(issue, "Sprint"))
                         .Select(i => int.Parse(i.Substring(i.IndexOf('=') + 1, i.IndexOf(',') - i.IndexOf('=') - 1)))
          };

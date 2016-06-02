@@ -8,61 +8,64 @@ using System.Windows.Threading;
 
 namespace JiraAssistant.Services.Daemons
 {
-   public class WorkLogUpdater
-   {
-      private readonly IJiraApi _jiraApi;
-      private readonly ReportsSettings _reportsSettings;
-      private readonly DispatcherTimer _timer;
-      private bool _popupOpened;
+    public class WorkLogUpdater
+    {
+        private readonly IJiraApi _jiraApi;
+        private readonly ReportsSettings _reportsSettings;
+        private readonly DispatcherTimer _timer;
+        private bool _popupOpened;
 
-      public WorkLogUpdater(ReportsSettings reportsSettings, IJiraApi jiraApi)
-      {
-         _reportsSettings = reportsSettings;
-         _jiraApi = jiraApi;
+        public WorkLogUpdater(ReportsSettings reportsSettings, IJiraApi jiraApi)
+        {
+            _reportsSettings = reportsSettings;
+            _jiraApi = jiraApi;
 
-         _timer = new DispatcherTimer();
-         _timer.Interval = TimeSpan.FromSeconds(30);
-         _timer.Tick += CheckIfWorkShouldBeLogged;
-         _timer.Start();
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(30);
+            _timer.Tick += CheckIfWorkShouldBeLogged;
+            _timer.Start();
 
-         LogWorkCommand = new RelayCommand(LogWork);
-      }
+            LogWorkCommand = new RelayCommand(LogWork);
+        }
 
-      public RelayCommand LogWorkCommand { get; private set; }
+        public RelayCommand LogWorkCommand { get; private set; }
 
-      private void CheckIfWorkShouldBeLogged(object sender, EventArgs e)
-      {
-         if (_reportsSettings.RemindAboutWorklog == false)
-            return;
-         
-         if ((int) DateTime.Now.TimeOfDay.TotalMinutes == (int) _reportsSettings.RemindAt.TimeOfDay.TotalMinutes)
-         {
-            LogWork();
-         }
-      }
+        private void CheckIfWorkShouldBeLogged(object sender, EventArgs e)
+        {
+            if (_reportsSettings.RemindAboutWorklog == false)
+                return;
 
-      private async void LogWork()
-      {
-         if (_popupOpened)
-            return;
+            var todayDisplayTime = DateTime.Today.Add(_reportsSettings.RemindAt.TimeOfDay);
 
-         try
-         {
-            _popupOpened = true;
-            var activeTasks = await _jiraApi.SearchForIssues("Assignee = currentUser() AND (Resolution IS EMPTY OR (resolved >= \"-24h\" AND resolved < endOfDay()))");
-            var dialog = new LogWorkDialog(activeTasks);
-            if (dialog.ShowDialog() == false)
-               return;
-
-            foreach (var entry in dialog.Entries.Where(e => e.Hours > 0))
+            if (_reportsSettings.LastLogWorkDisplayed <= todayDisplayTime)
             {
-               await _jiraApi.Worklog.Log(entry.Issue, entry.Hours);
+                _reportsSettings.LastLogWorkDisplayed = DateTime.Now;
+                LogWork();
             }
-         }
-         finally
-         {
-            _popupOpened = false;
-         }
-      }
-   }
+        }
+
+        private async void LogWork()
+        {
+            if (_popupOpened)
+                return;
+
+            try
+            {
+                _popupOpened = true;
+                var activeTasks = await _jiraApi.SearchForIssues("Assignee = currentUser() AND (Resolution IS EMPTY OR (resolved >= \"-24h\" AND resolved < endOfDay()))");
+                var dialog = new LogWorkDialog(activeTasks);
+                if (dialog.ShowDialog() == false)
+                    return;
+
+                foreach (var entry in dialog.Entries.Where(e => e.Hours > 0))
+                {
+                    await _jiraApi.Worklog.Log(entry.Issue, entry.Hours);
+                }
+            }
+            finally
+            {
+                _popupOpened = false;
+            }
+        }
+    }
 }

@@ -49,7 +49,7 @@ namespace JiraAssistant.Services
          return await _resourceDownloader.DownloadPicture(imageUri);
       }
 
-      public async Task<IEnumerable<JiraIssue>> SearchForIssues(string jqlQuery)
+      public async Task<IList<JiraIssue>> SearchForIssues(string jqlQuery)
       {
          return await _issuesFinder.Search(jqlQuery);
       }

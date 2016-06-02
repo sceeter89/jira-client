@@ -9,7 +9,7 @@ namespace JiraAssistant.Services.Jira
    {
       Task<ImageSource> DownloadPicture(string imageUri);
 
-      Task<IEnumerable<JiraIssue>> SearchForIssues(string jqlQuery);
+      Task<IList<JiraIssue>> SearchForIssues(string jqlQuery);
 
       IJiraAgileApi Agile { get; }
       IJiraServerApi Server { get; }

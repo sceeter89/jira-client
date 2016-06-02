@@ -211,6 +211,7 @@
     <Compile Include="Controls\ScrumCardsPrintPreviewIssueTypeFilter.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreviewIssueTypeFilter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\SecondsToHoursConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToIconConverter.cs" />
     <Compile Include="Converters\BoolToVisibleConverter.cs" />
