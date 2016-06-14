@@ -1,4 +1,4 @@
-﻿using JiraAssistant.Model.Jira;
+﻿using JiraAssistant.Domain.Jira;
 
 namespace JiraAssistant.Pages
 {

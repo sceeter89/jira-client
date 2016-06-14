@@ -15,10 +15,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/sceeter89/jira-client/releases"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Yakuza"/>
-    <ROW Property="ProductCode" Value="1045:{943B3C79-98C3-478A-A3ED-EDBF031709DF} " Type="16"/>
+    <ROW Property="ProductCode" Value="1045:{467E01DD-85CC-4C19-B648-79623EF049C1} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1045"/>
     <ROW Property="ProductName" Value="Jira Assistant"/>
-    <ROW Property="ProductVersion" Value="0.7.5" Type="32"/>
+    <ROW Property="ProductVersion" Value="0.7.6" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{A9552DC2-4382-42C2-BF0D-3CD48972867C}"/>
@@ -115,7 +115,7 @@
     <ROW File="Hardcodet.Wpf.TaskbarNotification.dll" Component_="Hardcodet.Wpf.TaskbarNotification.dll" FileName="HARDCO~1.DLL|Hardcodet.Wpf.TaskbarNotification.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll" SelfReg="false" NextFile="Microsoft.Expression.Interactions.dll"/>
     <ROW File="JiraAssistant.exe" Component_="JiraAssistant.exe" FileName="JIRAAS~1.EXE|JiraAssistant.exe" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.exe" SelfReg="false" NextFile="Microsoft.Expression.Interactions.resources.dll" DigSign="true"/>
     <ROW File="JiraAssistant.exe.config" Component_="JiraAssistant.exe.config" FileName="JIRAAS~1.CON|JiraAssistant.exe.config" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.exe.config" SelfReg="false" NextFile="Autofac.dll"/>
-    <ROW File="JiraAssistant.pdb" Component_="JiraAssistant.exe" FileName="JIRAAS~1.PDB|JiraAssistant.pdb" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.pdb" SelfReg="false"/>
+    <ROW File="JiraAssistant.pdb" Component_="JiraAssistant.exe" FileName="JIRAAS~1.PDB|JiraAssistant.pdb" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.pdb" SelfReg="false" NextFile="log_8"/>
     <ROW File="Microsoft.Expression.Interactions.dll" Component_="Microsoft.Expression.Interactions.dll" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Microsoft.Expression.Interactions.dll" SelfReg="false" NextFile="Microsoft.Practices.ServiceLocation.dll"/>
     <ROW File="Microsoft.Expression.Interactions.resources.dll" Component_="Microsoft.Expression.Interactions.resour" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.resources.dll"/>
     <ROW File="Microsoft.Expression.Interactions.resources.dll_1" Component_="Microsoft.Expression.Interactions.reso_1" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Microsoft.Expression.Interactions.resources.dll_2"/>
@@ -165,6 +165,7 @@
     <ROW File="log_5" Component_="log" FileName="2016-0~6.LOG|2016-04-17.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-04-17.log" SelfReg="false" NextFile="log_6"/>
     <ROW File="log_6" Component_="log" FileName="2016-0~7.LOG|2016-05-05.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-05-05.log" SelfReg="false" NextFile="log_7"/>
     <ROW File="log_7" Component_="log" FileName="2016-0~8.LOG|2016-05-08.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-05-08.log" SelfReg="false" NextFile="JiraAssistant.exe.config"/>
+    <ROW File="log_8" Component_="log" FileName="2016-0~9.LOG|2016-05-18.log" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\logs\2016-05-18.log" SelfReg="false"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="AnyCPU_Release" BuildName="AnyCPU_Release" BuildOrder="1" BuildType="0" PackageFolder="H:\InstallerOutput\Jira Assistant" Languages="pl" InstallationType="4" UseLargeSchema="true"/>

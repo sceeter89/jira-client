@@ -1,5 +1,5 @@
 ﻿using JiraAssistant.Pages;
-using JiraAssistant.ViewModel;
+using JiraAssistant.Logic.ViewModels;
 
 namespace JiraAssistant
 {

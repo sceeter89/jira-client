@@ -1,4 +1,4 @@
-﻿using JiraAssistant.ViewModel;
+﻿using JiraAssistant.Logic.ViewModels;
 using System.Windows.Input;
 
 namespace JiraAssistant.Pages

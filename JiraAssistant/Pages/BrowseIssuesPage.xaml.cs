@@ -1,12 +1,12 @@
-﻿using JiraAssistant.Model.Ui;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using System;
 using System.Windows.Media.Imaging;
-using JiraAssistant.ViewModel;
+using JiraAssistant.Logic.ViewModels;
+using JiraAssistant.Domain.Ui;
 
 namespace JiraAssistant.Pages
 {
-   public partial class BrowseIssuesPage
+    public partial class BrowseIssuesPage
    {
       public BrowseIssuesPage(IssuesBrowserViewModel viewModel)
       {

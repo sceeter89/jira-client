@@ -1,12 +1,12 @@
 ﻿using System;
-using JiraAssistant.Model.Ui;
 using System.Windows.Media.Imaging;
-using JiraAssistant.Controls;
-using JiraAssistant.ViewModel;
+using JiraAssistant.Logic.Controls;
+using JiraAssistant.Logic.ViewModels;
+using JiraAssistant.Domain.Ui;
 
 namespace JiraAssistant.Pages
 {
-   public partial class ScrumCardsPrintPreview : BaseNavigationPage
+    public partial class ScrumCardsPrintPreview : BaseNavigationPage
    {
       public ScrumCardsPrintPreview(ScrumCardsViewModel viewModel)
       {

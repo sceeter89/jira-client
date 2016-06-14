@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A89B4325-3813-430E-A3DA-853C4C8F8690}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JiraAssistant.Domain</RootNamespace>
+    <AssemblyName>JiraAssistant.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AgileBoardCacheMetadata.cs" />
+    <Compile Include="Exceptions\CacheCorruptedException.cs" />
+    <Compile Include="Exceptions\IncompleteJiraConfiguration.cs" />
+    <Compile Include="Exceptions\LoginFailedException.cs" />
+    <Compile Include="Exceptions\MissingJiraAgileSupportException.cs" />
+    <Compile Include="Exceptions\SearchFailedException.cs" />
+    <Compile Include="Exceptions\ServerNotFoundException.cs" />
+    <Compile Include="Github\GithubApplicationRelease.cs" />
+    <Compile Include="Github\GithubReleaseArtifact.cs" />
+    <Compile Include="IssuesCollectionStatistics.cs" />
+    <Compile Include="Jira\AgileBoardIssues.cs" />
+    <Compile Include="Jira\JiraIssue.cs" />
+    <Compile Include="Jira\PivotJiraIssue.cs" />
+    <Compile Include="Jira\RawJiraAgileModel.cs" />
+    <Compile Include="Jira\RawJiraModel.cs" />
+    <Compile Include="NavigationMessages\ClearNavigationHistoryMessage.cs" />
+    <Compile Include="NavigationMessages\OpenAgileBoardMessage.cs" />
+    <Compile Include="NavigationMessages\OpenAgileBoardPickupMessage.cs" />
+    <Compile Include="NavigationMessages\OpenBoardGraveyardMessage.cs" />
+    <Compile Include="NavigationMessages\OpenBurnDownMessage.cs" />
+    <Compile Include="NavigationMessages\OpenEngagementChartMessage.cs" />
+    <Compile Include="NavigationMessages\OpenEpicsOverviewMessage.cs" />
+    <Compile Include="NavigationMessages\OpenIssueDetailsMessage.cs" />
+    <Compile Include="NavigationMessages\OpenIssuesBrowserMessage.cs" />
+    <Compile Include="NavigationMessages\OpenPageMessage.cs" />
+    <Compile Include="NavigationMessages\OpenPivotAnalysisMessage.cs" />
+    <Compile Include="NavigationMessages\OpenScrumCardsMessage.cs" />
+    <Compile Include="NavigationMessages\OpenSettingsMessage.cs" />
+    <Compile Include="NavigationMessages\OpenSprintsPickupMessage.cs" />
+    <Compile Include="NavigationMessages\OpenSprintsVelocityMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ui\AnimationState.cs" />
+    <Compile Include="Ui\INavigationPage.cs" />
+    <Compile Include="Ui\IToolbarItem.cs" />
+    <Compile Include="Ui\SettingsPage.cs" />
+    <Compile Include="Ui\ToolbarButton.cs" />
+    <Compile Include="Ui\ToolbarControl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

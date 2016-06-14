@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="JiraAssistant.Logic.Controls.ScrumCardsPrintPreviewStatusBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JiraAssistant.Logic.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="600">
+   <Grid>
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="*"/>
+         <ColumnDefinition Width="*"/>
+         <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <Image Source="/Assets/Icons/HintIcon.png" VerticalAlignment="Center" HorizontalAlignment="Center"
+             Width="32" Height="32"  Margin="5" />
+
+      <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
+         <TextBlock TextWrapping="Wrap" Margin="2">
+            <Bold>Navigation</Bold><LineBreak/>
+            To move preview to another page grab any corner with mouse and flip it just like normal book's page.
+         </TextBlock>
+      </ScrollViewer>
+
+      <ScrollViewer Grid.Column="2" HorizontalScrollBarVisibility="Disabled">
+         <TextBlock TextWrapping="Wrap" Margin="2">
+            <Bold>Cards' coloring</Bold><LineBreak/>
+            You can color any card owith color of your choice by simply clicking on it.
+         </TextBlock>
+      </ScrollViewer>  
+
+      <ScrollViewer Grid.Column="3" HorizontalScrollBarVisibility="Disabled">
+         <TextBlock TextWrapping="Wrap" Margin="2">
+            <Bold>Export</Bold><LineBreak/>
+            To export pages to printable format press "Export" button on top, next to "Back" button.
+         </TextBlock>
+      </ScrollViewer>      
+   </Grid>
+</UserControl>

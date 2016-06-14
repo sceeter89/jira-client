@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using JiraAssistant.Model.Jira;
-using JiraAssistant.Model.NavigationMessages;
-using JiraAssistant.Model.Ui;
+using JiraAssistant.Domain.Jira;
+using JiraAssistant.Domain.NavigationMessages;
+using JiraAssistant.Domain.Ui;
 using System;
 using System.Collections.Generic;
 

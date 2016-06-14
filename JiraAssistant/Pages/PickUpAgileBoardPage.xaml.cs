@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using JiraAssistant.Model.Ui;
-using JiraAssistant.ViewModel;
+using JiraAssistant.Domain.Ui;
+using JiraAssistant.Logic.ViewModels;
 
 namespace JiraAssistant.Pages
 {
-   public partial class PickUpAgileBoardPage : INavigationPage
+    public partial class PickUpAgileBoardPage : INavigationPage
    {
       public PickUpAgileBoardPage()
       {

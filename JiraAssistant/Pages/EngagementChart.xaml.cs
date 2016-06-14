@@ -1,9 +1,9 @@
-﻿using JiraAssistant.Controls;
-using JiraAssistant.ViewModel;
+﻿using JiraAssistant.Logic.Controls;
+using JiraAssistant.Logic.ViewModels;
 
 namespace JiraAssistant.Pages
 {
-   public partial class EngagementChart
+    public partial class EngagementChart
    {
       public EngagementChart(EngagementChartViewModel viewModel)
       {

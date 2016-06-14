@@ -1,12 +1,12 @@
-﻿using JiraAssistant.Model.Ui;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using JiraAssistant.Domain.Ui;
 
 namespace JiraAssistant.Pages
 {
-   public abstract class BaseNavigationPage : UserControl, INavigationPage, INotifyPropertyChanged
+    public abstract class BaseNavigationPage : UserControl, INavigationPage, INotifyPropertyChanged
    {
       public BaseNavigationPage()
       {

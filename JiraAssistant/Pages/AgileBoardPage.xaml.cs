@@ -1,12 +1,12 @@
 ﻿using System;
-using JiraAssistant.Model.Ui;
 using System.Windows.Media.Imaging;
-using JiraAssistant.ViewModel;
-using JiraAssistant.Controls;
+using JiraAssistant.Logic.ViewModels;
+using JiraAssistant.Domain.Ui;
+using JiraAssistant.Logic.Controls;
 
 namespace JiraAssistant.Pages
 {
-   public partial class AgileBoardPage : BaseNavigationPage
+    public partial class AgileBoardPage : BaseNavigationPage
    {
       public AgileBoardPage(AgileBoardViewModel viewModel)
       {

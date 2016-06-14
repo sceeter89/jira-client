@@ -63,16 +63,16 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.2.0.37226, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
@@ -105,7 +105,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -199,79 +199,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\IssueCollectionStatisticsControl.xaml.cs">
-      <DependentUpon>IssueCollectionStatisticsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IssueScrumCard.xaml.cs">
-      <DependentUpon>IssueScrumCard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScrumCardsPageControl.xaml.cs">
-      <DependentUpon>ScrumCardsPageControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScrumCardsPrintPreviewIssueTypeFilter.xaml.cs">
-      <DependentUpon>ScrumCardsPrintPreviewIssueTypeFilter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Converters\SecondsToHoursConverter.cs" />
-    <Compile Include="Converters\StringToVisibilityConverter.cs" />
-    <Compile Include="Converters\BoolToIconConverter.cs" />
-    <Compile Include="Converters\BoolToVisibleConverter.cs" />
-    <Compile Include="Dialogs\ColorDialog.xaml.cs">
-      <DependentUpon>ColorDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\LogWorkDialog.xaml.cs">
-      <DependentUpon>LogWorkDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\SelectFilterDialog.xaml.cs">
-      <DependentUpon>SelectFilterDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\RichTextPreview.xaml.cs">
-      <DependentUpon>RichTextPreview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\FilterNameDialog.xaml.cs">
-      <DependentUpon>FilterNameDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\TextualPreview.xaml.cs">
-      <DependentUpon>TextualPreview.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialogs\UpdateInstallPrompt.xaml.cs">
-      <DependentUpon>UpdateInstallPrompt.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Extensions\BindableGridViewPropertyProvider.cs" />
-    <Compile Include="Extensions\BindableGridViewProxies.cs" />
-    <Compile Include="Extensions\BindableRadGridView.cs" />
-    <Compile Include="Model\AgileBoardCacheMetadata.cs" />
-    <Compile Include="Model\Exceptions\CacheCorruptedException.cs" />
-    <Compile Include="Model\Exceptions\IncompleteJiraConfiguration.cs" />
-    <Compile Include="Model\Exceptions\ServerNotFoundException.cs" />
-    <Compile Include="Model\Exceptions\LoginFailedException.cs" />
-    <Compile Include="Model\Exceptions\MissingJiraAgileSupportException.cs" />
-    <Compile Include="Model\Exceptions\SearchFailedException.cs" />
-    <Compile Include="Model\Github\GithubApplicationRelease.cs" />
-    <Compile Include="Model\Github\GithubReleaseArtifact.cs" />
-    <Compile Include="Model\IssuesCollectionStatistics.cs" />
-    <Compile Include="Model\Jira\AgileBoardIssues.cs" />
-    <Compile Include="Model\NavigationMessages\OpenAgileBoardPickupMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenBurnDownMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenEngagementChartMessage.cs" />
-    <Compile Include="Model\NavigationMessages\ClearNavigationHistoryMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenSettingsMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenSprintsPickupMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenPageMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenSprintsVelocityMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenIssueDetailsMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenBoardGraveyardMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenScrumCardsMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenEpicsOverviewMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenIssuesBrowserMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenPivotAnalysisMessage.cs" />
-    <Compile Include="Model\NavigationMessages\OpenAgileBoardMessage.cs" />
-    <Compile Include="Model\Ui\IToolbarItem.cs" />
-    <Compile Include="Model\Ui\ToolbarControl.cs" />
+    <Compile Include="NavigationService.cs" />
     <Compile Include="Pages\AgileBoardPage.xaml.cs">
       <DependentUpon>AgileBoardPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\AgileBoardPageStatusBar.xaml.cs">
-      <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ApplicationSettings.xaml.cs">
       <DependentUpon>ApplicationSettings.xaml</DependentUpon>
@@ -286,14 +216,8 @@
     <Compile Include="Pages\BurnDownChart.xaml.cs">
       <DependentUpon>BurnDownChart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\BurnDownChartStatusBar.xaml.cs">
-      <DependentUpon>BurnDownChartStatusBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\EngagementChart.xaml.cs">
       <DependentUpon>EngagementChart.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\EngagementChartStatusBar.xaml.cs">
-      <DependentUpon>EngagementChartStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\EpicsOverviewPage.xaml.cs">
       <DependentUpon>EpicsOverviewPage.xaml</DependentUpon>
@@ -313,112 +237,16 @@
     <Compile Include="Pages\ScrumCardsPrintPreview.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ScrumCardsPrintPreviewPageIndicator.xaml.cs">
-      <DependentUpon>ScrumCardsPrintPreviewPageIndicator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScrumCardsPrintPreviewStatusBar.xaml.cs">
-      <DependentUpon>ScrumCardsPrintPreviewStatusBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\SprintDetailsPage.xaml.cs">
       <DependentUpon>SprintDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SprintsVelocity.xaml.cs">
       <DependentUpon>SprintsVelocity.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\AgileBoardDataCache.cs" />
-    <Compile Include="Services\ApplicationCache.cs" />
-    <Compile Include="Services\IssuesStatisticsCalculator.cs" />
-    <Compile Include="Services\Jira\IJiraAgileApi.cs" />
-    <Compile Include="Services\Jira\IJiraApi.cs" />
-    <Compile Include="Services\Jira\IJiraServerApi.cs" />
-    <Compile Include="Services\Jira\IJiraSessionApi.cs" />
-    <Compile Include="Services\Jira\IJiraWorklogManager.cs" />
-    <Compile Include="Services\Jira\JiraApi.cs" />
-    <Compile Include="Services\Daemons\NavigationService.cs" />
-    <Compile Include="Services\Resources\WorklogManager.cs" />
-    <Compile Include="Settings\AnalysisSettings.cs" />
-    <Compile Include="Settings\AssistantSettings.cs" />
-    <Compile Include="Settings\ReportsSettings.cs" />
-    <Compile Include="Settings\IssuesSettings.cs" />
-    <Compile Include="Settings\GraveyardSettings.cs" />
-    <Compile Include="Settings\SettingsBase.cs" />
-    <Compile Include="Settings\GeneralSettings.cs" />
-    <Compile Include="Services\Daemons\UpdateService.cs" />
-    <Compile Include="Services\Daemons\IssuesUpdatesChecker.cs" />
-    <Compile Include="Services\Daemons\WorkLogUpdater.cs" />
-    <Compile Include="ViewModel\AgileBoardViewModel.cs" />
-    <Compile Include="ViewModel\BoardGraveyardViewModel.cs" />
-    <Compile Include="ViewModel\BurnDownChartViewModel.cs" />
-    <Compile Include="ViewModel\EngagementChartViewModel.cs" />
-    <Compile Include="ViewModel\EpicsOverviewViewModel.cs" />
-    <Compile Include="ViewModel\IssuesBrowserViewModel.cs" />
-    <Compile Include="ViewModel\JiraSessionViewModel.cs" />
-    <Compile Include="Model\Jira\JiraIssue.cs" />
-    <Compile Include="Model\Jira\PivotJiraIssue.cs" />
-    <Compile Include="Model\Jira\RawJiraAgileModel.cs" />
-    <Compile Include="Model\Jira\RawJiraModel.cs" />
-    <Compile Include="Model\Ui\AnimationState.cs" />
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\INavigator.cs" />
-    <Compile Include="Services\Resources\BaseRestService.cs" />
-    <Compile Include="Services\Resources\IssuesFinder.cs" />
-    <Compile Include="Services\Resources\JiraAgileService.cs" />
-    <Compile Include="Services\Resources\MetadataRetriever.cs" />
-    <Compile Include="Services\Resources\ResourceDownloader.cs" />
-    <Compile Include="Services\Resources\JiraSessionService.cs" />
-    <Compile Include="ViewModel\LoginPageViewModel.cs" />
-    <Compile Include="ViewModel\AgileBoardSelectViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\PivotAnalysisViewModel.cs" />
-    <Compile Include="ViewModel\ScrumCardsViewModel.cs" />
-    <Compile Include="ViewModel\SprintsVelocityViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="Controls\IssueCollectionStatisticsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\IssueScrumCard.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ScrumCardsPageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ScrumCardsPrintPreviewIssueTypeFilter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\ColorDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\LogWorkDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\SelectFilterDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Dialogs\RichTextPreview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\FilterNameDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\TextualPreview.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\UpdateInstallPrompt.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -431,10 +259,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AgileBoardPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\AgileBoardPageStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -454,15 +278,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\BurnDownChartStatusBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\EngagementChart.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\EngagementChartStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -494,14 +310,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\ScrumCardsPrintPreviewPageIndicator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\ScrumCardsPrintPreviewStatusBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\SprintDetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -512,8 +320,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Ui\INavigationPage.cs" />
-    <Compile Include="Model\Ui\ToolbarButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -574,6 +380,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\ExportIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JiraAssistant.Domain\JiraAssistant.Domain.csproj">
+      <Project>{A89B4325-3813-430E-A3DA-853C4C8F8690}</Project>
+      <Name>JiraAssistant.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiraAssistant.Logic\JiraAssistant.Logic.csproj">
+      <Project>{d730a576-2171-4886-9ed4-b08b25a2bb85}</Project>
+      <Name>JiraAssistant.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

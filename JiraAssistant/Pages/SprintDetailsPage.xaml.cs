@@ -1,15 +1,15 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using JiraAssistant.Model.Jira;
 using System.Collections.Generic;
 using System.Windows.Input;
-using JiraAssistant.Services;
-using JiraAssistant.Model;
+using JiraAssistant.Logic.Services;
 using GalaSoft.MvvmLight.Messaging;
-using JiraAssistant.Model.NavigationMessages;
+using JiraAssistant.Domain.Jira;
+using JiraAssistant.Domain;
+using JiraAssistant.Domain.NavigationMessages;
 
 namespace JiraAssistant.Pages
 {
-   public partial class SprintDetailsPage : BaseNavigationPage
+    public partial class SprintDetailsPage : BaseNavigationPage
    {
       private IssuesCollectionStatistics _statistics;
       private readonly IssuesStatisticsCalculator _statisticsCalculator;
