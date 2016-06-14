@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Dialogs;
 using JiraAssistant.Domain.Jira;
-using JiraAssistant.Logic.Controls;
+using JiraAssistant.Controls;
 using JiraAssistant.Logic.Services.Jira;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

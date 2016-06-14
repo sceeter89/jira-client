@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraAssistant.Logic", "Jira
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraAssistant.Domain", "JiraAssistant.Domain\JiraAssistant.Domain.csproj", "{A89B4325-3813-430E-A3DA-853C4C8F8690}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraAssistant.Controls", "JiraAssistant.Controls\JiraAssistant.Controls.csproj", "{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Release|x86.ActiveCfg = Release|Any CPU
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Release|x86.Build.0 = Release|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug|x86.Build.0 = Debug|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release|x86.ActiveCfg = Release|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

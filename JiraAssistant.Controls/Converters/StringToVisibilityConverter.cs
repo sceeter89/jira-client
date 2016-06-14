@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace JiraAssistant.Logic.Converters
+namespace JiraAssistant.Controls.Converters
 {
    public class StringToVisibilityConverter : IValueConverter
    {

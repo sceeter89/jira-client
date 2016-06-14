@@ -1,4 +1,4 @@
-﻿namespace JiraAssistant.Logic.Controls
+﻿namespace JiraAssistant.Controls
 {
    public partial class ScrumCardsPrintPreviewStatusBar
    {

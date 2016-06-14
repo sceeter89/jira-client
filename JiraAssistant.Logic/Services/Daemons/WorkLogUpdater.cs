@@ -37,7 +37,7 @@ namespace JiraAssistant.Logic.Services.Daemons
 
             var todayDisplayTime = DateTime.Today.Add(_reportsSettings.RemindAt.TimeOfDay);
 
-            if (_reportsSettings.LastLogWorkDisplayed <= todayDisplayTime)
+            if (DateTime.Now >= todayDisplayTime && _reportsSettings.LastLogWorkDisplayed < todayDisplayTime)
             {
                 _reportsSettings.LastLogWorkDisplayed = DateTime.Now;
                 LogWork();

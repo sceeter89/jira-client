@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
-using JiraAssistant.Logic.Controls;
+using JiraAssistant.Controls;
 using JiraAssistant.Logic.ViewModels;
 using JiraAssistant.Domain.Ui;
 

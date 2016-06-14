@@ -1,5 +1,5 @@
 ﻿using JiraAssistant.Domain.Jira;
-using JiraAssistant.Logic.Converters;
+using JiraAssistant.Controls.Converters;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;

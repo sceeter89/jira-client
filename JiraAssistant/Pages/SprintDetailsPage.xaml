@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JiraAssistant.Pages"
-             xmlns:controls="clr-namespace:JiraAssistant.Logic.Controls;assembly=JiraAssistant.Logic"
+             xmlns:controls="clr-namespace:JiraAssistant.Controls;assembly=JiraAssistant.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="700"
              d:DataContext="{d:DesignInstance Type={x:Type local:SprintDetailsPage}}">

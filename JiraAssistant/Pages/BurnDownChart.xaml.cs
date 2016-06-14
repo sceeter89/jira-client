@@ -1,4 +1,4 @@
-﻿using JiraAssistant.Logic.Controls;
+﻿using JiraAssistant.Controls;
 using JiraAssistant.Logic.ViewModels;
 
 namespace JiraAssistant.Pages

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace JiraAssistant.Logic.Controls
+namespace JiraAssistant.Controls
 {
    public partial class IssueCollectionStatisticsControl
    {

@@ -109,37 +109,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AgileBoardPageStatusBar.xaml.cs">
-      <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\BurnDownChartStatusBar.xaml.cs">
-      <DependentUpon>BurnDownChartStatusBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\EngagementChartStatusBar.xaml.cs">
-      <DependentUpon>EngagementChartStatusBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IssueCollectionStatisticsControl.xaml.cs">
-      <DependentUpon>IssueCollectionStatisticsControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\IssueScrumCard.xaml.cs">
-      <DependentUpon>IssueScrumCard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScrumCardsPageControl.xaml.cs">
-      <DependentUpon>ScrumCardsPageControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScrumCardsPrintPreviewIssueTypeFilter.xaml.cs">
-      <DependentUpon>ScrumCardsPrintPreviewIssueTypeFilter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScrumCardsPrintPreviewPageIndicator.xaml.cs">
-      <DependentUpon>ScrumCardsPrintPreviewPageIndicator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\ScrumCardsPrintPreviewStatusBar.xaml.cs">
-      <DependentUpon>ScrumCardsPrintPreviewStatusBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Converters\BoolToIconConverter.cs" />
-    <Compile Include="Converters\BoolToVisibleConverter.cs" />
-    <Compile Include="Converters\SecondsToHoursConverter.cs" />
-    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Dialogs\ColorDialog.xaml.cs">
       <DependentUpon>ColorDialog.xaml</DependentUpon>
     </Compile>
@@ -208,48 +177,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JiraAssistant.Controls\JiraAssistant.Controls.csproj">
+      <Project>{0ff6d466-c5aa-4495-a5a0-36a2b1a42b88}</Project>
+      <Name>JiraAssistant.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JiraAssistant.Domain\JiraAssistant.Domain.csproj">
       <Project>{A89B4325-3813-430E-A3DA-853C4C8F8690}</Project>
       <Name>JiraAssistant.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\AgileBoardPageStatusBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\BurnDownChartStatusBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\EngagementChartStatusBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\IssueCollectionStatisticsControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\IssueScrumCard.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\ScrumCardsPageControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\ScrumCardsPrintPreviewIssueTypeFilter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\ScrumCardsPrintPreviewPageIndicator.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\ScrumCardsPrintPreviewStatusBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Dialogs\ColorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

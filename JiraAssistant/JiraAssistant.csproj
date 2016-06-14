@@ -382,6 +382,10 @@
     <Resource Include="Assets\Icons\ExportIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JiraAssistant.Controls\JiraAssistant.Controls.csproj">
+      <Project>{0ff6d466-c5aa-4495-a5a0-36a2b1a42b88}</Project>
+      <Name>JiraAssistant.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JiraAssistant.Domain\JiraAssistant.Domain.csproj">
       <Project>{A89B4325-3813-430E-A3DA-853C4C8F8690}</Project>
       <Name>JiraAssistant.Domain</Name>
