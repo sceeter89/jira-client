@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using JiraAssistant.Dialogs;
+using JiraAssistant.Controls.Dialogs;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Extensions;

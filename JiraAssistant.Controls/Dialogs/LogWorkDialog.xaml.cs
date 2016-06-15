@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JiraAssistant.Logic.Dialogs
+namespace JiraAssistant.Controls.Dialogs
 {
     public partial class LogWorkDialog
     {

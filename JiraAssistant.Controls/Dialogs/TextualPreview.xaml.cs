@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace JiraAssistant.Dialogs
+namespace JiraAssistant.Controls.Dialogs
 {
    public partial class TextualPreview
    {

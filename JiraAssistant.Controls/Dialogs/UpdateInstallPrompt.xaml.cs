@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 
-namespace JiraAssistant.Dialogs
+namespace JiraAssistant.Controls.Dialogs
 {
    public partial class UpdateInstallPrompt
    {

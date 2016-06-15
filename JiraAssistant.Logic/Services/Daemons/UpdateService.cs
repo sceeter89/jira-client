@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using JiraAssistant.Dialogs;
+using JiraAssistant.Controls.Dialogs;
 using RestSharp.Extensions;
 using Microsoft.Win32;
 using System.IO;

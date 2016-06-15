@@ -1,6 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using JiraAssistant.Dialogs;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Controls;
 using JiraAssistant.Logic.Services.Jira;
@@ -12,6 +11,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Markup;
 using System.Windows.Xps.Packaging;
+using JiraAssistant.Controls.Dialogs;
 
 namespace JiraAssistant.Logic.ViewModels
 {

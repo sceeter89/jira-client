@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace JiraAssistant.Dialogs
+namespace JiraAssistant.Controls.Dialogs
 {
    public partial class ColorDialog : INotifyPropertyChanged
    {

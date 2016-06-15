@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using JiraAssistant.Logic.Dialogs;
+using JiraAssistant.Controls.Dialogs;
 using JiraAssistant.Logic.Settings;
 using JiraAssistant.Logic.Services.Jira;
 using System;
