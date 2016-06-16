@@ -9,7 +9,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace JiraAssistant.Logic.ViewModels
+namespace JiraAssistant.Logic.ContextlessViewModels
 {
     public class JiraSessionViewModel : ViewModelBase
    {

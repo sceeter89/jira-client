@@ -1,7 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Domain.Exceptions;
 using JiraAssistant.Logic.Settings;
-using JiraAssistant.Logic.ViewModels;
 using JiraAssistant.Logic.Services.Jira;
 using NLog;
 using System;
@@ -11,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Telerik.Windows.Controls;
+using JiraAssistant.Logic.ContextlessViewModels;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {

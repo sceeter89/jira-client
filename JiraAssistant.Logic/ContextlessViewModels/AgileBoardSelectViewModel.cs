@@ -12,7 +12,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 
-namespace JiraAssistant.Logic.ViewModels
+namespace JiraAssistant.Logic.ContextlessViewModels
 {
     public class AgileBoardSelectViewModel : ViewModelBase
    {

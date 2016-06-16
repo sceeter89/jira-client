@@ -11,9 +11,9 @@ using Microsoft.Win32;
 using System.IO;
 using System.Diagnostics;
 using NLog;
-using JiraAssistant.Logic.ViewModels;
 using JiraAssistant.Logic.Settings;
 using JiraAssistant.Domain.Github;
+using JiraAssistant.Logic.ContextlessViewModels;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {

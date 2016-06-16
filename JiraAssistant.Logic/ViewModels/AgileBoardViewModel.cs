@@ -5,6 +5,7 @@ using JiraAssistant.Domain;
 using JiraAssistant.Domain.Exceptions;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.NavigationMessages;
+using JiraAssistant.Logic.ContextlessViewModels;
 using JiraAssistant.Logic.Services;
 using JiraAssistant.Logic.Services.Jira;
 using NLog;

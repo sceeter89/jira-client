@@ -15,7 +15,7 @@ using JiraAssistant.Domain.Exceptions;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.NavigationMessages;
 
-namespace JiraAssistant.Logic.ViewModels
+namespace JiraAssistant.Logic.ContextlessViewModels
 {
     public class MainViewModel : ViewModelBase, INavigator
     {

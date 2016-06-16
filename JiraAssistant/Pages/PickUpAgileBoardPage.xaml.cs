@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using JiraAssistant.Domain.Ui;
-using JiraAssistant.Logic.ViewModels;
+using JiraAssistant.Logic.ContextlessViewModels;
 
 namespace JiraAssistant.Pages
 {

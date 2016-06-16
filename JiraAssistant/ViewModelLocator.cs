@@ -1,10 +1,10 @@
 using Autofac;
 using GalaSoft.MvvmLight.Messaging;
-using JiraAssistant.Logic.ViewModels;
 using JiraAssistant.Pages;
 using JiraAssistant.Logic.Services;
 using JiraAssistant.Logic.Settings;
 using System.Reflection;
+using JiraAssistant.Logic.ContextlessViewModels;
 
 namespace JiraAssistant
 {
@@ -78,6 +78,11 @@ namespace JiraAssistant
 
             builder.RegisterAssemblyTypes(logicAssembly)
                .InNamespace("JiraAssistant.Logic.ViewModels")
+               .AsSelf()
+               .AsImplementedInterfaces();
+
+            builder.RegisterAssemblyTypes(logicAssembly)
+               .InNamespace("JiraAssistant.Logic.ContextlessViewModels")
                .AsSelf()
                .AsImplementedInterfaces()
                .SingleInstance();

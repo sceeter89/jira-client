@@ -8,7 +8,7 @@ using JiraAssistant.Logic.Services.Jira;
 using System;
 using System.Windows.Controls;
 
-namespace JiraAssistant.Logic.ViewModels
+namespace JiraAssistant.Logic.ContextlessViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
