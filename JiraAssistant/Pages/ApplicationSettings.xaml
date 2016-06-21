@@ -192,6 +192,7 @@
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
                      <RowDefinition Height="Auto" />
+                     <RowDefinition Height="Auto" />
                   </Grid.RowDefinitions>
                   <Grid.ColumnDefinitions>
                      <ColumnDefinition Width="Auto" />
@@ -240,6 +241,9 @@
 
                   <TextBlock Text="Inform about updated: " Grid.Row="9" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
                   <CheckBox Grid.Row="9" Grid.Column="1" IsChecked="{Binding ShowUpdatedIssues, Mode=TwoWay}" Margin="3" />
+
+                  <TextBlock Text="Skip own changes: " Grid.Row="10" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                  <CheckBox Grid.Row="10" Grid.Column="1" IsChecked="{Binding SkipOwnChanges, Mode=TwoWay}" Margin="3" />
                </Grid>
             </ScrollViewer>
          </telerik:RadTabItem>
