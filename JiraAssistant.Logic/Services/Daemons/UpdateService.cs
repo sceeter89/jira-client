@@ -14,6 +14,7 @@ using NLog;
 using JiraAssistant.Logic.Settings;
 using JiraAssistant.Domain.Github;
 using JiraAssistant.Logic.ContextlessViewModels;
+using System.Reflection;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -53,7 +54,7 @@ namespace JiraAssistant.Logic.Services.Daemons
             var client = new RestClient(EndpointUrl);
             var request = new RestRequest("/", Method.GET);
 
-            var currentVersion = GetType().Assembly.GetName().Version;
+            var currentVersion = Assembly.GetEntryAssembly().GetName().Version;
 
             var response = await client.ExecuteGetTaskAsync(request);
             var releases = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<GithubApplicationRelease>>(response.Content));

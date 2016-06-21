@@ -14,6 +14,7 @@ using JiraAssistant.Logic.Settings;
 using JiraAssistant.Domain.Exceptions;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.NavigationMessages;
+using System.Reflection;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
@@ -89,7 +90,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
 
         public string ApplicationTitle
         {
-            get { return string.Format("Jira Assistant - {0}", GetType().Assembly.GetName().Version.ToString(3)); }
+            get { return string.Format("Jira Assistant - {0}", Assembly.GetEntryAssembly().GetName().Version.ToString(3)); }
         }
 
         public string UserMessage
