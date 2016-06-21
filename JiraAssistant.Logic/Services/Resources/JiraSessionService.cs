@@ -24,7 +24,7 @@ namespace JiraAssistant.Logic.Services.Resources
       public async Task<RawProfileDetails> GetProfileDetails()
       {
          var client = BuildRestClient();
-         var request = new RestRequest("/rest/api/latest/myself", Method.GET);
+         var request = new RestRequest("/rest/api/latest/myself?expand=groups,applicationRoles", Method.GET);
 
          var response = await client.ExecuteTaskAsync(request);
          var result = JsonConvert.DeserializeObject<RawProfileDetails>(response.Content);

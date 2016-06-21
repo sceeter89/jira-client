@@ -12,191 +12,210 @@
         Icon="/Assets/Icons/ApplicationIcon.png"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         Background="LightGray" Visibility="{Binding WindowVisibility}">
-   <Window.Resources>
-      <Storyboard x:Key="CollapseAnimation">
-         <DoubleAnimation Storyboard.TargetName="DocumentHost" 
+    <Window.Resources>
+        <Storyboard x:Key="CollapseAnimation">
+            <DoubleAnimation Storyboard.TargetName="DocumentHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleX" From="1" To="0" 
           Duration="0:0:.250" RepeatBehavior="1x"/>
-         <DoubleAnimation Storyboard.TargetName="StatusBarHost" 
+            <DoubleAnimation Storyboard.TargetName="StatusBarHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="0" 
           Duration="0:0:.250" RepeatBehavior="1x"/>
-         <DoubleAnimation Storyboard.TargetName="ToolBarHost" 
+            <DoubleAnimation Storyboard.TargetName="ToolBarHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleY" From="1" To="0" 
           Duration="0:0:.250" RepeatBehavior="1x"/>
-      </Storyboard>
-      <Storyboard x:Key="ExpandAnimation">
-         <DoubleAnimation Storyboard.TargetName="DocumentHost" 
+        </Storyboard>
+        <Storyboard x:Key="ExpandAnimation">
+            <DoubleAnimation Storyboard.TargetName="DocumentHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleX" From="0" To="1" 
           Duration="0:0:.350" RepeatBehavior="1x"/>
-         <DoubleAnimation Storyboard.TargetName="StatusBarHost" 
+            <DoubleAnimation Storyboard.TargetName="StatusBarHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleY" From="0" To="1" 
           Duration="0:0:.350" RepeatBehavior="1x"/>
-         <DoubleAnimation Storyboard.TargetName="ToolBarHost" 
+            <DoubleAnimation Storyboard.TargetName="ToolBarHost" 
           Storyboard.TargetProperty="RenderTransform.ScaleY" From="0" To="1" 
           Duration="0:0:.350" RepeatBehavior="1x"/>
-      </Storyboard>
-      <converters:StringToVisibilityConverter x:Key="MessageVisibilityConverter" />
-      <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" x:Key="MenuButtonStyle">
-         <Setter Property="Background" Value="Transparent" />
-         <Setter Property="BorderThickness" Value="0" />
-         <Setter Property="IsEnabled" Value="True" />
-         <Style.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-               <Setter Property="Foreground" Value="DarkGray" />
-               <Setter Property="Background" Value="DarkGray" />
-            </Trigger>
-         </Style.Triggers>
-      </Style>
-   </Window.Resources>
-   <i:Interaction.Triggers>
-      <ei:DataTrigger Binding="{Binding CollapseAnimationState, Mode=OneWay}" Value="Play">
-         <ei:ControlStoryboardAction Storyboard="{StaticResource CollapseAnimation}"     
+        </Storyboard>
+        <converters:StringToVisibilityConverter x:Key="MessageVisibilityConverter" />
+        <converters:RawJiraGroupsToTextConverter x:Key="GroupsToTextConverter" />
+        <converters:RawJiraApplicationRolesToTextConverter x:Key="RolesToTextConverter" />
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" x:Key="MenuButtonStyle">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsEnabled" Value="True" />
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="DarkGray" />
+                    <Setter Property="Background" Value="DarkGray" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <i:Interaction.Triggers>
+        <ei:DataTrigger Binding="{Binding CollapseAnimationState, Mode=OneWay}" Value="Play">
+            <ei:ControlStoryboardAction Storyboard="{StaticResource CollapseAnimation}"     
                                                 ControlStoryboardOption="Play"/>
-      </ei:DataTrigger>
-      <ei:DataTrigger Binding="{Binding ExpandAnimationState, Mode=OneWay}" Value="Play">
-         <ei:ControlStoryboardAction Storyboard="{StaticResource ExpandAnimation}"     
+        </ei:DataTrigger>
+        <ei:DataTrigger Binding="{Binding ExpandAnimationState, Mode=OneWay}" Value="Play">
+            <ei:ControlStoryboardAction Storyboard="{StaticResource ExpandAnimation}"     
                                                 ControlStoryboardOption="Play"/>
-      </ei:DataTrigger>
-      <ei:DataTrigger Binding="{Binding CollapseAnimationState, Mode=OneWay}" Value="Stop">
-         <ei:ControlStoryboardAction Storyboard="{StaticResource CollapseAnimation}"     
+        </ei:DataTrigger>
+        <ei:DataTrigger Binding="{Binding CollapseAnimationState, Mode=OneWay}" Value="Stop">
+            <ei:ControlStoryboardAction Storyboard="{StaticResource CollapseAnimation}"     
                                                 ControlStoryboardOption="Stop"/>
-      </ei:DataTrigger>
-      <ei:DataTrigger Binding="{Binding ExpandAnimationState, Mode=OneWay}" Value="Stop">
-         <ei:ControlStoryboardAction Storyboard="{StaticResource ExpandAnimation}"     
+        </ei:DataTrigger>
+        <ei:DataTrigger Binding="{Binding ExpandAnimationState, Mode=OneWay}" Value="Stop">
+            <ei:ControlStoryboardAction Storyboard="{StaticResource ExpandAnimation}"     
                                                 ControlStoryboardOption="Stop"/>
-      </ei:DataTrigger>
-   </i:Interaction.Triggers>
-   <Grid>
-      <Grid.RowDefinitions>
-         <RowDefinition Height="60"/>
-         <RowDefinition Height="*"/>
-         <RowDefinition Height="80"/>
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-         <ColumnDefinition Width="Auto"/>
-         <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
+        </ei:DataTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
-      <ScrollViewer VerticalScrollBarVisibility="Hidden"
+        <StackPanel Orientation="Horizontal" Margin="5 0 0 5" Grid.Row="0" Grid.Column="0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}">
+            <StackPanel.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}"></Style>
+            </StackPanel.Resources>
+            <Button ToolTip="Back" Command="{Binding BackCommand}" Margin="5">
+                <Image Source="/Assets/Icons/BackIcon.png" Width="30" Height="30"/>
+            </Button>
+            <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0"
+                           Content="" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0">
+                <telerik:RadDropDownButton.DropDownContent>
+                    <Border BorderBrush="{telerik:Windows8Resource ResourceKey=AccentBrush}" BorderThickness="2">
+                        <ItemsControl ItemsSource="{Binding NavigationHistory}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Width="150" HorizontalContentAlignment="Left" Content="{Binding Title}"
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.BackToPageCommand}"
+                                CommandParameter="{Binding .}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Border>
+                </telerik:RadDropDownButton.DropDownContent>
+            </telerik:RadDropDownButton>
+            <Button ToolTip="Settings" Command="{Binding OpenSettingsCommand, 
+            diag:PresentationTraceSources.TraceLevel=High}" Margin="5">
+                <Image Source="/Assets/Icons/ToolIcon.png" Width="30" Height="30" />
+            </Button>
+            <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0"
+                                     ToolTip="Tools">
+                <telerik:RadDropDownButton.DropDownContent>
+                    <Border BorderBrush="{telerik:Windows8Resource ResourceKey=AccentBrush}" BorderThickness="2">
+                        <StackPanel Width="120">
+                            <Button Content="Log work" Command="{Binding LogWorkCommand}" IsEnabled="{Binding Source={StaticResource Locator}, Path=JiraSession.IsLoggedIn}" 
+                          HorizontalContentAlignment="Center" />
+                            <Separator />
+                            <Button Content="Exit" Command="{Binding CloseApplicationCommand}" HorizontalContentAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </telerik:RadDropDownButton.DropDownContent>
+            </telerik:RadDropDownButton>
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden"
                     HorizontalScrollBarVisibility="Auto"
                     Background="Transparent"
                     BorderThickness="0"
                     Grid.Row="0"
                     Grid.Column="1">
-         <ItemsControl ItemsSource="{Binding CurrentPage.Buttons}"
+            <ItemsControl ItemsSource="{Binding CurrentPage.Buttons}"
                        Margin="5 0 5 5" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" x:Name="ToolBarHost">
-            <ItemsControl.RenderTransform>
-               <ScaleTransform ScaleY="1"/>
-            </ItemsControl.RenderTransform>
-            <ItemsControl.ItemsPanel>
-               <ItemsPanelTemplate>
-                  <StackPanel Orientation="Horizontal"/>
-               </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.Resources>
-               <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}"></Style>
-               <DataTemplate DataType="{x:Type model:ToolbarButton}">
-                  <Button ToolTip="{Binding Tooltip}" Command="{Binding Command}" Margin="5">
-                     <Image Source="{Binding Icon}" Width="30" Height="30"/>
-                  </Button>
-               </DataTemplate>
-               <DataTemplate DataType="{x:Type model:ToolbarControl}">
-                  <ContentControl Content="{Binding Control}" Margin="5" Height="50" />
-               </DataTemplate>
-            </ItemsControl.Resources>
-         </ItemsControl>
-      </ScrollViewer>
+                <ItemsControl.RenderTransform>
+                    <ScaleTransform ScaleY="1"/>
+                </ItemsControl.RenderTransform>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.Resources>
+                    <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}"></Style>
+                    <DataTemplate DataType="{x:Type model:ToolbarButton}">
+                        <Button ToolTip="{Binding Tooltip}" Command="{Binding Command}" Margin="5">
+                            <Image Source="{Binding Icon}" Width="30" Height="30"/>
+                        </Button>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type model:ToolbarControl}">
+                        <ContentControl Content="{Binding Control}" Margin="5" Height="50" />
+                    </DataTemplate>
+                </ItemsControl.Resources>
+            </ItemsControl>
+        </ScrollViewer>
 
-      <StackPanel Orientation="Horizontal" Margin="5 0 0 5" Grid.Row="0" Grid.Column="0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}">
-         <StackPanel.Resources>
-            <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}"></Style>
-         </StackPanel.Resources>
-         <Button ToolTip="Back" Command="{Binding BackCommand}" Margin="5">
-            <Image Source="/Assets/Icons/BackIcon.png" Width="30" Height="30"/>
-         </Button>
-         <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0"
-                           Content="" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0">
-            <telerik:RadDropDownButton.DropDownContent>
-               <Border BorderBrush="{telerik:Windows8Resource ResourceKey=AccentBrush}" BorderThickness="2">
-                  <ItemsControl ItemsSource="{Binding NavigationHistory}">
-                     <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                           <Button Width="150" HorizontalContentAlignment="Left" Content="{Binding Title}"
-                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.BackToPageCommand}"
-                                CommandParameter="{Binding .}"/>
-                        </DataTemplate>
-                     </ItemsControl.ItemTemplate>
-                     <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                           <StackPanel/>
-                        </ItemsPanelTemplate>
-                     </ItemsControl.ItemsPanel>
-                  </ItemsControl>
-               </Border>
-            </telerik:RadDropDownButton.DropDownContent>
-         </telerik:RadDropDownButton>
-            <Button ToolTip="Settings" Command="{Binding OpenSettingsCommand, 
-            diag:PresentationTraceSources.TraceLevel=High}" Margin="5">
-            <Image Source="/Assets/Icons/ToolIcon.png" Width="30" Height="30" />
-         </Button>
-         <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0"
-                                     ToolTip="Tools">
-            <telerik:RadDropDownButton.DropDownContent>
-               <Border BorderBrush="{telerik:Windows8Resource ResourceKey=AccentBrush}" BorderThickness="2">
-                  <StackPanel Width="120">
-                     <Button Content="Log work" Command="{Binding LogWorkCommand}" IsEnabled="{Binding Source={StaticResource Locator}, Path=JiraSession.IsLoggedIn}" 
-                          HorizontalContentAlignment="Center" />
-                     <Separator />
-                     <Button Content="Exit" Command="{Binding CloseApplicationCommand}" HorizontalContentAlignment="Center" />
-                  </StackPanel>
-               </Border>
-            </telerik:RadDropDownButton.DropDownContent>
-         </telerik:RadDropDownButton>
-      </StackPanel>
-
-      <ContentControl Content="{Binding CurrentPage.Control}" Grid.Row="1"  Grid.ColumnSpan="2"
+        <ContentControl Content="{Binding CurrentPage.Control}" Grid.Row="1"  Grid.ColumnSpan="3"
                       Margin="5 0 5 0" Padding="5 0 0 0" x:Name="DocumentHost"
                       Background="{telerik:Windows8Resource ResourceKey=AccentBrush}">
-         <ContentControl.RenderTransform>
-            <ScaleTransform ScaleX="1"/>
-         </ContentControl.RenderTransform>
-      </ContentControl>
+            <ContentControl.RenderTransform>
+                <ScaleTransform ScaleX="1"/>
+            </ContentControl.RenderTransform>
+        </ContentControl>
 
-      <Grid Grid.Row="2" Margin="5 5 5 0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Grid.ColumnSpan="2" x:Name="StatusBarHost"
+        <Grid Grid.Row="0" Grid.Column="2" Width="50" Margin="0 0 5 5" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}"
+              DataContext="{Binding Source={StaticResource Locator}, Path=JiraSession}">
+            <Image Source="{Binding ProfileAvatar}" Width="40" Height="40">
+                <Image.ToolTip>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Profile.DisplayName}" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Profile.Name}" />
+                        <TextBlock Text="{Binding Profile.EmailAddress}" />
+                        <TextBlock Text="{Binding Profile.Groups, Converter={StaticResource GroupsToTextConverter}}" FontSize="9" TextWrapping="Wrap" MaxWidth="150"/>
+                        <TextBlock Text="{Binding Profile.ApplicationRoles, Converter={StaticResource RolesToTextConverter}}" FontSize="9" TextWrapping="Wrap" MaxWidth="150"/>
+                    </StackPanel>
+                </Image.ToolTip>
+            </Image>
+        </Grid>
+        
+        <Grid Grid.Row="2" Margin="5 5 5 0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Grid.ColumnSpan="3" x:Name="StatusBarHost"
             RenderTransformOrigin="0 1">
-         <Grid.RenderTransform>
-            <ScaleTransform ScaleY="1"/>
-         </Grid.RenderTransform>
+            <Grid.RenderTransform>
+                <ScaleTransform ScaleY="1"/>
+            </Grid.RenderTransform>
 
-         <ContentControl Content="{Binding CurrentPage.StatusBarControl}"/>
-      </Grid>
+            <ContentControl Content="{Binding CurrentPage.StatusBarControl}"/>
+        </Grid>
 
-      <Border Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Height="50"
+        <Border Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Top" Height="50"
               Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Visibility="{Binding UserMessage, Converter={StaticResource MessageVisibilityConverter}, FallbackValue=Visible}">
-         <Grid>
-            <Grid.ColumnDefinitions>
-               <ColumnDefinition Width="*" />
-               <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBlock TextTrimming="WordEllipsis" Text="{Binding UserMessage}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock TextTrimming="WordEllipsis" Text="{Binding UserMessage}" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
                        FontSize="15"/>
 
-            <Button Content="X" Grid.Column="1" Command="{Binding ClearMessageCommand}" Width="40" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Foreground="White"
+                <Button Content="X" Grid.Column="1" Command="{Binding ClearMessageCommand}" Width="40" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Foreground="White"
                     VerticalAlignment="Center"/>
-         </Grid>
-      </Border>
+            </Grid>
+        </Border>
 
-      <tb:TaskbarIcon IconSource="/Icon.ico"
+        <tb:TaskbarIcon IconSource="/Icon.ico"
                       ToolTipText="JIRA Assistant" 
                       LeftClickCommand="{Binding ActivateWindowCommand}">
 
-         <tb:TaskbarIcon.ContextMenu>
-            <ContextMenu>
-               <MenuItem Header="Open" Command="{Binding ActivateWindowCommand}" />
-               <Separator />
-               <MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}" />
-            </ContextMenu>
-         </tb:TaskbarIcon.ContextMenu>
-      </tb:TaskbarIcon>
-   </Grid>
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Open" Command="{Binding ActivateWindowCommand}" />
+                    <MenuItem Header="Log work" Command="{Binding LogWorkCommand}" />
+                    <Separator />
+                    <MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}" />
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+    </Grid>
 </Window>

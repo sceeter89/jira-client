@@ -329,6 +329,7 @@ namespace JiraAssistant.Domain.Jira
         public bool Active { get; set; }
         public string TimeZone { get; set; }
         public RawGroups Groups { get; set; }
+        public RawApplicationRoles ApplicationRoles { get; set; }
         public string Expand { get; set; }
     }
 
@@ -342,6 +343,18 @@ namespace JiraAssistant.Domain.Jira
     {
         public string Name { get; set; }
         public string Self { get; set; }
+    }
+
+    public class RawApplicationRoles
+    {
+        public long Size { get; set; }
+        public RawApplicationRole[] Items { get; set; }
+    }
+
+    public class RawApplicationRole
+    {
+        public string Name { get; set; }
+        public string Key { get; set; }
     }
 
     public class RawTimeTracking
