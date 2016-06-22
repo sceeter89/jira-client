@@ -76,7 +76,7 @@ namespace JiraAssistant.Logic.Services.Daemons
             if (File.Exists(_installerPath) == false || new FileInfo(_installerPath).Length != installer.Size)
                await DownloadToFile(installer.BrowserDownloadUrl, _installerPath);
 
-            if (_settings.InformAboutUpdate)
+            if (_settings.InformAboutUpdate || higherVersion.Prerelease)
             {
                var dialog = new UpdateInstallPrompt(currentVersion, Version.Parse(higherVersion.TagName), higherVersion.Prerelease == false);
 
