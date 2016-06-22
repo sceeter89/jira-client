@@ -107,7 +107,10 @@ namespace JiraAssistant.Logic.Services.Daemons
 
                         var changeSummaryBuilder = new StringBuilder();
                         foreach (var changeSummary in rawChangeSummary)
-                            changeSummaryBuilder.AppendFormat("{0}: {1}\n", changeSummary.Key, changeSummary.Value.Substring(0, Math.Min(15, changeSummary.Value.Length)));
+                        {
+                            var newValue = changeSummary.Value ?? "(None)";
+                            changeSummaryBuilder.AppendFormat("{0}: {1}\n", changeSummary.Key, newValue.Substring(0, Math.Min(15, newValue.Length)));
+                        }
 
                         alertManager.ShowAlert(new RadDesktopAlert
                         {
