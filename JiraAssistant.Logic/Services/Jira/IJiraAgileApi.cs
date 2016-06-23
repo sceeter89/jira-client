@@ -1,4 +1,5 @@
 ﻿using JiraAssistant.Domain.Jira;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,6 +12,6 @@ namespace JiraAssistant.Logic.Services.Jira
       Task<IEnumerable<RawAgileEpic>> GetEpics(int boardId);
       Task<IEnumerable<RawAgileBoard>> GetAgileBoards();
       Task<RawAgileBoardConfiguration> GetBoardConfiguration(int boardId);
-      Task<AgileBoardIssues> GetBoardContent(int boardId, bool forceReload = false);
+      Task<AgileBoardIssues> GetBoardContent(int boardId, bool forceReload = false, Action<float> progressUpdateCallback = null);
    }
 }

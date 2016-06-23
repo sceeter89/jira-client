@@ -7,6 +7,7 @@ using RestSharp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace JiraAssistant.Logic.Services.Resources
 {
@@ -120,7 +121,7 @@ namespace JiraAssistant.Logic.Services.Resources
          return result;
       }
 
-      private async Task<IList<JiraIssue>> DownloadIssues(int boardId, bool forceReload)
+      private async Task<IList<JiraIssue>> DownloadIssues(int boardId, bool forceReload, Action<float> progressUpdateCallback)
       {
          var boardConfig = await GetBoardConfiguration(boardId);
          var filter = await _metadataRetriever.GetFilterDefinition(boardConfig.Filter.Id);
@@ -132,7 +133,7 @@ namespace JiraAssistant.Logic.Services.Resources
          if (forceReload)
             boardCache.Invalidate();
 
-         var issues = await _issuesFinder.Search(boardCache.PrepareSearchStatement(filter.Jql));
+         var issues = await _issuesFinder.Search(boardCache.PrepareSearchStatement(filter.Jql), progressUpdateCallback);
 
          issues = await boardCache.UpdateCache(issues);
 
@@ -153,11 +154,11 @@ namespace JiraAssistant.Logic.Services.Resources
          return sprints.ToList();
       }
 
-      public async Task<AgileBoardIssues> GetBoardContent(int boardId, bool forceReload = false)
+      public async Task<AgileBoardIssues> GetBoardContent(int boardId, bool forceReload = false, Action<float> progressUpdateCallback = null)
       {
          var sprintsTask = DownloadSprints(boardId);
          var epicsTask = DownloadEpics(boardId);
-         var issuesTask = DownloadIssues(boardId, forceReload);
+         var issuesTask = DownloadIssues(boardId, forceReload, progressUpdateCallback);
 
          await Task.Factory.StartNew(() => Task.WaitAll(sprintsTask, epicsTask, issuesTask));
 

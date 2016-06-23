@@ -8,7 +8,7 @@
                           xmlns:controls="clr-namespace:JiraAssistant.Controls;assembly=JiraAssistant.Controls"
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="600">
-   <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
+   <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}" IsIndeterminate="{Binding IsIndeterminate}" ProgressValue="{Binding DownloadProgress}">
       <telerik:RadBusyIndicator.BusyContent>
          <TextBlock Text="Updating Agile Board data..." />
       </telerik:RadBusyIndicator.BusyContent>

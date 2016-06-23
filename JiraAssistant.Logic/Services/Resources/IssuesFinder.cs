@@ -9,12 +9,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System;
+using System.Threading;
+using GalaSoft.MvvmLight.Threading;
 
 namespace JiraAssistant.Logic.Services.Resources
 {
     public class IssuesFinder : BaseRestService
     {
-        private const int BatchSize = 1000;
+        private const int BatchSize = 100;
         private IDictionary<string, RawFieldDefinition> _fields;
         private readonly IJiraServerApi _metadata;
 
@@ -49,19 +52,31 @@ namespace JiraAssistant.Logic.Services.Resources
             return batch;
         }
 
-        public async Task<IList<JiraIssue>> Search(string jqlQuery)
+        public async Task<IList<JiraIssue>> Search(string jqlQuery, Action<float> progressUpdateCallback = null)
         {
+            var counter = 0;
+
             var searchResults = new List<RawIssue>();
 
             var firstBatch = await DownloadSearchResultsBatch(jqlQuery, 0);
             var batches = new List<RawSearchResults> { firstBatch };
             if (firstBatch.Total > BatchSize)
             {
+                counter = firstBatch.Issues.Length;
+                if (progressUpdateCallback != null)
+                    progressUpdateCallback((float) counter / firstBatch.Total * 100);
                 var pendingBatchesCount = (firstBatch.Total - BatchSize) / BatchSize + 1;
                 var tasks = new Task<RawSearchResults>[pendingBatchesCount];
 
                 for (int i = 1; i <= pendingBatchesCount; i++)
-                    tasks[i - 1] = DownloadSearchResultsBatch(jqlQuery, i * BatchSize);
+                    tasks[i - 1] = DownloadSearchResultsBatch(jqlQuery, i * BatchSize).ContinueWith<RawSearchResults>(resultTask =>
+                    {
+                        var result = resultTask.Result;
+                        Interlocked.Add(ref counter, result.Issues.Length);
+                        if (progressUpdateCallback != null)
+                            DispatcherHelper.CheckBeginInvokeOnUI(() => progressUpdateCallback(((float) counter / firstBatch.Total) * 100));
+                        return result;
+                    });
 
                 await Task.Factory.StartNew(() => Task.WaitAll(tasks));
 
