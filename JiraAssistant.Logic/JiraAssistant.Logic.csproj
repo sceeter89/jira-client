@@ -112,6 +112,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\JiraAssistant\Properties\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="Extensions\BindableGridViewPropertyProvider.cs" />
     <Compile Include="Extensions\BindableGridViewProxies.cs" />
     <Compile Include="Extensions\BindableRadGridView.cs" />

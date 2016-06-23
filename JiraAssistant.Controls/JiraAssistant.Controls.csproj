@@ -86,6 +86,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\JiraAssistant\Properties\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
     <Compile Include="AgileBoardPageStatusBar.xaml.cs">
       <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
     </Compile>
