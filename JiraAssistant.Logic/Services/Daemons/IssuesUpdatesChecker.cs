@@ -13,6 +13,7 @@ using Telerik.Windows.Controls;
 using JiraAssistant.Logic.ContextlessViewModels;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Win32;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -24,12 +25,18 @@ namespace JiraAssistant.Logic.Services.Daemons
         private readonly DispatcherTimer _timer;
         private readonly ImageSourceConverter _imageSourceConverter = new ImageSourceConverter();
         private readonly JiraSessionViewModel _jiraSession;
+        private bool _isStationLocked = false;
 
         public IssuesUpdatesChecker(ReportsSettings reportsSettings, IJiraApi jiraApi, JiraSessionViewModel jiraSession)
         {
             _reportsSettings = reportsSettings;
             _jiraApi = jiraApi;
             _jiraSession = jiraSession;
+
+            SystemEvents.SessionSwitch += (sender, args) =>
+            {
+                _isStationLocked = args.Reason == SessionSwitchReason.SessionLock;
+            };
 
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(30);
@@ -43,6 +50,9 @@ namespace JiraAssistant.Logic.Services.Daemons
                 return;
 
             if (_reportsSettings.MonitorIssuesUpdates == false)
+                return;
+
+            if (_isStationLocked)
                 return;
 
             if (DateTime.Now - _reportsSettings.LastUpdatesScan > _reportsSettings.ScanForUpdatesInterval)
