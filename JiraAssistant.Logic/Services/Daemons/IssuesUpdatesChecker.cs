@@ -14,6 +14,8 @@ using JiraAssistant.Logic.ContextlessViewModels;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Win32;
+using GalaSoft.MvvmLight.Messaging;
+using JiraAssistant.Domain.Messages;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -26,12 +28,14 @@ namespace JiraAssistant.Logic.Services.Daemons
         private readonly ImageSourceConverter _imageSourceConverter = new ImageSourceConverter();
         private readonly JiraSessionViewModel _jiraSession;
         private bool _isStationLocked = false;
+        private readonly IMessenger _messenger;
 
-        public IssuesUpdatesChecker(ReportsSettings reportsSettings, IJiraApi jiraApi, JiraSessionViewModel jiraSession)
+        public IssuesUpdatesChecker(ReportsSettings reportsSettings, IJiraApi jiraApi, JiraSessionViewModel jiraSession, IMessenger messenger)
         {
             _reportsSettings = reportsSettings;
             _jiraApi = jiraApi;
             _jiraSession = jiraSession;
+            _messenger = messenger;
 
             SystemEvents.SessionSwitch += (sender, args) =>
             {
@@ -107,13 +111,17 @@ namespace JiraAssistant.Logic.Services.Daemons
                         if (changes.Any() == false)
                             continue;
 
+                        _messenger.Send(new IssueUpdatedMessage(issue, changes.SelectMany(c => c.Items), changes.First().Created));
+
                         var rawChangeSummary = new Dictionary<string, string>();
 
                         foreach (var change in changes)
+                        {
                             foreach (var item in change.Items)
                             {
                                 rawChangeSummary[item.Field] = item.toString;
                             }
+                        }
 
                         var changeSummaryBuilder = new StringBuilder();
                         foreach (var changeSummary in rawChangeSummary)

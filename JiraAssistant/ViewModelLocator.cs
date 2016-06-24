@@ -62,6 +62,11 @@ namespace JiraAssistant
             get { return IocContainer.Resolve<ReportsSettings>(); }
         }
 
+        public RecentUpdatesViewModel RecentUpdates
+        {
+            get { return IocContainer.Resolve<RecentUpdatesViewModel>(); }
+        }
+
         public static void Cleanup()
         {
             IocContainer.Dispose();

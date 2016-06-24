@@ -15,6 +15,7 @@ using JiraAssistant.Domain.Exceptions;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.NavigationMessages;
 using System.Reflection;
+using System;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
@@ -39,10 +40,16 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             LogWorkCommand = workLogUpdater.LogWorkCommand;
             BackToPageCommand = new RelayCommand<NavigationHistoryEntry>(BackToPage);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
+            OpenRecentUpdatesCommand = new RelayCommand(OpenRecentUpdates);
             NavigationHistory = new ObservableCollection<NavigationHistoryEntry>();
             Settings = settings;
 
             ActivateWindowCommand = new RelayCommand(() => WindowVisibility = Visibility.Visible);
+        }
+
+        private void OpenRecentUpdates()
+        {
+            _messenger.Send(new OpenRecentUpdatesMessage());
         }
 
         private void OpenSettings()
@@ -120,6 +127,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
         public RelayCommand ActivateWindowCommand { get; private set; }
         public RelayCommand LogWorkCommand { get; private set; }
         public RelayCommand CloseApplicationCommand { get; private set; }
+        public RelayCommand OpenRecentUpdatesCommand { get; private set; }
 
         private async void BackToPage(NavigationHistoryEntry entry)
         {
@@ -169,9 +177,9 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             {
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
              {
-                   if (CurrentPage != null)
-                       CurrentPage.OnNavigatedFrom();
-               });
+                 if (CurrentPage != null)
+                     CurrentPage.OnNavigatedFrom();
+             });
             });
 
             await Task.Delay(250);
@@ -179,8 +187,8 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             {
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
              {
-                   CurrentPage = _navigationHistory.Peek();
-               });
+                 CurrentPage = _navigationHistory.Peek();
+             });
             });
 
             await Task.Delay(200);
@@ -190,10 +198,10 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             {
                 DispatcherHelper.CheckBeginInvokeOnUI(() =>
              {
-                   CurrentPage.OnNavigatedTo();
-                   BackCommand.RaiseCanExecuteChanged();
-                   OpenSettingsCommand.RaiseCanExecuteChanged();
-               });
+                 CurrentPage.OnNavigatedTo();
+                 BackCommand.RaiseCanExecuteChanged();
+                 OpenSettingsCommand.RaiseCanExecuteChanged();
+             });
             });
         }
 

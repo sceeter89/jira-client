@@ -234,6 +234,9 @@
     <Compile Include="Pages\PivotAnalysisPage.xaml.cs">
       <DependentUpon>PivotAnalysisPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RecentUpdates.xaml.cs">
+      <DependentUpon>RecentUpdates.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ScrumCardsPrintPreview.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreview.xaml</DependentUpon>
     </Compile>
@@ -304,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PivotAnalysisPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RecentUpdates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
