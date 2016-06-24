@@ -349,12 +349,6 @@
     <Resource Include="Assets\Icons\ToolIcon.png" />
     <Resource Include="Assets\Avatars\EditSign.png" />
     <Resource Include="Assets\Avatars\PlusSign.png" />
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
