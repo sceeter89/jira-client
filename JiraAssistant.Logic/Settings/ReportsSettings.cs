@@ -1,9 +1,25 @@
-﻿using System;
+﻿using JiraAssistant.Domain.Jira;
+using JiraAssistant.Logic.Services.Jira;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace JiraAssistant.Logic.Settings
 {
     public class ReportsSettings : SettingsBase
     {
+        private readonly IJiraApi _jiraApi;
+        private ObservableCollection<RawProjectInfo> _selectedProjects;
+        private RawProjectInfo[] _allProjects;
+        private ObservableCollection<RawProjectInfo> _availableProjects;
+
+        public ReportsSettings(IJiraApi jiraApi)
+        {
+            _jiraApi = jiraApi;
+            GetProjects();
+        }
+
         public bool RemindAboutWorklog
         {
             get { return GetValue(defaultValue: false); }
@@ -52,10 +68,55 @@ namespace JiraAssistant.Logic.Settings
             set { SetValue(value, defaultValue: new DateTime(1900, 1, 1)); }
         }
 
-        public string ProjectsList
+        public string SelectedProjectsList
         {
             get { return GetValue(defaultValue: ""); }
             set { SetValue(value, defaultValue: ""); }
+        }
+
+        public ObservableCollection<RawProjectInfo> SelectedProjects
+        {
+            get
+            {
+                if (_allProjects == null)
+                    return null;
+
+                if (_selectedProjects == null)
+                {
+                    var selectedProjectsKeys = new HashSet<string>(SelectedProjectsList.Split(','));
+                    _selectedProjects = new ObservableCollection<RawProjectInfo>(_allProjects.Where(p => selectedProjectsKeys.Contains(p.Key)));
+                    _selectedProjects.CollectionChanged += (sender, args) =>
+                    {
+                        SelectedProjectsList = string.Join(",", SelectedProjects.Select(p => p.Key));
+                    };
+                }
+
+                return _selectedProjects;
+            }
+        }
+
+        private async void GetProjects()
+        {
+            _allProjects = (await _jiraApi.Server.GetProjects()).ToArray();
+            RaisePropertyChanged("SelectedProjects");
+            RaisePropertyChanged("AvailableProjects");
+        }
+
+        public ObservableCollection<RawProjectInfo> AvailableProjects
+        {
+            get
+            {
+                if (_allProjects == null)
+                    return null;
+
+                if (_availableProjects == null)
+                {
+                    var selectedProjectsKeys = new HashSet<string>(SelectedProjectsList.Split(','));
+                    _availableProjects = new ObservableCollection<RawProjectInfo>(_allProjects.Where(p => selectedProjectsKeys.Contains(p.Key) == false));
+                }
+
+                return _availableProjects;
+            }
         }
 
         public bool SkipOwnChanges

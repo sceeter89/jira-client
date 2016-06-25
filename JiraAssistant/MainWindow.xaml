@@ -7,7 +7,6 @@
         xmlns:model="clr-namespace:JiraAssistant.Domain.Ui;assembly=JiraAssistant.Domain"
         xmlns:converters="clr-namespace:JiraAssistant.Controls.Converters;assembly=JiraAssistant.Controls"
         xmlns:tb="http://www.hardcodet.net/taskbar" 
-        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         Title="{Binding ApplicationTitle}" Height="700" Width="800"
         Icon="/Assets/Icons/ApplicationIcon.png"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
@@ -108,8 +107,7 @@
                     </Border>
                 </telerik:RadDropDownButton.DropDownContent>
             </telerik:RadDropDownButton>
-            <Button ToolTip="Settings" Command="{Binding OpenSettingsCommand, 
-            diag:PresentationTraceSources.TraceLevel=High}" Margin="5">
+            <Button ToolTip="Settings" Command="{Binding OpenSettingsCommand}" Margin="5">
                 <Image Source="/Assets/Icons/ToolIcon.png" Width="30" Height="30" />
             </Button>
             <telerik:RadDropDownButton AutoOpenDelay="0:0:0.0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Padding="0" Margin="0" BorderThickness="0"
@@ -119,6 +117,7 @@
                         <StackPanel Width="120">
                             <Button Content="Log work" Command="{Binding LogWorkCommand}" IsEnabled="{Binding Source={StaticResource Locator}, Path=JiraSession.IsLoggedIn}" 
                           HorizontalContentAlignment="Center" />
+                            <Button Content="Recent updates" Command="{Binding OpenRecentUpdatesCommand}" HorizontalContentAlignment="Center" />
                             <Separator />
                             <Button Content="Exit" Command="{Binding CloseApplicationCommand}" HorizontalContentAlignment="Center" />
                         </StackPanel>

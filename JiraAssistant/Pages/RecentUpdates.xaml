@@ -15,43 +15,46 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                        <StackPanel>
-                            <TextBlock Text="{Binding Issue.Key}" />
-                            <TextBlock Text=" - " />
-                            <TextBlock Text="{Binding Issue.Summary}" />
-                            <TextBlock Text=" @ " />
-                            <TextBlock Text="{Binding ChangeTime}" />
-                        </StackPanel>
-
-                        <ItemsControl Grid.Row="1" ItemsSource="{Binding ChangeSummary}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <TextBlock Text="{Binding FieldName}" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding OriginalValue}" Grid.Column="1"/>
-                                        <TextBlock Text="{Binding NewValue}" Grid.Column="2"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
+                            <Border Margin="5" Background="Gray">
+                                <StackPanel Orientation="Horizontal" Margin="5">
+                                    <TextBlock Text="{Binding Issue.Key}" FontWeight="Bold"/>
+                                    <TextBlock Text=" - " />
+                                    <TextBlock Text="{Binding Issue.Summary}" />
+                                    <TextBlock Text=" @ " />
+                                    <TextBlock Text="{Binding ChangeTime}" />
+                                </StackPanel>
+                            </Border>
+                            <ItemsControl Grid.Row="1" ItemsSource="{Binding ChangeSummary}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="150" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border BorderBrush="Black" BorderThickness="0.5" Width="1" HorizontalAlignment="Right"/>
+                                            <TextBlock Text="{Binding FieldName}" Grid.Column="0" Margin="3" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding OriginalValue}" Grid.Column="1" Margin="3" Foreground="Gray" />
+                                            <TextBlock Text="{Binding NewValue}" Grid.Column="2" Margin="3" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

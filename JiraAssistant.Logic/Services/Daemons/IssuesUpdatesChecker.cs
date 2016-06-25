@@ -73,7 +73,7 @@ namespace JiraAssistant.Logic.Services.Daemons
             var alertManager = new RadDesktopAlertManager();
 
             var changesSince = GreatestDateTime((DateTime.Now - TimeSpan.FromHours(24)), _reportsSettings.LastUpdatesScan);
-            var projectKeys = _reportsSettings.ProjectsList.Split(',').Select(p => p.Trim());
+            var projectKeys = _reportsSettings.SelectedProjectsList.Split(',').Select(p => p.Trim());
             try
             {
                 var query = string.Format("updated >= '{0}'", changesSince.ToString("yyyy-MM-dd HH:mm"));

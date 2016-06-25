@@ -317,8 +317,7 @@ namespace JiraAssistant.Domain.Jira
         public string Custom { get; set; }
         public long CustomId { get; set; }
     }
-
-
+    
     public class RawProfileDetails
     {
         public string Self { get; set; }
