@@ -16,10 +16,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/sceeter89/jira-client/releases"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Yakuza"/>
-    <ROW Property="ProductCode" Value="1045:{B63399D1-84B8-4FD7-AED6-F4539A8F16A5} " Type="16"/>
+    <ROW Property="ProductCode" Value="1045:{E00BD3C3-B1DF-44BA-BF1F-257054694498} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1045"/>
     <ROW Property="ProductName" Value="Jira Assistant"/>
-    <ROW Property="ProductVersion" Value="1.0.2" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.0.3" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{A9552DC2-4382-42C2-BF0D-3CD48972867C}"/>
@@ -121,7 +121,7 @@
     <ROW File="JiraAssistant.Logic.dll" Component_="JiraAssistant.Logic.dll" FileName="JIRAAS~3.DLL|JiraAssistant.Logic.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.Logic.dll" SelfReg="false" NextFile="Microsoft.Expression.Interactions.dll"/>
     <ROW File="JiraAssistant.Logic.pdb" Component_="JiraAssistant.Logic.dll" FileName="JIRAAS~4.PDB|JiraAssistant.Logic.pdb" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.Logic.pdb" SelfReg="false"/>
     <ROW File="JiraAssistant.exe" Component_="JiraAssistant.exe" FileName="JIRAAS~1.EXE|JiraAssistant.exe" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.exe" SelfReg="false" NextFile="Microsoft.Expression.Interactions.resources.dll" DigSign="true"/>
-    <ROW File="JiraAssistant.exe.config" Component_="JiraAssistant.exe.config" FileName="JIRAAS~1.CON|JiraAssistant.exe.config" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.exe.config" SelfReg="false" NextFile="NLog.config"/>
+    <ROW File="JiraAssistant.exe.config" Component_="JiraAssistant.exe.config" FileName="JIRAAS~1.CON|JiraAssistant.exe.config" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.exe.config" SelfReg="false" NextFile="Autofac.dll"/>
     <ROW File="JiraAssistant.pdb" Component_="JiraAssistant.exe" FileName="JIRAAS~1.PDB|JiraAssistant.pdb" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\JiraAssistant.pdb" SelfReg="false" NextFile="JiraAssistant.Controls.pdb"/>
     <ROW File="Microsoft.Expression.Interactions.dll" Component_="Microsoft.Expression.Interactions.dll" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Microsoft.Expression.Interactions.dll" SelfReg="false" NextFile="Microsoft.Practices.ServiceLocation.dll"/>
     <ROW File="Microsoft.Expression.Interactions.resources.dll" Component_="Microsoft.Expression.Interactions.resour" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Telerik.Windows.Controls.resources.dll"/>
@@ -135,7 +135,6 @@
     <ROW File="Microsoft.Expression.Interactions.resources.dll_8" Component_="Microsoft.Expression.Interactions.reso_8" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="Microsoft.Expression.Interactions.resources.dll_9"/>
     <ROW File="Microsoft.Expression.Interactions.resources.dll_9" Component_="Microsoft.Expression.Interactions.reso_9" FileName="MICROS~1.DLL|Microsoft.Expression.Interactions.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll" SelfReg="false" NextFile="JiraAssistant.exe.config"/>
     <ROW File="Microsoft.Practices.ServiceLocation.dll" Component_="Microsoft.Practices.ServiceLocation.dll" FileName="MICROS~2.DLL|Microsoft.Practices.ServiceLocation.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Microsoft.Practices.ServiceLocation.dll" SelfReg="false" NextFile="Newtonsoft.Json.dll"/>
-    <ROW File="NLog.config" Component_="JiraAssistant.exe.config" FileName="NLOG~1.CON|NLog.config" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\NLog.config" SelfReg="false" NextFile="Autofac.dll"/>
     <ROW File="NLog.dll" Component_="NLog.dll" FileName="NLog.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\NLog.dll" SelfReg="false" NextFile="RestSharp.dll"/>
     <ROW File="Newtonsoft.Json.dll" Component_="Newtonsoft.Json.dll" FileName="NEWTON~1.DLL|Newtonsoft.Json.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\Newtonsoft.Json.dll" SelfReg="false" NextFile="NLog.dll"/>
     <ROW File="RestSharp.dll" Component_="RestSharp.dll" FileName="RESTSH~1.DLL|RestSharp.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\RestSharp.dll" SelfReg="false" NextFile="System.Windows.Interactivity.dll"/>
