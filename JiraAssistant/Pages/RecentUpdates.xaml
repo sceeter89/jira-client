@@ -29,6 +29,8 @@
                                     <TextBlock Text="{Binding Issue.Summary}" />
                                     <TextBlock Text=" @ " />
                                     <TextBlock Text="{Binding ChangeTime}" />
+                                    <TextBlock Text=" by " />
+                                    <TextBlock Text="{Binding Author.}" />
                                 </StackPanel>
                             </Border>
                             <ItemsControl Grid.Row="1" ItemsSource="{Binding ChangeSummary}">

@@ -16,6 +16,7 @@ using System.Text;
 using Microsoft.Win32;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.Messages;
+using JiraAssistant.Domain.Jira;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -106,12 +107,35 @@ namespace JiraAssistant.Logic.Services.Daemons
                     }
                     else if (issue.Created < changesSince && _reportsSettings.ShowUpdatedIssues)
                     {
-                        var changes = issue.Changelog.Where(ch => ch.Created >= changesSince && !(_reportsSettings.SkipOwnChanges && issue.BuiltInFields.Reporter.Name == _jiraSession.Profile.Name));
+                        var changes = issue.Changelog.Where(ch => ch.Created >= changesSince
+                                                                && !(_reportsSettings.SkipOwnChanges
+                                                                && issue.BuiltInFields.Reporter.Name == _jiraSession.Profile.Name));
+
+                        changes = changes.Concat(issue.BuiltInFields.Comments.Comments.Where(c => c.Updated >= changesSince
+                                                                && !(_reportsSettings.SkipOwnChanges
+                                                                && issue.BuiltInFields.Reporter.Name == _jiraSession.Profile.Name))
+                                                                .Select(c => new RawChangesHistory
+                                                                {
+                                                                    Author = c.UpdateAuthor,
+                                                                    Created = c.Updated,
+                                                                    Items = new[]
+                                                                    {
+                                                                        new RawChangelogItem
+                                                                        {
+                                                                            Field = "Comment",
+                                                                            Fieldtype = "string",
+                                                                            From = "",
+                                                                            FromString = "",
+                                                                            To = c.Body,
+                                                                            toString = c.Body
+                                                                        }
+                                                                    }
+                                                                }));
 
                         if (changes.Any() == false)
                             continue;
 
-                        _messenger.Send(new IssueUpdatedMessage(issue, changes.SelectMany(c => c.Items), changes.First().Created));
+                        _messenger.Send(new IssueUpdatedMessage(issue, changes.SelectMany(c => c.Items), changes.First().Created, changes.First().Author));
 
                         var rawChangeSummary = new Dictionary<string, string>();
 

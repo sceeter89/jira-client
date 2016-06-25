@@ -26,7 +26,8 @@ namespace JiraAssistant.Logic.ContextlessViewModels
                     FieldName = c.Field,
                     OriginalValue = c.FromString,
                     NewValue = c.toString
-                })
+                }),
+                Author = message.Author.DisplayName
             };
 
             Updates.Insert(0, updateDetails);
