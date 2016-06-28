@@ -109,11 +109,11 @@ namespace JiraAssistant.Logic.Services.Daemons
                     {
                         var changes = issue.Changelog.Where(ch => ch.Created >= changesSince
                                                                 && !(_reportsSettings.SkipOwnChanges
-                                                                && issue.BuiltInFields.Reporter.Name == _jiraSession.Profile.Name));
+                                                                && ch.Author.Name == _jiraSession.Profile.Name));
 
                         changes = changes.Concat(issue.BuiltInFields.Comments.Comments.Where(c => c.Updated >= changesSince
                                                                 && !(_reportsSettings.SkipOwnChanges
-                                                                && issue.BuiltInFields.Reporter.Name == _jiraSession.Profile.Name))
+                                                                && c.UpdateAuthor.Name == _jiraSession.Profile.Name))
                                                                 .Select(c => new RawChangesHistory
                                                                 {
                                                                     Author = c.UpdateAuthor,
