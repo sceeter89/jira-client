@@ -12,83 +12,83 @@ using System.Windows.Media;
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
     public class JiraSessionViewModel : ViewModelBase
-   {
-      private readonly AssistantSettings _configuration;
-      private bool _isLoggedIn;
-      private RawProfileDetails _profile;
-      private ImageSource _profileAvatar;
-      private readonly IJiraApi _jiraApi;
-      private readonly IMessenger _messenger;
+    {
+        private readonly AssistantSettings _configuration;
+        private bool _isLoggedIn;
+        private RawProfileDetails _profile;
+        private ImageSource _profileAvatar;
+        private readonly IJiraApi _jiraApi;
+        private readonly IMessenger _messenger;
 
-      public JiraSessionViewModel(AssistantSettings configuration,
-         IMessenger messenger,
-         IJiraApi jiraApi)
-      {
-         _jiraApi = jiraApi;
-         _configuration = configuration;
-         _messenger = messenger;
+        public JiraSessionViewModel(AssistantSettings configuration,
+           IMessenger messenger,
+           IJiraApi jiraApi)
+        {
+            _jiraApi = jiraApi;
+            _configuration = configuration;
+            _messenger = messenger;
 
-         _jiraApi.Session.OnLogout += (sender, args) => LoggedOut();
-         _jiraApi.Session.OnSuccessfulLogin += (sender, args) => LoggedIn();
-      }
+            _jiraApi.Session.OnLogout += (sender, args) => LoggedOut();
+            _jiraApi.Session.OnSuccessfulLogin += (sender, args) => LoggedIn();
+        }
 
-      internal void LoggedOut()
-      {
-         IsLoggedIn = false;
-         Profile = null;
-         ProfileAvatar = null;
+        internal void LoggedOut()
+        {
+            IsLoggedIn = false;
+            Profile = null;
+            ProfileAvatar = null;
 
-         _messenger.Send(new ClearNavigationHistoryMessage());
-      }
+            _messenger.Send(new ClearNavigationHistoryMessage());
+        }
 
-      internal void LoggedIn()
-      {
-         IsLoggedIn = true;
-         _configuration.LastLogin = DateTime.Now;
-         Task.Factory.StartNew(async () =>
-         {
-            var details = await _jiraApi.Session.GetProfileDetails();
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+        internal void LoggedIn()
+        {
+            IsLoggedIn = true;
+            _configuration.LastLogin = DateTime.Now;
+            Task.Factory.StartNew(async () =>
             {
-               Profile = details;
-            });
+                var details = await _jiraApi.Session.GetProfileDetails();
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+             {
+                   Profile = details;
+               });
 
-            var avatar = await _jiraApi.DownloadPicture(details.AvatarUrls.Avatar48x48);
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                var avatar = await _jiraApi.DownloadPicture(details.AvatarUrls.Avatar48x48);
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+             {
+                   ProfileAvatar = avatar;
+               });
+            });
+        }
+
+        public bool IsLoggedIn
+        {
+            get { return _isLoggedIn; }
+            private set
             {
-               ProfileAvatar = avatar;
-            });
-         });
-      }
+                _isLoggedIn = value;
+                RaisePropertyChanged();
+            }
+        }
 
-      public bool IsLoggedIn
-      {
-         get { return _isLoggedIn; }
-         private set
-         {
-            _isLoggedIn = value;
-            RaisePropertyChanged();
-         }
-      }
+        public RawProfileDetails Profile
+        {
+            get { return _profile; }
+            private set
+            {
+                _profile = value;
+                RaisePropertyChanged();
+            }
+        }
 
-      public RawProfileDetails Profile
-      {
-         get { return _profile; }
-         private set
-         {
-            _profile = value;
-            RaisePropertyChanged();
-         }
-      }
-
-      public ImageSource ProfileAvatar
-      {
-         get { return _profileAvatar; }
-         private set
-         {
-            _profileAvatar = value;
-            RaisePropertyChanged();
-         }
-      }
-   }
+        public ImageSource ProfileAvatar
+        {
+            get { return _profileAvatar; }
+            private set
+            {
+                _profileAvatar = value;
+                RaisePropertyChanged();
+            }
+        }
+    }
 }

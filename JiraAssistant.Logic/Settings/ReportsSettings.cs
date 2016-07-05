@@ -97,9 +97,16 @@ namespace JiraAssistant.Logic.Settings
 
         private async void GetProjects()
         {
-            _allProjects = (await _jiraApi.Server.GetProjects()).ToArray();
-            RaisePropertyChanged("SelectedProjects");
-            RaisePropertyChanged("AvailableProjects");
+            try
+            {
+                var result = await _jiraApi.Server.GetProjects();
+                if (result == null)
+                    return;
+                _allProjects = result.ToArray();
+                RaisePropertyChanged("SelectedProjects");
+                RaisePropertyChanged("AvailableProjects");
+            }
+            catch { }
         }
 
         public ObservableCollection<RawProjectInfo> AvailableProjects

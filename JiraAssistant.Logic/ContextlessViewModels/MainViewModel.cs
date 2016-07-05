@@ -16,11 +16,14 @@ using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.NavigationMessages;
 using System.Reflection;
 using System;
+using NLog;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
     public class MainViewModel : ViewModelBase, INavigator
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         private readonly Stack<INavigationPage> _navigationHistory = new Stack<INavigationPage>();
         private INavigationPage _currentPage;
         private AnimationState _collapseAnimationState;
@@ -34,17 +37,25 @@ namespace JiraAssistant.Logic.ContextlessViewModels
         {
             _jiraApi = jiraApi;
             _messenger = messenger;
+            Settings = settings;
+
             BackCommand = new RelayCommand(Back, () => _navigationHistory.Count > 1);
             ClearMessageCommand = new RelayCommand(() => { UserMessage = ""; });
-            this.OpenSettingsCommand = new RelayCommand(OpenSettings, () => this._navigationHistory.Count > 1 && this._navigationHistory.Peek().GetType().Name != "ApplicationSettings");
+            OpenSettingsCommand = new RelayCommand(OpenSettings, () => _navigationHistory.Count > 1 && _navigationHistory.Peek().GetType().Name != "ApplicationSettings");
             LogWorkCommand = workLogUpdater.LogWorkCommand;
             BackToPageCommand = new RelayCommand<NavigationHistoryEntry>(BackToPage);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
             OpenRecentUpdatesCommand = new RelayCommand(OpenRecentUpdates);
-            NavigationHistory = new ObservableCollection<NavigationHistoryEntry>();
-            Settings = settings;
-
             ActivateWindowCommand = new RelayCommand(() => WindowVisibility = Visibility.Visible);
+
+            NavigationHistory = new ObservableCollection<NavigationHistoryEntry>();
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
+            {
+                if (args.ExceptionObject == null)
+                    return;
+
+                _logger.Fatal(args.ExceptionObject as Exception, "Unexpected exception - shutting down.");
+            };
         }
 
         private void OpenRecentUpdates()
@@ -131,6 +142,9 @@ namespace JiraAssistant.Logic.ContextlessViewModels
 
         private async void BackToPage(NavigationHistoryEntry entry)
         {
+            if (entry.Page.Title.Contains("Log out"))
+                await _jiraApi.Session.Logout();
+
             if (_navigationHistory.Peek() == entry.Page)
                 return;
 
@@ -243,9 +257,8 @@ namespace JiraAssistant.Logic.ContextlessViewModels
         public NavigationHistoryEntry(INavigationPage page)
         {
             Page = page;
-            Title = page.Title;
         }
         public INavigationPage Page { get; private set; }
-        public string Title { get; private set; }
+        public string Title { get { return Page.Title; } }
     }
 }
