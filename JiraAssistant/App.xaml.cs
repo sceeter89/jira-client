@@ -4,19 +4,24 @@ using NLog.Config;
 using NLog.Targets;
 using System.IO;
 using NLog;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
 
 namespace JiraAssistant
 {
     public partial class App
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
         public App()
         {
-            this.InitializeComponent();
+            ConfigureLogger();
+
+            InitializeComponent();
             DispatcherHelper.Initialize();
 
-            ConfigureLogger();
         }
-
         private void ConfigureLogger()
         {
             var config = new LoggingConfiguration();
@@ -41,7 +46,7 @@ namespace JiraAssistant
                 ConcurrentWrites = true
             };
             config.AddTarget("file", fileTarget);
-            
+
             config.LoggingRules.Add(new LoggingRule("*", LogLevel.Trace, consoleTarget));
             config.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, fileTarget));
 

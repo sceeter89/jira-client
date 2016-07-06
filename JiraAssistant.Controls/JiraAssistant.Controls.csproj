@@ -93,9 +93,6 @@
     <Compile Include="..\JiraAssistant\Properties\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="AgileBoardPageStatusBar.xaml.cs">
-      <DependentUpon>AgileBoardPageStatusBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="BurnDownChartStatusBar.xaml.cs">
       <DependentUpon>BurnDownChartStatusBar.xaml</DependentUpon>
     </Compile>
@@ -169,10 +166,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="AgileBoardPageStatusBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="BurnDownChartStatusBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
