@@ -15,7 +15,7 @@
             </Style>
         </Grid.Resources>
         <telerik:RadTabControl TabStripPlacement="Left" TabOrientation="Vertical"
-                             SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
+                               SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" Align="Right">
             <telerik:RadTabItem Header="General" DataContext="{Binding Source={StaticResource Locator}, Path=GeneralSettings}">
                 <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                     <Grid>
