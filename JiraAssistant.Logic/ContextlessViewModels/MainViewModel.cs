@@ -15,15 +15,11 @@ using JiraAssistant.Domain.Exceptions;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.NavigationMessages;
 using System.Reflection;
-using System;
-using NLog;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
     public class MainViewModel : ViewModelBase, INavigator
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-
         private readonly Stack<INavigationPage> _navigationHistory = new Stack<INavigationPage>();
         private INavigationPage _currentPage;
         private AnimationState _collapseAnimationState;
@@ -49,13 +45,6 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             ActivateWindowCommand = new RelayCommand(() => WindowVisibility = Visibility.Visible);
 
             NavigationHistory = new ObservableCollection<NavigationHistoryEntry>();
-            AppDomain.CurrentDomain.UnhandledException += (sender, args) =>
-            {
-                if (args.ExceptionObject == null)
-                    return;
-
-                _logger.Fatal(args.ExceptionObject as Exception, "Unexpected exception - shutting down.");
-            };
         }
 
         private void OpenRecentUpdates()
