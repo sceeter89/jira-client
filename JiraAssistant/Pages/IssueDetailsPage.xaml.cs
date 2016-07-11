@@ -1,19 +1,23 @@
-﻿using JiraAssistant.Domain.Jira;
+﻿using JiraAssistant.Logic.ViewModels;
 
 namespace JiraAssistant.Pages
 {
-   public partial class IssueDetailsPage
-   {
-      public IssueDetailsPage(JiraIssue issue)
-      {
-         InitializeComponent();
+    public partial class IssueDetailsPage
+    {
+        public IssueDetailsPage(IssueDetailsViewModel viewModel)
+        {
+            InitializeComponent();
 
-         Issue = issue;
+            DataContext = viewModel;
+        }
 
-         DataContext = this;
-      }
-
-      public JiraIssue Issue { get; private set; }
-      public override string Title { get { return string.Format("Issue: {0}", Issue.Key); } }
-   }
+        public override string Title
+        {
+            get
+            {
+                var key = (DataContext as IssueDetailsViewModel).Issue.Key;
+                return string.Format("Issue: {0}", key);
+            }
+        }
+    }
 }

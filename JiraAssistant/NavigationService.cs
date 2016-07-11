@@ -91,11 +91,15 @@ namespace JiraAssistant
             Func<RawAgileSprint, INavigationPage> followUpCallback = sprint =>
             {
                 if (_sprintsDetailsCache.ContainsKey(sprint.Id) == false)
-                    _sprintsDetailsCache[sprint.Id] = _resolver.Resolve<SprintDetailsPage>(new NamedParameter("sprint", sprint), new NamedParameter("issues", message.BoardContent.IssuesInSprint(sprint.Id)));
+                {
+                    var newViewModel = _resolver.Resolve<SprintDetailsViewModel>(new NamedParameter("sprint", sprint), new NamedParameter("issues", message.BoardContent.IssuesInSprint(sprint.Id)));
+                    _sprintsDetailsCache[sprint.Id] = new SprintDetailsPage(newViewModel);
+                }
 
                 return _sprintsDetailsCache[sprint.Id];
             };
-            var page = _resolver.Resolve<PickUpSprintPage>(new NamedParameter("sprints", sprints), new NamedParameter("followUp", followUpCallback));
+            var viewModel = _resolver.Resolve<PickUpSprintViewModel>(new NamedParameter("sprints", sprints), new NamedParameter("followUp", followUpCallback));
+            var page = new PickUpSprintPage(viewModel);
 
             _navigator.NavigateTo(page);
         }
@@ -123,7 +127,8 @@ namespace JiraAssistant
 
         private void OpenIssueDetails(OpenIssueDetailsMessage message)
         {
-            var page = _resolver.Resolve<IssueDetailsPage>(new NamedParameter("issue", message.Issue));
+            var viewModel = _resolver.Resolve<IssueDetailsViewModel>(new NamedParameter("issue", message.Issue));
+            var page = new IssueDetailsPage(viewModel);
 
             _navigator.NavigateTo(page);
         }

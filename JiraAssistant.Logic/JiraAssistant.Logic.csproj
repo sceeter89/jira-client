@@ -160,12 +160,15 @@
     <Compile Include="ViewModels\BurnDownChartViewModel.cs" />
     <Compile Include="ViewModels\EngagementChartViewModel.cs" />
     <Compile Include="ViewModels\EpicsOverviewViewModel.cs" />
+    <Compile Include="ViewModels\IssueDetailsViewModel.cs" />
     <Compile Include="ViewModels\IssuesBrowserViewModel.cs" />
     <Compile Include="ContextlessViewModels\JiraSessionViewModel.cs" />
     <Compile Include="ContextlessViewModels\LoginPageViewModel.cs" />
     <Compile Include="ContextlessViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PickUpSprintViewModel.cs" />
     <Compile Include="ViewModels\PivotAnalysisViewModel.cs" />
     <Compile Include="ViewModels\ScrumCardsViewModel.cs" />
+    <Compile Include="ViewModels\SprintDetailsViewModel.cs" />
     <Compile Include="ViewModels\SprintsVelocityViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
