@@ -39,7 +39,7 @@
                         <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding InformAboutUpdate, Mode=TwoWay}" Margin="3" />
 
                         <TextBlock Grid.Row="2" Grid.ColumnSpan="2" FontSize="8" Foreground="Gray" Margin="5" TextWrapping="Wrap">
-                     If box above will unchecked then once update is available it will be automatically installed once you close application.
+                     If box above is unchecked, then once update is available it will be automatically installed once you close application.
                      If you check it, once update is available you will see prompt if you want to install it and in what way.
                         </TextBlock>
 
