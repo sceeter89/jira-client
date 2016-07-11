@@ -5,6 +5,7 @@ using JiraAssistant.Controls.Dialogs;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Extensions;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,7 @@ namespace JiraAssistant.Logic.ViewModels
 {
     public class IssuesBrowserViewModel : GalaSoft.MvvmLight.ViewModelBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly string _settingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                                                              "Yakuza", "Jira Assistant", "GridFilters");
         private readonly IMessenger _messenger;
@@ -51,27 +53,35 @@ namespace JiraAssistant.Logic.ViewModels
 
         private void SaveGridState()
         {
-            var dialog = new FilterNameDialog();
-            if (dialog.ShowDialog() == false)
-                return;
-
-            var name = Regex.Replace(dialog.FilterName, @"[^\w\s]", "_");
-
-            if (File.Exists(Path.Combine(_settingsPath, name)))
+            try
             {
-                var result = MessageBox.Show("Do you want to overwrite existing filter?", "Jira Assistant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                if (result == MessageBoxResult.No)
+                var dialog = new FilterNameDialog();
+                if (dialog.ShowDialog() == false)
                     return;
-            }
 
-            var manager = new PersistenceManager();
-            manager.AllowCrossVersion = true;
-            var savedState = manager.Save(Grid);
-            using (var reader = new StreamReader(savedState))
-            using (var writer = new StreamWriter(Path.Combine(_settingsPath, name)))
+                var name = Regex.Replace(dialog.FilterName, @"[^\w\s]", "_");
+
+                if (File.Exists(Path.Combine(_settingsPath, name)))
+                {
+                    var result = MessageBox.Show("Do you want to overwrite existing filter?", "Jira Assistant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.No)
+                        return;
+                }
+
+                var manager = new PersistenceManager();
+                manager.AllowCrossVersion = true;
+                var savedState = manager.Save(Grid);
+                using (var reader = new StreamReader(savedState))
+                using (var writer = new StreamWriter(Path.Combine(_settingsPath, name)))
+                {
+                    writer.Write(reader.ReadToEnd());
+                }
+            }
+            catch(Exception e)
             {
-                writer.Write(reader.ReadToEnd());
+                MessageBox.Show("Failed to save filter!", "Jira Assistant", MessageBoxButton.OK, MessageBoxImage.Error);
+                _logger.Error(e, "Error while saving Issue Browser filter!");
             }
         }
 
@@ -83,16 +93,26 @@ namespace JiraAssistant.Logic.ViewModels
 
         private void LoadGridState()
         {
-            var filters = Directory.EnumerateFiles(_settingsPath).Select(p => Path.GetFileName(p)).ToArray();
-            var dialog = new SelectFilterDialog(filters);
-            if (dialog.ShowDialog() == false)
-                return;
-
-            var manager = new PersistenceManager();
-            manager.AllowCrossVersion = true;
-            using (var stream = File.OpenRead(Path.Combine(_settingsPath, dialog.FilterName)))
+            string filterPath = null;
+            try
             {
-                manager.Load(Grid as RadGridView, stream);
+                var filters = Directory.EnumerateFiles(_settingsPath).Select(p => Path.GetFileName(p)).ToArray();
+                var dialog = new SelectFilterDialog(filters);
+                if (dialog.ShowDialog() == false)
+                    return;
+
+                var manager = new PersistenceManager();
+                manager.AllowCrossVersion = true;
+                filterPath = Path.Combine(_settingsPath, dialog.FilterName);
+                using (var stream = File.OpenRead(filterPath))
+                {
+                    manager.Load(Grid as RadGridView, stream);
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Failed to load filter!", "Jira Assistant", MessageBoxButton.OK, MessageBoxImage.Error);
+                _logger.Error(e, "Error while loading Issue Browser filter from: " + filterPath);
             }
         }
 
