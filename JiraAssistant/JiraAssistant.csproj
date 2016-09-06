@@ -203,10 +203,8 @@
       <HintPath>..\lib\RCWPF\2016.2.613.45.NoXaml\Telerik.Windows.PersistenceFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.Windows.Themes.Windows8, Version=2016.2.613.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWPF\2016.2.613.45.NoXaml\Telerik.Windows.Themes.Windows8.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Telerik.Windows.Themes.Windows8">
+      <HintPath>..\Themes\Telerik.Windows.Themes.Windows8.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Zip, Version=2016.2.606.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

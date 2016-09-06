@@ -47,7 +47,7 @@ namespace JiraAssistant.Logic.ViewModels
 
             PickUpSprintCommand = new RelayCommand(OpenPickUpSprint, () => Board.Type == "scrum");
             OpenPivotAnalysisCommand = new RelayCommand(() => _messenger.Send(new OpenPivotAnalysisMessage(BoardContent.Issues)));
-            OpenEpicsOverviewCommand = new RelayCommand(() => _messenger.Send(new OpenEpicsOverviewMessage(BoardContent.Issues, BoardContent.Epics)));
+            OpenEpicsOverviewCommand = new RelayCommand(() => _messenger.Send(new OpenEpicsOverviewMessage(BoardContent.Issues, BoardContent.Epics)), () => Board.Type == "scrum");
             BrowseIssuesCommand = new RelayCommand(() => _messenger.Send(new OpenIssuesBrowserMessage(BoardContent.Issues)));
             OpenGraveyardCommand = new RelayCommand(() => _messenger.Send(new OpenBoardGraveyardMessage(BoardContent.Issues)));
             OpenSprintsVelocityCommand = new RelayCommand(() => _messenger.Send(new OpenSprintsVelocityMessage(BoardContent)), () => Board.Type == "scrum");
