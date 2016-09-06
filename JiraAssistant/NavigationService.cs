@@ -53,7 +53,7 @@ namespace JiraAssistant
         private void OpenAgileBoardPickup(OpenAgileBoardPickupMessage message)
         {
             var page = _resolver.Resolve<PickUpAgileBoardPage>();
-
+                                             
             _navigator.NavigateTo(page);
         }
 
@@ -71,7 +71,7 @@ namespace JiraAssistant
 
         private void OpenEngagementChart(OpenEngagementChartMessage message)
         {
-            var viewModel = _resolver.Resolve<EngagementChartViewModel>(new NamedParameter("issues", message.Issues));
+            var viewModel = _resolver.Resolve<EngagementChartViewModel>(new NamedParameter("sprintIssues", message.Issues));
             var page = new EngagementChart(viewModel);
 
             _navigator.NavigateTo(page);
