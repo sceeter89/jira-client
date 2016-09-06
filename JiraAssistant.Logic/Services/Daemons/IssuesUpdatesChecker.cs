@@ -151,12 +151,12 @@ namespace JiraAssistant.Logic.Services.Daemons
                         foreach (var changeSummary in rawChangeSummary)
                         {
                             var newValue = changeSummary.Value ?? "(None)";
-                            changeSummaryBuilder.AppendFormat("{0}: {1}\n", changeSummary.Key, newValue.Substring(0, Math.Min(40, newValue.Length)));
+                            changeSummaryBuilder.AppendFormat("{0}: {1}\n", changeSummary.Key, newValue);
                         }
 
                         alertManager.ShowAlert(new RadDesktopAlert
                         {
-                            Header = string.Format("[{0}] {1}", issue.Key, issue.Summary.Substring(0, Math.Min(30, issue.Summary.Length))),
+                            Header = string.Format("[{0}] {1}", issue.Key, issue.Summary),
                             Content = changeSummaryBuilder.ToString(),
                             ShowDuration = 5000,
                             Icon = new Image { Source = GetImageFromResources("/Assets/Avatars/EditSign.png"), Width = 48, Height = 48 },
