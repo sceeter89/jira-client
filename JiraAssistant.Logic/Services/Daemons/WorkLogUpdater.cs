@@ -53,6 +53,9 @@ namespace JiraAssistant.Logic.Services.Daemons
             {
                 _popupOpened = true;
                 var activeTasks = await _jiraApi.SearchForIssues("Assignee = currentUser() AND (Resolution IS EMPTY OR (resolved >= \"-24h\" AND resolved < endOfDay()))");
+                if (activeTasks.Any() == false)
+                    return;
+
                 var dialog = new LogWorkDialog(activeTasks);
                 if (dialog.ShowDialog() == false)
                     return;
