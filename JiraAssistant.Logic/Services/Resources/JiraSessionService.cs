@@ -11,122 +11,144 @@ using JiraAssistant.Domain.Exceptions;
 
 namespace JiraAssistant.Logic.Services.Resources
 {
-   public class JiraSessionService : BaseRestService, IJiraSessionApi
-   {
-      public JiraSessionService(AssistantSettings configuration)
-         : base(configuration)
-      {
-      }
+    public class JiraSessionService : BaseRestService, IJiraSessionApi
+    {
+        public JiraSessionService(AssistantSettings configuration)
+           : base(configuration)
+        {
+        }
 
-      public event EventHandler OnSuccessfulLogin;
-      public event EventHandler OnLogout;
+        public event EventHandler OnSuccessfulLogin;
+        public event EventHandler OnLogout;
 
-      public async Task<RawProfileDetails> GetProfileDetails()
-      {
-         var client = BuildRestClient();
-         var request = new RestRequest("/rest/api/latest/myself?expand=groups,applicationRoles", Method.GET);
+        public async Task<RawProfileDetails> GetProfileDetails()
+        {
+            var client = BuildRestClient();
+            var request = new RestRequest("/rest/api/latest/myself?expand=groups,applicationRoles", Method.GET);
 
-         var response = await client.ExecuteTaskAsync(request);
-         var result = JsonConvert.DeserializeObject<RawProfileDetails>(response.Content);
+            var response = await client.ExecuteTaskAsync(request);
+            var result = JsonConvert.DeserializeObject<RawProfileDetails>(response.Content);
 
-         return result;
-      }
+            return result;
+        }
 
-      public async Task Logout()
-      {
-         var client = BuildRestClient();
-
-         var response = await client.ExecuteTaskAsync(new RestRequest("/rest/auth/1/session", Method.DELETE));
-         Configuration.SessionCookies = "";
-
-         RaiseOnLogout();
-      }
-
-      private void RaiseOnLogout()
-      {
-         if (OnLogout != null)
-            OnLogout(this, EventArgs.Empty);
-      }
-
-      private void RaiseOnSuccessfulLogin()
-      {
-         if (OnSuccessfulLogin != null)
-            OnSuccessfulLogin(this, EventArgs.Empty);
-      }
-
-      public async Task<bool> CheckJiraSession()
-      {
-         try
-         {
+        public async Task Logout()
+        {
             var client = BuildRestClient();
 
-            var response = await client.ExecuteGetTaskAsync<RawSessionInfo>(new RestRequest("/rest/auth/1/session"));
+            var response = await client.ExecuteTaskAsync(new RestRequest("/rest/auth/1/session", Method.DELETE));
+            Configuration.SessionCookies = "";
 
-            if (response.StatusCode == 0)
+            RaiseOnLogout();
+        }
+
+        private void RaiseOnLogout()
+        {
+            if (OnLogout != null)
+                OnLogout(this, EventArgs.Empty);
+        }
+
+        private void RaiseOnSuccessfulLogin()
+        {
+            if (OnSuccessfulLogin != null)
+                OnSuccessfulLogin(this, EventArgs.Empty);
+        }
+
+        public async Task<bool> CheckJiraSession()
+        {
+            try
             {
-               throw new ServerNotFoundException();
-            }
+                var client = BuildRestClient();
 
-            if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
+                var response = await client.ExecuteGetTaskAsync<RawSessionInfo>(new RestRequest("/rest/auth/1/session"));
+
+                if (response.StatusCode == 0)
+                {
+                    throw new ServerNotFoundException();
+                }
+
+                if (response.StatusCode == HttpStatusCode.Unauthorized || response.Data == null)
+                {
+                    Configuration.SessionCookies = "";
+                    return false;
+                }
+
+                RaiseOnSuccessfulLogin();
+                return true;
+            }
+            catch (UriFormatException)
             {
-               Configuration.SessionCookies = "";
-               return false;
+                return false;
             }
+        }
 
-            RaiseOnSuccessfulLogin();
-            return true;
-         }
-         catch (UriFormatException)
-         {
-            return false;
-         }
-      }
-
-      public async Task AttemptLogin(string jiraUrl, string username, string password)
-      {
-         try
-         {
-            Configuration.JiraUrl = jiraUrl;
-            Configuration.Username = username;
-            var client = BuildRestClient();
-
-            var sessionInfoRequest = new RestRequest("/rest/gadget/1.0/login");
-            sessionInfoRequest.AddParameter("os_username", username, ParameterType.GetOrPost);
-            sessionInfoRequest.AddParameter("os_password", password, ParameterType.GetOrPost);
-            sessionInfoRequest.AddParameter("os_cookie", "true", ParameterType.GetOrPost);
-            
-            var response = await client.ExecutePostTaskAsync(sessionInfoRequest);
-
-            if (response.StatusCode == HttpStatusCode.Unauthorized)
+        public async Task AttemptLogin(string jiraUrl, string username, string password)
+        {
+            try
             {
-               throw new LoginFailedException("Invalid username or password");
-            }
+                Configuration.JiraUrl = jiraUrl;
+                Configuration.Username = username;
+                var client = BuildRestClient();
 
-            if (response.StatusCode == HttpStatusCode.Forbidden)
+                var sessionInfoRequest = new RestRequest("/rest/gadget/1.0/login");
+                sessionInfoRequest.AddParameter("os_username", username, ParameterType.GetOrPost);
+                sessionInfoRequest.AddParameter("os_password", password, ParameterType.GetOrPost);
+                sessionInfoRequest.AddParameter("os_cookie", "true", ParameterType.GetOrPost);
+
+                var response = await client.ExecutePostTaskAsync(sessionInfoRequest);
+
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new LoginFailedException("Invalid username or password");
+                }
+
+                if (response.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    throw new LoginFailedException("User was not allowed to log in. Try to login via browser.");
+                }
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    if (response.StatusCode == 0)
+                        throw new ServerNotFoundException();
+
+                    throw new LoginFailedException("Server returned unexpected response code: " + response.StatusCode);
+                }
+
+                if (string.IsNullOrEmpty(response.Content))
+                {
+                    throw new LoginFailedException(string.Format("Given address '{0}' does not point at valid JIRA server.", jiraUrl));
+                }
+
+                var loginResult = JsonConvert.DeserializeObject<RawLoginResult>(response.Content);
+
+                if (loginResult.LoginSucceeded == false)
+                    throw new LoginFailedException(LoginResultToReason(loginResult));
+
+                Configuration.SessionCookies = response.Headers.First(h => h.Name.ToLowerInvariant() == "set-cookie").Value.ToString();
+                RaiseOnSuccessfulLogin();
+            }
+            catch (UriFormatException)
             {
-               throw new LoginFailedException("User was not allowed to log in. Try to login via browser.");
+                throw new LoginFailedException(string.Format("Invalid JIRA server address."));
             }
+        }
 
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-               if (response.StatusCode == 0)
-                  throw new ServerNotFoundException();
+        private string LoginResultToReason(RawLoginResult loginResult)
+        {
+            if (loginResult.CaptchaFailure)
+                return "JIRA needs to verify captcha to unlock your account. Try to login via WWW first.";
 
-               throw new LoginFailedException("Server returned unexpected response code: " + response.StatusCode);
-            }
+            if (loginResult.CommunicationError)
+                return "Encountered communication issues.";
 
-            if (string.IsNullOrEmpty(response.Content))
-            {
-               throw new LoginFailedException(string.Format("Given address '{0}' does not point at valid JIRA server.", jiraUrl));
-            }
-            
-            Configuration.SessionCookies = response.Headers.First(h => h.Name.ToLowerInvariant() == "set-cookie").Value.ToString();
-            RaiseOnSuccessfulLogin();
-         }
-         catch (UriFormatException)
-         {
-            throw new LoginFailedException(string.Format("Invalid JIRA server address."));
-         }
-      }
-   }
+            if (loginResult.LoginFailedByPermissions)
+                return "Login was correct, but you are not allowed to access JIRA.";
+
+            if (loginResult.LoginError)
+                return "Technical issues interrupted login.";
+
+            return "Invalid user name and/or password.";
+        }
+    }
 }

@@ -438,5 +438,19 @@ namespace JiraAssistant.Domain.Jira
         public int Total { get; set; }
         public RawChangesHistory[] Histories { get; set; }
     }
+
+    public class RawLoginResult
+    {
+        public bool AllowCookies { get; set; }
+        public bool ExternalUserManagement { get; set; }
+        public bool IsPublicMode { get; set; }
+        public bool IsElevatedSecurityCheckShown { get; set; }
+        public bool LoginSucceeded { get; set; }
+        public bool CaptchaFailure { get; set; }
+        public bool LoginError { get; set; }
+        public bool CommunicationError { get; set; }
+        public string ContactAdminLink { get; set; }
+        public bool LoginFailedByPermissions { get; set; }
+    }
 #pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
 }
