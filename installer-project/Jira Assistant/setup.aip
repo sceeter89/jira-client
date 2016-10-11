@@ -16,10 +16,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="https://github.com/sceeter89/jira-client/releases"/>
     <ROW Property="CTRLS" Value="2"/>
     <ROW Property="Manufacturer" Value="Yakuza"/>
-    <ROW Property="ProductCode" Value="1045:{40102F6C-9273-44A1-A539-B21247103C73} " Type="16"/>
+    <ROW Property="ProductCode" Value="1045:{4056498C-973F-4F35-A9E1-8BFD36713BE8} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1045"/>
     <ROW Property="ProductName" Value="Jira Assistant"/>
-    <ROW Property="ProductVersion" Value="1.1.0" Type="32"/>
+    <ROW Property="ProductVersion" Value="1.1.1" Type="32"/>
     <ROW Property="RUNAPPLICATION" Value="1" Type="4"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{A9552DC2-4382-42C2-BF0D-3CD48972867C}"/>
@@ -129,7 +129,7 @@
     <ROW File="Telerik.Windows.Controls.resources.dll_5" Component_="Telerik.Windows.Controls.resources.dll_5" FileName="TELERI~1.DLL|Telerik.Windows.Controls.resources.dll" Attributes="0" SourcePath="..\..\JiraAssistant\bin\Debug\tr\Telerik.Windows.Controls.resources.dll" SelfReg="false" NextFile="Microsoft.Expression.Interactions.resources.dll_8"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="AnyCPU_Release" BuildName="AnyCPU_Release" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\..\..\tmp\installers" PackageFileName="Jira Assistant 1.1.0" Languages="pl" InstallationType="4" UseLargeSchema="true"/>
+    <ROW BuildKey="AnyCPU_Release" BuildName="AnyCPU_Release" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\..\..\tmp\installers" PackageFileName="Jira Assistant 1.1.1" Languages="pl" InstallationType="4" UseLargeSchema="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>

@@ -85,7 +85,14 @@ namespace JiraAssistant.Logic.Services.Resources
 
             if (_fields == null)
             {
-                _fields = (await _metadata.GetFieldsDefinitions()).ToDictionary(d => d.Name, d => d);
+                var fieldDefinitions = (await _metadata.GetFieldsDefinitions())
+                    .GroupBy(f => f.Name)
+                    .Select(g => g.Count() == 1 ? 
+                                g.First() : 
+                                (g.FirstOrDefault(f => f.Name.StartsWith("customfield") == false) ?? g.First())
+                           );
+
+                _fields = fieldDefinitions.ToDictionary(d => d.Name, d => d);
             }
 
             return ConvertIssuesToDomainModel(batches.SelectMany(b => b.Issues));
