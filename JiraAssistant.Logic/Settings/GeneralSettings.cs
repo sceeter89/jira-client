@@ -43,5 +43,11 @@ namespace JiraAssistant.Logic.Settings
          get { return GetValue(defaultValue: false); }
          set { SetValue(value, defaultValue: false); }
       }
+
+      public bool StartInTray
+      {
+         get { return GetValue(defaultValue: false); }
+         set { SetValue(value, defaultValue: false); }
+      }
    }
 }

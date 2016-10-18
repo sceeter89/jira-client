@@ -26,6 +26,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -51,6 +52,9 @@
 
                         <TextBlock Text="Close to tray: " Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
                         <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding CloseToTray, Mode=TwoWay}" Margin="3" />
+
+                        <TextBlock Text="Start in tray: " Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Margin="3"/>
+                        <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding StartInTray, Mode=TwoWay}" Margin="3" />
                     </Grid>
                 </ScrollViewer>
             </telerik:RadTabItem>

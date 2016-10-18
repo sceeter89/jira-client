@@ -151,9 +151,9 @@ namespace JiraAssistant.Logic.ViewModels
             foreach (var group in grouped)
             {
                 if (string.IsNullOrWhiteSpace(group.Key))
-                    resultBuilder.AppendLine("(No Epic)");
+                    resultBuilder.AppendLine("\n(No Epic)");
                 else
-                    resultBuilder.AppendLine(group.Key);
+                    resultBuilder.AppendLine("\n" + group.Key);
 
                 foreach (var issue in group)
                     resultBuilder.AppendLine(string.Format("* {0} - {1}", issue.Key, issue.Summary));
