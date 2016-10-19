@@ -68,6 +68,10 @@
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SharpRaven, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpRaven.2.1.0\lib\net45\SharpRaven.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Printing" />
@@ -126,6 +130,7 @@
     <Compile Include="Extensions\BindableGridViewPropertyProvider.cs" />
     <Compile Include="Extensions\BindableGridViewProxies.cs" />
     <Compile Include="Extensions\BindableRadGridView.cs" />
+    <Compile Include="Extensions\Sentry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AgileBoardDataCache.cs" />
     <Compile Include="Services\ApplicationCache.cs" />

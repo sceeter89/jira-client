@@ -4,9 +4,7 @@ using NLog.Config;
 using NLog.Targets;
 using System.IO;
 using NLog;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Linq;
+using SharpRaven;
 
 namespace JiraAssistant
 {

@@ -16,6 +16,7 @@ using JiraAssistant.Domain.Github;
 using JiraAssistant.Logic.ContextlessViewModels;
 using System.Reflection;
 using System.Windows.Threading;
+using JiraAssistant.Logic.Extensions;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -121,6 +122,7 @@ namespace JiraAssistant.Logic.Services.Daemons
             }
             catch (Exception e)
             {
+                Sentry.CaptureException(e);
                 _logger.Warn(e, "Failed to check for updates.");
             }
             finally
