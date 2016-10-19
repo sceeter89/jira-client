@@ -8,56 +8,56 @@
                           xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="300" Background="White">
-   <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
-      <telerik:RadBusyIndicator.BusyContent>
-         <TextBlock Text="Aggregating data..." />
-      </telerik:RadBusyIndicator.BusyContent>
-      <Grid>
-         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-         </Grid.ColumnDefinitions>
-         <Grid.Resources>
-            <DataTemplate x:Key="ChartLabelTemplate">
-               <StackPanel Orientation="Horizontal">
-                  <TextBlock Text="{Binding DataItem.EpicName}"
+    <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
+        <telerik:RadBusyIndicator.BusyContent>
+            <TextBlock Text="Aggregating data..." />
+        </telerik:RadBusyIndicator.BusyContent>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <DataTemplate x:Key="ChartLabelTemplate">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding DataItem.EpicName}"
                        FontSize="10"
                        FontFamily="Segoe UI"
                        TextAlignment="Center" Margin="5 0 5 0"/>
 
-                  <TextBlock Text="{Binding DataItem.IssuesCount}"
+                        <TextBlock Text="{Binding DataItem.IssuesCount}"
                        FontSize="10"
                        FontFamily="Segoe UI"
                        TextAlignment="Center" Margin="0 0 5 0"/>
-               </StackPanel>
-            </DataTemplate>
-         </Grid.Resources>
-         <telerik:RadPieChart>
-            <telerik:RadPieChart.SmartLabelsStrategy>
-               <telerik:PieChartSmartLabelsStrategy DisplayMode="Spider"/>
-            </telerik:RadPieChart.SmartLabelsStrategy>
-            <telerik:DoughnutSeries ValueBinding="IssuesCount" ShowLabels="True" RadiusFactor="0.65" ItemsSource="{Binding EpicsStatistics}">
-               <telerik:PieSeries.LabelDefinitions>
-                  <telerik:ChartSeriesLabelDefinition Margin="-10,0,0,0" Template="{StaticResource ChartLabelTemplate}" />
-               </telerik:PieSeries.LabelDefinitions>
-               <telerik:DoughnutSeries.LabelConnectorsSettings>
-                  <telerik:ChartSeriesLabelConnectorsSettings />
-               </telerik:DoughnutSeries.LabelConnectorsSettings>
-               <telerik:DoughnutSeries.AngleRange>
-                  <telerik:AngleRange StartAngle="270" SweepAngle="360" />
-               </telerik:DoughnutSeries.AngleRange>
-            </telerik:DoughnutSeries>
-         </telerik:RadPieChart>
+                    </StackPanel>
+                </DataTemplate>
+            </Grid.Resources>
+            <telerik:RadPieChart Palette="{StaticResource ChartPalette}">
+                <telerik:RadPieChart.SmartLabelsStrategy>
+                    <telerik:PieChartSmartLabelsStrategy DisplayMode="Spider"/>
+                </telerik:RadPieChart.SmartLabelsStrategy>
+                <telerik:DoughnutSeries ValueBinding="IssuesCount" ShowLabels="True" RadiusFactor="0.65" ItemsSource="{Binding EpicsStatistics}">
+                    <telerik:PieSeries.LabelDefinitions>
+                        <telerik:ChartSeriesLabelDefinition Margin="-10,0,0,0" Template="{StaticResource ChartLabelTemplate}" />
+                    </telerik:PieSeries.LabelDefinitions>
+                    <telerik:DoughnutSeries.LabelConnectorsSettings>
+                        <telerik:ChartSeriesLabelConnectorsSettings />
+                    </telerik:DoughnutSeries.LabelConnectorsSettings>
+                    <telerik:DoughnutSeries.AngleRange>
+                        <telerik:AngleRange StartAngle="270" SweepAngle="360" />
+                    </telerik:DoughnutSeries.AngleRange>
+                </telerik:DoughnutSeries>
+            </telerik:RadPieChart>
 
-         <telerik:RadGridView Grid.Column="1" Width="160" RowIndicatorVisibility="Collapsed"
+            <telerik:RadGridView Grid.Column="1" Width="160" RowIndicatorVisibility="Collapsed"
                               ShowGroupPanel="False" ShowColumnHeaders="False" AutoGenerateColumns="False"
                               ItemsSource="{Binding EpicsStatistics}" MouseDoubleClick="ItemDoubleClick"
                               SelectedItem="{Binding SelectedEpic, Mode=OneWayToSource}">
-            <telerik:RadGridView.Columns>
-               <telerik:GridViewDataColumn DataMemberBinding="{Binding EpicName}" Width="110"/>
-               <telerik:GridViewDataColumn DataMemberBinding="{Binding IssuesCount}" Width="30"/>
-            </telerik:RadGridView.Columns>
-         </telerik:RadGridView>
-      </Grid>
-   </telerik:RadBusyIndicator>
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding EpicName}" Width="110"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding IssuesCount}" Width="30"/>
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+        </Grid>
+    </telerik:RadBusyIndicator>
 </local:BaseNavigationPage>

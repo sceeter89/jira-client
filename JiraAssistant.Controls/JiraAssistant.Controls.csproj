@@ -154,6 +154,9 @@
     <Compile Include="ScrumCardsPrintPreviewStatusBar.xaml.cs">
       <DependentUpon>ScrumCardsPrintPreviewStatusBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SprintsVelocityLegend.xaml.cs">
+      <DependentUpon>SprintsVelocityLegend.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -221,6 +224,10 @@
     <Page Include="ScrumCardsPrintPreviewStatusBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SprintsVelocityLegend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

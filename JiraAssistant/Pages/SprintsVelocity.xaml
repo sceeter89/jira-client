@@ -5,63 +5,58 @@
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:local="clr-namespace:JiraAssistant.Pages"
                           xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-                          mc:Ignorable="d" 
+                          mc:Ignorable="d" Background="White"
                           d:DesignHeight="300" d:DesignWidth="300">
-   <Grid>
-      <Grid.RowDefinitions>
-         <RowDefinition Height="*"/>
-         <RowDefinition Height="Auto"/>
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-         <ColumnDefinition Width="*"/>
-         <ColumnDefinition Width="Auto"/>
-      </Grid.ColumnDefinitions>
-      <telerik:RadCartesianChart>
-         <telerik:RadCartesianChart.Behaviors>
-            <telerik:ChartTooltipBehavior Placement="Top"/>
-         </telerik:RadCartesianChart.Behaviors>
-         <telerik:RadCartesianChart.HorizontalAxis>
-            <telerik:CategoricalAxis Title="Sprint"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <telerik:RadCartesianChart>
+            <telerik:RadCartesianChart.Behaviors>
+                <telerik:ChartTooltipBehavior Placement="Top"/>
+            </telerik:RadCartesianChart.Behaviors>
+            <telerik:RadCartesianChart.HorizontalAxis>
+                <telerik:CategoricalAxis Title="Sprint"
                                      LabelFitMode="Rotate"/>
-         </telerik:RadCartesianChart.HorizontalAxis>
-         <telerik:RadCartesianChart.VerticalAxis>
-            <telerik:LinearAxis Title="Value"/>
-         </telerik:RadCartesianChart.VerticalAxis>
-         <telerik:RadCartesianChart.Series>
-            <telerik:BarSeries ItemsSource="{Binding Statistics}"
+            </telerik:RadCartesianChart.HorizontalAxis>
+            <telerik:RadCartesianChart.VerticalAxis>
+                <telerik:LinearAxis Title="Value"/>
+            </telerik:RadCartesianChart.VerticalAxis>
+            <telerik:RadCartesianChart.Series>
+                <telerik:BarSeries ItemsSource="{Binding Statistics}"
                                CategoryBinding="SprintName"
                                ValueBinding="Velocity">
-               <telerik:BarSeries.PointTemplate>
-                  <DataTemplate>
-                     <Rectangle Fill="Green"/>
-                  </DataTemplate>
-               </telerik:BarSeries.PointTemplate>
-            </telerik:BarSeries>
-            <telerik:BarSeries ItemsSource="{Binding Statistics}"
+                    <telerik:BarSeries.PointTemplate>
+                        <DataTemplate>
+                            <Rectangle Fill="#DAF7A6"/>
+                        </DataTemplate>
+                    </telerik:BarSeries.PointTemplate>
+                </telerik:BarSeries>
+                <telerik:BarSeries ItemsSource="{Binding Statistics}"
                                CategoryBinding="SprintName"
                                ValueBinding="Commitment">
-               <telerik:BarSeries.PointTemplate>
-                  <DataTemplate>
-                     <Rectangle Fill="Orange"/>
-                  </DataTemplate>
-               </telerik:BarSeries.PointTemplate>
-            </telerik:BarSeries>
+                    <telerik:BarSeries.PointTemplate>
+                        <DataTemplate>
+                            <Rectangle Fill="#FAD7A0"/>
+                        </DataTemplate>
+                    </telerik:BarSeries.PointTemplate>
+                </telerik:BarSeries>
 
-            <telerik:LineSeries ItemsSource="{Binding Minimum}" 
+                <telerik:LineSeries ItemsSource="{Binding Average}" 
                                 CategoryBinding="SprintName"
                                 ValueBinding="Velocity"
-                                Stroke="Olive"/>
+                                Stroke="#A3D18A"/>
 
-            <telerik:LineSeries ItemsSource="{Binding Average}" 
+                <telerik:LineSeries ItemsSource="{Binding Maximum}" 
                                 CategoryBinding="SprintName"
                                 ValueBinding="Velocity"
-                                Stroke="GreenYellow"/>
-
-            <telerik:LineSeries ItemsSource="{Binding Maximum}" 
-                                CategoryBinding="SprintName"
-                                ValueBinding="Velocity"
-                                Stroke="RosyBrown"/>
-         </telerik:RadCartesianChart.Series>
-      </telerik:RadCartesianChart>
-   </Grid>
+                                Stroke="#FF5733"/>
+            </telerik:RadCartesianChart.Series>
+        </telerik:RadCartesianChart>
+    </Grid>
 </local:BaseNavigationPage>
