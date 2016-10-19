@@ -178,7 +178,7 @@
                 </Image.ToolTip>
             </Image>
         </Grid>
-        
+
         <Grid Grid.Row="2" Margin="5 5 5 0" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}" Grid.ColumnSpan="3" x:Name="StatusBarHost"
             RenderTransformOrigin="0 1">
             <Grid.RenderTransform>
@@ -204,8 +204,9 @@
         </Border>
 
         <tb:TaskbarIcon IconSource="/Icon.ico"
-                      ToolTipText="JIRA Assistant" 
-                      LeftClickCommand="{Binding ActivateWindowCommand}">
+                        ToolTipText="JIRA Assistant" 
+                        LeftClickCommand="{Binding ActivateWindowCommand}"
+                        DoubleClickCommand="{Binding ActivateWindowCommand}">
 
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>

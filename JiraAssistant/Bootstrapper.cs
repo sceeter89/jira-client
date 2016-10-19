@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using JiraAssistant.Logic.Extensions;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -39,6 +40,7 @@ namespace JiraAssistant
                     }
                     catch (Exception ex)
                     {
+                        Sentry.CaptureException(ex);
                         _logger.Error(ex, "Failed to load: {0}", path);
                     }
                 }
@@ -49,7 +51,7 @@ namespace JiraAssistant
             {
                 if (args.ExceptionObject == null)
                     return;
-
+                Sentry.CaptureException(args.ExceptionObject as Exception);
                 _logger.Fatal(args.ExceptionObject as Exception, "Unexpected exception - shutting down.");
             };
 

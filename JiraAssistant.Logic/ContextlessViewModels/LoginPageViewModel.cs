@@ -7,6 +7,7 @@ using JiraAssistant.Logic.Settings;
 using JiraAssistant.Logic.Services.Jira;
 using System;
 using System.Windows.Controls;
+using JiraAssistant.Logic.Extensions;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
@@ -105,8 +106,9 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             {
                 LoginErrorMessage = e.Message;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Sentry.CaptureException(e);
                 LoginErrorMessage = "Failed to log in due to technical issues.";
             }
             finally

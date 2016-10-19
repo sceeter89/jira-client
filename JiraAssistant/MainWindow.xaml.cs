@@ -9,10 +9,15 @@ namespace JiraAssistant
         public MainWindow()
         {
             InitializeComponent();
+
             Loaded += (sender, args) =>
             {
                 var viewModel = DataContext as MainViewModel;
                 viewModel.NavigateTo(new LoginPage());
+                if (viewModel.Settings.StartInTray)
+                {
+                    viewModel.WindowVisibility = System.Windows.Visibility.Collapsed;
+                }
             };
             Closing += (sender, args) =>
             {

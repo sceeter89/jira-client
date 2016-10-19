@@ -40,6 +40,20 @@
             </Style>
             <Style TargetType="{x:Type ext:BindableRadGridView}" BasedOn="{StaticResource RadGridViewStyle}">
             </Style>
+
+            <telerik:ChartPalette x:Key="ChartPalette">
+                <telerik:ChartPalette.GlobalEntries>
+                    <telerik:PaletteEntry Fill="#21B573" Stroke="White" />
+                    <telerik:PaletteEntry Fill="#88CA2A" Stroke="White" />
+                    <telerik:PaletteEntry Fill="#FF921E" Stroke="White" />
+                    <telerik:PaletteEntry Fill="#FEE487" Stroke="White" />
+                    <telerik:PaletteEntry Fill="#6ED8EF" Stroke="White" />
+                    <telerik:PaletteEntry Fill="#FE6757" Stroke="White" />
+                    <telerik:PaletteEntry Fill="#767ABA" Stroke="White" />
+                    <telerik:PaletteEntry Fill="#E389B4" Stroke="White" />
+                    <telerik:PaletteEntry Fill="#B17C34" Stroke="White" />
+                </telerik:ChartPalette.GlobalEntries>
+            </telerik:ChartPalette>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

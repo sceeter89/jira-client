@@ -80,6 +80,7 @@ namespace JiraAssistant.Logic.ViewModels
             }
             catch(Exception e)
             {
+                Sentry.CaptureException(e);
                 MessageBox.Show("Failed to save filter!", "Jira Assistant", MessageBoxButton.OK, MessageBoxImage.Error);
                 _logger.Error(e, "Error while saving Issue Browser filter!");
             }
@@ -111,6 +112,7 @@ namespace JiraAssistant.Logic.ViewModels
             }
             catch(Exception e)
             {
+                Sentry.CaptureException(e);
                 MessageBox.Show("Failed to load filter!", "Jira Assistant", MessageBoxButton.OK, MessageBoxImage.Error);
                 _logger.Error(e, "Error while loading Issue Browser filter from: " + filterPath);
             }
@@ -151,9 +153,9 @@ namespace JiraAssistant.Logic.ViewModels
             foreach (var group in grouped)
             {
                 if (string.IsNullOrWhiteSpace(group.Key))
-                    resultBuilder.AppendLine("(No Epic)");
+                    resultBuilder.AppendLine("\n(No Epic)");
                 else
-                    resultBuilder.AppendLine(group.Key);
+                    resultBuilder.AppendLine("\n" + group.Key);
 
                 foreach (var issue in group)
                     resultBuilder.AppendLine(string.Format("* {0} - {1}", issue.Key, issue.Summary));

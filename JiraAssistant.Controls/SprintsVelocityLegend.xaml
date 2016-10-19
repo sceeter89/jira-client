@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="JiraAssistant.Controls.SprintsVelocityLegend"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JiraAssistant.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="80" d:DesignWidth="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Rectangle VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Height="30" Width="50" Fill="#fad7a0" />
+        <TextBlock Margin="60 0 0 0" VerticalAlignment="Center"
+                   Text="Commitment"/>
+
+        <Rectangle VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Height="30" Width="50" Fill="#DAF7A6" Grid.Row="1" />
+        <TextBlock Margin="60 0 0 0" VerticalAlignment="Center"
+                   Text="Velocity" Grid.Row="1"/>
+
+        <Rectangle VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Height="5" Width="50" Fill="#FF5733" Grid.Row="1" Grid.Column="1"/>
+        <TextBlock Margin="60 0 0 0" VerticalAlignment="Center"
+                   Text="Maximum velocity" Grid.Row="1" Grid.Column="1"/>
+
+        <Rectangle VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Height="5" Width="50" Fill="#A3D18A" Grid.Row="0" Grid.Column="1"/>
+        <TextBlock Margin="60 0 0 0" VerticalAlignment="Center"
+                   Text="Average velocity" Grid.Row="0" Grid.Column="1"/>
+
+    </Grid>
+</UserControl>
