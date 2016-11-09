@@ -101,8 +101,12 @@ namespace JiraAssistant
             builder.RegisterAssemblyTypes(GetType().Assembly)
                .InNamespaceOf<BaseNavigationPage>()
                .Except<BaseNavigationPage>()
+               .Except<ScrumCardsPrintPreview>()
                .AsSelf()
                .SingleInstance();
+                
+            builder.RegisterType<ScrumCardsPrintPreview>()
+               .AsSelf();
 
             builder.RegisterAssemblyTypes(logicAssembly)
                .InNamespace("JiraAssistant.Logic.Services")
@@ -124,7 +128,10 @@ namespace JiraAssistant
 
             builder.RegisterType<NavigationService>()
                .SingleInstance()
-               .AsImplementedInterfaces()
+               .AutoActivate();
+
+            builder.RegisterType<DesktopNotificationsService>()
+               .SingleInstance()
                .AutoActivate();
 
             builder.RegisterType<Messenger>()

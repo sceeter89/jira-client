@@ -17,6 +17,7 @@ using JiraAssistant.Logic.Services.Jira;
 using System.Collections.Generic;
 using GalaSoft.MvvmLight;
 using JiraAssistant.Controls.Dialogs;
+using System.Windows.Media;
 
 namespace JiraAssistant.Pages
 {
@@ -192,7 +193,9 @@ namespace JiraAssistant.Pages
             private void SetCardColor(JiraIssuePrintPreviewModel printPreview)
             {
                 var dialog = new ColorDialog(printPreview.CategoryColor);
-
+                XamlReader.Parse(@"<TextBox xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
+                            xmlns:x=""http://schemas.microsoft.com/winfx/2006/xaml""
+                            IsReadOnly=""True""/>");
                 if (dialog.ShowDialog() == false)
                     return;
 
