@@ -59,7 +59,11 @@
     <Compile Include="Jira\PivotJiraIssue.cs" />
     <Compile Include="Jira\RawJiraAgileModel.cs" />
     <Compile Include="Jira\RawJiraModel.cs" />
+    <Compile Include="Messages\Dialogs\OpenUpdateAvailableDialogMessage.cs" />
+    <Compile Include="Messages\Dialogs\OpenWorklogMessage.cs" />
     <Compile Include="Messages\IssueUpdatedMessage.cs" />
+    <Compile Include="Messages\PerformApplicationUpdateMessage.cs" />
+    <Compile Include="Messages\ShowDesktopNotificationMessage.cs" />
     <Compile Include="NavigationMessages\OpenRecentUpdatesMessage.cs" />
     <Compile Include="NavigationMessages\ClearNavigationHistoryMessage.cs" />
     <Compile Include="NavigationMessages\OpenAgileBoardMessage.cs" />
@@ -78,13 +82,16 @@
     <Compile Include="NavigationMessages\OpenSprintsVelocityMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ui\AnimationState.cs" />
+    <Compile Include="Messages\Dialogs\OpenTextualPreviewMessage.cs" />
     <Compile Include="Ui\FieldChange.cs" />
+    <Compile Include="Ui\GridColumnInfo.cs" />
     <Compile Include="Ui\INavigationPage.cs" />
     <Compile Include="Ui\IssueUpdateDetails.cs" />
     <Compile Include="Ui\IToolbarItem.cs" />
     <Compile Include="Ui\SettingsPage.cs" />
     <Compile Include="Ui\ToolbarButton.cs" />
     <Compile Include="Ui\ToolbarControl.cs" />
+    <Compile Include="Ui\UpdateMethod.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

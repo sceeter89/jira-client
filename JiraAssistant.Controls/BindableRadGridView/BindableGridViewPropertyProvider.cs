@@ -4,7 +4,7 @@ using Telerik.Windows.Controls;
 using Telerik.Windows.Controls.GridView;
 using Telerik.Windows.Persistence.Services;
 
-namespace JiraAssistant.Logic.Extensions
+namespace JiraAssistant.Controls.BindableRadGridView
 {
    public class BindableGridViewPropertyProvider : ICustomPropertyProvider
    {

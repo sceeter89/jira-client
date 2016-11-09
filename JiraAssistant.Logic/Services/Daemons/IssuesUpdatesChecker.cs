@@ -9,7 +9,6 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Telerik.Windows.Controls;
 using JiraAssistant.Logic.ContextlessViewModels;
 using System.Collections.Generic;
 using System.Text;
@@ -26,7 +25,6 @@ namespace JiraAssistant.Logic.Services.Daemons
         private readonly IJiraApi _jiraApi;
         private readonly ReportsSettings _reportsSettings;
         private readonly DispatcherTimer _timer;
-        private readonly ImageSourceConverter _imageSourceConverter = new ImageSourceConverter();
         private readonly JiraSessionViewModel _jiraSession;
         private bool _isStationLocked = false;
         private readonly IMessenger _messenger;
@@ -71,7 +69,7 @@ namespace JiraAssistant.Logic.Services.Daemons
 
         private async void ScanForUpdates()
         {
-            var alertManager = new RadDesktopAlertManager();
+            
 
             var changesSince = GreatestDateTime((DateTime.Now - TimeSpan.FromHours(24)), _reportsSettings.LastUpdatesScan);
             var projectKeys = _reportsSettings.SelectedProjectsList.Split(',').Select(p => p.Trim());
@@ -84,26 +82,20 @@ namespace JiraAssistant.Logic.Services.Daemons
                 var updatedIssues = await _jiraApi.SearchForIssues(query);
                 foreach (var issue in updatedIssues.Where(i => i.BuiltInFields.Updated >= _reportsSettings.LastUpdatesScan))
                 {
-                    var openIssueCommand = new RelayCommand(() =>
-                    {
-                        var i = issue;
-                        Process.Start(string.Format("{0}/browse/{1}", _jiraApi.Server.ServerUri, i.Key));
-                    });
-
                     if (issue.Created >= changesSince && _reportsSettings.ShowCreatedIssues)
                     {
                         if (_reportsSettings.SkipOwnChanges && issue.BuiltInFields.Reporter.Name == _jiraSession.Profile.Name)
                             continue;
 
-                        alertManager.ShowAlert(new RadDesktopAlert
-                        {
-                            Header = string.Format("New issue: {0}", issue.Key),
-                            Content = issue.Summary,
-                            ShowDuration = 5000,
-                            Icon = new Image { Source = GetImageFromResources("/Assets/Avatars/PlusSign.png"), Width = 48, Height = 48 },
-                            IconColumnWidth = 48,
-                            Command = openIssueCommand
-                        });
+                        _messenger.Send(new ShowDesktopNotificationMessage(
+                            title: string.Format("New issue: {0}", issue.Key),
+                            description: issue.Summary,
+                            clickCallback: () =>
+                            {
+                                var i = issue;
+                                Process.Start(string.Format("{0}/browse/{1}", _jiraApi.Server.ServerUri, i.Key));
+                            },
+                            iconResource: "/Assets/Avatars/PlusSign.png"));
                     }
                     else if (issue.Created < changesSince && _reportsSettings.ShowUpdatedIssues)
                     {
@@ -153,16 +145,15 @@ namespace JiraAssistant.Logic.Services.Daemons
                             var newValue = changeSummary.Value ?? "(None)";
                             changeSummaryBuilder.AppendFormat("{0}: {1}\n", changeSummary.Key, newValue);
                         }
-
-                        alertManager.ShowAlert(new RadDesktopAlert
-                        {
-                            Header = string.Format("[{0}] {1}", issue.Key, issue.Summary),
-                            Content = changeSummaryBuilder.ToString(),
-                            ShowDuration = 5000,
-                            Icon = new Image { Source = GetImageFromResources("/Assets/Avatars/EditSign.png"), Width = 48, Height = 48 },
-                            IconColumnWidth = 48,
-                            Command = openIssueCommand
-                        });
+                        _messenger.Send(new ShowDesktopNotificationMessage(
+                            title: string.Format("[{0}] {1}", issue.Key, issue.Summary),
+                            description: changeSummaryBuilder.ToString(),
+                            clickCallback: () =>
+                            {
+                                var i = issue;
+                                Process.Start(string.Format("{0}/browse/{1}", _jiraApi.Server.ServerUri, i.Key));
+                            },
+                            iconResource: "/Assets/Avatars/EditSign.png"));
                     }
                 }
                 _reportsSettings.LastUpdatesScan = DateTime.Now;
@@ -170,19 +161,12 @@ namespace JiraAssistant.Logic.Services.Daemons
             catch (SearchFailedException e)
             {
                 _logger.Log(LogLevel.Warn, "Failed to retrieve updated issues.", e);
-                alertManager.ShowAlert(new RadDesktopAlert
-                {
-                    Header = "Invalid configuration",
-                    Content = "Please verify that you provided correct list of project keys",
-                    ShowDuration = 2000
-                });
+                _messenger.Send(new ShowDesktopNotificationMessage(
+                            title: "Invalid configuration",
+                            description: "Posible causes: incorrect list of project keys, credentials expired, connectivity issues.",
+                            clickCallback: null,
+                            iconResource: null));
             }
-        }
-
-        protected ImageSource GetImageFromResources(string path)
-        {
-            var uri = string.Format("pack://application:,,,/JiraAssistant;component/{0}", path.TrimStart('/'));
-            return _imageSourceConverter.ConvertFromString(uri) as ImageSource;
         }
     }
 }

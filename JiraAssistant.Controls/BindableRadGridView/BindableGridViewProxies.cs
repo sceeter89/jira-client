@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Telerik.Windows.Data;
 
-namespace JiraAssistant.Logic.Extensions
+namespace JiraAssistant.Controls.BindableRadGridView
 {
 #pragma warning disable JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
    public class SortDescriptorProxy

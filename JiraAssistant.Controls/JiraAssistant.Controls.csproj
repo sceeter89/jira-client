@@ -51,6 +51,10 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.10\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -65,10 +69,18 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Telerik.Pivot.Core, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Pivot.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Windows.Controls, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Controls.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Controls.GridView.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Input, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -80,10 +92,18 @@
       <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Controls.Navigation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.Pivot, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Controls.Pivot.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Windows.Data, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Data.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.PersistenceFramework, Version=2016.3.1024.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.PersistenceFramework.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -93,11 +113,15 @@
     <Compile Include="..\JiraAssistant\Properties\AssemblyVersion.cs">
       <Link>Properties\AssemblyVersion.cs</Link>
     </Compile>
+    <Compile Include="BindableRadGridView\BindableGridViewPropertyProvider.cs" />
+    <Compile Include="BindableRadGridView\BindableGridViewProxies.cs" />
+    <Compile Include="BindableRadGridView\BindableRadGridView.cs" />
     <Compile Include="BurnDownChartStatusBar.xaml.cs">
       <DependentUpon>BurnDownChartStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToIconConverter.cs" />
     <Compile Include="Converters\BoolToVisibleConverter.cs" />
+    <Compile Include="Converters\GridViewColumns.cs" />
     <Compile Include="Converters\RawJiraGroupsToTextConverter.cs" />
     <Compile Include="Converters\RawJiraApplicationRolesToTextConverter.cs" />
     <Compile Include="Converters\SecondsToHoursConverter.cs" />
@@ -162,6 +186,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -235,6 +260,10 @@
     <ProjectReference Include="..\JiraAssistant.Domain\JiraAssistant.Domain.csproj">
       <Project>{a89b4325-3813-430e-a3da-853c4c8f8690}</Project>
       <Name>JiraAssistant.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiraAssistant.Logic\JiraAssistant.Logic.csproj">
+      <Project>{D730A576-2171-4886-9ED4-B08B25A2BB85}</Project>
+      <Name>JiraAssistant.Logic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

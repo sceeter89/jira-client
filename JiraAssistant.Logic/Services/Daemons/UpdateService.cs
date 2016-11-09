@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using JiraAssistant.Controls.Dialogs;
 using RestSharp.Extensions;
 using Microsoft.Win32;
 using System.IO;
@@ -17,6 +16,10 @@ using JiraAssistant.Logic.ContextlessViewModels;
 using System.Reflection;
 using System.Windows.Threading;
 using JiraAssistant.Logic.Extensions;
+using JiraAssistant.Domain.Ui;
+using GalaSoft.MvvmLight.Messaging;
+using JiraAssistant.Domain.Messages.Dialogs;
+using JiraAssistant.Domain.Messages;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -31,19 +34,36 @@ namespace JiraAssistant.Logic.Services.Daemons
         private readonly MainViewModel _mainViewModel;
         private bool _inProgress;
         private readonly DispatcherTimer _timer;
+        private readonly IMessenger _messenger;
 
-        public UpdateService(GeneralSettings settings, MainViewModel mainViewModel)
+        public UpdateService(GeneralSettings settings, MainViewModel mainViewModel, IMessenger messenger)
         {
             _settings = settings;
+            _messenger = messenger;
+            _mainViewModel = mainViewModel;
+
+            _messenger.Register<PerformApplicationUpdateMessage>(this, PerformApplicationUpdate);
 
             Application.Current.Exit += OnApplicationExit;
-            _mainViewModel = mainViewModel;
+
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromMinutes(20);
             _timer.Tick += (sender, args) => CheckForUpdates();
             _timer.Start();
 
             CheckForUpdates();
+        }
+
+        private void PerformApplicationUpdate(PerformApplicationUpdateMessage message)
+        {
+            _runInstaller = true;
+            if (message.Method == UpdateMethod.ExitAndInstall)
+            {                
+                _showInstallerUi = true;
+                Application.Current.Shutdown();
+                return;
+            }
+            _mainViewModel.UserMessage = string.Format("New version will be installed once you close application.");
         }
 
         private async Task DownloadToFile(string url, string destinationPath)
@@ -70,6 +90,9 @@ namespace JiraAssistant.Logic.Services.Daemons
 
                 var response = await client.ExecuteGetTaskAsync(request);
                 var releases = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<GithubApplicationRelease>>(response.Content));
+                if (releases == null)
+                    return;
+
                 var higherVersions = releases.Where(r => r.Draft == false
                                                       && (_settings.OnlyStableVersions == false || r.Prerelease != _settings.OnlyStableVersions)
                                                       && Version.Parse(r.TagName) > currentVersion)
@@ -81,8 +104,7 @@ namespace JiraAssistant.Logic.Services.Daemons
                 _timer.Stop();
 
                 var higherVersion = higherVersions.First();
-
-                var closeApplicationAfterDownload = false;
+                
                 var installer = higherVersion.Assets.First(a => a.Name.EndsWith(".msi"));
 
                 _installerPath = Path.Combine(Path.GetTempPath(), installer.Name);
@@ -92,33 +114,13 @@ namespace JiraAssistant.Logic.Services.Daemons
 
                 if (_settings.InformAboutUpdate || higherVersion.Prerelease)
                 {
-                    var dialog = new UpdateInstallPrompt(currentVersion, Version.Parse(higherVersion.TagName), higherVersion.Prerelease == false);
-
-                    var result = dialog.Prompt();
-
-                    if (result == UpdatePromptResult.None)
-                        return;
-
-                    if (result == UpdatePromptResult.InstallManually)
-                    {
-                        var saveDialog = new SaveFileDialog { FileName = installer.Name };
-                        if (saveDialog.ShowDialog() == true)
-                            File.Copy(_installerPath, saveDialog.FileName);
-                        return;
-                    }
-                    if (result == UpdatePromptResult.ExitAndInstall)
-                        closeApplicationAfterDownload = true;
+                    _messenger.Send(new OpenUpdateAvailableDialogMessage(
+                        currentVersion,
+                        Version.Parse(higherVersion.TagName),
+                        higherVersion.Prerelease == false,
+                        _installerPath
+                        ));
                 }
-
-                _runInstaller = true;
-                if (closeApplicationAfterDownload)
-                {
-                    _showInstallerUi = true;
-                    Application.Current.Shutdown();
-                    return;
-                }
-
-                _mainViewModel.UserMessage = string.Format("New version ({0}) will be installed once you close application.", higherVersion.TagName);
             }
             catch (Exception e)
             {
@@ -130,7 +132,6 @@ namespace JiraAssistant.Logic.Services.Daemons
                 _inProgress = false;
             }
         }
-
         private void OnApplicationExit(object sender, ExitEventArgs e)
         {
             if (_runInstaller == false)

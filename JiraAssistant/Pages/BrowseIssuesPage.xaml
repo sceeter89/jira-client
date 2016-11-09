@@ -4,15 +4,19 @@
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:local="clr-namespace:JiraAssistant.Pages"
-                          xmlns:ext="clr-namespace:JiraAssistant.Logic.Extensions;assembly=JiraAssistant.Logic"
+                          xmlns:ext="clr-namespace:JiraAssistant.Controls.BindableRadGridView;assembly=JiraAssistant.Controls"
+                          xmlns:converters="clr-namespace:JiraAssistant.Controls.Converters;assembly=JiraAssistant.Controls"
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="700"
                           d:DataContext="{d:DesignInstance Type={x:Type local:BrowseIssuesPage}}"
                           Background="White">
    <Grid>
-      <ext:BindableRadGridView ItemsSource="{Binding Issues}" AutoGenerateColumns="False" SelectionMode="Single"
+        <Grid.Resources>
+            <converters:GridViewColumns x:Key="MakeColumns" />
+        </Grid.Resources>
+      <ext:BindableRadGridView Issues="{Binding Issues}" AutoGenerateColumns="False" SelectionMode="Single"
                                SelectedItem="{Binding SelectedIssue, Mode=OneWayToSource}" MouseDoubleClick="ItemDoubleClick"
-                               ColumnsCollection="{Binding Source={StaticResource Locator}, Path=IssuesSettings.SelectedColumns}"
+                               ColumnsCollection="{Binding Source={StaticResource Locator}, Path=IssuesSettings.SelectedColumns, Converter={StaticResource MakeColumns}}"
                                x:Name="grid"/>
    </Grid>
 </local:BaseNavigationPage>

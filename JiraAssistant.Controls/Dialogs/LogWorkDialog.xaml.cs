@@ -1,4 +1,5 @@
 ﻿using JiraAssistant.Domain.Jira;
+using JiraAssistant.Logic.Services.Jira;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,12 @@ namespace JiraAssistant.Controls.Dialogs
 {
     public partial class LogWorkDialog
     {
-        public LogWorkDialog(IEnumerable<JiraIssue> issues)
+        private readonly IJiraApi _jiraApi;
+
+        public LogWorkDialog(IEnumerable<JiraIssue> issues, IJiraApi jiraApi)
         {
             InitializeComponent();
+            _jiraApi = jiraApi;
 
             Entries = issues.Select(i => new WorkLogEntry
             {
@@ -23,12 +27,16 @@ namespace JiraAssistant.Controls.Dialogs
 
         public IList<WorkLogEntry> Entries { get; private set; }
 
-        private void AcceptClicked(object sender, System.Windows.RoutedEventArgs e)
+        private async void AcceptClicked(object sender, System.Windows.RoutedEventArgs args)
         {
+            foreach (var entry in Entries.Where(e => e.Hours > 0))
+            {
+                await _jiraApi.Worklog.Log(entry.Issue, entry.Hours);
+            }
             DialogResult = true;
         }
 
-        private void CancelClicked(object sender, System.Windows.RoutedEventArgs e)
+        private void CancelClicked(object sender, System.Windows.RoutedEventArgs args)
         {
             DialogResult = false;
         }

@@ -8,6 +8,9 @@ using JiraAssistant.Logic.ViewModels;
 using JiraAssistant.Domain.Ui;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Logic.Services;
+using JiraAssistant.Controls.Dialogs;
+using JiraAssistant.Domain.Messages.Dialogs;
+using JiraAssistant.Logic.Services.Jira;
 
 namespace JiraAssistant
 {
@@ -41,6 +44,27 @@ namespace JiraAssistant
             messenger.Register<OpenAgileBoardPickupMessage>(this, OpenAgileBoardPickup);
             messenger.Register<ClearNavigationHistoryMessage>(this, ClearNavigationStack);
             messenger.Register<OpenRecentUpdatesMessage>(this, OpenRecentUpdates);
+            messenger.Register<OpenTextualPreviewMessage>(this, OpenTextualPreview);
+            messenger.Register<OpenWorklogMessage>(this, OpenWorklog);
+            messenger.Register<OpenUpdateAvailableDialogMessage>(this, OpenUpdateAvailable);
+        }
+
+        private void OpenUpdateAvailable(OpenUpdateAvailableDialogMessage message)
+        {
+            var dialog = new UpdateInstallPrompt(message.CurrentVersion, message.AvailableVersion, message.IsStable, message.InstallerPath, _resolver.Resolve<IMessenger>());
+            dialog.ShowDialog();
+        }
+
+        private void OpenWorklog(OpenWorklogMessage message)
+        {
+            var dialog = new LogWorkDialog(message.Issues, _resolver.Resolve<IJiraApi>());
+            dialog.ShowDialog();
+        }
+
+        private void OpenTextualPreview(OpenTextualPreviewMessage message)
+        {
+            var dialog = new TextualPreview(message.Content);
+            dialog.ShowDialog();
         }
 
         private void OpenRecentUpdates(OpenRecentUpdatesMessage message)
@@ -135,8 +159,7 @@ namespace JiraAssistant
 
         private void OpenScrumCards(OpenScrumCardsMessage message)
         {
-            var viewModel = _resolver.Resolve<ScrumCardsViewModel>(new NamedParameter("issues", message.Issues));
-            var page = new ScrumCardsPrintPreview(viewModel);
+            var page = _resolver.Resolve<ScrumCardsPrintPreview>(new NamedParameter("issues", message.Issues));
 
             _navigator.NavigateTo(page);
         }

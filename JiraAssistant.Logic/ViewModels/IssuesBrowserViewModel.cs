@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using JiraAssistant.Controls.Dialogs;
 using JiraAssistant.Domain.Jira;
+using JiraAssistant.Domain.Messages.Dialogs;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Extensions;
 using NLog;
@@ -13,37 +13,28 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
-using Telerik.Windows.Controls;
-using Telerik.Windows.Data;
-using Telerik.Windows.Persistence;
-using Telerik.Windows.Persistence.Services;
 
 namespace JiraAssistant.Logic.ViewModels
 {
-    public class IssuesBrowserViewModel : GalaSoft.MvvmLight.ViewModelBase
+    public class IssuesBrowserViewModel : ViewModelBase
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly string _settingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                                                             "Yakuza", "Jira Assistant", "GridFilters");
         private readonly IMessenger _messenger;
 
         public RelayCommand SaveFiltersCommand { get; private set; }
-        public BindableRadGridView Grid { get; set; }
+        public IGridView Grid { get; set; }
         public RelayCommand LoadFiltersCommand { get; private set; }
         public RelayCommand ExportToConfluenceCommand { get; private set; }
         public RelayCommand PlainTextExportCommand { get; private set; }
         public RelayCommand OpenScrumCardsCommand { get; private set; }
-
-        public QueryableCollectionView Issues { get; private set; }
+        
         public JiraIssue SelectedIssue { get; set; }
+        public IList<JiraIssue> Issues { get; private set; }
 
         public IssuesBrowserViewModel(IList<JiraIssue> issues, IMessenger messenger)
         {
-            Issues = new QueryableCollectionView(issues);
+            Issues = issues;
             _messenger = messenger;
-
-            ServiceProvider.RegisterPersistenceProvider<ICustomPropertyProvider>(typeof(BindableRadGridView), new BindableGridViewPropertyProvider());
-
+            
             SaveFiltersCommand = new RelayCommand(SaveGridState);
             LoadFiltersCommand = new RelayCommand(LoadGridState);
             ExportToConfluenceCommand = new RelayCommand(ExportAsConfluenceMarkupResults);
@@ -53,37 +44,7 @@ namespace JiraAssistant.Logic.ViewModels
 
         private void SaveGridState()
         {
-            try
-            {
-                var dialog = new FilterNameDialog();
-                if (dialog.ShowDialog() == false)
-                    return;
-
-                var name = Regex.Replace(dialog.FilterName, @"[^\w\s]", "_");
-
-                if (File.Exists(Path.Combine(_settingsPath, name)))
-                {
-                    var result = MessageBox.Show("Do you want to overwrite existing filter?", "Jira Assistant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                    if (result == MessageBoxResult.No)
-                        return;
-                }
-
-                var manager = new PersistenceManager();
-                manager.AllowCrossVersion = true;
-                var savedState = manager.Save(Grid);
-                using (var reader = new StreamReader(savedState))
-                using (var writer = new StreamWriter(Path.Combine(_settingsPath, name)))
-                {
-                    writer.Write(reader.ReadToEnd());
-                }
-            }
-            catch(Exception e)
-            {
-                Sentry.CaptureException(e);
-                MessageBox.Show("Failed to save filter!", "Jira Assistant", MessageBoxButton.OK, MessageBoxImage.Error);
-                _logger.Error(e, "Error while saving Issue Browser filter!");
-            }
+            Grid.SaveGridStateTo();
         }
 
         public void PreviewSelectedIssue()
@@ -94,34 +55,13 @@ namespace JiraAssistant.Logic.ViewModels
 
         private void LoadGridState()
         {
-            string filterPath = null;
-            try
-            {
-                var filters = Directory.EnumerateFiles(_settingsPath).Select(p => Path.GetFileName(p)).ToArray();
-                var dialog = new SelectFilterDialog(filters);
-                if (dialog.ShowDialog() == false)
-                    return;
-
-                var manager = new PersistenceManager();
-                manager.AllowCrossVersion = true;
-                filterPath = Path.Combine(_settingsPath, dialog.FilterName);
-                using (var stream = File.OpenRead(filterPath))
-                {
-                    manager.Load(Grid as RadGridView, stream);
-                }
-            }
-            catch(Exception e)
-            {
-                Sentry.CaptureException(e);
-                MessageBox.Show("Failed to load filter!", "Jira Assistant", MessageBoxButton.OK, MessageBoxImage.Error);
-                _logger.Error(e, "Error while loading Issue Browser filter from: " + filterPath);
-            }
+            Grid.LoadGridStateFrom();
         }
 
         private void ExportAsConfluenceMarkupResults()
         {
             var resultBuilder = new StringBuilder();
-            var grouped = Issues.OfType<JiraIssue>().GroupBy(i => i.EpicName);
+            var grouped = Grid.GetFilteredIssues().GroupBy(i => i.EpicName);
 
             foreach (var group in grouped)
             {
@@ -136,8 +76,7 @@ namespace JiraAssistant.Logic.ViewModels
                     resultBuilder.AppendLine(string.Format("* *{0}* - {1}", issue.Key, EscapeConfluenceMarkupCharacters(issue.Summary)));
             }
 
-            var dialog = new TextualPreview(resultBuilder.ToString());
-            dialog.ShowDialog();
+            _messenger.Send(new OpenTextualPreviewMessage(resultBuilder.ToString()));
         }
 
         private string EscapeConfluenceMarkupCharacters(string summary)
@@ -148,7 +87,7 @@ namespace JiraAssistant.Logic.ViewModels
         private void ExportAsTextResults()
         {
             var resultBuilder = new StringBuilder();
-            var grouped = Issues.OfType<JiraIssue>().GroupBy(i => i.EpicName);
+            var grouped = Grid.GetFilteredIssues().GroupBy(i => i.EpicName);
 
             foreach (var group in grouped)
             {
@@ -161,13 +100,12 @@ namespace JiraAssistant.Logic.ViewModels
                     resultBuilder.AppendLine(string.Format("* {0} - {1}", issue.Key, issue.Summary));
             }
 
-            var dialog = new TextualPreview(resultBuilder.ToString());
-            dialog.ShowDialog();
+            _messenger.Send(new OpenTextualPreviewMessage(resultBuilder.ToString()));
         }
 
         private void OpenScrumCards()
         {
-            _messenger.Send(new OpenScrumCardsMessage(Issues.OfType<JiraIssue>().ToList()));
+            _messenger.Send(new OpenScrumCardsMessage(Grid.GetFilteredIssues().ToList()));
         }
     }
 }

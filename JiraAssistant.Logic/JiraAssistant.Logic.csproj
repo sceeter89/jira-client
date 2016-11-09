@@ -85,41 +85,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.Pivot.Core, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Pivot.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Controls.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.GridView, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Controls.GridView.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Input, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Controls.Input.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Controls.Navigation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.Data, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Telerik.Windows.PersistenceFramework, Version=2016.3.914.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\RCWPF\2016.3.914.45\Telerik.Windows.PersistenceFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +92,7 @@
       <Link>Properties\AssemblyVersion.cs</Link>
     </Compile>
     <Compile Include="ContextlessViewModels\RecentUpdatesViewModel.cs" />
-    <Compile Include="Extensions\BindableGridViewPropertyProvider.cs" />
-    <Compile Include="Extensions\BindableGridViewProxies.cs" />
-    <Compile Include="Extensions\BindableRadGridView.cs" />
+    <Compile Include="Extensions\IGridView.cs" />
     <Compile Include="Extensions\Sentry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AgileBoardDataCache.cs" />
@@ -172,7 +135,6 @@
     <Compile Include="ContextlessViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PickUpSprintViewModel.cs" />
     <Compile Include="ViewModels\PivotAnalysisViewModel.cs" />
-    <Compile Include="ViewModels\ScrumCardsViewModel.cs" />
     <Compile Include="ViewModels\SprintDetailsViewModel.cs" />
     <Compile Include="ViewModels\SprintsVelocityViewModel.cs" />
   </ItemGroup>
@@ -181,10 +143,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JiraAssistant.Controls\JiraAssistant.Controls.csproj">
-      <Project>{0ff6d466-c5aa-4495-a5a0-36a2b1a42b88}</Project>
-      <Name>JiraAssistant.Controls</Name>
-    </ProjectReference>
     <ProjectReference Include="..\JiraAssistant.Domain\JiraAssistant.Domain.csproj">
       <Project>{A89B4325-3813-430E-A3DA-853C4C8F8690}</Project>
       <Name>JiraAssistant.Domain</Name>

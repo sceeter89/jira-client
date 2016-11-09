@@ -1,11 +1,9 @@
 ﻿using JiraAssistant.Domain.Jira;
-using JiraAssistant.Controls.Converters;
+using JiraAssistant.Domain.Ui;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Data;
 using System.Windows.Media;
-using Telerik.Windows.Controls;
 
 namespace JiraAssistant.Logic.Settings
 {
@@ -29,13 +27,13 @@ namespace JiraAssistant.Logic.Settings
             set { SetValue(value, "0,1,2,3,4,6,7,8,10,12,13"); }
         }
 
-        public ObservableCollection<GridViewDataColumn> SelectedColumns
+        public ObservableCollection<GridColumnInfo> SelectedColumns
         {
             get
             {
                 if (_selectedColumns == null)
                 {
-                    _selectedColumns = new ObservableCollection<GridViewDataColumn>(SelectedColumnsList.Split(',').Select(i => _allColumns[int.Parse(i)]));
+                    _selectedColumns = new ObservableCollection<GridColumnInfo>(SelectedColumnsList.Split(',').Select(i => _allColumns[int.Parse(i)]));
                     _selectedColumns.CollectionChanged += (sender, args) =>
                     {
                         SelectedColumnsList = string.Join(",", SelectedColumns.Select(c => Array.IndexOf(_allColumns, c)));
@@ -46,13 +44,13 @@ namespace JiraAssistant.Logic.Settings
             }
         }
 
-        public ObservableCollection<GridViewDataColumn> AvailableColumns
+        public ObservableCollection<GridColumnInfo> AvailableColumns
         {
             get
             {
                 if (_availableColumns == null)
                 {
-                    _availableColumns = new ObservableCollection<GridViewDataColumn>(
+                    _availableColumns = new ObservableCollection<GridColumnInfo>(
                        Enumerable.Range(0, _allColumns.Length)
                           .Except(SelectedColumnsList.Split(',').Select(i => int.Parse(i)))
                           .Select(i => _allColumns[i])
@@ -96,27 +94,27 @@ namespace JiraAssistant.Logic.Settings
 
         public JiraIssuePrintPreviewModel Sample { get; private set; }
 
-        private readonly GridViewDataColumn[] _allColumns = {
-         /* 00 */new GridViewDataColumn { Header = "Key", DataMemberBinding = new Binding("Key"), IsReadOnly = true },
-         /* 01 */new GridViewDataColumn { Header = "Summary", DataMemberBinding = new Binding("Summary"), IsReadOnly = true },
-         /* 02 */new GridViewDataColumn { Header = "Reporter", DataMemberBinding = new Binding("Reporter"), IsReadOnly = true },
-         /* 03 */new GridViewDataColumn { Header = "Priority", DataMemberBinding = new Binding("Priority"), IsReadOnly = true },
-         /* 04 */new GridViewDataColumn { Header = "Status", DataMemberBinding = new Binding("Status"), IsReadOnly = true },
-         /* 05 */new GridViewDataColumn { Header = "Created", DataMemberBinding = new Binding("Created"), IsReadOnly = true },
-         /* 06 */new GridViewDataColumn { Header = "Story points", DataMemberBinding = new Binding("StoryPoints"), IsReadOnly = true },
-         /* 07 */new GridViewDataColumn { Header = "Type", DataMemberBinding = new Binding("BuiltInFields.IssueType.Name"), IsReadOnly = true },
-         /* 08 */new GridViewDataColumn { Header = "Resolution", DataMemberBinding = new Binding("BuiltInFields.Resolution.Name"), IsReadOnly = true },
-         /* 09 */new GridViewDataColumn { Header = "Assignee", DataMemberBinding = new Binding("Assignee"), IsReadOnly = true },
-         /* 10 */new GridViewDataColumn { Header = "Resolved", DataMemberBinding = new Binding("Resolved"), IsReadOnly = true },
-         /* 11 */new GridViewDataColumn { Header = "Updated", DataMemberBinding = new Binding("BuiltInFields.Updated"), IsReadOnly = true },
-         /* 12 */new GridViewDataColumn { Header = "Epic link", DataMemberBinding = new Binding("EpicLink"), IsReadOnly = true },
-         /* 13 */new GridViewDataColumn { Header = "Time spent [h]", DataMemberBinding = new Binding("BuiltInFields.TimeSpent") { Converter = new SecondsToHoursConverter() }, IsReadOnly = true },
-         /* 14 */new GridViewDataColumn { Header = "Time spent (with subtasks) [h]", DataMemberBinding = new Binding("BuiltInFields.AggregateTimeSpent"){ Converter = new SecondsToHoursConverter() }, IsReadOnly = true },
-         /* 15 */new GridViewDataColumn { Header = "Labels", DataMemberBinding = new Binding("Labels"), IsReadOnly = true },
-         /* 16 */new GridViewDataColumn { Header = "Epic name", DataMemberBinding = new Binding("EpicName"), IsReadOnly = true },
+        private readonly GridColumnInfo[] _allColumns = {
+         /* 00 */new GridColumnInfo { Header = "Key", PropertyName ="Key" },
+         /* 01 */new GridColumnInfo { Header = "Summary", PropertyName ="Summary" },
+         /* 02 */new GridColumnInfo { Header = "Reporter", PropertyName = "Reporter" },
+         /* 03 */new GridColumnInfo { Header = "Priority", PropertyName = "Priority" },
+         /* 04 */new GridColumnInfo { Header = "Status", PropertyName = "Status" },
+         /* 05 */new GridColumnInfo { Header = "Created", PropertyName = "Created" },
+         /* 06 */new GridColumnInfo { Header = "Story points", PropertyName = "StoryPoints" },
+         /* 07 */new GridColumnInfo { Header = "Type", PropertyName = "BuiltInFields.IssueType.Name" },
+         /* 08 */new GridColumnInfo { Header = "Resolution", PropertyName = "BuiltInFields.Resolution.Name" },
+         /* 09 */new GridColumnInfo { Header = "Assignee", PropertyName = "Assignee" },
+         /* 10 */new GridColumnInfo { Header = "Resolved", PropertyName = "Resolved" },
+         /* 11 */new GridColumnInfo { Header = "Updated", PropertyName = "BuiltInFields.Updated" },
+         /* 12 */new GridColumnInfo { Header = "Epic link", PropertyName = "EpicLink" },
+         /* 13 */new GridColumnInfo { Header = "Time spent [h]", PropertyName = "BuiltInFields.TimeSpent", ApplySecondsToHoursConverter = true },
+         /* 14 */new GridColumnInfo { Header = "Time spent (with subtasks) [h]", PropertyName = "BuiltInFields.AggregateTimeSpent", ApplySecondsToHoursConverter = true },
+         /* 15 */new GridColumnInfo { Header = "Labels", PropertyName = "Labels" },
+         /* 16 */new GridColumnInfo { Header = "Epic name", PropertyName ="EpicName" },
       };
 
-        private ObservableCollection<GridViewDataColumn> _selectedColumns;
-        private ObservableCollection<GridViewDataColumn> _availableColumns;
+        private ObservableCollection<GridColumnInfo> _selectedColumns;
+        private ObservableCollection<GridColumnInfo> _availableColumns;
     }
 }

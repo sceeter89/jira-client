@@ -6,20 +6,24 @@
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                           xmlns:local="clr-namespace:JiraAssistant.Pages"
+                          xmlns:ds="clr-namespace:Telerik.Pivot.Core;assembly=Telerik.Pivot.Core"
                           mc:Ignorable="d" 
                           d:DesignHeight="300" d:DesignWidth="700">
-   <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
-      <telerik:RadBusyIndicator.BusyContent>
-         <TextBlock Text="Aggregating data..." />
-      </telerik:RadBusyIndicator.BusyContent>
-      <Grid>
-         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-         </Grid.ColumnDefinitions>
-         <pivot:RadPivotGrid DataProvider="{Binding DataSource}"/>
+    <local:BaseNavigationPage.Resources>
+        <ds:LocalDataSourceProvider x:Key="DataSource" ItemsSource="{Binding Items}" />
+    </local:BaseNavigationPage.Resources>
+    <telerik:RadBusyIndicator IsBusy="{Binding IsBusy}">
+        <telerik:RadBusyIndicator.BusyContent>
+            <TextBlock Text="Aggregating data..." />
+        </telerik:RadBusyIndicator.BusyContent>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <pivot:RadPivotGrid DataProvider="{StaticResource DataSource}"/>
 
-         <pivot:RadPivotFieldList DataProvider="{Binding DataSource}" Grid.Column="1"/>
-      </Grid>
-   </telerik:RadBusyIndicator>
+            <pivot:RadPivotFieldList DataProvider="{StaticResource DataSource}" Grid.Column="1"/>
+        </Grid>
+    </telerik:RadBusyIndicator>
 </local:BaseNavigationPage>
