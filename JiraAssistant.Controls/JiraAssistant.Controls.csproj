@@ -148,6 +148,7 @@
     </Compile>
     <Compile Include="Converters\BoolToIconConverter.cs" />
     <Compile Include="Converters\BoolToVisibleConverter.cs" />
+    <Compile Include="Converters\ColorInfoToColor.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\GridViewColumns.cs" />
     <Compile Include="Converters\RawJiraGroupsToTextConverter.cs" />
@@ -210,6 +211,8 @@
     <Compile Include="SprintsVelocityLegend.xaml.cs">
       <DependentUpon>SprintsVelocityLegend.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ToolbarButton.cs" />
+    <Compile Include="ToolbarControl.cs" />
     <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

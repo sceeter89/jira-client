@@ -1,7 +1,8 @@
-﻿using System.Windows.Input;
+﻿using JiraAssistant.Domain.Ui;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace JiraAssistant.Domain.Ui
+namespace JiraAssistant.Controls
 {
    public class ToolbarButton : IToolbarItem
    {

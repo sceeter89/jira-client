@@ -4,7 +4,7 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
-        xmlns:model="clr-namespace:JiraAssistant.Domain.Ui;assembly=JiraAssistant.Domain"
+        xmlns:model="clr-namespace:JiraAssistant.Controls;assembly=JiraAssistant.Controls"
         xmlns:converters="clr-namespace:JiraAssistant.Controls.Converters;assembly=JiraAssistant.Controls"
         xmlns:tb="http://www.hardcodet.net/taskbar" 
         Title="{Binding ApplicationTitle}" Height="700" Width="800"

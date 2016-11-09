@@ -1,6 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using JiraAssistant.Domain.Ui;
+using System.Windows.Controls;
 
-namespace JiraAssistant.Domain.Ui
+namespace JiraAssistant.Controls
 {
    public class ToolbarControl : IToolbarItem
    {

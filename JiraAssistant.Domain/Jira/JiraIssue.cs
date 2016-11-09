@@ -1,7 +1,7 @@
-﻿using System;
+﻿using JiraAssistant.Domain.Ui;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Media;
 
 namespace JiraAssistant.Domain.Jira
 {
@@ -69,18 +69,18 @@ namespace JiraAssistant.Domain.Jira
 
     public class JiraIssuePrintPreviewModel : INotifyPropertyChanged
     {
-        private Color _categoryColor;
+        private ColorInfo _categoryColor;
 
         public JiraIssuePrintPreviewModel()
         {
-            CategoryColor = Colors.White;
+            CategoryColor = ColorInfo.White;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public int Row { get; set; }
         public int Column { get; set; }
         public JiraIssue Issue { get; set; }
-        public Color CategoryColor
+        public ColorInfo CategoryColor
         {
             get { return _categoryColor; }
             set

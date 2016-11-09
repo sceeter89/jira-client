@@ -64,7 +64,7 @@ namespace JiraAssistant.Logic.Settings
         {
             Sample = new JiraIssuePrintPreviewModel
             {
-                CategoryColor = Colors.LightCoral,
+                CategoryColor = new ColorInfo { R = 240, G = 200, B = 200 },
                 Issue = new JiraIssue
                 {
                     Key = "PRJ-1234",

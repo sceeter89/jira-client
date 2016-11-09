@@ -34,8 +34,6 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,14 +81,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ui\AnimationState.cs" />
     <Compile Include="Messages\Dialogs\OpenTextualPreviewMessage.cs" />
+    <Compile Include="Ui\ColorInfo.cs" />
     <Compile Include="Ui\FieldChange.cs" />
     <Compile Include="Ui\GridColumnInfo.cs" />
     <Compile Include="Ui\INavigationPage.cs" />
     <Compile Include="Ui\IssueUpdateDetails.cs" />
     <Compile Include="Ui\IToolbarItem.cs" />
     <Compile Include="Ui\SettingsPage.cs" />
-    <Compile Include="Ui\ToolbarButton.cs" />
-    <Compile Include="Ui\ToolbarControl.cs" />
     <Compile Include="Ui\UpdateMethod.cs" />
   </ItemGroup>
   <ItemGroup>

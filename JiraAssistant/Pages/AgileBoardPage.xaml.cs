@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
 using JiraAssistant.Logic.ViewModels;
-using JiraAssistant.Domain.Ui;
+using JiraAssistant.Controls;
 
 namespace JiraAssistant.Pages
 {
