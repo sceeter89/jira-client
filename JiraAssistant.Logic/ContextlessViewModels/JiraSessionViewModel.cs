@@ -7,7 +7,7 @@ using JiraAssistant.Logic.Settings;
 using JiraAssistant.Logic.Services.Jira;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Media;
+using System.Drawing;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
@@ -16,7 +16,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
         private readonly AssistantSettings _configuration;
         private bool _isLoggedIn;
         private RawProfileDetails _profile;
-        private ImageSource _profileAvatar;
+        private Bitmap _profileAvatar;
         private readonly IJiraApi _jiraApi;
         private readonly IMessenger _messenger;
 
@@ -81,7 +81,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             }
         }
 
-        public ImageSource ProfileAvatar
+        public Bitmap ProfileAvatar
         {
             get { return _profileAvatar; }
             private set

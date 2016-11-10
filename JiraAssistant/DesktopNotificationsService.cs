@@ -5,6 +5,8 @@ using Telerik.Windows.Controls;
 using System.Windows.Controls;
 using System.Windows.Media;
 using GalaSoft.MvvmLight.Command;
+using System.Windows;
+using GalaSoft.MvvmLight.Threading;
 
 namespace JiraAssistant
 {
@@ -19,21 +21,31 @@ namespace JiraAssistant
             _messenger = messenger;
             _alertManager = new RadDesktopAlertManager();
             _messenger.Register<ShowDesktopNotificationMessage>(this, ShowDesktopNotification);
+            _messenger.Register<ShowAlertMessage>(this, ShowAlert);
+        }
+
+        private void ShowAlert(ShowAlertMessage message)
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            MessageBox.Show(message.Message, "JIRA Assistant", MessageBoxButton.OK, MessageBoxImage.Information));
         }
 
         private void ShowDesktopNotification(ShowDesktopNotificationMessage message)
         {
-            var icon = message.IconResource != null ?
-                new Image { Source = GetImageFromResources(message.IconResource), Width = 48, Height = 48 } :
-                null;
-            _alertManager.ShowAlert(new RadDesktopAlert
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-                Header = message.Title,
-                Content = message.Description,
-                ShowDuration = 5000,
-                Icon = icon,
-                IconColumnWidth = 48,
-                Command = message.ClickCallback != null ? new RelayCommand(message.ClickCallback) : null
+                var icon = message.IconResource != null ?
+                    new Image { Source = GetImageFromResources(message.IconResource), Width = 48, Height = 48 } :
+                    null;
+                _alertManager.ShowAlert(new RadDesktopAlert
+                {
+                    Header = message.Title,
+                    Content = message.Description,
+                    ShowDuration = 5000,
+                    Icon = icon,
+                    IconColumnWidth = 48,
+                    Command = message.ClickCallback != null ? new RelayCommand(message.ClickCallback) : null
+                });
             });
         }
 

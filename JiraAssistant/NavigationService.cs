@@ -11,6 +11,9 @@ using JiraAssistant.Logic.Services;
 using JiraAssistant.Controls.Dialogs;
 using JiraAssistant.Domain.Messages.Dialogs;
 using JiraAssistant.Logic.Services.Jira;
+using GalaSoft.MvvmLight.Threading;
+using JiraAssistant.Domain.Messages;
+using System.Windows;
 
 namespace JiraAssistant
 {
@@ -47,24 +50,42 @@ namespace JiraAssistant
             messenger.Register<OpenTextualPreviewMessage>(this, OpenTextualPreview);
             messenger.Register<OpenWorklogMessage>(this, OpenWorklog);
             messenger.Register<OpenUpdateAvailableDialogMessage>(this, OpenUpdateAvailable);
+            messenger.Register<ShutdownApplicationMessage>(this, ShutdownApplication);
+        }
+
+        private void ShutdownApplication(ShutdownApplicationMessage message)
+        {
+            Application.Current.Shutdown();
         }
 
         private void OpenUpdateAvailable(OpenUpdateAvailableDialogMessage message)
         {
-            var dialog = new UpdateInstallPrompt(message.CurrentVersion, message.AvailableVersion, message.IsStable, message.InstallerPath, _resolver.Resolve<IMessenger>());
-            dialog.ShowDialog();
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                var dialog = new UpdateInstallPrompt(message.CurrentVersion, message.AvailableVersion, message.IsStable, message.InstallerPath, _resolver.Resolve<IMessenger>());
+
+                dialog.ShowDialog();
+            });
         }
 
         private void OpenWorklog(OpenWorklogMessage message)
         {
-            var dialog = new LogWorkDialog(message.Issues, _resolver.Resolve<IJiraApi>());
-            dialog.ShowDialog();
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                var dialog = new LogWorkDialog(message.Issues, _resolver.Resolve<IJiraApi>());
+
+                dialog.ShowDialog();
+            });
         }
 
         private void OpenTextualPreview(OpenTextualPreviewMessage message)
         {
-            var dialog = new TextualPreview(message.Content);
-            dialog.ShowDialog();
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                var dialog = new TextualPreview(message.Content);
+
+                dialog.ShowDialog();
+            });
         }
 
         private void OpenRecentUpdates(OpenRecentUpdatesMessage message)
@@ -77,7 +98,7 @@ namespace JiraAssistant
         private void OpenAgileBoardPickup(OpenAgileBoardPickupMessage message)
         {
             var page = _resolver.Resolve<PickUpAgileBoardPage>();
-                                             
+
             _navigator.NavigateTo(page);
         }
 

@@ -1,13 +1,13 @@
 ﻿using JiraAssistant.Domain.Jira;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace JiraAssistant.Logic.Services.Jira
 {
    public interface IJiraApi
    {
-      Task<ImageSource> DownloadPicture(string imageUri);
+      Task<Bitmap> DownloadPicture(string imageUri);
 
       Task<IList<JiraIssue>> SearchForIssues(string jqlQuery);
 

@@ -6,7 +6,6 @@ using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Settings;
 using JiraAssistant.Logic.Services.Jira;
 using System;
-using System.Windows.Controls;
 using JiraAssistant.Logic.Extensions;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
@@ -35,7 +34,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             Username = configuration.Username;
         }
 
-        public RelayCommand<PasswordBox> LoginCommand { get { return new RelayCommand<PasswordBox>(Login); } }
+        public RelayCommand<string> LoginCommand { get { return new RelayCommand<string>(Login); } }
 
         public string LoginErrorMessage
         {
@@ -87,14 +86,14 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             }
         }
 
-        private async void Login(PasswordBox passwordBox)
+        private async void Login(string password)
         {
             try
             {
                 LoginErrorMessage = string.Empty;
                 BusyMessage = "Trying to log into JIRA...";
                 IsBusy = true;
-                await _jiraApi.Session.AttemptLogin(JiraAddress, Username, passwordBox.Password);
+                await _jiraApi.Session.AttemptLogin(JiraAddress, Username, password);
 
                 _messenger.Send(new OpenAgileBoardPickupMessage());
             }
@@ -113,7 +112,6 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             }
             finally
             {
-                passwordBox.Password = string.Empty;
                 IsBusy = false;
             }
         }

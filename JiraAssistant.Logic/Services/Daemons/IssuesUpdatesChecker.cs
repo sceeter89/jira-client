@@ -1,14 +1,10 @@
-﻿using GalaSoft.MvvmLight.Command;
-using JiraAssistant.Domain.Exceptions;
+﻿using JiraAssistant.Domain.Exceptions;
 using JiraAssistant.Logic.Settings;
 using JiraAssistant.Logic.Services.Jira;
 using NLog;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Threading;
 using JiraAssistant.Logic.ContextlessViewModels;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +12,8 @@ using Microsoft.Win32;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.Messages;
 using JiraAssistant.Domain.Jira;
+using System.Timers;
+using GalaSoft.MvvmLight.Threading;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -24,7 +22,7 @@ namespace JiraAssistant.Logic.Services.Daemons
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IJiraApi _jiraApi;
         private readonly ReportsSettings _reportsSettings;
-        private readonly DispatcherTimer _timer;
+        private readonly Timer _timer;
         private readonly JiraSessionViewModel _jiraSession;
         private bool _isStationLocked = false;
         private readonly IMessenger _messenger;
@@ -41,9 +39,9 @@ namespace JiraAssistant.Logic.Services.Daemons
                 _isStationLocked = args.Reason == SessionSwitchReason.SessionLock;
             };
 
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(30);
-            _timer.Tick += TimerTick;
+            _timer = new Timer();
+            _timer.Interval = TimeSpan.FromSeconds(30).TotalMilliseconds;
+            _timer.Elapsed += TimerTick;
             _timer.Start();
         }
 
@@ -69,7 +67,7 @@ namespace JiraAssistant.Logic.Services.Daemons
 
         private async void ScanForUpdates()
         {
-            
+
 
             var changesSince = GreatestDateTime((DateTime.Now - TimeSpan.FromHours(24)), _reportsSettings.LastUpdatesScan);
             var projectKeys = _reportsSettings.SelectedProjectsList.Split(',').Select(p => p.Trim());
@@ -145,6 +143,7 @@ namespace JiraAssistant.Logic.Services.Daemons
                             var newValue = changeSummary.Value ?? "(None)";
                             changeSummaryBuilder.AppendFormat("{0}: {1}\n", changeSummary.Key, newValue);
                         }
+                        
                         _messenger.Send(new ShowDesktopNotificationMessage(
                             title: string.Format("[{0}] {1}", issue.Key, issue.Summary),
                             description: changeSummaryBuilder.ToString(),

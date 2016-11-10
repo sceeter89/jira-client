@@ -3,7 +3,6 @@ using JiraAssistant.Domain.Ui;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Media;
 
 namespace JiraAssistant.Logic.Settings
 {

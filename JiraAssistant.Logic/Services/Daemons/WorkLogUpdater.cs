@@ -3,10 +3,10 @@ using JiraAssistant.Logic.Settings;
 using JiraAssistant.Logic.Services.Jira;
 using System;
 using System.Linq;
-using System.Windows.Threading;
 using JiraAssistant.Domain.Exceptions;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.Messages.Dialogs;
+using System.Timers;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -14,7 +14,7 @@ namespace JiraAssistant.Logic.Services.Daemons
     {
         private readonly IJiraApi _jiraApi;
         private readonly ReportsSettings _reportsSettings;
-        private readonly DispatcherTimer _timer;
+        private readonly Timer _timer;
         private bool _popupOpened;
         private readonly IMessenger _messenger;
 
@@ -24,9 +24,9 @@ namespace JiraAssistant.Logic.Services.Daemons
             _jiraApi = jiraApi;
             _messenger = messenger;
 
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(30);
-            _timer.Tick += CheckIfWorkShouldBeLogged;
+            _timer = new Timer();
+            _timer.Interval = TimeSpan.FromSeconds(30).TotalMilliseconds;
+            _timer.Elapsed += CheckIfWorkShouldBeLogged;
             _timer.Start();
 
             LogWorkCommand = new RelayCommand(LogWork);

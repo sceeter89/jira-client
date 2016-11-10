@@ -5,6 +5,7 @@
              xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ext="clr-namespace:JiraAssistant.Controls.BindableRadGridView;assembly=JiraAssistant.Controls"
+             xmlns:converters="clr-namespace:JiraAssistant.Controls.Converters;assembly=JiraAssistant.Controls"
              xmlns:vm="clr-namespace:JiraAssistant.Logic.ViewModels;assembly=JiraAssistant.Logic"
              StartupUri="MainWindow.xaml"
              d1p1:Ignorable="d">
@@ -54,6 +55,8 @@
                     <telerik:PaletteEntry Fill="#B17C34" Stroke="White" />
                 </telerik:ChartPalette.GlobalEntries>
             </telerik:ChartPalette>
+
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" HiddenValue="Hidden" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

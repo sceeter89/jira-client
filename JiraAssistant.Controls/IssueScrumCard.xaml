@@ -14,7 +14,7 @@
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="BorderThickness" Value="1"/>
             </Style>
-            <converters:BoolToVisibleConverter x:Key="BoolToVisible" />
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisible" />
             <converters:ColorInfoToColorConverter x:Key="ToColor" />
         </Grid.Resources>
         <Grid.RowDefinitions>

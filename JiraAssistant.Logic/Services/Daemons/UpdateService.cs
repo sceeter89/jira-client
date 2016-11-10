@@ -1,12 +1,10 @@
-﻿using System.Windows;
-using System;
+﻿using System;
 using RestSharp;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using RestSharp.Extensions;
-using Microsoft.Win32;
 using System.IO;
 using System.Diagnostics;
 using NLog;
@@ -14,12 +12,12 @@ using JiraAssistant.Logic.Settings;
 using JiraAssistant.Domain.Github;
 using JiraAssistant.Logic.ContextlessViewModels;
 using System.Reflection;
-using System.Windows.Threading;
 using JiraAssistant.Logic.Extensions;
 using JiraAssistant.Domain.Ui;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.Messages.Dialogs;
 using JiraAssistant.Domain.Messages;
+using System.Timers;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -33,7 +31,7 @@ namespace JiraAssistant.Logic.Services.Daemons
         private string _installerPath;
         private readonly MainViewModel _mainViewModel;
         private bool _inProgress;
-        private readonly DispatcherTimer _timer;
+        private readonly Timer _timer;
         private readonly IMessenger _messenger;
 
         public UpdateService(GeneralSettings settings, MainViewModel mainViewModel, IMessenger messenger)
@@ -44,14 +42,26 @@ namespace JiraAssistant.Logic.Services.Daemons
 
             _messenger.Register<PerformApplicationUpdateMessage>(this, PerformApplicationUpdate);
 
-            Application.Current.Exit += OnApplicationExit;
-
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMinutes(20);
-            _timer.Tick += (sender, args) => CheckForUpdates();
+            AppDomain.CurrentDomain.ProcessExit += OnApplicationExit;
+            
+            _timer = new Timer();
+            _timer.Elapsed += CheckForUpdates;
+            _timer.Interval = TimeSpan.FromMinutes(20).TotalMilliseconds;
             _timer.Start();
+        }
+        
+        private void OnApplicationExit(object sender, EventArgs e)
+        {
+            if (_runInstaller == false)
+                return;
 
-            CheckForUpdates();
+            var processInfo = new ProcessStartInfo
+            {
+                FileName = _installerPath,
+                UseShellExecute = true,
+                Arguments = _showInstallerUi ? "" : "/quiet /passive"
+            };
+            Process.Start(processInfo);
         }
 
         private void PerformApplicationUpdate(PerformApplicationUpdateMessage message)
@@ -60,7 +70,7 @@ namespace JiraAssistant.Logic.Services.Daemons
             if (message.Method == UpdateMethod.ExitAndInstall)
             {                
                 _showInstallerUi = true;
-                Application.Current.Shutdown();
+                _messenger.Send(new ShutdownApplicationMessage());
                 return;
             }
             _mainViewModel.UserMessage = string.Format("New version will be installed once you close application.");
@@ -73,7 +83,7 @@ namespace JiraAssistant.Logic.Services.Daemons
             await Task.Factory.StartNew(() => client.DownloadData(request).SaveAs(destinationPath));
         }
 
-        private async void CheckForUpdates()
+        private async void CheckForUpdates(object sender, EventArgs args)
         {
             if (_inProgress)
                 return;
@@ -101,7 +111,7 @@ namespace JiraAssistant.Logic.Services.Daemons
                 if (higherVersions.Any() == false)
                     return;
 
-                _timer.Stop();
+                _timer.Enabled = false;
 
                 var higherVersion = higherVersions.First();
                 
@@ -131,19 +141,6 @@ namespace JiraAssistant.Logic.Services.Daemons
             {
                 _inProgress = false;
             }
-        }
-        private void OnApplicationExit(object sender, ExitEventArgs e)
-        {
-            if (_runInstaller == false)
-                return;
-
-            var processInfo = new ProcessStartInfo
-            {
-                FileName = _installerPath,
-                UseShellExecute = true,
-                Arguments = _showInstallerUi ? "" : "/quiet /passive"
-            };
-            Process.Start(processInfo);
         }
     }
 }

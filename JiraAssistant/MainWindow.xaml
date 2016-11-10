@@ -10,7 +10,7 @@
         Title="{Binding ApplicationTitle}" Height="700" Width="800"
         Icon="/Assets/Icons/ApplicationIcon.png"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
-        Background="LightGray" Visibility="{Binding WindowVisibility}">
+        Background="LightGray" Visibility="{Binding IsWindowVisible, Converter={StaticResource BoolToVisibilityConverter}}">
     <Window.Resources>
         <Storyboard x:Key="CollapseAnimation">
             <DoubleAnimation Storyboard.TargetName="DocumentHost" 
@@ -37,6 +37,7 @@
         <converters:StringToVisibilityConverter x:Key="MessageVisibilityConverter" />
         <converters:RawJiraGroupsToTextConverter x:Key="GroupsToTextConverter" />
         <converters:RawJiraApplicationRolesToTextConverter x:Key="RolesToTextConverter" />
+        <converters:BitmapToImageSourceConverter x:Key="BitmapToImageSource" />
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" x:Key="MenuButtonStyle">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
@@ -166,7 +167,7 @@
 
         <Grid Grid.Row="0" Grid.Column="2" Width="50" Margin="0 0 5 5" Background="{telerik:Windows8Resource ResourceKey=AccentBrush}"
               DataContext="{Binding Source={StaticResource Locator}, Path=JiraSession}">
-            <Image Source="{Binding ProfileAvatar}" Width="40" Height="40">
+            <Image Source="{Binding ProfileAvatar, Converter={StaticResource BitmapToImageSource}}" Width="40" Height="40">
                 <Image.ToolTip>
                     <StackPanel>
                         <TextBlock Text="{Binding Profile.DisplayName}" FontWeight="Bold"/>

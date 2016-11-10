@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using JiraAssistant.Logic.Extensions;
+using JiraAssistant.Domain.Messages;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
@@ -81,12 +82,12 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             }
             catch (MissingJiraAgileSupportException)
             {
-                MessageBox.Show("Please log into JIRA instance with JIRA Agile installed.", "JIRA Assistant", MessageBoxButton.OK, MessageBoxImage.Information);
+                _messenger.Send(new ShowAlertMessage("Please log into JIRA instance with JIRA Agile installed."));
             }
             catch (Exception e)
             {
                 Sentry.CaptureException(e);
-                MessageBox.Show("Failed to retrieve list of available JIRA boards. Can't go any further.\nReason: " + e.Message, "JIRA Assistant", MessageBoxButton.OK, MessageBoxImage.Warning);
+                _messenger.Send(new ShowAlertMessage("Failed to retrieve list of available JIRA boards. Can't go any further.\nReason: " + e.Message));
             }
             finally
             {

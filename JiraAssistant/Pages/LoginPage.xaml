@@ -43,7 +43,7 @@
          </PasswordBox>
 
          <Button HorizontalAlignment="Right" VerticalAlignment="Center" Content="Login"
-              Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password}"
+              Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password, Path=Password}"
               Grid.Row="3" Grid.Column="1" Margin="0 5 5 5"  BorderBrush="LightGray" />
 
          <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Margin="0 5 5 0" Height="60"

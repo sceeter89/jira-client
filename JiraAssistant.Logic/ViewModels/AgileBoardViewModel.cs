@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain;
 using JiraAssistant.Domain.Exceptions;
 using JiraAssistant.Domain.Jira;
+using JiraAssistant.Domain.Messages;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.ContextlessViewModels;
 using JiraAssistant.Logic.Services;
@@ -87,10 +88,10 @@ namespace JiraAssistant.Logic.ViewModels
             {
                 if (_forceReload)
                 {
-                    MessageBox.Show("Failed to download board data.", "JiraAssistant");
+                    _messenger.Send(new ShowAlertMessage("Failed to download board data."));
                     return;
                 }
-                MessageBox.Show("There were problems to save board data. We'll try to re-download it.", "Jira Assistant");
+                _messenger.Send(new ShowAlertMessage("There were problems to save board data. We'll try to re-download it."));
 
                 _forceReload = true;
                 DownloadElements();
@@ -105,7 +106,7 @@ namespace JiraAssistant.Logic.ViewModels
 
                 _logger.Error(e, "Download failed for issues in board: {0} ({1})", Board.Name, Board.Id);
                 ClearData();
-                MessageBox.Show("Failed to retrieve issues belonging board: " + Board.Name, "Jira Assistant");
+                _messenger.Send(new ShowAlertMessage("Failed to retrieve issues belonging board: " + Board.Name));
             }
             finally
             {

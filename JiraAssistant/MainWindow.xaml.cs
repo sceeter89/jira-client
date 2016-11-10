@@ -16,7 +16,7 @@ namespace JiraAssistant
                 viewModel.NavigateTo(new LoginPage());
                 if (viewModel.Settings.StartInTray)
                 {
-                    viewModel.WindowVisibility = System.Windows.Visibility.Collapsed;
+                    viewModel.IsWindowVisible = false;
                 }
             };
             Closing += (sender, args) =>

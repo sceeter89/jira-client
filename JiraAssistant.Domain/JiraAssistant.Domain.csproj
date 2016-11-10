@@ -61,7 +61,9 @@
     <Compile Include="Messages\Dialogs\OpenWorklogMessage.cs" />
     <Compile Include="Messages\IssueUpdatedMessage.cs" />
     <Compile Include="Messages\PerformApplicationUpdateMessage.cs" />
+    <Compile Include="Messages\ShowAlertMessage.cs" />
     <Compile Include="Messages\ShowDesktopNotificationMessage.cs" />
+    <Compile Include="Messages\ShutdownApplicationMessage.cs" />
     <Compile Include="NavigationMessages\OpenRecentUpdatesMessage.cs" />
     <Compile Include="NavigationMessages\ClearNavigationHistoryMessage.cs" />
     <Compile Include="NavigationMessages\OpenAgileBoardMessage.cs" />

@@ -6,7 +6,6 @@ using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Logic.Services.Jira;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.ComponentModel;
 using JiraAssistant.Logic.Services.Daemons;
 using JiraAssistant.Domain.Ui;
@@ -15,6 +14,8 @@ using JiraAssistant.Domain.Exceptions;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.NavigationMessages;
 using System.Reflection;
+using System;
+using JiraAssistant.Domain.Messages;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
@@ -26,7 +27,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
         private AnimationState _expandAnimationState;
         private readonly IJiraApi _jiraApi;
         private string _userMessage;
-        private Visibility _windowVisibility;
+        private bool _isWindowVisible;
         private readonly IMessenger _messenger;
 
         public MainViewModel(IJiraApi jiraApi, GeneralSettings settings, WorkLogUpdater workLogUpdater, IMessenger messenger)
@@ -42,7 +43,9 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             BackToPageCommand = new RelayCommand<NavigationHistoryEntry>(BackToPage);
             CloseApplicationCommand = new RelayCommand(CloseApplication);
             OpenRecentUpdatesCommand = new RelayCommand(OpenRecentUpdates);
-            ActivateWindowCommand = new RelayCommand(() => WindowVisibility = Visibility.Visible);
+            ActivateWindowCommand = new RelayCommand(() => IsWindowVisible = true);
+
+            IsWindowVisible = Settings.StartInTray == false;
 
             NavigationHistory = new ObservableCollection<NavigationHistoryEntry>();
         }
@@ -59,7 +62,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
 
         private void CloseApplication()
         {
-            Application.Current.Shutdown();
+            _messenger.Send(new ShutdownApplicationMessage());
         }
 
         public RelayCommand BackCommand { get; private set; }
@@ -114,12 +117,12 @@ namespace JiraAssistant.Logic.ContextlessViewModels
         public ObservableCollection<NavigationHistoryEntry> NavigationHistory { get; private set; }
         public RelayCommand<NavigationHistoryEntry> BackToPageCommand { get; private set; }
         public GeneralSettings Settings { get; private set; }
-        public Visibility WindowVisibility
+        public bool IsWindowVisible
         {
-            get { return _windowVisibility; }
+            get { return _isWindowVisible; }
             set
             {
-                _windowVisibility = value;
+                _isWindowVisible = value;
                 RaisePropertyChanged();
             }
         }
@@ -235,7 +238,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
         {
             if (Settings.CloseToTray)
             {
-                WindowVisibility = Visibility.Hidden;
+                IsWindowVisible = false;
                 args.Cancel = true;
             }
         }

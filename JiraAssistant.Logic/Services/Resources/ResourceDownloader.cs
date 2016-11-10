@@ -1,9 +1,8 @@
 ﻿using JiraAssistant.Logic.Settings;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace JiraAssistant.Logic.Services.Resources
 {
@@ -14,7 +13,7 @@ namespace JiraAssistant.Logic.Services.Resources
       {
       }
 
-      public async Task<ImageSource> DownloadPicture(string imageUri)
+      public async Task<Bitmap> DownloadPicture(string imageUri)
       {
          var request = (HttpWebRequest)WebRequest.Create(imageUri);
          if (string.IsNullOrEmpty(Configuration.SessionCookies) == false)
@@ -36,12 +35,7 @@ namespace JiraAssistant.Logic.Services.Resources
                outputStream.Write(buffer, 0, bytesRead);
             } while (bytesRead != 0);
 
-            var bitmapImage = new BitmapImage();
-            bitmapImage.BeginInit();
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.StreamSource = outputStream;
-            bitmapImage.EndInit();
-            bitmapImage.Freeze();
+            var bitmapImage = new Bitmap(outputStream);
 
             return bitmapImage;
          }

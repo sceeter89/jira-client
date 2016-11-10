@@ -4,7 +4,7 @@ using JiraAssistant.Logic.Services.Jira;
 using JiraAssistant.Logic.Services.Resources;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Media;
+using System.Drawing;
 
 namespace JiraAssistant.Logic.Services
 {
@@ -44,7 +44,7 @@ namespace JiraAssistant.Logic.Services
          get; private set;
       }
 
-      public async Task<ImageSource> DownloadPicture(string imageUri)
+      public async Task<Bitmap> DownloadPicture(string imageUri)
       {
          return await _resourceDownloader.DownloadPicture(imageUri);
       }
