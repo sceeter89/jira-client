@@ -5,21 +5,108 @@
     <target-gtk-version>2.12</target-gtk-version>
   </configuration>
   <import>
-    <widget-library name="../bin/Debug/JiraAssistant.Mono.exe" internal="true" />
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <widget-library name="../bin/Debug_Mono/JiraAssistant.Mono.exe" internal="true" />
   </import>
-  <icon-factory>
-    <icon-set id="JiraAssistant">
-      <source>
-        <property name="Image">file:./Icon.ico</property>
-      </source>
-    </icon-set>
-  </icon-factory>
-  <widget class="Gtk.Window" id="MainWindow" design-size="400 300">
+  <widget class="Gtk.Bin" id="JiraAssistant.Mono.StatusBarWidget" design-size="563 30">
+    <property name="MemberName" />
+    <property name="Visible">False</property>
+    <child>
+      <widget class="Gtk.Statusbar" id="statusbar4">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.Label" id="connectionStatus">
+            <property name="MemberName" />
+            <property name="LabelProp" translatable="yes">Offline</property>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="JiraAssistant.Mono.MainWindow" design-size="400 300">
+    <action-group name="Default">
+      <action id="JiraAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Jira</property>
+        <property name="ShortLabel" translatable="yes">Jira</property>
+      </action>
+      <action id="LoginAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Login</property>
+        <property name="ShortLabel" translatable="yes">Login</property>
+      </action>
+      <action id="LogoutAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Logout</property>
+        <property name="ShortLabel" translatable="yes">Logout</property>
+      </action>
+    </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
     <property name="WindowPosition">CenterOnParent</property>
-    <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <child>
+      <widget class="Gtk.Table" id="table1">
+        <property name="MemberName" />
+        <property name="NRows">3</property>
+        <property name="RowSpacing">6</property>
+        <property name="ColumnSpacing">6</property>
+        <child>
+          <placeholder />
+        </child>
+        <child>
+          <widget class="Gtk.MenuBar" id="mainMenu">
+            <property name="MemberName" />
+            <node name="mainMenu" type="Menubar">
+              <node type="Menu" action="JiraAction">
+                <node type="Menuitem" action="LoginAction" />
+                <node type="Menuitem" action="LogoutAction" />
+              </node>
+            </node>
+          </widget>
+          <packing>
+            <property name="AutoSize">False</property>
+            <property name="YOptions">Fill</property>
+            <property name="XExpand">True</property>
+            <property name="XFill">True</property>
+            <property name="XShrink">False</property>
+            <property name="YExpand">False</property>
+            <property name="YFill">True</property>
+            <property name="YShrink">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="JiraAssistant.Mono.StatusBarWidget" id="statusBar">
+            <property name="MemberName" />
+            <property name="Events">ButtonPressMask</property>
+          </widget>
+          <packing>
+            <property name="TopAttach">2</property>
+            <property name="BottomAttach">3</property>
+            <property name="AutoSize">True</property>
+            <property name="XOptions">Fill</property>
+            <property name="YOptions">Fill</property>
+            <property name="XExpand">False</property>
+            <property name="XFill">True</property>
+            <property name="XShrink">False</property>
+            <property name="YExpand">False</property>
+            <property name="YFill">True</property>
+            <property name="YShrink">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="JiraAssistant.Mono.MainWindow" design-size="400 300">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">MainWindow</property>
+    <property name="WindowPosition">CenterOnParent</property>
     <child>
       <placeholder />
     </child>

@@ -68,6 +68,8 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             {
                 _isLoggedIn = value;
                 RaisePropertyChanged();
+				if (IsLoggedInChanged != null)
+					IsLoggedInChanged(this, _isLoggedIn);
             }
         }
 
@@ -90,5 +92,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
                 RaisePropertyChanged();
             }
         }
+
+		public event EventHandler<bool> IsLoggedInChanged;
     }
 }
