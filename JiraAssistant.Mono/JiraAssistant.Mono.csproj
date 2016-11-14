@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -78,15 +77,20 @@
     <Compile Include="Services\DesktopNotificationsService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Components\StatusBarComponent.cs" />
-    <Compile Include="Components\MenuComponent.cs" />
     <Compile Include="Widgets\StatusBarWidget.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.StatusBarWidget.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.MainWindow.cs" />
+    <Compile Include="Widgets\ContentDisplayWidget.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.ContentDisplayWidget.cs" />
+    <Compile Include="Components\ContentDisplayComponent.cs" />
+    <Compile Include="Widgets\AuthControlWidget.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.AuthControlWidget.cs" />
+    <Compile Include="Components\AuthControlComponent.cs" />
+    <Compile Include="LoginAttemptEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icon.ico">
-    </Content>
+    <Content Include="Icon.ico"></Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JiraAssistant.Domain\JiraAssistant.Domain.csproj">

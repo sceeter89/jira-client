@@ -1,12 +1,29 @@
-﻿using System;
+﻿using Autofac;
+using Gtk;
+using JiraAssistant.Mono.Components;
+
 namespace JiraAssistant.Mono
 {
-	public partial class MainWindow : Gtk.Window
+	public partial class MainWindow : Window
 	{
-		public MainWindow() :
-				base(Gtk.WindowType.Toplevel)
+		private readonly StatusBarComponent _statusBarComponent;
+		private readonly AuthControlComponent _authControlComponent;
+		private readonly ContentDisplayComponent _contentDisplayComponent;
+
+		public MainWindow(IComponentContext resolver) :
+				base(WindowType.Toplevel)
 		{
 			this.Build();
+
+			_statusBarComponent = resolver.Resolve<StatusBarComponent>(new NamedParameter("control", statusBarWidget));
+			_authControlComponent = resolver.Resolve<AuthControlComponent>(new NamedParameter("control", authControlWidget));
+			_contentDisplayComponent = resolver.Resolve<ContentDisplayComponent>(new NamedParameter("control", authControlWidget.ContentDisplay));
+		}
+
+		protected void OnDeleteEvent(object sender, DeleteEventArgs a)
+		{
+			Application.Quit();
+			a.RetVal = true;
 		}
 	}
 }

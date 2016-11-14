@@ -61,6 +61,11 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             });
         }
 
+		public async Task Logout()
+		{
+			await _jiraApi.Session.Logout();
+		}
+
         public bool IsLoggedIn
         {
             get { return _isLoggedIn; }

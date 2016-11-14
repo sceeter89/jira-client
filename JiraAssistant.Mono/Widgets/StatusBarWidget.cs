@@ -8,5 +8,17 @@ namespace JiraAssistant.Mono
 		{
 			this.Build();
 		}
+
+		public string ConnectionStatus
+		{
+			get
+			{
+				return connectionStatus.Text;
+			}
+			set
+			{
+				connectionStatus.Text = value;
+			}
+		}
 	}
 }

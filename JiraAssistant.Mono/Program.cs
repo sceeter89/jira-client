@@ -4,6 +4,7 @@ using Autofac;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Gtk;
+using JiraAssistant.Logic.ContextlessViewModels;
 using JiraAssistant.Logic.Services;
 using JiraAssistant.Logic.Settings;
 
@@ -23,8 +24,10 @@ namespace JiraAssistant.Mono
 
 			Application.Init();
 			var win = IocContainer.Resolve<MainWindow>();
-
 			win.Show();
+
+			AttemptToLogin();
+
 			Application.Run();
 		}
 
@@ -69,6 +72,11 @@ namespace JiraAssistant.Mono
 			   .SingleInstance()
 			   .AutoActivate();
 
+			builder.RegisterAssemblyTypes(typeof(Bootstrap).Assembly)
+				   .InNamespace("JiraAssistant.Mono.Components")
+				   .AsSelf()
+				   .SingleInstance();
+
 			builder.RegisterType<JiraApi>()
 			   .SingleInstance()
 			   .AsImplementedInterfaces()
@@ -91,6 +99,11 @@ namespace JiraAssistant.Mono
 			   .SingleInstance();
 
 			IocContainer = builder.Build();
+		}
+
+		private static void AttemptToLogin()
+		{
+			IocContainer.Resolve<LoginPageViewModel>().AttemptAutoLogin();
 		}
 	}
 }
