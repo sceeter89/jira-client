@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JiraAssistant.Pages"
+             xmlns:converters="clr-namespace:JiraAssistant.Controls.Converters;assembly=JiraAssistant.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400"
              Background="White"
@@ -14,6 +15,9 @@
          <TextBlock Text="{Binding BusyMessage}" />
       </telerik:RadBusyIndicator.BusyContent>
       <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.Resources>
+                <converters:PasswordExtractor x:Key="ExtractPassword"/>
+            </Grid.Resources>
          <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -38,12 +42,12 @@
          <PasswordBox x:Name="Password" Margin="0 5 5 5" Width="250"
                        Grid.Row="2" Grid.Column="1">
             <PasswordBox.InputBindings>
-               <KeyBinding Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password}" Key="Return"/>
+               <KeyBinding Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password, Converter={StaticResource ExtractPassword}}" Key="Return"/>
             </PasswordBox.InputBindings>
          </PasswordBox>
 
          <Button HorizontalAlignment="Right" VerticalAlignment="Center" Content="Login"
-              Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password, Path=Password}"
+              Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=Password, Converter={StaticResource ExtractPassword}}"
               Grid.Row="3" Grid.Column="1" Margin="0 5 5 5"  BorderBrush="LightGray" />
 
          <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Margin="0 5 5 0" Height="60"

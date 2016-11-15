@@ -1,4 +1,5 @@
 ﻿using System;
+using GalaSoft.MvvmLight.Threading;
 using JiraAssistant.Logic.ContextlessViewModels;
 
 namespace JiraAssistant.Mono.Components
@@ -10,8 +11,8 @@ namespace JiraAssistant.Mono.Components
 		private readonly AuthControlWidget _control;
 
 		public AuthControlComponent(AuthControlWidget control,
-		                            JiraSessionViewModel jiraSession,
-		                            LoginPageViewModel login)
+									JiraSessionViewModel jiraSession,
+									LoginPageViewModel login)
 		{
 			_control = control;
 			_jiraSession = jiraSession;
@@ -29,21 +30,24 @@ namespace JiraAssistant.Mono.Components
 		{
 			_login.JiraAddress = e.JiraUrl;
 			_login.Username = e.Username;
-			_login.LoginCommand.Execute(e.Password);
+			_login.LoginCommand.Execute(new Func<string>(() => e.Password));
 		}
 
 		private void IsLoggedInChanged(object sender, bool isLoggedIn)
 		{
-			if (isLoggedIn)
+			DispatcherHelper.CheckBeginInvokeOnUI(() =>
 			{
-				_control.IsLoginControlVisible = false;
-				_control.IsContentDisplayVisible = true;
-			}
-			else
-			{
-				_control.IsLoginControlVisible = true;
-				_control.IsContentDisplayVisible = false;
-			}
+				if (isLoggedIn)
+				{
+					_control.IsLoginControlVisible = false;
+					_control.IsContentDisplayVisible = true;
+				}
+				else
+				{
+					_control.IsLoginControlVisible = true;
+					_control.IsContentDisplayVisible = false;
+				}
+			});
 		}
 	}
 }

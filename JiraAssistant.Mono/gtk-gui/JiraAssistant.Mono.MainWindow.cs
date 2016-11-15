@@ -36,7 +36,7 @@ namespace JiraAssistant.Mono
 			this.UIManager.InsertActionGroup(w1, 0);
 			this.AddAccelGroup(this.UIManager.AccelGroup);
 			this.Name = "JiraAssistant.Mono.MainWindow";
-			this.Title = global::Mono.Unix.Catalog.GetString("MainWindow");
+			this.Title = global::Mono.Unix.Catalog.GetString("Jira Assistant");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Container child JiraAssistant.Mono.MainWindow.Gtk.Container+ContainerChild
 			this.table1 = new global::Gtk.Table(((uint)(2)), ((uint)(1)), false);

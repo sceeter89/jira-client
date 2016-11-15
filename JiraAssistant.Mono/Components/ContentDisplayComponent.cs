@@ -10,7 +10,7 @@ namespace JiraAssistant.Mono.Components
 		private readonly JiraSessionViewModel _jiraSession;
 
 		public ContentDisplayComponent(ContentDisplayWidget control,
-		                               JiraSessionViewModel jiraSession)
+									   JiraSessionViewModel jiraSession)
 		{
 			_control = control;
 			_jiraSession = jiraSession;
@@ -25,10 +25,14 @@ namespace JiraAssistant.Mono.Components
 			var jiraMenu = new MenuItem("JIRA");
 			var submenu = new Menu();
 			var logoutItem = new MenuItem("Logout");
-			logoutItem.Activated += async (sender, e) => await _jiraSession.Logout();
+			logoutItem.Activated += async (sender, e) =>
+			{
+				await _jiraSession.Logout();
+			};
 			submenu.Add(logoutItem);
+			jiraMenu.Submenu = submenu;
 
-			menu.Add(submenu);
+			menu.Add(jiraMenu);
 		}
-}
+	}
 }

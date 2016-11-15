@@ -172,6 +172,7 @@
     <Compile Include="Converters\ColorInfoToColor.cs" />
     <Compile Include="Converters\ColorToBrushConverter.cs" />
     <Compile Include="Converters\GridViewColumns.cs" />
+    <Compile Include="Converters\PasswordExtractor.cs" />
     <Compile Include="Converters\RawJiraGroupsToTextConverter.cs" />
     <Compile Include="Converters\RawJiraApplicationRolesToTextConverter.cs" />
     <Compile Include="Converters\SecondsToHoursConverter.cs" />

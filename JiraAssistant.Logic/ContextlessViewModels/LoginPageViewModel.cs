@@ -34,7 +34,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             Username = configuration.Username;
         }
 
-        public RelayCommand<string> LoginCommand { get { return new RelayCommand<string>(Login); } }
+        public RelayCommand<Func<string>> LoginCommand { get { return new RelayCommand<Func<string>>(Login); } }
 
         public string LoginErrorMessage
         {
@@ -86,14 +86,14 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             }
         }
 
-        private async void Login(string password)
+        private async void Login(Func<string> passwordGetter)
         {
             try
             {
                 LoginErrorMessage = string.Empty;
                 BusyMessage = "Trying to log into JIRA...";
                 IsBusy = true;
-                await _jiraApi.Session.AttemptLogin(JiraAddress, Username, password);
+                await _jiraApi.Session.AttemptLogin(JiraAddress, Username, passwordGetter());
 
                 _messenger.Send(new OpenAgileBoardPickupMessage());
             }
