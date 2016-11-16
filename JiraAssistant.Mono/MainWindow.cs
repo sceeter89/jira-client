@@ -18,6 +18,7 @@ namespace JiraAssistant.Mono
 			_statusBarComponent = resolver.Resolve<StatusBarComponent>(new NamedParameter("control", statusBarWidget));
 			_authControlComponent = resolver.Resolve<AuthControlComponent>(new NamedParameter("control", authControlWidget));
 			_contentDisplayComponent = resolver.Resolve<ContentDisplayComponent>(new NamedParameter("control", authControlWidget.ContentDisplay));
+			
 			DeleteEvent += OnDeleteEvent;
 		}
 

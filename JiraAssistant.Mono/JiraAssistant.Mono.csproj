@@ -64,6 +64,10 @@
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.4.2.0\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -88,6 +92,8 @@
     <Compile Include="gtk-gui\JiraAssistant.Mono.AuthControlWidget.cs" />
     <Compile Include="Components\AuthControlComponent.cs" />
     <Compile Include="LoginAttemptEventArgs.cs" />
+    <Compile Include="Widgets\JiraServerInfoWidget.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.JiraServerInfoWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico"></Content>
