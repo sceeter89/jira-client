@@ -10,7 +10,7 @@ using JiraAssistant.Logic.Settings;
 
 namespace JiraAssistant.Mono
 {
-	class Bootstrap
+	internal class Bootstrap
 	{
 		public static void Main(string[] args)
 		{
@@ -73,7 +73,7 @@ namespace JiraAssistant.Mono
 			   .AutoActivate();
 
 			builder.RegisterAssemblyTypes(typeof(Bootstrap).Assembly)
-				   .InNamespace("JiraAssistant.Mono.Components")
+				   .InNamespace("JiraAssistant.Mono.Controllers")
 				   .AsSelf()
 				   .SingleInstance();
 

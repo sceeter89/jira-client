@@ -2,14 +2,14 @@
 using Gtk;
 using JiraAssistant.Logic.ContextlessViewModels;
 
-namespace JiraAssistant.Mono.Components
+namespace JiraAssistant.Mono.Controllers
 {
-	public class StatusBarComponent
+	public class StatusBarController
 	{
 		private readonly StatusBarWidget _control;
 		private readonly JiraSessionViewModel _jiraSession;
 
-		public StatusBarComponent(StatusBarWidget control,
+		public StatusBarController(StatusBarWidget control,
 		                          JiraSessionViewModel jiraSession)
 		{
 			_control = control;

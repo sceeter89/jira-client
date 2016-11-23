@@ -1,12 +1,19 @@
 ﻿using System;
+using Autofac;
+using JiraAssistant.Mono.Controllers;
+
 namespace JiraAssistant.Mono
 {
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class AuthControlWidget : Gtk.Bin
 	{
+		private readonly AuthControlController _controller;
+
 		public AuthControlWidget()
 		{
 			this.Build();
+
+			_controller = Bootstrap.IocContainer.Resolve<AuthControlController>(new NamedParameter("control", this));
 		}
 
 		public bool IsLoginControlVisible

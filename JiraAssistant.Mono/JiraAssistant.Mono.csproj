@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ProjectGuid>{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <RootNamespace>JiraAssistant.Mono</RootNamespace>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -80,20 +80,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DesktopNotificationsService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Components\StatusBarComponent.cs" />
+    <Compile Include="Controllers\StatusBarController.cs" />
     <Compile Include="Widgets\StatusBarWidget.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.StatusBarWidget.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.MainWindow.cs" />
     <Compile Include="Widgets\ContentDisplayWidget.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.ContentDisplayWidget.cs" />
-    <Compile Include="Components\ContentDisplayComponent.cs" />
+    <Compile Include="Controllers\ContentDisplayController.cs" />
     <Compile Include="Widgets\AuthControlWidget.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.AuthControlWidget.cs" />
-    <Compile Include="Components\AuthControlComponent.cs" />
+    <Compile Include="Controllers\AuthControlController.cs" />
     <Compile Include="LoginAttemptEventArgs.cs" />
     <Compile Include="Widgets\JiraServerInfoWidget.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.JiraServerInfoWidget.cs" />
+    <Compile Include="Controllers\JiraServerInfoController.cs" />
+    <Compile Include="Widgets\ToolsWidget.cs" />
+    <Compile Include="Controllers\ToolsController.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.ToolsWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico"></Content>
@@ -113,7 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="Components\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Widgets\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

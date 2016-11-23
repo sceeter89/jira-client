@@ -4,12 +4,178 @@ namespace JiraAssistant.Mono
 {
 	public partial class JiraServerInfoWidget
 	{
+		private global::Gtk.Table table2;
+
+		private global::Gtk.Image avatar;
+
+		private global::Gtk.Entry email;
+
+		private global::Gtk.Entry groups;
+
+		private global::Gtk.Entry jiraAddress;
+
+		private global::Gtk.Label label1;
+
+		private global::Gtk.Label label4;
+
+		private global::Gtk.Label label5;
+
+		private global::Gtk.Label label6;
+
+		private global::Gtk.Label label7;
+
+		private global::Gtk.Label label8;
+
+		private global::Gtk.Entry roles;
+
+		private global::Gtk.Entry userName;
+
 		protected virtual void Build()
 		{
 			global::Stetic.Gui.Initialize(this);
 			// Widget JiraAssistant.Mono.JiraServerInfoWidget
 			global::Stetic.BinContainer.Attach(this);
 			this.Name = "JiraAssistant.Mono.JiraServerInfoWidget";
+			// Container child JiraAssistant.Mono.JiraServerInfoWidget.Gtk.Container+ContainerChild
+			this.table2 = new global::Gtk.Table(((uint)(7)), ((uint)(2)), false);
+			this.table2.Name = "table2";
+			this.table2.RowSpacing = ((uint)(6));
+			this.table2.ColumnSpacing = ((uint)(6));
+			// Container child table2.Gtk.Table+TableChild
+			this.avatar = new global::Gtk.Image();
+			this.avatar.WidthRequest = 48;
+			this.avatar.HeightRequest = 48;
+			this.avatar.Name = "avatar";
+			this.table2.Add(this.avatar);
+			global::Gtk.Table.TableChild w1 = ((global::Gtk.Table.TableChild)(this.table2[this.avatar]));
+			w1.TopAttach = ((uint)(5));
+			w1.BottomAttach = ((uint)(6));
+			w1.LeftAttach = ((uint)(1));
+			w1.RightAttach = ((uint)(2));
+			w1.XOptions = ((global::Gtk.AttachOptions)(0));
+			w1.YOptions = ((global::Gtk.AttachOptions)(0));
+			// Container child table2.Gtk.Table+TableChild
+			this.email = new global::Gtk.Entry();
+			this.email.CanFocus = true;
+			this.email.Name = "email";
+			this.email.IsEditable = false;
+			this.email.InvisibleChar = '●';
+			this.table2.Add(this.email);
+			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table2[this.email]));
+			w2.TopAttach = ((uint)(2));
+			w2.BottomAttach = ((uint)(3));
+			w2.LeftAttach = ((uint)(1));
+			w2.RightAttach = ((uint)(2));
+			w2.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.groups = new global::Gtk.Entry();
+			this.groups.CanFocus = true;
+			this.groups.Name = "groups";
+			this.groups.IsEditable = false;
+			this.groups.InvisibleChar = '●';
+			this.table2.Add(this.groups);
+			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table2[this.groups]));
+			w3.TopAttach = ((uint)(3));
+			w3.BottomAttach = ((uint)(4));
+			w3.LeftAttach = ((uint)(1));
+			w3.RightAttach = ((uint)(2));
+			w3.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.jiraAddress = new global::Gtk.Entry();
+			this.jiraAddress.CanFocus = true;
+			this.jiraAddress.Name = "jiraAddress";
+			this.jiraAddress.IsEditable = false;
+			this.jiraAddress.InvisibleChar = '●';
+			this.table2.Add(this.jiraAddress);
+			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table2[this.jiraAddress]));
+			w4.LeftAttach = ((uint)(1));
+			w4.RightAttach = ((uint)(2));
+			w4.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.label1 = new global::Gtk.Label();
+			this.label1.Name = "label1";
+			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString("JIRA address");
+			this.table2.Add(this.label1);
+			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table2[this.label1]));
+			w5.XOptions = ((global::Gtk.AttachOptions)(4));
+			w5.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.label4 = new global::Gtk.Label();
+			this.label4.Name = "label4";
+			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString("User");
+			this.table2.Add(this.label4);
+			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table2[this.label4]));
+			w6.TopAttach = ((uint)(1));
+			w6.BottomAttach = ((uint)(2));
+			w6.XOptions = ((global::Gtk.AttachOptions)(4));
+			w6.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.label5 = new global::Gtk.Label();
+			this.label5.Name = "label5";
+			this.label5.LabelProp = global::Mono.Unix.Catalog.GetString("E-mail");
+			this.table2.Add(this.label5);
+			global::Gtk.Table.TableChild w7 = ((global::Gtk.Table.TableChild)(this.table2[this.label5]));
+			w7.TopAttach = ((uint)(2));
+			w7.BottomAttach = ((uint)(3));
+			w7.XOptions = ((global::Gtk.AttachOptions)(4));
+			w7.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.label6 = new global::Gtk.Label();
+			this.label6.Name = "label6";
+			this.label6.LabelProp = global::Mono.Unix.Catalog.GetString("Groups");
+			this.table2.Add(this.label6);
+			global::Gtk.Table.TableChild w8 = ((global::Gtk.Table.TableChild)(this.table2[this.label6]));
+			w8.TopAttach = ((uint)(3));
+			w8.BottomAttach = ((uint)(4));
+			w8.XOptions = ((global::Gtk.AttachOptions)(4));
+			w8.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.label7 = new global::Gtk.Label();
+			this.label7.Name = "label7";
+			this.label7.LabelProp = global::Mono.Unix.Catalog.GetString("Avatar");
+			this.table2.Add(this.label7);
+			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table2[this.label7]));
+			w9.TopAttach = ((uint)(5));
+			w9.BottomAttach = ((uint)(6));
+			w9.XOptions = ((global::Gtk.AttachOptions)(4));
+			w9.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.label8 = new global::Gtk.Label();
+			this.label8.Name = "label8";
+			this.label8.LabelProp = global::Mono.Unix.Catalog.GetString("Roles");
+			this.table2.Add(this.label8);
+			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table2[this.label8]));
+			w10.TopAttach = ((uint)(4));
+			w10.BottomAttach = ((uint)(5));
+			w10.XOptions = ((global::Gtk.AttachOptions)(4));
+			w10.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.roles = new global::Gtk.Entry();
+			this.roles.CanFocus = true;
+			this.roles.Name = "roles";
+			this.roles.IsEditable = false;
+			this.roles.InvisibleChar = '●';
+			this.table2.Add(this.roles);
+			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table2[this.roles]));
+			w11.TopAttach = ((uint)(4));
+			w11.BottomAttach = ((uint)(5));
+			w11.LeftAttach = ((uint)(1));
+			w11.RightAttach = ((uint)(2));
+			w11.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table2.Gtk.Table+TableChild
+			this.userName = new global::Gtk.Entry();
+			this.userName.CanFocus = true;
+			this.userName.Name = "userName";
+			this.userName.IsEditable = false;
+			this.userName.InvisibleChar = '●';
+			this.table2.Add(this.userName);
+			global::Gtk.Table.TableChild w12 = ((global::Gtk.Table.TableChild)(this.table2[this.userName]));
+			w12.TopAttach = ((uint)(1));
+			w12.BottomAttach = ((uint)(2));
+			w12.LeftAttach = ((uint)(1));
+			w12.RightAttach = ((uint)(2));
+			w12.YOptions = ((global::Gtk.AttachOptions)(4));
+			this.Add(this.table2);
 			if ((this.Child != null))
 			{
 				this.Child.ShowAll();

@@ -1,26 +1,24 @@
-﻿using System.Linq;
+﻿using System.Drawing;
 using System.ComponentModel;
+using System.Linq;
 using GalaSoft.MvvmLight.Threading;
-using Gtk;
 using JiraAssistant.Logic.ContextlessViewModels;
 using JiraAssistant.Logic.Settings;
 using Gdk;
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
+using System.Drawing.Imaging;
 
-namespace JiraAssistant.Mono.Components
+namespace JiraAssistant.Mono.Controllers
 {
-	public class ContentDisplayComponent
+	public class JiraServerInfoController
 	{
-		private readonly ContentDisplayWidget _control;
 		private readonly JiraSessionViewModel _jiraSession;
 		private readonly AssistantSettings _assistantSettings;
+		private readonly JiraServerInfoWidget _control;
 
-		public ContentDisplayComponent(ContentDisplayWidget control,
+		public JiraServerInfoController(JiraServerInfoWidget control,
 									   JiraSessionViewModel jiraSession,
-		                               AssistantSettings assistantSettings)
+									   AssistantSettings assistantSettings)
 		{
 			_control = control;
 			_jiraSession = jiraSession;
@@ -28,33 +26,13 @@ namespace JiraAssistant.Mono.Components
 
 			_jiraSession.IsLoggedInChanged += OnIsLoggedInChanged;
 			_jiraSession.PropertyChanged += JiraSessionPropertyChanged;
-			InitializeMenuBar();
-		}
-
-		private void InitializeMenuBar()
-		{
-			var menu = _control.Menu;
-
-			var jiraMenu = new MenuItem("JIRA");
-			var submenu = new Menu();
-			var logoutItem = new MenuItem("Logout");
-			logoutItem.Activated += async (sender, e) =>
-			{
-				await _jiraSession.Logout();
-			};
-			submenu.Add(logoutItem);
-			jiraMenu.Submenu = submenu;
-
-			menu.Add(jiraMenu);
-
-			menu.ShowAll();
 		}
 
 		private void OnIsLoggedInChanged(object sender, bool isLoggedIn)
 		{
 			DispatcherHelper.CheckBeginInvokeOnUI(() =>
 			{
-				
+
 			});
 		}
 
@@ -68,16 +46,16 @@ namespace JiraAssistant.Mono.Components
 
 		private void UpdateJiraConnectionInfo()
 		{
-			_control.Server_JiraAddress.Text = _assistantSettings.JiraUrl;
-			_control.Server_UserName.Text = _jiraSession.Profile.DisplayName;
-			_control.Server_Email.Text = _jiraSession.Profile.EmailAddress;
-			_control.Server_Roles.Text = string.Join(", ", _jiraSession.Profile.ApplicationRoles.Items.Select(r => r.Name));
-			_control.Server_Groups.Text = string.Join(", ", _jiraSession.Profile.Groups.Items.Select(r => r.Name));
+			_control.JiraAddress.Text = _assistantSettings.JiraUrl;
+			_control.UserName.Text = _jiraSession.Profile.DisplayName;
+			_control.Email.Text = _jiraSession.Profile.EmailAddress;
+			_control.Roles.Text = string.Join(", ", _jiraSession.Profile.ApplicationRoles.Items.Select(r => r.Name));
+			_control.Groups.Text = string.Join(", ", _jiraSession.Profile.Groups.Items.Select(r => r.Name));
 		}
 
 		private void UpdateAvatar()
 		{
-			_control.Server_Avatar.Pixbuf = BitmapToPixBuf(_jiraSession.ProfileAvatar);
+			_control.Avatar.Pixbuf = BitmapToPixBuf(_jiraSession.ProfileAvatar);
 		}
 
 		Pixbuf BitmapToPixBuf(Bitmap bitmap)
@@ -90,5 +68,6 @@ namespace JiraAssistant.Mono.Components
 				return result;
 			}
 		}
-}
+
+	}
 }

@@ -2,15 +2,15 @@
 using GalaSoft.MvvmLight.Threading;
 using JiraAssistant.Logic.ContextlessViewModels;
 
-namespace JiraAssistant.Mono.Components
+namespace JiraAssistant.Mono.Controllers
 {
-	public class AuthControlComponent
+	public class AuthControlController
 	{
 		private readonly LoginPageViewModel _login;
 		private readonly JiraSessionViewModel _jiraSession;
 		private readonly AuthControlWidget _control;
 
-		public AuthControlComponent(AuthControlWidget control,
+		public AuthControlController(AuthControlWidget control,
 									JiraSessionViewModel jiraSession,
 									LoginPageViewModel login)
 		{

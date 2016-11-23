@@ -16,33 +16,11 @@ namespace JiraAssistant.Mono
 
 		private global::Gtk.Notebook notebook;
 
-		private global::Gtk.Table table2;
-
-		private global::Gtk.Label label1;
-
-		private global::Gtk.Label label4;
-
-		private global::Gtk.Label label5;
-
-		private global::Gtk.Label label6;
-
-		private global::Gtk.Label label7;
-
-		private global::Gtk.Label label8;
-
-		private global::Gtk.Image server_avatar;
-
-		private global::Gtk.Entry server_email;
-
-		private global::Gtk.Entry server_groups;
-
-		private global::Gtk.Entry server_jiraAddress;
-
-		private global::Gtk.Entry server_roles;
-
-		private global::Gtk.Entry server_userName;
+		private global::JiraAssistant.Mono.JiraServerInfoWidget jiraserverinfowidget1;
 
 		private global::Gtk.Label label2;
+
+		private global::JiraAssistant.Mono.ToolsWidget toolswidget1;
 
 		private global::Gtk.Label label3;
 
@@ -77,171 +55,35 @@ namespace JiraAssistant.Mono
 			this.notebook = new global::Gtk.Notebook();
 			this.notebook.CanFocus = true;
 			this.notebook.Name = "notebook";
-			this.notebook.CurrentPage = 0;
+			this.notebook.CurrentPage = 1;
 			// Container child notebook.Gtk.Notebook+NotebookChild
-			this.table2 = new global::Gtk.Table(((uint)(7)), ((uint)(2)), false);
-			this.table2.Name = "table2";
-			this.table2.RowSpacing = ((uint)(6));
-			this.table2.ColumnSpacing = ((uint)(6));
-			// Container child table2.Gtk.Table+TableChild
-			this.label1 = new global::Gtk.Label();
-			this.label1.Name = "label1";
-			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString("JIRA address");
-			this.table2.Add(this.label1);
-			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table2[this.label1]));
-			w4.XOptions = ((global::Gtk.AttachOptions)(4));
-			w4.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.label4 = new global::Gtk.Label();
-			this.label4.Name = "label4";
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString("User");
-			this.table2.Add(this.label4);
-			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table2[this.label4]));
-			w5.TopAttach = ((uint)(1));
-			w5.BottomAttach = ((uint)(2));
-			w5.XOptions = ((global::Gtk.AttachOptions)(4));
-			w5.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.label5 = new global::Gtk.Label();
-			this.label5.Name = "label5";
-			this.label5.LabelProp = global::Mono.Unix.Catalog.GetString("E-mail");
-			this.table2.Add(this.label5);
-			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table2[this.label5]));
-			w6.TopAttach = ((uint)(2));
-			w6.BottomAttach = ((uint)(3));
-			w6.XOptions = ((global::Gtk.AttachOptions)(4));
-			w6.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.label6 = new global::Gtk.Label();
-			this.label6.Name = "label6";
-			this.label6.LabelProp = global::Mono.Unix.Catalog.GetString("Groups");
-			this.table2.Add(this.label6);
-			global::Gtk.Table.TableChild w7 = ((global::Gtk.Table.TableChild)(this.table2[this.label6]));
-			w7.TopAttach = ((uint)(3));
-			w7.BottomAttach = ((uint)(4));
-			w7.XOptions = ((global::Gtk.AttachOptions)(4));
-			w7.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.label7 = new global::Gtk.Label();
-			this.label7.Name = "label7";
-			this.label7.LabelProp = global::Mono.Unix.Catalog.GetString("Avatar");
-			this.table2.Add(this.label7);
-			global::Gtk.Table.TableChild w8 = ((global::Gtk.Table.TableChild)(this.table2[this.label7]));
-			w8.TopAttach = ((uint)(5));
-			w8.BottomAttach = ((uint)(6));
-			w8.XOptions = ((global::Gtk.AttachOptions)(4));
-			w8.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.label8 = new global::Gtk.Label();
-			this.label8.Name = "label8";
-			this.label8.LabelProp = global::Mono.Unix.Catalog.GetString("Roles");
-			this.table2.Add(this.label8);
-			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table2[this.label8]));
-			w9.TopAttach = ((uint)(4));
-			w9.BottomAttach = ((uint)(5));
-			w9.XOptions = ((global::Gtk.AttachOptions)(4));
-			w9.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.server_avatar = new global::Gtk.Image();
-			this.server_avatar.WidthRequest = 48;
-			this.server_avatar.HeightRequest = 48;
-			this.server_avatar.Name = "server_avatar";
-			this.table2.Add(this.server_avatar);
-			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table2[this.server_avatar]));
-			w10.TopAttach = ((uint)(5));
-			w10.BottomAttach = ((uint)(6));
-			w10.LeftAttach = ((uint)(1));
-			w10.RightAttach = ((uint)(2));
-			w10.XOptions = ((global::Gtk.AttachOptions)(0));
-			w10.YOptions = ((global::Gtk.AttachOptions)(0));
-			// Container child table2.Gtk.Table+TableChild
-			this.server_email = new global::Gtk.Entry();
-			this.server_email.Sensitive = false;
-			this.server_email.CanFocus = true;
-			this.server_email.Name = "server_email";
-			this.server_email.IsEditable = true;
-			this.server_email.InvisibleChar = '●';
-			this.table2.Add(this.server_email);
-			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table2[this.server_email]));
-			w11.TopAttach = ((uint)(2));
-			w11.BottomAttach = ((uint)(3));
-			w11.LeftAttach = ((uint)(1));
-			w11.RightAttach = ((uint)(2));
-			w11.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.server_groups = new global::Gtk.Entry();
-			this.server_groups.Sensitive = false;
-			this.server_groups.CanFocus = true;
-			this.server_groups.Name = "server_groups";
-			this.server_groups.IsEditable = true;
-			this.server_groups.InvisibleChar = '●';
-			this.table2.Add(this.server_groups);
-			global::Gtk.Table.TableChild w12 = ((global::Gtk.Table.TableChild)(this.table2[this.server_groups]));
-			w12.TopAttach = ((uint)(3));
-			w12.BottomAttach = ((uint)(4));
-			w12.LeftAttach = ((uint)(1));
-			w12.RightAttach = ((uint)(2));
-			w12.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.server_jiraAddress = new global::Gtk.Entry();
-			this.server_jiraAddress.Sensitive = false;
-			this.server_jiraAddress.CanFocus = true;
-			this.server_jiraAddress.Name = "server_jiraAddress";
-			this.server_jiraAddress.IsEditable = true;
-			this.server_jiraAddress.InvisibleChar = '●';
-			this.table2.Add(this.server_jiraAddress);
-			global::Gtk.Table.TableChild w13 = ((global::Gtk.Table.TableChild)(this.table2[this.server_jiraAddress]));
-			w13.LeftAttach = ((uint)(1));
-			w13.RightAttach = ((uint)(2));
-			w13.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.server_roles = new global::Gtk.Entry();
-			this.server_roles.Sensitive = false;
-			this.server_roles.CanFocus = true;
-			this.server_roles.Name = "server_roles";
-			this.server_roles.IsEditable = true;
-			this.server_roles.InvisibleChar = '●';
-			this.table2.Add(this.server_roles);
-			global::Gtk.Table.TableChild w14 = ((global::Gtk.Table.TableChild)(this.table2[this.server_roles]));
-			w14.TopAttach = ((uint)(4));
-			w14.BottomAttach = ((uint)(5));
-			w14.LeftAttach = ((uint)(1));
-			w14.RightAttach = ((uint)(2));
-			w14.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table2.Gtk.Table+TableChild
-			this.server_userName = new global::Gtk.Entry();
-			this.server_userName.Sensitive = false;
-			this.server_userName.CanFocus = true;
-			this.server_userName.Name = "server_userName";
-			this.server_userName.IsEditable = true;
-			this.server_userName.InvisibleChar = '●';
-			this.table2.Add(this.server_userName);
-			global::Gtk.Table.TableChild w15 = ((global::Gtk.Table.TableChild)(this.table2[this.server_userName]));
-			w15.TopAttach = ((uint)(1));
-			w15.BottomAttach = ((uint)(2));
-			w15.LeftAttach = ((uint)(1));
-			w15.RightAttach = ((uint)(2));
-			w15.YOptions = ((global::Gtk.AttachOptions)(4));
-			this.notebook.Add(this.table2);
+			this.jiraserverinfowidget1 = new global::JiraAssistant.Mono.JiraServerInfoWidget();
+			this.jiraserverinfowidget1.Events = ((global::Gdk.EventMask)(256));
+			this.jiraserverinfowidget1.Name = "jiraserverinfowidget1";
+			this.notebook.Add(this.jiraserverinfowidget1);
 			// Notebook tab
 			this.label2 = new global::Gtk.Label();
 			this.label2.Name = "label2";
 			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString("JIRA Connection");
-			this.notebook.SetTabLabel(this.table2, this.label2);
+			this.notebook.SetTabLabel(this.jiraserverinfowidget1, this.label2);
 			this.label2.ShowAll();
+			// Container child notebook.Gtk.Notebook+NotebookChild
+			this.toolswidget1 = new global::JiraAssistant.Mono.ToolsWidget();
+			this.toolswidget1.Events = ((global::Gdk.EventMask)(256));
+			this.toolswidget1.Name = "toolswidget1";
+			this.notebook.Add(this.toolswidget1);
+			global::Gtk.Notebook.NotebookChild w5 = ((global::Gtk.Notebook.NotebookChild)(this.notebook[this.toolswidget1]));
+			w5.Position = 1;
 			// Notebook tab
-			global::Gtk.Label w17 = new global::Gtk.Label();
-			w17.Visible = true;
-			this.notebook.Add(w17);
 			this.label3 = new global::Gtk.Label();
 			this.label3.Name = "label3";
 			this.label3.LabelProp = global::Mono.Unix.Catalog.GetString("Tools");
-			this.notebook.SetTabLabel(w17, this.label3);
+			this.notebook.SetTabLabel(this.toolswidget1, this.label3);
 			this.label3.ShowAll();
 			this.table1.Add(this.notebook);
-			global::Gtk.Table.TableChild w18 = ((global::Gtk.Table.TableChild)(this.table1[this.notebook]));
-			w18.TopAttach = ((uint)(1));
-			w18.BottomAttach = ((uint)(2));
+			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table1[this.notebook]));
+			w6.TopAttach = ((uint)(1));
+			w6.BottomAttach = ((uint)(2));
 			this.Add(this.table1);
 			if ((this.Child != null))
 			{

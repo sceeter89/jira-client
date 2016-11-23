@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraAssistant.Controls", "J
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraAssistant.Mono", "JiraAssistant.Mono\JiraAssistant.Mono.csproj", "{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiraAssistant.Tools", "JiraAssistant.Tools\JiraAssistant.Tools.csproj", "{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Mono|Any CPU = Debug_Mono|Any CPU
@@ -23,6 +25,8 @@ Global
 		Release_Mono|x86 = Release_Mono|x86
 		Release_WPF|Any CPU = Release_WPF|Any CPU
 		Release_WPF|x86 = Release_WPF|x86
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Debug_Mono|Any CPU.ActiveCfg = Debug_Mono|Any CPU
@@ -39,6 +43,10 @@ Global
 		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Release_WPF|Any CPU.Build.0 = Release|Any CPU
 		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Release_WPF|x86.ActiveCfg = Release|x86
 		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Release_WPF|x86.Build.0 = Release|x86
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F169BA-2A7A-4EFC-9A87-D8EC3DAA2929}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Debug_Mono|Any CPU.ActiveCfg = Debug_Mono|Any CPU
 		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Debug_Mono|Any CPU.Build.0 = Debug_Mono|Any CPU
 		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Debug_Mono|x86.ActiveCfg = Debug_Mono|Any CPU
@@ -55,6 +63,10 @@ Global
 		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Release_WPF|Any CPU.Build.0 = Release|Any CPU
 		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Release_WPF|x86.ActiveCfg = Release|Any CPU
 		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Release_WPF|x86.Build.0 = Release|Any CPU
+		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D730A576-2171-4886-9ED4-B08B25A2BB85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Debug_Mono|Any CPU.ActiveCfg = Debug_Mono|Any CPU
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Debug_Mono|Any CPU.Build.0 = Debug_Mono|Any CPU
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Debug_Mono|x86.ActiveCfg = Debug_Mono|Any CPU
@@ -71,6 +83,10 @@ Global
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Release_WPF|Any CPU.Build.0 = Release|Any CPU
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Release_WPF|x86.ActiveCfg = Release|Any CPU
 		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Release_WPF|x86.Build.0 = Release|Any CPU
+		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A89B4325-3813-430E-A3DA-853C4C8F8690}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug_Mono|Any CPU.ActiveCfg = Debug_Mono|Any CPU
 		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug_Mono|x86.ActiveCfg = Debug_Mono|Any CPU
 		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug_Mono|x86.Build.0 = Debug_Mono|Any CPU
@@ -85,6 +101,10 @@ Global
 		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release_WPF|Any CPU.Build.0 = Release|Any CPU
 		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release_WPF|x86.ActiveCfg = Release|Any CPU
 		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release_WPF|x86.Build.0 = Release|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FF6D466-C5AA-4495-A5A0-36A2B1A42B88}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Debug_Mono|Any CPU.ActiveCfg = Debug_Mono|Any CPU
 		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Debug_Mono|Any CPU.Build.0 = Debug_Mono|Any CPU
 		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Debug_Mono|x86.ActiveCfg = Debug_Mono|Any CPU
@@ -99,6 +119,30 @@ Global
 		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Release_WPF|Any CPU.ActiveCfg = Release|Any CPU
 		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Release_WPF|x86.ActiveCfg = Release|Any CPU
 		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Release_WPF|x86.Build.0 = Release|Any CPU
+		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4DD9CC-0CFA-452D-B7EA-3C233BDFE651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug_Mono|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug_Mono|Any CPU.Build.0 = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug_Mono|x86.ActiveCfg = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug_Mono|x86.Build.0 = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug_WPF|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug_WPF|Any CPU.Build.0 = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug_WPF|x86.ActiveCfg = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug_WPF|x86.Build.0 = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release_Mono|Any CPU.ActiveCfg = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release_Mono|Any CPU.Build.0 = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release_Mono|x86.ActiveCfg = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release_Mono|x86.Build.0 = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release_WPF|Any CPU.ActiveCfg = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release_WPF|Any CPU.Build.0 = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release_WPF|x86.ActiveCfg = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release_WPF|x86.Build.0 = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
