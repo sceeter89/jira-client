@@ -16,23 +16,25 @@ namespace JiraAssistant.Mono
 
 		private global::Gtk.Alignment alignment1;
 
-		private global::Gtk.Table table1;
+		private global::Gtk.Table table3;
 
 		private global::Gtk.Button button1;
 
-		private global::Gtk.Entry jiraAddress;
+		private global::Gtk.Entry jiraAddress1;
 
-		private global::Gtk.Label label1;
+		private global::Gtk.Label label10;
 
-		private global::Gtk.Label label4;
+		private global::Gtk.Label label11;
 
-		private global::Gtk.Label label5;
+		private global::Gtk.Label label9;
 
 		private global::Gtk.Entry password;
 
 		private global::Gtk.Entry username;
 
 		private global::Gtk.Label GtkLabel1;
+
+		private global::Gtk.Label messageLabel;
 
 		protected virtual void Build()
 		{
@@ -56,6 +58,8 @@ namespace JiraAssistant.Mono
 			this.vbox1.Add(this.contentDisplayWidget);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.contentDisplayWidget]));
 			w3.Position = 0;
+			w3.Expand = false;
+			w3.Fill = false;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.loginFrame = new global::Gtk.Frame();
 			this.loginFrame.Name = "loginFrame";
@@ -68,94 +72,94 @@ namespace JiraAssistant.Mono
 			this.alignment1 = new global::Gtk.Alignment(1F, 1F, 1F, 1F);
 			this.alignment1.Name = "alignment1";
 			// Container child alignment1.Gtk.Container+ContainerChild
-			this.table1 = new global::Gtk.Table(((uint)(4)), ((uint)(2)), false);
-			this.table1.Name = "table1";
-			this.table1.RowSpacing = ((uint)(6));
-			this.table1.ColumnSpacing = ((uint)(6));
-			// Container child table1.Gtk.Table+TableChild
+			this.table3 = new global::Gtk.Table(((uint)(4)), ((uint)(2)), false);
+			this.table3.Name = "table3";
+			this.table3.RowSpacing = ((uint)(6));
+			this.table3.ColumnSpacing = ((uint)(6));
+			// Container child table3.Gtk.Table+TableChild
 			this.button1 = new global::Gtk.Button();
 			this.button1.CanFocus = true;
 			this.button1.Name = "button1";
 			this.button1.UseUnderline = true;
 			this.button1.Label = global::Mono.Unix.Catalog.GetString("Login");
-			this.table1.Add(this.button1);
-			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table1[this.button1]));
+			this.table3.Add(this.button1);
+			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table3[this.button1]));
 			w4.TopAttach = ((uint)(3));
 			w4.BottomAttach = ((uint)(4));
 			w4.LeftAttach = ((uint)(1));
 			w4.RightAttach = ((uint)(2));
 			w4.XOptions = ((global::Gtk.AttachOptions)(4));
 			w4.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
-			this.jiraAddress = new global::Gtk.Entry();
-			this.jiraAddress.CanFocus = true;
-			this.jiraAddress.Name = "jiraAddress";
-			this.jiraAddress.IsEditable = true;
-			this.jiraAddress.InvisibleChar = '●';
-			this.table1.Add(this.jiraAddress);
-			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table1[this.jiraAddress]));
+			// Container child table3.Gtk.Table+TableChild
+			this.jiraAddress1 = new global::Gtk.Entry();
+			this.jiraAddress1.CanFocus = true;
+			this.jiraAddress1.Name = "jiraAddress1";
+			this.jiraAddress1.IsEditable = true;
+			this.jiraAddress1.InvisibleChar = '●';
+			this.table3.Add(this.jiraAddress1);
+			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table3[this.jiraAddress1]));
 			w5.LeftAttach = ((uint)(1));
 			w5.RightAttach = ((uint)(2));
 			w5.XOptions = ((global::Gtk.AttachOptions)(4));
 			w5.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
-			this.label1 = new global::Gtk.Label();
-			this.label1.Name = "label1";
-			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString("User name");
-			this.table1.Add(this.label1);
-			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table1[this.label1]));
-			w6.TopAttach = ((uint)(1));
-			w6.BottomAttach = ((uint)(2));
+			// Container child table3.Gtk.Table+TableChild
+			this.label10 = new global::Gtk.Label();
+			this.label10.Name = "label10";
+			this.label10.LabelProp = global::Mono.Unix.Catalog.GetString("Password");
+			this.table3.Add(this.label10);
+			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table3[this.label10]));
+			w6.TopAttach = ((uint)(2));
+			w6.BottomAttach = ((uint)(3));
 			w6.XOptions = ((global::Gtk.AttachOptions)(4));
 			w6.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
-			this.label4 = new global::Gtk.Label();
-			this.label4.Name = "label4";
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString("Password");
-			this.table1.Add(this.label4);
-			global::Gtk.Table.TableChild w7 = ((global::Gtk.Table.TableChild)(this.table1[this.label4]));
-			w7.TopAttach = ((uint)(2));
-			w7.BottomAttach = ((uint)(3));
+			// Container child table3.Gtk.Table+TableChild
+			this.label11 = new global::Gtk.Label();
+			this.label11.Name = "label11";
+			this.label11.LabelProp = global::Mono.Unix.Catalog.GetString("User name");
+			this.table3.Add(this.label11);
+			global::Gtk.Table.TableChild w7 = ((global::Gtk.Table.TableChild)(this.table3[this.label11]));
+			w7.TopAttach = ((uint)(1));
+			w7.BottomAttach = ((uint)(2));
 			w7.XOptions = ((global::Gtk.AttachOptions)(4));
 			w7.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
-			this.label5 = new global::Gtk.Label();
-			this.label5.Name = "label5";
-			this.label5.LabelProp = global::Mono.Unix.Catalog.GetString("JIRA address");
-			this.table1.Add(this.label5);
-			global::Gtk.Table.TableChild w8 = ((global::Gtk.Table.TableChild)(this.table1[this.label5]));
+			// Container child table3.Gtk.Table+TableChild
+			this.label9 = new global::Gtk.Label();
+			this.label9.Name = "label9";
+			this.label9.LabelProp = global::Mono.Unix.Catalog.GetString("JIRA address");
+			this.table3.Add(this.label9);
+			global::Gtk.Table.TableChild w8 = ((global::Gtk.Table.TableChild)(this.table3[this.label9]));
 			w8.XOptions = ((global::Gtk.AttachOptions)(4));
 			w8.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
+			// Container child table3.Gtk.Table+TableChild
 			this.password = new global::Gtk.Entry();
 			this.password.CanFocus = true;
 			this.password.Name = "password";
 			this.password.IsEditable = true;
 			this.password.Visibility = false;
 			this.password.InvisibleChar = '●';
-			this.table1.Add(this.password);
-			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table1[this.password]));
+			this.table3.Add(this.password);
+			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table3[this.password]));
 			w9.TopAttach = ((uint)(2));
 			w9.BottomAttach = ((uint)(3));
 			w9.LeftAttach = ((uint)(1));
 			w9.RightAttach = ((uint)(2));
 			w9.XOptions = ((global::Gtk.AttachOptions)(4));
 			w9.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
+			// Container child table3.Gtk.Table+TableChild
 			this.username = new global::Gtk.Entry();
 			this.username.CanFocus = true;
 			this.username.Name = "username";
 			this.username.IsEditable = true;
 			this.username.InvisibleChar = '●';
-			this.table1.Add(this.username);
-			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table1[this.username]));
+			this.table3.Add(this.username);
+			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table3[this.username]));
 			w10.TopAttach = ((uint)(1));
 			w10.BottomAttach = ((uint)(2));
 			w10.LeftAttach = ((uint)(1));
 			w10.RightAttach = ((uint)(2));
 			w10.XOptions = ((global::Gtk.AttachOptions)(4));
 			w10.YOptions = ((global::Gtk.AttachOptions)(4));
-			this.alignment1.Add(this.table1);
+			this.alignment1.Add(this.table3);
 			this.GtkAlignment.Add(this.alignment1);
 			this.loginFrame.Add(this.GtkAlignment);
 			this.GtkLabel1 = new global::Gtk.Label();
@@ -170,6 +174,14 @@ namespace JiraAssistant.Mono
 			w14.Position = 1;
 			w14.Expand = false;
 			w14.Fill = false;
+			// Container child vbox1.Gtk.Box+BoxChild
+			this.messageLabel = new global::Gtk.Label();
+			this.messageLabel.Name = "messageLabel";
+			this.vbox1.Add(this.messageLabel);
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.messageLabel]));
+			w15.Position = 2;
+			w15.Expand = false;
+			w15.Fill = false;
 			this.Add(this.vbox1);
 			if ((this.Child != null))
 			{

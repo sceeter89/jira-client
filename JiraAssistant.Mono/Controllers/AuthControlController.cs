@@ -1,3 +1,4 @@
+using Gtk;
 using System;
 using JiraAssistant.Domain.Ui;
 using JiraAssistant.Logic.ContextlessViewModels;
@@ -24,6 +25,14 @@ namespace JiraAssistant.Mono.Controllers
 			_control.LoginAttempt += OnLoginAttempt;
 			_control.JiraAddress = _login.JiraAddress;
 			_control.Username = _login.Username;
+
+			_login.PropertyChanged += (sender, e) =>
+			{
+				if (e.PropertyName == "LoginErrorMessage")
+				{
+					_control.Message = _login.LoginErrorMessage;
+				}
+			};
 		}
 
 		private void OnLoginAttempt(object sender, LoginAttemptEventArgs e)

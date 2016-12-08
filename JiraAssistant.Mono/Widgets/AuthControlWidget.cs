@@ -44,11 +44,11 @@ namespace JiraAssistant.Mono
 		{
 			get
 			{
-				return jiraAddress.Text;
+				return jiraAddress1.Text;
 			}
 			set
 			{
-				jiraAddress.Text = value;
+				jiraAddress1.Text = value;
 			}
 		}
 
@@ -64,6 +64,18 @@ namespace JiraAssistant.Mono
 			}
 		}
 
+		public string Message
+		{
+			get
+			{
+				return messageLabel.Text;
+			}
+			set
+			{
+				messageLabel.Text = value;
+			}
+		}
+
 		public ContentDisplayWidget ContentDisplay
 		{
 			get { return contentDisplayWidget; }
@@ -75,7 +87,7 @@ namespace JiraAssistant.Mono
 		{
 			if (LoginAttempt != null)
 				LoginAttempt(this, new LoginAttemptEventArgs(
-					jiraAddress.Text,
+					jiraAddress1.Text,
 					username.Text,
 					password.Text
 				));
