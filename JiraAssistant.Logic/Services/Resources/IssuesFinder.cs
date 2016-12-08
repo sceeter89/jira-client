@@ -1,5 +1,6 @@
-﻿using JiraAssistant.Domain.Exceptions;
+using JiraAssistant.Domain.Exceptions;
 using JiraAssistant.Domain.Jira;
+using JiraAssistant.Domain.Ui;
 using JiraAssistant.Logic.Settings;
 using JiraAssistant.Logic.Services.Jira;
 using Newtonsoft.Json;
@@ -11,7 +12,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System;
 using System.Threading;
-using GalaSoft.MvvmLight.Threading;
 
 namespace JiraAssistant.Logic.Services.Resources
 {
@@ -74,7 +74,7 @@ namespace JiraAssistant.Logic.Services.Resources
                         var result = resultTask.Result;
                         Interlocked.Add(ref counter, result.Issues.Length);
                         if (progressUpdateCallback != null)
-                            DispatcherHelper.CheckBeginInvokeOnUI(() => progressUpdateCallback(((float) counter / firstBatch.Total) * 100));
+                            CustomDispatcherHelper.CheckBeginInvokeOnUI(() => progressUpdateCallback(((float) counter / firstBatch.Total) * 100));
                         return result;
                     });
 

@@ -1,5 +1,5 @@
-﻿using System;
-using GalaSoft.MvvmLight.Threading;
+using System;
+using JiraAssistant.Domain.Ui;
 using JiraAssistant.Logic.ContextlessViewModels;
 
 namespace JiraAssistant.Mono.Controllers
@@ -35,7 +35,7 @@ namespace JiraAssistant.Mono.Controllers
 
 		private void IsLoggedInChanged(object sender, bool isLoggedIn)
 		{
-			DispatcherHelper.CheckBeginInvokeOnUI(() =>
+			CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
 			{
 				if (isLoggedIn)
 				{

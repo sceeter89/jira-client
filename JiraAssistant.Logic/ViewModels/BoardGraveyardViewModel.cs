@@ -1,7 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
+using JiraAssistant.Domain.Ui;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Settings;
@@ -54,7 +54,7 @@ namespace JiraAssistant.Logic.ViewModels
             {
                foreach (var issue in Issues.Where(i => i.Resolved.HasValue == false))
                {
-                  DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                  CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
                   {
                      var sinceUpdate = DateTime.Now - issue.BuiltInFields.Updated;
                      var sinceCreation = DateTime.Now - issue.BuiltInFields.Created;

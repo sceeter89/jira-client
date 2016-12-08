@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Reflection;
 using Autofac;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
 using Gtk;
+using JiraAssistant.Domain.Ui;
 using JiraAssistant.Logic.ContextlessViewModels;
 using JiraAssistant.Logic.Services;
 using JiraAssistant.Logic.Settings;
@@ -19,7 +19,7 @@ namespace JiraAssistant.Mono
 				IocContainer.Dispose();
 			};
 
-			DispatcherHelper.Initialize();
+			CustomDispatcherHelper.Initialize();
 			InitializeIoc();
 
 			Application.Init();

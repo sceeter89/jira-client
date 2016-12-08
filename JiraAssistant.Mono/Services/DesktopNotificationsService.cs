@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
+using GalaSoft.MvvmLight.Messaging;
 using Gtk;
+using JiraAssistant.Domain.Ui;
 using JiraAssistant.Domain.Messages;
 
 namespace JiraAssistant.Mono
@@ -19,7 +19,7 @@ namespace JiraAssistant.Mono
 
 		void ShowAlert(ShowAlertMessage message)
 		{
-			DispatcherHelper.CheckBeginInvokeOnUI(() =>
+			CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
 			{
 				var dialog = new MessageDialog(null, DialogFlags.Modal, MessageType.Other, ButtonsType.Ok, message.Message);
 				dialog.Run();

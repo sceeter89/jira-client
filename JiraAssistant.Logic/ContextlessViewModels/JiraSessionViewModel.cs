@@ -1,6 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Threading;
+using JiraAssistant.Domain.Ui;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Settings;
@@ -48,13 +48,13 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             Task.Factory.StartNew(async () =>
             {
                 var details = await _jiraApi.Session.GetProfileDetails();
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
              {
                    Profile = details;
                });
 
                 var avatar = await _jiraApi.DownloadPicture(details.AvatarUrls.Avatar48x48);
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
              {
                    ProfileAvatar = avatar;
                });

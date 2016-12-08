@@ -181,7 +181,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
 
             await Task.Factory.StartNew(() =>
             {
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
              {
                  if (CurrentPage != null)
                      CurrentPage.OnNavigatedFrom();
@@ -191,7 +191,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             await Task.Delay(250);
             await Task.Factory.StartNew(() =>
             {
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
              {
                  CurrentPage = _navigationHistory.Peek();
              });
@@ -202,7 +202,7 @@ namespace JiraAssistant.Logic.ContextlessViewModels
 
             await Task.Factory.StartNew(() =>
             {
-                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
              {
                  CurrentPage.OnNavigatedTo();
                  BackCommand.RaiseCanExecuteChanged();
