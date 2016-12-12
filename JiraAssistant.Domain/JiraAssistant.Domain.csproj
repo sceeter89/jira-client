@@ -110,7 +110,7 @@
     <Compile Include="Ui\SettingsPage.cs" />
     <Compile Include="Ui\UpdateMethod.cs" />
     <Compile Include="Tools\ICustomTool.cs" />
-    <Compile Include="Ui\CustomDispatchHelper.cs" />
+    <Compile Include="Ui\IInvokeOnUiThread.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tools\" />

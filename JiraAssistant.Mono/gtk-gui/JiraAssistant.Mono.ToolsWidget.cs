@@ -7,9 +7,9 @@ namespace JiraAssistant.Mono
 		protected virtual void Build()
 		{
 			global::Stetic.Gui.Initialize(this);
-			// Widget JiraAssistant.Mono.Tools
+			// Widget JiraAssistant.Mono.ToolsWidget
 			global::Stetic.BinContainer.Attach(this);
-			this.Name = "JiraAssistant.Mono.Tools";
+			this.Name = "JiraAssistant.Mono.ToolsWidget";
 			if ((this.Child != null))
 			{
 				this.Child.ShowAll();

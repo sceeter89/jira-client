@@ -1,6 +1,5 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using JiraAssistant.Domain.Ui;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Settings;
@@ -8,6 +7,7 @@ using JiraAssistant.Logic.Services.Jira;
 using System;
 using System.Threading.Tasks;
 using System.Drawing;
+using JiraAssistant.Domain;
 
 namespace JiraAssistant.Logic.ContextlessViewModels
 {
@@ -19,12 +19,15 @@ namespace JiraAssistant.Logic.ContextlessViewModels
         private Bitmap _profileAvatar;
         private readonly IJiraApi _jiraApi;
         private readonly IMessenger _messenger;
+		private readonly IInvokeOnUiThread _onUiThread;
 
-        public JiraSessionViewModel(AssistantSettings configuration,
-           IMessenger messenger,
-           IJiraApi jiraApi)
+		public JiraSessionViewModel(AssistantSettings configuration,
+           							IMessenger messenger,
+           							IJiraApi jiraApi,
+		                            IInvokeOnUiThread onUiThread)
         {
-            _jiraApi = jiraApi;
+			_onUiThread = onUiThread;
+			_jiraApi = jiraApi;
             _configuration = configuration;
             _messenger = messenger;
 
@@ -48,13 +51,13 @@ namespace JiraAssistant.Logic.ContextlessViewModels
             Task.Factory.StartNew(async () =>
             {
                 var details = await _jiraApi.Session.GetProfileDetails();
-                CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
+				_onUiThread.Invoke(() =>
              {
                    Profile = details;
                });
 
                 var avatar = await _jiraApi.DownloadPicture(details.AvatarUrls.Avatar48x48);
-                CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
+				_onUiThread.Invoke(() =>
              {
                    ProfileAvatar = avatar;
                });

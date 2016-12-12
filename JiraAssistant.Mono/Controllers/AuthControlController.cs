@@ -2,6 +2,7 @@ using Gtk;
 using System;
 using JiraAssistant.Domain.Ui;
 using JiraAssistant.Logic.ContextlessViewModels;
+using JiraAssistant.Domain;
 
 namespace JiraAssistant.Mono.Controllers
 {
@@ -10,14 +11,18 @@ namespace JiraAssistant.Mono.Controllers
 		private readonly LoginPageViewModel _login;
 		private readonly JiraSessionViewModel _jiraSession;
 		private readonly AuthControlWidget _control;
+		private readonly IInvokeOnUiThread _onUiThread;
+
 
 		public AuthControlController(AuthControlWidget control,
 									JiraSessionViewModel jiraSession,
-									LoginPageViewModel login)
+									LoginPageViewModel login,
+		                            IInvokeOnUiThread onUiThread)
 		{
 			_control = control;
 			_jiraSession = jiraSession;
 			_login = login;
+			_onUiThread = onUiThread;
 
 			IsLoggedInChanged(this, false);
 
@@ -44,7 +49,7 @@ namespace JiraAssistant.Mono.Controllers
 
 		private void IsLoggedInChanged(object sender, bool isLoggedIn)
 		{
-			CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
+			_onUiThread.Invoke(() =>
 			{
 				if (isLoggedIn)
 				{

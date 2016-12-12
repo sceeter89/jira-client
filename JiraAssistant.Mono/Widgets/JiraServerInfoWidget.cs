@@ -8,6 +8,7 @@ namespace JiraAssistant.Mono
 	public partial class JiraServerInfoWidget : Bin
 	{
 		private readonly JiraServerInfoController _controller;
+
 		public JiraServerInfoWidget()
 		{
 			this.Build();

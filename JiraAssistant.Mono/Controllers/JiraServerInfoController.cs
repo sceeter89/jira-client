@@ -1,7 +1,6 @@
 using System.Drawing;
 using System.ComponentModel;
 using System.Linq;
-using JiraAssistant.Domain.Ui;
 using JiraAssistant.Logic.ContextlessViewModels;
 using JiraAssistant.Logic.Settings;
 using Gdk;
@@ -30,10 +29,6 @@ namespace JiraAssistant.Mono.Controllers
 
 		private void OnIsLoggedInChanged(object sender, bool isLoggedIn)
 		{
-			CustomDispatcherHelper.CheckBeginInvokeOnUI(() =>
-			{
-
-			});
 		}
 
 		private void JiraSessionPropertyChanged(object sender, PropertyChangedEventArgs e)

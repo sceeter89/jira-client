@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <widget-library name="../bin/Debug_Mono/JiraAssistant.Mono.exe" internal="true" />
+    <widget-library name="../bin/Debug/JiraAssistant.Mono.exe" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="JiraAssistant.Mono.StatusBarWidget" design-size="563 30">
     <property name="MemberName" />
@@ -30,7 +30,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="JiraAssistant.Mono.MainWindow" design-size="400 464">
+  <widget class="Gtk.Window" id="JiraAssistant.Mono.MainWindow" design-size="400 484">
     <action-group name="Default">
       <action id="JiraAction">
         <property name="Type">Action</property>

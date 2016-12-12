@@ -67,7 +67,7 @@ namespace JiraAssistant.Mono
 				this.Child.ShowAll();
 			}
 			this.DefaultWidth = 400;
-			this.DefaultHeight = 464;
+			this.DefaultHeight = 484;
 			this.Show();
 		}
 	}

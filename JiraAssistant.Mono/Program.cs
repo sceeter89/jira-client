@@ -3,7 +3,6 @@ using System.Reflection;
 using Autofac;
 using GalaSoft.MvvmLight.Messaging;
 using Gtk;
-using JiraAssistant.Domain.Ui;
 using JiraAssistant.Logic.ContextlessViewModels;
 using JiraAssistant.Logic.Services;
 using JiraAssistant.Logic.Settings;
@@ -19,7 +18,6 @@ namespace JiraAssistant.Mono
 				IocContainer.Dispose();
 			};
 
-			CustomDispatcherHelper.Initialize();
 			InitializeIoc();
 
 			Application.Init();
@@ -97,6 +95,10 @@ namespace JiraAssistant.Mono
 			builder.RegisterType<MainWindow>()
 			   .AsSelf()
 			   .SingleInstance();
+
+			builder.RegisterType<OnUiThread>()
+				   .AsImplementedInterfaces()
+				   .SingleInstance();
 
 			IocContainer = builder.Build();
 		}

@@ -53,8 +53,8 @@ namespace JiraAssistant.Mono
 			this.vbox1.Spacing = 6;
 			// Container child vbox1.Gtk.Box+BoxChild
 			this.contentDisplayWidget = new global::JiraAssistant.Mono.ContentDisplayWidget();
-			this.contentDisplayWidget.Events = ((global::Gdk.EventMask)(256));
-			this.contentDisplayWidget.Name = "contentDisplayWidget";
+                        this.contentDisplayWidget.Events = ((global::Gdk.EventMask)(256));
+                        this.contentDisplayWidget.Name = "contentDisplayWidget";
 			this.vbox1.Add(this.contentDisplayWidget);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.contentDisplayWidget]));
 			w3.Position = 0;
