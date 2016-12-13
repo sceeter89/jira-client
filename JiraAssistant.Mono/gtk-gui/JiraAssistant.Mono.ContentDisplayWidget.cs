@@ -45,7 +45,7 @@ namespace JiraAssistant.Mono
 			this.table1.RowSpacing = ((uint)(6));
 			this.table1.ColumnSpacing = ((uint)(6));
 			// Container child table1.Gtk.Table+TableChild
-			this.UIManager.AddUiFromString("<ui><menubar name='mainMenu'><menu><menuitem/></menu></menubar></ui>");
+			this.UIManager.AddUiFromString("<ui><menubar name=\'mainMenu\'><menu><menuitem/></menu></menubar></ui>");
 			this.mainMenu = ((global::Gtk.MenuBar)(this.UIManager.GetWidget("/mainMenu")));
 			this.mainMenu.Name = "mainMenu";
 			this.table1.Add(this.mainMenu);
@@ -57,7 +57,9 @@ namespace JiraAssistant.Mono
 			this.notebook.Name = "notebook";
 			this.notebook.CurrentPage = 1;
 			// Container child notebook.Gtk.Notebook+NotebookChild
-			this.jiraserverinfowidget1 = null;
+			this.jiraserverinfowidget1 = new global::JiraAssistant.Mono.JiraServerInfoWidget();
+			this.jiraserverinfowidget1.Events = ((global::Gdk.EventMask)(256));
+			this.jiraserverinfowidget1.Name = "jiraserverinfowidget1";
 			this.notebook.Add(this.jiraserverinfowidget1);
 			// Notebook tab
 			this.label2 = new global::Gtk.Label();
@@ -66,7 +68,9 @@ namespace JiraAssistant.Mono
 			this.notebook.SetTabLabel(this.jiraserverinfowidget1, this.label2);
 			this.label2.ShowAll();
 			// Container child notebook.Gtk.Notebook+NotebookChild
-			this.toolswidget1 = null;
+			this.toolswidget1 = new global::JiraAssistant.Mono.ToolsWidget();
+			this.toolswidget1.Events = ((global::Gdk.EventMask)(256));
+			this.toolswidget1.Name = "toolswidget1";
 			this.notebook.Add(this.toolswidget1);
 			global::Gtk.Notebook.NotebookChild w5 = ((global::Gtk.Notebook.NotebookChild)(this.notebook[this.toolswidget1]));
 			w5.Position = 1;
