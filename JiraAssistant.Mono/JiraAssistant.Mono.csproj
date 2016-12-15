@@ -112,9 +112,14 @@
       <Project>{D730A576-2171-4886-9ED4-B08B25A2BB85}</Project>
       <Name>JiraAssistant.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JiraAssistant.Tools\JiraAssistant.Tools.csproj">
+      <Project>{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}</Project>
+      <Name>JiraAssistant.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />

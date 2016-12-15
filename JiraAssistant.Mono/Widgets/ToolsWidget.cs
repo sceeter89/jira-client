@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Gtk;
 using JiraAssistant.Mono.Controllers;
 
 namespace JiraAssistant.Mono
@@ -13,6 +14,11 @@ namespace JiraAssistant.Mono
 			this.Build();
 
 			_controller = Bootstrap.IocContainer.Resolve<ToolsController>(new NamedParameter("control", this));
+		}
+
+		public TreeView ToolsTree
+		{
+			get { return treeview1; }
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.Tools;
@@ -8,6 +9,24 @@ namespace JiraAssistant.Tools
 	[Export(typeof(ICustomTool))]
 	public class ScrumReviewFilter : ICustomTool
 	{
+		public string Author
+		{
+			get { return "Jira Assistant"; }
+		}
+
+		public string Description
+		{
+			get
+			{
+				return @"Get tasks finished or updated in current sprint, to facilitate Scrum Review preparations.";
+			}
+		}
+
+		public Guid Id
+		{
+			get { return new Guid("AFCB6428-7A56-4F4B-8790-3AE8A985CA8D"); }
+		}
+
 		public string JqlQuery
 		{
 			get
@@ -16,6 +35,14 @@ namespace JiraAssistant.Tools
 				project = '{project}' AND updated >= '{updatedAfter}'
 				AND issuetype NOT IN (Epic) AND status IN (Closed, 'Awaiting Review')
 				";
+			}
+		}
+
+		public string Name
+		{
+			get
+			{
+				return "Scrum Review summary";
 			}
 		}
 
@@ -30,7 +57,7 @@ namespace JiraAssistant.Tools
 
 		public IOutput ProcessIssues(IEnumerable<JiraIssue> issues)
 		{
-			return new FlatFileOutput("Bla bla bla");
+			return new FlatFileOutput { Content = "Bla bla bla" };
 		}
 	}
 }

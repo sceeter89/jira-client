@@ -1,10 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using JiraAssistant.Domain.Jira;
 
 namespace JiraAssistant.Domain.Tools
 {
 	public interface ICustomTool
+	{
+		Guid Id { get; }
+
+		string Name { get; }
+		string Description { get; }
+		string Author { get; }
+	}
+
+	public interface IJqlBasedCustomTool
 	{
 		string JqlQuery { get; }
 		IEnumerable<QueryParameter> QueryParameters { get; }
@@ -19,16 +29,11 @@ namespace JiraAssistant.Domain.Tools
 
 	public class FlatFileOutput : IOutput
 	{
-		private readonly string _fileContent;
-
-		public FlatFileOutput(string fileContent)
-		{
-			_fileContent = fileContent;
-		}
+		public string Content { get; set; }
 
 		public void Save(string path)
 		{
-			File.WriteAllText(path, _fileContent);
+			File.WriteAllText(path, Content ?? string.Empty);
 		}
 	}
 
