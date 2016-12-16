@@ -32,13 +32,15 @@ namespace JiraAssistant.Mono.Widgets.ToolsWidgets
 			w1.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table2.Gtk.Table+TableChild
 			this.vbox1 = new global::Gtk.VBox();
-			this.vbox1.Name = "vbox1";
+			this.vbox1.Homogeneous = true;
 			this.vbox1.Spacing = 6;
+			this.vbox1.BorderWidth = ((uint)(2));
 			this.table2.Add(this.vbox1);
 			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table2[this.vbox1]));
 			w2.TopAttach = ((uint)(1));
 			w2.BottomAttach = ((uint)(2));
 			w2.XOptions = ((global::Gtk.AttachOptions)(4));
+			w2.YOptions = ((global::Gtk.AttachOptions)(4));
 			this.Add(this.table2);
 			if ((this.Child != null))
 			{

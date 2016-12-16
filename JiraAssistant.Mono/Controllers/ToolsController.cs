@@ -12,11 +12,11 @@ namespace JiraAssistant.Mono.Controllers
 	{
 		private readonly ToolsWidget _control;
 		private readonly CustomToolsViewModel _customTools;
-		private Bin _currentControl;
+		private Widget _currentControl;
 		private ICustomTool _currentTool;
 
 		private Dictionary<string, ICustomTool> _tools = new Dictionary<string, ICustomTool>();
-		private Dictionary<ICustomTool, Bin> _toolWidgetCache = new Dictionary<ICustomTool, Bin>();
+		private Dictionary<ICustomTool, Widget> _toolWidgetCache = new Dictionary<ICustomTool, Widget>();
 
 		public ToolsController(ToolsWidget control,
 							   CustomToolsViewModel customTools)
@@ -49,6 +49,15 @@ namespace JiraAssistant.Mono.Controllers
 
 		private void OnRunClicked(object sender, EventArgs e)
 		{
+			var toolInterfaces = _currentTool.GetType().GetInterfaces();
+			if (toolInterfaces.Contains(typeof(IJqlBasedCustomTool)))
+			{
+				var jqlBasedTool = (IJqlBasedCustomTool)_currentTool;
+				var jqlBasedToolWidget = (JqlBasedToolWidget)_currentControl;
+
+				var parameters = jqlBasedToolWidget.GetParametersValues();
+			}
+
 			var dialog = new MessageDialog(Bootstrap.MainWindow,
 			                               DialogFlags.Modal,
 			                               MessageType.Info,
@@ -83,16 +92,17 @@ namespace JiraAssistant.Mono.Controllers
 			_control.RunButton.Sensitive = true;
 		}
 
-		private Bin PrepareWidgetForTool(ICustomTool tool)
+		private Widget PrepareWidgetForTool(ICustomTool tool)
 		{
 			if (_toolWidgetCache.ContainsKey(tool))
 				return _toolWidgetCache[tool];
 
 			var toolInterfaces = tool.GetType().GetInterfaces();
-			Bin widget = null;
+			Widget widget = null;
 			if (toolInterfaces.Contains(typeof(IJqlBasedCustomTool)))
 			{
-				widget = new JqlBasedToolWidget();
+				var jqlBasedTool = (IJqlBasedCustomTool)tool;
+				widget = new JqlBasedToolWidget(jqlBasedTool.QueryParameters);
 			}
 
 			_toolWidgetCache[tool] = widget;

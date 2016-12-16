@@ -4,12 +4,21 @@ namespace JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets
 {
 	public partial class TextParameterWidget
 	{
+		private global::Gtk.Entry entry1;
+
 		protected virtual void Build()
 		{
 			global::Stetic.Gui.Initialize(this);
 			// Widget JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets.TextParameterWidget
 			global::Stetic.BinContainer.Attach(this);
 			this.Name = "JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets.TextParameterWidget";
+			// Container child JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets.TextParameterWidget.Gtk.Container+ContainerChild
+			this.entry1 = new global::Gtk.Entry();
+			this.entry1.CanFocus = true;
+			this.entry1.Name = "entry1";
+			this.entry1.IsEditable = true;
+			this.entry1.InvisibleChar = '●';
+			this.Add(this.entry1);
 			if ((this.Child != null))
 			{
 				this.Child.ShowAll();

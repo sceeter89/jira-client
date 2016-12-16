@@ -103,6 +103,7 @@
     <Compile Include="gtk-gui\JiraAssistant.Mono.Widgets.ToolsWidgets.JqlBasedToolWidget.cs" />
     <Compile Include="Widgets\ToolsWidgets\ParametersWidgets\TextParameterWidget.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets.TextParameterWidget.cs" />
+    <Compile Include="Widgets\ToolsWidgets\ParametersWidgets\IQueryParameterWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico"></Content>

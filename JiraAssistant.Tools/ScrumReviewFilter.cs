@@ -50,8 +50,8 @@ namespace JiraAssistant.Tools
 		{
 			get
 			{
-				yield return new QueryParameter("project", QueryParameterType.Text);
-				yield return new QueryParameter("updatedAfter", QueryParameterType.Text);
+				yield return new QueryParameter("project", QueryParameterType.Text, label:"Project name or key");
+				yield return new QueryParameter("updatedAfter", QueryParameterType.Text, label:"Last Scrum Review date");
 			}
 		}
 
