@@ -14,7 +14,7 @@ namespace JiraAssistant.Domain.Tools
 		string Author { get; }
 	}
 
-	public interface IJqlBasedCustomTool
+	public interface IJqlBasedCustomTool : ICustomTool
 	{
 		string JqlQuery { get; }
 		IEnumerable<QueryParameter> QueryParameters { get; }

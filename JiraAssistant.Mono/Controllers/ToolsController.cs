@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gtk;
 using JiraAssistant.Domain.Tools;
 using JiraAssistant.Logic.ContextlessViewModels;
+using JiraAssistant.Mono.Widgets.ToolsWidgets;
 
 namespace JiraAssistant.Mono.Controllers
 {
@@ -10,8 +12,11 @@ namespace JiraAssistant.Mono.Controllers
 	{
 		private readonly ToolsWidget _control;
 		private readonly CustomToolsViewModel _customTools;
+		private Bin _currentControl;
+		private ICustomTool _currentTool;
 
 		private Dictionary<string, ICustomTool> _tools = new Dictionary<string, ICustomTool>();
+		private Dictionary<ICustomTool, Bin> _toolWidgetCache = new Dictionary<ICustomTool, Bin>();
 
 		public ToolsController(ToolsWidget control,
 							   CustomToolsViewModel customTools)
@@ -38,17 +43,61 @@ namespace JiraAssistant.Mono.Controllers
 
 			_control.ToolsTree.Model = store;
 			_control.ToolsTree.RowActivated += OnRowActivated;
+			_control.ToolsTree.Selection.UnselectAll();
+			_control.RunButton.Clicked += OnRunClicked;
+		}
+
+		private void OnRunClicked(object sender, EventArgs e)
+		{
+			var dialog = new MessageDialog(Bootstrap.MainWindow,
+			                               DialogFlags.Modal,
+			                               MessageType.Info,
+			                               ButtonsType.Ok,
+			                              "Tool fake run");
+			dialog.Show();
 		}
 
 		private void OnRowActivated(object sender, RowActivatedArgs args)
 		{
 			TreeIter iter;
-			TreeView view = (TreeView)sender;
+			var view = (TreeView)sender;
 
 			if (view.Model.GetIter(out iter, args.Path) == false)
 				return;
-			
+
 			var tool = _tools[(string)view.Model.GetValue(iter, (int)Column.Id)];
+
+			var toolWidget = PrepareWidgetForTool(tool);
+
+			if (toolWidget == _currentControl)
+				return;
+
+			_currentControl = toolWidget;
+			_currentTool = tool;
+
+			foreach (var child in _control.ControlBox.Children)
+				_control.ControlBox.Remove(child);
+
+			_control.ControlBox.PackStart(toolWidget, true, false, 4);
+
+			_control.RunButton.Sensitive = true;
+		}
+
+		private Bin PrepareWidgetForTool(ICustomTool tool)
+		{
+			if (_toolWidgetCache.ContainsKey(tool))
+				return _toolWidgetCache[tool];
+
+			var toolInterfaces = tool.GetType().GetInterfaces();
+			Bin widget = null;
+			if (toolInterfaces.Contains(typeof(IJqlBasedCustomTool)))
+			{
+				widget = new JqlBasedToolWidget();
+			}
+
+			_toolWidgetCache[tool] = widget;
+
+			return widget;
 		}
 
 		private TreeViewColumn BuildColumn(Column column)

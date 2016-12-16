@@ -99,6 +99,10 @@
     <Compile Include="Controllers\ToolsController.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.ToolsWidget.cs" />
     <Compile Include="Services\OnUiThread.cs" />
+    <Compile Include="Widgets\ToolsWidgets\JqlBasedToolWidget.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.Widgets.ToolsWidgets.JqlBasedToolWidget.cs" />
+    <Compile Include="Widgets\ToolsWidgets\ParametersWidgets\TextParameterWidget.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets.TextParameterWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico"></Content>
@@ -125,6 +129,8 @@
     <Folder Include="Services\" />
     <Folder Include="Controllers\" />
     <Folder Include="Widgets\" />
+    <Folder Include="Widgets\ToolsWidgets\" />
+    <Folder Include="Widgets\ToolsWidgets\ParametersWidgets\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@ using JiraAssistant.Domain.Tools;
 namespace JiraAssistant.Tools
 {
 	[Export(typeof(ICustomTool))]
-	public class ScrumReviewFilter : ICustomTool
+	public class ScrumReviewFilter : IJqlBasedCustomTool
 	{
 		public string Author
 		{

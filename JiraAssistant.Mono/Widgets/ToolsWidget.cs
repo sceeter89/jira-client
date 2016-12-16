@@ -20,5 +20,15 @@ namespace JiraAssistant.Mono
 		{
 			get { return treeview1; }
 		}
+
+		public VBox ControlBox
+		{
+			get { return vbox2; }
+		}
+
+		public Button RunButton
+		{
+			get { return button1; }
+		}
 	}
 }

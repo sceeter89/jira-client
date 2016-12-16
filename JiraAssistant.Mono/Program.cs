@@ -21,8 +21,8 @@ namespace JiraAssistant.Mono
 			InitializeIoc();
 
 			Application.Init();
-			var win = IocContainer.Resolve<MainWindow>();
-			win.Show();
+			MainWindow = IocContainer.Resolve<MainWindow>();
+			MainWindow.Show();
 
 			AttemptToLogin();
 
@@ -30,6 +30,7 @@ namespace JiraAssistant.Mono
 		}
 
 		public static IContainer IocContainer { get; private set; }
+		public static MainWindow MainWindow { get; private set; }
 
 		private static void InitializeIoc()
 		{
