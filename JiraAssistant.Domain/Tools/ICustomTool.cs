@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using JiraAssistant.Domain.Jira;
 
 namespace JiraAssistant.Domain.Tools
@@ -19,7 +20,7 @@ namespace JiraAssistant.Domain.Tools
 		string JqlQuery { get; }
 		IEnumerable<QueryParameter> QueryParameters { get; }
 
-		IOutput ProcessIssues(IEnumerable<JiraIssue> issues, IJiraApi jiraApi);
+		Task<IOutput> ProcessIssues(IEnumerable<JiraIssue> issues, IJiraApi jiraApi);
 	}
 
 	public interface IOutput
@@ -50,6 +51,6 @@ namespace JiraAssistant.Domain.Tools
 
 	public enum QueryParameterType
 	{
-		Text
+		Text, Date
 	}
 }

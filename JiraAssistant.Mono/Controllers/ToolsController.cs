@@ -27,7 +27,7 @@ namespace JiraAssistant.Mono.Controllers
 		public ToolsController(ToolsWidget control,
 							   CustomToolsViewModel customTools,
 							   IJiraApi jiraApi,
-		                       IInvokeOnUiThread onUiThread)
+							   IInvokeOnUiThread onUiThread)
 		{
 			_control = control;
 			_customTools = customTools;
@@ -93,20 +93,23 @@ namespace JiraAssistant.Mono.Controllers
 
 					var issues = await _jiraApi.SearchForIssues(query);
 
-					var output = jqlBasedTool.ProcessIssues(issues, _jiraApi);
+					var output = await jqlBasedTool.ProcessIssues(issues, _jiraApi);
 
 					_onUiThread.Invoke(() => HandleToolOutput(output));
 				}
 			}
 			catch (Exception e)
 			{
-				var d = new MessageDialog(Bootstrap.MainWindow,
-										  DialogFlags.Modal,
-										  MessageType.Error,
-										  ButtonsType.Close,
-										  e.Message);
-				d.Run();
-				d.Destroy();
+				_onUiThread.Invoke(() =>
+				{
+					var d = new MessageDialog(Bootstrap.MainWindow,
+											  DialogFlags.Modal,
+											  MessageType.Error,
+											  ButtonsType.Close,
+					                          e.Message.Replace("{", "{{"));
+					d.Run();
+					d.Destroy();
+				});
 			}
 			finally
 			{

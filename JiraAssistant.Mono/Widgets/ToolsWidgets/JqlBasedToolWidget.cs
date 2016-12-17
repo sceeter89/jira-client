@@ -8,13 +8,13 @@ using JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets;
 namespace JiraAssistant.Mono.Widgets.ToolsWidgets
 {
 	[System.ComponentModel.ToolboxItem(true)]
-	public partial class JqlBasedToolWidget : Gtk.Bin
+	public partial class JqlBasedToolWidget : Bin
 	{
 		private Dictionary<QueryParameter, IQueryParameterWidget> _parametersWidgets = new Dictionary<QueryParameter, IQueryParameterWidget>();
 
 		public JqlBasedToolWidget(IEnumerable<QueryParameter> parameters)
 		{
-			this.Build();
+			Build();
 			var parametersList = parameters.ToList();
 
 			table1.NRows = (uint)parametersList.Count;
@@ -30,7 +30,7 @@ namespace JiraAssistant.Mono.Widgets.ToolsWidgets
 				table1.Attach(label, 0, 1, i, i + 1, AttachOptions.Fill, AttachOptions.Fill, 3, 3);
 				table1.Attach((Widget)parameterWidget, 1, 2, i, i + 1, AttachOptions.Fill, AttachOptions.Fill, 3, 3);
 			}
-			this.Child.ShowAll();
+			Child.ShowAll();
 		}
 
 		private IQueryParameterWidget GetWidgetForParameter(QueryParameter parameter)
@@ -39,6 +39,8 @@ namespace JiraAssistant.Mono.Widgets.ToolsWidgets
 			{
 				case QueryParameterType.Text:
 					return new TextParameterWidget();
+				case QueryParameterType.Date:
+					return new DateParameterWidget();
 				default:
 					throw new ArgumentException("Unsupported parameter type: " + parameter.Type);
 			}

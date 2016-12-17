@@ -104,9 +104,10 @@
     <Compile Include="Widgets\ToolsWidgets\ParametersWidgets\TextParameterWidget.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets.TextParameterWidget.cs" />
     <Compile Include="Widgets\ToolsWidgets\ParametersWidgets\IQueryParameterWidget.cs" />
-    <Compile Include="gtk-gui\JiraAssistant.Mono.Windows.TextPreviewWindow.cs" />
     <Compile Include="Windows\TextPreviewDialog.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.Windows.TextPreviewDialog.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets.DateParameterWidget.cs" />
+    <Compile Include="Widgets\ToolsWidgets\ParametersWidgets\DateParameterWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico"></Content>

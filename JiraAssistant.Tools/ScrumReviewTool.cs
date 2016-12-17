@@ -4,13 +4,14 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.Tools;
 
 namespace JiraAssistant.Tools
 {
 	[Export(typeof(ICustomTool))]
-	public class ScrumReviewFilter : IJqlBasedCustomTool
+	public class ScrumReviewTool : IJqlBasedCustomTool
 	{
 		public string Author
 		{
@@ -26,7 +27,7 @@ namespace JiraAssistant.Tools
 		{
 			get
 			{
-				return 
+				return
 @"Get tasks finished or updated in current sprint, to facilitate Scrum Review preparations.
 Result is exported as Confluence Markup.";
 			}
@@ -61,11 +62,32 @@ Result is exported as Confluence Markup.";
 			get
 			{
 				yield return new QueryParameter("project", QueryParameterType.Text, label: "Project name or key");
-				yield return new QueryParameter("updatedAfter", QueryParameterType.Text, label: "Last Scrum Review date");
+				yield return new QueryParameter("updatedAfter", QueryParameterType.Date, label: "Last Scrum Review date");
 			}
 		}
 
-		public IOutput ProcessIssues(IEnumerable<JiraIssue> issues, IJiraApi jiraApi)
+		private async Task<IDictionary<string, string>> FetchEpicsNames(IList<string> epicKeys, IJiraApi jiraApi)
+		{
+			IDictionary<string, string> result = null;
+			if (epicKeys.Any())
+			{
+				var lookForKeys = epicKeys.Where(key => string.IsNullOrWhiteSpace(key) == false);
+
+				var jqlQuery = string.Format("key IN ({0})", string.Join(",", lookForKeys));
+
+				var epics = await jiraApi.SearchForIssues(jqlQuery);
+
+				result = epics.ToDictionary(i => i.Key, i => i.EpicName);
+			}
+			else
+				result = new Dictionary<string, string>();
+			
+			result[""] = "(No Epic)";
+
+			return result;
+		}
+
+		public async Task<IOutput> ProcessIssues(IEnumerable<JiraIssue> issues, IJiraApi jiraApi)
 		{
 			var resultBuilder = new StringBuilder();
 			var grouped = issues.GroupBy(i => i.EpicLink);
@@ -74,13 +96,12 @@ Result is exported as Confluence Markup.";
 
 			epicLinks.AddRange(grouped.Select(group => group.Key));
 
+			var epics = await FetchEpicsNames(epicLinks, jiraApi);
+
 			foreach (var group in grouped)
 			{
 				resultBuilder.AppendLine();
-				if (string.IsNullOrWhiteSpace(group.Key))
-					resultBuilder.AppendLine("h2. (No Epic)");
-				else
-					resultBuilder.AppendLine("h2. " + group.Key);
+				resultBuilder.AppendLine("h2. " + epics[group.Key ?? ""]);
 				resultBuilder.AppendLine();
 
 				foreach (var issue in group)
@@ -94,7 +115,7 @@ Result is exported as Confluence Markup.";
 			};
 		}
 
-        private string EscapeConfluenceMarkupCharacters(string summary)
+		private string EscapeConfluenceMarkupCharacters(string summary)
 		{
 			return Regex.Replace(summary, @"[{\[\]\}\(\)!@\\]", m => "\\" + m.Value);
 		}
