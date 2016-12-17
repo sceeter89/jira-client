@@ -8,7 +8,6 @@ using JiraAssistant.Domain.Messages;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.ContextlessViewModels;
 using JiraAssistant.Logic.Services;
-using JiraAssistant.Logic.Services.Jira;
 using NLog;
 using System;
 using System.Net;

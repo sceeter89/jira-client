@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.Exceptions;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Settings;
-using JiraAssistant.Logic.Services.Jira;
+using JiraAssistant.Domain.Jira;
 using System;
 using JiraAssistant.Logic.Extensions;
 

@@ -1,6 +1,6 @@
 ﻿using JiraAssistant.Domain.Exceptions;
 using JiraAssistant.Logic.Settings;
-using JiraAssistant.Logic.Services.Jira;
+using JiraAssistant.Domain.Jira;
 using NLog;
 using System;
 using System.Diagnostics;
@@ -11,9 +11,7 @@ using System.Text;
 using Microsoft.Win32;
 using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.Messages;
-using JiraAssistant.Domain.Jira;
 using System.Timers;
-using GalaSoft.MvvmLight.Threading;
 
 namespace JiraAssistant.Logic.Services.Daemons
 {
@@ -67,9 +65,7 @@ namespace JiraAssistant.Logic.Services.Daemons
 
         private async void ScanForUpdates()
         {
-
-
-            var changesSince = GreatestDateTime((DateTime.Now - TimeSpan.FromHours(24)), _reportsSettings.LastUpdatesScan);
+			var changesSince = GreatestDateTime((DateTime.Now - TimeSpan.FromHours(24)), _reportsSettings.LastUpdatesScan);
             var projectKeys = _reportsSettings.SelectedProjectsList.Split(',').Select(p => p.Trim());
             try
             {

@@ -3,7 +3,7 @@ using JiraAssistant.Logic.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
-using JiraAssistant.Logic.Services.Jira;
+using JiraAssistant.Domain.Jira;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using JiraAssistant.Logic.Services.Daemons;

@@ -8,7 +8,7 @@ namespace JiraAssistant.Mono.Widgets.ToolsWidgets
 
 		private global::Gtk.Label label2;
 
-		private global::Gtk.VBox vbox1;
+		private global::Gtk.Table table1;
 
 		protected virtual void Build()
 		{
@@ -31,16 +31,15 @@ namespace JiraAssistant.Mono.Widgets.ToolsWidgets
 			global::Gtk.Table.TableChild w1 = ((global::Gtk.Table.TableChild)(this.table2[this.label2]));
 			w1.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table2.Gtk.Table+TableChild
-			this.vbox1 = new global::Gtk.VBox();
-			this.vbox1.Homogeneous = true;
-			this.vbox1.Spacing = 6;
-			this.vbox1.BorderWidth = ((uint)(2));
-			this.table2.Add(this.vbox1);
-			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table2[this.vbox1]));
+			this.table1 = new global::Gtk.Table(((uint)(1)), ((uint)(2)), false);
+			this.table1.Name = "table1";
+			this.table1.RowSpacing = ((uint)(6));
+			this.table1.ColumnSpacing = ((uint)(6));
+			this.table2.Add(this.table1);
+			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table2[this.table1]));
 			w2.TopAttach = ((uint)(1));
 			w2.BottomAttach = ((uint)(2));
 			w2.XOptions = ((global::Gtk.AttachOptions)(4));
-			w2.YOptions = ((global::Gtk.AttachOptions)(4));
 			this.Add(this.table2);
 			if ((this.Child != null))
 			{

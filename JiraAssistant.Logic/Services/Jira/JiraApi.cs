@@ -1,6 +1,5 @@
 ﻿using JiraAssistant.Domain.Jira;
 using JiraAssistant.Logic.Settings;
-using JiraAssistant.Logic.Services.Jira;
 using JiraAssistant.Logic.Services.Resources;
 using System.Collections.Generic;
 using System.Threading.Tasks;

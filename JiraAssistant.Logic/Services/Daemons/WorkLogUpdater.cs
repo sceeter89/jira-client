@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using JiraAssistant.Logic.Settings;
-using JiraAssistant.Logic.Services.Jira;
+using JiraAssistant.Domain.Jira;
 using System;
 using System.Linq;
 using JiraAssistant.Domain.Exceptions;

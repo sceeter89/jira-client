@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
+using JiraAssistant.Domain;
 using JiraAssistant.Domain.Tools;
 using JiraAssistant.Logic.ContextlessViewModels;
+using JiraAssistant.Domain.Jira;
 using JiraAssistant.Mono.Widgets.ToolsWidgets;
+using JiraAssistant.Mono.Windows;
 
 namespace JiraAssistant.Mono.Controllers
 {
@@ -18,11 +21,18 @@ namespace JiraAssistant.Mono.Controllers
 		private Dictionary<string, ICustomTool> _tools = new Dictionary<string, ICustomTool>();
 		private Dictionary<ICustomTool, Widget> _toolWidgetCache = new Dictionary<ICustomTool, Widget>();
 
+		private readonly IJiraApi _jiraApi;
+		private readonly IInvokeOnUiThread _onUiThread;
+
 		public ToolsController(ToolsWidget control,
-							   CustomToolsViewModel customTools)
+							   CustomToolsViewModel customTools,
+							   IJiraApi jiraApi,
+		                       IInvokeOnUiThread onUiThread)
 		{
 			_control = control;
 			_customTools = customTools;
+			_jiraApi = jiraApi;
+			_onUiThread = onUiThread;
 
 			InitializeWidget();
 		}
@@ -47,23 +57,61 @@ namespace JiraAssistant.Mono.Controllers
 			_control.RunButton.Clicked += OnRunClicked;
 		}
 
-		private void OnRunClicked(object sender, EventArgs e)
+		private void HandleToolOutput(IOutput toolOutput)
 		{
-			var toolInterfaces = _currentTool.GetType().GetInterfaces();
-			if (toolInterfaces.Contains(typeof(IJqlBasedCustomTool)))
+			if (toolOutput.GetType() == typeof(FlatTextOutput))
 			{
-				var jqlBasedTool = (IJqlBasedCustomTool)_currentTool;
-				var jqlBasedToolWidget = (JqlBasedToolWidget)_currentControl;
+				var textualOutput = (FlatTextOutput)toolOutput;
+				var textPreviewDialog = new TextPreviewDialog(textualOutput.Content, textualOutput.SuggestedFilename);
 
-				var parameters = jqlBasedToolWidget.GetParametersValues();
+				textPreviewDialog.Run();
+				textPreviewDialog.Destroy();
+				return;
 			}
 
-			var dialog = new MessageDialog(Bootstrap.MainWindow,
-			                               DialogFlags.Modal,
-			                               MessageType.Info,
-			                               ButtonsType.Ok,
-			                              "Tool fake run");
-			dialog.Show();
+			throw new ArgumentException("Unsupported output type: " + toolOutput.GetType().FullName);
+		}
+
+		private async void OnRunClicked(object sender, EventArgs args)
+		{
+			_control.RunButton.Sensitive = false;
+
+			try
+			{
+				var toolInterfaces = _currentTool.GetType().GetInterfaces();
+				if (toolInterfaces.Contains(typeof(IJqlBasedCustomTool)))
+				{
+					var jqlBasedTool = (IJqlBasedCustomTool)_currentTool;
+					var jqlBasedToolWidget = (JqlBasedToolWidget)_currentControl;
+
+					var parameters = jqlBasedToolWidget.GetParametersValues();
+
+					var query = jqlBasedTool.JqlQuery;
+
+					foreach (var parameter in parameters)
+						query = query.Replace("{" + parameter.Key.Name + "}", parameter.Value);
+
+					var issues = await _jiraApi.SearchForIssues(query);
+
+					var output = jqlBasedTool.ProcessIssues(issues, _jiraApi);
+
+					_onUiThread.Invoke(() => HandleToolOutput(output));
+				}
+			}
+			catch (Exception e)
+			{
+				var d = new MessageDialog(Bootstrap.MainWindow,
+										  DialogFlags.Modal,
+										  MessageType.Error,
+										  ButtonsType.Close,
+										  e.Message);
+				d.Run();
+				d.Destroy();
+			}
+			finally
+			{
+				_control.RunButton.Sensitive = true;
+			}
 		}
 
 		private void OnRowActivated(object sender, RowActivatedArgs args)

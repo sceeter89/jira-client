@@ -5,12 +5,10 @@ using JiraAssistant.Domain.Exceptions;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Settings;
-using JiraAssistant.Logic.Services.Jira;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using JiraAssistant.Logic.Extensions;
 using JiraAssistant.Domain.Messages;
 

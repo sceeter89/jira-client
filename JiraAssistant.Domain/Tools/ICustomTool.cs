@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using JiraAssistant.Domain.Jira;
 
 namespace JiraAssistant.Domain.Tools
@@ -8,6 +7,7 @@ namespace JiraAssistant.Domain.Tools
 	public interface ICustomTool
 	{
 		Guid Id { get; }
+		Version Version { get; }
 
 		string Name { get; }
 		string Description { get; }
@@ -19,22 +19,17 @@ namespace JiraAssistant.Domain.Tools
 		string JqlQuery { get; }
 		IEnumerable<QueryParameter> QueryParameters { get; }
 
-		IOutput ProcessIssues(IEnumerable<JiraIssue> issues);
+		IOutput ProcessIssues(IEnumerable<JiraIssue> issues, IJiraApi jiraApi);
 	}
 
 	public interface IOutput
 	{
-		void Save(string path);
 	}
 
-	public class FlatFileOutput : IOutput
+	public class FlatTextOutput : IOutput
 	{
+		public string SuggestedFilename { get; set; }
 		public string Content { get; set; }
-
-		public void Save(string path)
-		{
-			File.WriteAllText(path, Content ?? string.Empty);
-		}
 	}
 
 	public class QueryParameter

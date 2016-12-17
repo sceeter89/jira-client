@@ -55,6 +55,7 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\JiraAssistant\Properties\AssemblyVersion.cs">
@@ -111,6 +112,11 @@
     <Compile Include="Ui\UpdateMethod.cs" />
     <Compile Include="Tools\ICustomTool.cs" />
     <Compile Include="Ui\IInvokeOnUiThread.cs" />
+    <Compile Include="Jira\IJiraAgileApi.cs" />
+    <Compile Include="Jira\IJiraApi.cs" />
+    <Compile Include="Jira\IJiraServerApi.cs" />
+    <Compile Include="Jira\IJiraSessionApi.cs" />
+    <Compile Include="Jira\IJiraWorklogManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tools\" />

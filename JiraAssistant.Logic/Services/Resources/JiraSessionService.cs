@@ -3,7 +3,6 @@ using System.Net;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
-using JiraAssistant.Logic.Services.Jira;
 using System.Linq;
 using JiraAssistant.Logic.Settings;
 using JiraAssistant.Domain.Jira;

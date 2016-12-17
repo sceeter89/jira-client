@@ -100,11 +100,6 @@
     <Compile Include="Services\Daemons\WorkLogUpdater.cs" />
     <Compile Include="Services\INavigator.cs" />
     <Compile Include="Services\IssuesStatisticsCalculator.cs" />
-    <Compile Include="Services\Jira\IJiraAgileApi.cs" />
-    <Compile Include="Services\Jira\IJiraApi.cs" />
-    <Compile Include="Services\Jira\IJiraServerApi.cs" />
-    <Compile Include="Services\Jira\IJiraSessionApi.cs" />
-    <Compile Include="Services\Jira\IJiraWorklogManager.cs" />
     <Compile Include="Services\Jira\JiraApi.cs" />
     <Compile Include="Services\Resources\BaseRestService.cs" />
     <Compile Include="Services\Resources\IssuesFinder.cs" />

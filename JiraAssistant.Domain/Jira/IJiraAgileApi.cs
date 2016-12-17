@@ -1,9 +1,8 @@
-﻿using JiraAssistant.Domain.Jira;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace JiraAssistant.Logic.Services.Jira
+namespace JiraAssistant.Domain.Jira
 {
    public interface IJiraAgileApi
    {

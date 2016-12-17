@@ -104,6 +104,9 @@
     <Compile Include="Widgets\ToolsWidgets\ParametersWidgets\TextParameterWidget.cs" />
     <Compile Include="gtk-gui\JiraAssistant.Mono.Widgets.ToolsWidgets.ParametersWidgets.TextParameterWidget.cs" />
     <Compile Include="Widgets\ToolsWidgets\ParametersWidgets\IQueryParameterWidget.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.Windows.TextPreviewWindow.cs" />
+    <Compile Include="Windows\TextPreviewDialog.cs" />
+    <Compile Include="gtk-gui\JiraAssistant.Mono.Windows.TextPreviewDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico"></Content>
@@ -132,6 +135,7 @@
     <Folder Include="Widgets\" />
     <Folder Include="Widgets\ToolsWidgets\" />
     <Folder Include="Widgets\ToolsWidgets\ParametersWidgets\" />
+    <Folder Include="Windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

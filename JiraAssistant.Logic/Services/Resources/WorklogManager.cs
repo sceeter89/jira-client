@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
-using JiraAssistant.Logic.Services.Jira;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Logic.Settings;
 

@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.Messaging;
 using JiraAssistant.Domain.Jira;
 using JiraAssistant.Domain.NavigationMessages;
 using JiraAssistant.Logic.Settings;
-using JiraAssistant.Logic.Services.Jira;
 using System;
 using System.Threading.Tasks;
 using System.Drawing;

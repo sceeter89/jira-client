@@ -15,18 +15,20 @@ namespace JiraAssistant.Mono.Widgets.ToolsWidgets
 		public JqlBasedToolWidget(IEnumerable<QueryParameter> parameters)
 		{
 			this.Build();
+			var parametersList = parameters.ToList();
 
-			foreach (var parameter in parameters)
+			table1.NRows = (uint)parametersList.Count;
+
+			for (uint i = 0; i < parametersList.Count; i++)
 			{
-				var layout = new HBox(false, 3) { HeightRequest = 35 };
+				var parameter = parametersList[(int)i];
+				var label = new Label { LabelProp = parameter.Label };
 				var parameterWidget = GetWidgetForParameter(parameter);
 
 				_parametersWidgets[parameter] = parameterWidget;
 
-				layout.PackStart(new Label { LabelProp = parameter.Label }, false, true, 5);
-				layout.PackEnd((Widget)parameterWidget, true, true, 5);
-
-				vbox1.PackEnd(layout, false, true, 5);
+				table1.Attach(label, 0, 1, i, i + 1, AttachOptions.Fill, AttachOptions.Fill, 3, 3);
+				table1.Attach((Widget)parameterWidget, 1, 2, i, i + 1, AttachOptions.Fill, AttachOptions.Fill, 3, 3);
 			}
 			this.Child.ShowAll();
 		}
