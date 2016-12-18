@@ -33,6 +33,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScrumReviewTool.cs" />
+    <Compile Include="WorklogMonthlySummaryTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JiraAssistant.Domain\JiraAssistant.Domain.csproj">
