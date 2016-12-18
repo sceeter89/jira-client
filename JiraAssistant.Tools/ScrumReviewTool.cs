@@ -87,7 +87,7 @@ Result is exported as Confluence Markup.";
 			return result;
 		}
 
-		public async Task<IOutput> ProcessIssues(IEnumerable<JiraIssue> issues, IJiraApi jiraApi)
+		public async Task<IOutput> ProcessIssues(IEnumerable<JiraIssue> issues, IDictionary<QueryParameter, string> parametersValues, IJiraApi jiraApi)
 		{
 			var resultBuilder = new StringBuilder();
 			var grouped = issues.GroupBy(i => i.EpicLink);

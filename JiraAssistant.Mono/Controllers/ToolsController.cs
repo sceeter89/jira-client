@@ -93,7 +93,7 @@ namespace JiraAssistant.Mono.Controllers
 
 					var issues = await _jiraApi.SearchForIssues(query);
 
-					var output = await jqlBasedTool.ProcessIssues(issues, _jiraApi);
+					var output = await jqlBasedTool.ProcessIssues(issues, parameters, _jiraApi);
 
 					_onUiThread.Invoke(() => HandleToolOutput(output));
 				}

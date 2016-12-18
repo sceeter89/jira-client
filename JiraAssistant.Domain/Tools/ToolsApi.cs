@@ -20,6 +20,6 @@ namespace JiraAssistant.Domain.Tools
 		string JqlQuery { get; }
 		IEnumerable<QueryParameter> QueryParameters { get; }
 
-		Task<IOutput> ProcessIssues(IEnumerable<JiraIssue> issues, IJiraApi jiraApi);
+		Task<IOutput> ProcessIssues(IEnumerable<JiraIssue> issues, IDictionary<QueryParameter, string> parametersValues, IJiraApi jiraApi);
 	}
 }

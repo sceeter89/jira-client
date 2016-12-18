@@ -452,5 +452,27 @@ namespace JiraAssistant.Domain.Jira
         public string ContactAdminLink { get; set; }
         public bool LoginFailedByPermissions { get; set; }
     }
+
+	public class Worklog
+	{
+		public string self { get; set; }
+		public RawUserInfo author { get; set; }
+		public RawUserInfo updateAuthor { get; set; }
+		public string created { get; set; }
+		public string updated { get; set; }
+		public string started { get; set; }
+		public string timeSpent { get; set; }
+		public int timeSpentSeconds { get; set; }
+		public string id { get; set; }
+		public string issueId { get; set; }
+	}
+
+	public class RawWorklogList
+	{
+		public int startAt { get; set; }
+		public int maxResults { get; set; }
+		public int total { get; set; }
+		public Worklog[] worklogs { get; set; }
+	}
 #pragma warning restore JustCode_CSharp_TypeFileNameMismatch // Types not matching file names
 }
