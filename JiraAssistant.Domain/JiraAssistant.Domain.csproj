@@ -110,13 +110,15 @@
     <Compile Include="Ui\IToolbarItem.cs" />
     <Compile Include="Ui\SettingsPage.cs" />
     <Compile Include="Ui\UpdateMethod.cs" />
-    <Compile Include="Tools\ICustomTool.cs" />
+    <Compile Include="Tools\ToolsApi.cs" />
     <Compile Include="Ui\IInvokeOnUiThread.cs" />
     <Compile Include="Jira\IJiraAgileApi.cs" />
     <Compile Include="Jira\IJiraApi.cs" />
     <Compile Include="Jira\IJiraServerApi.cs" />
     <Compile Include="Jira\IJiraSessionApi.cs" />
     <Compile Include="Jira\IJiraWorklogManager.cs" />
+    <Compile Include="Tools\ToolOutputApi.cs" />
+    <Compile Include="Tools\JqlQueryParametersApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tools\" />
