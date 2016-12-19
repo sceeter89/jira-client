@@ -59,10 +59,6 @@
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="SharpRaven, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpRaven.2.1.0\lib\net45\SharpRaven.dll</HintPath>
       <Private>True</Private>
@@ -140,6 +136,10 @@
     <ProjectReference Include="..\JiraAssistant.Domain\JiraAssistant.Domain.csproj">
       <Project>{A89B4325-3813-430E-A3DA-853C4C8F8690}</Project>
       <Name>JiraAssistant.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JiraAssistant.Tools\JiraAssistant.Tools.csproj">
+      <Project>{FC2A68D9-376A-4D92-9440-904F0E9DC7C6}</Project>
+      <Name>JiraAssistant.Tools</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

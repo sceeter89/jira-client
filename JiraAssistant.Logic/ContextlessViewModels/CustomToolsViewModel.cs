@@ -24,21 +24,11 @@ namespace JiraAssistant.Logic.ContextlessViewModels
 
 			var catalog = new AggregateCatalog();
 			catalog.Catalogs.Add(new DirectoryCatalog(pluginsPath));
-
-			// This crashes on Mono, as it cannot load file or assembly 'PresentationCore, Version=4.0.0.0
 			catalog.Catalogs.Add(new DirectoryCatalog(jiraAssistantPath));
 
-			try
-			{
+			var container = new CompositionContainer(catalog);
 
-				var container = new CompositionContainer(catalog);
-
-				container.ComposeParts(this);
-			}
-			catch (ReflectionTypeLoadException e)
-			{
-				Console.WriteLine(String.Format("Cannot load assembly: {0}",  e.ToString()));
-			}
+			container.ComposeParts(this);
 		}
 
 		public IList<ICustomTool> CustomTools
